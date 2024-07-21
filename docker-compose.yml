@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     volumes:
-      - portfolio:/var/lib/postgresql/data
+      - portfolio_db:/var/lib/postgresql/data
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
@@ -18,3 +18,6 @@ services:
       - db
     environment:
       DATABASE_URL: postgres://postgres:password@db:5432/postgres
+      SECRET_KEY_BASE: 2c013bcff8863d9753acbc1e0ca9f722f78ab5e36171d9231dd407327c1aeaaada507c7b7862c509cc0164590216593bca807809bb84fc757dba66bf8def4141
+volumes:
+  portfolio_db:
