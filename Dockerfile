@@ -1,12 +1,10 @@
-#FROM jekyll/jekyll:latest
-FROM ubuntu:latest
-RUN mkdir /new_dir
+FROM jekyll/jekyll:latest
 
-#WORKDIR /srv/jekyll
-COPY app/ /new_dir
+WORKDIR /srv/jekyll
+COPY app/ /srv/jekyll
 
-#RUN bundle install
+RUN bundle install
 
-#EXPOSE 4000
+EXPOSE 4000
 
-#CMD ["jekyll", "serve", "--watch", "--force_polling", "--livereload"]
+CMD ["jekyll", "serve", "--watch", "--force_polling", "--livereload"]
