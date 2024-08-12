@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <style>
-  #marker{
+  #hand{
     position: absolute;
   }
 </style>
@@ -15,13 +15,13 @@
     device-orientation-permission-ui="enabled: false">
     
     <a-camera id="camera" position="0 0 0" look-controls="enabled: false"></a-camera>
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-gltf-model src="./models/henobero-ilust.glb" position="0 0 0" scale="0.3 0.3 0.3"></a-gltf-model>
+    <a-entity id="imageTargetar" mindar-image-target="targetIndex: 0">
+      <a-gltf-model id="berus" src="./models/henobero-ilust.glb" position="0 0 0" scale="0.3 0.3 0.3"></a-gltf-model>
     </a-entity>
   </a-scene>
   <script type="module" src="./index.js"></script>
 
-  <h1 id="marker">へ</h1>
+  <h1 id="hand">へ</h1>
 </body>
 
 </html>
