@@ -5,7 +5,19 @@
   <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 </head>
-
+<style>body {
+  width: 10px !important;
+  overflow: hidden !important;
+}
+canvas{
+    width: 10px !important;
+    height: 10px !important;
+    
+}
+.mindar-ui-overlay{
+  background: red !important;
+}
+</style>
 <body>
   <a-scene
     mindar-image="imageTargetSrc: ./targets.mind;"

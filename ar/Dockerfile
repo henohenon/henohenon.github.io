@@ -1,13 +1,13 @@
-FROM node:latest
+FROM node:18.12
+
+RUN npm install -g pnpm
 
 WORKDIR /app
 
-COPY app/ ./
-
-RUN npm install -g pnpm
+COPY ./henohenos .
 
 RUN pnpm install
 
 CMD ["pnpm", "run", "dev"]
 
-EXPOSE 3000
+EXPOSE 8000
