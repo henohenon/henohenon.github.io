@@ -1,20 +1,6 @@
 import "aframe";
+import "aframe-extras";
 import "mind-ar/dist/mindar-image-aframe.prod.js";
-
-THREE.Vector3.prototype.myProject = function (camera) {
-  // カメラのプロジェクション行列を適用
-  console.log(camera.matrixWorldInverse);
-  const vector = this.applyMatrix4(camera.matrixWorldInverse).applyMatrix4(
-    camera.projectionMatrix
-  );
-
-  // スクリーン座標に変換
-  const x = (vector.x / vector.w) * 0.5 + 0.5;
-  const y = (vector.y / vector.w) * 0.5 + 0.5;
-  const z = (vector.z / vector.w) * 0.5 + 0.5;
-
-  return new THREE.Vector3(x, y, z);
-};
 //const videoElement = document.createElement('a-canvas');
 console.log(Hands);
 const hands = new Hands({
@@ -29,8 +15,9 @@ hands.setOptions({
 });
 
 hands.onResults((results) => {
+  if (neckBone == null) return;
   if (results.multiHandLandmarks.length > 0) {
-    const handPosition = results.multiHandLandmarks[0][9]; // 手の中央あたりの座標を取得
+    const handPosition = results.multiHandLandmarks[0][8]; // 手の中央あたりの座標を取得
     updateArrowDirection(handPosition);
   }
 });
@@ -44,35 +31,86 @@ document.querySelector("a-scene").addEventListener("arReady", () => {
 
 const handElem = document.getElementById("hand");
 const modelElem = document.querySelector("#berus");
+let neckBone = null;
+let idealNeckRotation;
+
+modelElem.addEventListener("model-loaded", (e) => {
+  const model = e.detail.model;
+  modelElem.setAttribute("animation-mixer", "clip: ideal; loop: once;");
+  const skinnedMesh = model.getObjectByProperty("type", "SkinnedMesh");
+  neckBone = skinnedMesh.skeleton.getBoneByName("neck"); // ボーン名で取得
+  idealNeckRotation = new THREE.Vector3(
+    neckBone.rotation.x,
+    neckBone.rotation.y,
+    neckBone.rotation.z
+  );
+});
 
 const marker = document.querySelector("#imageTargetar");
+let motionTimer = null;
+let isFirst = true;
+let isFounding = false;
+
+marker.addEventListener("targetFound", (e) => {
+  if (isFirst) {
+    modelElem.setAttribute("animation-mixer", "clip: howling; loop: once;");
+    isFirst = false;
+  }
+  isFounding = true;
+  RandomHowling();
+});
+
+function RandomHowling() {
+  const randomTime = Math.floor(Math.random() * 3000) + 10000;
+
+  motionTimer = setTimeout(() => {
+    modelElem.setAttribute("animation-mixer", "clip: ideal; loop: once;");
+    modelElem.setAttribute("animation-mixer", "clip: howling; loop: once;");
+    if (isFounding) {
+      RandomHowling();
+    }
+  }, randomTime);
+}
+
+marker.addEventListener("targetLost", (e) => {
+  clearTimeout(motionTimer);
+  modelElem.setAttribute("animation-mixer", "clip: idle; loop: repeat;");
+  isFounding = false;
+});
 
 async function processFrame() {
   await hands.send({ image: videoElement });
 
   requestAnimationFrame(processFrame);
 }
-let count = 0;
 function updateArrowDirection(handPosition) {
+  console.log(marker.object3D);
+  const camera = document.querySelector("a-camera").getObject3D("camera");
   // ワールド座標を格納するためのベクターを作成
-  var worldPosition = new THREE.Vector3();
-  let objectPosition = new THREE.Vector3();
-  objectPosition.setFromMatrixPosition(marker.object3D.matrixWorld);
+  var objectPosition = new THREE.Vector3();
+  modelElem.object3D.getWorldPosition(objectPosition);
+  objectPosition.project(camera);
+  if (objectPosition.x == NaN) return;
   // 2Dスクリーン座標に変換（キャンバスのサイズに基づく）
-  const imageX = (worldPosition.x * 0.5 + 0.5) * window.innerWidth;
-  const imageY = (1 - (worldPosition.y * 0.5 + 0.5)) * window.innerHeight;
+  const imageX = (objectPosition.x * 0.5 + 0.5) * window.innerWidth;
+  const imageY = (1 - (objectPosition.y * 0.5 + 0.5)) * window.innerHeight;
 
   const handX = window.innerWidth * handPosition.x;
   const handY = window.innerHeight * handPosition.y;
 
-  handElem.style.left = handX;
-  handElem.style.top = handY;
+  handElem.style.left = imageX;
+  handElem.style.top = imageY;
 
   const angleInDegrees = calculateAngle(imageX, imageY, handX, handY);
 
-  console.log(angleInDegrees);
-  count++;
-  modelElem.setAttribute("rotation", `0 0 ${angleInDegrees * -1 - 90}`);
+  const xtmp =
+    Math.abs(angleInDegrees) > 90
+      ? 180 - Math.abs(angleInDegrees)
+      : Math.abs(angleInDegrees);
+  const xDegress = xtmp * Math.sign(angleInDegrees);
+  const yDegress = Math.abs(angleInDegrees) - 90;
+  neckBone.rotation.x = idealNeckRotation.x + (Math.PI / 2) * -(yDegress / 135);
+  neckBone.rotation.z = idealNeckRotation.z + (Math.PI / 2) * (xDegress / 135);
 
   //const arrow = document.querySelector('#arrow');
   // 手の位置に基づいて矢印の回転を計算

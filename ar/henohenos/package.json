@@ -9,6 +9,7 @@
     "@mediapipe/camera_utils": "^0.3.1675466862",
     "@mediapipe/hands": "^0.4.1675469240",
     "aframe": "^1.2.0",
+    "aframe-extras": "^7.5.1",
     "mind-ar": "^1.1.2",
     "vite": "^5.4.0"
   }
