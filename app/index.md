@@ -25,6 +25,8 @@ theme: minima
   - AWS認定ソリューションアーキテクト - アソシエイト
   - IBM 認定アソシエイト開発者 - Qiskit v0.2X
   - Unity認定プロフェッショナル　プログラマー
+  - 英検3級
+  - 普通自動車免許
 # Works
 - Alphatiqueサイト修正
   - https://alphatique.co.jp/
