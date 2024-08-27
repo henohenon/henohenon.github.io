@@ -26,7 +26,20 @@ theme: minima
   - IBM 認定アソシエイト開発者 - Qiskit v0.2X
   - Unity認定プロフェッショナル　プログラマー
 # Works
+- Alphatiqueサイト修正
+  - https://alphatique.co.jp/
+  - こちらのサイトの一部を修正しました
 - ドローンシミュレーター開発/リリース
   - https://store.steampowered.com/app/2635620/GlobeXplore/?l=japanese
+  - こちらのシミュレーターの開発、steam管理をしております
+- エッチな雰囲気測定アプリ
+  - https://topaz.dev/projects/51aa3cd195efd2231447
+  - ハッカソンネタ枠。とても楽しかったです。
+- live2dでvtuber錬精する
+  - https://note.com/henohenon/n/n8d2fb5b47c75
+  - 意味不明シリーズ。結構心行くまで堪能した。
+- 謎の自作cgアニメーション
+  - https://youtu.be/qnLSJ3IcVI8
+  - かなり黒歴史より。頑張ってはいる。
 # Contact
-- Twitter: https://twitter.com/henohenon8282
+- X: https://x.com/henohenon_8282
