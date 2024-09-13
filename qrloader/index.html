@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <video id="video"></video>
+    <canvas id="canvas"></canvas>
+    <div id="result"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    
+    const video = document.getElementById("video");
+    const result = document.getElementById("result");
+
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then((stream) => {
+            video.srcObject = stream;
+            video.play();
+            scanQRCode();
+        });
+
+    function scanQRCode() {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const interval = setInterval(() => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
+
+            if (qrCode) {
+                //console.log(qrCode.location.topLeftCorner);
+                //console.log(qrCode.location.bottomRightCorner);
+                console.log(qrCode.location);
+                result.textContent = `QRコード内容: ${qrCode.data}`;
+                //ThreeCube(qrCode.location.topLeftCorner, qrCode.location.topRightCorner, qrCode.location.bottomLeftCorner, qrCode.location.bottomRightCorner);
+                //clearInterval(interval);
+            }
+        }, 500);
+    }
+    
+    
+    function ThreeCube(topLeft, topRight, bottomLeft, bottomRight){
+        // 1. Three.jsの初期化
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas') });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // 2. キューブの作成
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshBasicMaterial({ color: 0x0077ff, wireframe: true }); // ワイヤーフレーム表示に
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        const qrLocation = {
+            topLeft: topLeft,
+            topRight: topRight,
+            bottomLeft: bottomLeft,
+            bottomRight: bottomRight
+        };
+        
+        // 4. QRコードの中心を計算
+        const centerX = (qrLocation.topLeft.x + qrLocation.topRight.x + qrLocation.bottomLeft.x + qrLocation.bottomRight.x) / 4;
+        const centerY = (qrLocation.topLeft.y + qrLocation.topRight.y + qrLocation.bottomLeft.y + qrLocation.bottomRight.y) / 4;
+
+        console.log(centerX, centerY);
+        
+        // 5. QRコードの幅と高さを計算 (スケーリングに使用)
+        const qrWidth = Math.sqrt(Math.pow(qrLocation.topRight.x - qrLocation.topLeft.x, 2) + Math.pow(qrLocation.topRight.y - qrLocation.topLeft.y, 2));
+        const qrHeight = Math.sqrt(Math.pow(qrLocation.bottomLeft.x - qrLocation.topLeft.x, 2) + Math.pow(qrLocation.bottomLeft.y - qrLocation.topLeft.y, 2));
+
+        console.log(qrWidth, qrHeight);
+        
+        // 6. キューブの位置とスケーリングをQRコードに合わせる
+        cube.position.set(centerX, centerY, 0);
+        cube.scale.set(qrWidth, qrHeight, qrWidth); // 50で割って適切なサイズにスケーリング
+
+        // 7. QRコードの回転角度を計算 (XY平面での回転角)
+        const angle = Math.atan2(
+            qrLocation.topRight.y - qrLocation.topLeft.y,
+            qrLocation.topRight.x - qrLocation.topLeft.x
+        );
+        cube.rotation.z = angle; // Z軸回転で傾きを調整
+
+        // 8. カメラの位置を調整
+        camera.position.z = 500; // カメラを離れた位置に配置
+
+        // 4. レンダリング
+        function render() {
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+
+        // 初期描画の呼び出し
+        render();
+    }
+</script>
+</html>
