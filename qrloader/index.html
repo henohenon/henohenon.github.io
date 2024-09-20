@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,138 +9,26 @@
     <script src="https://cdn.jsdelivr.net/gh/inspirit/jsfeat/build/jsfeat-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <style>
-        body { margin: 0; }
-        canvas { display: block; }
+        body {
+            margin: 0;
+        }
+
+        video {
+            visibility: hidden;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     </style>
 </head>
+
 <body>
-<canvas id="cameraCanvas"></canvas>
-<video id="video"></video>
-
-<script>
-    // カメラ映像を取得し、canvasに描画
-    const cameraCanvas = document.getElementById('cameraCanvas');
-    const context = cameraCanvas.getContext('2d');
-    const video = document.getElementById('video');
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-            video.srcObject = stream;
-            video.play();
-        });
-
-    video.addEventListener('loadedmetadata', () => {
-        cameraCanvas.width = video.videoWidth;
-        cameraCanvas.height = video.videoHeight;
-        drawVideo();
-        //scanQRCode();
-        animate();
-    });
-
-    function drawVideo() {
-        context.drawImage(video, 0, 0, cameraCanvas.width, cameraCanvas.height);
-        requestAnimationFrame(drawVideo);
-    }
-
-    // マーカーの4つの角の座標（仮の座標、マーカー検出部分で変更）
-    let srcCorners = [
-        { x: 100, y: 100 },  // 左上
-        { x: 300, y: 100 },  // 右上
-        { x: 300, y: 300 },  // 右下
-        { x: 100, y: 300 }   // 左下
-    ];
-
-    
-    function scanQRCode() {
-        setInterval(function () {
-            const imageData = context.getImageData(0, 0, cameraCanvas.width, cameraCanvas.height);
-            const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
-
-            if (qrCode) {
-//console.log(qrCode.location.topLeftCorner);
-//console.log(qrCode.location.bottomRightCorner);
-                console.log(qrCode.location);
-                console.log(qrCode.data);
-                
-                srcCorners = [
-                    { x: qrCode.location.topLeftCorner.x, y: qrCode.location.topLeftCorner.y },
-                    { x: qrCode.location.topRightCorner.x, y: qrCode.location.topRightCorner.y },
-                    { x: qrCode.location.bottomRightCorner.x, y: qrCode.location.bottomRightCorner.y },
-                    { x: qrCode.location.bottomLeftCorner.x, y: qrCode.location.bottomLeftCorner.y }
-                ];
-//ThreeCube(qrCode.location.topLeftCorner, qrCode.location.topRightCorner, qrCode.location.bottomLeftCorner, qrCode.location.bottomRightCorner);
-//clearInterval(interval);
-            }
-        }, 500);
-    }
-
-
-    // three.jsで使用する仮のターゲット座標（マーカーの4角を基準に変換する座標）
-    const dstCorners = [
-        { x: -1, y: 1, z: 0 },   // 左上
-        { x: 1, y: 1, z: 0 },    // 右上
-        { x: 1, y: -1, z: 0 },   // 右下
-        { x: -1, y: -1, z: 0 }   // 左下
-    ];
-
-    // ホモグラフィ行列を計算
-    function computeHomography(srcCorners, dstCorners) {
-        const src = new jsfeat.matrix_t(8, 1, jsfeat.F32_t | jsfeat.C1_t);
-        const dst = new jsfeat.matrix_t(8, 1, jsfeat.F32_t | jsfeat.C1_t);
-        for (let i = 0; i < 4; i++) {
-            src.data[i * 2] = srcCorners[i].x;
-            src.data[i * 2 + 1] = srcCorners[i].y;
-            dst.data[i * 2] = dstCorners[i].x;
-            dst.data[i * 2 + 1] = dstCorners[i].y;
-        }
-        const H = new jsfeat.matrix_t(3, 3, jsfeat.F32_t | jsfeat.C1_t);
-        jsfeat.motion_model.homography2d(H, src, dst);
-        return H;
-    }
-
-    // three.jsのシーン設定
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // 立方体を作成
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-
-    // カメラ位置設定
-    camera.position.z = 5;
-
-    // ホモグラフィ行列をThree.jsに適用する関数
-    function applyHomographyToObject(H, object) {
-        const matrix = new THREE.Matrix4();
-        // 3x3のホモグラフィ行列を正規化してから4x4行列に変換
-        const scale = Math.sqrt(H.data[0] * H.data[0] + H.data[3] * H.data[3]);
-        matrix.set(
-            H.data[0] / scale, H.data[1] / scale, 0, H.data[2] / scale,
-            H.data[3] / scale, H.data[4] / scale, 0, H.data[5] / scale,
-            0, 0, 1, 0,
-            H.data[6], H.data[7], 0, H.data[8]
-        );
-
-        // オブジェクトに変換行列を適用
-        object.matrix.identity();  // 以前の変換をリセット
-        object.applyMatrix4(matrix);
-    }
-
-    // アニメーションループ
-    function animate() {
-
-        // ホモグラフィ行列を計算して立方体に適用
-        const H = computeHomography(srcCorners, dstCorners);
-        console.log(cube);
-        applyHomographyToObject(H, cube);
-
-        renderer.render(scene, camera);
-        requestAnimationFrame(animate);
-    }
-</script>
+    <video id="video"></video>
+    <canvas id="videoCanvas"></canvas>
+    <script src="./index.js" type="module"></script>
 </body>
+
 </html>
