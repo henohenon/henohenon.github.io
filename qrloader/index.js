@@ -1,6 +1,7 @@
 console.log("qrloader/index.js");
 const video = document.getElementById("video");
 const cameraCanvas = document.getElementById("videoCanvas");
+const arCanvas = document.getElementById("arCanvas");
 const context = cameraCanvas.getContext("2d");
 
 navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
@@ -8,10 +9,15 @@ navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
   video.play();
 });
 
+let threeScene;
+
 video.addEventListener("loadedmetadata", () => {
   cameraCanvas.width = video.videoWidth;
   cameraCanvas.height = video.videoHeight;
-  console.log(video.videoWidth, video.videoHeight);
+  arCanvas.width = video.videoWidth;
+  arCanvas.height = video.videoHeight;
+  threeScene = new ThreeScene(arCanvas, video.videoWidth, video.videoHeight);
+  //threeInit(video.videoWidth, video.videoHeight);
   qrScan();
 });
 
@@ -48,7 +54,56 @@ function qrScan() {
     context.lineTo(bottomLeftCorner.x, bottomLeftCorner.y);
     context.closePath();
     context.stroke();
+
+    // QRコードに合わせて3Dオブジェクトを位置・回転
+    const qrCenterX =
+      (topLeftCorner.x +
+        topRightCorner.x +
+        bottomRightCorner.x +
+        bottomLeftCorner.x) /
+      4;
+    const qrCenterY =
+      (topLeftCorner.y +
+        topRightCorner.y +
+        bottomRightCorner.y +
+        bottomLeftCorner.y) /
+      4;
+
+    // 座標変換（キャンバス座標からthree.jsの座標系に変換）
+    const normalizedX = (qrCenterX / cameraCanvas.width) * 2 - 1;
+    const normalizedY = -(qrCenterY / cameraCanvas.height) * 2 + 1;
+
+    // 簡単な回転処理
+    const dx = topRightCorner.x - topLeftCorner.x;
+    const dy = topRightCorner.y - topLeftCorner.y;
+    const angle = Math.atan2(dy, dx); // QRコードの回転角度を計算
+    threeScene.setCubeTrans(normalizedX * 5, normalizedY * 5, 0, angle);
+
+    // Three.jsのレンダリング
+    threeScene.render();
   }
 
   requestAnimationFrame(qrScan);
+}
+
+class ThreeScene {
+  constructor(canvas, width, height) {
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
+    this.camera.position.z = 5;
+    this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    this.renderer.setSize(width, height);
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    this.cube = new THREE.Mesh(geometry, material);
+    this.scene.add(this.cube);
+  }
+  setCubeTrans(x, y, z, rot) {
+    this.cube.position.set(x, y, z);
+    this.cube.rotation.z = rot;
+  }
+  render() {
+    this.renderer.render(this.scene, this.camera);
+  }
 }
