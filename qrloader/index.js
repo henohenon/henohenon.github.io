@@ -77,7 +77,7 @@ function qrScan() {
     const dx = topRightCorner.x - topLeftCorner.x;
     const dy = topRightCorner.y - topLeftCorner.y;
     const angle = Math.atan2(dy, dx); // QRコードの回転角度を計算
-    threeScene.setCubeTrans(normalizedX * 5, normalizedY * 5, 0, angle);
+    threeScene.setObjTrans(normalizedX * 5, normalizedY * 5, 0, angle);
 
     // Three.jsのレンダリング
     threeScene.render();
@@ -94,14 +94,14 @@ class ThreeScene {
     this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
     this.renderer.setSize(width, height);
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const geometry = new THREE.PlaneGeometry(1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    this.cube = new THREE.Mesh(geometry, material);
-    this.scene.add(this.cube);
+    this.plane = new THREE.Mesh(geometry, material);
+    this.scene.add(this.plane);
   }
-  setCubeTrans(x, y, z, rot) {
-    this.cube.position.set(x, y, z);
-    this.cube.rotation.z = rot;
+  setObjTrans(x, y, z, rot) {
+    this.plane.position.set(x, y, z);
+    this.plane.rotation.z = rot;
   }
   render() {
     this.renderer.render(this.scene, this.camera);
