@@ -80,7 +80,7 @@ class ThreeScene {
     this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
     this.renderer.setSize(width, height);
 
-    const geometry = new THREE.PlaneGeometry(1, 1);
+    const geometry = new THREE.PlaneGeometry(2, 2);
     const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     this.plane = new THREE.Mesh(geometry, material);
     this.scene.add(this.plane);
@@ -91,33 +91,27 @@ class ThreeScene {
     bottomRightCorner,
     bottomLeftCorner
   ) {
-    // QRコードに合わせて3Dオブジェクトを位置・回転
-    const qrCenterX =
-      (topLeftCorner.x +
-        topRightCorner.x +
-        bottomRightCorner.x +
-        bottomLeftCorner.x) /
-      4;
-    const qrCenterY =
-      (topLeftCorner.y +
-        topRightCorner.y +
-        bottomRightCorner.y +
-        bottomLeftCorner.y) /
-      4;
-
     // 座標変換（キャンバス座標からthree.jsの座標系に変換）
-    const normalizedX = (qrCenterX / this.width) * 2 - 1;
-    const normalizedY = -(qrCenterY / this.height) * 2 + 1;
+    const normalizedX = (topLeftCorner.x / this.width) * 2 - 1;
+    const normalizedY = -(topLeftCorner.y / this.height) * 2 + 1;
 
     // 簡単な回転処理
-    const dx = topRightCorner.x - topLeftCorner.x;
-    const dy = topRightCorner.y - topLeftCorner.y;
-    const angle = Math.atan2(dy, dx); // QRコードの回転角度を計算
+    const dx = topLeftCorner.x - topRightCorner.x;
+    //    const angle = Math.atan2(dy, dx); // QRコードの回転角度を計算
 
-    const scale = 5;
+    const rate = Math.abs(dx) / this.width;
+    const scale = 1 / rate; // QRコードの幅を計算
+
+    console.log(scale, rate);
+
+    const widthHeightRate = this.width / this.height;
 
     // カメラの位置と回転をQRコードの中心に合わせる
-    this.camera.position.set(-normalizedX * scale, -normalizedY * scale, scale);
+    this.camera.position.set(
+      -normalizedX * scale,
+      (-normalizedY * scale) / widthHeightRate,
+      scale
+    );
     //this.camera.rotation.z = angle;
   }
   render() {
