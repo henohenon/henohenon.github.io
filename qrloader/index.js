@@ -76,7 +76,7 @@ class ThreeScene {
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
-    this.camera.position.z = 5;
+    this.camera.position.z = 10;
     this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
     this.renderer.setSize(width, height);
 
@@ -146,6 +146,19 @@ class ThreeScene {
     const ay = topRightCorner.y - topLeftCorner.y;
     const angle = Math.atan2(ay, ax);
     this.pivot.rotation.z = angle;
+
+    const topLength = this.distance(topLeftCorner, topRightCorner);
+    const bottomLength = this.distance(bottomLeftCorner, bottomRightCorner);
+    const leftLength = this.distance(topLeftCorner, bottomLeftCorner);
+    const rightLength = this.distance(topRightCorner, bottomRightCorner);
+
+    const rotX = (Math.abs(topLength) / Math.abs(bottomLength) - 1) * -Math.PI;
+    const rotY = (Math.abs(leftLength) / Math.abs(rightLength) - 1) * -Math.PI;
+
+    console.log(rotX, rotY);
+
+    this.pivot.rotation.x = rotX;
+    this.pivot.rotation.y = rotY;
   }
   render() {
     this.renderer.render(this.scene, this.camera);
