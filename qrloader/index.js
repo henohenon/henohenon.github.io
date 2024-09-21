@@ -86,6 +86,9 @@ class ThreeScene {
     this.scene.add(this.plane);
   }
 
+  distance(p1, p2) {
+    return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+  }
   changeCamera(
     topLeftCorner,
     topRightCorner,
@@ -109,20 +112,28 @@ class ThreeScene {
     const normalizedX = (centerX / this.width) * 2 - 1;
     const normalizedY = -(centerY / this.height) * 2 + 1;
 
-    const dx = topLeftCorner.x - topRightCorner.x;
+    const dx =
+      (Math.abs(this.distance(topLeftCorner, topRightCorner)) +
+        Math.abs(this.distance(bottomLeftCorner, bottomRightCorner))) /
+      2;
+    const dy =
+      (Math.abs(this.distance(topLeftCorner, bottomLeftCorner)) +
+        Math.abs(this.distance(topRightCorner, bottomRightCorner))) /
+      2;
 
-    const rate = Math.abs(dx) / this.width;
-    const scale = 1 / rate; // QRコードの幅を計算
-
-    console.log(scale, rate);
+    const scaleX = 1 / (dx / this.width); // QRコードの幅を計算
+    const scaleY = 1 / (dy / this.height); // QRコードの幅を計算
 
     const widthHeightRate = this.width / this.height;
 
+    console.log(dx, dy, scaleX, scaleY);
+
     // カメラの位置と回転をQRコードの中心に合わせる
     this.camera.position.set(
-      -normalizedX * scale,
-      (-normalizedY * scale) / widthHeightRate,
-      scale
+      -normalizedX * scaleX,
+      -normalizedY * scaleY,
+      // *1.2は物理です。はい。
+      ((scaleX + scaleY) / 2) * 1.2
     );
     //this.camera.rotation.z = angle;
   }
