@@ -55,6 +55,42 @@ function qrScan() {
     context.closePath();
     context.stroke();
 
+    threeScene.changeCamera(
+      topLeftCorner,
+      topRightCorner,
+      bottomRightCorner,
+      bottomLeftCorner
+    );
+
+    // Three.jsのレンダリング
+    threeScene.render();
+  }
+
+  requestAnimationFrame(qrScan);
+}
+
+class ThreeScene {
+  constructor(canvas, width, height) {
+    this.width = width;
+    this.height = height;
+
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
+    this.camera.position.z = 5;
+    this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    this.renderer.setSize(width, height);
+
+    const geometry = new THREE.PlaneGeometry(1, 1);
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    this.plane = new THREE.Mesh(geometry, material);
+    this.scene.add(this.plane);
+  }
+  changeCamera(
+    topLeftCorner,
+    topRightCorner,
+    bottomRightCorner,
+    bottomLeftCorner
+  ) {
     // QRコードに合わせて3Dオブジェクトを位置・回転
     const qrCenterX =
       (topLeftCorner.x +
@@ -70,38 +106,19 @@ function qrScan() {
       4;
 
     // 座標変換（キャンバス座標からthree.jsの座標系に変換）
-    const normalizedX = (qrCenterX / cameraCanvas.width) * 2 - 1;
-    const normalizedY = -(qrCenterY / cameraCanvas.height) * 2 + 1;
+    const normalizedX = (qrCenterX / this.width) * 2 - 1;
+    const normalizedY = -(qrCenterY / this.height) * 2 + 1;
 
     // 簡単な回転処理
     const dx = topRightCorner.x - topLeftCorner.x;
     const dy = topRightCorner.y - topLeftCorner.y;
     const angle = Math.atan2(dy, dx); // QRコードの回転角度を計算
-    threeScene.setObjTrans(normalizedX * 5, normalizedY * 5, 0, angle);
 
-    // Three.jsのレンダリング
-    threeScene.render();
-  }
+    const scale = 5;
 
-  requestAnimationFrame(qrScan);
-}
-
-class ThreeScene {
-  constructor(canvas, width, height) {
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
-    this.camera.position.z = 5;
-    this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
-    this.renderer.setSize(width, height);
-
-    const geometry = new THREE.PlaneGeometry(1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    this.plane = new THREE.Mesh(geometry, material);
-    this.scene.add(this.plane);
-  }
-  setObjTrans(x, y, z, rot) {
-    this.plane.position.set(x, y, z);
-    this.plane.rotation.z = rot;
+    // カメラの位置と回転をQRコードの中心に合わせる
+    this.camera.position.set(-normalizedX * scale, -normalizedY * scale, scale);
+    //this.camera.rotation.z = angle;
   }
   render() {
     this.renderer.render(this.scene, this.camera);
