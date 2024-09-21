@@ -44,7 +44,7 @@ function qrScan() {
     console.log("QRコード内容:", qrCode);
 
     // 赤い線を描画する
-    context.strokeStyle = "red";
+    context.strokeStyle = "yellow";
     context.lineWidth = 3;
 
     context.beginPath();
@@ -80,9 +80,14 @@ class ThreeScene {
     this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
     this.renderer.setSize(width, height);
 
-    const geometry = new THREE.PlaneGeometry(2, 2);
+    const planeScale = 2;
+    const geometry = new THREE.PlaneGeometry(planeScale, planeScale);
     const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     this.plane = new THREE.Mesh(geometry, material);
+    this.pivot = new THREE.Object3D(); // ピボットオブジェクト
+    this.scene.add(this.pivot);
+    this.pivot.position.set(-planeScale, planeScale, 0);
+    this.pivot.add(this.camera);
     this.scene.add(this.plane);
   }
 
@@ -124,18 +129,23 @@ class ThreeScene {
     const scaleX = 1 / (dx / this.width); // QRコードの幅を計算
     const scaleY = 1 / (dy / this.height); // QRコードの幅を計算
 
-    const widthHeightRate = this.width / this.height;
-
     console.log(dx, dy, scaleX, scaleY);
 
     // カメラの位置と回転をQRコードの中心に合わせる
+    /*
     this.camera.position.set(
       -normalizedX * scaleX,
       -normalizedY * scaleY,
       // *1.2は物理です。はい。
       ((scaleX + scaleY) / 2) * 1.2
     );
-    //this.camera.rotation.z = angle;
+
+    */
+    //this.camera.position.set(0, 0, 3);
+    const ax = topRightCorner.x - topLeftCorner.x;
+    const ay = topRightCorner.y - topLeftCorner.y;
+    const angle = Math.atan2(ay, ax);
+    this.pivot.rotation.z = angle;
   }
   render() {
     this.renderer.render(this.scene, this.camera);
