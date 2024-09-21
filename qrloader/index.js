@@ -85,19 +85,31 @@ class ThreeScene {
     this.plane = new THREE.Mesh(geometry, material);
     this.scene.add(this.plane);
   }
+
   changeCamera(
     topLeftCorner,
     topRightCorner,
     bottomRightCorner,
     bottomLeftCorner
   ) {
-    // 座標変換（キャンバス座標からthree.jsの座標系に変換）
-    const normalizedX = (topLeftCorner.x / this.width) * 2 - 1;
-    const normalizedY = -(topLeftCorner.y / this.height) * 2 + 1;
+    const centerX =
+      (topLeftCorner.x +
+        topRightCorner.x +
+        bottomRightCorner.x +
+        bottomLeftCorner.x) /
+      4;
+    const centerY =
+      (topLeftCorner.y +
+        topRightCorner.y +
+        bottomRightCorner.y +
+        bottomLeftCorner.y) /
+      4;
 
-    // 簡単な回転処理
+    // 座標変換（キャンバス座標からthree.jsの座標系に変換）
+    const normalizedX = (centerX / this.width) * 2 - 1;
+    const normalizedY = -(centerY / this.height) * 2 + 1;
+
     const dx = topLeftCorner.x - topRightCorner.x;
-    //    const angle = Math.atan2(dy, dx); // QRコードの回転角度を計算
 
     const rate = Math.abs(dx) / this.width;
     const scale = 1 / rate; // QRコードの幅を計算
