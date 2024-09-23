@@ -31,8 +31,18 @@ function qrScan() {
     cameraCanvas.width,
     cameraCanvas.height
   );
-  const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
 
+  // カメラの中心に十字を描画
+  context.strokeStyle = "white";
+  context.lineWidth = 3;
+  context.beginPath();
+  context.moveTo(cameraCanvas.width / 2, 0);
+  context.lineTo(cameraCanvas.width / 2, cameraCanvas.height);
+  context.moveTo(0, cameraCanvas.height / 2);
+  context.lineTo(cameraCanvas.width, cameraCanvas.height / 2);
+  context.stroke();
+
+  const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
   if (qrCode) {
     const {
       topLeftCorner,
@@ -41,11 +51,10 @@ function qrScan() {
       bottomLeftCorner,
     } = qrCode.location;
 
-    console.log("QRコード内容:", qrCode);
+    //console.log("QRコード内容:", qrCode);
 
     // 赤い線を描画する
     context.strokeStyle = "yellow";
-    context.lineWidth = 3;
 
     context.beginPath();
     context.moveTo(topLeftCorner.x, topLeftCorner.y);
@@ -75,7 +84,7 @@ class ThreeScene {
     this.height = height;
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 1000);
+    this.camera = new THREE.PerspectiveCamera(60, width / height, 0.01, 1000);
     this.camera.position.z = 10;
     this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
     this.renderer.setSize(width, height);
@@ -86,36 +95,49 @@ class ThreeScene {
     this.plane = new THREE.Mesh(geometry, material);
     this.pivot = new THREE.Object3D(); // ピボットオブジェクト
     this.scene.add(this.pivot);
-    this.pivot.position.set(-planeScale, planeScale, 0);
-    this.pivot.add(this.camera);
+    //this.pivot.position.set(-planeScale, planeScale, 0);
+    this.pivot.attach(this.camera);
     this.scene.add(this.plane);
   }
 
   distance(p1, p2) {
     return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
   }
+  center(p1, p2) {
+    return {
+      x: (p1.x + p2.x) / 2,
+      y: (p1.y + p2.y) / 2,
+    };
+  }
+
   changeCamera(
     topLeftCorner,
     topRightCorner,
     bottomRightCorner,
     bottomLeftCorner
   ) {
-    const centerX =
-      (topLeftCorner.x +
-        topRightCorner.x +
-        bottomRightCorner.x +
-        bottomLeftCorner.x) /
-      4;
-    const centerY =
-      (topLeftCorner.y +
-        topRightCorner.y +
-        bottomRightCorner.y +
-        bottomLeftCorner.y) /
-      4;
+    //this.camera.position.set(0, 0, 3);
+    const ax = topRightCorner.x - topLeftCorner.x;
+    const ay = topRightCorner.y - topLeftCorner.y;
+    const angle = Math.atan2(ay, ax);
 
-    // 座標変換（キャンバス座標からthree.jsの座標系に変換）
-    const normalizedX = (centerX / this.width) * 2 - 1;
-    const normalizedY = -(centerY / this.height) * 2 + 1;
+    const topLength = this.distance(topLeftCorner, topRightCorner);
+    const bottomLength = this.distance(bottomLeftCorner, bottomRightCorner);
+    const leftLength = this.distance(topLeftCorner, bottomLeftCorner);
+    const rightLength = this.distance(topRightCorner, bottomRightCorner);
+
+    const rateX = Math.abs(topLength) / Math.abs(bottomLength);
+    const rateY = Math.abs(leftLength) / Math.abs(rightLength);
+
+    const leftCenter = this.center(topLeftCorner, bottomLeftCorner);
+    const rightCenter = this.center(topRightCorner, bottomRightCorner);
+    const leftToRight = this.distance(leftCenter, rightCenter);
+    const topCenter = this.center(topLeftCorner, topRightCorner);
+    const bottomCenter = this.center(bottomLeftCorner, bottomRightCorner);
+    const topToBottom = this.distance(topCenter, bottomCenter);
+
+    const centerX = this.width / 2; //topLeftCorner.x;
+    const centerY = this.height / 2; //topLeftCorner.y;
 
     const dx =
       (Math.abs(this.distance(topLeftCorner, topRightCorner)) +
@@ -129,36 +151,32 @@ class ThreeScene {
     const scaleX = 1 / (dx / this.width); // QRコードの幅を計算
     const scaleY = 1 / (dy / this.height); // QRコードの幅を計算
 
-    console.log(dx, dy, scaleX, scaleY);
+    // 座標変換（キャンバス座標からthree.jsの座標系に変換）
+    const normalizedX = (centerX / this.width) * 2 - 1;
+    const normalizedY = -(centerY / this.height) * 2 + 1;
+
+    const left = 0; //-normalizedX * scaleX - 1;
+    const top = 0; //-normalizedY * scaleY + 1;
+
+    //this.pivot.rotation.x = 0.3 * Math.PI;
+    // this.pivot.position.set(3, 0, 0);
+
+    this.pivot.rotation.z = angle;
+    this.pivot.rotation.x = (rateX - 1) * -Math.PI;
+    this.pivot.rotation.y = (rateY - 1) * -Math.PI;
+
+    this.camera.position.set(
+      left,
+      top,
+      10
+      // *1.2は物理です。はい。
+      //((scaleX + scaleY) / 2) * 1.2
+    );
+    /*
+
 
     // カメラの位置と回転をQRコードの中心に合わせる
-    /*
-    this.camera.position.set(
-      -normalizedX * scaleX,
-      -normalizedY * scaleY,
-      // *1.2は物理です。はい。
-      ((scaleX + scaleY) / 2) * 1.2
-    );
-
     */
-    //this.camera.position.set(0, 0, 3);
-    const ax = topRightCorner.x - topLeftCorner.x;
-    const ay = topRightCorner.y - topLeftCorner.y;
-    const angle = Math.atan2(ay, ax);
-    this.pivot.rotation.z = angle;
-
-    const topLength = this.distance(topLeftCorner, topRightCorner);
-    const bottomLength = this.distance(bottomLeftCorner, bottomRightCorner);
-    const leftLength = this.distance(topLeftCorner, bottomLeftCorner);
-    const rightLength = this.distance(topRightCorner, bottomRightCorner);
-
-    const rotX = (Math.abs(topLength) / Math.abs(bottomLength) - 1) * -Math.PI;
-    const rotY = (Math.abs(leftLength) / Math.abs(rightLength) - 1) * -Math.PI;
-
-    console.log(rotX, rotY);
-
-    this.pivot.rotation.x = rotX;
-    this.pivot.rotation.y = rotY;
   }
   render() {
     this.renderer.render(this.scene, this.camera);
