@@ -40,6 +40,9 @@ function qrScan() {
   context.lineTo(cameraCanvas.width / 2, cameraCanvas.height);
   context.moveTo(0, cameraCanvas.height / 2);
   context.lineTo(cameraCanvas.width, cameraCanvas.height / 2);
+  context.lineWidth = 2;
+  context.moveTo(cameraCanvas.width / 4, 0);
+  context.lineTo(cameraCanvas.width / 4, cameraCanvas.height);
   context.stroke();
 
   const qrCode = jsQR(imageData.data, imageData.width, imageData.height);
@@ -82,15 +85,21 @@ class ThreeScene {
   constructor(canvas, width, height) {
     this.width = width;
     this.height = height;
+    this.planeScale = 2;
+    this.fav = 63;
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(60, width / height, 0.01, 1000);
-    this.camera.position.z = 10;
+    this.camera = new THREE.PerspectiveCamera(
+      this.fav,
+      width / height,
+      0.01,
+      1000
+    );
+    //this.camera.position.z = 10;
     this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
     this.renderer.setSize(width, height);
 
-    const planeScale = 2;
-    const geometry = new THREE.PlaneGeometry(planeScale, planeScale);
+    const geometry = new THREE.PlaneGeometry(this.planeScale, this.planeScale);
     const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
     this.plane = new THREE.Mesh(geometry, material);
     this.pivot = new THREE.Object3D(); // ピボットオブジェクト
@@ -136,8 +145,8 @@ class ThreeScene {
     const bottomCenter = this.center(bottomLeftCorner, bottomRightCorner);
     const topToBottom = this.distance(topCenter, bottomCenter);
 
-    const centerX = this.width / 2; //topLeftCorner.x;
-    const centerY = this.height / 2; //topLeftCorner.y;
+    const centerX = topLeftCorner.x;
+    const centerY = topLeftCorner.y;
 
     const dx =
       (Math.abs(this.distance(topLeftCorner, topRightCorner)) +
@@ -153,25 +162,27 @@ class ThreeScene {
 
     // 座標変換（キャンバス座標からthree.jsの座標系に変換）
     const normalizedX = (centerX / this.width) * 2 - 1;
-    const normalizedY = -(centerY / this.height) * 2 + 1;
-
-    const left = 0; //-normalizedX * scaleX - 1;
-    const top = 0; //-normalizedY * scaleY + 1;
+    const normalizedY = (centerY / this.height) * -2 + 1;
 
     //this.pivot.rotation.x = 0.3 * Math.PI;
-    // this.pivot.position.set(3, 0, 0);
+    //this.pivot.position.set(3, 0, 0);
 
-    this.pivot.rotation.z = angle;
-    this.pivot.rotation.x = (rateX - 1) * -Math.PI;
-    this.pivot.rotation.y = (rateY - 1) * -Math.PI;
+    /*
+     */
+    this.plane.rotation.z = -angle;
+    this.plane.rotation.x = (rateX - 1) * Math.PI;
+    this.plane.rotation.y = (rateY - 1) * Math.PI;
+    //this.camera.position.z = ;
 
-    this.camera.position.set(
-      left,
-      top,
-      10
-      // *1.2は物理です。はい。
-      //((scaleX + scaleY) / 2) * 1.2
-    );
+    const z =
+      this.planeScale /
+      (2 * Math.tan(this.fav / 2)) /
+      (this.width / this.height);
+    const left = normalizedX * z + 1;
+    const top = normalizedY * scaleY - 1;
+    this.plane.position.set(left, top, -z);
+
+    console.log(scaleX, scaleY);
     /*
 
 
