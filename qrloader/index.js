@@ -2,22 +2,48 @@ console.log("qrloader/index.js");
 const video = document.getElementById("video");
 const cameraCanvas = document.getElementById("videoCanvas");
 const arCanvas = document.getElementById("arCanvas");
-const context = cameraCanvas.getContext("2d");
+const context = cameraCanvas.getContext("2d", { willReadFrequently: true });
 
 navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
   video.srcObject = stream;
   video.play();
 });
 
-let threeScene;
+//let threeScene;
+let mesh;
+let renderer;
+let scene;
+let camera;
+let vertices;
+let geometry;
 
 video.addEventListener("loadedmetadata", () => {
   cameraCanvas.width = video.videoWidth;
   cameraCanvas.height = video.videoHeight;
   arCanvas.width = video.videoWidth;
   arCanvas.height = video.videoHeight;
-  threeScene = new ThreeScene(arCanvas, video.videoWidth, video.videoHeight);
-  //threeInit(video.videoWidth, video.videoHeight);
+
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(
+    75,
+    cameraCanvas.width / cameraCanvas.height,
+    0.1,
+    1000
+  );
+  renderer = new THREE.WebGLRenderer({
+    canvas: arCanvas,
+  });
+  renderer.setSize(cameraCanvas.width, cameraCanvas.height);
+
+  geometry = new THREE.PlaneGeometry(2, 2, 1, 1); // 2x2の平面
+  vertices = geometry.attributes.position.array;
+  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+  camera.position.z = 5;
+
+  //console.log(geometry.attributes.position.array);
+
   qrScan();
 });
 
@@ -56,7 +82,7 @@ function qrScan() {
 
     //console.log("QRコード内容:", qrCode);
 
-    // 赤い線を描画する
+    // qrの縁に線を描画する
     context.strokeStyle = "yellow";
 
     context.beginPath();
@@ -66,130 +92,111 @@ function qrScan() {
     context.lineTo(bottomLeftCorner.x, bottomLeftCorner.y);
     context.closePath();
     context.stroke();
+    const chWidth = cameraCanvas.width / 2;
+    const chHeight = cameraCanvas.height / 2;
+    // QRコードの座標
+    const twoDPoints = [
+      topLeftCorner.x,
+      topLeftCorner.y,
+      topRightCorner.x,
+      topRightCorner.y,
+      bottomLeftCorner.x,
+      bottomLeftCorner.y,
+      bottomRightCorner.x,
+      bottomRightCorner.y,
+    ];
+    // 3d座標
+    const threeDPoints = [1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0];
 
-    threeScene.changeCamera(
-      topLeftCorner,
-      topRightCorner,
-      bottomRightCorner,
-      bottomLeftCorner
+    const fx = 300; // 焦点距離の例
+    const fy = 300; // 焦点距離の例
+    const cx = chWidth; // カメラ中心（例）
+    const cy = chHeight; // カメラ中心（例）
+
+    const cameraMatrix = cv.matFromArray(3, 3, cv.CV_64F, [
+      fx,
+      0,
+      cx,
+      0,
+      fy,
+      cy,
+      0,
+      0,
+      1,
+    ]);
+
+    // 歪み係数（ゼロに設定）
+    const distCoeffs = cv.Mat.zeros(4, 1, cv.CV_64F);
+
+    // 変数の初期化
+    const rvec = new cv.Mat();
+    const tvec = new cv.Mat();
+
+    // SolvePnPでカメラの外部パラメータを推定
+    const objectPointsMat = cv.matFromArray(4, 3, cv.CV_32F, threeDPoints);
+
+    const imagePointsMat = cv.matFromArray(4, 2, cv.CV_32F, twoDPoints);
+
+    cv.solvePnP(
+      objectPointsMat,
+      imagePointsMat,
+      cameraMatrix,
+      distCoeffs,
+      rvec,
+      tvec
     );
 
-    // Three.jsのレンダリング
-    threeScene.render();
+    // 回転ベクトルと平行移動ベクトルを表示
+    console.log("Rotation Vector:", rvec.data64F);
+    console.log("Translation Vector:", tvec.data64F);
+
+    // 回転ベクトルを回転行列に変換（Rodrigues変換）
+    const rotationMatrix = new cv.Mat();
+    cv.Rodrigues(rvec, rotationMatrix); // rvecを回転行列に変換
+
+    // Three.jsのカメラに回転行列を適用
+    const threeRotationMatrix = new THREE.Matrix4();
+    threeRotationMatrix.set(
+      rotationMatrix.data64F[0],
+      -rotationMatrix.data64F[1],
+      -rotationMatrix.data64F[2],
+      0,
+      -rotationMatrix.data64F[3],
+      rotationMatrix.data64F[4],
+      rotationMatrix.data64F[5],
+      0,
+      -rotationMatrix.data64F[6],
+      rotationMatrix.data64F[7],
+      rotationMatrix.data64F[8],
+      0,
+      0,
+      0,
+      0,
+      1
+    );
+
+    /*
+          rotationMatrix.makeRotationFromEuler(
+        new THREE.Euler(
+          rotationVector.x,
+          rotationVector.y,
+          rotationVector.z,
+          "XYZ"
+        )
+      )
+
+    */
+    camera.position.set(-tvec.data64F[0], tvec.data64F[1], tvec.data64F[2]);
+
+    const quaternion = new THREE.Quaternion();
+    quaternion.setFromRotationMatrix(threeRotationMatrix);
+    mesh.setRotationFromQuaternion(quaternion);
+
+    // カメラの更新
+    mesh.updateMatrixWorld();
+
+    renderer.render(scene, camera);
   }
 
   requestAnimationFrame(qrScan);
-}
-
-class ThreeScene {
-  constructor(canvas, width, height) {
-    this.width = width;
-    this.height = height;
-    this.planeScale = 2;
-    this.fav = 63;
-
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(
-      this.fav,
-      width / height,
-      0.01,
-      1000
-    );
-    //this.camera.position.z = 10;
-    this.renderer = new THREE.WebGLRenderer({ canvas: canvas });
-    this.renderer.setSize(width, height);
-
-    const geometry = new THREE.PlaneGeometry(this.planeScale, this.planeScale);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    this.plane = new THREE.Mesh(geometry, material);
-    this.pivot = new THREE.Object3D(); // ピボットオブジェクト
-    this.scene.add(this.pivot);
-    //this.pivot.position.set(-planeScale, planeScale, 0);
-    this.pivot.attach(this.camera);
-    this.scene.add(this.plane);
-  }
-
-  distance(p1, p2) {
-    return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
-  }
-  center(p1, p2) {
-    return {
-      x: (p1.x + p2.x) / 2,
-      y: (p1.y + p2.y) / 2,
-    };
-  }
-
-  changeCamera(
-    topLeftCorner,
-    topRightCorner,
-    bottomRightCorner,
-    bottomLeftCorner
-  ) {
-    //this.camera.position.set(0, 0, 3);
-    const ax = topRightCorner.x - topLeftCorner.x;
-    const ay = topRightCorner.y - topLeftCorner.y;
-    const angle = Math.atan2(ay, ax);
-
-    const topLength = this.distance(topLeftCorner, topRightCorner);
-    const bottomLength = this.distance(bottomLeftCorner, bottomRightCorner);
-    const leftLength = this.distance(topLeftCorner, bottomLeftCorner);
-    const rightLength = this.distance(topRightCorner, bottomRightCorner);
-
-    const rateX = Math.abs(topLength) / Math.abs(bottomLength);
-    const rateY = Math.abs(leftLength) / Math.abs(rightLength);
-
-    const leftCenter = this.center(topLeftCorner, bottomLeftCorner);
-    const rightCenter = this.center(topRightCorner, bottomRightCorner);
-    const leftToRight = this.distance(leftCenter, rightCenter);
-    const topCenter = this.center(topLeftCorner, topRightCorner);
-    const bottomCenter = this.center(bottomLeftCorner, bottomRightCorner);
-    const topToBottom = this.distance(topCenter, bottomCenter);
-
-    const centerX = topLeftCorner.x;
-    const centerY = topLeftCorner.y;
-
-    const dx =
-      (Math.abs(this.distance(topLeftCorner, topRightCorner)) +
-        Math.abs(this.distance(bottomLeftCorner, bottomRightCorner))) /
-      2;
-    const dy =
-      (Math.abs(this.distance(topLeftCorner, bottomLeftCorner)) +
-        Math.abs(this.distance(topRightCorner, bottomRightCorner))) /
-      2;
-
-    const scaleX = 1 / (dx / this.width); // QRコードの幅を計算
-    const scaleY = 1 / (dy / this.height); // QRコードの幅を計算
-
-    // 座標変換（キャンバス座標からthree.jsの座標系に変換）
-    const normalizedX = (centerX / this.width) * 2 - 1;
-    const normalizedY = (centerY / this.height) * -2 + 1;
-
-    //this.pivot.rotation.x = 0.3 * Math.PI;
-    //this.pivot.position.set(3, 0, 0);
-
-    /*
-     */
-    this.plane.rotation.z = -angle;
-    this.plane.rotation.x = (rateX - 1) * Math.PI;
-    this.plane.rotation.y = (rateY - 1) * Math.PI;
-    //this.camera.position.z = ;
-
-    const z =
-      this.planeScale /
-      (2 * Math.tan(this.fav / 2)) /
-      (this.width / this.height);
-    const left = normalizedX * z + 1;
-    const top = normalizedY * scaleY - 1;
-    this.plane.position.set(left, top, -z);
-
-    console.log(scaleX, scaleY);
-    /*
-
-
-    // カメラの位置と回転をQRコードの中心に合わせる
-    */
-  }
-  render() {
-    this.renderer.render(this.scene, this.camera);
-  }
 }
