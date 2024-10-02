@@ -34,9 +34,7 @@ video.addEventListener("loadedmetadata", () => {
     canvas: arCanvas,
   });
   renderer.setSize(cameraCanvas.width, cameraCanvas.height);
-
-  geometry = new THREE.PlaneGeometry(2, 2, 1, 1); // 2x2の平面
-  vertices = geometry.attributes.position.array;
+  geometry = new THREE.BoxGeometry(2, 2, 2); // 2x2x2の立方体
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
@@ -194,6 +192,7 @@ function qrScan() {
 
     // カメラの更新
     mesh.updateMatrixWorld();
+    camera.updateMatrixWorld();
 
     renderer.render(scene, camera);
   }
