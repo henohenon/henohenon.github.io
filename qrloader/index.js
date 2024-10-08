@@ -8,6 +8,7 @@ navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
   video.srcObject = stream;
   video.play();
 });
+const loader = new THREE.GLTFLoader();
 
 let myThree;
 let arConverter;
@@ -22,6 +23,20 @@ video.addEventListener("loadedmetadata", () => {
   arConverter = new ARCoordinateTransformer(
     cameraCanvas.width,
     cameraCanvas.height
+  );
+  loader.load(
+    "./henobero-ilust.glb",
+    function (gltf) {
+      const model = gltf.scene;
+      //scene.add(model);
+      //model.position.set(0, 0, 0);
+      console.log("model", model);
+      myThree.addMesh(model);
+    },
+    undefined,
+    function (error) {
+      console.error(error);
+    }
   );
 
   qrScan();
@@ -172,13 +187,17 @@ class MyThree {
     );
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvas,
+      alpha: true,
     });
+    this.renderer.setClearColor(0x000000, 0); // 背景色を透明に設定
     this.renderer.setSize(canvas.width, canvas.height);
-    const geometry = new THREE.BoxGeometry(2, 2, 2); // 2x2x2の立方体
+    const geometry = new THREE.BoxGeometry(1, 1, 1); // 2x2x2の立方体
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this.mesh = new THREE.Mesh(geometry, material);
     this.scene.add(this.mesh);
     this.camera.position.z = 5;
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    this.scene.add(light);
   }
 
   update(tvec, rvec) {
@@ -223,5 +242,9 @@ class MyThree {
     this.camera.updateMatrixWorld();
 
     this.renderer.render(this.scene, this.camera);
+  }
+
+  addMesh(addMesh) {
+    this.mesh.add(addMesh);
   }
 }
