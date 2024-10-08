@@ -196,8 +196,10 @@ class MyThree {
     this.mesh = new THREE.Object3D(); //new THREE.Mesh(geometry);
     this.scene.add(this.mesh);
     this.camera.position.z = 5;
-    const light = new THREE.DirectionalLight(0xffffff, 1);
+    const light = new THREE.DirectionalLight(0xffffff, 0.5);
     this.scene.add(light);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    this.scene.add(ambientLight);
   }
 
   update(tvec, rvec) {
