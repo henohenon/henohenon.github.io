@@ -1,0 +1,36 @@
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="module" crossorigin src="./assets/index-pjTWe-6_.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/mediapipe-hands-5X5MU4lq.js">
+</head>
+<style>
+  #hand {
+    position: absolute;
+  }
+</style>
+
+<body>
+  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB"
+    renderer="colorManagement: false, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="animated-model" src="./models/henobero-ilust.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera id="camera" position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-entity id="imageTargetar" mindar-image-target="targetIndex: 0">
+      <a-entity id="berus" gltf-model="#animated-model" animation-mixer scale="0.1 0.1 0.1"></a-entity>
+    </a-entity>
+  </a-scene>
+
+  <canvas id="henyahenya"></canvas>
+
+  <h1 id="hand" style="display: none;">へ</h1>
+</body>
+
+</html>
+<html>
