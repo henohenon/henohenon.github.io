@@ -191,9 +191,8 @@ class MyThree {
     });
     this.renderer.setClearColor(0x000000, 0); // 背景色を透明に設定
     this.renderer.setSize(canvas.width, canvas.height);
-    const geometry = new THREE.BoxGeometry(1, 1, 1); // 2x2x2の立方体
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    this.mesh = new THREE.Mesh(geometry, material);
+    const geometry = new THREE.BoxGeometry(2, 2, 2); // 2x2x2の立方体
+    this.mesh = new THREE.Object3D(); //new THREE.Mesh(geometry);
     this.scene.add(this.mesh);
     this.camera.position.z = 5;
     const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -235,16 +234,30 @@ class MyThree {
     // カメラの姿勢を設定
     const quaternion = new THREE.Quaternion();
     quaternion.setFromRotationMatrix(threeRotationMatrix);
-    this.mesh.setRotationFromQuaternion(quaternion);
 
-    // カメラの更新
-    this.mesh.updateMatrixWorld();
-    this.camera.updateMatrixWorld();
+    const xAxis = new THREE.Vector3(1, 0, 0); // x軸
+    const quaternionX = new THREE.Quaternion().setFromAxisAngle(
+      xAxis,
+      THREE.Math.degToRad(90)
+    );
+
+    // z軸方向に+180度の回転を追加
+    const zAxis = new THREE.Vector3(0, 1, 0); // z軸
+    const quaternionZ = new THREE.Quaternion().setFromAxisAngle(
+      zAxis,
+      THREE.Math.degToRad(180)
+    );
+
+    // クォータニオンを乗算
+    quaternion.multiply(quaternionX).multiply(quaternionZ);
+
+    this.mesh.setRotationFromQuaternion(quaternion);
 
     this.renderer.render(this.scene, this.camera);
   }
 
   addMesh(addMesh) {
     this.mesh.add(addMesh);
+    addMesh.scale.set(0.1, 0.1, 0.1);
   }
 }
