@@ -74,14 +74,10 @@ function qrScan() {
 
     // QRコードの座標
     const twoDPoints = [
-      topLeftCorner.x,
-      topLeftCorner.y,
-      topRightCorner.x,
-      topRightCorner.y,
-      bottomLeftCorner.x,
-      bottomLeftCorner.y,
-      bottomRightCorner.x,
-      bottomRightCorner.y,
+      topRightCorner.x, topRightCorner.y, // 右上
+      topLeftCorner.x, topLeftCorner.y, // 左上
+      bottomLeftCorner.x, bottomLeftCorner.y, // 左下
+      bottomRightCorner.x, bottomRightCorner.y, // 右下
     ];
 
     console.log(arConverter);
@@ -127,7 +123,12 @@ class ARCoordinateTransformer {
 
   constructor(width, height) {
     // 3d座標
-    this.threeDPoints = [1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0];
+    this.threeDPoints = [
+      -1, 1, 0, // 右上
+      1, 1, 0, // 左上
+      1, -1, 0, // 左下
+      -1, -1, 0, // 右下
+    ];
     this.fx = 300; // 焦点距離の例
     this.fy = 300; // 焦点距離の例
     this.cx = width / 2; // カメラ中心（例）
@@ -234,23 +235,22 @@ class MyThree {
     // カメラの姿勢を設定
     const quaternion = new THREE.Quaternion();
     quaternion.setFromRotationMatrix(threeRotationMatrix);
-
+    
+    // threejsとopencvの座標系の違いを補正。なんか補正できりゃぁ一番なんだがうまくいかんしこっちでもそんなパフォーマンス悪くないと思うのでパワー
     const xAxis = new THREE.Vector3(1, 0, 0); // x軸
     const quaternionX = new THREE.Quaternion().setFromAxisAngle(
       xAxis,
       THREE.Math.degToRad(90)
     );
-
-    // z軸方向に+180度の回転を追加
-    const zAxis = new THREE.Vector3(0, 1, 0); // z軸
+    const zAxis = new THREE.Vector3(0, 1, 0); // y軸
     const quaternionZ = new THREE.Quaternion().setFromAxisAngle(
       zAxis,
       THREE.Math.degToRad(180)
     );
-
     // クォータニオンを乗算
     quaternion.multiply(quaternionX).multiply(quaternionZ);
 
+  
     this.mesh.setRotationFromQuaternion(quaternion);
 
     this.renderer.render(this.scene, this.camera);
@@ -258,6 +258,8 @@ class MyThree {
 
   addMesh(addMesh) {
     this.mesh.add(addMesh);
+    // TODO: モデル側で調整
     addMesh.scale.set(0.1, 0.1, 0.1);
+    addMesh.position.set(0, 0, 1);
   }
 }
