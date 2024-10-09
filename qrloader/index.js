@@ -27,11 +27,11 @@ video.addEventListener("loadedmetadata", () => {
   loader.load(
     "./henobero-ilust.glb",
     function (gltf) {
-      const model = gltf.scene;
       //scene.add(model);
       //model.position.set(0, 0, 0);
-      console.log("model", model);
-      myThree.addMesh(model);
+      myThree.setGLTFModel(gltf);
+
+      console.log("model", gltf);
     },
     undefined,
     function (error) {
@@ -41,6 +41,8 @@ video.addEventListener("loadedmetadata", () => {
 
   qrScan();
 });
+
+let isFirst = true;
 
 function qrScan() {
   context.drawImage(video, 0, 0, cameraCanvas.width, cameraCanvas.height);
@@ -88,8 +90,17 @@ function qrScan() {
     console.log("Rotation Vector:", rvec.data64F);
     console.log("Translation Vector:", tvec.data64F);
 
+    if (isFirst) {
+      myThree.animationMesh();
+      isFirst = false;
+    }
+
     // 3D座標を更新
     myThree.update(tvec, rvec);
+
+    arCanvas.classList.add("active");
+  }else{
+    arCanvas.classList.remove("active");
   }
 
   requestAnimationFrame(qrScan);
@@ -176,7 +187,9 @@ class MyThree {
   scene;
   camera;
   renderer;
-  mesh;
+  animMixer;
+  animClips;
+  clock;
 
   constructor(canvas) {
     this.scene = new THREE.Scene();
@@ -200,6 +213,8 @@ class MyThree {
     this.scene.add(light);
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     this.scene.add(ambientLight);
+
+    this.clock = new THREE.Clock();
   }
 
   update(tvec, rvec) {
@@ -255,13 +270,29 @@ class MyThree {
   
     this.mesh.setRotationFromQuaternion(quaternion);
 
+    const delta = this.clock.getDelta();
+    if (this.animMixer) this.animMixer.update(delta);
+
     this.renderer.render(this.scene, this.camera);
   }
 
-  addMesh(addMesh) {
-    this.mesh.add(addMesh);
+  setGLTFModel(gltf) {
+    const model = gltf.scene;
     // TODO: モデル側で調整
-    addMesh.scale.set(0.1, 0.1, 0.1);
-    addMesh.position.set(0, 0, 1);
+    this.animMixer = new THREE.AnimationMixer(model);
+    model.scale.set(0.1, 0.1, 0.1);
+    model.position.set(0, 0, 1);
+    this.mesh.add(model);
+    console.log(this.scene);
+    
+    this.animClips = gltf.animations;
   }
+
+  animationMesh(){
+    const action = this.animMixer.clipAction(this.animClips[1]);
+    action.setLoop(THREE.LoopOnce); // ループを無効にし、1回のみ再生
+    action.clampWhenFinished = true; // アニメーション終了後、最後のフレームで停止
+    console.log(this.animClips);
+    action.play();
+ }
 }

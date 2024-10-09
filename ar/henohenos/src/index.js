@@ -53,7 +53,6 @@ let isFounding = false;
 
 marker.addEventListener("targetFound", (e) => {
   if (isFirst) {
-    modelElem.setAttribute("animation-mixer", "clip: howling; loop: once;");
     isFirst = false;
   }
   isFounding = true;
