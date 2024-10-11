@@ -131,6 +131,7 @@ class ARCoordinateTransformer {
   cy;
   cameraMatrix;
   distCoeffs;
+  animRandom;
 
   constructor(width, height) {
     // 3d座標
@@ -190,6 +191,9 @@ class MyThree {
   animMixer;
   animClips;
   clock;
+  animRandom = 0;
+  neckBone;
+  initQuaternion;
 
   constructor(canvas) {
     this.scene = new THREE.Scene();
@@ -252,7 +256,7 @@ class MyThree {
     // カメラの姿勢を設定
     const quaternion = new THREE.Quaternion();
     quaternion.setFromRotationMatrix(threeRotationMatrix);
-    
+
     // threejsとopencvの座標系の違いを補正。なんか補正できりゃぁ一番なんだがうまくいかんしこっちでもそんなパフォーマンス悪くないと思うのでパワー
     const xAxis = new THREE.Vector3(1, 0, 0); // x軸
     const quaternionX = new THREE.Quaternion().setFromAxisAngle(
@@ -267,32 +271,69 @@ class MyThree {
     // クォータニオンを乗算
     quaternion.multiply(quaternionX).multiply(quaternionZ);
 
-  
     this.mesh.setRotationFromQuaternion(quaternion);
 
-    const delta = this.clock.getDelta();
-    if (this.animMixer) this.animMixer.update(delta);
+    // カメラとオブジェクトの距離を計算する
+    var meshPosition = new THREE.Vector3();
+    this.mesh.getWorldPosition(meshPosition); // オブジェクトのワールド座標を取得
+
+    var cameraPosition = new THREE.Vector3();
+    this.camera.getWorldPosition(cameraPosition); // カメラのワールド座標を取得
+
+    var distance = meshPosition.distanceTo(cameraPosition); // 距離を計算
+
+    console.log("カメラとの距離: " + distance);
+
+    if(distance <= 6){
+      this.neckBone.lookAt(cameraPosition);
+      this.neckBone.quaternion.multiply(this.initQuaternion);
+
+       // X軸方向に45度回転を追加
+    const additionalQuaternion = new THREE.Quaternion();
+    const axis = new THREE.Vector3(1, 0, 0); // X軸
+    const angle = THREE.MathUtils.degToRad(30); // 45度をラジアンに変換
+
+    additionalQuaternion.setFromAxisAngle(axis, angle);
+
+    // 初期クォータニオンにX軸方向の45度回転を追加
+    this.neckBone.quaternion.multiply(additionalQuaternion);
+
+    }else{
+      // 経過時間
+      const delta = this.clock.getDelta();
+      // アニメーションの更新
+      if (this.animMixer) this.animMixer.update(delta);
+      // ランダムな時間でアニメーションを再生
+      this.animRandom -= delta;
+      if(this.animRandom <= 0) this.animationMesh();
+    }
 
     this.renderer.render(this.scene, this.camera);
   }
 
   setGLTFModel(gltf) {
     const model = gltf.scene;
+    const skinnedMesh = model.getObjectByProperty("type", "SkinnedMesh");
+    this.neckBone = skinnedMesh.skeleton.getBoneByName("neck"); // ボーン名で取得
+
+    this.initQuaternion = this.neckBone.quaternion.clone();
+    
+   
     // TODO: モデル側で調整
     this.animMixer = new THREE.AnimationMixer(model);
     model.scale.set(0.1, 0.1, 0.1);
     model.position.set(0, 0, 1);
     this.mesh.add(model);
-    console.log(this.scene);
-    
+
     this.animClips = gltf.animations;
   }
 
   animationMesh(){
     const action = this.animMixer.clipAction(this.animClips[1]);
-    action.setLoop(THREE.LoopOnce); // ループを無効にし、1回のみ再生
-    action.clampWhenFinished = true; // アニメーション終了後、最後のフレームで停止
-    console.log(this.animClips);
+    action.reset();
+    action.setLoop(THREE.LoopOnce);
+    action.clampWhenFinished = true;
     action.play();
- }
+    this.animRandom = Math.floor(Math.random() * 4) + 7;
+  }
 }
