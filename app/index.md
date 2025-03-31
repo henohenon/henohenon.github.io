@@ -43,5 +43,13 @@ theme: minima
 - 謎の自作cgアニメーション
   - https://youtu.be/qnLSJ3IcVI8
   - かなり黒歴史より。頑張ってはいる。
+- GX-Pro開発
+  - https://gxpro.app/
+  - こちらのサイトじゃなくてソフトのほうの開発を行いました
+  - UIToolkit/VCoontainerをいい感じに使っていい感じにできたと思います
+- MultiSweepers
+  - https://unityroom.com/games/multi-sweeper
+  - こちらゲームジャムでチーム開発しました。
+  - 予定管理/プログラマー/モデラー/UIの配置・作成など色々やりました...タノシカッタ
 # Contact
 - X: https://x.com/henohenon_8282
