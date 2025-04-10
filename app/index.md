@@ -10,7 +10,7 @@ theme: minima
   - https://alphatique.co.jp/
   - https://www.ozoradrone.site/
   - 割とフリーランス
-- 結構unityの人
+- 主にゲーム制作>unity>プログラマーの人
 - プログラマー
   - web系
     - html/css/js(ts)
@@ -28,6 +28,9 @@ theme: minima
   - 英検3級
   - 普通自動車免許
 # Works
+- 文字顔メーカー
+  - https://henohenon.github.io/mojigao-maker/scripts/mojigao-maker.html
+  - へのへのっぽいアイコンをランダムで生成するサイト
 - Alphatiqueサイト修正
   - https://alphatique.co.jp/
   - こちらのサイトの一部を修正しました
