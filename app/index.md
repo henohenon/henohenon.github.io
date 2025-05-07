@@ -6,18 +6,22 @@ theme: minima
 
 # Profile
 - へのへのん/北村 尊瑠
+- 技術スタック
+  - tierS
+    - unity, unity c#
+  - tierA
+    - typescript
+  - tierB
+    - html, css
+    - live2D
+    - blender
+    - unreal engine, blue print
 - 所属
   - https://alphatique.co.jp/
-  - https://www.ozoradrone.site/
-  - 割とフリーランス
-- 主にゲーム制作>unity>プログラマーの人
-- プログラマー
-  - web系
-    - html/css/js(ts)
-    - react/nuxt
-  - ゲーム系
-    - unity(c#)
-    - unrealengine(blueprint)
+  - https://x.com/tukuruttyan
+  - https://www.iwakenlab.jp/
+  - https://x.com/fuprogram
+  - https://jyogi.pages.dev/
 - 資格
   - 基本情報技術者試験
   - カラーコーディネーター
@@ -27,22 +31,40 @@ theme: minima
   - Unity認定プロフェッショナル　プログラマー
   - 英検3級
   - 普通自動車免許
+# Vision and Values
+- 自己認識
+  - より良いモノづくり・エンタメを求めてる人
+  - 特に技術に執着はないが、結果としてゲームプログラマーがメイン
+  - 強いて一言でいうならば「探求者」
+- 目標
+  - 自作言語、自作レンダラー、自作エンジンでゲームを作る
+    - 動機はプログラマー的趣味
+    - スキルアップ的に一番良いという判断
+  - 自分のモノづくりで文化にムーブメントを起こす
+    - ボカロ、アニメなど。
+    - とりあえず今はゲームMVが作りたい
 # Works
-- 文字顔メーカー
-  - https://henohenon.github.io/mojigao-maker/scripts/mojigao-maker.html
-  - へのへのっぽいアイコンをランダムで生成するサイト
+- Glimmer
+  - 自作言語。まだまだ思想段階。
+  - https://github.com/henohenon/Glimmer
 - Alphatiqueサイト修正
   - https://alphatique.co.jp/
-  - こちらのサイトの一部を修正しました
+  - こちらのサイトの一部修正するなどしました
 - ドローンシミュレーター開発/リリース
   - https://store.steampowered.com/app/2635620/GlobeXplore/?l=japanese
-  - こちらのシミュレーターの開発、steam管理をしております
-- エッチな雰囲気測定アプリ
-  - https://topaz.dev/projects/51aa3cd195efd2231447
-  - ハッカソンネタ枠。とても楽しかったです。
+  - こちらのシミュレーターの開発、steam管理を2年ほどしてました
 - live2dでvtuber錬精する
   - https://note.com/henohenon/n/n8d2fb5b47c75
   - 意味不明シリーズ。結構心行くまで堪能した。
+- Who am I?
+  - https://unityroom.com/games/whoami
+  - unity1week、「あい」で作成したゲーム
+- 文字顔メーカー
+  - https://henohenon.github.io/mojigao-maker/scripts/mojigao-maker.html
+  - へのへのっぽいアイコンをランダムで生成するサイト
+- エッチな雰囲気測定アプリ
+  - https://topaz.dev/projects/51aa3cd195efd2231447
+  - ハッカソンネタ枠。とても楽しかったです。
 - 謎の自作cgアニメーション
   - https://youtu.be/qnLSJ3IcVI8
   - かなり黒歴史より。頑張ってはいる。
