@@ -1,40 +1,24 @@
 {
   "main": {
-    "id": "78f10a825d65cc8b",
+    "id": "7240c1601bc38692",
     "type": "split",
     "children": [
       {
-        "id": "9317bccc7be5c14a",
+        "id": "10fccd77bf2d8b3a",
         "type": "tabs",
         "children": [
           {
-            "id": "a9e0459ba33f459b",
+            "id": "9ae72b61d4f2c2c5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Welcome.md",
+                "file": "henoheno.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Welcome"
-            }
-          }
-        ]
-      },
-      {
-        "id": "31f24d84f96a0564",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "dc4b4dabbc8424c6",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "title": "henoheno"
             }
           }
         ]
@@ -43,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "22d29aa180c334c0",
+    "id": "c27f5a96880523c6",
     "type": "split",
     "children": [
       {
-        "id": "0a7094fd51adfd00",
+        "id": "09460f80428ec12d",
         "type": "tabs",
         "children": [
           {
-            "id": "4f7a3489c0bb7c25",
+            "id": "b9d6acfefd91652f",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -64,7 +48,7 @@
             }
           },
           {
-            "id": "f56a4c4491deb269",
+            "id": "81aad5e68c45e431",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -81,7 +65,7 @@
             }
           },
           {
-            "id": "9be16bd55102ae22",
+            "id": "344a231a1c0f3375",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -97,15 +81,15 @@
     "width": 300
   },
   "right": {
-    "id": "adf144c62c207a11",
+    "id": "9ac668122684d759",
     "type": "split",
     "children": [
       {
-        "id": "aa4a1267222b4591",
+        "id": "6991fd54f7af31f8",
         "type": "tabs",
         "children": [
           {
-            "id": "0d7db3189511cae3",
+            "id": "d576446dfd1d0ba3",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -124,7 +108,7 @@
             }
           },
           {
-            "id": "ccdd818ce9d6b81c",
+            "id": "aefbf31d94f114da",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -138,7 +122,7 @@
             }
           },
           {
-            "id": "0232de1316a1d785",
+            "id": "52e21f710e27d2a3",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -153,7 +137,7 @@
             }
           },
           {
-            "id": "dda710877698b09f",
+            "id": "b132838ae1bf7d29",
             "type": "leaf",
             "state": {
               "type": "outline",
@@ -185,8 +169,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "a9e0459ba33f459b",
+  "active": "9ae72b61d4f2c2c5",
   "lastOpenFiles": [
-    "Welcome.md"
+    "Pasted image 20250826172335.png",
+    "Welcome.md",
+    "henoheno.md~",
+    "henoheno.md"
   ]
 }

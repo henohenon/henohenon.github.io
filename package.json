@@ -1,0 +1,22 @@
+{
+  "name": "henohenon.github.io",
+  "version": "1.0.0",
+  "description": "Hugo blog with Bun",
+  "scripts": {
+    "dev": "hugo server -D",
+    "build": "npm run convert && hugo",
+    "convert": "ts-node scripts/obsidian-to-hugo.ts content dist",
+    "convert:js": "npm run build:ts && node dist/scripts/obsidian-to-hugo.js content dist",
+    "build:ts": "tsc",
+    "build:clean": "npm run clean && npm run build",
+    "new": "hugo new",
+    "clean": "rm -rf public dist"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "gray-matter": "^4.0.3",
+    "hugo-bin": "^0.145.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
