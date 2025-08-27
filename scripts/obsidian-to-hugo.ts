@@ -3,6 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import matter from 'gray-matter';
+import yaml from 'js-yaml';
 
 interface GrayMatterFile<T = any> {
   data: T;
@@ -164,7 +165,11 @@ class ObsidianToHugoConverter {
       }
 
       // Create new content with frontmatter
-      const hugoContent = matter.stringify(convertedContent, frontmatter);
+      const yamlContent = yaml.dump(frontmatter, {
+        quotingType: '"' as const,
+        forceQuotes: true
+      });
+      const hugoContent = `---\n${yamlContent}---\n${convertedContent}`;
       return hugoContent;
     } catch (error) {
       console.error(`Error processing file ${filePath}:`, error);

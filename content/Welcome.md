@@ -1,7 +1,7 @@
 ---
-title: Welcome
-slug: welcome
-date: '2025-08-26T18:16:00.000Z'
+title: "Welcome"
+slug: "welcome"
+date: "2025-08-26T18:16:00.000Z"
 draft: false
 ---
 This is your new *vault*.

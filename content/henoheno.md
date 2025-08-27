@@ -1,10 +1,10 @@
 ---
-title: へのへの
-slug: henoheno
-date: '2025-08-26T18:16:00.000Z'
+title: "へのへの"
+slug: "henoheno"
+date: "2025-08-26T18:16:00.000Z"
 draft: false
 tags:
-  - henoheno
+  - "henoheno"
 ---
 
 afewef

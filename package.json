@@ -11,10 +11,14 @@
     "clean": "rm -rf public content"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.3.0",
     "gray-matter": "^4.0.3",
     "hugo-bin": "^0.145.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
   }
 }
