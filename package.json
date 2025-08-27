@@ -5,12 +5,10 @@
   "scripts": {
     "dev": "hugo server -D",
     "build": "npm run convert && hugo",
-    "convert": "ts-node scripts/obsidian-to-hugo.ts content dist",
-    "convert:js": "npm run build:ts && node dist/scripts/obsidian-to-hugo.js content dist",
-    "build:ts": "tsc",
+    "convert": "ts-node scripts/obsidian-to-hugo.ts vault content",
     "build:clean": "npm run clean && npm run build",
     "new": "hugo new",
-    "clean": "rm -rf public dist"
+    "clean": "rm -rf public content"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",

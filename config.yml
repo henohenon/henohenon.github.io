@@ -2,7 +2,6 @@ baseURL: "https://henohenon.github.io/"
 languageCode: "ja"
 title: "Henohenon's Blog"
 theme: "PaperMod"
-contentDir: "dist"
 
 enableRobotsTXT: true
 buildDrafts: false
@@ -99,7 +98,7 @@ params:
     hiddenInSingle: true # hide on single page
 
   editPost:
-    URL: "https://github.com/henohenon/henohenon.github.io/tree/main/content"
+    URL: "https://github.com/henohenon/henohenon.github.io/tree/main/obsidian_new"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 
@@ -132,6 +131,25 @@ menu:
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
+  goldmark:
+    renderer:
+      unsafe: true
+      hardWraps: false
+      xhtml: false
+    parser:
+      attribute:
+        block: true
+        title: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
   highlight:
     noClasses: false
     # anchorLineNos: true
