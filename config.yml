@@ -16,8 +16,8 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: "Henohenon's Blog"
-  description: "Personal blog powered by Hugo and PaperMod theme"
+  title: "Henohenon's Portfolio"
+  description: "Personal Portfolio powered by Hugo and PaperMod theme"
   keywords: [Blog, Portfolio, PaperMod]
   author: "Henohenon"
   # author: ["Me", "You"] # multiple authors
@@ -52,7 +52,7 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "Henohenon's Blog"
+    text: "Henohenon's Portfolio"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
@@ -70,19 +70,6 @@ params:
         url: posts
       - name: Tags
         url: tags
-
-  # home-info mode
-  homeInfoParams:
-    Title: "こんにちは 👋"
-    Content: Hugoで作られたブログへようこそ
-
-  socialIcons:
-    - name: twitter
-      url: "https://twitter.com/"
-    - name: stackoverflow
-      url: "https://stackoverflow.com"
-    - name: github
-      url: "https://github.com/"
 
   analytics:
     google:
@@ -115,18 +102,19 @@ params:
 
 menu:
   main:
-    - identifier: categories
-      name: categories
-      url: /categories/
+    - identifier: blogs
+      name: Blogs
+      url: /blogs/
       weight: 10
-    - identifier: tags
-      name: tags
-      url: /tags/
+    - identifier: works
+      name: Works
+      url: /works/
       weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
+    - identifier: links
+      name: Links
+      url: /links/
       weight: 30
+
 
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true

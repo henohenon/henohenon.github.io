@@ -5,6 +5,99 @@ import * as path from 'path';
 import matter from 'gray-matter';
 import yaml from 'js-yaml';
 
+// Configuration constants
+const CONFIG = {
+  SLUG_LENGTH: 12,
+  SLUG_CHARSET: 'abcdefghijklmnopqrstuvwxyz0123456789',
+  EXCLUDED_DIRS: ['.obsidian', 'templates'],
+  EXCLUDED_FILES: ['.vault-nickname'],
+  DEFAULT_TIMEZONE: '+09:00',
+  IMAGE_PATH_PREFIX: '/',
+  RELATIVE_LINK_PREFIX: '../'
+} as const;
+
+// Pre-compiled regex patterns
+const PATTERNS = {
+  IMAGE_EMBED: /!\[\[([^|\]]+)(?:\|([^\]]+))?\]\]/g,
+  WIKILINK_WITH_ALIAS: /(?<!\!)\[\[([^|\]]+)\|([^\]]+)\]\]/g,
+  WIKILINK_SIMPLE: /(?<!\!)\[\[([^\]]+)\]\]/g,
+  OBSIDIAN_TAG: /(?:^|[\s])#([a-zA-Z0-9_\-/\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]+)/gm,
+  WHITESPACE_CLEANUP: /\n\s*\n/g
+} as const;
+
+/**
+ * Get timezone offset for date formatting
+ */
+function getTimezoneOffset(): string {
+  return CONFIG.DEFAULT_TIMEZONE;
+}
+
+/**
+ * Custom error class for conversion operations
+ */
+class ConversionError extends Error {
+  constructor(message: string, public filePath?: string) {
+    super(message);
+    this.name = 'ConversionError';
+  }
+}
+
+/**
+ * Result interface for processing operations
+ */
+interface ProcessResult<T = any> {
+  success: boolean;
+  data?: T;
+  error?: string;
+}
+
+/**
+ * Interface for conversion operation results
+ */
+interface ConversionResult {
+  convertedFiles: number;
+  copiedAssets: number;
+  skippedFiles: string[];
+  errors: ConversionError[];
+}
+
+/**
+ * Interface for processing context
+ */
+interface ProcessingContext {
+  markdownFiles: string[];
+  allAssetFiles: string[];
+  fileNameToSlugMapping: Map<string, string>;
+}
+
+/**
+ * Configuration options for conversion
+ */
+interface ConversionOptions {
+  inputDir?: string;
+  outputDir?: string;
+  staticDir?: string;
+  generateRandomSlugs?: boolean;
+  preserveUnusedAssets?: boolean;
+  timezone?: string;
+}
+
+/**
+ * Safe wrapper for processing files with unified error handling
+ */
+function safeProcessFile(filePath: string, fileNameToSlugMapping: Map<string, string>, referencedImages: Set<string>): ProcessResult<string> {
+  try {
+    const result = processFile(filePath, fileNameToSlugMapping, referencedImages);
+    if (result === null) {
+      return { success: false, error: `Failed to process file: ${filePath}` };
+    }
+    return { success: true, data: result };
+  } catch (error) {
+    console.error(`Failed to process ${filePath}:`, error);
+    return { success: false, error: error instanceof Error ? error.message : String(error) };
+  }
+}
+
 interface GrayMatterFile<T = any> {
   data: T;
   content: string;
@@ -24,281 +117,376 @@ interface TagExtractionResult {
   cleanContent: string;
 }
 
-class ObsidianToHugoConverter {
-  private readonly inputDir: string;
-  private readonly outputDir: string;
-  private readonly staticDir: string;
-
-  constructor(inputDir: string = './obsidian', outputDir: string = './content', staticDir: string = './static') {
-    this.inputDir = inputDir;
-    this.outputDir = outputDir;
-    this.staticDir = staticDir;
-  }
-
-  /**
-   * Convert Obsidian image embeds ![[image.png]] to markdown image syntax
-   */
-  convertImageEmbeds(content: string): string {
-    // Handle image embeds with alt text: ![[image.png|Alt Text]]
-    content = content.replace(/!\[\[([^|\]]+)\|([^\]]+)\]\]/g, (match: string, imageName: string, altText: string): string => {
-      const encodedImageName = encodeURIComponent(imageName);
-      return `![${altText}](/${encodedImageName})`;
-    });
-
-    // Handle simple image embeds: ![[image.png]]
-    content = content.replace(/!\[\[([^\]]+)\]\]/g, (match: string, imageName: string): string => {
-      const altText = path.basename(imageName, path.extname(imageName));
-      const encodedImageName = encodeURIComponent(imageName);
-      return `![${altText}](/${encodedImageName})`;
-    });
-
-    return content;
-  }
-
-  /**
-   * Convert Obsidian wikilinks [[Page Name]] to Hugo markdown links
-   */
-  convertWikilinks(content: string): string {
-    // Handle wikilinks with aliases: [[Page Name|Display Text]]
-    content = content.replace(/(?<!\!)\[\[([^|\]]+)\|([^\]]+)\]\]/g, (match: string, pageName: string, displayText: string): string => {
-      const slug = this.pageNameToSlug(pageName);
-      return `[${displayText}](../${slug}/)`;
-    });
-
-    // Handle simple wikilinks: [[Page Name]]
-    content = content.replace(/(?<!\!)\[\[([^\]]+)\]\]/g, (match: string, pageName: string): string => {
-      const slug = this.pageNameToSlug(pageName);
-      return `[${pageName}](../${slug}/)`;
-    });
-
-    return content;
-  }
-
-  /**
-   * Extract tags from content and remove them
-   */
-  extractObsidianTags(content: string): TagExtractionResult {
-    const tags: string[] = [];
+/**
+ * Convert Obsidian image embeds ![[image.png]] to markdown image syntax
+ * Returns both converted content and set of referenced images
+ */
+function convertImageEmbeds(content: string, referencedImages: Set<string>): string {
+  // Handle both cases in a single pass: ![[image.png|Alt Text]] and ![[image.png]]
+  return content.replace(PATTERNS.IMAGE_EMBED, (match: string, imageName: string, altText?: string): string => {
+    // Track this image as referenced
+    referencedImages.add(imageName);
     
-    // Extract inline tags (including Japanese characters)
-    const tagRegex = /#([a-zA-Z0-9_\-/\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF]+)/g;
-    let match: RegExpExecArray | null;
+    const encodedImageName = encodeURIComponent(imageName);
+    const finalAltText = altText || path.basename(imageName, path.extname(imageName));
+    return `![${finalAltText}](${CONFIG.IMAGE_PATH_PREFIX}${encodedImageName})`;
+  });
+}
 
-    while ((match = tagRegex.exec(content)) !== null) {
-      tags.push(match[1]);
-    }
-
-    // Remove tags from content and clean up whitespace
-    let cleanContent = content.replace(tagRegex, '');
-    cleanContent = cleanContent.replace(/\n\s*\n/g, '\n\n');
-    
-    return { tags, cleanContent };
-  }
-
-  /**
-   * Convert page names to URL-friendly slugs
-   */
-  pageNameToSlug(pageName: string): string {
-    return pageName
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9\-]/g, '')
-      .replace(/--+/g, '-')
-      .replace(/^-+|-+$/g, '');
-  }
-
-  /**
-   * Generate title from filename
-   */
-  filenameToTitle(filename: string): string {
-    return path.basename(filename, '.md')
-      .replace(/[-_]/g, ' ')
-      .replace(/\b\w/g, (l: string): string => l.toUpperCase());
-  }
-
-  /**
-   * Generate slug from filename
-   */
-  filenameToSlug(filename: string): string {
-    return this.pageNameToSlug(path.basename(filename, '.md'));
-  }
-
-  /**
-   * Process a single markdown file
-   */
-  processFile(filePath: string): string | null {
+/**
+ * Build a mapping of filename to slug for all markdown files
+ */
+function buildFileNameToSlugMapping(inputDir: string): Map<string, string> {
+  const mapping = new Map<string, string>();
+  const markdownFiles = findMarkdownFiles(inputDir);
+  
+  for (const filePath of markdownFiles) {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
       const parsed = matter(content) as GrayMatterFile<HugoFrontmatter>;
+      const fileName = path.basename(filePath, '.md');
       
-      // Extract tags from content
-      const { tags: contentTags, cleanContent } = this.extractObsidianTags(parsed.content);
-      
-      // Convert image embeds and wikilinks
-      let convertedContent = this.convertImageEmbeds(cleanContent);
-      convertedContent = this.convertWikilinks(convertedContent);
-
-      // Auto-complete frontmatter fields if they don't exist
-      const frontmatter: HugoFrontmatter = { ...parsed.data };
-      
-      if (!frontmatter.title) {
-        frontmatter.title = this.filenameToTitle(filePath);
+      // Determine what slug will be assigned to this file
+      let slug: string;
+      if (parsed.data.slug && parsed.data.slug.trim() !== '') {
+        slug = parsed.data.slug;
+      } else {
+        slug = generateRandomSlug();
       }
       
-      if (!frontmatter.date) {
-        frontmatter.date = new Date().toISOString();
-      }
-      
-      if (frontmatter.draft === undefined) {
-        frontmatter.draft = false;
-      }
-      
-      if (!frontmatter.slug) {
-        frontmatter.slug = this.filenameToSlug(filePath);
-      }
-
-      // Merge tags (existing + extracted)
-      const allTags = [...(frontmatter.tags || []), ...contentTags];
-      const uniqueTags = [...new Set(allTags)];
-      if (uniqueTags.length > 0) {
-        frontmatter.tags = uniqueTags;
-      }
-
-      // Create new content with frontmatter
-      const yamlContent = yaml.dump(frontmatter, {
-        quotingType: '"' as const,
-        forceQuotes: true
-      });
-      const hugoContent = `---\n${yamlContent}---\n${convertedContent}`;
-      return hugoContent;
+      mapping.set(fileName, slug);
     } catch (error) {
-      console.error(`Error processing file ${filePath}:`, error);
-      return null;
+      console.error(`Error reading file ${filePath} for mapping:`, error);
     }
   }
+  
+  return mapping;
+}
 
-  /**
-   * Copy asset file to static directory, preserving directory structure
-   */
-  copyAssetFile(filePath: string): boolean {
-    try {
-      const relativePath = path.relative(this.inputDir, filePath);
-      const staticPath = path.join(this.staticDir, relativePath);
-      
-      this.ensureDirectoryExists(staticPath);
-      fs.copyFileSync(filePath, staticPath);
-      return true;
-    } catch (error) {
-      console.error(`Error copying asset ${filePath}:`, error);
-      return false;
+/**
+ * Convert Obsidian wikilinks [[Page Name]] to Hugo markdown links
+ */
+function convertWikilinks(content: string, fileNameToSlugMapping: Map<string, string>): string {
+  // Handle wikilinks with aliases: [[Page Name|Display Text]]
+  content = content.replace(PATTERNS.WIKILINK_WITH_ALIAS, (match: string, pageName: string, displayText: string): string => {
+    const slug = fileNameToSlugMapping.get(pageName);
+    if (slug) {
+      return `[${displayText}](${CONFIG.RELATIVE_LINK_PREFIX}${slug}/)`;
+    } else {
+      // If page not found in mapping, keep original wikilink or convert to broken link
+      console.warn(`Wikilink target "${pageName}" not found in file mapping`);
+      return `[${displayText}](${CONFIG.RELATIVE_LINK_PREFIX}${pageName}/)`;
     }
-  }
+  });
 
-  /**
-   * Ensure directory exists
-   */
-  ensureDirectoryExists(filePath: string): void {
-    const directory = path.dirname(filePath);
-    if (!fs.existsSync(directory)) {
-      fs.mkdirSync(directory, { recursive: true });
+  // Handle simple wikilinks: [[Page Name]]
+  content = content.replace(PATTERNS.WIKILINK_SIMPLE, (match: string, pageName: string): string => {
+    const slug = fileNameToSlugMapping.get(pageName);
+    if (slug) {
+      return `[${pageName}](${CONFIG.RELATIVE_LINK_PREFIX}${slug}/)`;
+    } else {
+      // If page not found in mapping, keep original wikilink or convert to broken link
+      console.warn(`Wikilink target "${pageName}" not found in file mapping`);
+      return `[${pageName}](${CONFIG.RELATIVE_LINK_PREFIX}${pageName}/)`;
     }
+  });
+
+  return content;
+}
+
+/**
+ * Extract tags from content and remove them
+ */
+function extractObsidianTags(content: string): TagExtractionResult {
+  const tags: string[] = [];
+  
+  // Extract inline tags (including Japanese characters)
+  let match: RegExpExecArray | null;
+
+  while ((match = PATTERNS.OBSIDIAN_TAG.exec(content)) !== null) {
+    tags.push(match[1]);
   }
 
-  /**
-   * Get output file path maintaining directory structure
-   */
-  getOutputFilePath(inputFilePath: string): string {
-    const relativePath = path.relative(this.inputDir, inputFilePath);
-    return path.join(this.outputDir, relativePath);
-  }
+  // Remove tags from content and clean up whitespace
+  let cleanContent = content.replace(PATTERNS.OBSIDIAN_TAG, '');
+  cleanContent = cleanContent.replace(PATTERNS.WHITESPACE_CLEANUP, '\n\n');
+  
+  return { tags, cleanContent };
+}
 
-  /**
-   * Find markdown files recursively
-   */
-  findMarkdownFiles(dir: string): string[] {
-    const files: string[] = [];
-    const traverse = (currentDir: string): void => {
-      const entries = fs.readdirSync(currentDir, { withFileTypes: true });
-      entries.forEach((entry) => {
-        const fullPath = path.join(currentDir, entry.name);
-        if (entry.isDirectory() && entry.name !== '.obsidian') {
-          traverse(fullPath);
-        } else if (entry.isFile() && entry.name.endsWith('.md')) {
-          files.push(fullPath);
-        }
-      });
-    };
-    traverse(dir);
-    return files;
+/**
+ * Generate random slug using configured length and charset
+ */
+function generateRandomSlug(): string {
+  let result = '';
+  for (let i = 0; i < CONFIG.SLUG_LENGTH; i++) {
+    result += CONFIG.SLUG_CHARSET.charAt(Math.floor(Math.random() * CONFIG.SLUG_CHARSET.length));
   }
+  return result;
+}
 
-  /**
-   * Find asset files (non-markdown files)
-   */
-  findAssetFiles(dir: string): string[] {
-    const files: string[] = [];
-    const traverse = (currentDir: string): void => {
-      const entries = fs.readdirSync(currentDir, { withFileTypes: true });
-      entries.forEach((entry) => {
-        const fullPath = path.join(currentDir, entry.name);
-        if (entry.isDirectory() && entry.name !== '.obsidian') {
-          traverse(fullPath);
-        } else if (entry.isFile() && !entry.name.endsWith('.md') && entry.name !== '.vault-nickname') {
-          files.push(fullPath);
-        }
-      });
-    };
-    traverse(dir);
-    return files;
-  }
 
-  /**
-   * Convert all files from obsidian to content
-   */
-  convertAll(): void {
-    const markdownFiles = this.findMarkdownFiles(this.inputDir);
-    const assetFiles = this.findAssetFiles(this.inputDir);
+/**
+ * Get output file path maintaining directory structure
+ */
+function getOutputFilePath(inputFilePath: string, inputDir: string, outputDir: string): string {
+  const relativePath = path.relative(inputDir, inputFilePath);
+  return path.join(outputDir, relativePath);
+}
+
+/**
+ * Process a single markdown file
+ * Returns both converted content and set of referenced images
+ */
+function processFile(filePath: string, fileNameToSlugMapping: Map<string, string>, referencedImages: Set<string>): string | null {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const parsed = matter(content) as GrayMatterFile<HugoFrontmatter>;
     
-    console.log(`Processing ${markdownFiles.length} markdown files and ${assetFiles.length} assets`);
+    // Extract tags from content
+    const { tags: contentTags, cleanContent } = extractObsidianTags(parsed.content);
+    
+    // Convert image embeds and wikilinks
+    let convertedContent = convertImageEmbeds(cleanContent, referencedImages);
+    convertedContent = convertWikilinks(convertedContent, fileNameToSlugMapping);
 
-    // Clean output directory
-    if (fs.existsSync(this.outputDir)) {
-      fs.rmSync(this.outputDir, { recursive: true, force: true });
+    // Auto-complete frontmatter fields if they don't exist
+    const frontmatter: HugoFrontmatter = { ...parsed.data };
+    
+    if (!frontmatter.title) {
+      frontmatter.title = path.basename(filePath, '.md');
+    }
+    
+    if (!frontmatter.date) {
+      frontmatter.date = new Date().toISOString().replace('Z', getTimezoneOffset());
+    }
+    
+    if (frontmatter.draft === undefined) {
+      frontmatter.draft = false;
+    }
+    
+    if (!frontmatter.slug || frontmatter.slug.trim() === '') {
+      frontmatter.slug = generateRandomSlug();
     }
 
-    let converted = 0;
-    let copied = 0;
+    // Merge tags (existing + extracted)
+    const allTags = [...(frontmatter.tags || []), ...contentTags];
+    const uniqueTags = [...new Set(allTags)];
+    if (uniqueTags.length > 0) {
+      frontmatter.tags = uniqueTags;
+    }
 
-    // Process markdown files
-    markdownFiles.forEach((filePath) => {
-      const convertedContent = this.processFile(filePath);
-      if (convertedContent !== null) {
-        const outputPath = this.getOutputFilePath(filePath);
-        this.ensureDirectoryExists(outputPath);
-        fs.writeFileSync(outputPath, convertedContent, 'utf8');
-        converted++;
-      }
+    // Create new content with frontmatter
+    const yamlContent = yaml.dump(frontmatter, {
+      quotingType: '"' as const,
+      forceQuotes: true
     });
-
-    // Copy asset files
-    assetFiles.forEach((filePath) => {
-      if (this.copyAssetFile(filePath)) {
-        copied++;
-      }
-    });
-
-    console.log(`Conversion complete: ${converted} files converted, ${copied} assets copied`);
+    const hugoContent = `---\n${yamlContent}---\n${convertedContent}`;
+    return hugoContent;
+  } catch (error) {
+    console.error(`Error processing file ${filePath}:`, error);
+    return null;
   }
+}
+
+/**
+ * Copy asset file to static directory, preserving directory structure
+ */
+function copyAssetFile(filePath: string, inputDir: string, staticDir: string): boolean {
+  try {
+    const relativePath = path.relative(inputDir, filePath);
+    const staticPath = path.join(staticDir, relativePath);
+    
+    ensureDirectoryExists(staticPath);
+    fs.copyFileSync(filePath, staticPath);
+    return true;
+  } catch (error) {
+    console.error(`Error copying asset ${filePath}:`, error);
+    return false;
+  }
+}
+
+/**
+ * Find files recursively with a custom filter predicate
+ */
+function findFiles(dir: string, fileFilter: (fileName: string) => boolean): string[] {
+  const files: string[] = [];
+  const traverse = (currentDir: string): void => {
+    const entries = fs.readdirSync(currentDir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(currentDir, entry.name);
+      if (entry.isDirectory() && !CONFIG.EXCLUDED_DIRS.includes(entry.name)) {
+        traverse(fullPath);
+      } else if (entry.isFile() && fileFilter(entry.name)) {
+        files.push(fullPath);
+      }
+    }
+  };
+  traverse(dir);
+  return files;
+}
+
+/**
+ * Find markdown files recursively
+ */
+function findMarkdownFiles(dir: string): string[] {
+  return findFiles(dir, (fileName) => fileName.endsWith('.md'));
+}
+
+/**
+ * Find asset files (non-markdown files)
+ */
+function findAssetFiles(dir: string): string[] {
+  return findFiles(dir, (fileName) => !fileName.endsWith('.md') && !CONFIG.EXCLUDED_FILES.includes(fileName));
+}
+
+/**
+ * Filter asset files to only include those that are referenced
+ */
+function findReferencedAssetFiles(inputDir: string, referencedImages: Set<string>): string[] {
+  const allAssets = findAssetFiles(inputDir);
+  return allAssets.filter(assetPath => {
+    const fileName = path.basename(assetPath);
+    return referencedImages.has(fileName);
+  });
+}
+
+/**
+ * Initialize conversion context with file discovery and mapping
+ */
+function initializeConversion(inputDir: string): ProcessingContext {
+  const markdownFiles = findMarkdownFiles(inputDir);
+  const allAssetFiles = findAssetFiles(inputDir);
+  
+  console.log(`Processing ${markdownFiles.length} markdown files and ${allAssetFiles.length} total assets`);
+
+  // Build filename to slug mapping before processing
+  console.log('Building filename to slug mapping...');
+  const fileNameToSlugMapping = buildFileNameToSlugMapping(inputDir);
+  console.log(`Created mapping for ${fileNameToSlugMapping.size} files`);
+
+  return {
+    markdownFiles,
+    allAssetFiles,
+    fileNameToSlugMapping
+  };
+}
+
+/**
+ * Clean output and static directories
+ */
+function cleanupDirectories(outputDir: string, staticDir: string): void {
+  if (fs.existsSync(outputDir)) {
+    fs.rmSync(outputDir, { recursive: true, force: true });
+  }
+  if (fs.existsSync(staticDir)) {
+    fs.rmSync(staticDir, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Process markdown files and collect referenced images
+ */
+function processMarkdownFiles(
+  markdownFiles: string[],
+  fileNameToSlugMapping: Map<string, string>,
+  inputDir: string,
+  outputDir: string,
+  referencedImages: Set<string>
+): number {
+  let converted = 0;
+  
+  for (const filePath of markdownFiles) {
+    const result = safeProcessFile(filePath, fileNameToSlugMapping, referencedImages);
+    if (result.success && result.data) {
+      try {
+        const outputPath = getOutputFilePath(filePath, inputDir, outputDir);
+        ensureDirectoryExists(outputPath);
+        fs.writeFileSync(outputPath, result.data, 'utf8');
+        converted++;
+      } catch (error) {
+        console.error(`Failed to write output file for ${filePath}:`, error);
+      }
+    } else {
+      console.error(`Failed to process ${filePath}: ${result.error}`);
+    }
+  }
+  
+  return converted;
+}
+
+/**
+ * Copy referenced assets to static directory
+ */
+function copyReferencedAssets(
+  inputDir: string,
+  staticDir: string,
+  referencedImages: Set<string>
+): number {
+  const referencedAssetFiles = findReferencedAssetFiles(inputDir, referencedImages);
+  let copied = 0;
+
+  console.log(`Found ${referencedImages.size} referenced images, copying ${referencedAssetFiles.length} asset files`);
+
+  for (const filePath of referencedAssetFiles) {
+    if (copyAssetFile(filePath, inputDir, staticDir)) {
+      copied++;
+    }
+  }
+
+  return copied;
+}
+
+/**
+ * Log conversion results
+ */
+function logConversionResults(
+  converted: number,
+  copied: number,
+  allAssetFiles: string[],
+  referencedAssetFiles: string[]
+): void {
+  const unusedAssets = allAssetFiles.length - referencedAssetFiles.length;
+  console.log(`Conversion complete: ${converted} files converted, ${copied} assets copied`);
+  if (unusedAssets > 0) {
+    console.log(`✓ Cleaned up ${unusedAssets} unused asset files`);
+  }
+}
+
+/**
+ * Convert all files from obsidian to content
+ */
+function convertObsidianToHugo(options: ConversionOptions = {}): void {
+  const config = {
+    inputDir: './obsidian',
+    outputDir: './content',
+    staticDir: './static',
+    generateRandomSlugs: true,
+    preserveUnusedAssets: false,
+    timezone: CONFIG.DEFAULT_TIMEZONE,
+    ...options
+  };
+
+  const context = initializeConversion(config.inputDir);
+  cleanupDirectories(config.outputDir, config.staticDir);
+  
+  const referencedImages = new Set<string>();
+  const converted = processMarkdownFiles(context.markdownFiles, context.fileNameToSlugMapping, config.inputDir, config.outputDir, referencedImages);
+  const copied = copyReferencedAssets(config.inputDir, config.staticDir, referencedImages);
+  const referencedAssetFiles = findReferencedAssetFiles(config.inputDir, referencedImages);
+  
+  logConversionResults(converted, copied, context.allAssetFiles, referencedAssetFiles);
 }
 
 // Main execution
 if (require.main === module) {
-  const inputDir = process.argv[2] || './obsidian';
-  const outputDir = process.argv[3] || './content';
-  const staticDir = process.argv[4] || './static';
+  const options: ConversionOptions = {
+    inputDir: process.argv[2] || './obsidian',
+    outputDir: process.argv[3] || './content',
+    staticDir: process.argv[4] || './static'
+  };
   
-  const converter = new ObsidianToHugoConverter(inputDir, outputDir, staticDir);
-  converter.convertAll();
+  convertObsidianToHugo(options);
 }
 
-export default ObsidianToHugoConverter;
+export default convertObsidianToHugo;
