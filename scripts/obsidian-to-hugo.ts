@@ -2,8 +2,8 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import matter from 'gray-matter';
-import yaml from 'js-yaml';
+import * as matter from 'gray-matter';
+import * as yaml from 'js-yaml';
 
 // Configuration constants
 const CONFIG = {
@@ -30,6 +30,16 @@ const PATTERNS = {
  */
 function getTimezoneOffset(): string {
   return CONFIG.DEFAULT_TIMEZONE;
+}
+
+/**
+ * Ensure directory exists, creating it recursively if needed
+ */
+function ensureDirectoryExists(filePath: string): void {
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
 }
 
 /**
@@ -143,7 +153,7 @@ function buildFileNameToSlugMapping(inputDir: string): Map<string, string> {
   for (const filePath of markdownFiles) {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
-      const parsed = matter(content) as GrayMatterFile<HugoFrontmatter>;
+      const parsed = matter.default(content) as GrayMatterFile<HugoFrontmatter>;
       const fileName = path.basename(filePath, '.md');
       
       // Determine what slug will be assigned to this file
@@ -241,7 +251,7 @@ function getOutputFilePath(inputFilePath: string, inputDir: string, outputDir: s
 function processFile(filePath: string, fileNameToSlugMapping: Map<string, string>, referencedImages: Set<string>): string | null {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
-    const parsed = matter(content) as GrayMatterFile<HugoFrontmatter>;
+    const parsed = matter.default(content) as GrayMatterFile<HugoFrontmatter>;
     
     // Extract tags from content
     const { tags: contentTags, cleanContent } = extractObsidianTags(parsed.content);
@@ -270,8 +280,8 @@ function processFile(filePath: string, fileNameToSlugMapping: Map<string, string
     }
 
     // Merge tags (existing + extracted)
-    const allTags = [...(frontmatter.tags || []), ...contentTags];
-    const uniqueTags = [...new Set(allTags)];
+    const allTags = (frontmatter.tags || []).concat(contentTags);
+    const uniqueTags = Array.from(new Set(allTags));
     if (uniqueTags.length > 0) {
       frontmatter.tags = uniqueTags;
     }
@@ -315,7 +325,7 @@ function findFiles(dir: string, fileFilter: (fileName: string) => boolean): stri
     const entries = fs.readdirSync(currentDir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
-      if (entry.isDirectory() && !CONFIG.EXCLUDED_DIRS.includes(entry.name)) {
+      if (entry.isDirectory() && !(CONFIG.EXCLUDED_DIRS as readonly string[]).includes(entry.name)) {
         traverse(fullPath);
       } else if (entry.isFile() && fileFilter(entry.name)) {
         files.push(fullPath);
@@ -337,7 +347,7 @@ function findMarkdownFiles(dir: string): string[] {
  * Find asset files (non-markdown files)
  */
 function findAssetFiles(dir: string): string[] {
-  return findFiles(dir, (fileName) => !fileName.endsWith('.md') && !CONFIG.EXCLUDED_FILES.includes(fileName));
+  return findFiles(dir, (fileName) => !fileName.endsWith('.md') && !(CONFIG.EXCLUDED_FILES as readonly string[]).includes(fileName));
 }
 
 /**
