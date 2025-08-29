@@ -56,21 +56,6 @@ params:
     icon: /apple-touch-icon.png
     iconHeight: 35
 
-  # profile-mode
-  profileMode:
-    enabled: false # needs to be explicitly set
-    title: ExampleSite
-    subtitle: "This is subtitle"
-    imageUrl: "<img location>"
-    imageWidth: 120
-    imageHeight: 120
-    imageTitle: my image
-    buttons:
-      - name: Posts
-        url: posts
-      - name: Tags
-        url: tags
-
   analytics:
     google:
       SiteVerificationTag: "XYZabc"
@@ -85,7 +70,7 @@ params:
     hiddenInSingle: true # hide on single page
 
   editPost:
-    URL: "https://github.com/henohenon/henohenon.github.io/tree/main/obsidian_new"
+    URL: "https://github.com/henohenon/henohenon.github.io/"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 
