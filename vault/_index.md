@@ -12,9 +12,9 @@ date: 2025-08-29T18:21:51+09:00
 | A    | typescript, css                                                 |
 | B    | html, js, nodejs, live2d, blender, unreal engine, ue blue print |
 ## Places
-[株式会社Alphatique](https://alphatique.co.jp/)(1年半ほどコントリビューター)
+[株式会社Alphatique](https://alphatique.co.jp/)(2年半ほどコントリビューター)
 
-[株式会社Tramworks](https://tramworks-inc.com/)(2年ほど所属)
+[株式会社Tramworks](https://tramworks-inc.com/)(2年ほど業務委託契約中)
 
 [作るっちゃん](https://x.com/tukuruttyan)(1年半ほど所属)
 
