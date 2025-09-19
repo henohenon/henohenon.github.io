@@ -1,6 +1,6 @@
 baseURL: "https://henohenon.github.io/"
 languageCode: "ja"
-title: "Henohenon's Portfolio"
+title: "へのへのんのの"
 theme: "PaperMod"
 
 enableRobotsTXT: true
@@ -16,10 +16,10 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: "Henohenon's Portfolio"
+  title: "へのへのんのの"
   description: "Personal Portfolio powered by Hugo and PaperMod theme"
   keywords: [Blog, Portfolio, PaperMod]
-  author: "Henohenon"
+  author: "henohenon"
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
   DateFormat: "January 2, 2006"
@@ -52,7 +52,7 @@ params:
     safari_pinned_tab: "<link / abs url>"
 
   label:
-    text: "Henohenon's Portfolio"
+    text: "へのへのんのの"
     icon: /apple-touch-icon.png
     iconHeight: 35
 
