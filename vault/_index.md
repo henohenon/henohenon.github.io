@@ -9,7 +9,7 @@ date: 2025-08-29T18:21:51+09:00
 
 というふうな真面目かつ俺らしいポートフォリオ&ブログ&リンク集&コンテンツです。
 # Contents
-## [[drawp]]
+## [[drowp]]
 人生の中の特上のエキスを抽出し、真剣に出力。
 イチオシのコンテンツ。
 ## [[lifire]]
@@ -20,14 +20,18 @@ date: 2025-08-29T18:21:51+09:00
 [x(旧twitter)](x.com/henohenon_8282)
 - 主にお知らせや最近の動向はこちらから。
 - お問合せもこちらのDMやリプからお願いします。
+
 [note](note.com/henohenon)
 - 宣伝したい・周知したい！(興が乗った！)と言う動機で、誰でも読み物として楽しめるものを置いてある場所です。
+
 [zenn](zenn.com/henohenon)
 - 技術ログ、雑記。
+
 [github](github.com/henohenon)
 - オープンにできるものはオープンで置いてあります
 ## 他リンク
 [memOrieditブログ](memOriedit.github.io/blog/)
 - たまにブログ書いています
+
 [Topa'z](topaz.dev/henohenon)
 - ハックツハッカソンは楽しいぞ
