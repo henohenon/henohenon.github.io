@@ -64,6 +64,76 @@
             }
           },
           {
+            "id": "061b337d0271a379",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "gallery.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "gallery"
+            }
+          },
+          {
+            "id": "22126338e1403186",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "profile.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "profile"
+            }
+          },
+          {
+            "id": "f3a03a8837e5a343",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "profile.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "profile"
+            }
+          },
+          {
+            "id": "d639f9a6e04bd9e7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "profile.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "profile"
+            }
+          },
+          {
+            "id": "15a043aa9a802b94",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "profile.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "profile"
+            }
+          },
+          {
             "id": "2c2c3f968a186381",
             "type": "leaf",
             "state": {
@@ -78,7 +148,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -226,12 +296,17 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "6c38b5e61590f164",
+  "active": "15a043aa9a802b94",
   "lastOpenFiles": [
-    "drowp.md",
-    "_index.md",
-    "lifire.md",
+    "skills.md",
     "profile.md",
+    "licenses.md",
+    "lifire.md",
+    "places.md",
+    "gallery.md",
+    "へのへのん.md",
+    "_index.md",
+    "drowp.md",
     "Links.md",
     "zenn.com/henohenon.md",
     "zenn.com",
@@ -259,10 +334,6 @@
     "Blogs/あｆｊぁうぇ.md",
     "test-no-title.md",
     "Untitled 5.md",
-    "Untitled 4.md",
-    "Untitled 3.md",
-    "Untitled 2.md",
-    "Blogs/index.md",
     "templates/Default Template.md~",
     "templates",
     "images/subdir-image.png"
