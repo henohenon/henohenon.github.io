@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "肥大化を続けるコンテンツ。奇跡とひとつよ。ぼくの作る未来。.md",
+                "file": "lifire.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "肥大化を続けるコンテンツ。奇跡とひとつよ。ぼくの作る未来。"
+              "title": "lifire"
             }
           }
         ],
@@ -242,13 +242,24 @@
   },
   "active": "246db6e858427876",
   "lastOpenFiles": [
-    "ポートフォリオを作り直しています.md",
-    "肥大化を続けるコンテンツ。奇跡とひとつよ。ぼくの作る未来。.md",
+    "Portfolio.md",
     "Links.md",
-    "lifire.md",
-    "drowp.md",
-    "コンテンツの肥大化と奇跡とひとつよ.md",
     "_index.md",
+    "zenn.com/henohenon.md",
+    "zenn.com",
+    "github.com/henohenon.md",
+    "github.com",
+    "licenses.md",
+    "gallery.md",
+    "drowp.md",
+    "肥大化を続けるコンテンツ。奇跡とひとつよ。ぼくの作る未来。.md",
+    "へのへのん.md",
+    "skills.md",
+    "places.md",
+    "profile.md",
+    "ポートフォリオを作り直しています.md",
+    "lifire.md",
+    "コンテンツの肥大化と奇跡とひとつよ.md",
     "Pasted image 20250827151710.png",
     "henoheno.md",
     "henoheno.md~",
@@ -267,14 +278,8 @@
     "Works",
     "Blogs/あｆｊぁうぇ.md",
     "test-no-title.md",
-    "Untitled 5.md",
-    "Untitled 4.md",
-    "Untitled 3.md",
-    "Untitled 2.md",
-    "Blogs/index.md",
     "templates/Default Template.md~",
     "templates",
-    "Welcome.md~",
     "images/subdir-image.png"
   ]
 }
