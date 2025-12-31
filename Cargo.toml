@@ -1,0 +1,7 @@
+[package]
+name = "henohenon"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+strune = "0.1.1"
