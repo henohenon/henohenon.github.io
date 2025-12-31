@@ -1,23 +1,20 @@
-# Strune configuration for sample project
+base_path: "/"
+brand_title: "へのへのんのの"
 
-base_path: "/projects/Strune/sample/dist/"
-brand_logo: "public/logo.svg"
-brand_title: "Strune"
-
-# Stylesheet configuration
-# Specify CSS file paths relative to the public directory copied above
 styles:
   - "public/style.css"
 
-# Additional stylesheets (uncomment to use)
-# styles:
-#   - "css/base.css"
-#   - "css/theme.css"
-#   - "css/custom.css"
 
 menu:
-  - label: "Home"
-    url: "/"
-  - label: "Github"
-    url: "https://github.com/Project-Starlivia/Strune"
+  - label: "Links"
+    url: "/link"
+  - label: "Games"
+    url: "/game"
+  - label: "Works"
+    url: "/work"
+  - label: ""
+    url: "https://x.com/henohenon_8282"
+    icon: "public/x-logo/logo.svg"
+  - label: ""
+    url: "https://github.com/henohenon"
     icon: "public/github-mark/github-mark-white.svg"
