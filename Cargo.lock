@@ -21,6 +21,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.100"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a23eb6b1614318a8071c9b2521f36b424b2c83db5eb3a0fead4a6c0809af6e61"
+
+[[package]]
 name = "autocfg"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -248,6 +254,9 @@ checksum = "841d1cc9bed7f9236f321df977030373f4a4163ae1a7dbfe1a51a2c1a51d9100"
 name = "henohenon"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
+ "serde",
+ "serde_json",
  "strune",
 ]
 
@@ -684,9 +693,9 @@ dependencies = [
 
 [[package]]
 name = "strune"
-version = "0.1.1"
+version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c488369bec1101201f8a5bee828b3db9e71f5b78960559fa519b5659f7f2c359"
+checksum = "410c00fdba3e76505e55856da5137c16ddac09c59fd7b7ddd2449564e13cc96f"
 dependencies = [
  "once_cell",
  "pulldown-cmark",
