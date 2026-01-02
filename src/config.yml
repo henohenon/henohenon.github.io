@@ -1,0 +1,21 @@
+base_path: "/"
+brand_title: "へのへのんのの"
+
+styles:
+  - "public/style.css"
+
+menu:
+  - label: "Links"
+    url: "links.html"
+  - label: "Games"
+    url: "games.html"
+  - label: "Works"
+    url: "works.html"
+  - label: ""
+    url: "https://x.com/henohenon_8282"
+    icon: "public/x-logo/logo.svg"
+    is_external: true
+  - label: ""
+    url: "https://github.com/henohenon"
+    icon: "public/github-mark/github-mark-white.svg"
+    is_external: true
