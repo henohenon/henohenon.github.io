@@ -1,0 +1,30 @@
+{% import "components/header.html" as header %}
+{% import "components/node-details.html" as node_details %}
+{% import "components/link-nodes.html" as link_nodes %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <base href="{{ config.base_path }}">
+    {% if config.styles %}
+        {% for style in config.styles %}
+        <link rel="stylesheet" href="{{ style }}" />
+        {% endfor %}
+    {% endif %}
+    <title>{{ config.brand_title }} - {{ title }}</title>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="public/favicon.ico">
+    {% endblock head %}
+</head>
+<body>
+    {{ header::input(
+    base_path = config.base_path | default(value="/"),
+    brand_logo = config.brand_logo | default(value=""),
+    brand_title = config.brand_title,
+    menu = config.menu | default(value=[])
+    ) }}
+    <main id="content">{% block content %}{% endblock content %}</main>
+    {% include "components/powered_by_strune.html" ignore missing %}
+</body>
+</html>
