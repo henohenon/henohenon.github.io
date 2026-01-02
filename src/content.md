@@ -1,392 +1,257 @@
-﻿# Strune
+﻿# へのへのんのの
 ## description
-Strune is a simple, directional knowledge structure.
+へのへのんさんのポートフォリオ・リンク集
 ## dependencies
-- Rust
-- Project Starlivia
-- Structural Data Format
-- Knowledge Graph
+- へのへのん
+- Strune
 ## options
 ### slug
 index
 
-# Project Starlivia
-## dependencies
-へのへのん
-## description
-> Oss libraries from @henohenon
-
-[https://github.com/Project-Starlivia](https://github.com/Project-Starlivia)
-## options
-### slug
-project-starlivia
-
 # へのへのん
 ## description
-[ぱんじー](https://henohenon.github.io/)
+ゲームを中心に色々つくる
 ## options
 ### slug
 henohenon
 
-# Rust
-## description
-> A language empowering everyone to build reliable and efficient software.
-
-[https://rust-lang.org/](https://rust-lang.org/)
+# Games
 ## dependencies
-- Programming Language
-
-# TypeScript
-## description
-> TypeScript is JavaScript with syntax for types.
-
-[https://www.typescriptlang.org/](https://www.typescriptlang.org/)
-## dependencies
-- Programming Language
-- JavaScript
-
-
-# Programming Language
-## description
-A formal language comprising a set of instructions that produce various kinds of output. Programming languages are used to create programs that implement specific algorithms and control the behavior of machines.
+- へのへのんのの
 ## options
 ### slug
-programming-language
+games
 
-# Programming Language?
-## description
-Languages that may be considered programming languages but have some debate around their classification, such as markup languages or domain-specific languages.
+# Links
 ## dependencies
-Programming Language
+- へのへのんのの
 ## options
 ### slug
-programming-languageQ
+links
 
-# core Web Language
-## description
-The fundamental languages that form the basis of web development: HTML for structure, CSS for presentation, and JavaScript for behavior. These three languages work together to create web pages and applications.
+# Works
 ## dependencies
-Programming Language
+- へのへのんのの
 ## options
 ### slug
-core-web-language
+works
 
-
-# HTML
-## description
-> HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content. Other technologies besides HTML are generally used to describe a web page's appearance/presentation (CSS) or functionality/behavior (JavaScript).
-
-[https://developer.mozilla.org/en-US/docs/Web/HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+# Places
 ## dependencies
-- Programming Language?
-- core Web Language
-- Structural Data Format
-
-# CSS
-## dependencies
-- Programming Language?
-- core Web Language
-## description
-> Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.
-
-[https://developer.mozilla.org/en-US/docs/Web/CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-
-# JavaScript
-## dependencies
-- Programming Language
-- core Web Language
-## description
-> Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.
-
-[https://developer.mozilla.org/en-US/docs/Web/JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-
-# crates/tera-render
-## description
-> A rendering engine that generates static HTML sites from Strune nodes using the Tera template engine.
-
-[https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#tera-render](https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#tera-render)
-## dependencies
-- Strune
-- tera
-- HTML
-- CSS
-- SSG
+- へのへのんのの
 ## options
 ### slug
-crates_sailfish-render
+places
 
-
-# tera
+# Zenn
 ## description
-> A powerful, easy to use template engine for Rust Inspired by Jinja2 and Django templates
-
-[https://keats.github.io/tera/](https://keats.github.io/tera/)
+[https://zenn.dev/henohenon](https://zenn.dev/henohenon)
 ## dependencies
-- Rust
-- Template Engine
-- HTML
-- jinja2
-
-# jinja2
-## description
-> Jinja2 is a template engine written in pure Python. It provides a Django inspired non-XML syntax but supports inline expressions and an optional sandboxed environment.
-
-[https://github.com/noirbizarre/jinja2](https://github.com/noirbizarre/jinja2)
-## dependencies
-- Template Engine
-- HTML
-
-# Template Engine
-## description
-A software component that combines templates with data to produce output documents. Template engines are commonly used to generate HTML, configuration files, or other text-based formats by separating logic from presentation.
+- Links
 ## options
 ### slug
-template_engine
+zenn
 
-# rust-sailfish
+# Note
 ## description
-> Simple, small, and extremely fast template engine for Rust
-
-[https://github.com/rust-sailfish/sailfish](https://github.com/rust-sailfish/sailfish)
+[https://note.com/henohenon](https://note.com/henohenon)
 ## dependencies
-- Rust
-- Template Engine
-
-
-# cargo
-## description
-> Cargo is the Rust package manager. It downloads dependencies, compiles packages, makes distributable packages, and uploads them to crates.io.
-
-[https://doc.rust-lang.org/cargo/](https://doc.rust-lang.org/cargo/)
-## dependencies
-- Rust
-
-
-# serde
-## description
-> Serde is a framework for serializing and deserializing Rust data structures efficiently and generically.
-
-[https://serde.rs/](https://serde.rs/)
-## dependencies
-- Rust
-
-
-# SSG
-## description
-Static Site Generator - A tool that generates a complete static website based on raw data and templates. SSGs produce HTML files that can be deployed directly to a web server without requiring server-side processing.
+- Links
 ## options
 ### slug
-ssg
+note
 
-
-# hugo
+# Qiita
 ## description
-> The world's fastest framework for building websites. Hugo is a static site generator written in Go, known for its speed and flexibility.
-
-[https://gohugo.io/](https://gohugo.io/)
+[https://qiita.com/](https://qiita.com/)
 ## dependencies
-- SSG
-
-
-# astro
-## description
-> Astro is a modern static site builder that allows you to use your favorite JavaScript framework (React, Vue, Svelte, etc.) and delivers zero JavaScript by default for faster sites.
-
-[https://astro.build/](https://astro.build/)
-## dependencies
-- SSG
-- JavaScript
-- TypeScript
-
-
-# jekyll
-## description
-> Jekyll is a simple, blog-aware static site generator written in Ruby. It's the engine behind GitHub Pages.
-
-[https://jekyllrb.com/](https://jekyllrb.com/)
-## dependencies
-- SSG
-
-
-# Git
-## description
-> Git is a distributed version control system for tracking changes in source code during software development. It's designed for coordinating work among programmers.
-
-[https://git-scm.com/](https://git-scm.com/)
-
-
-# GitHub
-## description
-> GitHub is a web-based platform for version control and collaboration using Git. It provides hosting for software development and offers distributed version control plus access control, bug tracking, and feature requests.
-
-[https://github.com/](https://github.com/)
-## dependencies
-- Git
-
-
-# runes
-## description
-Ancient symbols used by Germanic peoples long ago. The Elder Futhark has 24 runes.
-
-# ᛝ
-## description
-> ᛝ Ing ƿæs ærest mid Eástdenum
-> geseƿen secgum, oð he síððan e[á]st
-> ofer ƿæg geƿát. ƿæn æfter ran.
-> þus Heardingas þone hæle nemdon.
-
-[https://ja.wikipedia.org/wiki/%E1%9B%9C](https://ja.wikipedia.org/wiki/%E1%9B%9C)
-## dependencies
-- runes
+- Links
 ## options
 ### slug
-ingwaz
+qiita
 
-
-# crates/loader
+# Topa'z
 ## description
-> A library for loading Strune nodes from various file formats into the core Node structure.
-
-[https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#loader](https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#loader)
-## dependencies
-- Strune
+[https://topaz.dev/henohenon/](https://topaz.dev/henohenon/)
 ## options
 ### slug
-crates_loader
+topaz
 
-
-# crates/operation
+# Github
 ## description
-> Provides operations for analyzing and manipulating Strune node graphs. This package introduces trait-based extensibility for adding computed fields to nodes.
-
-[https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#operation](https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#operation)
+[https://github.com/henohenon](https://github.com/henohenon)
 ## dependencies
-- Strune
+- Links
 ## options
 ### slug
-crates_operation
+github
 
-# cli
+# Unityroom
 ## description
-> Command-line interface for Strune. This is the main executable that ties all packages together.
-
-[https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#cli](https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#cli)
+[https://unityroom.com/users/henohenon](https://unityroom.com/users/henohenon)
 ## dependencies
-- Strune
+- Links
+- Unity
 ## options
 ### slug
-strune_cli
+unityroom
 
-
-# tera-render/ingwaz
+# memOrieditブログ
 ## description
-One of the tera-render styles. It strongly expresses the connections between nodes.
+[https://memoriedit.github.io/blog/](https://memoriedit.github.io/blog/)
 ## dependencies
-- crates/tera-render
-- ᛝ
+- Links
+- memOriedit
 ## options
 ### slug
-tera-render_ingwaz
+memoriedit-blog
 
-
-# JSON
+# memOriedit
 ## description
-> JSON (JavaScript Object Notation) is a lightweight data interchange format that is easy for humans to read and write and easy for machines to parse and generate.
-
-[https://www.json.org/](https://www.json.org/)
+同人のノベルゲーム。プログラム全部と雑用担当。
+[https://memoriedit.github.io/](https://memoriedit.github.io/)
 ## dependencies
-- Structural Data Format
-
-
-# Markdown
-## description
-> Markdown is a lightweight markup language with plain text formatting syntax. It's designed to be converted to HTML and many other formats, widely used for documentation and content creation.
-
-[https://daringfireball.net/projects/markdown/](https://daringfireball.net/projects/markdown/)
-## dependencies
-- Structural Data Format
-
-# strune-core
-## description
-> The core data structure library for Strune. This package defines the fundamental Node<T> type that all other packages depend on.
-
-[https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#strune_core](https://github.com/Project-Starlivia/Strune?tab=readme-ov-file#strune_core)
-## dependencies
-- Strune
+- Works
+- Games
+- Ren'Py
 ## options
 ### slug
-strune-core
+memoriedit
 
-
-# regex
+# Ren'Py
 ## description
-> A Rust library providing regular expression support with a focus on performance and correctness. Used for pattern matching and text processing.
-
-[https://docs.rs/regex/](https://docs.rs/regex/)
+[https://www.renpy.org/](https://www.renpy.org/)
 ## dependencies
-- Rust
+- GameEngine
+- Python
 
+# Python
 
-# once_cell
+# 株式会社Alphatique
 ## description
-> A Rust library for single-assignment cells and lazy statics without macros, providing safe one-time initialization.
-
-[https://docs.rs/once_cell/](https://docs.rs/once_cell/)
+[https://alphatique.co.jp/](https://alphatique.co.jp/)
 ## dependencies
-- Rust
-
-
-# thiserror
-## description
-> A Rust library that provides a convenient derive macro for the standard library's std::error::Error trait, making error handling more ergonomic.
-
-[https://docs.rs/thiserror/](https://docs.rs/thiserror/)
-## dependencies
-- Rust
-
-
-# obsidian
-## description
-> Obsidian is a knowledge base application that works on local Markdown files. It features a powerful linking system and graph view for visualizing connections between notes.
-
-[https://obsidian.md/](https://obsidian.md/)
-## dependencies
-- Markdown
-- Knowledge Graph
-
-
-# Zola
-## description
-> A fast static site generator written in Rust. Zola uses the Tera template engine and compiles to a single binary with no dependencies.
-
-[https://www.getzola.org/](https://www.getzola.org/)
-## dependencies
-- Rust
-- SSG
-- tera
-
-
-# mdBook
-## description
-> A utility to create modern online books from Markdown files, written in Rust. It's used extensively in the Rust community for documentation.
-
-[https://rust-lang.github.io/mdBook/](https://rust-lang.github.io/mdBook/)
-## dependencies
-- Rust
-- SSG
-- Markdown
-
-
-# Knowledge Graph
-## description
-> A knowledge graph is a network of entities, their semantic types, properties, and relationships. It's used to represent knowledge in a structured, machine-readable format that shows how concepts are connected.
+- Places
 ## options
 ### slug
-knowledge-graph
+alphatique
 
-# Structural Data Format
+# セラー管理くん
 ## description
-A data description format for structurally expressing data and resolving it between systems
+Amazonセラー向けの管理ツール
+[https://alphatique.co.jp/products/seller-kanrikun/](https://alphatique.co.jp/products/seller-kanrikun/)
 ## options
 ### slug
-structural-data-format
+seller-kanrikun
+
+# 一人アドベントカレンダー2025
+## description
+[https://qiita.com/advent-calendar/2025/wanna-be-a-game_creator](https://qiita.com/advent-calendar/2025/wanna-be-a-game_creator)
+## dependencies
+- Qiita
+## options
+### slug
+advent-calendar-2025
+
+# Alphatiqueでの働き
+## description
+[https://qiita.com/darknes_henohenon/items/f7c6cc7e09fdd7811b90](https://qiita.com/darknes_henohenon/items/f7c6cc7e09fdd7811b90)
+## dependencies
+- 株式会社Alphatique
+- セラー管理くん
+- Qiita
+- 一人アドベントカレンダー2025
+- Works
+## options
+### slug
+alphatique-works
+
+# 株式会社トラムワークス
+## description
+[https://tramworks-inc.com/](https://tramworks-inc.com/)
+## dependencies
+- Places
+## options
+### slug
+tramworks
+
+# TRAMCITY
+## description
+[https://tramcity.net/](https://tramcity.net/)
+## dependencies
+- 株式会社トラムワークス
+- Unity
+## options
+### slug
+tramcity
+
+# Project Starlivia
+## description
+へのへのんさんのOSS Organisation。
+## dependencies
+- へのへのん
+## options
+### slug
+project-starlivia
+
+# Strune
+## description
+ンプルで指向性のある知識構造+SSG拡張。
+[https://github.com/Project-Starlivia/Strune](https://github.com/Project-Starlivia/Strune)
+## dependencies
+- Project Starlivia
+## options
+### slug
+strune
+
+# Iwaken Lab.
+## description
+[https://iwakenlab.jp/](https://iwakenlab.jp/)
+## dependencies
+- Places
+
+# Sketch Knights
+## description
+Iwaken Lab.の夏合宿で作成したXRゲーム
+[https://team-sketch-knights.itch.io/sketch-knights](https://team-sketch-knights.itch.io/sketch-knights)
+## dependencies
+- Iwaken Lab.
+- Works
+- Games
+- Unity
+## options
+### slug
+sketch-knights
+
+# 株式会社ozora
+[https://www.ozoradrone.site/](https://www.ozoradrone.site/)
+## options
+### slug
+ozora
+
+# GlobeXplore
+## description
+[https://www.ozoradrone.site/services/globexplore](https://www.ozoradrone.site/services/globexplore)
+## dependencies
+- Unity
+- Works
+## options
+### slug
+globe-xplore
+
+# Unity
+## description
+[https://unity.com/](https://unity.com/)
+## dependencies
+- GameEngine
+## options
+### slug
+unity
+
+# GameEngine
+
+# 404 Not Found
+## description
+## options
+### slug
+404
