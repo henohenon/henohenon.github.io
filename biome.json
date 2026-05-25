@@ -1,7 +1,15 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.9.0/schema.json",
   "files": {
-    "ignore": ["dist", ".astro", "node_modules", "archive", "src/styles/theme.css", "public"]
+    "ignore": [
+      "dist",
+      ".astro",
+      "node_modules",
+      "archive",
+      "src/styles/theme.css",
+      "src/data",
+      "public"
+    ]
   },
   "vcs": {
     "enabled": true,

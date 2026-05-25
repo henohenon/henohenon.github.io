@@ -178,3 +178,21 @@ article.post header h1 {
 article.post .content > * + * {
   margin-top: 1em;
 }
+
+.not-found {
+  text-align: center;
+  display: grid;
+  gap: 1.25rem;
+  margin-block: calc(var(--spacing-unit, 1rem) * 4);
+}
+
+.not-found-mark {
+  font-family: var(--font-heading, inherit);
+  font-size: 4rem;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.not-found-msg {
+  display: block;
+}
