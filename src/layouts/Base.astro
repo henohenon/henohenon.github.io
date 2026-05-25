@@ -1,0 +1,37 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import "../styles/base.css";
+import "../styles/theme.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const siteTitle = "へのへのんのの";
+const { title, description } = Astro.props;
+const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+  </head>
+  <body>
+    <div class="site">
+      <Header />
+      <main class="site-main">
+        <div class="container">
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>
