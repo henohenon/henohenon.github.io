@@ -50,11 +50,15 @@ Claude は md を参考にしてもいいし、独自に書いてもいい (詳�
 - [ ] **C-type** `docs/techniques/typography.md` 作成 (タイポの手法例)
 - [ ] **C-motion** `docs/techniques/motion.md` 作成 (transition + @keyframes まとめて)
 - [ ] **C-vt** `docs/techniques/view-transitions.md` 作成 (D1 完了後に活きる)
+- [ ] **C-cursor** `docs/techniques/cursor-and-microinteractions.md` 作成 (カーソル + hover 微反応 + Tier 3 例。B4 完了後に活きる)
 
 ### 機構系 (1 回仕込めば自由が広がる)
 
 - [ ] **C5** `color-mix` 曲調ダーク modifier (暗い曲調なら自動 dim — 自動 modifier、Claude 生成ではない)
 - [ ] **D1** View Transitions 導入 (Astro `<ClientRouter />` を Base.astro に)
+- [ ] **B4** カーソル位置 CSS 変数 bridge — `mousemove` で `--mx` / `--my` を `:root` に書く
+  5 行の常設スクリプトを Base.astro に。Claude がカーソル追従 / spotlight / mix-blend-mode 等を
+  CSS で書ける状態に
 
 ### メタ表現
 
@@ -66,6 +70,8 @@ Claude は md を参考にしてもいいし、独自に書いてもいい (詳�
   **日本語フォント中心に curation** する方針 (2026-05-25 判断、装飾・見出し系を集める)
 - 🟡 **レイアウトテンプレ複数化** (`BaseBlog` / `BaseMagazine` / `BaseTerminal` / `BasePoster` 等) —
   CSS だけで類似の見た目を作れる前提で様子見。足りないと判明したら復活
+- 🟡 **Tier 4 おもちゃ** (ロゴクリックで弾む / マウス停止演出 / 隠しキャラ / 隠しテーマ /
+  trail / ブックマーク) — 規模感が許せば再開 (2026-05-25 判断、状態管理発生系は当面避ける)
 
 ### 継続タスク
 
