@@ -99,9 +99,15 @@ button {
   align-items: center;
 }
 
-.site-header .icon-link img {
+.site-header .icon-link {
+  display: inline-flex;
+  color: var(--color-fg, #1a1a1a);
+}
+
+.site-header .icon-link svg {
   width: 1.25rem;
   height: 1.25rem;
+  fill: currentColor;
 }
 
 .site-main {
