@@ -17,8 +17,8 @@ import { z } from "zod";
 const THEME_PATH = path.resolve("src/styles/theme.css");
 const THEME_SOURCE_PATH = path.resolve("src/data/theme-source.json");
 const VOCADB_BASE = "https://vocadb.net/api";
-const RECENT_DAYS = 30;
-const POOL_SIZE = 20;
+/** 「直近の人気曲」を取る上限ウィンドウ。前回生成からの日数とこの値の長い方を採る */
+const MAX_WINDOW_DAYS = 14;
 const MODEL = "claude-sonnet-4-6";
 
 const TagSchema = z.object({
@@ -49,26 +49,60 @@ const SongDetailSchema = SongSummarySchema.extend({
   lyrics: z.array(LyricSchema).default([]),
 });
 
+const ThemeSourceSchema = z.object({
+  songId: z.number().nullable(),
+  songName: z.string().nullable(),
+  artist: z.string().nullable(),
+  generatedAt: z.string().nullable(),
+});
+
 type SongSummary = z.infer<typeof SongSummarySchema>;
 type SongDetail = z.infer<typeof SongDetailSchema>;
 
-async function fetchPopularPool(): Promise<SongSummary[]> {
-  const after = new Date();
-  after.setUTCDate(after.getUTCDate() - RECENT_DAYS);
-  const afterDate = after.toISOString().slice(0, 10);
+async function readLastGeneratedAt(): Promise<Date | null> {
+  try {
+    const raw = await readFile(THEME_SOURCE_PATH, "utf8");
+    const parsed = ThemeSourceSchema.parse(JSON.parse(raw));
+    return parsed.generatedAt ? new Date(parsed.generatedAt) : null;
+  } catch {
+    return null;
+  }
+}
+
+function resolveWindowStart(last: Date | null): Date {
+  const cap = new Date();
+  cap.setUTCDate(cap.getUTCDate() - MAX_WINDOW_DAYS);
+  if (!last) return cap;
+  // last と cap の遅い方 (= 短いウィンドウ) を採用
+  return last > cap ? last : cap;
+}
+
+/**
+ * `[前回生成 or 14日前, now]` の範囲で RatingScore 最上位の 1 曲を取る。
+ * ランダム選定はしない (情報量を担保したいので、確実に人気のある曲を狙う)。
+ */
+async function fetchLatestTopSong(): Promise<SongSummary> {
+  const last = await readLastGeneratedAt();
+  const start = resolveWindowStart(last);
+  const afterDate = start.toISOString().slice(0, 10);
 
   const url = new URL(`${VOCADB_BASE}/songs`);
   url.searchParams.set("sort", "RatingScore");
-  url.searchParams.set("maxResults", String(POOL_SIZE));
+  url.searchParams.set("maxResults", "1");
   url.searchParams.set("songTypes", "Original");
   url.searchParams.set("fields", "Tags");
   url.searchParams.set("lang", "Default");
   url.searchParams.set("afterDate", afterDate);
 
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`VocaDB pool fetch failed: ${res.status}`);
+  console.log(`    window: [${afterDate}, now] (last=${last?.toISOString() ?? "null"})`);
 
-  return SongListSchema.parse(await res.json()).items;
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!res.ok) throw new Error(`VocaDB fetch failed: ${res.status}`);
+
+  const list = SongListSchema.parse(await res.json());
+  const top = list.items[0];
+  if (!top) throw new Error(`no songs found in window since ${afterDate}`);
+  return top;
 }
 
 async function fetchSongDetail(id: number): Promise<SongDetail> {
@@ -98,18 +132,24 @@ function buildUserMessage(detail: SongDetail): string {
     .slice(0, 15);
   const lyric = pickLyric(detail)?.slice(0, 1500) ?? "(歌詞なし)";
 
+  // 曲を信じる。曲名と歌詞を主役に置き、タグは補助情報として末尾に。
   return [
-    `今日の曲: ${detail.name} / ${detail.artistString}`,
-    `タグ: ${tagNames.join(", ") || "(タグなし)"}`,
+    "# 今日の曲",
+    `${detail.name} / ${detail.artistString}`,
     "",
-    "歌詞抜粋:",
+    "## 歌詞 (抜粋)",
     lyric,
+    "",
+    "## 補助タグ (参考程度)",
+    tagNames.join(", ") || "(タグなし)",
   ].join("\n");
 }
 
 const SYSTEM_PROMPT = `あなたはこのブログ "へのへのんのの" の毎日の見た目を CSS だけで翻訳するデザイナーです。
-ユーザーから渡される今日の Vocaloid 曲 (タイトル / アーティスト / タグ / 歌詞) の雰囲気を読み取り、
+ユーザーから渡される今日の Vocaloid 曲 (曲名 / アーティスト / 歌詞 + 補助タグ) の雰囲気を読み取り、
 \`src/styles/theme.css\` の中身を生成してください。
+
+**曲名と歌詞を主に読み取ること。タグはあくまで補助情報** (タグだけに引っ張られない)。
 
 ## 必ず守ること
 
@@ -246,19 +286,14 @@ function validateCss(css: string): void {
 }
 
 async function main(): Promise<void> {
-  console.log("[1/4] fetching popular pool from VocaDB...");
-  const pool = await fetchPopularPool();
-  if (pool.length === 0) throw new Error("VocaDB returned an empty pool");
-
-  const idx = Math.floor(Math.random() * pool.length);
-  const picked = pool[idx];
-  if (!picked) throw new Error("internal: pool index out of range");
+  console.log("[1/3] picking latest top song from VocaDB...");
+  const picked = await fetchLatestTopSong();
   console.log(
-    `[2/4] picked: "${picked.name}" / ${picked.artistString} (score=${picked.ratingScore})`,
+    `    picked: "${picked.name}" / ${picked.artistString} (score=${picked.ratingScore})`,
   );
 
   const detail = await fetchSongDetail(picked.id);
-  console.log("[3/4] calling Claude...");
+  console.log("[2/3] calling Claude...");
   const css = await generateThemeCss(detail);
   validateCss(css);
 
@@ -273,7 +308,7 @@ async function main(): Promise<void> {
   await writeFile(THEME_SOURCE_PATH, `${JSON.stringify(source, null, 2)}\n`, "utf8");
 
   // bot コミット用の情報を stdout に流す (CI で読む)
-  console.log("[4/4] wrote", THEME_PATH, "and", THEME_SOURCE_PATH);
+  console.log("[3/3] wrote", THEME_PATH, "and", THEME_SOURCE_PATH);
   console.log("META=", JSON.stringify({ songId: detail.id, songName: detail.name }));
 }
 
