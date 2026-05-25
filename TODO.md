@@ -45,8 +45,9 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 
 - [x] X アイコンが白で、明るいテーマだと見えない問題
   - Header に SVG をインライン化し `fill="currentColor"` で `--color-fg` 追従に
-- [ ] 個人アイコンを `archive/ar` の henohenos 系から発掘して使えないか調査
-  - `git ls-tree -r archive/ar` で中身確認
+- [x] 個人アイコンを `archive/ar` の henohenos 系から発掘して使えないか調査
+  - `archive/ar:ar/henohenos/negi.png` を採用 → `public/negi.png`
+  - Header のブランド名左に CSS mask + currentColor で配置
 - [x] `public/logo*.png` 削除 (未使用)
 - [x] `public/icons/` 配下も合わせて削除 (Header インライン化で外部参照不要に)
 - [x] favicon は OK (`Base.astro` で使用中)

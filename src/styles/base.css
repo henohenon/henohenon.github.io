@@ -91,6 +91,20 @@ button {
   font-family: var(--font-heading, inherit);
   font-size: 1.25rem;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-fg, #1a1a1a);
+}
+
+.site-header .brand-mark {
+  display: inline-block;
+  width: 1.1em;
+  height: 1.5em;
+  background-color: currentColor;
+  mask: url(/negi.png) center / contain no-repeat;
+  -webkit-mask: url(/negi.png) center / contain no-repeat;
+  flex-shrink: 0;
 }
 
 .site-header nav {
