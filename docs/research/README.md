@@ -13,7 +13,7 @@ catalog 整理 (棚卸 → ギャップ → 補助情報) フェーズ全般で�
 - [expression-references.md](expression-references.md) — 表現の幅 (ジャンル / 軸 / ムード翻訳)
 - [design-doc-conventions.md](design-doc-conventions.md) — DESIGN.md / ADR / 設計ドキュメント慣習
 
-### 1. DESIGN.md 各セクションに対応する語彙
+### 1. DESIGN.md 各セクションに対応する語彙 (出力側)
 
 | ファイル | 対応セクション (DESIGN.md) |
 |---|---|
@@ -23,15 +23,20 @@ catalog 整理 (棚卸 → ギャップ → 補助情報) フェーズ全般で�
 | [shapes-and-depth.md](shapes-and-depth.md) | Shapes / Elevation & Depth |
 | [components-and-patterns.md](components-and-patterns.md) | Components |
 | [motion-and-easing.md](motion-and-easing.md) | (拡張) Motion |
-| [svg-and-iconography.md](svg-and-iconography.md) | (拡張) Iconography |
-| [imagery-and-illustration.md](imagery-and-illustration.md) | (拡張) Imagery |
+| [svg-and-iconography.md](svg-and-iconography.md) | (拡張) Iconography / Imagery |
 
 ### 2. 横断的・哲学的軸
 
 - [accessibility.md](accessibility.md) — WCAG / 色覚 / モーション / セマンティック (=「壊れない最低限」の規律)
 - [brand-voice-and-mood.md](brand-voice-and-mood.md) — Overview (人格・声・mood の articulation)
 
-### 3. プロジェクト固有 / 環境固有
+### 3. 入力・制約・生成手法 (本プロジェクト固有の柱)
+
+- [input-and-vocadb.md](input-and-vocadb.md) — VocaDB から渡る入力データの語彙 (「曲を信じる」の解像度)
+- [css-only-boundary.md](css-only-boundary.md) — CSS だけで描ける範囲と機構を要求する範囲の境界
+- [prompt-and-generation.md](prompt-and-generation.md) — Claude への渡し方 / 出力検証 / 安定化の引き出し
+
+### 4. ドメイン / 技術スナップショット
 
 - [vocaloid-aesthetic.md](vocaloid-aesthetic.md) — Vocaloid 文化の視覚語彙 (本プロジェクト固有の翻訳辞書)
 - [modern-css-techniques.md](modern-css-techniques.md) — 直近 CSS 機能 (Baseline 2024-2026)

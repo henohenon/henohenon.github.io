@@ -1,7 +1,8 @@
 # SVG とアイコノグラフィ
 
-> SVG の表現技法 / アイコンシステム / 装飾用 SVG パターン。
+> SVG の表現技法 / アイコンシステム / 装飾用 SVG パターン / 画像処理。
 > DESIGN.md には明示セクションはないが、AI 生成テーマで活用余地大きい。
+> 旧 `imagery-and-illustration.md` の写真処理・装飾画像系もここに統合。
 
 ---
 
@@ -232,7 +233,48 @@ LLM (Claude) が SVG を生成する場合:
 
 ---
 
-## 10. 本プロジェクト視点
+## 10. 画像処理 (旧 imagery から統合)
+
+### CSS フィルターでの加工
+```css
+.photo { filter: grayscale(100%); }
+.photo { filter: sepia(50%) hue-rotate(20deg); }
+.photo { filter: blur(2px) brightness(0.9); }
+.photo { mix-blend-mode: multiply; }
+```
+[modern-css-techniques.md](modern-css-techniques.md) §14 と合わせ、`mix-blend-mode` / `backdrop-filter` で重ね合わせ表現。
+
+### 写真の処理スタイル (引き出し)
+- Color grading (トーン統一) / Duotone / Tritone
+- Sepia / Black & White
+- Filter overlay (noise / grain / scratch)
+- Vignette (周辺暗くする)
+- Cinematic letterbox (上下黒帯)
+
+### 装飾画像の使い方
+- **角飾り**: 左上 / 右下に小さな SVG
+- **Bullet**: `ul { list-style-image: url(/bullet.svg); }`
+- **Divider**: セクション間の装飾区切り (罫線 / SVG curve / ASCII)
+- **Watermark**: `body::before` で背景に薄い装飾
+
+### 視覚要素 → mood 翻訳
+| 視覚要素 | mood |
+|---|---|
+| 高 contrast / sharp | 力強い / 鋭い |
+| Low contrast / soft | 穏やか / 内省 |
+| 暖色 + 自然光 | ノスタルジー / 温かさ |
+| 寒色 + 直線 | 未来 / 清潔 |
+| 粒子 / ノイズ | 古い / 親しみ |
+| Monochrome | 文学的 / 静謐 |
+| Neon + dark | cyberpunk / 派手 |
+
+### 本プロジェクトでの現状
+- 写真は使っていない (記事に必要なら手動添付)
+- VocaDB の MainPicture 取り込みは未着手 (`input-and-vocadb.md` §3)
+
+---
+
+## 11. 本プロジェクト視点
 
 ### 現状
 - インライン SVG (Header の X/GH icon)
@@ -254,3 +296,5 @@ LLM (Claude) が SVG を生成する場合:
 - [SVG Backgrounds](https://www.svgbackgrounds.com/)
 - [CSS-Tricks — A Complete Guide to SVG](https://css-tricks.com/snippets/svg/)
 - [Lucide Icons](https://lucide.dev/) (Feather successor, ISC ライセンス)
+- [filter — MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/filter)
+- [mix-blend-mode — MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/mix-blend-mode)

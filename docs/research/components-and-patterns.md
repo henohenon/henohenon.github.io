@@ -1,200 +1,116 @@
 # コンポーネントとパターン
 
-> Atom レベル (button, input, card) から compound パターンまで。
 > DESIGN.md の Components セクションに対応。
+> 本プロジェクトの規模 (Header / Footer / 一覧 / 記事 / 404 のみ) に絞り、
+> 出てくる atom / pattern の語彙を Claude が選べる引き出しとして整理。
 
 ---
 
-## 1. Atomic Design
+## 1. 本プロジェクトに存在する要素 (現状)
 
-Brad Frost の分類:
+[src/styles/base.css](../../src/styles/base.css) と [components/](../../src/components/) から:
 
-| 層 | 例 |
-|---|---|
-| **Atoms** | ボタン、入力、ラベル、アイコン、見出し |
-| **Molecules** | フォーム行 (label + input)、検索バー、ナビアイテム |
-| **Organisms** | ヘッダー、カード、リスト、フォーム全体 |
-| **Templates** | レイアウト構造 |
-| **Pages** | 実コンテンツ入りページ |
+| 要素 | クラス / セレクタ | 装飾の余地 (CSS-only) |
+|---|---|---|
+| ブランドマーク | `.brand-mark` (`mask` + `currentColor`) | サイズ・色追従の調整 |
+| ブランドテキスト | `.brand` | フォント / 字間 / 装飾 |
+| ヘッダーナビ | `.site-header nav`, `.icon-link svg` | アイコン色 / 配置 / hover |
+| 記事一覧 | `.post-list`, `.post-list a`, `.post-list h2`, `.post-list time` | grid / card 化 / 装飾 |
+| 記事本文 | `article.post header`, `article.post .content` | typography 強化 / 罫線 / drop cap |
+| フッター | `.site-footer`, `.theme-credit` | 配置 / 字間 / 区切り装飾 |
+| 404 | `.not-found`, `.not-found-mark`, `.not-found-msg` | 表現の遊び場 |
 
-本プロジェクトは規模小で Organism までで十分:
-- Atoms: 見出し、リンク、本文
-- Organisms: Header / Footer / 記事カード / 記事本文
+[css-only-boundary.md](css-only-boundary.md) に詳細あり。**HTML を変えない以上 atom の追加はできない** — 既存要素の "見せ方" を変えるのが本プロジェクトの全範囲。
 
 ---
 
-## 2. Atom 別の語彙
-
-### Button
-- **Primary** (アクションを促す、最も目立つ): 充填色 + 高コントラスト
-- **Secondary** (代替アクション): 罫線 + 透明背景
-- **Tertiary / Ghost**: 罫線も色も控えめ
-- **Destructive**: 赤系で警告
-- **Icon button**: アイコンのみ
-- **Link button**: 下線付きテキスト
-
-属性軸: size (sm/md/lg) / weight (normal/bold) / shape (rectangle/pill/icon)
+## 2. Atom 別の表現語彙
 
 ### Link (本プロジェクトの主役)
 - **Inline link**: 本文中、下線 + アクセント色
 - **Navigation link**: メニュー内、最小装飾
-- **External link**: target=_blank、外部マーク
-- **Icon link**: SNS アイコン等
+- **Icon link**: SNS アイコン (`.icon-link svg` で `currentColor`)
+- 状態: `:hover` / `:focus-visible` / `:visited`
 
-スタイル例:
 ```css
-a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 2px; }
 a:hover { text-decoration-thickness: 2px; }
 ```
 
-### Input / Form
-本プロジェクトには現状なし。将来コメント等で必要なら:
-- text input / textarea / select / checkbox / radio / file
-- focus ring の意匠 (アクセシビリティ必須)
-- error state / disabled state
-
 ### Heading
-- h1 → h6 の階層 (modular scale で size 制御)
-- 見出しの装飾 (下線 / 縁取り / アクセント色)
-- 番号付き見出し (counters CSS で `counter-increment`)
+- h1-h6 階層 (modular scale で size 制御 → [typography.md](typography.md))
+- 装飾: 下線 / 縁取り / アクセント色 / counter (`counter-increment`)
+- 番号付き見出し: CSS counter で実装可能
 
 ### List
 - ul / ol / dl
-- マーカーのカスタム (`::marker`)
-- `list-style-image` で SVG マーカー
+- `::marker` でマーカー装飾
+- `list-style-image: url(/bullet.svg)` で SVG マーカー
 
-### Image (本プロジェクトは少ない)
-- ratio 維持 (`aspect-ratio` CSS)
-- placeholder / lazy loading
-- 装飾枠 (フィルム枠、額装)
+### Time / Date
+- `<time datetime="...">` (記事一覧と本文)
+- `font-variant-numeric` で数字表現
+
+### Image (現状ほぼ未使用)
+- 装飾枠 / `aspect-ratio` / フィルター
 
 ---
 
-## 3. Molecule / Organism 別の語彙
+## 3. Pattern (compound) の語彙
 
-### Card
-- **Standard card**: 画像 + タイトル + 説明 + リンク
-- **Quote card**: 引用 + 引用元
-- **Stat card**: 大数字 + 説明
-- **Action card**: タイトル + CTA ボタン
-- **Image card**: 画像が主、テキストは下部
+### List → Card 化
+`.post-list` を grid 化して 2-col bento や masonry にできる:
+```css
+.post-list { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.post-list > li { padding: 1rem; border: 1px solid var(--color-fg); }
+```
 
-属性軸: shape / shadow / hover反応 / 配置 (横並び/縦)
-
-### Navigation
-- **Top nav**: ヘッダー水平
-- **Sidebar nav**: 縦配置 (本プロジェクトでは未使用)
-- **Bottom nav**: モバイル下部
-- **Breadcrumb**: 階層位置
-- **Tab**: 切替可能
-- **Pagination**: ページ送り
-
-### Header / Footer (本プロジェクトの主役)
-- **Header**: ブランド / ナビ / メタ要素
-- **Footer**: コピーライト / クレジット / リンク
+### Hero (記事ページの header)
+`article.post header h1` を大判タイポにして hero 化する余地。
 
 ### Empty State
-404 / no result / コンテンツなし の表現
-本プロジェクトでは 404 page で実装済
+404 ページが該当。`decisions.md` で「ここには何もない + / へのリンクのみ」と確定済。表現の遊び場として残る。
 
-### Loading state
-- spinner / skeleton / progress bar
-- 本プロジェクトは静的サイトなので不要
+### Index / Archive
+トップページ。`.post-list` の構成次第で magazine 風 / minimal index 風に振れる。
 
-### Modal / Popover
-- 注釈 / 詳細表示
-- HTML `<dialog popover>` で JS なしで実現可能 (新仕様)
+### Article / Long-form
+記事ページ。行幅 (`min(72ch, ...)`) は base.css で固定だが、内側装飾 (drop cap / 引用 / 見出し階層) は theme.css で自由。
 
 ---
 
 ## 4. 状態 (state) の表現
 
-各 atom が持つ可能性のある state:
+`:hover` / `:focus-visible` / `:visited` / `::selection` / `:has()` が現実的に使える。
 
-- **default** (通常)
-- **hover** (マウス乗せ)
-- **focus** (キーボードフォーカス、a11y 必須)
-- **focus-visible** (キーボードのみ focus を可視化)
-- **active** (押されてる瞬間)
-- **disabled** (押せない)
-- **loading** (処理中)
-- **selected** (選択済)
-- **error** (エラー)
-- **visited** (リンク既訪)
-
-各状態の視覚差は、ユーザーへの feedback として重要。
-本プロジェクトでは主に hover / focus / visited をどう扱うかが要。
+`:focus-visible` は a11y 必須なので Claude が省略すると微妙 — `base.css` で default を持たせるか、prompt で要求するかは棚卸事項。
 
 ---
 
-## 5. パターン (compound) の語彙
+## 5. 規約化のレベル感
 
-### Hero
-ページ冒頭の "顔" 領域。タイトル + sub + CTA。
+| レベル | 内容 | 本プロジェクトの位置 |
+|---|---|---|
+| A | Token のみ (色 / 余白 / フォントの変数) | **現状** |
+| B | atom クラス定義 (`.btn-primary` 等) | 不要 (button が無い) |
+| C | variant 用意 (`.card-magazine` 等) | Claude の自由度を縛るので不採用 |
+| D | Astro component で props 切替 | HTML 改変、本プロジェクト非対象 |
 
-### Feature list / grid
-特徴を並べる。3-4 列のグリッド or アイコン + テキスト。
-
-### Testimonial / Quote
-引用を見せる。
-本プロジェクトでは曲名引用が footer に出るのが類似パターン。
-
-### Timeline
-時系列の表現。本プロジェクトでは過去テーマ非可視化なので使わない。
-
-### Article / Long-form
-本文中心、行幅最適化、見出し階層、引用、コード。
-本プロジェクトの記事ページの形。
-
-### Index / Archive
-一覧表示。
-本プロジェクトのトップページ。
+A のままが本プロジェクトの精神 ([decisions.md](../decisions.md) 「自由度優先」) と一致。
 
 ---
 
-## 6. 規約化のレベル感
+## 6. 棚卸時の確認
 
-DESIGN.md 的なアプローチで、コンポーネントを **どこまで定義しておくか**:
-
-### A. Token のみ (現状本プロジェクト)
-色 / 余白 / フォントの変数だけ定義、レイアウトは個別
-
-### B. Atom スタイル定義
-button / link / heading の class まで定義
-```css
-.btn-primary { ... }
-.btn-secondary { ... }
-```
-
-### C. Organism + variant
-card-magazine / card-minimal / card-zine 等のスタイル別 variant を用意
-
-### D. Component framework
-Astro component に props で variant 切替
-
-本プロジェクトは **A → 軽い B (link / heading のみ)** が現実的。Claude の自由度を保ちつつ最低限の規約。
-
----
-
-## 7. 本プロジェクト視点
-
-### 現状のコンポーネント
-- Header.astro (brand-mark + brand-text + nav)
-- Footer.astro (theme-credit + copyright)
-- pages/index.astro (post-list)
-- pages/[slug].astro (article)
-- pages/404.astro
-
-### 棚卸時の確認
 - Header / Footer の class 命名が theme.css で再現性ある形か
-- link の hover / focus 状態を Claude が個別に書いてるか規約化されてるか
-- post-list の card 構造に Claude が自由に装飾足せる余地はあるか
+- `.post-list` を Claude が grid 化する選択肢を持っているか
+- link の `:hover` / `:focus-visible` を Claude が個別に書くか、base.css に default を持たせるか
+- 記事本文の typography (drop cap / 引用) を Claude が触る余地が伝わっているか
 
 ---
 
 ## Sources
 
-- [Atomic Design — Brad Frost](https://atomicdesign.bradfrost.com/chapter-2/)
-- [Material Design — Components](https://m3.material.io/components)
-- [Refactoring UI — Component patterns](https://www.refactoringui.com/)
-- [Popover API — MDN](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+- [Atomic Design — Brad Frost](https://atomicdesign.bradfrost.com/chapter-2/) (一般慣習として)
+- [src/styles/base.css](../../src/styles/base.css) — 触れない既存スタイル
+- [Popover API — MDN](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) (HTML 改変が許せば使える)
