@@ -7,11 +7,17 @@ import "../styles/theme.css";
 interface Props {
   title?: string;
   description?: string;
+  ogType?: "website" | "article";
 }
 
 const siteTitle = "へのへのんのの";
-const { title, description } = Astro.props;
+const siteDescription = "毎朝、Vocaloid に着替えるブログ";
+
+const { title, description, ogType = "website" } = Astro.props;
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
+const metaDescription = description ?? siteDescription;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? "https://henohenon.github.io").href;
+const ogImageUrl = new URL("/og.png", Astro.site ?? "https://henohenon.github.io").href;
 ---
 
 <!doctype html>
@@ -21,7 +27,23 @@ const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" />
     <title>{fullTitle}</title>
-    {description && <meta name="description" content={description} />}
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {/* Open Graph */}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content={siteTitle} />
+    <meta property="og:locale" content="ja_JP" />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body>
     <div class="site">
