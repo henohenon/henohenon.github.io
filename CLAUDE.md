@@ -4,9 +4,13 @@
 
 ## プロジェクト概要
 
-VocaDB API から毎日 Vocaloid 曲を1曲選び、その情報を Claude API に渡して `theme.css` を生成 → main に push → GitHub Pages デプロイ。
+VocaDB API から毎日 Vocaloid 曲を1曲選び、その情報を Claude に渡して `theme.css` を生成 → main に push → GitHub Pages デプロイ。
 
 HTML / Astro コンポーネントは触らない。CSS の差し替えだけで日々の見た目を更新する。
+
+**スケジュール実行はローカル側に集約予定** (launchd / cron で `bun run generate-theme` を回す)。
+GitHub Actions の `daily.yml` は廃止予定 — 詳細は [TODO.md](TODO.md) の「1. ローカルスケジュール化」。
+GHA は `deploy.yml` (main push → Pages) のみ残す。
 
 ## スタック
 
@@ -61,12 +65,12 @@ Conventional Commits 風。日本語可、命令形・現在形。
 ## generate-theme のバックエンド
 
 `scripts/generate-theme.ts` は 2 系統の Claude 呼び出しを内蔵する。
-切り替えは自動 (環境変数で上書き可)。
+**主たる実行系は CLI 経路 (ローカル launchd/cron)**。SDK 経路は将来の保険として残置。
 
 | 環境 | 既定 | 仕組み |
 | --- | --- | --- |
-| ローカル開発 | `cli` | `claude -p` を子プロセス起動。Pro/Max サブスク認証を流用 (API 課金なし) |
-| GitHub Actions | `sdk` | `@anthropic-ai/sdk` で API 直叩き (`ANTHROPIC_API_KEY` 必須) |
+| ローカル (本番) | `cli` | `claude -p` を子プロセス起動。Pro/Max サブスク認証を流用 (API 課金なし) |
+| SDK 経路 (休眠) | `sdk` | `@anthropic-ai/sdk` で API 直叩き (`ANTHROPIC_API_KEY` 必須)。今は使わない |
 
 `THEME_BACKEND=sdk` / `THEME_BACKEND=cli` で明示指定可。`ANTHROPIC_API_KEY` が
 セットされていれば SDK、なければ CLI が自動選択される。
