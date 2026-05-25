@@ -8,16 +8,19 @@ interface Props {
   title?: string;
   description?: string;
   ogType?: "website" | "article";
+  /** 記事ページなら slug (= og:image を /og/{slug}.png に切替) */
+  ogSlug?: string;
 }
 
 const siteTitle = "へのへのんのの";
 const siteDescription = "毎朝、Vocaloid に着替えるブログ";
 
-const { title, description, ogType = "website" } = Astro.props;
+const { title, description, ogType = "website", ogSlug } = Astro.props;
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
 const metaDescription = description ?? siteDescription;
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? "https://henohenon.github.io").href;
-const ogImageUrl = new URL("/og.png", Astro.site ?? "https://henohenon.github.io").href;
+const siteOrigin = Astro.site ?? new URL("https://henohenon.github.io");
+const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).href;
+const ogImageUrl = new URL(ogSlug ? `/og/${ogSlug}.png` : "/og.png", siteOrigin).href;
 ---
 
 <!doctype html>

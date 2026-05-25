@@ -50,6 +50,7 @@ if (cliArgs["song-id"] && cliArgs.song) {
 const THEME_PATH = path.resolve("src/styles/theme.css");
 const THEME_SOURCE_PATH = path.resolve("src/data/theme-source.json");
 const USED_SONGS_PATH = path.resolve("src/data/used-songs.json");
+const OG_SVG_PATH = path.resolve("public/og.svg");
 const VOCADB_BASE = "https://vocadb.net/api";
 /** 「直近の人気曲」を取るローリングウィンドウ (日数) */
 const WINDOW_DAYS = 30;
@@ -330,6 +331,71 @@ function pickBackend(): ThemeBackend {
   return process.env.ANTHROPIC_API_KEY ? sdkBackend : cliBackend;
 }
 
+const OG_SYSTEM_PROMPT = `あなたはこのブログ "へのへのんのの" の OGP カード (1200x630) を SVG 1枚で描くデザイナーです。
+
+ユーザーから今日の曲情報と、生成済みの \`theme.css\` が渡されます。
+**theme.css の配色 / 雰囲気と整合する OGP** を作ってください。
+
+## 必須
+
+- ルート要素は \`<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">\`
+- 背景全面塗り (theme.css の \`--color-bg\` と同じ色)
+- サイト名 "へのへのんのの" を含める (theme.css の \`--color-fg\` と同じ色)
+- 曲名を含める (\`--color-accent\` 等を使うとよい)
+- 出力は **純粋な SVG のみ**。説明文・コードフェンス (\`\`\`) 禁止
+
+## 禁止
+
+- \`<script>\`, \`<foreignObject>\`, \`<image href="http...">\`, \`@import\` 等の外部参照
+- \`font-family\` は \`'serif'\` / \`'sans-serif'\` / \`'monospace'\` のいずれかのみ
+- width / height / viewBox の値を変える
+
+## 自由
+
+- 装飾 (パターン / 図形 / グラデ / 罫線 等) は曲調に合わせて自由
+- 文字位置・サイズ・余白も自由 (はみ出さない範囲で)`;
+
+function sanitizeSvg(text: string): string {
+  return text
+    .replace(/^```(?:svg|xml)?\s*\n/, "")
+    .replace(/\n```\s*$/, "")
+    .trim();
+}
+
+function validateOgSvg(svg: string): void {
+  if (!/^<svg\b/.test(svg)) throw new Error("not an svg");
+  if (!/width=["']1200["']/.test(svg)) throw new Error("missing width=1200");
+  if (!/height=["']630["']/.test(svg)) throw new Error("missing height=630");
+  if (/<script\b/i.test(svg)) throw new Error("<script> forbidden");
+  if (/<foreignObject\b/i.test(svg)) throw new Error("<foreignObject> forbidden");
+  if (/@import|<image[^>]+href=["']https?:/i.test(svg)) {
+    throw new Error("external resource forbidden");
+  }
+  const fonts = [...svg.matchAll(/font-family=["']([^"']+)["']/g)];
+  for (const m of fonts) {
+    const fam = (m[1] ?? "").trim().toLowerCase();
+    if (fam !== "serif" && fam !== "sans-serif" && fam !== "monospace") {
+      throw new Error(`unsafe font-family: ${m[1]}`);
+    }
+  }
+}
+
+async function generateOgSvg(detail: SongDetail, themeCss: string): Promise<string> {
+  const backend = pickBackend();
+  console.log(`    using backend: ${backend.name}`);
+  const user = [
+    "# 今日の曲",
+    `${detail.name} / ${detail.artistString}`,
+    "",
+    "# 生成済みの theme.css (これと整合する OGP を作って)",
+    "```css",
+    themeCss,
+    "```",
+  ].join("\n");
+  const raw = await backend.generate(OG_SYSTEM_PROMPT, user);
+  return sanitizeSvg(raw);
+}
+
 async function generateThemeCss(detail: SongDetail): Promise<string> {
   const backend = pickBackend();
   console.log(`    using backend: ${backend.name}`);
@@ -403,9 +469,19 @@ async function main(): Promise<void> {
   };
   await writeFile(THEME_SOURCE_PATH, `${JSON.stringify(source, null, 2)}\n`, "utf8");
   await appendUsedSongId(detail.id);
+  console.log("[3/4] wrote theme.css, theme-source.json, used-songs.json");
+
+  console.log("[4/4] generating OGP svg (site)...");
+  try {
+    const ogSvg = await generateOgSvg(detail, css);
+    validateOgSvg(ogSvg);
+    await writeFile(OG_SVG_PATH, `${ogSvg}\n`, "utf8");
+    console.log("    wrote", OG_SVG_PATH);
+  } catch (err) {
+    console.error("    OGP generation failed, keeping yesterday's og.svg:", err);
+  }
 
   // bot コミット用の情報を stdout に流す (CI で読む)
-  console.log("[3/3] wrote theme.css, theme-source.json, used-songs.json");
   console.log("META=", JSON.stringify({ songId: detail.id, songName: detail.name }));
 }
 

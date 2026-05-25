@@ -14,7 +14,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Base title={post.data.title} description={post.data.description ?? undefined} ogType="article">
+<Base
+  title={post.data.title}
+  description={post.data.description ?? undefined}
+  ogType="article"
+  ogSlug={post.id}
+>
   <article class="post">
     <header>
       <time datetime={post.data.date.toISOString()}>
