@@ -37,28 +37,40 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 採否と探索の一覧は [docs/expression-catalog.md](docs/expression-catalog.md)。
 方針判断のログは [docs/decisions.md](docs/decisions.md)。
 
-### 語彙拡張 (カタログ機構)
+**方針: 自由度優先**。静的アセット + ID 選択のカタログ式ではなく、
+**技法を記述した md を Claude に inspire 用として渡す** 形で実装する。
+Claude は md を参考にしてもいいし、独自に書いてもいい (詳細: [docs/decisions.md](docs/decisions.md))。
 
-- [ ] **C1** 欧文フォントカタログ (`public/fonts/` に複数 + theme.css 規約で選択肢化)
-- [ ] **C2** 背景 SVG パターンカタログ (`public/patterns/` に静的 SVG 10-20)
-- [ ] **C3** 装飾モチーフカタログ (ボーダー / 影 / マーカー / スタンプ の名前付きスタイル群)
-- [ ] **C4** タイポスケール比 / 字間 / 行間 バリエーション
-- [ ] **C5** `color-mix` 曲調ダーク modifier (暗い曲調なら自動 dim)
+### techniques inspiration docs (Claude へのレファレンス)
 
-### 構造 (Astro レイアウト複数化)
+- [ ] **C-α** 注入機構 — `docs/techniques/` 配下の md を generate-theme.ts が
+  読んで prompt に組み込む (system prompt に入れるか user message かは追って判断)
+- [ ] **C-bg** `docs/techniques/backgrounds.md` 作成 (背景の手法例)
+- [ ] **C-dec** `docs/techniques/decorations.md` 作成 (装飾の手法例)
+- [ ] **C-type** `docs/techniques/typography.md` 作成 (タイポの手法例)
+- [ ] **C-motion** `docs/techniques/motion.md` 作成 (transition + @keyframes まとめて)
+- [ ] **C-vt** `docs/techniques/view-transitions.md` 作成 (D1 完了後に活きる)
 
-- [ ] **D1** View Transitions 導入 (Astro `<ClientRouter />`)
-- [ ] **D2** レイアウトテンプレ複数化 (`BaseBlog` / `BaseMagazine` / `BaseTerminal` / `BasePoster` 等) + 日替わり選択機構
+### 機構系 (1 回仕込めば自由が広がる)
+
+- [ ] **C5** `color-mix` 曲調ダーク modifier (暗い曲調なら自動 dim — 自動 modifier、Claude 生成ではない)
+- [ ] **D1** View Transitions 導入 (Astro `<ClientRouter />` を Base.astro に)
 
 ### メタ表現
 
 - [ ] **E1** mood ラベル → `theme-source.json` に追加 → Footer に「今日は: 〜」表示
 
+### 棚上げ
+
+- 🟡 **欧文 / 日本語フォントの自前 bundle** — 当面 system stack のみ。再開時は
+  **日本語フォント中心に curation** する方針 (2026-05-25 判断、装飾・見出し系を集める)
+- 🟡 **レイアウトテンプレ複数化** (`BaseBlog` / `BaseMagazine` / `BaseTerminal` / `BasePoster` 等) —
+  CSS だけで類似の見た目を作れる前提で様子見。足りないと判明したら復活
+
 ### 継続タスク
 
-- [ ] **更なる探索** — 静的で効く新しい手法 / CSS 新機能 / 他サイト事例を定期的に調査して
-  [docs/expression-catalog.md](docs/expression-catalog.md) に追記する
-  (LLM が選べる "語彙" を増やしていく感覚)
+- [ ] **更なる探索** — 上記 techniques md を継続的に拡充 (CSS 新機能 / 他サイト事例 / 静的で効く新しい手法を)
+  [docs/expression-catalog.md](docs/expression-catalog.md) と合わせて更新
 
 ## 4. ロゴ・アイコン
 
