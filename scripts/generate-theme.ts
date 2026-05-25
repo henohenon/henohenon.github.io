@@ -16,9 +16,12 @@ import { z } from "zod";
 
 const THEME_PATH = path.resolve("src/styles/theme.css");
 const THEME_SOURCE_PATH = path.resolve("src/data/theme-source.json");
+const USED_SONGS_PATH = path.resolve("src/data/used-songs.json");
 const VOCADB_BASE = "https://vocadb.net/api";
-/** 「直近の人気曲」を取る上限ウィンドウ。前回生成からの日数とこの値の長い方を採る */
-const MAX_WINDOW_DAYS = 14;
+/** 「直近の人気曲」を取るローリングウィンドウ (日数) */
+const WINDOW_DAYS = 30;
+/** VocaDB から一度に取る候補数。blacklist で消しても余る程度の余裕を持つ */
+const POOL_SIZE = 50;
 const MODEL = "claude-sonnet-4-6";
 
 const TagSchema = z.object({
@@ -36,10 +39,6 @@ const SongSummarySchema = z.object({
   tags: z.array(TagSchema).default([]),
 });
 
-const SongListSchema = z.object({
-  items: z.array(SongSummarySchema),
-});
-
 const LyricSchema = z.object({
   value: z.string(),
   cultureCodes: z.array(z.string()).default([]),
@@ -49,60 +48,80 @@ const SongDetailSchema = SongSummarySchema.extend({
   lyrics: z.array(LyricSchema).default([]),
 });
 
-const ThemeSourceSchema = z.object({
-  songId: z.number().nullable(),
-  songName: z.string().nullable(),
-  artist: z.string().nullable(),
-  generatedAt: z.string().nullable(),
+const SongListSchema = z.object({
+  items: z.array(SongDetailSchema),
 });
 
-type SongSummary = z.infer<typeof SongSummarySchema>;
+const UsedSongsSchema = z.object({
+  songIds: z.array(z.number()),
+});
+
 type SongDetail = z.infer<typeof SongDetailSchema>;
 
-async function readLastGeneratedAt(): Promise<Date | null> {
+async function readUsedSongIds(): Promise<number[]> {
   try {
-    const raw = await readFile(THEME_SOURCE_PATH, "utf8");
-    const parsed = ThemeSourceSchema.parse(JSON.parse(raw));
-    return parsed.generatedAt ? new Date(parsed.generatedAt) : null;
+    const raw = await readFile(USED_SONGS_PATH, "utf8");
+    return UsedSongsSchema.parse(JSON.parse(raw)).songIds;
   } catch {
-    return null;
+    return [];
   }
 }
 
-function resolveWindowStart(last: Date | null): Date {
-  const cap = new Date();
-  cap.setUTCDate(cap.getUTCDate() - MAX_WINDOW_DAYS);
-  if (!last) return cap;
-  // last と cap の遅い方 (= 短いウィンドウ) を採用
-  return last > cap ? last : cap;
+async function appendUsedSongId(id: number): Promise<void> {
+  const current = await readUsedSongIds();
+  if (current.includes(id)) return;
+  current.push(id);
+  await writeFile(USED_SONGS_PATH, `${JSON.stringify({ songIds: current }, null, 2)}\n`, "utf8");
 }
 
 /**
- * `[前回生成 or 14日前, now]` の範囲で RatingScore 最上位の 1 曲を取る。
- * ランダム選定はしない (情報量を担保したいので、確実に人気のある曲を狙う)。
+ * 直近 WINDOW_DAYS 日で RatingScore 上位 POOL_SIZE 曲を、歌詞付きで取得する。
+ * 1 回の API コールで歌詞・タグ含む詳細が全部返ってくる。
  */
-async function fetchLatestTopSong(): Promise<SongSummary> {
-  const last = await readLastGeneratedAt();
-  const start = resolveWindowStart(last);
+async function fetchPool(): Promise<SongDetail[]> {
+  const start = new Date();
+  start.setUTCDate(start.getUTCDate() - WINDOW_DAYS);
   const afterDate = start.toISOString().slice(0, 10);
 
   const url = new URL(`${VOCADB_BASE}/songs`);
   url.searchParams.set("sort", "RatingScore");
-  url.searchParams.set("maxResults", "1");
+  url.searchParams.set("maxResults", String(POOL_SIZE));
   url.searchParams.set("songTypes", "Original");
-  url.searchParams.set("fields", "Tags");
+  url.searchParams.set("fields", "Lyrics,Tags");
   url.searchParams.set("lang", "Default");
   url.searchParams.set("afterDate", afterDate);
 
-  console.log(`    window: [${afterDate}, now] (last=${last?.toISOString() ?? "null"})`);
+  console.log(`    window: [${afterDate}, now] (size=${POOL_SIZE})`);
 
   const res = await fetch(url, { headers: { Accept: "application/json" } });
   if (!res.ok) throw new Error(`VocaDB fetch failed: ${res.status}`);
 
-  const list = SongListSchema.parse(await res.json());
-  const top = list.items[0];
-  if (!top) throw new Error(`no songs found in window since ${afterDate}`);
-  return top;
+  return SongListSchema.parse(await res.json()).items;
+}
+
+type PickResult = { song: SongDetail; tier: "fresh+lyrics" | "stale+lyrics" | "fresh-no-lyrics" };
+
+/**
+ * pool から「未使用 × 歌詞あり」を最優先で 1 曲選ぶ。
+ * フォールバック順:
+ *   1. fresh+lyrics   blacklist 外で歌詞ありの最上位
+ *   2. stale+lyrics   blacklist 内でも歌詞ありの最上位 (= 過去ピック済の再利用)
+ *   3. fresh-no-lyrics blacklist 外で歌詞なしも許容して最上位
+ */
+function pickFromPool(pool: SongDetail[], blacklist: Set<number>): PickResult {
+  const hasLyric = (s: SongDetail) => pickLyric(s) !== null;
+  const notUsed = (s: SongDetail) => !blacklist.has(s.id);
+
+  const freshLyric = pool.find((s) => notUsed(s) && hasLyric(s));
+  if (freshLyric) return { song: freshLyric, tier: "fresh+lyrics" };
+
+  const staleLyric = pool.find(hasLyric);
+  if (staleLyric) return { song: staleLyric, tier: "stale+lyrics" };
+
+  const freshAny = pool.find(notUsed);
+  if (freshAny) return { song: freshAny, tier: "fresh-no-lyrics" };
+
+  throw new Error("pool is empty");
 }
 
 async function fetchSongDetail(id: number): Promise<SongDetail> {
@@ -286,14 +305,17 @@ function validateCss(css: string): void {
 }
 
 async function main(): Promise<void> {
-  console.log("[1/3] picking latest top song from VocaDB...");
-  const picked = await fetchLatestTopSong();
+  console.log("[1/4] fetching pool from VocaDB...");
+  const pool = await fetchPool();
+
+  console.log("[2/4] picking song (filter: 未使用 × 歌詞あり)...");
+  const blacklist = new Set(await readUsedSongIds());
+  const { song: detail, tier } = pickFromPool(pool, blacklist);
   console.log(
-    `    picked: "${picked.name}" / ${picked.artistString} (score=${picked.ratingScore})`,
+    `    picked [${tier}]: "${detail.name}" / ${detail.artistString} (score=${detail.ratingScore})`,
   );
 
-  const detail = await fetchSongDetail(picked.id);
-  console.log("[2/3] calling Claude...");
+  console.log("[3/4] calling Claude...");
   const css = await generateThemeCss(detail);
   validateCss(css);
 
@@ -306,9 +328,10 @@ async function main(): Promise<void> {
     generatedAt: new Date().toISOString(),
   };
   await writeFile(THEME_SOURCE_PATH, `${JSON.stringify(source, null, 2)}\n`, "utf8");
+  await appendUsedSongId(detail.id);
 
   // bot コミット用の情報を stdout に流す (CI で読む)
-  console.log("[3/3] wrote", THEME_PATH, "and", THEME_SOURCE_PATH);
+  console.log("[4/4] wrote theme.css, theme-source.json, used-songs.json");
   console.log("META=", JSON.stringify({ songId: detail.id, songName: detail.name }));
 }
 
