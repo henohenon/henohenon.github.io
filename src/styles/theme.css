@@ -1,26 +1,28 @@
 /*
- * From Overseas, With Love / absynthe, SweetSoSweet, iju feat. various
- * mood: 海を越えて届く航空便。クリーム色の便箋に青と赤の縞、四声のハーモニーが滲む。
+ * 歌姫失格 / ピノキオピー feat. 初音ミク V4X (Dark)
+ * Mood: 0と1の狭間で揺らぐ電波ポップ、虚無と祝祭の同居するメタ・ビタースイート
  */
 
 :root {
-  --color-bg: #f4ead3;
-  --color-fg: #1c2a4a;
-  --color-accent: #c8324a;
-  --color-accent-soft: #2e5aa8;
-  --color-stamp: #b88a3a;
-  --color-paper-shadow: rgba(28, 42, 74, 0.12);
+  --color-bg: #04060d;
+  --color-bg-soft: #0b1124;
+  --color-fg: #e6ecff;
+  --color-fg-muted: #8a93b8;
+  --color-accent: #39c5bb;
+  --color-accent-alt: #ff3d8a;
+  --color-accent-warn: #f7e463;
+  --color-rule: #1a2244;
 
-  --spacing-unit: 1.1rem;
+  --spacing-unit: 1.15rem;
 
-  --font-heading: 'Playfair Display', 'Cormorant Garamond', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
-  --font-body: 'Iowan Old Style', 'Georgia', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
-  --font-mono: 'Courier Prime', 'Courier New', 'Hiragino Sans', 'Yu Gothic', monospace;
+  --font-heading: 'Space Grotesk', 'Helvetica Neue', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
 
   --line-height-body: 1.85;
   --line-height-heading: 1.25;
 
-  --ease-default: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
@@ -29,220 +31,343 @@ html {
 }
 
 body {
+  background:
+    radial-gradient(1100px 700px at 18% -10%, rgba(57, 197, 187, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 110% 10%, rgba(255, 61, 138, 0.16), transparent 65%),
+    linear-gradient(180deg, #04060d 0%, #06091a 50%, #04060d 100%);
+  background-attachment: fixed;
+  color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  background-color: var(--color-bg);
-  background-image:
-    repeating-linear-gradient(
-      135deg,
-      transparent 0 22px,
-      rgba(200, 50, 74, 0.05) 22px 24px,
-      transparent 24px 46px,
-      rgba(46, 90, 168, 0.05) 46px 48px
-    );
-  color: var(--color-fg);
-  margin: 0;
-  padding: calc(var(--spacing-unit) * 2);
+  letter-spacing: 0.01em;
+  font-feature-settings: "palt" 1;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  letter-spacing: 0.02em;
-  color: var(--color-fg);
-}
-
-h1 {
-  font-size: 2.4rem;
-  font-style: italic;
-  position: relative;
-  padding-bottom: calc(var(--spacing-unit) * 0.5);
-}
-
-h1::after {
+/* 走査線: アナログとデジタルの間 */
+body::before {
   content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 4.5rem;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--color-accent) 0 25%,
-    var(--color-bg) 25% 50%,
-    var(--color-accent-soft) 50% 75%,
-    var(--color-bg) 75% 100%
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.022) 0 1px,
+    transparent 1px 3px
   );
+  mix-blend-mode: overlay;
+  z-index: 2;
 }
 
-h2 {
-  font-size: 1.7rem;
+/* バイナリの薄い雨 */
+body::after {
+  content: "0 1 0 1 1 0 1 0 0 1 1 0 1 1 0 0 1 0 1 1 0 1 0 0 1 1 0 1 0 1 0 0";
+  position: fixed;
+  top: 0;
+  right: 1.2rem;
+  bottom: 0;
+  width: 1.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(57, 197, 187, 0.18);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.6rem;
+  pointer-events: none;
+  z-index: 1;
+  animation: binary-drift 22s linear infinite;
+}
+
+@keyframes binary-drift {
+  0%   { transform: translateY(-12%); opacity: 0.55; }
+  50%  { opacity: 0.9; }
+  100% { transform: translateY(12%); opacity: 0.55; }
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #03121a;
 }
 
 a {
   color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px dotted var(--color-accent);
-  transition: color 220ms var(--ease-default), border-color 220ms var(--ease-default);
+  border-bottom: 1px dashed rgba(57, 197, 187, 0.45);
+  transition: color 220ms var(--ease-default), border-color 220ms var(--ease-default), background-color 220ms var(--ease-default);
 }
 
 a:hover,
-a:focus {
-  color: var(--color-accent-soft);
-  border-bottom-color: var(--color-accent-soft);
+a:focus-visible {
+  color: var(--color-accent-alt);
+  border-bottom-color: var(--color-accent-alt);
+  background: linear-gradient(transparent 70%, rgba(255, 61, 138, 0.18) 70%);
 }
 
-.site-header {
-  border-top: 6px solid var(--color-bg);
-  border-bottom: 1px solid var(--color-paper-shadow);
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
-  margin-bottom: calc(var(--spacing-unit) * 2);
+a:focus-visible {
+  outline: 2px solid var(--color-accent-warn);
+  outline-offset: 3px;
+}
+
+/* 見出しはオーディションのプラカードめいて */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-heading);
+  letter-spacing: 0.02em;
+  color: var(--color-fg);
+  margin-top: calc(var(--spacing-unit) * 2);
+  margin-bottom: var(--spacing-unit);
+}
+
+h1 {
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  font-weight: 700;
   position: relative;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      var(--color-accent) 0 14px,
-      var(--color-bg) 14px 22px,
-      var(--color-accent-soft) 22px 36px,
-      var(--color-bg) 36px 44px
-    ) top / 100% 8px no-repeat,
-    var(--color-bg);
-  padding-top: calc(var(--spacing-unit) * 1.6);
+  display: inline-block;
+  padding: 0.1em 0.2em;
+  background: linear-gradient(120deg, #39c5bb 0%, #e6ecff 45%, #ff3d8a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.site-header::after {
-  content: "PAR AVION";
-  position: absolute;
-  top: calc(var(--spacing-unit) * 1.6);
-  right: calc(var(--spacing-unit) * 1.2);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.35em;
-  color: var(--color-accent-soft);
-  border: 1px solid var(--color-accent-soft);
-  padding: 0.15rem 0.5rem;
-  opacity: 0.85;
+h1::after {
+  content: " — 失格";
+  font-size: 0.4em;
+  color: var(--color-accent-alt);
+  letter-spacing: 0.4em;
+  vertical-align: middle;
+  margin-left: 0.6em;
+  opacity: 0.7;
 }
 
-.site-footer {
-  margin-top: calc(var(--spacing-unit) * 3);
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
-  border-top: 2px dashed var(--color-paper-shadow);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--color-accent-soft);
-  text-align: center;
+h2 {
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  border-left: 3px solid var(--color-accent);
+  padding-left: 0.75rem;
 }
 
-.site-footer::before {
-  content: "✉  ";
+h3 {
+  font-size: 1.25rem;
   color: var(--color-accent);
 }
 
-.post-list {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: calc(var(--spacing-unit) * 1.25);
-}
-
-.post-list li {
-  padding: var(--spacing-unit);
-  background-color: rgba(255, 252, 240, 0.65);
-  border: 1px solid var(--color-paper-shadow);
-  border-left: 4px solid var(--color-accent);
-  box-shadow: 2px 3px 0 var(--color-paper-shadow);
-  transition: transform 260ms var(--ease-default), box-shadow 260ms var(--ease-default);
-}
-
-.post-list li:hover {
-  transform: translate(-1px, -2px);
-  box-shadow: 4px 6px 0 var(--color-paper-shadow);
-}
-
-article.post {
-  background-color: rgba(255, 252, 240, 0.78);
-  border: 1px solid var(--color-paper-shadow);
-  padding: calc(var(--spacing-unit) * 2);
-  max-width: 44rem;
-  margin: 0 auto;
-  position: relative;
-  box-shadow: 0 8px 24px var(--color-paper-shadow);
-}
-
-article.post::before {
-  content: "";
-  position: absolute;
-  top: calc(var(--spacing-unit) * -0.4);
-  right: calc(var(--spacing-unit) * 1.2);
-  width: 3.2rem;
-  height: 3.6rem;
-  background:
-    radial-gradient(circle at 50% 50%, var(--color-bg) 0 6px, transparent 7px),
-    repeating-linear-gradient(45deg, var(--color-stamp) 0 6px, #d8a85a 6px 12px);
-  border: 2px dashed var(--color-bg);
-  transform: rotate(6deg);
-  box-shadow: 0 2px 4px var(--color-paper-shadow);
-  opacity: 0.9;
-  animation: stamp-settle 1.2s var(--ease-default) both;
-}
-
-@keyframes stamp-settle {
-  0%   { transform: rotate(18deg) translateY(-12px); opacity: 0; }
-  60%  { transform: rotate(2deg)  translateY(2px);   opacity: 1; }
-  100% { transform: rotate(6deg)  translateY(0);     opacity: 0.9; }
-}
-
-article.post p {
-  text-indent: 1.2em;
+p {
+  margin: var(--spacing-unit) 0;
+  max-width: 38em;
 }
 
 blockquote {
-  border-left: 3px double var(--color-accent-soft);
-  padding: calc(var(--spacing-unit) * 0.4) var(--spacing-unit);
-  margin: var(--spacing-unit) 0;
-  color: var(--color-accent-soft);
+  margin: calc(var(--spacing-unit) * 1.4) 0;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.3);
+  border-left: 2px solid var(--color-accent-alt);
+  background: rgba(255, 61, 138, 0.06);
+  color: var(--color-fg-muted);
   font-style: italic;
-  background: rgba(46, 90, 168, 0.05);
+  position: relative;
+}
+
+blockquote::before {
+  content: "「";
+  position: absolute;
+  top: -0.2em;
+  left: 0.2em;
+  font-size: 2.2rem;
+  color: rgba(255, 61, 138, 0.35);
+  font-family: var(--font-heading);
 }
 
 code, pre {
   font-family: var(--font-mono);
-  background-color: rgba(28, 42, 74, 0.06);
-  padding: 0.1em 0.35em;
-  border-radius: 2px;
+  font-size: 0.92em;
+}
+
+code {
+  background: rgba(57, 197, 187, 0.1);
+  color: var(--color-accent);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  border: 1px solid rgba(57, 197, 187, 0.2);
 }
 
 pre {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-rule);
+  border-radius: 6px;
   padding: var(--spacing-unit);
   overflow-x: auto;
-  border-left: 3px solid var(--color-accent);
+  color: var(--color-fg);
+}
+
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
 }
 
 hr {
   border: 0;
-  height: 6px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-accent) 0 10px,
-    var(--color-bg) 10px 16px,
-    var(--color-accent-soft) 16px 26px,
-    var(--color-bg) 26px 32px
-  );
-  margin: calc(var(--spacing-unit) * 2) 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent), var(--color-accent-alt), transparent);
+  margin: calc(var(--spacing-unit) * 2.5) 0;
 }
 
-::selection {
+/* レイアウト枠組み */
+.site-header,
+.site-footer,
+.post-list,
+article.post {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-unit);
+  padding-right: var(--spacing-unit);
+  position: relative;
+  z-index: 3;
+}
+
+.site-header {
+  padding-top: calc(var(--spacing-unit) * 2.4);
+  padding-bottom: calc(var(--spacing-unit) * 1.6);
+  border-bottom: 1px solid var(--color-rule);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-unit);
+  flex-wrap: wrap;
+}
+
+.site-header::before {
+  content: "● REC  二代目オーディション中";
+  position: absolute;
+  top: 0.6rem;
+  left: var(--spacing-unit);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--color-accent-alt);
+  text-transform: uppercase;
+  animation: rec-blink 1.6s steps(2, end) infinite;
+}
+
+@keyframes rec-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0.25; }
+}
+
+.site-header a {
+  border-bottom: none;
+  color: var(--color-fg);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.site-footer {
+  margin-top: calc(var(--spacing-unit) * 4);
+  padding-top: calc(var(--spacing-unit) * 1.6);
+  padding-bottom: calc(var(--spacing-unit) * 2.4);
+  border-top: 1px solid var(--color-rule);
+  color: var(--color-fg-muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.site-footer::after {
+  content: "存在しないため、クレームは一切お受けいたしかねます。";
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: rgba(247, 228, 99, 0.55);
+}
+
+.post-list {
+  list-style: none;
+  padding-left: var(--spacing-unit);
+  padding-right: var(--spacing-unit);
+}
+
+.post-list li {
+  padding: calc(var(--spacing-unit) * 0.9) 0;
+  border-bottom: 1px dashed var(--color-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: transform 260ms var(--ease-default), background 260ms var(--ease-default);
+}
+
+.post-list li:hover {
+  background: linear-gradient(90deg, rgba(57, 197, 187, 0.06), transparent 70%);
+  transform: translateX(4px);
+}
+
+.post-list li::before {
+  content: "▸";
+  color: var(--color-accent);
+  font-size: 0.85em;
+  margin-right: 0.4em;
+}
+
+article.post {
+  padding-top: calc(var(--spacing-unit) * 2);
+  padding-bottom: calc(var(--spacing-unit) * 3);
+  background: linear-gradient(180deg, rgba(11, 17, 36, 0.55) 0%, rgba(4, 6, 13, 0) 80%);
+  border-radius: 8px;
+}
+
+article.post h1 {
+  animation: glitch-shift 7s var(--ease-default) infinite;
+}
+
+@keyframes glitch-shift {
+  0%, 92%, 100% { transform: translate(0, 0); filter: none; }
+  93%           { transform: translate(-1px, 0); filter: hue-rotate(-12deg); }
+  94%           { transform: translate(2px, -1px); filter: hue-rotate(20deg); }
+  95%           { transform: translate(-2px, 1px); filter: hue-rotate(-8deg); }
+  96%           { transform: translate(1px, 0); filter: none; }
+}
+
+article.post time,
+.post-list time {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--color-rule);
+}
+
+button, .button {
+  font-family: var(--font-heading);
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 0.55rem 1.2rem;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 240ms var(--ease-default), color 240ms var(--ease-default), box-shadow 240ms var(--ease-default);
+}
+
+button:hover, .button:hover {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: #03121a;
+  box-shadow: 0 0 0 3px rgba(57, 197, 187, 0.25);
 }
 
+/* 控えめ・フラッシュ抑制 */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation: none !important;
     transition: none !important;
+    scroll-behavior: auto !important;
   }
 }
