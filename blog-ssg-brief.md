@@ -48,14 +48,14 @@ Astro ビルド
 ├── public/
 │   └── pattern.svg         # 毎日Claudeが上書き（stretch）
 ├── scripts/
-│   └── generate-theme.js   # VocaDB → Claude → ファイル生成
+│   └── generate-theme.ts   # VocaDB → Claude → ファイル生成
 └── .github/workflows/
     └── daily.yml           # 毎朝スケジューラ
 ```
 
 ---
 
-## generate-theme.js の責務
+## generate-theme.ts の責務
 
 1. VocaDB APIを叩いて人気曲プール（トップ10〜30）を取得し、その中から1曲をランダムに選ぶ
 2. 選ばれた曲のタグ・歌詞をClaudeに渡す
@@ -220,7 +220,7 @@ Aboutページなし。自己紹介はブログそのものでする。
 ## TODO（Claude Codeへ）
 
 - [ ] Astroプロジェクトの初期セットアップ
-- [ ] `scripts/generate-theme.js` の実装
+- [ ] `scripts/generate-theme.ts` の実装
 - [ ] VocaDB APIの動作確認・エンドポイント選定
 - [ ] Claudeへのプロンプト設計（テーマ生成指示）
 - [ ] `base.css` と `theme.css` の役割分担定義
