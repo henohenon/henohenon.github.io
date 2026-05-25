@@ -150,9 +150,12 @@ Claudeが選ぶのは欧文フォントのみ。`public/fonts/` にあらかじ�
 
 ## 入力データ（VocaDB）
 
-- エンドポイント: `https://vocadb.net/api/songs`（認証不要）
-- 取得する情報: タイトル・アーティスト・タグ・歌詞
-- サムネイルのカラーパレット抽出はオプション
+- ベース URL: `https://vocadb.net/api/`（認証不要、JSON）
+- 取得する情報: タイトル・アーティスト・タグ・歌詞・サムネイル URL
+- 想定エンドポイント: `/api/songs/top-rated?durationHours=24&...`（第一候補）または `/api/songs?sort=PublishDate&...` でクライアント側ソート（フォールバック）
+- カラーパレット抽出は stretch
+
+詳細・パラメータの妥当性確認・フォールバック方針は [vocadb-api-note.md](vocadb-api-note.md) を参照。
 
 ---
 

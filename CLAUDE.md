@@ -100,6 +100,8 @@ scripts/
 - 出力: `src/styles/theme.css` を上書き (stretch で `public/pattern.svg`)
 - **失敗時は既存ファイルを温存** (前日のテーマが残る = 仕様)
 
+エンドポイント候補・パラメータ仕様・フォールバック方針は [vocadb-api-note.md](vocadb-api-note.md) にまとめ済み。実装前にここを読む。
+
 ### Claude API 呼び出し
 - モデル: `claude-sonnet-4-6` を既定。質を上げたい時のみ `claude-opus-4-7`
 - **prompt caching 必須**: システムプロンプト・ガードレール・ルール記述部分には `cache_control: { type: "ephemeral" }` を付ける。曲データだけが日々変わる入力
