@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-仕様の一次情報は [blog-ssg-brief.md](blog-ssg-brief.md)。後回し項目は [TODO.md](TODO.md)。
+プロジェクト概要は [README.md](README.md)。後回し項目は [TODO.md](TODO.md)。
+技術ノートは [docs/](docs/) 配下。
 
 ## プロジェクト概要
 
@@ -89,7 +90,7 @@ bun run generate-theme
 
 ## エージェント指針
 
-- 仕様判断で迷ったら [blog-ssg-brief.md](blog-ssg-brief.md)。それでも不明なら**実装前に質問する**
+- 仕様判断で迷ったら [README.md](README.md) と [docs/](docs/)。それでも不明なら**実装前に質問する**
 - 細かい規約 (CSS / TS strict / Claude プロンプト / フォント等) は [TODO.md](TODO.md) で後回し中。実装で必要になったら先に方針を相談
 - 1 PR / 1 コミット = 1 トピック
 - `archive/*` ブランチは過去資産。現行コードの規約として参照しない

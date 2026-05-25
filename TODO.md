@@ -1,6 +1,6 @@
 # TODO
 
-仕様の一次情報は [blog-ssg-brief.md](blog-ssg-brief.md)。
+プロジェクト概要は [README.md](README.md)。技術ノートは [docs/](docs/)。
 
 完了済みの大物 (Astro 初期セットアップ / generate-theme / GHA / レイアウト等) は `git log` 参照。
 
@@ -54,14 +54,13 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 
 ## 5. docs 整備 / 活動ログ
 
-- [ ] md ファイルが増えてきた (`CLAUDE.md` / `blog-ssg-brief.md` / `vocadb-api-note.md` / `TODO.md` / `README.md`) — 整理方針を決める
-  - 案: `docs/` ディレクトリに技術ノート (vocadb 等) を集約
-  - 案: brief と README を統合 (人向け / AI 向けの 2 枚体制に)
-- [ ] 活動ログ (= ここまでやったこと、これからやることを残す設備)
-  - 候補 a: `CHANGELOG.md` (人手で書く)
-  - 候補 b: `docs/journal.md` (日付ベース)
-  - 候補 c: 既存の git log + bot コミット で十分 → 何もしない
-  - 自動化案: deploy.yml から PR 説明 / リリースノートを生成
+- [x] md ファイル整理
+  - `blog-ssg-brief.md` → README.md に統合して削除
+  - `vocadb-api-note.md` → `docs/vocadb-api.md` に移動
+  - 結果: ルートに `README.md` (人向け) / `CLAUDE.md` (AI 向け) / `TODO.md`、技術ノートは `docs/` 配下
+- [x] 活動ログ → 候補 c (git log + bot コミットで十分) を採用、設備実装はしない
+  - Conventional Commits + `chore(theme): YYYY-MM-DD (song)` の bot コミットで日次の差分は十分追える
+  - 必要になったら CHANGELOG.md / journal を後付け
 
 ## 6. 選曲ロジック / 入力の重み付け
 
