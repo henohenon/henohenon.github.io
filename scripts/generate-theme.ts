@@ -11,8 +11,41 @@ import { spawn } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { parseArgs } from "node:util";
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
+
+const { values: cliArgs } = parseArgs({
+  options: {
+    "song-id": { type: "string" },
+    song: { type: "string" },
+    help: { type: "boolean", short: "h" },
+  },
+  strict: true,
+  allowPositionals: false,
+});
+
+const HELP = `usage: bun run generate-theme [options]
+
+選曲モード (どれか 1 つ。指定なしなら blacklist + lyrics ベースの自動選曲):
+  --song-id <id>     VocaDB の曲 ID を直接指定 (例: --song-id 1501)
+  --song <query>     クエリ検索の先頭ヒットを採用 (例: --song "ローリンガール")
+  -h, --help         このヘルプを表示
+
+環境変数:
+  THEME_BACKEND      cli | sdk (デフォルト: ANTHROPIC_API_KEY あれば sdk、なければ cli)
+  CLAUDE_BIN         claude バイナリパス (CLI モード)
+  ANTHROPIC_API_KEY  API キー (SDK モード)
+`;
+
+if (cliArgs.help) {
+  console.log(HELP);
+  process.exit(0);
+}
+if (cliArgs["song-id"] && cliArgs.song) {
+  console.error("--song-id と --song は同時指定できません");
+  process.exit(2);
+}
 
 const THEME_PATH = path.resolve("src/styles/theme.css");
 const THEME_SOURCE_PATH = path.resolve("src/data/theme-source.json");
@@ -135,6 +168,21 @@ async function fetchSongDetail(id: number): Promise<SongDetail> {
   return SongDetailSchema.parse(await res.json());
 }
 
+async function searchSong(query: string): Promise<SongDetail> {
+  const url = new URL(`${VOCADB_BASE}/songs`);
+  url.searchParams.set("query", query);
+  url.searchParams.set("maxResults", "1");
+  url.searchParams.set("fields", "Lyrics,Tags");
+  url.searchParams.set("lang", "Default");
+
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!res.ok) throw new Error(`VocaDB search failed: ${res.status}`);
+
+  const first = SongListSchema.parse(await res.json()).items[0];
+  if (!first) throw new Error(`no song matched query: "${query}"`);
+  return first;
+}
+
 function pickLyric(detail: SongDetail): string | null {
   // 日本語 → 英語 → 最初に見つかったもの の優先で 1 言語ぶん使う
   const jp = detail.lyrics.find((l) => l.cultureCodes.includes("ja"));
@@ -198,12 +246,13 @@ const SYSTEM_PROMPT = `あなたはこのブログ "へのへのんのの" の�
 - 外部リソースの \`@import\`
 - \`!important\` の濫用 (\`prefers-reduced-motion\` ブロック以外)`;
 
-type Backend = "sdk" | "cli";
-
-function pickBackend(): Backend {
-  const explicit = process.env.THEME_BACKEND?.toLowerCase();
-  if (explicit === "sdk" || explicit === "cli") return explicit;
-  return process.env.ANTHROPIC_API_KEY ? "sdk" : "cli";
+/**
+ * LLM 呼び出しの抽象。別 AI に差し替えたいときは新しい ThemeBackend を作って
+ * pickBackend に足すだけで済む。
+ */
+interface ThemeBackend {
+  readonly name: string;
+  generate(system: string, user: string): Promise<string>;
 }
 
 async function callClaudeSdk(system: string, user: string): Promise<string> {
@@ -271,15 +320,47 @@ async function callClaudeCli(system: string, user: string): Promise<string> {
   });
 }
 
+const sdkBackend: ThemeBackend = { name: "sdk", generate: callClaudeSdk };
+const cliBackend: ThemeBackend = { name: "cli", generate: callClaudeCli };
+
+function pickBackend(): ThemeBackend {
+  const explicit = process.env.THEME_BACKEND?.toLowerCase();
+  if (explicit === "sdk") return sdkBackend;
+  if (explicit === "cli") return cliBackend;
+  return process.env.ANTHROPIC_API_KEY ? sdkBackend : cliBackend;
+}
+
 async function generateThemeCss(detail: SongDetail): Promise<string> {
   const backend = pickBackend();
-  console.log(`    using backend: ${backend}`);
-  const user = buildUserMessage(detail);
-  const raw =
-    backend === "sdk"
-      ? await callClaudeSdk(SYSTEM_PROMPT, user)
-      : await callClaudeCli(SYSTEM_PROMPT, user);
+  console.log(`    using backend: ${backend.name}`);
+  const raw = await backend.generate(SYSTEM_PROMPT, buildUserMessage(detail));
   return sanitizeCss(raw);
+}
+
+async function pickSong(): Promise<SongDetail> {
+  const id = cliArgs["song-id"];
+  if (id) {
+    const n = Number(id);
+    if (!Number.isInteger(n) || n <= 0) {
+      throw new Error(`--song-id must be a positive integer: ${id}`);
+    }
+    console.log(`[1/4] fetching song by id=${n}...`);
+    return fetchSongDetail(n);
+  }
+
+  const query = cliArgs.song;
+  if (query) {
+    console.log(`[1/4] searching VocaDB for "${query}"...`);
+    return searchSong(query);
+  }
+
+  console.log("[1/4] fetching pool from VocaDB...");
+  const pool = await fetchPool();
+  console.log("    picking (filter: 未使用 × 歌詞あり)...");
+  const blacklist = new Set(await readUsedSongIds());
+  const { song, tier } = pickFromPool(pool, blacklist);
+  console.log(`    tier=${tier}`);
+  return song;
 }
 
 function sanitizeCss(text: string): string {
@@ -305,17 +386,10 @@ function validateCss(css: string): void {
 }
 
 async function main(): Promise<void> {
-  console.log("[1/4] fetching pool from VocaDB...");
-  const pool = await fetchPool();
+  const detail = await pickSong();
+  console.log(`    "${detail.name}" / ${detail.artistString} (score=${detail.ratingScore})`);
 
-  console.log("[2/4] picking song (filter: 未使用 × 歌詞あり)...");
-  const blacklist = new Set(await readUsedSongIds());
-  const { song: detail, tier } = pickFromPool(pool, blacklist);
-  console.log(
-    `    picked [${tier}]: "${detail.name}" / ${detail.artistString} (score=${detail.ratingScore})`,
-  );
-
-  console.log("[3/4] calling Claude...");
+  console.log("[2/3] calling Claude...");
   const css = await generateThemeCss(detail);
   validateCss(css);
 
@@ -331,7 +405,7 @@ async function main(): Promise<void> {
   await appendUsedSongId(detail.id);
 
   // bot コミット用の情報を stdout に流す (CI で読む)
-  console.log("[4/4] wrote theme.css, theme-source.json, used-songs.json");
+  console.log("[3/3] wrote theme.css, theme-source.json, used-songs.json");
   console.log("META=", JSON.stringify({ songId: detail.id, songName: detail.name }));
 }
 
