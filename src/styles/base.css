@@ -102,8 +102,8 @@ button {
   width: 1.1em;
   height: 1.5em;
   background-color: currentColor;
-  mask: url(/negi.png) center / contain no-repeat;
-  -webkit-mask: url(/negi.png) center / contain no-repeat;
+  mask: url(/henoheno.png) center / contain no-repeat;
+  -webkit-mask: url(/henoheno.png) center / contain no-repeat;
   flex-shrink: 0;
 }
 
