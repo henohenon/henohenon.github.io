@@ -13,28 +13,37 @@
 
 毎日1曲、その日の人気 Vocaloid 曲を取得し、テーマ生成 (`theme.css`) の入力にする。
 
-## 試すべきエンドポイント
+## 使うエンドポイント (動作確認済)
 
-### 第一候補: 直近24時間の人気上位
-
-```
-GET /api/songs/top-rated?durationHours=24&maxResults=1&vocalistSelection=Vocaloid&fields=Tags,Lyrics
-```
-
-- VocaDB の Rankings ページが裏で叩いてるルートに近い
-- `durationHours` パラメータが API レベルでも効くかは実装前に Swagger で要確認
-- ハンドル名 `top-rated` の挙動も Swagger でちゃんと裏取りする
-
-### 第二候補（フォールバック）: 新着 × 人気の手動マージ
-
-第一候補が想定通り動かなかった場合：
+### Step 1: 直近 N 日の人気曲リスト取得
 
 ```
-GET /api/songs?sort=PublishDate&maxResults=30&songTypes=Original&fields=Tags,Lyrics
+GET /api/songs?sort=RatingScore&maxResults=20&songTypes=Original&fields=Tags&lang=Default&afterDate=YYYY-MM-DD
 ```
 
-- 直近30曲を取得 → クライアント側で `ratingScore` 降順ソート → 1位を採用
-- API 1 回で済むが、API 側のランキング判定に乗れない
+- `afterDate` は ISO 形式 (例: `2026-04-25`)。日付以降に公開された曲が対象
+- `sort=RatingScore` で人気順
+- `songTypes=Original` でカバー曲・アレンジを除外
+- レスポンスは `{ items: Song[], totalCount }`
+
+`/api/songs/top-rated?durationHours=24` も存在するが、ブラウザ向け SPA HTML
+が返るのみ (API ルートではない)。**使わない**。
+
+### Step 2: 選定した 1 曲の歌詞・画像取得
+
+```
+GET /api/songs/{id}?fields=Lyrics,Tags,MainPicture&lang=Default
+```
+
+- `lyrics` は配列。各要素 `{ value, cultureCodes }` (`ja`, `en`, `zh`, `ha` (Hepburn) など複数言語あり)
+- `mainPicture.urlOriginal` がサムネ URL。曲によっては存在しない (空オブジェクト)
+- `tags` は `{ count, tag: { name, categoryName, urlSlug, additionalNames } }` の配列
+
+### 実装手順
+
+1. Step 1 で 10〜30 曲取得 → JS 側でランダム選定
+2. Step 2 で歌詞・画像を 1 回追加取得
+3. タグ名・歌詞 (日本語または英語) を Claude に投げる
 
 ## 取得するフィールド
 
