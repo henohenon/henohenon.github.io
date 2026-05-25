@@ -34,12 +34,31 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 毎日の差分を CSS だけでなく、もっと幅広いレイヤーで表現する。
 **選択肢のカタログを持つ** → LLM がそこから選ぶ → 出力が安定しつつ表現は広がる、というのが狙い。
 
-- [ ] 背景画像 (生成パターン / 既製 SVG パターンカタログ)
-- [ ] フォントカタログ (欧文 / 日本語、`public/fonts/` 配下に複数)
-- [ ] レイアウトのバリエーション (現状 1 カラムのみ — グリッド / 寄せ / 行間で大きく雰囲気変える案)
-- [ ] アニメーション (現状 theme.css 内のみ。エントリ / ホバー / アンビエント背景の各カタログ)
-- [ ] カーソルジャック / カスタムカーソル (`cursor: url(...)` + CSS で発光させたり)
-- [ ] それぞれ「種類 + 説明」を持って LLM が選びやすい形に揃える
+採否と探索の一覧は [docs/expression-catalog.md](docs/expression-catalog.md)。
+方針判断のログは [docs/decisions.md](docs/decisions.md)。
+
+### 語彙拡張 (カタログ機構)
+
+- [ ] **C1** 欧文フォントカタログ (`public/fonts/` に複数 + theme.css 規約で選択肢化)
+- [ ] **C2** 背景 SVG パターンカタログ (`public/patterns/` に静的 SVG 10-20)
+- [ ] **C3** 装飾モチーフカタログ (ボーダー / 影 / マーカー / スタンプ の名前付きスタイル群)
+- [ ] **C4** タイポスケール比 / 字間 / 行間 バリエーション
+- [ ] **C5** `color-mix` 曲調ダーク modifier (暗い曲調なら自動 dim)
+
+### 構造 (Astro レイアウト複数化)
+
+- [ ] **D1** View Transitions 導入 (Astro `<ClientRouter />`)
+- [ ] **D2** レイアウトテンプレ複数化 (`BaseBlog` / `BaseMagazine` / `BaseTerminal` / `BasePoster` 等) + 日替わり選択機構
+
+### メタ表現
+
+- [ ] **E1** mood ラベル → `theme-source.json` に追加 → Footer に「今日は: 〜」表示
+
+### 継続タスク
+
+- [ ] **更なる探索** — 静的で効く新しい手法 / CSS 新機能 / 他サイト事例を定期的に調査して
+  [docs/expression-catalog.md](docs/expression-catalog.md) に追記する
+  (LLM が選べる "語彙" を増やしていく感覚)
 
 ## 4. ロゴ・アイコン
 
@@ -61,6 +80,24 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 - [x] 活動ログ → 候補 c (git log + bot コミットで十分) を採用、設備実装はしない
   - Conventional Commits + `chore(theme): YYYY-MM-DD (song)` の bot コミットで日次の差分は十分追える
   - 必要になったら CHANGELOG.md / journal を後付け
+
+## 7. メタ UX / 周辺機構
+
+サイト本体の体験を支える脇役群。即手で進められる軽量タスク。
+
+### 即手 (1ファイル系)
+
+- [ ] **A1** 404 ページ (`src/pages/404.astro`、案A 「ここには何もない」+ `/` リンク。Base 経由でテーマ自動反映)
+- [ ] **A2** OGP テキストタグを `Base.astro` head に (`og:title` / `description` / `type` / `url` / `image` / `twitter:card`)
+- [ ] **A3** `scrollbar-color` / `::selection` を theme.css 規約に追加 (色追従)
+
+### メタ脇役
+
+- [ ] **B1** OGP 画像 — ハイブリッド 2 call (CSS 渡し) で `public/og.svg` 生成、ビルド時に `scripts/build-og.ts` で `dist/og.png` にラスタライズ (`@resvg/resvg-js`)
+- [ ] **B2** 時刻色シフト (`<html data-tod>` をインライン JS で属性付与 + theme.css で `color-mix` 微シフト)
+- [ ] **B3** favicon 色追従 — SVG テンプレに theme accent 色 inject、`public/favicon.svg` を Base から参照
+
+詳細・方針は [docs/decisions.md](docs/decisions.md) / [docs/expression-catalog.md](docs/expression-catalog.md)。
 
 ## 6. 選曲ロジック / 入力の重み付け
 
