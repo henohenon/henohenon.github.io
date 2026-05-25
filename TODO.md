@@ -34,7 +34,8 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 毎日の差分を CSS だけでなく、もっと幅広いレイヤーで表現する。
 **選択肢のカタログを持つ** → LLM がそこから選ぶ → 出力が安定しつつ表現は広がる、というのが狙い。
 
-採否と探索の一覧は [docs/expression-catalog.md](docs/expression-catalog.md)。
+表現の語彙の棚は [docs/research/expression-references.md](docs/research/expression-references.md)。
+設計ドキュメント慣習 (DESIGN.md 等) のリサーチは [docs/research/design-doc-conventions.md](docs/research/design-doc-conventions.md)。
 方針判断のログは [docs/decisions.md](docs/decisions.md)。
 
 **方針: 自由度優先**。静的アセット + ID 選択のカタログ式ではなく、
@@ -83,7 +84,7 @@ Claude は md を参考にしてもいいし、独自に書いてもいい (詳�
 ### 継続タスク
 
 - [ ] **更なる探索** — 上記 techniques md を継続的に拡充 (CSS 新機能 / 他サイト事例 / 静的で効く新しい手法を)
-  [docs/expression-catalog.md](docs/expression-catalog.md) と合わせて更新
+  [docs/research/expression-references.md](docs/research/expression-references.md) と合わせて更新
 
 ## 4. ロゴ・アイコン
 
@@ -122,7 +123,7 @@ Claude は md を参考にしてもいいし、独自に書いてもいい (詳�
 - [ ] **B2** 時刻色シフト (`<html data-tod>` をインライン JS で属性付与 + theme.css で `color-mix` 微シフト)
 - [ ] **B3** favicon 色追従 — SVG テンプレに theme accent 色 inject、`public/favicon.svg` を Base から参照
 
-詳細・方針は [docs/decisions.md](docs/decisions.md) / [docs/expression-catalog.md](docs/expression-catalog.md)。
+詳細・方針は [docs/decisions.md](docs/decisions.md) / [docs/research/expression-references.md](docs/research/expression-references.md)。
 
 ## 6. 選曲ロジック / 入力の重み付け
 

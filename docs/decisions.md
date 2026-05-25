@@ -54,7 +54,7 @@
 **理由**: 動的要素はバグ温床 / UX を下げる懸念が大きい。動かないが日替わる、で十分に
 "日々の顔" は伝わる。
 
-**詳細**: 個別の採否は [expression-catalog.md](expression-catalog.md) 参照。
+**詳細**: 個別の採否や表現の語彙は [research/expression-references.md](research/expression-references.md) 参照。
 レイアウト変化は「気済むまで」の許可、ただし HTML 構造変えても破綻しない範囲で。
 
 **棚上げ**: ドロップキャップ / 隠しページ — 「ただ置く」のは微妙だが、何か仕掛けがある
