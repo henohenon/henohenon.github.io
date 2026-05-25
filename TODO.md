@@ -64,6 +64,13 @@ Claude は md を参考にしてもいいし、独自に書いてもいい (詳�
 
 - [ ] **E1** mood ラベル → `theme-source.json` に追加 → Footer に「今日は: 〜」表示
 
+### OGP まわりの改善
+
+- [ ] `public/og.article-template.svg` のデザイン改善 (現状ダサい、長いタイトルがはみ出す)
+  - タイトル wrap / truncation
+  - 装飾要素の見直し
+  - フォント・余白の調整
+
 ### 棚上げ
 
 - 🟡 **欧文 / 日本語フォントの自前 bundle** — 当面 system stack のみ。再開時は
