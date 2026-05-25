@@ -4,18 +4,19 @@
 
 ## プロジェクト概要
 
-VocaDB API から毎日 Vocaloid 曲を1曲選び、その情報を Claude に渡して `theme.css` を生成 → main に push → GitHub Pages デプロイ。
+VocaDB API から直近の人気 Vocaloid 曲を1曲選び、その情報を Claude に渡して `theme.css` を生成 → main に push → GitHub Pages デプロイ。
 
 HTML / Astro コンポーネントは触らない。CSS の差し替えだけで日々の見た目を更新する。
 
-**スケジュール実行はローカル側に集約予定** (launchd / cron で `bun run generate-theme` を回す)。
-GitHub Actions の `daily.yml` は廃止予定 — 詳細は [TODO.md](TODO.md) の「1. ローカルスケジュール化」。
-GHA は `deploy.yml` (main push → Pages) のみ残す。
+**日次のテーマ生成はローカルで回す** (launchd / cron で `bun run generate-theme` → commit → push)。
+GitHub Actions は `deploy.yml` (main push → Pages デプロイ) のみ。
+具体的なローカル cron 設定は [TODO.md](TODO.md) の「1. ローカルスケジュール化」で詰める。
 
 ## スタック
 
-Astro 5.x (SSG) / TypeScript / `@anthropic-ai/sdk` / GitHub Actions / GitHub Pages / Node 22 LTS (`.nvmrc`) / Biome / **bun** (パッケージマネージャ & TS ランナー)
+Astro 5.x (SSG) / TypeScript / Claude Code CLI (`claude -p`) / GitHub Pages / Node 22 LTS (`.nvmrc`) / Biome / **bun** (パッケージマネージャ & TS ランナー)
 
+`@anthropic-ai/sdk` も依存に入っているが、今は休眠 (API キー方針を採るなら復活させる)。
 Agent SDK は使わない (一発呼び出しでよい)。
 
 ## ディレクトリ規約
@@ -27,15 +28,16 @@ src/
     base.css            # 固定スタイル
     theme.css           # 日替わり生成 — 手で編集しない
   pages/                # / (一覧) と /[slug] (記事) の 2 種類のみ
-  components/
+  components/           # Header / Footer + SVG アイコン (currentColor でインライン)
+  data/
+    theme-source.json   # 現在のテーマの出典曲メタ (フッター表示 + 次回ウィンドウ起点)
 public/
-  favicon.ico, logo.png # archive/strune から流用
+  favicon.ico           # archive/strune から流用
   pattern.svg           # stretch: 日替わり背景
   fonts/                # 欧文のみ。日本語は同梱しない
 scripts/
-  generate-theme.ts     # VocaDB → Claude → theme.css
+  generate-theme.ts     # VocaDB → Claude → theme.css + theme-source.json
 .github/workflows/
-  daily.yml             # cron でテーマ更新
   deploy.yml            # main push でビルド & Pages デプロイ
 ```
 
@@ -49,8 +51,7 @@ scripts/
 | --- | --- | --- |
 | サイトタイトル `へのへのんのの` | `src/config.yml` の `brand_title` | レイアウトコンポーネント / `<title>` |
 | favicon | `src/static/favicon.ico` | `public/favicon.ico` |
-| ヘッダーロゴ | `src/static/logo.png` / `logo-white.png` | `public/logo.png` |
-| X / GitHub アイコン | `src/static/x-logo/`, `src/static/github-mark/` | `public/icons/` 配下 |
+| X / GitHub アイコン | `src/static/x-logo/`, `src/static/github-mark/` | `src/components/Header.astro` にインライン (currentColor 化) |
 | SNS リンク | `src/config.yml` の `menu` (`https://x.com/henohenon_8282`, `https://github.com/henohenon`) | ヘッダーにハードコード可 |
 
 取り出しは `git show archive/strune:<path> > <dest>` または `git checkout archive/strune -- <path>`。
@@ -65,15 +66,15 @@ Conventional Commits 風。日本語可、命令形・現在形。
 ## generate-theme のバックエンド
 
 `scripts/generate-theme.ts` は 2 系統の Claude 呼び出しを内蔵する。
-**主たる実行系は CLI 経路 (ローカル launchd/cron)**。SDK 経路は将来の保険として残置。
+**本番は CLI 経路 (ローカル launchd/cron)**。SDK 経路は将来の保険として残置。
 
-| 環境 | 既定 | 仕組み |
+| 経路 | 仕組み | 状態 |
 | --- | --- | --- |
-| ローカル (本番) | `cli` | `claude -p` を子プロセス起動。Pro/Max サブスク認証を流用 (API 課金なし) |
-| SDK 経路 (休眠) | `sdk` | `@anthropic-ai/sdk` で API 直叩き (`ANTHROPIC_API_KEY` 必須)。今は使わない |
+| `cli` | `claude -p` を子プロセス起動。Pro/Max サブスク認証を流用 (API 課金なし) | 既定 |
+| `sdk` | `@anthropic-ai/sdk` で API 直叩き (`ANTHROPIC_API_KEY` 必須) | 休眠 |
 
-`THEME_BACKEND=sdk` / `THEME_BACKEND=cli` で明示指定可。`ANTHROPIC_API_KEY` が
-セットされていれば SDK、なければ CLI が自動選択される。
+`THEME_BACKEND=cli|sdk` で明示指定可。`ANTHROPIC_API_KEY` がセットされていれば
+SDK、なければ CLI が自動選択される (実運用では CLI 経路一択)。
 
 CLI バイナリは PATH の `claude` を見る。見つからない時は `CLAUDE_BIN` で上書き:
 

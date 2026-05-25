@@ -13,9 +13,9 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 - [ ] launchd か cron で毎朝 `bun run generate-theme && git add ... && git commit && git push` を回す
   - bun の PATH / CLAUDE_BIN を明示する必要あり
   - 失敗時のログをどこに残すか (`~/Library/Logs/henohenon-theme/` あたり?)
-- [ ] `.github/workflows/daily.yml` を削除
-- [ ] `deploy.yml` は残す (main push → Pages デプロイ)
-- [ ] CLAUDE.md / docs から `ANTHROPIC_API_KEY` 前提の記述を整理 (SDK バックエンド自体は残しておく — 後で気が変わったとき用)
+- [x] `.github/workflows/daily.yml` を削除
+- [x] `deploy.yml` は残す (main push → Pages デプロイ)
+- [x] CLAUDE.md / docs から `ANTHROPIC_API_KEY` 前提の記述を整理 (SDK バックエンドは残置)
 
 ## 2. 生成部分の構造化
 
@@ -43,14 +43,13 @@ API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証)
 
 ## 4. ロゴ・アイコン
 
-- [ ] X アイコンが白で、明るいテーマだと見えない問題
-  - SVG を `currentColor` 化して theme の `--color-fg` に追従させる
-  - もしくは theme ごとに使うバリアント (黒/白) を切替
+- [x] X アイコンが白で、明るいテーマだと見えない問題
+  - Header に SVG をインライン化し `fill="currentColor"` で `--color-fg` 追従に
 - [ ] 個人アイコンを `archive/ar` の henohenos 系から発掘して使えないか調査
   - `git ls-tree -r archive/ar` で中身確認
-- [ ] `public/logo.png` / `logo-white.png` は現状未使用 → 削除候補
-  - 念のため Header / Footer / Layout で参照していないか grep
-- [ ] favicon は OK (`Base.astro` で使用中)
+- [x] `public/logo*.png` 削除 (未使用)
+- [x] `public/icons/` 配下も合わせて削除 (Header インライン化で外部参照不要に)
+- [x] favicon は OK (`Base.astro` で使用中)
 
 ## 5. docs 整備 / 活動ログ
 
