@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "predev": "bun run scripts/build-favicon.ts",
     "dev": "astro dev",
+    "prebuild": "bun run scripts/build-favicon.ts",
     "build": "astro build && bun run scripts/build-og.ts",
     "preview": "astro preview",
     "check": "astro check",

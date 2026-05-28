@@ -8,7 +8,7 @@
  * - `public/og.article-template.svg` の `{{TITLE}}` を各記事の frontmatter title に置換
  *   → `dist/og/{slug}.png` (記事ページ用)
  *
- * テンプレートは generate-theme が日次で再生成する想定 (theme.css の配色 / 雰囲気を反映)。
+ * favicon の生成は build-favicon.ts に分離 (predev / prebuild で先に走る)。
  * SVG / 記事が無い場合はスキップ (静かに失敗、前回ビルドのまま)。
  */
 

@@ -3,6 +3,9 @@ node_modules/
 dist/
 .astro/
 
+# Build artifacts (生成物、テンプレから build-favicon.ts で書き出される)
+public/favicon.svg
+
 # Env
 .env
 .env.*
