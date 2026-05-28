@@ -46,6 +46,11 @@
 - **非決定性は仕様** — 壊れない枠より、壊れたら fallback で十分
 - **catalog は設計者の診断ツール** — Claude に選ばせるメニューではない ([log/session-2026-05-25.md](log/session-2026-05-25.md))
 - **公序良俗** — 唯一のハード制限
+- **Identity と Dress の分離** — Claude が触れる範囲の境界:
+  - **HTML 骨格 (Astro)** = Identity = Claude 不可侵 (サイトの "戻る場所感" の源泉)
+  - **CSS (theme.css)** = Dress = Mode 3 全自由 (毎日の表現)
+  - **JS** = 当面禁止 (壊れにくさ・状態管理回避)。ただし限定的な静的 bridge (例: `--mx --my` カーソル / `--tod` 時刻) は適切性で判断、`fetch` 系は除く
+  - **Astro components** = Identity の一部、不可侵
 
 ---
 
