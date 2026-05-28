@@ -67,10 +67,9 @@ Claude は md を参考にしてもいいし、独自に書いてもいい (詳�
 
 ### OGP まわりの改善
 
-- [ ] `public/og.article-template.svg` のデザイン改善 (現状ダサい、長いタイトルがはみ出す)
-  - タイトル wrap / truncation
-  - 装飾要素の見直し
-  - フォント・余白の調整
+- [x] `public/og.article-template.svg` のデザイン改善
+  - generate-theme が日次でテーマ整合の SVG テンプレを生成 (`{{TITLE}}` プレースホルダ付き)
+  - build-og.ts が CRLF frontmatter 対応 + 長文タイトル切り詰め (28 文字)
 
 ### 棚上げ
 

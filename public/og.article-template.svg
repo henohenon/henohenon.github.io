@@ -1,6 +1,133 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="100%" height="100%" fill="{{BG}}"/>
-  <rect x="60" y="60" width="1080" height="510" fill="none" stroke="{{ACCENT}}" stroke-width="2" opacity="0.4"/>
-  <text x="100" y="480" font-family="serif" font-size="84" fill="{{FG}}">{{TITLE}}</text>
-  <text x="100" y="550" font-family="sans-serif" font-size="32" fill="{{ACCENT}}">へのへのんのの</text>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glowMagenta" cx="15%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#ff3df0" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ff3df0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowCyan" cx="85%" cy="15%" r="55%">
+      <stop offset="0%" stop-color="#36e3ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#36e3ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGold" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#ffd84d" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ffd84d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ball" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#fdf4ff"/>
+      <stop offset="40%" stop-color="#c8b8ff"/>
+      <stop offset="100%" stop-color="#1a0f3d"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3df0"/>
+      <stop offset="50%" stop-color="#ffd84d"/>
+      <stop offset="100%" stop-color="#36e3ff"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d0726" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#ff3df0" stop-opacity="0.22"/>
+    </linearGradient>
+    <pattern id="diag" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="20" height="20" fill="transparent"/>
+      <line x1="0" y1="0" x2="0" y2="20" stroke="#ffffff" stroke-opacity="0.04" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0d0726"/>
+  <rect width="1200" height="630" fill="url(#diag)"/>
+  <rect width="1200" height="630" fill="url(#glowMagenta)"/>
+  <rect width="1200" height="630" fill="url(#glowCyan)"/>
+  <rect width="1200" height="630" fill="url(#glowGold)"/>
+
+  <!-- Dance floor checker (bottom) -->
+  <g opacity="0.32">
+    <polygon points="0,630 1200,630 920,500 280,500" fill="url(#floorGrad)"/>
+    <g stroke="#ff3df0" stroke-opacity="0.4" stroke-width="1">
+      <line x1="280" y1="500" x2="0" y2="630"/>
+      <line x1="400" y1="500" x2="200" y2="630"/>
+      <line x1="520" y1="500" x2="430" y2="630"/>
+      <line x1="640" y1="500" x2="660" y2="630"/>
+      <line x1="760" y1="500" x2="870" y2="630"/>
+      <line x1="880" y1="500" x2="1080" y2="630"/>
+    </g>
+    <g stroke="#36e3ff" stroke-opacity="0.4" stroke-width="1">
+      <line x1="280" y1="500" x2="920" y2="500"/>
+      <line x1="240" y1="525" x2="960" y2="525"/>
+      <line x1="180" y1="560" x2="1020" y2="560"/>
+      <line x1="100" y1="600" x2="1100" y2="600"/>
+    </g>
+  </g>
+
+  <!-- Light beams from upper-right mirror ball -->
+  <g opacity="0.28" stroke-linecap="round">
+    <line x1="1060" y1="120" x2="200" y2="540" stroke="#ff3df0" stroke-width="3"/>
+    <line x1="1060" y1="120" x2="60" y2="380" stroke="#36e3ff" stroke-width="2"/>
+    <line x1="1060" y1="120" x2="1180" y2="560" stroke="#ffd84d" stroke-width="2"/>
+    <line x1="1060" y1="120" x2="780" y2="620" stroke="#ff3df0" stroke-width="2"/>
+  </g>
+
+  <!-- Mirror ball (small, upper-right) -->
+  <g>
+    <line x1="1060" y1="40" x2="1060" y2="80" stroke="#c8b8ff" stroke-width="2"/>
+    <circle cx="1060" cy="120" r="42" fill="url(#ball)" stroke="#ff3df0" stroke-opacity="0.55" stroke-width="1.5"/>
+    <g stroke="#fdf4ff" stroke-opacity="0.22" stroke-width="1" fill="none">
+      <ellipse cx="1060" cy="120" rx="42" ry="14"/>
+      <ellipse cx="1060" cy="120" rx="42" ry="28"/>
+      <line x1="1018" y1="120" x2="1102" y2="120"/>
+      <line x1="1060" y1="78" x2="1060" y2="162"/>
+    </g>
+    <g fill="#fdf4ff" opacity="0.85">
+      <circle cx="1044" cy="106" r="2.2"/>
+      <circle cx="1074" cy="114" r="1.8"/>
+      <circle cx="1054" cy="132" r="1.5"/>
+      <circle cx="1080" cy="138" r="2"/>
+    </g>
+  </g>
+
+  <!-- Sparkles -->
+  <g fill="#ffd84d">
+    <polygon points="120,90 126,104 140,106 130,116 132,130 120,124 108,130 110,116 100,106 114,104"/>
+  </g>
+  <g fill="#36e3ff" opacity="0.8">
+    <circle cx="220" cy="200" r="2.2"/>
+    <circle cx="380" cy="80" r="1.8"/>
+    <circle cx="600" cy="110" r="2.5"/>
+    <circle cx="820" cy="80" r="1.8"/>
+    <circle cx="80" cy="360" r="1.8"/>
+  </g>
+
+  <!-- Site name top-left -->
+  <g font-family="sans-serif">
+    <rect x="60" y="58" width="14" height="14" fill="#ff3df0"/>
+    <rect x="78" y="58" width="14" height="14" fill="#36e3ff"/>
+    <rect x="96" y="58" width="14" height="14" fill="#ffd84d"/>
+    <text x="60" y="105" fill="#fdf4ff" font-size="26" font-weight="700" letter-spacing="3">へのへのんのの</text>
+  </g>
+
+  <!-- Badge: ARTICLE -->
+  <g font-family="sans-serif">
+    <rect x="60" y="225" width="150" height="32" rx="16" fill="#1a0f3d" stroke="#36e3ff" stroke-opacity="0.6"/>
+    <text x="135" y="246" fill="#36e3ff" font-size="14" letter-spacing="6" text-anchor="middle" font-weight="700">★ ARTICLE ★</text>
+  </g>
+
+  <!-- Title (replaced at build time) -->
+  <g font-family="sans-serif" font-weight="900">
+    <text x="60" y="370" fill="url(#titleGrad)" font-size="72" letter-spacing="1">{{TITLE}}</text>
+    <text x="60" y="370" fill="none" stroke="#ff3df0" stroke-opacity="0.22" stroke-width="1" font-size="72" letter-spacing="1">{{TITLE}}</text>
+  </g>
+
+  <!-- Divider -->
+  <line x1="60" y1="420" x2="700" y2="420" stroke="#ff3df0" stroke-opacity="0.55" stroke-width="1" stroke-dasharray="3 6"/>
+
+  <!-- Bottom tag -->
+  <g font-family="monospace">
+    <text x="60" y="585" fill="#fdf4ff" opacity="0.5" font-size="14" letter-spacing="4">// from henohenon.github.io</text>
+  </g>
+
+  <!-- corner accent -->
+  <g opacity="0.7">
+    <rect x="1100" y="560" width="40" height="4" fill="#ff3df0"/>
+    <rect x="1100" y="570" width="60" height="4" fill="#36e3ff"/>
+    <rect x="1100" y="580" width="80" height="4" fill="#ffd84d"/>
+  </g>
 </svg>

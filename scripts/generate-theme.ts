@@ -51,6 +51,7 @@ const THEME_PATH = path.resolve("src/styles/theme.css");
 const THEME_SOURCE_PATH = path.resolve("src/data/theme-source.json");
 const USED_SONGS_PATH = path.resolve("src/data/used-songs.json");
 const OG_SVG_PATH = path.resolve("public/og.svg");
+const OG_ARTICLE_TEMPLATE_PATH = path.resolve("public/og.article-template.svg");
 const VOCADB_BASE = "https://vocadb.net/api";
 /** 「直近の人気曲」を取るローリングウィンドウ (日数) */
 const WINDOW_DAYS = 30;
@@ -362,7 +363,7 @@ function sanitizeSvg(text: string): string {
     .trim();
 }
 
-function validateOgSvg(svg: string): void {
+function validateSvgBase(svg: string): void {
   if (!/^<svg\b/.test(svg)) throw new Error("not an svg");
   if (!/width=["']1200["']/.test(svg)) throw new Error("missing width=1200");
   if (!/height=["']630["']/.test(svg)) throw new Error("missing height=630");
@@ -377,6 +378,24 @@ function validateOgSvg(svg: string): void {
     if (fam !== "serif" && fam !== "sans-serif" && fam !== "monospace") {
       throw new Error(`unsafe font-family: ${m[1]}`);
     }
+  }
+}
+
+function validateOgSvg(svg: string): void {
+  validateSvgBase(svg);
+}
+
+function validateArticleTemplateSvg(svg: string): void {
+  validateSvgBase(svg);
+  if (!/\{\{\s*TITLE\s*\}\}/.test(svg)) {
+    throw new Error("missing {{TITLE}} placeholder");
+  }
+  // {{TITLE}} 以外のプレースホルダ記法は build 時に置換されないので拒否
+  const extras = [...svg.matchAll(/\{\{\s*([A-Z_][A-Z0-9_]*)\s*\}\}/g)]
+    .map((m) => m[1])
+    .filter((n): n is string => typeof n === "string" && n !== "TITLE");
+  if (extras.length > 0) {
+    throw new Error(`unknown placeholders: ${[...new Set(extras)].join(", ")}`);
   }
 }
 
@@ -396,6 +415,60 @@ async function generateOgSvg(detail: SongDetail, themeCss: string): Promise<stri
   return sanitizeSvg(raw);
 }
 
+const OG_ARTICLE_TEMPLATE_SYSTEM_PROMPT = `あなたはこのブログ "へのへのんのの" の **記事ページ用 OGP テンプレート** (1200x630 SVG) を描くデザイナーです。
+
+ユーザーから「今日の曲情報」と「生成済み theme.css」が渡されます。
+theme.css の配色 / 雰囲気と整合する**テンプレート**を作ってください。
+このテンプレートは複数の記事ページで使い回され、\`{{TITLE}}\` 部分だけビルド時に各記事のタイトルへ差し替えられます。
+
+## 必須
+
+- ルート要素は \`<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">\`
+- 背景全面塗り (theme.css の \`--color-bg\` と同じ色)
+- サイト名 "へのへのんのの" をどこかに含める (\`--color-fg\` 系の色で)
+- **記事タイトルが入る位置に、文字列 \`{{TITLE}}\` をそのまま書く**
+  - 例: \`<text x="60" y="320" font-family="serif" font-size="80" fill="...">{{TITLE}}</text>\`
+  - これがビルド時に各記事の実タイトル (XML エスケープ済み) に置換される
+  - グラデ塗り + ストローク overlay 等で同じ位置に 2 回書くのは OK (全 \`{{TITLE}}\` は同じ文字列に置換される)
+  - 文字列を分解して \`{{TITLE}}\` を別々の \`<text>\` に分けるのは禁止 (例: 半分ずつに割らない)
+  - \`{{TITLE}}\` 以外のプレースホルダ (\`{{XXX}}\`) は使わないこと
+- 出力は **純粋な SVG のみ**。説明文・コードフェンス (\`\`\`) 禁止
+
+## デザインの指針
+
+- 今日の曲の雰囲気 (theme.css の配色 / ムード / ジャンル感) を反映した装飾を入れる
+  (背景パターン / 図形 / グラデ / 罫線 など、サイト全体の og.svg と同じトーン)
+- ただし **曲名・アーティスト名は入れない** (それはサイト全体の og.svg の役割)
+- 記事タイトルは 30 文字程度の日本語が 1〜2 行で収まるフォントサイズで配置
+  (\`font-size\` 60〜84 あたりが目安。テンプレなので長文には完全対応しなくてよい)
+- タイトル領域は画面の主役にする (余白を確保、装飾で潰さない)
+
+## 禁止
+
+- \`<script>\`, \`<foreignObject>\`, \`<image href="http...">\`, \`@import\` 等の外部参照
+- \`font-family\` は \`'serif'\` / \`'sans-serif'\` / \`'monospace'\` のいずれかのみ
+- width / height / viewBox の値を変える
+- \`{{TITLE}}\` を文字単位で分解する (例: 「タ」と「イトル」に分ける)`;
+
+async function generateOgArticleTemplate(detail: SongDetail, themeCss: string): Promise<string> {
+  const backend = pickBackend();
+  console.log(`    using backend: ${backend.name}`);
+  const user = [
+    "# 今日の曲",
+    `${detail.name} / ${detail.artistString}`,
+    "",
+    "# 生成済みの theme.css (これと整合する記事 OGP テンプレートを作って)",
+    "```css",
+    themeCss,
+    "```",
+    "",
+    "# 注意",
+    "記事タイトルの位置には必ず文字列 `{{TITLE}}` を 1 つだけ書く (ビルド時に置換される)。",
+  ].join("\n");
+  const raw = await backend.generate(OG_ARTICLE_TEMPLATE_SYSTEM_PROMPT, user);
+  return sanitizeSvg(raw);
+}
+
 async function generateThemeCss(detail: SongDetail): Promise<string> {
   const backend = pickBackend();
   console.log(`    using backend: ${backend.name}`);
@@ -410,17 +483,17 @@ async function pickSong(): Promise<SongDetail> {
     if (!Number.isInteger(n) || n <= 0) {
       throw new Error(`--song-id must be a positive integer: ${id}`);
     }
-    console.log(`[1/4] fetching song by id=${n}...`);
+    console.log(`[1/5] fetching song by id=${n}...`);
     return fetchSongDetail(n);
   }
 
   const query = cliArgs.song;
   if (query) {
-    console.log(`[1/4] searching VocaDB for "${query}"...`);
+    console.log(`[1/5] searching VocaDB for "${query}"...`);
     return searchSong(query);
   }
 
-  console.log("[1/4] fetching pool from VocaDB...");
+  console.log("[1/5] fetching pool from VocaDB...");
   const pool = await fetchPool();
   console.log("    picking (filter: 未使用 × 歌詞あり)...");
   const blacklist = new Set(await readUsedSongIds());
@@ -455,7 +528,7 @@ async function main(): Promise<void> {
   const detail = await pickSong();
   console.log(`    "${detail.name}" / ${detail.artistString} (score=${detail.ratingScore})`);
 
-  console.log("[2/3] calling Claude...");
+  console.log("[2/5] calling Claude for theme.css...");
   const css = await generateThemeCss(detail);
   validateCss(css);
 
@@ -469,9 +542,9 @@ async function main(): Promise<void> {
   };
   await writeFile(THEME_SOURCE_PATH, `${JSON.stringify(source, null, 2)}\n`, "utf8");
   await appendUsedSongId(detail.id);
-  console.log("[3/4] wrote theme.css, theme-source.json, used-songs.json");
+  console.log("[3/5] wrote theme.css, theme-source.json, used-songs.json");
 
-  console.log("[4/4] generating OGP svg (site)...");
+  console.log("[4/5] generating OGP svg (site)...");
   try {
     const ogSvg = await generateOgSvg(detail, css);
     validateOgSvg(ogSvg);
@@ -479,6 +552,19 @@ async function main(): Promise<void> {
     console.log("    wrote", OG_SVG_PATH);
   } catch (err) {
     console.error("    OGP generation failed, keeping yesterday's og.svg:", err);
+  }
+
+  console.log("[5/5] generating OGP article template...");
+  try {
+    const articleSvg = await generateOgArticleTemplate(detail, css);
+    validateArticleTemplateSvg(articleSvg);
+    await writeFile(OG_ARTICLE_TEMPLATE_PATH, `${articleSvg}\n`, "utf8");
+    console.log("    wrote", OG_ARTICLE_TEMPLATE_PATH);
+  } catch (err) {
+    console.error(
+      "    article template generation failed, keeping yesterday's og.article-template.svg:",
+      err,
+    );
   }
 
   // bot コミット用の情報を stdout に流す (CI で読む)

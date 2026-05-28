@@ -4,11 +4,12 @@
  * OGP 画像をビルド時にラスタライズして `dist/og/` 配下に出力する。
  * `astro build` の後に呼ぶ (package.json の build を参照)。
  *
- * - `public/og.svg` → `dist/og.png` (サイト全体のシェアカード、Claude 生成 SVG をそのまま)
- * - `public/og.article-template.svg` + 各記事の frontmatter title + theme.css の色
- *   → `dist/og/{slug}.png` (記事ページ用、色追従テンプレ)
+ * - `public/og.svg` → `dist/og.png` (サイト全体のシェアカード)
+ * - `public/og.article-template.svg` の `{{TITLE}}` を各記事の frontmatter title に置換
+ *   → `dist/og/{slug}.png` (記事ページ用)
  *
- * SVG / theme.css / 記事が無い場合はスキップ (静かに失敗、前回ビルドのまま)。
+ * テンプレートは generate-theme が日次で再生成する想定 (theme.css の配色 / 雰囲気を反映)。
+ * SVG / 記事が無い場合はスキップ (静かに失敗、前回ビルドのまま)。
  */
 
 import { existsSync } from "node:fs";
@@ -18,11 +19,13 @@ import { Resvg } from "@resvg/resvg-js";
 
 const SITE_SVG_PATH = path.resolve("public/og.svg");
 const ARTICLE_TEMPLATE_PATH = path.resolve("public/og.article-template.svg");
-const THEME_PATH = path.resolve("src/styles/theme.css");
 const POSTS_DIR = path.resolve("src/content/posts");
 const DIST_DIR = path.resolve("dist");
 const SITE_PNG_PATH = path.join(DIST_DIR, "og.png");
 const ARTICLE_PNG_DIR = path.join(DIST_DIR, "og");
+
+/** 長すぎる記事タイトルは末尾に省略記号を付けて切り詰める (テンプレが破綻しない上限) */
+const TITLE_MAX_LEN = 28;
 
 function rasterize(svg: string): Buffer {
   const resvg = new Resvg(svg, {
@@ -32,19 +35,19 @@ function rasterize(svg: string): Buffer {
   return resvg.render().asPng();
 }
 
-/** theme.css から `--color-bg: #xxx;` の値を抽出 */
-function extractCssVar(css: string, name: string, fallback: string): string {
-  const re = new RegExp(`${name}\\s*:\\s*([^;]+);`);
-  const m = css.match(re);
-  return m?.[1]?.trim() ?? fallback;
-}
-
-/** Markdown frontmatter の title フィールドを取り出す (簡易パース) */
+/** Markdown frontmatter の title フィールドを取り出す (簡易パース、CRLF / BOM 対応) */
 function extractTitle(md: string, fallbackSlug: string): string {
-  const fmMatch = md.match(/^---\n([\s\S]*?)\n---/);
+  const stripped = md.replace(/^﻿/, "");
+  const fmMatch = stripped.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!fmMatch) return fallbackSlug;
   const titleMatch = fmMatch[1]?.match(/^title\s*:\s*(.+)$/m);
   return titleMatch?.[1]?.trim().replace(/^["']|["']$/g, "") ?? fallbackSlug;
+}
+
+/** テンプレに合わせて長い記事タイトルを丸める */
+function truncateTitle(title: string): string {
+  if ([...title].length <= TITLE_MAX_LEN) return title;
+  return `${[...title].slice(0, TITLE_MAX_LEN - 1).join("")}…`;
 }
 
 /** XML / SVG 用の最小エスケープ */
@@ -78,11 +81,6 @@ async function buildArticleOgs(): Promise<void> {
     return;
   }
 
-  const themeCss = existsSync(THEME_PATH) ? await readFile(THEME_PATH, "utf8") : "";
-  const bg = extractCssVar(themeCss, "--color-bg", "#fafafa");
-  const fg = extractCssVar(themeCss, "--color-fg", "#1a1a1a");
-  const accent = extractCssVar(themeCss, "--color-accent", "#555");
-
   const template = await readFile(ARTICLE_TEMPLATE_PATH, "utf8");
   await mkdir(ARTICLE_PNG_DIR, { recursive: true });
 
@@ -90,13 +88,9 @@ async function buildArticleOgs(): Promise<void> {
   for (const file of files) {
     const slug = file.replace(/\.md$/, "");
     const md = await readFile(path.join(POSTS_DIR, file), "utf8");
-    const title = extractTitle(md, slug);
+    const title = truncateTitle(extractTitle(md, slug));
 
-    const svg = template
-      .replace(/\{\{BG\}\}/g, xmlEscape(bg))
-      .replace(/\{\{FG\}\}/g, xmlEscape(fg))
-      .replace(/\{\{ACCENT\}\}/g, xmlEscape(accent))
-      .replace(/\{\{TITLE\}\}/g, xmlEscape(title));
+    const svg = template.replace(/\{\{\s*TITLE\s*\}\}/g, xmlEscape(title));
 
     const png = rasterize(svg);
     const out = path.join(ARTICLE_PNG_DIR, `${slug}.png`);
