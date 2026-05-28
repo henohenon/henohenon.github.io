@@ -1,10 +1,14 @@
 /**
  * generate-theme.ts
  *
- * VocaDB から直近の人気 Vocaloid 曲をランダムに 1 曲選び、
- * その曲のタグ・歌詞を Claude API に投げて `src/styles/theme.css` を上書きする。
+ * VocaDB の直近 30 日人気曲プールから 1 曲ピックし (blacklist + 歌詞優先のフォールバック)、
+ * その曲名・歌詞・タグを Claude に渡して以下を生成・上書きする:
+ *   1. src/styles/theme.css                  (日替わりテーマ)
+ *   2. public/og.svg                         (サイト全体 OGP)
+ *   3. public/og.article-template.svg        (記事ページ OGP テンプレ、{{TITLE}} 入り)
  *
- * 失敗時は既存の theme.css を温存する (前日のテーマが残る = 仕様)。
+ * 各 OGP ステップは独立で失敗可能 (失敗しても前日のファイルが残る = 仕様)。
+ * theme.css 生成自体が失敗した場合も既存ファイルを温存。
  */
 
 import { spawn } from "node:child_process";
@@ -521,11 +525,17 @@ function sanitizeCss(text: string): string {
 }
 
 function validateCss(css: string): void {
+  // SYSTEM_PROMPT の「必ず守ること」の必須トークン一覧と一致させる
   const required = [
     "--color-fg",
     "--color-bg",
+    "--color-accent",
     "--spacing-unit",
+    "--font-heading",
     "--font-body",
+    "--line-height-body",
+    "--line-height-heading",
+    "--ease-default",
     "prefers-reduced-motion",
   ];
   const missing = required.filter((tok) => !css.includes(tok));
