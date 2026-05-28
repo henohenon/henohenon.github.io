@@ -1,7 +1,7 @@
 # 方向性
 
 このプロジェクトでこれから取り組むことの目的と基本方針。
-個別の採否判断は [decisions.md](decisions.md)、現状タスクは [../TODO.md](../TODO.md)。
+個別の採否判断は [decisions.md](decisions.md)、現状タスクは [../TODO.md](../TODO.md)、拡張可能性のカタログは [feature-expansion-ideas.md](feature-expansion-ideas.md)。
 
 ---
 
@@ -19,7 +19,7 @@
 
 ### 1. 制限を「決める」のではなく、できることを増やす
 
-- **「自由節 / 禁止節」のような書き方は採らない**。Claude のデザイン選択を前もって枠にはめない。
+- 「自由節 / 禁止節」のような書き方は採らない。Claude のデザイン選択を前もって枠にはめない。
 - 「描けないことを生んでいる箇所」(規約の穴 / 入力データの薄さ / 構造的依存) は**外す方向**に動く。
 - 唯一のハードな線は **公序良俗** — それ以外は基本自由。
 - 技術的な「守ること」(CSS 変数定義 / `prefers-reduced-motion` / WCAG / 外部リソース不可 等) は美的制約ではなく**構造的前提**として最小限に保つ。
@@ -28,7 +28,7 @@
 
 - 制限ではなく **補助** で質を上げる。
 - 表現の語彙・参照・事例を Claude に渡す。母集団は [research/](research/)。
-- 入れ口: SYSTEM_PROMPT の参照箇所 / [techniques/](techniques/) 注入機構 (未整備) / user message。
+- 入れ口: SYSTEM_PROMPT / [techniques/](techniques/) (未整備) / user message。
 - 失敗時 fallback (前日ファイル温存) は維持 — 自由生成と壊れにくさは両立。
 
 ### 3. デザイン的選択肢を提示・補助する
@@ -44,31 +44,34 @@
 
 - **儚さ** — 過去テーマを履歴ページ等でサイト上に出さない (git だけが唯一のアーカイブ)
 - **非決定性は仕様** — 壊れない枠より、壊れたら fallback で十分
-- **catalog は設計者の診断ツール** — Claude に選ばせるメニューではない ([log/session-2026-05-25.md](log/session-2026-05-25.md))
 - **公序良俗** — 唯一のハード制限
 - **Identity と Dress の分離** — Claude が触れる範囲の境界:
   - **HTML 骨格 (Astro)** = Identity = Claude 不可侵 (サイトの "戻る場所感" の源泉)
   - **CSS (theme.css)** = Dress = Mode 3 全自由 (毎日の表現)
-  - **JS** = 当面禁止 (壊れにくさ・状態管理回避)。ただし限定的な静的 bridge (例: `--mx --my` カーソル / `--tod` 時刻) は適切性で判断、`fetch` 系は除く
+  - **JS** = 当面禁止 (壊れにくさ・状態管理回避)。ただし限定的な静的 bridge (例: `--mx --my` カーソル / `--tod` 時刻) は適切性で判断。`fetch` 系は引き続き除外
   - **Astro components** = Identity の一部、不可侵
 
 ---
 
-## 進め方 (並行可、順序縛らない)
+## 現在地 (2026-05-29 時点)
 
-機能拡張のために必要なものを必要なタイミングで進める。直列に縛らない。
+**表現拡充の全体方針はここから最終決定する段階。**
+[feature-expansion-ideas.md](feature-expansion-ideas.md) のカタログを材料に、棚上げから下ろした項目 (純 CSS 装飾、JS 制限の限定 re-visit 等) も含めて、何をどう乗せていくかを順次詰めていく。
 
-- **縛り撤廃** — SYSTEM_PROMPT の「自由節 / 禁止節」を撃退、構造的前提だけに整理 (関連: `validateCss` 等の同期)
-- **棚卸 (進行中)** — 現実装の雑な箇所 / 矛盾 / 描けない原因を洗う ([log/inventory-2026-05-25.md](log/inventory-2026-05-25.md) の続き)
-- **補助情報の充実** — [research/](research/) 整理、`techniques/` 整備、prompt 注入機構 (C-α)
-- **機能・機構の追加** — 棚卸と研究で「あった方が広がる」と分かったものから (View Transitions / mood ラベル / カーソル bridge / 時刻シフト 等、TODO.md #3 参照)
+進捗の大枠:
+- **実装済**: OGP テーマ追従 / favicon テーマ追従 / docs 整備
+- **方針確定 / 実装未**: C1 view-transition / C2 cursor bridge / C3 時刻シフト / C7+ base.css 削減 / P1 concept-first
+- **これから決める**: 表現拡充の全体方針、AI フロー設計、HTML 構造化テンプレ化、棚上げ復活分の具体運用
+- **継続**: techniques/ 母体整備 (D 群)
+- **最後**: ローカル cron 自動化
 
 ---
 
 ## 関連
 
 - [decisions.md](decisions.md) — 個別判断のログ
+- [feature-expansion-ideas.md](feature-expansion-ideas.md) — 拡張可能性カタログ
 - [research/](research/) — 語彙の母集団
-- [log/](log/) — 過去スナップショット (セッション記録 / 棚卸し記録)
+- [log/](log/) — 過去スナップショット (セッション記録 / 棚卸し記録 / journey)
 - [../TODO.md](../TODO.md) — 着手中・保留タスク
 - [../CLAUDE.md](../CLAUDE.md) — AI 向け運用規約
