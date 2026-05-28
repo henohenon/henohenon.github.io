@@ -1,6 +1,7 @@
 # CLAUDE.md
 
 プロジェクト概要は [README.md](README.md)。後回し項目は [TODO.md](TODO.md)。
+**取り組みの目的と方針** (北極星) は [docs/direction.md](docs/direction.md) — 提案前に必ず読む。
 技術ノートは [docs/](docs/) 配下。
 
 ## プロジェクト概要

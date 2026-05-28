@@ -1,6 +1,7 @@
 # 設計記録
 
 主要な方向性・採否判断と理由のログ。実装の細部 (どう書くか) は [CLAUDE.md](../CLAUDE.md) / [TODO.md](../TODO.md) / git log 側に任せる。
+全体の目的と基本方針 (北極星) は [direction.md](direction.md)。各 decision はその柱の下にぶら下がる個別判断。
 
 新しい設計判断が出たら上に追記する (新しい順)。
 

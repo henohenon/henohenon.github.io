@@ -1,6 +1,6 @@
 # TODO
 
-プロジェクト概要は [README.md](README.md)。技術ノートは [docs/](docs/)。
+プロジェクト概要は [README.md](README.md)。**取り組みの目的と方針** は [docs/direction.md](docs/direction.md)。技術ノートは [docs/](docs/)。
 
 完了済みの大物 (Astro 初期セットアップ / generate-theme / GHA / レイアウト等) は `git log` 参照。
 
