@@ -134,7 +134,7 @@
 - 「`<dialog popover>` を使った注釈」: HTML タグそのものが要る (装飾の見せ方は CSS で自由)
 
 ### CSS で描けるが "詰め込み" 警戒で却下されてきたもの
-[decisions.md](../decisions.md) と `session-2026-05-25.md` に蓄積された制約:
+[decisions.md](../decisions.md) と [log/session-2026-05-25.md](../log/session-2026-05-25.md) に蓄積された制約:
 - 自動再生される音 (HTML5 audio + autoplay)
 - ホイール乗っ取り (scroll-snap で擬似的にできるが酔うので不可)
 - 大型 hero アニメ (重い)
