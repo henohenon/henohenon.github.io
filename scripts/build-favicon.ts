@@ -1,12 +1,13 @@
 /**
  * build-favicon.ts
  *
- * `public/favicon.template.svg` の `{{BG}}` / `{{FG}}` を theme.css の
+ * `assets/favicon.template.svg` の `{{BG}}` / `{{FG}}` を theme.css の
  * `--color-bg` / `--color-accent` で置換して `public/favicon.svg` に書き出す。
  *
  * - `bun run dev` (predev) と `bun run build` (prebuild) の両方で走る
- * - `public/` 配下に置くことで dev server と Astro 本番ビルドの双方が拾える
- * - 出力先 `public/favicon.svg` は .gitignore (生成物)
+ * - 出力先 `public/favicon.svg` は dev server と Astro 本番ビルドの双方が拾える
+ *   (.gitignore 対象、生成物)
+ * - テンプレ自体は `assets/` 配下 (= public 配信されない) に置く
  *
  * テンプレ or theme.css が無い場合は何もしない (静かに失敗)。
  */
@@ -15,7 +16,7 @@ import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const FAVICON_TEMPLATE_PATH = path.resolve("public/favicon.template.svg");
+const FAVICON_TEMPLATE_PATH = path.resolve("assets/favicon.template.svg");
 const FAVICON_OUTPUT_PATH = path.resolve("public/favicon.svg");
 const THEME_CSS_PATH = path.resolve("src/styles/theme.css");
 
