@@ -1,116 +1,126 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="azalea" cx="18%" cy="10%" r="55%">
-      <stop offset="0%" stop-color="#ff7aa2" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#ff7aa2" stop-opacity="0"/>
+    <radialGradient id="bgGlow1" cx="20%" cy="-10%" r="70%">
+      <stop offset="0%" stop-color="#e6002e" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#e6002e" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="doom" cx="82%" cy="88%" r="60%">
-      <stop offset="0%" stop-color="#5a1326" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#5a1326" stop-opacity="0"/>
+    <radialGradient id="bgGlow2" cx="85%" cy="110%" r="75%">
+      <stop offset="0%" stop-color="#780014" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#780014" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a0a14"/>
-      <stop offset="100%" stop-color="#0c0408"/>
-    </linearGradient>
-    <radialGradient id="bloom" cx="78%" cy="20%" r="45%">
-      <stop offset="0%" stop-color="#ff3d6e" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#ff3d6e" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="ringline" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ff3d6e" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ff3d6e" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#ff3d6e" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="hr" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#5a1326" stop-opacity="0"/>
-      <stop offset="25%" stop-color="#5a1326"/>
-      <stop offset="50%" stop-color="#ff3d6e"/>
-      <stop offset="75%" stop-color="#5a1326"/>
-      <stop offset="100%" stop-color="#5a1326" stop-opacity="0"/>
-    </linearGradient>
-    <pattern id="scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
-      <rect width="3" height="1" fill="#ffffff" fill-opacity="0.025"/>
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#ffffff" fill-opacity="0.025"/>
     </pattern>
+    <pattern id="march" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M0 24 L24 24 M24 0 L24 48" stroke="#e6002e" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="hr" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#e6002e" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#e6002e" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#e6002e" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="frame">
+      <rect x="0" y="0" width="1200" height="630"/>
+    </clipPath>
   </defs>
 
-  <!-- 背景 -->
-  <rect width="1200" height="630" fill="#14080f"/>
-  <rect width="1200" height="630" fill="url(#bgGrad)"/>
-  <rect width="1200" height="630" fill="url(#doom)"/>
-  <rect width="1200" height="630" fill="url(#azalea)"/>
-  <rect width="1200" height="630" fill="url(#bloom)"/>
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <g clip-path="url(#frame)">
+    <!-- Base -->
+    <rect width="1200" height="630" fill="#0d0608"/>
+    <rect width="1200" height="630" fill="url(#march)"/>
+    <rect width="1200" height="630" fill="url(#bgGlow1)"/>
+    <rect width="1200" height="630" fill="url(#bgGlow2)"/>
+    <rect width="1200" height="630" fill="url(#scanlines)"/>
 
-  <!-- 受話器コード (装飾) -->
-  <g stroke="#f0c674" stroke-opacity="0.18" fill="none" stroke-width="1.2">
-    <path d="M -20 540 Q 60 510 80 540 T 180 540 T 280 540 T 380 540 T 480 540 T 580 540 T 680 540 T 780 540 T 880 540 T 980 540 T 1080 540 T 1220 540"/>
-    <path d="M -20 560 Q 60 530 80 560 T 180 560 T 280 560 T 380 560 T 480 560 T 580 560 T 680 560 T 780 560 T 880 560 T 980 560 T 1080 560 T 1220 560"/>
-  </g>
+    <!-- Border frame (article.post 上下の朱線をオマージュ) -->
+    <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#e6002e" stroke-opacity="0.35" stroke-width="1"/>
+    <line x1="40" y1="70" x2="1160" y2="70" stroke="#e6002e" stroke-width="2"/>
+    <line x1="40" y1="560" x2="1160" y2="560" stroke="#e6002e" stroke-width="2"/>
 
-  <!-- 上ボーダー -->
-  <rect x="60" y="60" width="1080" height="1" fill="#ff7aa2" fill-opacity="0.22"/>
-  <!-- 下ボーダー -->
-  <rect x="60" y="569" width="1080" height="1" fill="#ff7aa2" fill-opacity="0.22"/>
+    <!-- Top tag label (article.post::before 風) -->
+    <rect x="90" y="58" width="180" height="24" fill="#0d0608"/>
+    <text x="180" y="76" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="6" text-anchor="middle" fill="#e6002e" opacity="0.85">ヤ ラ ラ ラ</text>
 
-  <!-- 上部メタ: 公衆電話風 -->
-  <g font-family="monospace" font-size="16" fill="#f0c674" fill-opacity="0.75" letter-spacing="6">
-    <text x="80" y="100">☎  10¥ LEFT</text>
-    <text x="1120" y="100" text-anchor="end">都窪郡早島</text>
-  </g>
+    <!-- Bottom tag label (article.post::after 風) -->
+    <rect x="930" y="548" width="180" height="24" fill="#0d0608"/>
+    <text x="1020" y="566" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="6" text-anchor="middle" fill="#e6002e" opacity="0.85">ヤ ラ ラ ラ</text>
 
-  <!-- リングトーン線 -->
-  <rect x="200" y="135" width="800" height="1.5" fill="url(#ringline)"/>
+    <!-- Left side march tally (一歩ずつのリズム) -->
+    <g stroke="#e6002e" stroke-width="3" stroke-linecap="square">
+      <line x1="80" y1="300" x2="80" y2="340"/>
+      <line x1="92" y1="300" x2="92" y2="340"/>
+      <line x1="104" y1="300" x2="104" y2="340"/>
+      <line x1="116" y1="300" x2="116" y2="340"/>
+      <line x1="74" y1="320" x2="122" y2="320" stroke-opacity="0.9"/>
+    </g>
+    <g stroke="#d8c9bf" stroke-width="2" stroke-linecap="square" opacity="0.6">
+      <line x1="80" y1="360" x2="80" y2="392"/>
+      <line x1="92" y1="360" x2="92" y2="392"/>
+      <line x1="104" y1="360" x2="104" y2="392"/>
+    </g>
 
-  <!-- 主役: サイト名 -->
-  <g font-family="serif" text-anchor="middle">
-    <text x="600" y="305" font-size="124" font-style="italic" fill="#ff7aa2" letter-spacing="6" font-weight="500">へのへのんのの</text>
-    <!-- グロウ重ね -->
-    <text x="600" y="305" font-size="124" font-style="italic" fill="#fdeef0" fill-opacity="0.95" letter-spacing="6" font-weight="500">へのへのんのの</text>
-  </g>
+    <!-- Right side step counter -->
+    <g font-family="monospace" fill="#8a6b6f" font-size="14" letter-spacing="4">
+      <text x="1120" y="295" text-anchor="end">STEP 01</text>
+      <text x="1120" y="318" text-anchor="end" fill="#e6002e">STEP 02 ▸</text>
+      <text x="1120" y="341" text-anchor="end">STEP 03</text>
+      <text x="1120" y="364" text-anchor="end" opacity="0.5">STEP 04</text>
+    </g>
 
-  <!-- 区切り -->
-  <rect x="380" y="355" width="440" height="1" fill="url(#hr)"/>
+    <!-- Accent left border (post-list 風) -->
+    <rect x="40" y="220" width="6" height="220" fill="#e6002e"/>
 
-  <!-- 副題ラベル -->
-  <g font-family="monospace" text-anchor="middle">
-    <text x="600" y="395" font-size="14" fill="#c9a9b3" letter-spacing="8">— TODAY'S CALL —</text>
-  </g>
+    <!-- Site title (主役) -->
+    <!-- Glitch shadow layers -->
+    <text x="600" y="295" font-family="sans-serif" font-size="128" font-weight="900"
+          letter-spacing="6" text-anchor="middle" fill="#e6002e" opacity="0.9">
+      へのへのんのの
+    </text>
+    <text x="596" y="295" font-family="sans-serif" font-size="128" font-weight="900"
+          letter-spacing="6" text-anchor="middle" fill="#00c8dc" opacity="0.25">
+      へのへのんのの
+    </text>
+    <text x="598" y="295" font-family="sans-serif" font-size="128" font-weight="900"
+          letter-spacing="6" text-anchor="middle" fill="#d8c9bf">
+      へのへのんのの
+    </text>
 
-  <!-- 副題: 曲名 -->
-  <g font-family="serif" text-anchor="middle">
-    <text x="600" y="450" font-size="34" fill="#ff3d6e" font-style="italic" letter-spacing="2">電話して!!!!!!!!!!</text>
-    <text x="600" y="485" font-size="20" fill="#c9a9b3" letter-spacing="3">（だって今から世界が終わるので）</text>
-  </g>
+    <!-- Divider -->
+    <rect x="380" y="335" width="440" height="2" fill="url(#hr)"/>
 
-  <!-- アーティスト -->
-  <g font-family="sans-serif" text-anchor="middle">
-    <text x="600" y="525" font-size="15" fill="#c9a9b3" fill-opacity="0.8" letter-spacing="4">SLAVE.V-V-R  feat.  初音ミク V4X (Sweet)</text>
-  </g>
+    <!-- Today label -->
+    <text x="600" y="378" font-family="monospace" font-size="16" letter-spacing="8"
+          text-anchor="middle" fill="#8a6b6f">— 今 日 の B G M —</text>
 
-  <!-- 黒猫 (隅に小さく) -->
-  <g transform="translate(1060, 500)" fill="#0a0508" stroke="#ff3d6e" stroke-opacity="0.55" stroke-width="1">
-    <path d="M 0 30 Q -8 18 -6 8 L -10 -6 L -4 -2 Q 0 -8 6 -2 L 12 -6 L 8 8 Q 10 18 0 30 Z"/>
-    <circle cx="-2" cy="6" r="1" fill="#ff7aa2" stroke="none"/>
-    <circle cx="4" cy="6" r="1" fill="#ff7aa2" stroke="none"/>
-  </g>
+    <!-- Song title (副題) -->
+    <text x="600" y="430" font-family="sans-serif" font-size="40" font-weight="700"
+          letter-spacing="4" text-anchor="middle" fill="#e6002e">
+      ヤラララ
+    </text>
 
-  <!-- ツツジの花びら散らし -->
-  <g fill="#ff3d6e" fill-opacity="0.6">
-    <circle cx="140" cy="220" r="3"/>
-    <circle cx="180" cy="280" r="2"/>
-    <circle cx="100" cy="340" r="2.5"/>
-    <circle cx="220" cy="180" r="1.5"/>
-    <circle cx="1070" cy="240" r="2.5"/>
-    <circle cx="1020" cy="300" r="2"/>
-    <circle cx="1100" cy="350" r="3"/>
-    <circle cx="980" cy="200" r="1.5"/>
-  </g>
+    <!-- Artist (さらに小) -->
+    <text x="600" y="468" font-family="sans-serif" font-size="20" letter-spacing="2"
+          text-anchor="middle" fill="#d8c9bf" opacity="0.8">
+      뭐든지모에화  feat.  重음테토SV2
+    </text>
+    <text x="600" y="468" font-family="sans-serif" font-size="20" letter-spacing="2"
+          text-anchor="middle" fill="#d8c9bf">
+      뭐든지모에화  feat.  重音テトSV2
+    </text>
 
-  <!-- 左下サインタグ -->
-  <g font-family="monospace" font-size="13" fill="#f0c674" fill-opacity="0.55" letter-spacing="3">
-    <text x="80" y="555">henohenonnono.log</text>
-  </g>
-  <g font-family="monospace" font-size="13" fill="#f0c674" fill-opacity="0.55" letter-spacing="3" text-anchor="end">
-    <text x="1120" y="555">2026.05.29</text>
+    <!-- Mood tag -->
+    <g transform="translate(600, 510)">
+      <rect x="-180" y="-18" width="360" height="32" fill="none" stroke="#e6002e" stroke-opacity="0.5"/>
+      <text x="0" y="4" font-family="sans-serif" font-size="14" letter-spacing="6"
+            text-anchor="middle" fill="#d8c9bf">嘲笑をはねのけて 一歩ずつ 前へ</text>
+    </g>
+
+    <!-- Bottom-left signature -->
+    <text x="60" y="600" font-family="monospace" font-size="12" letter-spacing="3" fill="#8a6b6f">
+      henohenonnono.blog
+    </text>
+    <text x="1140" y="600" font-family="monospace" font-size="12" letter-spacing="3" text-anchor="end" fill="#8a6b6f">
+      ▸ もう一歩先へ
+    </text>
   </g>
 </svg>
