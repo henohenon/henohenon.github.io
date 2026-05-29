@@ -179,13 +179,33 @@ SYSTEM_PROMPT に 3-4 行で:
 
 ### Phase 2: techniques selection を subagent + plan mode で分離
 
-(md が 15-20 個 超え or 質が plateau したら)
+(下記 threshold を超えたら、または質が plateau したら)
 
 - `generate-theme.ts` の前に Claude SDK で subagent 起動
 - plan mode (read-only tool) で「今日の曲・concept」から関連 techniques を N 個選ぶ
 - 親 generate-theme は subagent の結果 (md 名 list + 短い rationale) を受け取り、それだけ push
 
 Anthropic 公式の hybrid push/pull canonical example (CLAUDE.md + Glob/Grep/Read) と整合。
+
+#### Phase 2 / Phase 3 の発動 threshold
+
+Sonnet 4.6 は **200K tokens** context が天井。現在使用は 1 call あたり ~5K tokens (全体の 2.5%)。
+
+| Trigger | techniques 量 | 1 call 合計 | 200K 中 | アクション |
+|---|---|---|---|---|
+| MVP (5 md) | ~15K | ~20K | 10% | push のまま |
+| 拡充 (10 md) | ~30K | ~35K | 17% | push のまま |
+| **「今の 10 倍」(目標規模)** | ~50K | ~55K | **27%** | **問題なし、push 継続** |
+| md 20+ or 80K+ | ~80K | ~85K | 43% | **Phase 2 発動検討** (subagent + plan mode) |
+| md 30+ or 120K+ | ~120K | ~125K | 63% | filter inject (step 別) 導入、"Lost in the Middle" 警戒 |
+| md 50+ or 200K+ | ~200K | 超過 | 100%+ | Opus 4.7 (1M) 切替 or pull 化必須 |
+
+**当面 (10x まで) は push 一択で全く問題なし**。Phase 2 は md が 20+ 程度になってから検討。
+
+#### コスト感
+
+- SDK Sonnet 4.6: 50K input + 5K output × 3 call/日 = ~$0.25/日 ≈ **$7.5/月** (cache miss)、cache hit でほぼ変わらず
+- CLI (Pro/Max サブスク): 含まれる、**$0 (固定)**
 
 ### Phase 3: extended thinking 有効化
 
