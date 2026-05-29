@@ -71,6 +71,7 @@
 
 - [decisions.md](decisions.md) — 個別判断のログ
 - [feature-expansion-ideas.md](feature-expansion-ideas.md) — 拡張可能性カタログ
+- [ai-flow.md](ai-flow.md) — AI 生成パイプラインの設計
 - [research/](research/) — 語彙の母集団
 - [log/](log/) — 過去スナップショット (セッション記録 / 棚卸し記録 / journey)
 - [../TODO.md](../TODO.md) — 着手中・保留タスク

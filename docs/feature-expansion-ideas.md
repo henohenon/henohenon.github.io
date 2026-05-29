@@ -99,20 +99,18 @@ Claude が theme.css で書ける表現の幅を広げる常設機構。
 
 ---
 
-## P1 コンセプト先行生成
+## P1 コンセプト先行生成 — 別 call から同一 call (Plan-and-Solve) に変更
 
-generate-theme.ts に concept 生成ステップを追加:
+**当初案 (別 call)** は撤回。AI フロー研究 ([log/journey-2026-05-29.md](log/journey-2026-05-29.md)) の結果、
+**theme.css 生成と同一 call で Plan-and-Solve 形式** (Wang et al. ACL 2023) として実装する方針に変更。
 
-```
-曲情報 → CONCEPT_PROMPT → concept.txt (短文)
-曲情報 + concept → SYSTEM_PROMPT → theme.css
-曲情報 + concept + theme.css → OG_SYSTEM_PROMPT → og.svg
-曲情報 + concept + theme.css → OG_ARTICLE_TEMPLATE_SYSTEM_PROMPT → og.article-template.svg
-```
+詳細は [ai-flow.md](ai-flow.md) Step 1 を参照。
 
-- 保存先: `src/data/concept.txt`
-- theme.css 冒頭の「ムード:」行は削除して concept に統合
-- **手段としての位置付け、目的化禁止** (UI 表示しない / prompt 過剰構造化しない / 効果出なきゃ落とせる)
+概要:
+- concept は theme.css の **冒頭 CSS コメント**に embedded (50-100 字)
+- 後段 (og.svg / article-template) は theme.css を読むので自然に concept 引き継ぎ
+- 別 file (`src/data/concept.txt`) も別 call も不要
+- 「目的化禁止」の精神も保持
 
 ---
 
@@ -264,7 +262,9 @@ launchd / cron で日次自動実行 ([../TODO.md](../TODO.md) #1)。
 ## 関連
 
 - [direction.md](direction.md) — 北極星
+- [ai-flow.md](ai-flow.md) — AI 生成パイプライン設計
 - [../TODO.md](../TODO.md) — 着手中・保留タスク
 - [log/inventory-2026-05-25.md](log/inventory-2026-05-25.md) — 棚卸し記録
+- [log/journey-2026-05-29.md](log/journey-2026-05-29.md) — リサーチ + 議論経緯
 - [research/](research/) — 語彙の母集団
 - [../CLAUDE.md](../CLAUDE.md) — AI 向け運用規約
