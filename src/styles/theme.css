@@ -1,97 +1,126 @@
 /*
- * 曲名: FANTASY★DiSCO NIGHT
- * アーティスト: SAWTOWNE feat. 初音ミク
- * ムード: ネオン煌めくダンスフロア。マゼンタとシアンの光がぐるぐる回る、夢の彼方の真夜中ディスコ。
+ * 曲名: 電話して!!!!!!!!!!（だって今から世界が終わるので）
+ * アーティスト: SLAVE.V-V-R feat. 初音ミク V4X (Sweet)
+ * 一言ムード: 終末の薄明、キリシマツツジの紅と黒猫の影、受話器越しの最期のロックバラード
  */
 
 :root {
-  /* Palette: midnight disco — deep violet night, hot magenta neon, cyan strobe, gold mirror-ball */
-  --color-bg: #0d0726;
-  --color-bg-elev: #1a0f3d;
-  --color-fg: #fdf4ff;
-  --color-fg-muted: #c8b8ff;
-  --color-accent: #ff3df0;
-  --color-accent-2: #36e3ff;
-  --color-accent-3: #ffd84d;
+  /* キリシマツツジの紅 × 終末の黒 × 公衆電話の鈍い光 */
+  --color-bg: #14080f;
+  --color-fg: #fdeef0;
+  --color-accent: #ff3d6e;
+
+  --color-bg-soft: #1f0d18;
+  --color-fg-muted: #c9a9b3;
+  --color-azalea: #ff7aa2;
+  --color-doom: #5a1326;
+  --color-receiver: #f0c674;
+  --color-blackcat: #0a0508;
 
   --spacing-unit: 1rem;
-  --spacing-xs: calc(var(--spacing-unit) * 0.5);
-  --spacing-sm: calc(var(--spacing-unit) * 0.75);
-  --spacing-md: calc(var(--spacing-unit) * 1.25);
-  --spacing-lg: calc(var(--spacing-unit) * 2);
-  --spacing-xl: calc(var(--spacing-unit) * 3.5);
+  --spacing-xs: 0.375rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1.25rem;
+  --spacing-lg: 2.25rem;
+  --spacing-xl: 4rem;
 
-  --font-heading: 'Bebas Neue', 'Futura', 'Trebuchet MS', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-  --font-body: 'Helvetica Neue', 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-heading: 'Bodoni 72', 'Didot', 'Playfair Display', 'Yu Mincho',
+    '游明朝', 'Hiragino Mincho ProN', serif;
+  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic',
+    '游ゴシック', 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
 
-  --line-height-body: 1.75;
-  --line-height-heading: 1.15;
+  --line-height-body: 1.85;
+  --line-height-heading: 1.2;
 
-  --ease-default: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-strobe: steps(2, jump-none);
+  --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-doom: cubic-bezier(0.7, 0, 0.84, 0);
 
-  --shadow-neon: 0 0 12px rgba(255, 61, 240, 0.55), 0 0 32px rgba(54, 227, 255, 0.35);
-  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.45);
-
-  --radius: 0.75rem;
+  --radius-soft: 4px;
+  --shadow-receiver: 0 0 18px rgba(255, 61, 110, 0.35),
+    0 0 48px rgba(255, 61, 110, 0.15);
 }
 
-/* --- base canvas: the dance floor itself --- */
 html {
-  background-color: var(--color-bg);
+  background: var(--color-bg);
+  color: var(--color-fg);
 }
 
 body {
-  margin: 0;
-  color: var(--color-fg);
-  background-color: var(--color-bg);
-  background-image:
-    radial-gradient(circle at 15% 20%, rgba(255, 61, 240, 0.28), transparent 45%),
-    radial-gradient(circle at 85% 10%, rgba(54, 227, 255, 0.22), transparent 50%),
-    radial-gradient(circle at 50% 95%, rgba(255, 216, 77, 0.18), transparent 55%),
-    repeating-linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.02) 0 2px,
-      transparent 2px 14px
-    );
-  background-attachment: fixed;
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  font-size: 1.05rem;
-  letter-spacing: 0.01em;
+  background:
+    radial-gradient(ellipse at 18% 10%, rgba(255, 122, 162, 0.18), transparent 55%),
+    radial-gradient(ellipse at 82% 88%, rgba(90, 19, 38, 0.65), transparent 60%),
+    linear-gradient(180deg, #1a0a14 0%, #0c0408 100%);
+  background-attachment: fixed;
   min-height: 100vh;
+  margin: 0;
+  padding: var(--spacing-lg) var(--spacing-md);
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* --- typography: kinetic caps for headings --- */
+/* 終末のノイズ ─ 反射率0の黒猫が鳴いた電波 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+/* キリシマツツジの蕾 ─ ふっと開いて落ちる */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20vh;
+  right: -10vw;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 61, 110, 0.22), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+  animation: tsutsuji-bloom 12s var(--ease-default) infinite alternate;
+  z-index: 0;
+}
+
+@keyframes tsutsuji-bloom {
+  0%   { transform: scale(0.85) translateY(0); opacity: 0.55; }
+  100% { transform: scale(1.05) translateY(2vh); opacity: 0.85; }
+}
+
+/* 見出し ─ バラードのセリフ体 */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin: var(--spacing-lg) 0 var(--spacing-sm);
   color: var(--color-fg);
+  letter-spacing: 0.02em;
+  margin: 0 0 var(--spacing-md);
+  font-weight: 500;
 }
 
 h1 {
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  background: linear-gradient(95deg, var(--color-accent) 0%, var(--color-accent-3) 50%, var(--color-accent-2) 100%);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: 0 0 24px rgba(255, 61, 240, 0.35);
-  animation: discoShift 6s linear infinite;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-style: italic;
+  color: var(--color-azalea);
+  text-shadow: 0 0 24px rgba(255, 61, 110, 0.4);
 }
 
 h2 {
-  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-  color: var(--color-accent-2);
-  text-shadow: 0 0 10px rgba(54, 227, 255, 0.5);
-}
-
-h3 {
-  font-size: 1.4rem;
-  color: var(--color-accent-3);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  border-bottom: 1px dashed var(--color-doom);
+  padding-bottom: var(--spacing-xs);
 }
 
 p, li {
@@ -99,226 +128,232 @@ p, li {
 }
 
 a {
-  color: var(--color-accent-2);
+  color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px dashed currentColor;
-  padding-bottom: 1px;
-  transition: color 0.25s var(--ease-default),
-              text-shadow 0.25s var(--ease-default),
-              transform 0.25s var(--ease-default);
+  border-bottom: 1px solid transparent;
+  transition: color 280ms var(--ease-default),
+              border-color 280ms var(--ease-default),
+              text-shadow 280ms var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: var(--color-accent);
-  text-shadow: 0 0 8px var(--color-accent);
-  transform: translateY(-1px);
-  outline: none;
+  color: var(--color-azalea);
+  border-bottom-color: var(--color-azalea);
+  text-shadow: 0 0 12px rgba(255, 122, 162, 0.55);
 }
 
 a:focus-visible {
-  outline: 2px solid var(--color-accent-3);
+  outline: 2px solid var(--color-receiver);
   outline-offset: 3px;
 }
 
-code, pre {
-  font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
-  background-color: var(--color-bg-elev);
-  border-radius: 0.35rem;
-  padding: 0.1em 0.35em;
-  color: var(--color-accent-3);
+::selection {
+  background: var(--color-accent);
+  color: var(--color-blackcat);
 }
 
-pre {
-  padding: var(--spacing-md);
-  overflow-x: auto;
-  border: 1px solid rgba(255, 61, 240, 0.25);
-  box-shadow: var(--shadow-soft);
-}
-
-blockquote {
-  margin: var(--spacing-md) 0;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-left: 4px solid var(--color-accent);
-  background: linear-gradient(90deg, rgba(255, 61, 240, 0.08), transparent);
-  color: var(--color-fg-muted);
-  font-style: italic;
-}
-
-hr {
-  border: none;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-accent-2), transparent);
-  margin: var(--spacing-lg) 0;
-}
-
-/* --- layout containers --- */
+/* ─── サイトヘッダー / フッター ─── */
 .site-header {
   position: relative;
-  padding: var(--spacing-lg) var(--spacing-md);
-  text-align: center;
-  background: linear-gradient(135deg, rgba(255, 61, 240, 0.18), rgba(54, 227, 255, 0.18));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-
-.site-header::before {
-  content: "";
-  position: absolute;
-  inset: -50%;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    rgba(255, 61, 240, 0.18) 60deg,
-    transparent 120deg,
-    rgba(54, 227, 255, 0.18) 200deg,
-    transparent 260deg,
-    rgba(255, 216, 77, 0.18) 320deg,
-    transparent 360deg
-  );
-  animation: mirrorBall 14s linear infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.site-header > * {
-  position: relative;
   z-index: 1;
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 122, 162, 0.18);
+  margin-bottom: var(--spacing-xl);
+}
+
+.site-header::after {
+  content: '☎ 10¥ left ⋯ 都窪郡早島';
+  display: block;
+  margin-top: var(--spacing-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--color-receiver);
+  opacity: 0.7;
+  animation: receiver-flicker 4.2s steps(2, end) infinite;
+}
+
+@keyframes receiver-flicker {
+  0%, 92%, 100% { opacity: 0.7; }
+  94% { opacity: 0.15; }
+  96% { opacity: 0.85; }
 }
 
 .site-footer {
+  position: relative;
+  z-index: 1;
   margin-top: var(--spacing-xl);
   padding: var(--spacing-lg) var(--spacing-md);
+  border-top: 1px solid rgba(255, 122, 162, 0.18);
   text-align: center;
   color: var(--color-fg-muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(0deg, rgba(13, 7, 38, 0.9), transparent);
-  font-size: 0.9rem;
-  letter-spacing: 0.08em;
+  font-size: 0.875rem;
 }
 
+.site-footer::before {
+  content: '🐈‍⬛';
+  display: block;
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xs);
+  filter: drop-shadow(0 0 6px rgba(255, 61, 110, 0.5));
+  animation: blackcat-fall 9s var(--ease-doom) infinite;
+}
+
+@keyframes blackcat-fall {
+  0%   { transform: translateY(-12px) rotate(-6deg); opacity: 0.4; }
+  60%  { transform: translateY(2px) rotate(2deg); opacity: 1; }
+  100% { transform: translateY(-12px) rotate(-6deg); opacity: 0.4; }
+}
+
+/* ─── 投稿リスト ─── */
 .post-list {
   list-style: none;
   padding: 0;
-  margin: var(--spacing-lg) auto;
-  max-width: 720px;
+  margin: 0;
   display: grid;
   gap: var(--spacing-md);
+  position: relative;
+  z-index: 1;
+  max-width: 64rem;
+  margin-inline: auto;
 }
 
-.post-list li {
-  padding: var(--spacing-md);
-  background: linear-gradient(135deg, rgba(26, 15, 61, 0.85), rgba(13, 7, 38, 0.85));
-  border: 1px solid rgba(255, 61, 240, 0.3);
-  border-radius: var(--radius);
-  transition: transform 0.3s var(--ease-default),
-              box-shadow 0.3s var(--ease-default),
-              border-color 0.3s var(--ease-default);
+.post-list > * {
+  background: linear-gradient(
+    135deg,
+    rgba(31, 13, 24, 0.7) 0%,
+    rgba(20, 8, 15, 0.85) 100%
+  );
+  border: 1px solid rgba(255, 122, 162, 0.12);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-soft);
+  padding: var(--spacing-md) var(--spacing-lg);
+  backdrop-filter: blur(6px);
+  transition: transform 320ms var(--ease-default),
+              border-color 320ms var(--ease-default),
+              box-shadow 320ms var(--ease-default);
 }
 
-.post-list li:hover {
-  transform: translateY(-3px) rotate(-0.4deg);
-  box-shadow: var(--shadow-neon);
-  border-color: var(--color-accent-2);
+.post-list > *:hover {
+  transform: translateX(4px);
+  border-left-color: var(--color-azalea);
+  box-shadow: var(--shadow-receiver);
 }
 
+/* ─── 記事 ─── */
 article.post {
-  max-width: 720px;
-  margin: var(--spacing-lg) auto;
-  padding: var(--spacing-lg) var(--spacing-md);
-  background: linear-gradient(180deg, rgba(26, 15, 61, 0.6), rgba(13, 7, 38, 0.6));
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(54, 227, 255, 0.2);
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+  background: linear-gradient(
+    180deg,
+    rgba(31, 13, 24, 0.55) 0%,
+    rgba(12, 4, 8, 0.75) 100%
+  );
+  border: 1px solid rgba(255, 122, 162, 0.15);
+  border-radius: var(--radius-soft);
 }
 
-article.post header {
+article.post::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-accent) 50%,
+    transparent 100%
+  );
   margin-bottom: var(--spacing-md);
-  padding-bottom: var(--spacing-sm);
-  border-bottom: 2px dotted rgba(255, 216, 77, 0.4);
+  animation: ringtone 3.6s var(--ease-default) infinite;
 }
 
-article.post time {
-  display: inline-block;
-  font-family: var(--font-heading);
-  letter-spacing: 0.15em;
-  color: var(--color-accent-3);
-  font-size: 0.85rem;
-  padding: 0.2em 0.6em;
-  background: rgba(255, 216, 77, 0.12);
-  border-radius: 999px;
+@keyframes ringtone {
+  0%, 100% { transform: scaleX(0.2); opacity: 0.3; }
+  50%      { transform: scaleX(1);   opacity: 1; }
 }
 
-/* --- selection: a little flash on every grab --- */
-::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
-  text-shadow: none;
+article.post blockquote {
+  border-left: 3px solid var(--color-azalea);
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-xs) var(--spacing-md);
+  color: var(--color-fg-muted);
+  font-style: italic;
+  background: rgba(255, 61, 110, 0.06);
 }
 
-/* --- buttons / interactive chips --- */
+article.post code,
+article.post pre {
+  font-family: var(--font-mono);
+  background: rgba(10, 5, 8, 0.7);
+  color: var(--color-receiver);
+  border-radius: var(--radius-soft);
+}
+
+article.post code {
+  padding: 0.1em 0.4em;
+  font-size: 0.9em;
+}
+
+article.post pre {
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  border: 1px solid rgba(255, 122, 162, 0.15);
+}
+
+article.post hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-doom),
+    var(--color-accent),
+    var(--color-doom),
+    transparent
+  );
+  margin: var(--spacing-lg) 0;
+}
+
+/* ボタン / インタラクション */
 button,
 .button {
-  font-family: var(--font-heading);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: var(--spacing-sm) var(--spacing-md);
-  color: var(--color-bg);
-  background: linear-gradient(95deg, var(--color-accent), var(--color-accent-3));
+  font-family: var(--font-body);
+  background: var(--color-accent);
+  color: var(--color-blackcat);
   border: none;
-  border-radius: 999px;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-soft);
   cursor: pointer;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
-  transition: transform 0.2s var(--ease-default),
-              box-shadow 0.2s var(--ease-default),
-              filter 0.2s var(--ease-default);
+  letter-spacing: 0.05em;
+  transition: transform 200ms var(--ease-default),
+              box-shadow 200ms var(--ease-default),
+              background-color 200ms var(--ease-default);
 }
 
 button:hover,
 .button:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.1);
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4), var(--shadow-neon);
+  background: var(--color-azalea);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-receiver);
 }
 
 button:active,
 .button:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+  transform: translateY(0);
 }
 
-/* --- keyframes: the strobe and the mirror ball --- */
-@keyframes discoShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes mirrorBall {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-@keyframes neonPulse {
-  0%, 100% { text-shadow: 0 0 8px var(--color-accent), 0 0 18px var(--color-accent); }
-  50%      { text-shadow: 0 0 14px var(--color-accent-2), 0 0 28px var(--color-accent-2); }
-}
-
-article.post h1,
-article.post h2 {
-  animation: neonPulse 4.5s ease-in-out infinite;
-}
-
-/* --- accessibility: stop the party for those who need it --- */
+/* ─── reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation: none !important;
     transition: none !important;
-  }
-
-  h1 {
-    background-position: 0% 50%;
   }
 }
