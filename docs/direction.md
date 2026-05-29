@@ -60,7 +60,7 @@
 
 進捗の大枠:
 - **実装済**: OGP テーマ追従 / favicon テーマ追従 / docs 整備
-- **方針確定 / 実装未**: C1 view-transition / C2 cursor bridge / C3 時刻シフト / C7+ base.css 削減 / P1 concept-first
+- **方針確定 / 実装未**: C1 view-transition / C2 cursor bridge / C3 時刻シフト / C7+ base.css 削減 / P1 Plan-and-Solve 方向先行
 - **これから決める**: 表現拡充の全体方針、AI フロー設計、HTML 構造化テンプレ化、棚上げ復活分の具体運用
 - **継続**: techniques/ 母体整備 (D 群)
 - **最後**: ローカル cron 自動化

@@ -8,7 +8,7 @@
 
 ## 1. 多層 Radial Gradient (Glow Field)
 
-**コンセプト**: 複数の `radial-gradient` を重ね、画面に "光の溜まり" を作る。ネオン / ディスコ / 夜景。
+**狙い**: 複数の `radial-gradient` を重ね、画面に "光の溜まり" を作る。ネオン / ディスコ / 夜景。
 
 **CSS**:
 ```css
@@ -28,7 +28,7 @@ body {
 
 ## 2. Conic Gradient (放射・回転)
 
-**コンセプト**: 中心から放射状の色、または時計の文字盤的な分割。回転 animation でミラーボール / プリズム化。
+**狙い**: 中心から放射状の色、または時計の文字盤的な分割。回転 animation でミラーボール / プリズム化。
 
 **CSS**:
 ```css
@@ -57,7 +57,7 @@ body {
 
 ## 3. Repeating Linear Gradient (Stripes / Halftone)
 
-**コンセプト**: 縞模様、ハーフトーン、紙焼け感。retro / print / 老舗感。
+**狙い**: 縞模様、ハーフトーン、紙焼け感。retro / print / 老舗感。
 
 **CSS**:
 ```css
@@ -78,7 +78,7 @@ body {
 
 ## 4. SVG Pattern (Data URL)
 
-**コンセプト**: 細かい紋様 / ドット / 幾何パターン。SVG `<pattern>` を base64 で background-image に。
+**狙い**: 細かい紋様 / ドット / 幾何パターン。SVG `<pattern>` を base64 で background-image に。
 
 **CSS**:
 ```css
@@ -94,7 +94,7 @@ body {
 
 ## 5. Box-Shadow Particle Field
 
-**コンセプト**: 1 要素の `box-shadow` を複数積み、星空 / 雪 / 粒子に。要素全体を transform で動かす。
+**狙い**: 1 要素の `box-shadow` を複数積み、星空 / 雪 / 粒子に。要素全体を transform で動かす。
 
 **CSS**:
 ```css
@@ -120,7 +120,7 @@ body {
 
 ## 6. Mesh Gradient (CSS Hougang 風)
 
-**コンセプト**: 滑らかな多色グラデ。柔らかい春 / instagrammy / pastel。
+**狙い**: 滑らかな多色グラデ。柔らかい春 / instagrammy / pastel。
 
 **CSS**:
 ```css
@@ -140,7 +140,7 @@ body {
 
 ## 7. Noise Texture (CSS で生成)
 
-**コンセプト**: ザラついた質感、film grain。SVG `<feTurbulence>` で生成、低 opacity で重ねる。
+**狙い**: ザラついた質感、film grain。SVG `<feTurbulence>` で生成、低 opacity で重ねる。
 
 **CSS**:
 ```css
@@ -161,7 +161,7 @@ body::after {
 
 ## 8. Single Solid + Vignette
 
-**コンセプト**: 単色 + 周辺の暗いビネット。劇場 / 映画 / 集中。
+**狙い**: 単色 + 周辺の暗いビネット。劇場 / 映画 / 集中。
 
 **CSS**:
 ```css
@@ -178,7 +178,7 @@ body {
 
 ## 9. Dance Floor (Checker / Grid Floor)
 
-**コンセプト**: 床を引いた感じ。perspective + grid lines で disco floor / vaporwave。
+**狙い**: 床を引いた感じ。perspective + grid lines で disco floor / vaporwave。
 
 **CSS**:
 ```css
@@ -203,7 +203,7 @@ body::after {
 
 ## 10. Scanlines (CRT 風)
 
-**コンセプト**: 水平の細い線を repeat、CRT モニター風。glitch / retro tech。
+**狙い**: 水平の細い線を repeat、CRT モニター風。glitch / retro tech。
 
 **CSS**:
 ```css

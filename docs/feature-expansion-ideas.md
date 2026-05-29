@@ -13,8 +13,8 @@
 
 1. **AI フロー全体図の docs/ 書き出し** ★ ここから
 2. **C 群 (土台拡張) のうち未実装の機構** — C1 / C2 / C3 / C7+
-3. **layout-patterns.md MVP (5-7 個 コンセプト形式)** — レイアウト hybrid の母体
-4. **P1 concept-first 生成 + decision tree** — generate-theme.ts に組み込み
+3. **layout-patterns.md MVP (5-7 個 パターン形式)** — レイアウト hybrid の母体
+4. **P1 Plan-and-Solve 生成 + decision tree** — generate-theme.ts に組み込み
 5. **C-α 注入機構** — techniques/*.md を prompt に流す
 6. **D 群 (techniques/) 拡充** — 継続
 7. **F1 フォント curation** (規模大、別 phase)
@@ -67,16 +67,16 @@ Claude が theme.css で書ける表現の幅を広げる常設機構。
 
 ---
 
-## レイアウト方針: concept-first hybrid
+## レイアウト方針: Plan-and-Solve + パターン照合 hybrid
 
 (旧 F2「テンプレ複数化 (BaseMagazine 等)」は撤回)
 
 ```
 1. Claude が今日の曲を読む
-2. concept を文字列で書く (P1 concept-first)
+2. palette / typography / mood の方向を冒頭コメントに宣言 (Plan-and-Solve)
 3. layout-patterns.md を眺める
 4. 判断:
-   a. concept が既存パターンに合致 → そのパターンを base に書く (≒ Mode 1 内 Mode 3)
+   a. 宣言が既存パターンに合致 → そのパターンを base に書く (≒ Mode 1 内 Mode 3)
    b. 部分一致 → パターンを base に拡張・改変
    c. どれにも合致しない → 自由に書く (Mode 3 fallback)
 5. 配色 / typography / 装飾を自由に乗せる
@@ -84,7 +84,7 @@ Claude が theme.css で書ける表現の幅を広げる常設機構。
 
 - HTML 構造は 1 種 (現状のまま)
 - C7+ で base.css の `.container` 等を撤廃 → Claude が CSS でレイアウト自由
-- `layout-patterns.md` は **コンセプト形式** で書く (コンセプト名 + 適合する曲 + 避けるとき + CSS のヒント)
+- `layout-patterns.md` は **パターン形式** で書く (型名 + 狙い + 適合する曲 + 避けるとき + CSS のヒント)
 - 「テンプレ menu に閉じ込めない、Mode 3 の余地は残す」「テンプレあれば優先使用、無ければ自由」のソフトな優先順位
 
 ### layout-patterns.md の MVP イメージ (5-7 個)
@@ -99,17 +99,17 @@ Claude が theme.css で書ける表現の幅を広げる常設機構。
 
 ---
 
-## P1 コンセプト先行生成 — 別 call から同一 call (Plan-and-Solve) に変更
+## P1 方向先行生成 — 別 call から同一 call (Plan-and-Solve) に変更
 
-**当初案 (別 call)** は撤回。AI フロー研究 ([log/journey-2026-05-29.md](log/journey-2026-05-29.md)) の結果、
+**当初案 (別 call で先に方向を書かせる)** は撤回。AI フロー研究 ([log/journey-2026-05-29.md](log/journey-2026-05-29.md)) の結果、
 **theme.css 生成と同一 call で Plan-and-Solve 形式** (Wang et al. ACL 2023) として実装する方針に変更。
 
 詳細は [ai-flow.md](ai-flow.md) Step 1 を参照。
 
 概要:
-- concept は theme.css の **冒頭 CSS コメント**に embedded (50-100 字)
-- 後段 (og.svg / article-template) は theme.css を読むので自然に concept 引き継ぎ
-- 別 file (`src/data/concept.txt`) も別 call も不要
+- palette / typography / mood を theme.css の **冒頭 CSS コメント**として 50-100 字で宣言
+- 後段 (og.svg / article-template) は theme.css を読むので自然に方向を引き継ぐ
+- 別 file の保存も別 call も不要
 - 「目的化禁止」の精神も保持
 
 ---
@@ -132,7 +132,7 @@ Mode 1 を物理制約から受容 (アセット必要、無限不可)。OFL ラ
 - 本文用 `--font-body` は system stack 維持 (重さ・即時表示)
 - typography.md (= D3) で各フォントの性格を inspire として書く
 
-**(F2 旧案撤回)** — レイアウトテンプレ複数化は不要、上記 concept-first hybrid に置換。
+**(F2 旧案撤回)** — レイアウトテンプレ複数化は不要、上記 Plan-and-Solve + パターン照合 hybrid に置換。
 
 ---
 
@@ -208,7 +208,7 @@ techniques/ で「現代的レスポンシブ語彙」として書く:
 ## theme-source.json スリム化
 
 現状 `{ songId, songName, artist, generatedAt }`。これ以上削るものなし、**現状維持**。
-将来 mood / theme-class / palette 等を生やす場合は別 file (concept.txt 等) に分けて、theme-source.json は最小を保つ。
+将来 mood / theme-class / palette 等を生やす場合は別 file に分けて、theme-source.json は最小を保つ。
 
 ---
 
@@ -223,7 +223,7 @@ techniques/ で「現代的レスポンシブ語彙」として書く:
 | **D4** | motion.md (scroll-driven / @starting-style 等含む) |
 | **D5** | view-transitions.md (C1 後) |
 | **D6** | cursor-and-microinteractions.md (C2 後、棚上げ装飾の純 CSS 組ここに) |
-| **D7** | layout-patterns.md ★優先 (concept-first hybrid の母体) |
+| **D7** | layout-patterns.md ★優先 (Plan-and-Solve hybrid の母体) |
 | **D8** | vocaloid-aesthetic を prompt 用に翻訳 |
 | **D9** | color-application.md (`color-mix` / OKLCH 等) |
 | **D10** (新) | markdown-elements.md (`blockquote` / `pre` / `code` / `table` / `details` 等) |
@@ -255,7 +255,7 @@ launchd / cron で日次自動実行 ([../TODO.md](../TODO.md) #1)。
 
 - A1-A5 (入力強化) / B 全部 (再生成系) / E1 (mood) / E3 (404 強化) / E6 (失敗ログ) / E4 (source 拡張)
 - G (中身: 自己紹介 / 記事執筆 / archive 発掘 — 機能ではなく中身、別軸)
-- F2 旧案 「テンプレ複数化 (BaseMagazine 等)」 — concept-first hybrid に置換
+- F2 旧案 「テンプレ複数化 (BaseMagazine 等)」 — Plan-and-Solve hybrid に置換
 
 ---
 

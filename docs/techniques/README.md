@@ -10,7 +10,7 @@ Claude への inspiration 用 md カタログ。`generate-theme.ts` から **pus
 
 | ID | File | 役割 | 状態 |
 |---|---|---|---|
-| **D7** | [layout-patterns.md](layout-patterns.md) | レイアウトのコンセプト型 (concept-first hybrid 母体) | ✓ MVP |
+| **D7** | [layout-patterns.md](layout-patterns.md) | レイアウトの型カタログ (Plan-and-Solve 生成の母体) | ✓ MVP |
 | **D1** | [backgrounds.md](backgrounds.md) | 背景の手法 | ✓ MVP |
 | **D2** | [decorations.md](decorations.md) | 装飾の手法 | ✓ MVP |
 | **D4** | [motion.md](motion.md) | 動き (transition / @keyframes / scroll-driven / @starting-style) | ✓ MVP |
@@ -27,9 +27,9 @@ Claude への inspiration 用 md カタログ。`generate-theme.ts` から **pus
 
 各 md は以下を満たす:
 
-- **inspire として渡す前提**: Claude が今日の曲・concept に応じて使う / 使わない判断。**強制ではない**
+- **inspire として渡す前提**: Claude が今日の曲に応じて使う / 使わない判断。**強制ではない**
 - **CSS-only で書ける手法のみ** (現状の方針、JS は将来 re-visit)
-- **コンセプト形式**: 手法名 + 何のために使うか + どんな曲に合うか / 避けるか + CSS のヒント (snippets) を持つ
+- **形式**: 手法名 + 狙い (何のために使うか) + どんな曲に合うか / 避けるか + CSS のヒント (snippets)
 - **AI っぽさを抜く** ことを目的に、引用元 (印刷文化 / 音楽文化 / Web デザインの先行事例) を付ける
 - 1 md ~50-200 行を目安に。大きすぎたら分割
 

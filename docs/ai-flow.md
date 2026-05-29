@@ -14,7 +14,7 @@
 
 scripts/generate-theme.ts
   [0] 曲選定 (現状維持)
-  [1] theme.css 生成 (push + Plan-and-Solve、concept を CSS 冒頭コメントに embedded)
+  [1] theme.css 生成 (push + Plan-and-Solve、palette / typography / mood を冒頭コメントに宣言)
   [2] og.svg 生成
   [3] og.article-template.svg 生成
 
@@ -53,12 +53,12 @@ LLM call は daily で **3 個** (theme / og / article)。
 > - 今日の color palette の方針
 > - typography の方向性
 > - mood / atmosphere
-> - (もし concept がいずれかの layout-pattern に合致するなら、その pattern 名を併記)
+> - (もし上記宣言がいずれかの layout-pattern に合致するなら、その pattern 名を併記)
 >
 > その下に theme.css の中身を書いてください。
 
-→ concept は theme.css の **冒頭 CSS コメント**に embedded。別 file / 別 call は持たない。
-→ og.svg / article-template はこの theme.css を user message で受け取るので、自然に concept を引き継ぐ。
+→ 上記の方向宣言は theme.css の **冒頭 CSS コメント**として残る。別 file / 別 call は持たない。
+→ og.svg / article-template はこの theme.css を user message で受け取るので、宣言が自然に下流に引き継がれる。
 
 **失敗 fallback:** throw → 以降 skip、前日 theme.css 温存。
 
@@ -66,7 +66,7 @@ LLM call は daily で **3 個** (theme / og / article)。
 
 **プロンプト構造:**
 - System Prompt = 共通 preamble + og.svg 用指示 + 関連 techniques (layout/decoration 系)
-- User Message = 曲 + 生成済 theme.css (concept コメント含む)
+- User Message = 曲 + 生成済 theme.css (冒頭の方向宣言コメント含む)
 
 **失敗 fallback:** catch、前日 og.svg 温存。
 
@@ -102,9 +102,9 @@ Claude 介在なし、`assets/favicon.template.svg` の `{{BG}}` `{{FG}}` を th
 - Plan-and-Solve ([Wang et al. ACL 2023](https://arxiv.org/abs/2305.04091)) が「同一 call 内で plan を書かせて続けて実装」の canonical 形
 - creative single-shot task では同一 call が安全
 
-→ concept = theme.css の冒頭 CSS コメント。下流 step は theme.css を読むだけで自然に concept 引き継ぎ。
+→ 今日の方向は theme.css の冒頭 CSS コメントに宣言される。下流 step は theme.css を読むだけで自然に引き継がれる。
 
-(旧 P1「別 call concept-first」案は廃止、Plan-and-Solve 同一 call に置換)
+(旧 P1「別 call で方向を先に書かせる」案は廃止、Plan-and-Solve 同一 call に置換)
 
 ### 3. Reflection / wishlist は別 script、on-demand
 
@@ -171,7 +171,7 @@ CLI 経路: 素通り (CLI 側の暗黙 caching に任せる)。
 
 SYSTEM_PROMPT に 3-4 行で:
 
-> 今日の concept (上記で書いた冒頭コメント) が `layout-patterns.md` のいずれかに合致するなら、そのパターンを base に書いてください。部分一致なら拡張・改変、合致しないなら自由に書いてください。
+> 上記で書いた冒頭コメントの方向 (palette / typography / mood) が `layout-patterns.md` のいずれかに合致するなら、そのパターンを base に書いてください。部分一致なら拡張・改変、合致しないなら自由に書いてください。
 
 ---
 
@@ -182,7 +182,7 @@ SYSTEM_PROMPT に 3-4 行で:
 (下記 threshold を超えたら、または質が plateau したら)
 
 - `generate-theme.ts` の前に Claude SDK で subagent 起動
-- plan mode (read-only tool) で「今日の曲・concept」から関連 techniques を N 個選ぶ
+- plan mode (read-only tool) で「今日の曲・方向宣言」から関連 techniques を N 個選ぶ
 - 親 generate-theme は subagent の結果 (md 名 list + 短い rationale) を受け取り、それだけ push
 
 Anthropic 公式の hybrid push/pull canonical example (CLAUDE.md + Glob/Grep/Read) と整合。
@@ -232,7 +232,7 @@ Sonnet 4.6 は **200K tokens** context が天井。現在使用は 1 call あた
 1. **この設計を `direction.md` / `feature-expansion-ideas.md` に反映**
    - P1 を「同一 call で Plan-and-Solve」に書き換え
    - C-α (techniques inject 機構) の方針更新 (filter は MVP では無し)
-2. **C7+ base.css 削減** — concept-driven layout を Claude が書ける土台
+2. **C7+ base.css 削減** — Claude が CSS でレイアウトを書ける土台
 3. **`techniques/*.md` の MVP** — 最低限 `layout-patterns.md` + 1-2 個を書く
 4. **`generate-theme.ts` を Plan-and-Solve 形式に書き換え** — SYSTEM_PROMPT 更新、techniques inject、prompt caching
 5. **C1 view-transition / C2 cursor bridge / C3 時刻シフト** — 任意の順で
