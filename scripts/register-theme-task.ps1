@@ -1,19 +1,22 @@
 # register-theme-task.ps1
 #
-# henohenon-daily-theme を Windows タスクスケジューラに登録する。
-# - 1 時間ごとに発火 (= PC 起動中は毎時チェック)
-# - StartWhenAvailable: PC がオフだった時間帯の分は、起動後に可能になり次第 1 回実行 (取りこぼし回収)
-# - /IT = ログオン中のみ実行 / パスワード保存なし
-#   → push は HTTPS + Git Credential Manager 経由なので、ユーザーセッションで走る必要がある
-# - 管理者権限は不要 (現ユーザーの対話タスクのため)
+# Register the henohenon-daily-theme task in Windows Task Scheduler.
+# - Fires hourly at minute :39 (avoids the top-of-hour rush)
+# - StartWhenAvailable: if the PC was off, run once ASAP after it comes back (catch-up)
+# - /IT = run only while logged on, no stored password
+#   (push uses HTTPS + Git Credential Manager, which needs the user session)
+# - No admin needed (per-user interactive task)
 #
-# 実装メモ: Windows PowerShell 5.1 の New-ScheduledTaskTrigger は時刻トリガーへの
-#   繰り返し付与が通らない (Repetition プロパティ非対応 / CIM トリガーは型名不一致で
-#   Register-ScheduledTask に弾かれる)。そのため作成は schtasks /SC HOURLY に任せ、
-#   取りこぼし回収・バッテリー時実行などの細かい設定だけ Set-ScheduledTask で補正する。
+# ASCII-only on purpose: Windows PowerShell 5.1 reads a BOM-less .ps1 as ANSI (CP932 on
+# JP Windows), so non-ASCII comments corrupt tokenization. Keep this file ASCII.
 #
-# 実行:   powershell -ExecutionPolicy Bypass -File scripts\register-theme-task.ps1
-# 解除:   Unregister-ScheduledTask -TaskName henohenon-daily-theme -Confirm:$false
+# Implementation note: on PS 5.1, New-ScheduledTaskTrigger cannot attach an hourly
+# repetition to a time trigger (no Repetition param; a CIM trigger is rejected by
+# Register-ScheduledTask on a type-name mismatch). So we create with `schtasks
+# /SC HOURLY` and only tweak catch-up / battery settings via Set-ScheduledTask.
+#
+# Run:       powershell -ExecutionPolicy Bypass -File scripts\register-theme-task.ps1
+# Remove:    Unregister-ScheduledTask -TaskName henohenon-daily-theme -Confirm:$false
 
 $ErrorActionPreference = "Stop"
 
@@ -25,21 +28,21 @@ if (-not (Test-Path $wrapper)) {
   throw "wrapper not found: $wrapper"
 }
 
-# 1 時間ごと / ログオン中のみ (/IT) / 既存があれば上書き (/F)
+# Hourly at :39 / only while logged on (/IT) / overwrite if it already exists (/F)
 $tr = "powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$wrapper`""
-schtasks /Create /TN $taskName /TR $tr /SC HOURLY /MO 1 /ST 00:00 /IT /F
+schtasks /Create /TN $taskName /TR $tr /SC HOURLY /MO 1 /ST 00:39 /IT /F
 if ($LASTEXITCODE -ne 0) {
   throw "schtasks /Create failed (exit $LASTEXITCODE)"
 }
 
-# 取りこぼし回収 + バッテリー時も実行 + 多重起動抑止 + 実行時間上限
+# Catch-up on missed runs + run on battery + suppress overlap + cap run time.
 $task = Get-ScheduledTask -TaskName $taskName
 $task.Settings.StartWhenAvailable = $true
 $task.Settings.DisallowStartIfOnBatteries = $false
 $task.Settings.StopIfGoingOnBatteries = $false
 $task.Settings.ExecutionTimeLimit = "PT30M"
 $task.Settings.MultipleInstances = "IgnoreNew"
-$task.Description = "henohenon.github.io: 毎時、今日まだ未更新なら theme 生成→commit→push (PC 起動中のみ / 取りこぼしは起動後に回収)"
+$task.Description = "henohenon.github.io: hourly check; if today is not updated yet, generate theme then push (only while logged on; missed runs caught up after boot)"
 Set-ScheduledTask -InputObject $task | Out-Null
 
 Write-Host "registered: $taskName"
