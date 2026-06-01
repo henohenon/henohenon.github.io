@@ -27,7 +27,8 @@ Write-Log ("==== {0} run ====" -f (Get-Date -Format "yyyy-MM-dd HH:mm:ss"))
 Write-Log ("repo={0}" -f $repo)
 Write-Log ("entry={0}" -f $dailyTs)
 
-# Make sure bun is reachable even when the task environment lacks it on PATH.
+# Make sure bun (D:\bun\bin) and the Claude CLI (~\.local\bin) are reachable even when
+# the task environment has a thinner PATH than an interactive session.
 foreach ($d in @("D:\bun\bin", (Join-Path $env:USERPROFILE ".local\bin"))) {
   if ((Test-Path $d) -and ($env:PATH -notlike "*$d*")) { $env:PATH = "$d;$env:PATH" }
 }
@@ -39,6 +40,19 @@ if (-not (Test-Path $dailyTs)) {
   Write-Log "ERROR: entry not found: $dailyTs"; Write-Log "==== exit 2 ===="; exit 2
 }
 Write-Log ("bun={0}" -f $bun)
+
+# Pin the Claude CLI to an absolute path so generate-theme does not rely on PATH order.
+# Only step 3 (first run of the day) needs it, so warn-but-continue if it is missing:
+# step 1/2 (nothing-to-do / push-only) must still work offline-from-claude.
+if (-not $env:CLAUDE_BIN) {
+  $claude = (Get-Command claude -ErrorAction SilentlyContinue).Source
+  if ($claude) { $env:CLAUDE_BIN = $claude }
+}
+if ($env:CLAUDE_BIN) {
+  Write-Log ("claude={0}" -f $env:CLAUDE_BIN)
+} else {
+  Write-Log "WARN: claude not found; theme generation (step 3) will fail until it is installed or CLAUDE_BIN is set"
+}
 
 # Launch bun via Start-Process, redirecting stdout/stderr to temp files.
 # Why: in PowerShell 5.1, piping a native command's `2>&1` mangles output and exit code.

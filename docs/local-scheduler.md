@@ -22,7 +22,7 @@ Windows タスクスケジューラ (毎時 :39)
 | --- | --- |
 | `scripts/daily-theme.ts` | コミットベースで「今日もう更新済みか」を判定し、未更新なら生成→push。**push はここ** |
 | `scripts/generate-theme.ts` | VocaDB→Claude でファイル生成し、デフォルトで `chore(theme)` コミット。**commit はここ** (`--no-commit` で抑止)。push はしない |
-| `scripts/run-daily-theme.ps1` | タスクから呼ばれる Windows 専用ラッパ。PATH 補正・ログ・終了コード回収 |
+| `scripts/run-daily-theme.ps1` | タスクから呼ばれる Windows 専用ラッパ。PATH 補正・`CLAUDE_BIN` 固定・ログ・終了コード回収 |
 | `scripts/register-theme-task.ps1` | タスクスケジューラへの登録 |
 
 commit と push を分離しているのは、**「生成 + commit は済んだが push だけ失敗」した日に、
@@ -34,7 +34,8 @@ JST の「今日」を基準に、コミットメッセージ `chore(theme):` �
 
 ```
 git fetch origin main            # オフラインなら警告して続行
-1. origin/main に今日の chore(theme) コミットあり  → 何もしない (= デプロイ済み)
+1. origin/main に今日の chore(theme) コミットあり  → 何もしない (ローカルに一切触れず終了)
+   git merge --ff-only origin/main  # 1 を抜けた = 何か手を加える前にローカルを最新へ追従
 2. ローカル main に今日の chore(theme) コミットあり (未 push) → push だけ (再生成しない)
 3. どちらも無し → bun run generate-theme (生成+commit) → push
 ```
@@ -42,6 +43,17 @@ git fetch origin main            # オフラインなら警告して続行
 - 普段 (PC 常時起動): 1 日の最初の 1 回だけ 3 が走り、残りは 1 で即終了。
 - 朝 PC オフ → 昼起動: 起動後最初の毎時で 3 が走り取りこぼしを回収。
 - push だけ失敗した日: 次回 2 が拾って push のみ再試行 (曲が変わる事故を防ぐ)。
+
+### 段階 1 を抜けた後の ff-only 追従 (non-ff push 対策)
+
+別マシン等で `origin/main` が進んでいると、ローカルが古いまま生成コミットを積んでしまい、
+push が non-ff で弾かれ続ける (段階 2 が毎回 reject される無限ループ) ことがある。これを避けるため、
+**段階 1 を抜けた直後 (= 生成 or push する前) に `git merge --ff-only origin/main` でローカル main を最新へ前進させる**。
+
+- ローカルが既に先行 (未 push の theme コミットあり) なら `origin/main` は祖先なので no-op。段階 2 はそのまま成立。
+- 真に分岐 / 作業ツリーに衝突する変更がある場合は **ff できない旨をログに出して続行**するだけ
+  (履歴を勝手に rebase/merge して壊さない — 安全側)。この場合 push は依然弾かれるが、ログで気づける。
+- 段階 1 で終わるとき (= デプロイ済み) は**ローカルに一切触れない** (副作用最小化)。`--check` でも ff はせず `would:` を出すだけ。
 
 ### 判定クエリ
 
@@ -66,6 +78,17 @@ git log <ref> --since="<今日0時JST>+09:00" --fixed-strings --grep="chore(them
 - **`/IT` = ログオン中のみ実行・パスワード保存なし**
   - push は HTTPS + Git Credential Manager 経由なので、ユーザーセッションで走る必要がある
   - SYSTEM や「ログオン問わず」だと push 認証が取れない
+
+### ラッパの PATH / CLAUDE_BIN 補正
+
+タスクスケジューラの実行環境は対話セッションより PATH が薄いことがある。ラッパは起動時に:
+
+- `D:\bun\bin` (bun) と `~\.local\bin` (Claude CLI) を PATH に前置 (無ければ無視)。
+- `bun` が見つからなければ即 `exit 127` (これが無いと何も動かないため致命扱い)。
+- **`claude` を絶対パスで解決して `CLAUDE_BIN` に固定**し、ログに `claude=...` を出す。
+  generate-theme は `process.env.CLAUDE_BIN ?? "claude"` で見るので、PATH 順序に依存せず確実に同じ binary を使う。
+  見つからない時は **warn して続行** — `claude` を要るのは段階 3 だけで、段階 1/2 (何もしない / push のみ) は
+  `claude` 不在でも成立させたいため、ここでは落とさない (生成時に generate-theme 側が明示エラーにする)。
 
 ### 実装上の制約 (PS 5.1)
 

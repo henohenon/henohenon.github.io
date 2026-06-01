@@ -49,6 +49,26 @@ function todayJst(): { date: string; sinceIso: string } {
   return { date, sinceIso: `${date}T00:00:00+09:00` };
 }
 
+/**
+ * ローカル main を origin/main へ fast-forward で前進させる (ff できなければ何もしない)。
+ *
+ * 別マシン等で origin/main が進んでいると、生成コミットを古い土台の上に積んでしまい
+ * push が non-ff で弾かれ続ける (段階 2 が毎回 reject される無限ループ) ことがある。
+ * 生成 / push の前に最新へ追従させておくことで、push を確実に fast-forward にする。
+ *
+ * - ローカルが既に先行 (未 push の theme コミットあり) なら origin/main は祖先なので no-op。
+ * - 真に分岐している / 作業ツリーに衝突する変更がある場合は ff できず、ログだけ出して続行
+ *   (履歴を勝手に rebase/merge はしない — 安全側に倒す)。
+ */
+function fastForwardToOrigin(): void {
+  const r = git(["merge", "--ff-only", "origin/main"]);
+  if (r.code === 0) {
+    log("ローカル main は origin/main に追従済み (ff または既に最新)");
+  } else {
+    log(`note: ff-only できず続行 (分岐 or ローカル変更あり): ${r.err.trim() || r.out.trim()}`);
+  }
+}
+
 /** ref に「今日以降の chore(theme): コミット」が在るか */
 function hasTodayThemeCommit(ref: string, sinceIso: string): boolean {
   const r = git([
@@ -76,10 +96,18 @@ function main(): number {
     log(`warn: git fetch failed (offline?): ${fetched.err.trim() || fetched.out.trim()}`);
   }
 
-  // 1. リモートに今日の theme コミット → 完了
+  // 1. リモートに今日の theme コミット → 完了 (ローカルには一切触れない)
   if (hasTodayThemeCommit("origin/main", sinceIso)) {
     log("origin/main に今日の theme コミットあり → 何もしない");
     return 0;
+  }
+
+  // ここから先は生成 or push する。事前にローカル main を origin/main へ追従させ、
+  // 古い土台の上にコミットして push が non-ff で弾かれ続けるのを防ぐ。
+  if (CHECK_ONLY) {
+    log("would: git merge --ff-only origin/main");
+  } else {
+    fastForwardToOrigin();
   }
 
   // 2. ローカルに今日の theme コミットがあるが未 push → push だけ
@@ -99,6 +127,8 @@ function main(): number {
     return 0;
   }
 
+  // process.execPath = このスクリプトを起動した bun 自身 (= `bun run generate-theme`)。
+  // PATH 上の別 bun ではなく必ず同じ bun を使い、env (CLAUDE_BIN 等) も引き継ぐ。
   const gen = spawnSync(process.execPath, ["run", "generate-theme"], {
     cwd: REPO,
     stdio: "inherit",
