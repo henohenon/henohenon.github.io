@@ -11,7 +11,7 @@
  * theme.css 生成自体が失敗した場合も既存ファイルを温存。
  */
 
-import { spawn } from "node:child_process";
+import { spawn, spawnSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -23,6 +23,7 @@ const { values: cliArgs } = parseArgs({
   options: {
     "song-id": { type: "string" },
     song: { type: "string" },
+    "no-commit": { type: "boolean" },
     help: { type: "boolean", short: "h" },
   },
   strict: true,
@@ -35,6 +36,10 @@ const HELP = `usage: bun run generate-theme [options]
   --song-id <id>     VocaDB の曲 ID を直接指定 (例: --song-id 1501)
   --song <query>     クエリ検索の先頭ヒットを採用 (例: --song "ローリンガール")
   -h, --help         このヘルプを表示
+
+その他:
+  --no-commit        生成後の git commit を抑止 (デフォルトは chore(theme) でコミットする)。
+                     push はしない (push は scripts/daily-theme.ts 側の責務)
 
 環境変数:
   THEME_BACKEND      cli | sdk (デフォルト: ANTHROPIC_API_KEY あれば sdk、なければ cli)
@@ -51,11 +56,20 @@ if (cliArgs["song-id"] && cliArgs.song) {
   process.exit(2);
 }
 
+const REPO = path.resolve(import.meta.dir, "..");
 const THEME_PATH = path.resolve("src/styles/theme.css");
 const THEME_SOURCE_PATH = path.resolve("src/data/theme-source.json");
 const USED_SONGS_PATH = path.resolve("src/data/used-songs.json");
 const OG_SVG_PATH = path.resolve("public/og.svg");
 const OG_ARTICLE_TEMPLATE_PATH = path.resolve("public/og.article-template.svg");
+/** commit 対象 = generate-theme が書き換えるファイル群 */
+const COMMIT_FILES = [
+  "src/styles/theme.css",
+  "src/data/theme-source.json",
+  "src/data/used-songs.json",
+  "public/og.svg",
+  "public/og.article-template.svg",
+];
 const VOCADB_BASE = "https://vocadb.net/api";
 /** 「直近の人気曲」を取るローリングウィンドウ (日数) */
 const WINDOW_DAYS = 30;
@@ -544,6 +558,37 @@ function validateCss(css: string): void {
   }
 }
 
+/** JST の「今日」(yyyy-MM-dd)。コミットメッセージ用 */
+function todayJstDate(): string {
+  return new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+
+/**
+ * 生成したテーマ一式を `chore(theme): YYYY-MM-DD (曲名)` でコミットする。
+ * push はしない (push は daily-theme.ts の責務 = commit/push 分離で再 push を成立させる)。
+ * 失敗しても throw せずログのみ (テーマ生成自体は成功しているため)。
+ */
+function commitTheme(songName: string): void {
+  const git = (args: string[]) => spawnSync("git", ["-C", REPO, ...args], { stdio: "inherit" });
+
+  if ((git(["add", "--", ...COMMIT_FILES]).status ?? 1) !== 0) {
+    console.error("    git add failed; skipping commit");
+    return;
+  }
+  // ステージに差分が無ければコミットしない (--quiet: 差分ありで exit 1)
+  const diff = spawnSync("git", ["-C", REPO, "diff", "--cached", "--quiet"]);
+  if ((diff.status ?? 0) === 0) {
+    console.log("    no staged changes; nothing to commit");
+    return;
+  }
+  const message = `chore(theme): ${todayJstDate()} (${songName})`;
+  if ((git(["commit", "-m", message]).status ?? 1) !== 0) {
+    console.error("    git commit failed");
+    return;
+  }
+  console.log(`    committed: ${message}`);
+}
+
 async function main(): Promise<void> {
   const detail = await pickSong();
   console.log(`    "${detail.name}" / ${detail.artistString} (score=${detail.ratingScore})`);
@@ -585,6 +630,14 @@ async function main(): Promise<void> {
       "    article template generation failed, keeping yesterday's og.article-template.svg:",
       err,
     );
+  }
+
+  // 生成物を 1 コミットにまとめる (push は daily-theme.ts 側)
+  if (cliArgs["no-commit"]) {
+    console.log("[commit] skipped (--no-commit)");
+  } else {
+    console.log("[commit] staging + committing theme files...");
+    commitTheme(detail.name);
   }
 
   // bot コミット用の情報を stdout に流す (CI で読む)
