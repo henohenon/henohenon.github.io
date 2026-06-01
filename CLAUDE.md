@@ -17,7 +17,8 @@ GitHub Actions は `deploy.yml` (main push → Pages デプロイ) のみ。
 
 Windows は `scripts/register-theme-task.ps1` でタスクスケジューラに毎時タスクを登録
 (薄いラッパ `scripts/run-daily-theme.ps1` 経由)。mac へ移す時は launchd から同じ
-`daily-theme.ts` を叩く (scheduler だけ差し替え)。詳細は [TODO.md](TODO.md) の「1. ローカルスケジュール化」。
+`daily-theme.ts` を叩く (scheduler だけ差し替え)。**詳細・運用・ハマりどころは
+[docs/local-scheduler.md](docs/local-scheduler.md)**。残タスクは [TODO.md](TODO.md) の「1. ローカルスケジュール化」。
 
 ## スタック
 

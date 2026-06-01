@@ -9,6 +9,7 @@
 ## 1. ローカルスケジュール化 (脱 API キー / 脱 GHA cron)
 
 API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証) でローカル実行に一本化する方針。
+**仕組みの詳細・運用・ハマりどころは [docs/local-scheduler.md](docs/local-scheduler.md)**。
 
 - [x] オーケストレータ `scripts/daily-theme.ts` (今日まだなら generate→push、毎時起動・冪等・コミットベース判定)
 - [x] **Windows**: タスクスケジューラに毎時タスク登録 (`scripts/register-theme-task.ps1` / ラッパ `scripts/run-daily-theme.ps1`)
