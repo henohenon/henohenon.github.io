@@ -10,9 +10,12 @@
 
 API 課金を回避するため、`claude -p` (CLI = Pro/Max サブスク認証) でローカル実行に一本化する方針。
 
-- [ ] launchd か cron で毎朝 `bun run generate-theme && git add ... && git commit && git push` を回す
-  - bun の PATH / CLAUDE_BIN を明示する必要あり
-  - 失敗時のログをどこに残すか (`~/Library/Logs/henohenon-theme/` あたり?)
+- [x] オーケストレータ `scripts/daily-theme.ts` (今日まだなら generate→push、毎時起動・冪等・コミットベース判定)
+- [x] **Windows**: タスクスケジューラに毎時タスク登録 (`scripts/register-theme-task.ps1` / ラッパ `scripts/run-daily-theme.ps1`)
+  - 1h ごと発火 + StartWhenAvailable (PCオフ分の取りこぼし回収) / ログオン中のみ (Git Credential Manager 用) / パスワード保存なし
+  - ログ: `%LOCALAPPDATA%\henohenon-theme\theme-YYYYMM.log`
+  - PATH に bun (`D:\bun\bin`) / claude (`~/.local\bin`) が無くてもラッパが補う
+- [ ] **mac**: launchd から同じ `daily-theme.ts` を叩く plist (scheduler だけ差し替え。bun の PATH / CLAUDE_BIN を明示)
 - [x] `.github/workflows/daily.yml` を削除
 - [x] `deploy.yml` は残す (main push → Pages デプロイ)
 - [x] CLAUDE.md / docs から `ANTHROPIC_API_KEY` 前提の記述を整理 (SDK バックエンドは残置)

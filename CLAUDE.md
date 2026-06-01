@@ -10,9 +10,14 @@ VocaDB API から直近の人気 Vocaloid 曲を1曲選び、その情報を Cla
 
 HTML / Astro コンポーネントは触らない。CSS の差し替えだけで日々の見た目を更新する。
 
-**日次のテーマ生成はローカルで回す** (launchd / cron で `bun run generate-theme` → commit → push)。
+**日次のテーマ生成はローカルで回す**。`scripts/daily-theme.ts` が「今日 (JST) まだ
+`chore(theme)` コミットが無ければ generate-theme → push」を冪等に行う (毎時起動される想定)。
+判定はコミットベース、commit は generate-theme が・push は daily-theme が担う (分離して再 push を成立)。
 GitHub Actions は `deploy.yml` (main push → Pages デプロイ) のみ。
-具体的なローカル cron 設定は [TODO.md](TODO.md) の「1. ローカルスケジュール化」で詰める。
+
+Windows は `scripts/register-theme-task.ps1` でタスクスケジューラに毎時タスクを登録
+(薄いラッパ `scripts/run-daily-theme.ps1` 経由)。mac へ移す時は launchd から同じ
+`daily-theme.ts` を叩く (scheduler だけ差し替え)。詳細は [TODO.md](TODO.md) の「1. ローカルスケジュール化」。
 
 ## スタック
 
@@ -69,6 +74,9 @@ Conventional Commits 風。日本語可、命令形・現在形。
 
 `scripts/generate-theme.ts` は 2 系統の Claude 呼び出しを内蔵する。
 **本番は CLI 経路 (ローカル launchd/cron)**。SDK 経路は将来の保険として残置。
+
+> **生成後はデフォルトで `chore(theme): YYYY-MM-DD (曲名)` を自動コミットする** (push はしない)。
+> 手動で試し生成したいだけでコミットしたくない時は `bun run generate-theme --no-commit`。
 
 | 経路 | 仕組み | 状態 |
 | --- | --- | --- |
