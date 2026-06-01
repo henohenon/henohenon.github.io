@@ -1,126 +1,130 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGlow1" cx="20%" cy="-10%" r="70%">
-      <stop offset="0%" stop-color="#e6002e" stop-opacity="0.28"/>
-      <stop offset="55%" stop-color="#e6002e" stop-opacity="0"/>
+    <radialGradient id="bg1" cx="18%" cy="12%" r="55%">
+      <stop offset="0%" stop-color="#ff2da8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff2da8" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bgGlow2" cx="85%" cy="110%" r="75%">
-      <stop offset="0%" stop-color="#780014" stop-opacity="0.5"/>
-      <stop offset="60%" stop-color="#780014" stop-opacity="0"/>
+    <radialGradient id="bg2" cx="82%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#c6ff2e" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#c6ff2e" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect width="4" height="1" fill="#ffffff" fill-opacity="0.025"/>
-    </pattern>
-    <pattern id="march" width="48" height="48" patternUnits="userSpaceOnUse">
-      <path d="M0 24 L24 24 M24 0 L24 48" stroke="#e6002e" stroke-opacity="0.07" stroke-width="1"/>
-    </pattern>
-    <linearGradient id="hr" x1="0" x2="1" y1="0" y2="0">
-      <stop offset="0%" stop-color="#e6002e" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#e6002e" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#e6002e" stop-opacity="0"/>
+    <radialGradient id="bg3" cx="50%" cy="110%" r="60%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hr1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff2da8"/>
+      <stop offset="50%" stop-color="#c6ff2e"/>
+      <stop offset="100%" stop-color="#00e5ff"/>
     </linearGradient>
-    <clipPath id="frame">
-      <rect x="0" y="0" width="1200" height="630"/>
-    </clipPath>
+    <pattern id="scan" x="0" y="0" width="6" height="3" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="6" height="1" fill="#ffffff" fill-opacity="0.04"/>
+    </pattern>
+    <pattern id="dopa" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="2" fill="#ff2da8" fill-opacity="0.22"/>
+      <circle cx="26" cy="20" r="1.4" fill="#c6ff2e" fill-opacity="0.22"/>
+      <circle cx="14" cy="32" r="1.2" fill="#00e5ff" fill-opacity="0.22"/>
+    </pattern>
   </defs>
 
-  <g clip-path="url(#frame)">
-    <!-- Base -->
-    <rect width="1200" height="630" fill="#0d0608"/>
-    <rect width="1200" height="630" fill="url(#march)"/>
-    <rect width="1200" height="630" fill="url(#bgGlow1)"/>
-    <rect width="1200" height="630" fill="url(#bgGlow2)"/>
-    <rect width="1200" height="630" fill="url(#scanlines)"/>
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#0b0410"/>
+  <rect width="1200" height="630" fill="url(#bg1)"/>
+  <rect width="1200" height="630" fill="url(#bg2)"/>
+  <rect width="1200" height="630" fill="url(#bg3)"/>
+  <rect width="1200" height="630" fill="url(#dopa)"/>
+  <rect width="1200" height="630" fill="url(#scan)"/>
 
-    <!-- Border frame (article.post 上下の朱線をオマージュ) -->
-    <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#e6002e" stroke-opacity="0.35" stroke-width="1"/>
-    <line x1="40" y1="70" x2="1160" y2="70" stroke="#e6002e" stroke-width="2"/>
-    <line x1="40" y1="560" x2="1160" y2="560" stroke="#e6002e" stroke-width="2"/>
+  <!-- Outer brutal frame -->
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#1a0a26" stroke-width="6"/>
+  <rect x="36" y="36" width="1128" height="558" fill="none" stroke="#ff2da8" stroke-width="2" stroke-dasharray="14 8"/>
 
-    <!-- Top tag label (article.post::before 風) -->
-    <rect x="90" y="58" width="180" height="24" fill="#0d0608"/>
-    <text x="180" y="76" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="6" text-anchor="middle" fill="#e6002e" opacity="0.85">ヤ ラ ラ ラ</text>
+  <!-- Top tag chip "こちょこちょ" -->
+  <g transform="translate(70, 70)">
+    <rect x="0" y="0" width="260" height="44" fill="#ff2da8"/>
+    <text x="130" y="30" font-family="sans-serif" font-weight="900" font-size="22" fill="#0b0410" text-anchor="middle" letter-spacing="6">こちょこちょ</text>
+  </g>
 
-    <!-- Bottom tag label (article.post::after 風) -->
-    <rect x="930" y="548" width="180" height="24" fill="#0d0608"/>
-    <text x="1020" y="566" font-family="sans-serif" font-size="14" font-weight="700" letter-spacing="6" text-anchor="middle" fill="#e6002e" opacity="0.85">ヤ ラ ラ ラ</text>
+  <!-- Top-right meta -->
+  <g transform="translate(1130, 92)">
+    <text x="0" y="0" font-family="monospace" font-size="16" fill="#00e5ff" text-anchor="end" letter-spacing="4">"DOPAMINE"</text>
+    <text x="0" y="22" font-family="monospace" font-size="13" fill="#f4b8d8" text-anchor="end" letter-spacing="3">2026 / 06 / 01</text>
+  </g>
 
-    <!-- Left side march tally (一歩ずつのリズム) -->
-    <g stroke="#e6002e" stroke-width="3" stroke-linecap="square">
-      <line x1="80" y1="300" x2="80" y2="340"/>
-      <line x1="92" y1="300" x2="92" y2="340"/>
-      <line x1="104" y1="300" x2="104" y2="340"/>
-      <line x1="116" y1="300" x2="116" y2="340"/>
-      <line x1="74" y1="320" x2="122" y2="320" stroke-opacity="0.9"/>
-    </g>
-    <g stroke="#d8c9bf" stroke-width="2" stroke-linecap="square" opacity="0.6">
-      <line x1="80" y1="360" x2="80" y2="392"/>
-      <line x1="92" y1="360" x2="92" y2="392"/>
-      <line x1="104" y1="360" x2="104" y2="392"/>
-    </g>
+  <!-- Decorative blocks left -->
+  <g opacity="0.85">
+    <rect x="60" y="200" width="14" height="280" fill="#c6ff2e"/>
+    <rect x="84" y="240" width="6" height="180" fill="#00e5ff"/>
+    <rect x="98" y="280" width="3" height="100" fill="#ff2da8"/>
+  </g>
 
-    <!-- Right side step counter -->
-    <g font-family="monospace" fill="#8a6b6f" font-size="14" letter-spacing="4">
-      <text x="1120" y="295" text-anchor="end">STEP 01</text>
-      <text x="1120" y="318" text-anchor="end" fill="#e6002e">STEP 02 ▸</text>
-      <text x="1120" y="341" text-anchor="end">STEP 03</text>
-      <text x="1120" y="364" text-anchor="end" opacity="0.5">STEP 04</text>
-    </g>
+  <!-- Decorative blocks right -->
+  <g opacity="0.85">
+    <rect x="1126" y="200" width="14" height="280" fill="#ff2da8"/>
+    <rect x="1110" y="240" width="6" height="180" fill="#c6ff2e"/>
+    <rect x="1099" y="280" width="3" height="100" fill="#00e5ff"/>
+  </g>
 
-    <!-- Accent left border (post-list 風) -->
-    <rect x="40" y="220" width="6" height="220" fill="#e6002e"/>
+  <!-- MAIN SITE TITLE — chromatic aberration in pink + cyan -->
+  <g transform="translate(600, 310)">
+    <!-- shadow chunks behind -->
+    <text x="-7" y="0" font-family="sans-serif" font-weight="900" font-size="130" fill="#ff2da8" text-anchor="middle" letter-spacing="6">へのへのんのの</text>
+    <text x="7" y="0" font-family="sans-serif" font-weight="900" font-size="130" fill="#00e5ff" text-anchor="middle" letter-spacing="6">へのへのんのの</text>
+    <text x="0" y="0" font-family="sans-serif" font-weight="900" font-size="130" fill="#ffe8f4" text-anchor="middle" letter-spacing="6">へのへのんのの</text>
+  </g>
 
-    <!-- Site title (主役) -->
-    <!-- Glitch shadow layers -->
-    <text x="600" y="295" font-family="sans-serif" font-size="128" font-weight="900"
-          letter-spacing="6" text-anchor="middle" fill="#e6002e" opacity="0.9">
-      へのへのんのの
-    </text>
-    <text x="596" y="295" font-family="sans-serif" font-size="128" font-weight="900"
-          letter-spacing="6" text-anchor="middle" fill="#00c8dc" opacity="0.25">
-      へのへのんのの
-    </text>
-    <text x="598" y="295" font-family="sans-serif" font-size="128" font-weight="900"
-          letter-spacing="6" text-anchor="middle" fill="#d8c9bf">
-      へのへのんのの
-    </text>
+  <!-- Underline accent under site title -->
+  <rect x="320" y="345" width="560" height="8" fill="url(#hr1)"/>
+  <g>
+    <rect x="320" y="362" width="60" height="3" fill="#ff2da8"/>
+    <rect x="395" y="362" width="40" height="3" fill="#c6ff2e"/>
+    <rect x="450" y="362" width="80" height="3" fill="#00e5ff"/>
+    <rect x="545" y="362" width="30" height="3" fill="#ff2da8"/>
+    <rect x="590" y="362" width="120" height="3" fill="#c6ff2e"/>
+    <rect x="725" y="362" width="50" height="3" fill="#00e5ff"/>
+    <rect x="790" y="362" width="90" height="3" fill="#ff2da8"/>
+  </g>
 
-    <!-- Divider -->
-    <rect x="380" y="335" width="440" height="2" fill="url(#hr)"/>
+  <!-- Subtitle bracket: today's track -->
+  <g transform="translate(600, 430)">
+    <text x="0" y="0" font-family="monospace" font-size="18" fill="#00e5ff" text-anchor="middle" letter-spacing="8">— TODAY'S MOOD —</text>
+  </g>
 
-    <!-- Today label -->
-    <text x="600" y="378" font-family="monospace" font-size="16" letter-spacing="8"
-          text-anchor="middle" fill="#8a6b6f">— 今 日 の B G M —</text>
+  <g transform="translate(600, 480)">
+    <text x="0" y="0" font-family="sans-serif" font-weight="900" font-size="42" fill="#c6ff2e" text-anchor="middle" letter-spacing="4">Cocho Cocho</text>
+  </g>
 
-    <!-- Song title (副題) -->
-    <text x="600" y="430" font-family="sans-serif" font-size="40" font-weight="700"
-          letter-spacing="4" text-anchor="middle" fill="#e6002e">
-      ヤラララ
-    </text>
+  <g transform="translate(600, 520)">
+    <text x="0" y="0" font-family="sans-serif" font-size="22" fill="#f4b8d8" text-anchor="middle" letter-spacing="3">鬱P feat. 初音ミク</text>
+  </g>
 
-    <!-- Artist (さらに小) -->
-    <text x="600" y="468" font-family="sans-serif" font-size="20" letter-spacing="2"
-          text-anchor="middle" fill="#d8c9bf" opacity="0.8">
-      뭐든지모에화  feat.  重음테토SV2
-    </text>
-    <text x="600" y="468" font-family="sans-serif" font-size="20" letter-spacing="2"
-          text-anchor="middle" fill="#d8c9bf">
-      뭐든지모에화  feat.  重音テトSV2
-    </text>
+  <!-- Bottom dopadopa banner -->
+  <g transform="translate(0, 565)">
+    <rect x="0" y="0" width="1200" height="40" fill="#1a0a26"/>
+    <text x="600" y="27" font-family="sans-serif" font-weight="900" font-size="18" fill="#c6ff2e" text-anchor="middle" letter-spacing="12">ドパドパ  ドパドパ  ドーパミン</text>
+  </g>
 
-    <!-- Mood tag -->
-    <g transform="translate(600, 510)">
-      <rect x="-180" y="-18" width="360" height="32" fill="none" stroke="#e6002e" stroke-opacity="0.5"/>
-      <text x="0" y="4" font-family="sans-serif" font-size="14" letter-spacing="6"
-            text-anchor="middle" fill="#d8c9bf">嘲笑をはねのけて 一歩ずつ 前へ</text>
-    </g>
+  <!-- Tiny corner glyphs -->
+  <g font-family="monospace" font-size="12" fill="#ff2da8" opacity="0.8">
+    <text x="60" y="555" letter-spacing="2">// hennohennon-no-no</text>
+    <text x="1140" y="555" text-anchor="end" letter-spacing="2">ch.01 ▶ tickle</text>
+  </g>
 
-    <!-- Bottom-left signature -->
-    <text x="60" y="600" font-family="monospace" font-size="12" letter-spacing="3" fill="#8a6b6f">
-      henohenonnono.blog
-    </text>
-    <text x="1140" y="600" font-family="monospace" font-size="12" letter-spacing="3" text-anchor="end" fill="#8a6b6f">
-      ▸ もう一歩先へ
-    </text>
+  <!-- Scattered tick marks for "tickle" feel -->
+  <g stroke="#ff2da8" stroke-width="2" opacity="0.7">
+    <line x1="180" y1="160" x2="200" y2="180"/>
+    <line x1="200" y1="160" x2="180" y2="180"/>
+  </g>
+  <g stroke="#c6ff2e" stroke-width="2" opacity="0.7">
+    <line x1="1000" y1="170" x2="1020" y2="190"/>
+    <line x1="1020" y1="170" x2="1000" y2="190"/>
+  </g>
+  <g stroke="#00e5ff" stroke-width="2" opacity="0.7">
+    <line x1="150" y1="500" x2="170" y2="520"/>
+    <line x1="170" y1="500" x2="150" y2="520"/>
+  </g>
+  <g stroke="#ff2da8" stroke-width="2" opacity="0.7">
+    <line x1="1030" y1="495" x2="1050" y2="515"/>
+    <line x1="1050" y1="495" x2="1030" y2="515"/>
   </g>
 </svg>
