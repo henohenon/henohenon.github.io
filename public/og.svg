@@ -1,129 +1,121 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGlowA" cx="18%" cy="-5%" r="65%">
-      <stop offset="0%" stop-color="#c93656" stop-opacity="0.32"/>
-      <stop offset="55%" stop-color="#c93656" stop-opacity="0"/>
+    <radialGradient id="glowTop" cx="18%" cy="8%" r="65%">
+      <stop offset="0%" stop-color="#ffc94a" stop-opacity="0.28"/>
+      <stop offset="55%" stop-color="#ffc94a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bgGlowB" cx="110%" cy="10%" r="70%">
-      <stop offset="0%" stop-color="#6b1430" stop-opacity="0.55"/>
-      <stop offset="60%" stop-color="#6b1430" stop-opacity="0"/>
+    <radialGradient id="glowBot" cx="82%" cy="92%" r="60%">
+      <stop offset="0%" stop-color="#6be2d4" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#6be2d4" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bgGlowC" cx="50%" cy="118%" r="70%">
-      <stop offset="0%" stop-color="#d97a8c" stop-opacity="0.18"/>
-      <stop offset="70%" stop-color="#d97a8c" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="20%">
-      <stop offset="20%" stop-color="#ede1d6"/>
-      <stop offset="65%" stop-color="#d97a8c"/>
-      <stop offset="100%" stop-color="#c93656"/>
+    <linearGradient id="goldRule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffc94a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffc94a" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ffc94a" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="hr" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#c93656" stop-opacity="0"/>
-      <stop offset="40%" stop-color="#6b1430"/>
-      <stop offset="50%" stop-color="#c93656"/>
-      <stop offset="60%" stop-color="#6b1430"/>
-      <stop offset="100%" stop-color="#c93656" stop-opacity="0"/>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#271854" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#1a1033" stop-opacity="0.6"/>
     </linearGradient>
-    <pattern id="scan" x="0" y="0" width="3" height="3" patternUnits="userSpaceOnUse">
-      <rect width="3" height="1" fill="#ffffff" fill-opacity="0.025"/>
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffc94a" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#ffc94a" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ffc94a" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="22" height="22" patternTransform="rotate(135)">
+      <rect width="22" height="22" fill="transparent"/>
+      <rect width="2" height="22" fill="#ffc94a" fill-opacity="0.035"/>
     </pattern>
-    <symbol id="rose" viewBox="-50 -50 100 100">
-      <g fill="none" stroke="#c93656" stroke-width="1.1" stroke-opacity="0.55">
-        <circle r="4"/>
-        <path d="M0,-4 C6,-8 10,-4 8,2 C14,0 16,8 8,10 C10,16 2,18 -2,12 C-8,16 -14,10 -10,4 C-16,2 -14,-6 -8,-6 C-8,-12 -2,-12 0,-8 Z"/>
-        <path d="M-2,8 C-10,14 -18,22 -22,32" stroke="#6b1430"/>
-        <path d="M-18,22 l-6,-2 l4,6 Z" fill="#2a1a24" stroke="#6b1430"/>
-      </g>
-    </symbol>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
   </defs>
 
-  <!-- Base -->
-  <rect width="1200" height="630" fill="#0d0710"/>
-  <rect width="1200" height="630" fill="url(#bgGlowB)"/>
-  <rect width="1200" height="630" fill="url(#bgGlowA)"/>
-  <rect width="1200" height="630" fill="url(#bgGlowC)"/>
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1a1033"/>
+  <rect width="1200" height="630" fill="url(#hatch)"/>
+  <rect width="1200" height="630" fill="url(#glowTop)"/>
+  <rect width="1200" height="630" fill="url(#glowBot)"/>
 
-  <!-- Thorn vines (decorative corners) -->
-  <g stroke="#2a1a24" stroke-width="1.2" fill="none" opacity="0.85">
-    <path d="M0,60 C140,40 260,90 360,130 C460,170 540,150 620,120"/>
-    <path d="M1200,520 C1060,540 940,500 840,470 C740,440 660,460 580,490"/>
-    <path d="M-10,580 C80,560 140,540 200,500"/>
-    <path d="M1210,80 C1120,100 1060,120 1000,160"/>
+  <!-- Decorative stars / sparkles -->
+  <g fill="#f6ead0" opacity="0.55">
+    <circle cx="120" cy="90" r="1.6"/>
+    <circle cx="1080" cy="120" r="2.2"/>
+    <circle cx="990" cy="60" r="1.2"/>
+    <circle cx="200" cy="540" r="1.4"/>
+    <circle cx="1110" cy="500" r="1.8"/>
+    <circle cx="60" cy="320" r="1.2"/>
+    <circle cx="1150" cy="320" r="1.6"/>
+    <circle cx="840" cy="540" r="1.4"/>
+    <circle cx="360" cy="80" r="1.2"/>
   </g>
-  <g fill="#6b1430" opacity="0.55">
-    <path d="M180,55 l-4,-8 l8,2 Z"/>
-    <path d="M320,108 l-3,-9 l9,3 Z"/>
-    <path d="M520,150 l-4,-8 l8,2 Z"/>
-    <path d="M900,488 l4,8 l-9,-1 Z"/>
-    <path d="M740,452 l4,8 l-9,-1 Z"/>
-  </g>
-
-  <!-- Decorative roses -->
-  <use href="#rose" x="100" y="170" width="80" height="80"/>
-  <use href="#rose" x="1040" y="430" width="100" height="100" transform="rotate(15 1090 480)"/>
-  <use href="#rose" x="980" y="120" width="55" height="55" opacity="0.5"/>
-  <use href="#rose" x="140" y="470" width="60" height="60" opacity="0.6"/>
-
-  <!-- Top ornament: dead-rose petals scattering -->
-  <g fill="#d97a8c" opacity="0.35">
-    <ellipse cx="600" cy="92" rx="3.5" ry="2"/>
-    <ellipse cx="640" cy="76" rx="3" ry="1.7" transform="rotate(20 640 76)"/>
-    <ellipse cx="560" cy="80" rx="3" ry="1.7" transform="rotate(-15 560 80)"/>
-    <ellipse cx="690" cy="108" rx="2.6" ry="1.4"/>
-    <ellipse cx="510" cy="105" rx="2.6" ry="1.4"/>
-    <ellipse cx="450" cy="135" rx="2.2" ry="1.2"/>
-    <ellipse cx="750" cy="142" rx="2.2" ry="1.2"/>
+  <g fill="#6be2d4" opacity="0.7">
+    <circle cx="150" cy="200" r="1.6"/>
+    <circle cx="1050" cy="430" r="1.8"/>
+    <circle cx="930" cy="540" r="1.2"/>
+    <circle cx="280" cy="430" r="1.2"/>
   </g>
 
-  <!-- Top tagline -->
-  <g font-family="serif" fill="#a89baa">
-    <text x="600" y="118" text-anchor="middle" font-size="20" font-style="italic" letter-spacing="8">— we're already dead —</text>
+  <!-- Lamp glow halo -->
+  <circle cx="600" cy="270" r="260" fill="url(#lampGlow)" opacity="0.55"/>
+
+  <!-- Main card frame -->
+  <rect x="60" y="60" width="1080" height="510" rx="22" ry="22" fill="url(#cardGrad)" stroke="#ffc94a" stroke-opacity="0.35" stroke-width="1.5"/>
+
+  <!-- Inner gold border -->
+  <rect x="78" y="78" width="1044" height="474" rx="14" ry="14" fill="none" stroke="#ffc94a" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="2 6"/>
+
+  <!-- Corner ornaments -->
+  <g stroke="#ffc94a" stroke-opacity="0.6" stroke-width="1.4" fill="none">
+    <path d="M 95 130 L 95 95 L 130 95"/>
+    <path d="M 1105 130 L 1105 95 L 1070 95"/>
+    <path d="M 95 500 L 95 535 L 130 535"/>
+    <path d="M 1105 500 L 1105 535 L 1070 535"/>
   </g>
 
-  <!-- Main title: site name -->
-  <text x="600" y="320" text-anchor="middle"
-        font-family="serif" font-style="italic" font-weight="600"
-        font-size="132" letter-spacing="4"
-        fill="url(#titleGrad)">へのへのんのの</text>
-
-  <!-- Subtle title shadow/echo -->
-  <text x="600" y="320" text-anchor="middle"
-        font-family="serif" font-style="italic" font-weight="600"
-        font-size="132" letter-spacing="4"
-        fill="#c93656" opacity="0.08" transform="translate(3,3)">へのへのんのの</text>
-
-  <!-- Divider -->
-  <rect x="380" y="368" width="440" height="1.4" fill="url(#hr)"/>
-  <g fill="#c93656" opacity="0.85">
-    <circle cx="600" cy="369" r="3"/>
+  <!-- Small lamp icon (top) -->
+  <g transform="translate(600 138)">
+    <ellipse cx="0" cy="0" rx="42" ry="14" fill="#ffc94a" opacity="0.18" filter="url(#soft)"/>
+    <path d="M -28 0 Q -28 -16 0 -16 Q 28 -16 28 0 Q 28 8 16 10 L -16 10 Q -28 8 -28 0 Z" fill="#ffc94a" opacity="0.85"/>
+    <path d="M 24 -4 Q 40 -4 40 4 Q 40 10 30 10" fill="none" stroke="#ffc94a" stroke-width="2" opacity="0.85"/>
+    <circle cx="-2" cy="-18" r="3" fill="#ffc94a"/>
+    <path d="M -1 -22 Q -8 -32 -2 -42 Q 4 -52 -3 -60" fill="none" stroke="#ffc94a" stroke-opacity="0.55" stroke-width="1.4"/>
   </g>
+
+  <!-- Top eyebrow text -->
+  <text x="600" y="200" font-family="monospace" font-size="16" fill="#c9b8e6" text-anchor="middle" letter-spacing="8">✦  T O D A Y ' S   L A M P  ✦</text>
+
+  <!-- Hero: Site name -->
+  <text x="600" y="340" font-family="serif" font-size="124" font-weight="700" fill="#f6ead0" text-anchor="middle" letter-spacing="6" style="text-shadow: 0 0 12px #ffc94a;">へのへのんのの</text>
+
+  <!-- Gold rule under hero -->
+  <rect x="430" y="365" width="340" height="2" fill="url(#goldRule)"/>
 
   <!-- Subtitle: today's song -->
-  <text x="600" y="430" text-anchor="middle"
-        font-family="serif" font-style="italic"
-        font-size="34" letter-spacing="2"
-        fill="#d97a8c">✦ We're Already Dead ✦</text>
+  <text x="600" y="425" font-family="sans-serif" font-size="34" font-weight="600" fill="#ffc94a" text-anchor="middle" letter-spacing="2">승인해주세요 지니님!</text>
 
-  <text x="600" y="472" text-anchor="middle"
-        font-family="sans-serif"
-        font-size="20" letter-spacing="4"
-        fill="#a89baa">heartcy-P  feat.  初音ミク V6</text>
+  <!-- Artist line -->
+  <text x="600" y="465" font-family="sans-serif" font-size="20" fill="#c9b8e6" text-anchor="middle" letter-spacing="3">트랩칙  feat. 重音テトSV  ·  重音テト (VOICEPEAK)  ·  音街ウナ</text>
 
-  <!-- Bottom meta -->
-  <g font-family="serif" fill="#a89baa" opacity="0.75">
-    <text x="600" y="558" text-anchor="middle" font-size="15" font-style="italic" letter-spacing="6">today's theme · a withered rose, dancing in the dark</text>
+  <!-- APPROVED stamp (top-right) -->
+  <g transform="translate(990 150) rotate(14)" opacity="0.7">
+    <rect x="-78" y="-22" width="156" height="44" fill="none" stroke="#4ade80" stroke-width="3.5"/>
+    <rect x="-72" y="-16" width="144" height="32" fill="none" stroke="#4ade80" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="0" y="8" font-family="monospace" font-size="22" font-weight="800" fill="#4ade80" text-anchor="middle" letter-spacing="6">APPROVED</text>
   </g>
 
-  <!-- Frame -->
-  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#2a1a24" stroke-width="1"/>
-  <rect x="30" y="30" width="1140" height="570" fill="none" stroke="#6b1430" stroke-width="0.5" stroke-opacity="0.6"/>
+  <!-- REVOKE stamp (bottom-left, subtle) -->
+  <g transform="translate(220 470) rotate(-9)" opacity="0.5">
+    <rect x="-62" y="-20" width="124" height="40" fill="none" stroke="#ef4f6b" stroke-width="3"/>
+    <text x="0" y="7" font-family="monospace" font-size="20" font-weight="800" fill="#ef4f6b" text-anchor="middle" letter-spacing="5">REVOKE</text>
+  </g>
 
-  <!-- Corner accents -->
-  <g stroke="#c93656" stroke-width="1.2" fill="none" opacity="0.8">
-    <path d="M24,80 L24,24 L80,24"/>
-    <path d="M1176,80 L1176,24 L1120,24"/>
-    <path d="M24,550 L24,606 L80,606"/>
-    <path d="M1176,550 L1176,606 L1120,606"/>
+  <!-- Footer ribbon -->
+  <text x="600" y="525" font-family="monospace" font-size="14" fill="#6be2d4" text-anchor="middle" letter-spacing="6" opacity="0.85">✧  海を越えて、どこまでも広く  ✧</text>
+
+  <!-- Tiny diamond marks flanking footer -->
+  <g fill="#ffc94a" opacity="0.7">
+    <path d="M 470 521 l 6 -6 l 6 6 l -6 6 z"/>
+    <path d="M 718 521 l 6 -6 l 6 6 l -6 6 z"/>
   </g>
 </svg>
