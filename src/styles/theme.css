@@ -1,208 +1,241 @@
 /*
- * 승인해주세요 지니님! / 트랩칙 feat. 重音テトSV, 重音テト (VOICEPEAK), 音街ウナ
- * Mood: 魔法ランプの紫煙にゴールドの財宝、APPROVED/REVOKEの判子が躍るチャオティック・フェアリーテイル
+ * my machine / stein feat. SELENA, klattsch
+ * mood: 血錆と鋼鉄、復讐のインダストリアル・マシン。
+ *       低い唸りと火花、コンクリートを抉る赤。
  */
 
 :root {
-  /* Palette: 深い夜空のような紫紺 × ランプの黄金 × 承認スタンプの朱 */
-  --color-bg: #1a1033;
-  --color-bg-soft: #271854;
-  --color-fg: #f6ead0;
-  --color-fg-muted: #c9b8e6;
-  --color-accent: #ffc94a;
-  --color-accent-2: #6be2d4;
-  --color-approve: #4ade80;
-  --color-revoke: #ef4f6b;
+  /* palette: 油まみれの鉄、コンクリート、そして滴る赤 */
+  --color-bg: #0d0b0c;
+  --color-fg: #e7e3df;
+  --color-accent: #d7263d;
 
-  --color-fg: #f6ead0;
-  --color-bg: #1a1033;
-  --color-accent: #ffc94a;
+  --color-bg-elev: #161314;
+  --color-bg-deep: #050405;
+  --color-fg-muted: #8a8480;
+  --color-rust: #6b1a22;
+  --color-steel: #2a2628;
+  --color-spark: #ff5a4a;
 
+  /* spacing: ボルトの間隔のように一定 */
   --spacing-unit: 1.15rem;
 
-  --font-heading: 'Cinzel', 'Trajan Pro', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif JP', serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', 'Meiryo', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, 'Source Han Code JP', monospace;
+  /* fonts: 等幅 / サンセリフのメカニカル */
+  --font-heading: 'Space Mono', 'JetBrains Mono', 'Courier New',
+    'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial,
+    'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif;
 
-  --line-height-body: 1.85;
-  --line-height-heading: 1.25;
+  --line-height-body: 1.75;
+  --line-height-heading: 1.1;
 
-  --ease-default: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-stamp: cubic-bezier(0.2, 0.9, 0.3, 1.4);
+  --ease-default: cubic-bezier(0.7, 0.02, 0.2, 1);
 
-  --radius-sm: 0.35rem;
-  --radius-md: 0.8rem;
-
-  color-scheme: dark;
+  --shadow-machine: 0 0 0 1px #000, 0 18px 40px -20px rgba(0, 0, 0, 0.9);
+  --grid-line: rgba(231, 227, 223, 0.04);
 }
 
-/* ---------- Base ---------- */
 html {
-  background:
-    radial-gradient(ellipse at 18% 8%, rgba(255, 201, 74, 0.18) 0%, transparent 55%),
-    radial-gradient(ellipse at 82% 92%, rgba(107, 226, 212, 0.12) 0%, transparent 60%),
-    var(--color-bg);
+  background-color: var(--color-bg);
   color: var(--color-fg);
-  font-family: var(--font-body);
-  line-height: var(--line-height-body);
-  -webkit-font-smoothing: antialiased;
+  /* 工場の床のような格子 */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(ellipse at top, rgba(215, 38, 61, 0.08), transparent 60%);
+  background-size: 48px 48px, 48px 48px, 100% 100%;
 }
 
 body {
-  max-width: 44rem;
-  margin: 0 auto;
-  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 1.5);
-  background-image:
-    repeating-linear-gradient(135deg, rgba(255, 201, 74, 0.025) 0 2px, transparent 2px 16px);
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  margin: 0;
+  padding: calc(var(--spacing-unit) * 2);
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow-x: hidden;
 }
 
-::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
+/* スキャンライン: 古いCRTの軋み */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    rgba(0, 0, 0, 0.22) 3px
+  );
+  mix-blend-mode: multiply;
+  z-index: 9999;
+  animation: scan 8s linear infinite;
 }
 
-/* ---------- Typography ---------- */
-h1, h2, h3, h4 {
+@keyframes scan {
+  from { background-position: 0 0; }
+  to   { background-position: 0 6px; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  42%      { opacity: 0.88; }
+  43%      { opacity: 1; }
+  78%      { opacity: 0.78; }
+  79%      { opacity: 1; }
+}
+
+@keyframes drip {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  60%  { transform: scaleY(1); transform-origin: top; }
+  61%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.02em;
-  color: var(--color-accent);
-  text-shadow: 0 0 12px rgba(255, 201, 74, 0.35);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+  font-weight: 700;
+  position: relative;
+  animation: flicker 6s steps(1, end) infinite;
 }
 
 h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  position: relative;
-  padding-bottom: calc(var(--spacing-unit) * 0.6);
-}
-
-h1::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 4rem;
-  height: 2px;
-  background: linear-gradient(90deg, var(--color-accent), transparent);
+  font-size: 2.6rem;
+  border-left: 4px solid var(--color-accent);
+  padding-left: var(--spacing-unit);
+  text-shadow: 1px 0 0 var(--color-accent), -1px 0 0 #2bd8ff33;
 }
 
 h2 {
-  font-size: 1.6rem;
-  margin-top: calc(var(--spacing-unit) * 2);
+  font-size: 1.75rem;
+  color: var(--color-accent);
 }
 
 h2::before {
-  content: "✦ ";
-  color: var(--color-accent-2);
+  content: '// ';
+  color: var(--color-fg-muted);
 }
 
 a {
-  color: var(--color-accent-2);
+  color: var(--color-accent);
   text-decoration: none;
-  border-bottom: 1px dotted currentColor;
-  transition: color 220ms var(--ease-default), background 220ms var(--ease-default);
+  border-bottom: 1px dashed var(--color-rust);
+  transition: color 220ms var(--ease-default),
+              background-color 220ms var(--ease-default),
+              border-color 220ms var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
   color: var(--color-bg);
-  background: var(--color-accent-2);
+  background-color: var(--color-spark);
+  border-bottom-color: var(--color-spark);
   outline: none;
-  border-bottom-color: transparent;
-  padding: 0 0.15em;
-  border-radius: var(--radius-sm);
 }
 
-p { margin: var(--spacing-unit) 0; }
+p, li {
+  color: var(--color-fg);
+}
 
-code, pre {
-  font-family: var(--font-mono);
-  background: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 201, 74, 0.2);
-  border-radius: var(--radius-sm);
+code, pre, kbd, samp {
+  font-family: var(--font-heading);
+  background: var(--color-bg-deep);
+  color: var(--color-spark);
   padding: 0.1em 0.4em;
+  border: 1px solid var(--color-steel);
+  border-radius: 2px;
 }
 
 pre {
   padding: var(--spacing-unit);
   overflow-x: auto;
-  line-height: 1.55;
+  box-shadow: var(--shadow-machine);
 }
 
 blockquote {
   border-left: 3px solid var(--color-accent);
-  margin: calc(var(--spacing-unit) * 1.2) 0;
-  padding: 0.4em 1em;
-  background: rgba(255, 201, 74, 0.06);
+  margin: calc(var(--spacing-unit) * 1.5) 0;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.25);
+  background: linear-gradient(
+    90deg,
+    rgba(215, 38, 61, 0.08),
+    transparent 80%
+  );
   color: var(--color-fg-muted);
   font-style: italic;
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 hr {
-  border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  border: 0;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0 12px,
+    transparent 12px 20px
+  );
   margin: calc(var(--spacing-unit) * 2) 0;
 }
 
-/* ---------- Layout regions ---------- */
+/* ヘッダー: 鋼板のプレート */
 .site-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--spacing-unit);
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.2);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  background: linear-gradient(135deg, var(--color-bg-soft) 0%, rgba(39, 24, 84, 0.4) 100%);
-  border: 1px solid rgba(255, 201, 74, 0.25);
-  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, var(--color-bg-elev), var(--color-bg));
+  border-bottom: 1px solid var(--color-steel);
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+  margin: calc(var(--spacing-unit) * -2) calc(var(--spacing-unit) * -2)
+          calc(var(--spacing-unit) * 2);
   position: relative;
-  overflow: hidden;
+  box-shadow: var(--shadow-machine);
 }
 
-.site-header::before {
-  content: "APPROVED";
+.site-header::after {
+  content: '';
   position: absolute;
-  top: 0.7rem;
-  right: -1.2rem;
-  font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.3em;
-  color: var(--color-approve);
-  border: 2px solid var(--color-approve);
-  padding: 0.15em 0.8em;
-  transform: rotate(14deg);
-  opacity: 0.55;
-  animation: stamp-in 700ms var(--ease-stamp) 200ms both;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent) 30%,
+    var(--color-spark) 50%,
+    var(--color-accent) 70%,
+    transparent
+  );
 }
 
 .site-header a {
   border-bottom: none;
 }
 
+/* フッター: 機械の銘板 */
 .site-footer {
-  margin-top: calc(var(--spacing-unit) * 3);
-  padding-top: var(--spacing-unit);
-  border-top: 1px dashed rgba(255, 201, 74, 0.35);
+  margin: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * -2) 0;
+  padding: calc(var(--spacing-unit) * 1.5);
+  background: var(--color-bg-deep);
+  border-top: 1px solid var(--color-rust);
   color: var(--color-fg-muted);
-  font-size: 0.88rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   text-align: center;
 }
 
-.site-footer::after {
-  content: "✧  海を越えて、どこまでも広く  ✧";
+.site-footer::before {
+  content: '⚙  MACHINE ONLINE  ⚙';
   display: block;
-  margin-top: 0.4em;
-  color: var(--color-accent-2);
-  letter-spacing: 0.15em;
-  font-size: 0.78rem;
-  opacity: 0.7;
+  color: var(--color-accent);
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
+  animation: flicker 3.7s steps(1, end) infinite;
 }
 
-/* ---------- Post list ---------- */
+/* 記事リスト */
 .post-list {
   list-style: none;
   padding: 0;
@@ -210,95 +243,110 @@ hr {
   gap: var(--spacing-unit);
 }
 
-.post-list li {
-  padding: var(--spacing-unit);
-  background: rgba(39, 24, 84, 0.55);
-  border: 1px solid rgba(107, 226, 212, 0.18);
-  border-radius: var(--radius-md);
+.post-list > li {
+  background: var(--color-bg-elev);
+  border: 1px solid var(--color-steel);
+  border-left: 4px solid var(--color-accent);
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.25);
+  transition: transform 260ms var(--ease-default),
+              border-color 260ms var(--ease-default),
+              background-color 260ms var(--ease-default);
   position: relative;
-  transition: transform 260ms var(--ease-default), border-color 260ms var(--ease-default), box-shadow 260ms var(--ease-default);
 }
 
-.post-list li::before {
-  content: "◈";
-  color: var(--color-accent);
-  margin-right: 0.5em;
+.post-list > li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  width: 4px;
+  background: var(--color-spark);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 260ms var(--ease-default);
 }
 
-.post-list li:hover {
-  transform: translateY(-2px) rotate(-0.3deg);
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 24px -10px rgba(255, 201, 74, 0.4);
+.post-list > li:hover {
+  transform: translateX(4px);
+  background-color: #1c1819;
+  border-color: var(--color-spark);
 }
 
-/* ---------- Article ---------- */
+.post-list > li:hover::after {
+  transform: scaleY(1);
+}
+
+/* 記事本体 */
 article.post {
-  background: linear-gradient(180deg, rgba(39, 24, 84, 0.6) 0%, rgba(26, 16, 51, 0.4) 100%);
-  border: 1px solid rgba(255, 201, 74, 0.2);
-  border-radius: var(--radius-md);
-  padding: calc(var(--spacing-unit) * 1.6);
+  background: var(--color-bg-elev);
+  border: 1px solid var(--color-steel);
+  padding: calc(var(--spacing-unit) * 1.5);
+  box-shadow: var(--shadow-machine);
   position: relative;
-  animation: lamp-rise 800ms var(--ease-default) both;
 }
 
 article.post::before {
-  content: "🪔";
+  content: '';
   position: absolute;
-  top: -0.6rem;
-  left: 1.2rem;
-  font-size: 1.4rem;
-  filter: drop-shadow(0 0 6px var(--color-accent));
-  animation: flicker 3.2s ease-in-out infinite;
+  top: 0;
+  left: calc(var(--spacing-unit) * 1.5);
+  width: 2px;
+  height: 28px;
+  background: var(--color-accent);
+  animation: drip 5.5s var(--ease-default) infinite;
 }
 
-article.post h1,
-article.post h2 {
-  margin-top: 0.4em;
+article.post header {
+  border-bottom: 1px solid var(--color-steel);
+  padding-bottom: var(--spacing-unit);
+  margin-bottom: var(--spacing-unit);
 }
 
-article.post time,
-article.post .meta {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+article.post time {
+  font-family: var(--font-heading);
   color: var(--color-fg-muted);
-  padding: 0.2em 0.7em;
-  border: 1px solid rgba(201, 184, 230, 0.35);
-  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-/* ---------- Stamp emphasis ---------- */
-strong, b {
+article.post time::before {
+  content: '[ ';
   color: var(--color-accent);
-  font-weight: 700;
+}
+article.post time::after {
+  content: ' ]';
+  color: var(--color-accent);
 }
 
-em, i {
-  color: var(--color-accent-2);
-  font-style: italic;
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
 
-/* ---------- Keyframes ---------- */
-@keyframes stamp-in {
-  0%   { opacity: 0; transform: rotate(30deg) scale(2); }
-  60%  { opacity: 0.8; transform: rotate(12deg) scale(0.92); }
-  100% { opacity: 0.55; transform: rotate(14deg) scale(1); }
+button,
+input[type='submit'] {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: 1px solid var(--color-spark);
+  padding: 0.6em 1.2em;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-default),
+              transform 120ms var(--ease-default);
 }
 
-@keyframes lamp-rise {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+button:hover {
+  background: var(--color-spark);
 }
 
-@keyframes flicker {
-  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px var(--color-accent)); }
-  45%      { opacity: 0.85; filter: drop-shadow(0 0 10px var(--color-accent)); }
-  55%      { opacity: 0.95; filter: drop-shadow(0 0 4px var(--color-accent)); }
+button:active {
+  transform: translateY(1px);
 }
 
-/* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

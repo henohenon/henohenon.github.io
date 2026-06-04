@@ -1,121 +1,145 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glowTop" cx="18%" cy="8%" r="65%">
-      <stop offset="0%" stop-color="#ffc94a" stop-opacity="0.28"/>
-      <stop offset="55%" stop-color="#ffc94a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowBot" cx="82%" cy="92%" r="60%">
-      <stop offset="0%" stop-color="#6be2d4" stop-opacity="0.22"/>
-      <stop offset="60%" stop-color="#6be2d4" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="goldRule" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffc94a" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ffc94a" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#ffc94a" stop-opacity="0"/>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#161314"/>
+      <stop offset="55%" stop-color="#0d0b0c"/>
+      <stop offset="100%" stop-color="#050405"/>
     </linearGradient>
-    <linearGradient id="cardGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#271854" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#1a1033" stop-opacity="0.6"/>
-    </linearGradient>
-    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ffc94a" stop-opacity="0.9"/>
-      <stop offset="60%" stop-color="#ffc94a" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#ffc94a" stop-opacity="0"/>
+    <radialGradient id="rustGlow" cx="50%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#d7263d" stop-opacity="0.18"/>
+      <stop offset="60%" stop-color="#6b1a22" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#0d0b0c" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="hatch" patternUnits="userSpaceOnUse" width="22" height="22" patternTransform="rotate(135)">
-      <rect width="22" height="22" fill="transparent"/>
-      <rect width="2" height="22" fill="#ffc94a" fill-opacity="0.035"/>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c1819"/>
+      <stop offset="100%" stop-color="#0d0b0c"/>
+    </linearGradient>
+    <linearGradient id="sparkLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d0b0c" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#d7263d"/>
+      <stop offset="50%" stop-color="#ff5a4a"/>
+      <stop offset="70%" stop-color="#d7263d"/>
+      <stop offset="100%" stop-color="#0d0b0c" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#e7e3df" stroke-opacity="0.04" stroke-width="1"/>
     </pattern>
-    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="6"/>
+    <pattern id="scan" x="0" y="0" width="4" height="3" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="transparent"/>
+      <rect y="2" width="4" height="1" fill="#000" fill-opacity="0.22"/>
+    </pattern>
+    <pattern id="hazard" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="12" height="20" fill="#d7263d"/>
+      <rect x="12" width="8" height="20" fill="#0d0b0c"/>
+    </pattern>
+    <filter id="glitch" x="-5%" y="-20%" width="110%" height="140%">
+      <feGaussianBlur stdDeviation="0.4"/>
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#1a1033"/>
-  <rect width="1200" height="630" fill="url(#hatch)"/>
-  <rect width="1200" height="630" fill="url(#glowTop)"/>
-  <rect width="1200" height="630" fill="url(#glowBot)"/>
+  <!-- base -->
+  <rect width="1200" height="630" fill="#0d0b0c"/>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#rustGlow)"/>
 
-  <!-- Decorative stars / sparkles -->
-  <g fill="#f6ead0" opacity="0.55">
-    <circle cx="120" cy="90" r="1.6"/>
-    <circle cx="1080" cy="120" r="2.2"/>
-    <circle cx="990" cy="60" r="1.2"/>
-    <circle cx="200" cy="540" r="1.4"/>
-    <circle cx="1110" cy="500" r="1.8"/>
-    <circle cx="60" cy="320" r="1.2"/>
-    <circle cx="1150" cy="320" r="1.6"/>
-    <circle cx="840" cy="540" r="1.4"/>
-    <circle cx="360" cy="80" r="1.2"/>
+  <!-- corner bolts -->
+  <g fill="#2a2628" stroke="#050405" stroke-width="1">
+    <circle cx="36" cy="36" r="7"/>
+    <circle cx="1164" cy="36" r="7"/>
+    <circle cx="36" cy="594" r="7"/>
+    <circle cx="1164" cy="594" r="7"/>
   </g>
-  <g fill="#6be2d4" opacity="0.7">
-    <circle cx="150" cy="200" r="1.6"/>
-    <circle cx="1050" cy="430" r="1.8"/>
-    <circle cx="930" cy="540" r="1.2"/>
-    <circle cx="280" cy="430" r="1.2"/>
+  <g stroke="#8a8480" stroke-width="1" stroke-linecap="round">
+    <line x1="32" y1="36" x2="40" y2="36"/>
+    <line x1="1160" y1="36" x2="1168" y2="36"/>
+    <line x1="32" y1="594" x2="40" y2="594"/>
+    <line x1="1160" y1="594" x2="1168" y2="594"/>
   </g>
 
-  <!-- Lamp glow halo -->
-  <circle cx="600" cy="270" r="260" fill="url(#lampGlow)" opacity="0.55"/>
+  <!-- frame plate -->
+  <rect x="60" y="60" width="1080" height="510" fill="none" stroke="#2a2628" stroke-width="1"/>
+  <rect x="68" y="68" width="1064" height="494" fill="none" stroke="#161314" stroke-width="1"/>
 
-  <!-- Main card frame -->
-  <rect x="60" y="60" width="1080" height="510" rx="22" ry="22" fill="url(#cardGrad)" stroke="#ffc94a" stroke-opacity="0.35" stroke-width="1.5"/>
+  <!-- top status bar -->
+  <g font-family="monospace" font-size="14" fill="#8a8480" letter-spacing="3">
+    <text x="80" y="100">// SYS.HENOHENONNONO</text>
+    <text x="1120" y="100" text-anchor="end" fill="#d7263d">REC ●</text>
+  </g>
+  <line x1="80" y1="112" x2="1120" y2="112" stroke="#2a2628" stroke-width="1"/>
 
-  <!-- Inner gold border -->
-  <rect x="78" y="78" width="1044" height="474" rx="14" ry="14" fill="none" stroke="#ffc94a" stroke-opacity="0.18" stroke-width="1" stroke-dasharray="2 6"/>
+  <!-- hazard stripe accent -->
+  <rect x="80" y="125" width="200" height="10" fill="url(#hazard)" opacity="0.85"/>
 
-  <!-- Corner ornaments -->
-  <g stroke="#ffc94a" stroke-opacity="0.6" stroke-width="1.4" fill="none">
-    <path d="M 95 130 L 95 95 L 130 95"/>
-    <path d="M 1105 130 L 1105 95 L 1070 95"/>
-    <path d="M 95 500 L 95 535 L 130 535"/>
-    <path d="M 1105 500 L 1105 535 L 1070 535"/>
+  <!-- red accent bar (left, like h1 border-left) -->
+  <rect x="100" y="200" width="6" height="200" fill="#d7263d"/>
+  <rect x="100" y="200" width="6" height="60" fill="#ff5a4a"/>
+
+  <!-- MAIN TITLE: site name -->
+  <g font-family="monospace" font-weight="700">
+    <!-- glitch shadow layers -->
+    <text x="135" y="305" font-size="118" fill="#d7263d" opacity="0.65" letter-spacing="2">へのへのんのの</text>
+    <text x="131" y="305" font-size="118" fill="#2bd8ff" opacity="0.18" letter-spacing="2">へのへのんのの</text>
+    <text x="133" y="305" font-size="118" fill="#e7e3df" letter-spacing="2">へのへのんのの</text>
   </g>
 
-  <!-- Small lamp icon (top) -->
-  <g transform="translate(600 138)">
-    <ellipse cx="0" cy="0" rx="42" ry="14" fill="#ffc94a" opacity="0.18" filter="url(#soft)"/>
-    <path d="M -28 0 Q -28 -16 0 -16 Q 28 -16 28 0 Q 28 8 16 10 L -16 10 Q -28 8 -28 0 Z" fill="#ffc94a" opacity="0.85"/>
-    <path d="M 24 -4 Q 40 -4 40 4 Q 40 10 30 10" fill="none" stroke="#ffc94a" stroke-width="2" opacity="0.85"/>
-    <circle cx="-2" cy="-18" r="3" fill="#ffc94a"/>
-    <path d="M -1 -22 Q -8 -32 -2 -42 Q 4 -52 -3 -60" fill="none" stroke="#ffc94a" stroke-opacity="0.55" stroke-width="1.4"/>
+  <!-- subtitle bracket marker -->
+  <g font-family="monospace" font-size="22" fill="#8a8480" letter-spacing="4">
+    <text x="135" y="355">// TODAY'S MACHINE</text>
   </g>
 
-  <!-- Top eyebrow text -->
-  <text x="600" y="200" font-family="monospace" font-size="16" fill="#c9b8e6" text-anchor="middle" letter-spacing="8">✦  T O D A Y ' S   L A M P  ✦</text>
+  <!-- SUBTITLE: today's track -->
+  <g font-family="monospace" font-weight="700">
+    <text x="135" y="408" font-size="40" fill="#d7263d" letter-spacing="3">my machine</text>
+    <text x="430" y="408" font-size="22" fill="#8a8480" letter-spacing="2">/</text>
+    <text x="455" y="408" font-size="28" fill="#e7e3df" letter-spacing="2">stein</text>
+  </g>
+  <text x="135" y="442" font-family="sans-serif" font-size="20" fill="#8a8480" letter-spacing="2">feat. SELENA, klattsch</text>
 
-  <!-- Hero: Site name -->
-  <text x="600" y="340" font-family="serif" font-size="124" font-weight="700" fill="#f6ead0" text-anchor="middle" letter-spacing="6" style="text-shadow: 0 0 12px #ffc94a;">へのへのんのの</text>
+  <!-- drip from title -->
+  <rect x="120" y="420" width="2" height="40" fill="#d7263d"/>
+  <circle cx="121" cy="464" r="3" fill="#d7263d"/>
 
-  <!-- Gold rule under hero -->
-  <rect x="430" y="365" width="340" height="2" fill="url(#goldRule)"/>
+  <!-- right side machine readout -->
+  <g transform="translate(820, 200)" font-family="monospace" font-size="12" fill="#8a8480" letter-spacing="2">
+    <rect x="0" y="0" width="260" height="220" fill="#161314" stroke="#2a2628" stroke-width="1"/>
+    <rect x="0" y="0" width="260" height="20" fill="#050405"/>
+    <text x="10" y="14" fill="#d7263d">⚙ MACHINE ONLINE</text>
 
-  <!-- Subtitle: today's song -->
-  <text x="600" y="425" font-family="sans-serif" font-size="34" font-weight="600" fill="#ffc94a" text-anchor="middle" letter-spacing="2">승인해주세요 지니님!</text>
+    <text x="10" y="44">CH.01 ▮▮▮▮▮▮▮▮▮▯</text>
+    <text x="10" y="64">CH.02 ▮▮▮▮▮▮▮▯▯▯</text>
+    <text x="10" y="84">CH.03 ▮▮▮▮▮▮▮▮▮▮</text>
+    <text x="10" y="104">CH.04 ▮▮▮▮▯▯▯▯▯▯</text>
 
-  <!-- Artist line -->
-  <text x="600" y="465" font-family="sans-serif" font-size="20" fill="#c9b8e6" text-anchor="middle" letter-spacing="3">트랩칙  feat. 重音テトSV  ·  重音テト (VOICEPEAK)  ·  音街ウナ</text>
+    <line x1="10" y1="120" x2="250" y2="120" stroke="#2a2628"/>
 
-  <!-- APPROVED stamp (top-right) -->
-  <g transform="translate(990 150) rotate(14)" opacity="0.7">
-    <rect x="-78" y="-22" width="156" height="44" fill="none" stroke="#4ade80" stroke-width="3.5"/>
-    <rect x="-72" y="-16" width="144" height="32" fill="none" stroke="#4ade80" stroke-width="1" stroke-opacity="0.5"/>
-    <text x="0" y="8" font-family="monospace" font-size="22" font-weight="800" fill="#4ade80" text-anchor="middle" letter-spacing="6">APPROVED</text>
+    <text x="10" y="142" fill="#e7e3df">RUST.LVL</text>
+    <text x="250" y="142" text-anchor="end" fill="#ff5a4a">98.6%</text>
+
+    <text x="10" y="162" fill="#e7e3df">SPARK</text>
+    <text x="250" y="162" text-anchor="end" fill="#ff5a4a">ON</text>
+
+    <text x="10" y="182" fill="#e7e3df">BLOOD.OK</text>
+    <text x="250" y="182" text-anchor="end" fill="#d7263d">●●●</text>
+
+    <text x="10" y="208" fill="#6b1a22">[ ID: 2026.06.05 ]</text>
   </g>
 
-  <!-- REVOKE stamp (bottom-left, subtle) -->
-  <g transform="translate(220 470) rotate(-9)" opacity="0.5">
-    <rect x="-62" y="-20" width="124" height="40" fill="none" stroke="#ef4f6b" stroke-width="3"/>
-    <text x="0" y="7" font-family="monospace" font-size="20" font-weight="800" fill="#ef4f6b" text-anchor="middle" letter-spacing="5">REVOKE</text>
+  <!-- waveform / hazard stripe bottom -->
+  <g transform="translate(80, 470)">
+    <line x1="0" y1="0" x2="1040" y2="0" stroke="#2a2628" stroke-width="1"/>
+    <g stroke="#d7263d" stroke-width="2">
+      <path d="M0 30 L20 30 L20 10 L40 10 L40 50 L60 50 L60 20 L80 20 L80 40 L100 40 L100 15 L120 15 L120 45 L140 45 L140 25 L160 25 L160 55 L180 55 L180 8 L200 8 L200 38 L220 38 L220 18 L240 18 L240 48 L260 48 L260 28 L280 28 L280 12 L300 12 L300 42 L320 42 L320 22 L340 22 L340 52 L360 52 L360 16 L380 16 L380 46 L400 46 L400 26 L420 26 L420 56 L440 56 L440 14 L460 14 L460 44 L480 44 L480 24 L500 24 L500 54 L520 54 L520 30 L540 30 L540 10 L560 10 L560 40 L580 40 L580 20 L600 20 L600 50 L620 50 L620 15 L640 15 L640 45 L660 45 L660 25 L680 25 L680 55 L700 55 L700 8 L720 8 L720 38 L740 38 L740 18 L760 18 L760 48 L780 48 L780 28 L800 28 L800 12 L820 12 L820 42 L840 42 L840 22 L860 22 L860 52 L880 52 L880 30 L900 30 L900 16 L920 16 L920 46 L940 46 L940 26 L960 26 L960 56 L980 56 L980 14 L1000 14 L1000 44 L1020 44 L1020 30 L1040 30" fill="none"/>
+    </g>
   </g>
 
-  <!-- Footer ribbon -->
-  <text x="600" y="525" font-family="monospace" font-size="14" fill="#6be2d4" text-anchor="middle" letter-spacing="6" opacity="0.85">✧  海を越えて、どこまでも広く  ✧</text>
-
-  <!-- Tiny diamond marks flanking footer -->
-  <g fill="#ffc94a" opacity="0.7">
-    <path d="M 470 521 l 6 -6 l 6 6 l -6 6 z"/>
-    <path d="M 718 521 l 6 -6 l 6 6 l -6 6 z"/>
+  <!-- bottom hazard / footer -->
+  <rect x="80" y="540" width="1040" height="3" fill="url(#sparkLine)"/>
+  <g font-family="monospace" font-size="14" fill="#8a8480" letter-spacing="4">
+    <text x="80" y="565">HENOHENONNONO.LOG</text>
+    <text x="1120" y="565" text-anchor="end" fill="#6b1a22">▮ 2026.06.05 ▮</text>
   </g>
+
+  <!-- scanline overlay -->
+  <rect width="1200" height="630" fill="url(#scan)" opacity="0.5"/>
 </svg>
