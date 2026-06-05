@@ -1,124 +1,102 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#161314"/>
-      <stop offset="100%" stop-color="#0d0b0c"/>
-    </linearGradient>
-    <radialGradient id="rustGlow" cx="50%" cy="0%" r="70%">
-      <stop offset="0%" stop-color="#d7263d" stop-opacity="0.18"/>
-      <stop offset="60%" stop-color="#d7263d" stop-opacity="0"/>
+    <radialGradient id="glowA" cx="18%" cy="12%" r="55%">
+      <stop offset="0%" stop-color="#8be9ff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#8be9ff" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e7e3df"/>
-      <stop offset="70%" stop-color="#e7e3df"/>
-      <stop offset="100%" stop-color="#ff5a4a"/>
+    <radialGradient id="glowB" cx="82%" cy="78%" r="60%">
+      <stop offset="0%" stop-color="#ffb6e6" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffb6e6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#5a4fcf" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#5a4fcf" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eef0ff"/>
+      <stop offset="45%" stop-color="#8be9ff"/>
+      <stop offset="75%" stop-color="#ffb6e6"/>
+      <stop offset="100%" stop-color="#eef0ff"/>
     </linearGradient>
-    <linearGradient id="plateLine" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#d7263d" stop-opacity="0"/>
-      <stop offset="30%" stop-color="#d7263d"/>
-      <stop offset="50%" stop-color="#ff5a4a"/>
-      <stop offset="70%" stop-color="#d7263d"/>
-      <stop offset="100%" stop-color="#d7263d" stop-opacity="0"/>
+    <linearGradient id="hrGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8be9ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffb6e6" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#8be9ff" stop-opacity="0"/>
     </linearGradient>
-    <pattern id="grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
-      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#e7e3df" stroke-opacity="0.04" stroke-width="1"/>
-    </pattern>
-    <pattern id="scanlines" x="0" y="0" width="4" height="3" patternUnits="userSpaceOnUse">
-      <rect x="0" y="2" width="4" height="1" fill="#000000" fill-opacity="0.35"/>
-    </pattern>
+    <linearGradient id="frag1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8be9ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#5a4fcf" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="frag2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb6e6" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5a4fcf" stop-opacity="0.05"/>
+    </linearGradient>
   </defs>
 
-  <!-- base -->
-  <rect width="1200" height="630" fill="#0d0b0c"/>
-  <rect width="1200" height="630" fill="url(#bgGrad)"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-  <rect width="1200" height="630" fill="url(#rustGlow)"/>
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="#0e1430"/>
+  <rect width="1200" height="630" fill="url(#glowC)"/>
+  <rect width="1200" height="630" fill="url(#glowA)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
 
-  <!-- steel plate frame -->
-  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#2a2628" stroke-width="1"/>
-  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="#2a2628" stroke-width="1" stroke-opacity="0.6"/>
-
-  <!-- corner bolts -->
-  <g fill="#2a2628" stroke="#050405" stroke-width="1">
-    <circle cx="64" cy="64" r="6"/>
-    <circle cx="1136" cy="64" r="6"/>
-    <circle cx="64" cy="566" r="6"/>
-    <circle cx="1136" cy="566" r="6"/>
-  </g>
-  <g fill="#161314" stroke="#8a8480" stroke-width="0.5" stroke-opacity="0.4">
-    <circle cx="64" cy="64" r="2"/>
-    <circle cx="1136" cy="64" r="2"/>
-    <circle cx="64" cy="566" r="2"/>
-    <circle cx="1136" cy="566" r="2"/>
+  <!-- 散らばる断片 (破片の多角形) -->
+  <g opacity="0.85">
+    <polygon points="80,90 140,70 165,130 110,150" fill="url(#frag1)" stroke="#8be9ff" stroke-opacity="0.35" stroke-width="0.8"/>
+    <polygon points="1050,80 1110,100 1095,160 1035,140" fill="url(#frag2)" stroke="#ffb6e6" stroke-opacity="0.3" stroke-width="0.8"/>
+    <polygon points="60,500 130,490 150,560 75,560" fill="url(#frag2)" stroke="#ffb6e6" stroke-opacity="0.25" stroke-width="0.7"/>
+    <polygon points="1080,470 1150,460 1140,540 1070,545" fill="url(#frag1)" stroke="#8be9ff" stroke-opacity="0.3" stroke-width="0.7"/>
+    <polygon points="930,30 985,25 980,75 925,80" fill="url(#frag1)" stroke="#8be9ff" stroke-opacity="0.25" stroke-width="0.6"/>
+    <polygon points="160,580 220,575 225,620 165,615" fill="url(#frag2)" stroke="#ffb6e6" stroke-opacity="0.2" stroke-width="0.6"/>
   </g>
 
-  <!-- top header bar -->
-  <rect x="40" y="40" width="1120" height="78" fill="#161314"/>
-  <rect x="40" y="118" width="1120" height="3" fill="url(#plateLine)"/>
-
-  <!-- header content -->
-  <text x="80" y="90" font-family="monospace" font-size="22" fill="#d7263d" letter-spacing="6">// MACHINE ONLINE</text>
-  <text x="1120" y="90" font-family="monospace" font-size="20" fill="#8a8480" text-anchor="end" letter-spacing="4">SYS://LOG.0xFE</text>
-
-  <!-- site name -->
-  <text x="80" y="200" font-family="monospace" font-size="28" fill="#e7e3df" letter-spacing="8">へのへのんのの</text>
-  <line x1="80" y1="218" x2="280" y2="218" stroke="#d7263d" stroke-width="2"/>
-  <line x1="290" y1="218" x2="320" y2="218" stroke="#d7263d" stroke-width="2" stroke-dasharray="4 4"/>
-
-  <!-- title accent bar (left) -->
-  <rect x="60" y="270" width="6" height="180" fill="#d7263d"/>
-  <rect x="60" y="270" width="6" height="40" fill="#ff5a4a"/>
-
-  <!-- drip from accent bar -->
-  <rect x="62" y="450" width="2" height="36" fill="#d7263d" opacity="0.7"/>
-  <circle cx="63" cy="492" r="3" fill="#d7263d"/>
-
-  <!-- TITLE -->
-  <text x="100" y="360" font-family="serif" font-size="72" font-weight="700" fill="url(#titleGrad)" letter-spacing="2">{{TITLE}}</text>
-
-  <!-- sparks / rivets row -->
-  <g opacity="0.9">
-    <circle cx="100" cy="500" r="2" fill="#ff5a4a"/>
-    <circle cx="120" cy="500" r="1.5" fill="#d7263d"/>
-    <circle cx="138" cy="500" r="1" fill="#6b1a22"/>
-    <circle cx="154" cy="500" r="1.5" fill="#d7263d"/>
+  <!-- 星屑 -->
+  <g fill="#ffffff">
+    <circle cx="156" cy="138" r="1.4" opacity="0.9"/>
+    <circle cx="804" cy="258" r="1.1" opacity="0.75"/>
+    <circle cx="396" cy="491" r="1.5" opacity="0.85"/>
+    <circle cx="1056" cy="94" r="1.2" opacity="0.7"/>
+    <circle cx="600" cy="561" r="1.3" opacity="0.85"/>
+    <circle cx="96" cy="378" r="1.4" opacity="0.65"/>
+    <circle cx="900" cy="410" r="1.2" opacity="0.7"/>
+    <circle cx="260" cy="220" r="1" opacity="0.6"/>
+    <circle cx="720" cy="120" r="1.3" opacity="0.8"/>
+    <circle cx="1140" cy="320" r="1.1" opacity="0.7"/>
+    <circle cx="450" cy="80" r="1.2" opacity="0.75"/>
+    <circle cx="980" cy="540" r="1.3" opacity="0.8"/>
+    <circle cx="330" cy="380" r="1" opacity="0.55"/>
+    <circle cx="560" cy="180" r="0.9" opacity="0.5"/>
+    <circle cx="1020" cy="220" r="1" opacity="0.6"/>
+  </g>
+  <g fill="#8be9ff">
+    <circle cx="240" cy="450" r="1.4" opacity="0.85"/>
+    <circle cx="860" cy="80" r="1.2" opacity="0.7"/>
+    <circle cx="500" cy="540" r="1.1" opacity="0.65"/>
+    <circle cx="1100" cy="380" r="1.3" opacity="0.75"/>
+  </g>
+  <g fill="#ffb6e6">
+    <circle cx="420" cy="220" r="1.3" opacity="0.75"/>
+    <circle cx="780" cy="500" r="1.2" opacity="0.7"/>
+    <circle cx="120" cy="280" r="1" opacity="0.6"/>
   </g>
 
-  <!-- bottom plate -->
-  <rect x="40" y="510" width="1120" height="80" fill="#050405"/>
-  <rect x="40" y="510" width="1120" height="1" fill="#6b1a22"/>
+  <!-- 上下の細い罫線 (グラデ) -->
+  <rect x="60" y="92" width="1080" height="1" fill="url(#hrGrad)" opacity="0.55"/>
+  <rect x="60" y="538" width="1080" height="1" fill="url(#hrGrad)" opacity="0.55"/>
 
-  <!-- dashed hr in bottom plate -->
-  <g transform="translate(80,540)">
-    <rect x="0" y="0" width="12" height="2" fill="#d7263d"/>
-    <rect x="20" y="0" width="12" height="2" fill="#d7263d"/>
-    <rect x="40" y="0" width="12" height="2" fill="#d7263d"/>
-    <rect x="60" y="0" width="12" height="2" fill="#d7263d"/>
-    <rect x="80" y="0" width="12" height="2" fill="#d7263d"/>
-    <rect x="100" y="0" width="12" height="2" fill="#d7263d"/>
+  <!-- サイト名 -->
+  <text x="60" y="75" font-family="serif" font-size="22" font-style="italic" fill="#eef0ff" letter-spacing="6">へのへのんのの</text>
+  <text x="1140" y="75" font-family="sans-serif" font-size="14" fill="#b8bfe2" letter-spacing="4" text-anchor="end">— fragments of the night —</text>
+
+  <!-- アクセントの小さなマーク -->
+  <g transform="translate(60, 250)">
+    <rect x="0" y="0" width="2" height="60" fill="#8be9ff" opacity="0.9"/>
+    <rect x="8" y="20" width="2" height="40" fill="#ffb6e6" opacity="0.7"/>
   </g>
 
-  <!-- bottom meta -->
-  <text x="80" y="572" font-family="monospace" font-size="16" fill="#8a8480" letter-spacing="6">[ POST ] ⚙ STEEL &amp; RUST LOG</text>
-  <text x="1120" y="572" font-family="monospace" font-size="16" fill="#d7263d" text-anchor="end" letter-spacing="4">⚙ ONLINE</text>
+  <!-- 記事タイトル (画面の主役) -->
+  <text x="100" y="345" font-family="serif" font-size="76" font-style="italic" font-weight="500" fill="url(#titleGrad)" letter-spacing="2">{{TITLE}}</text>
 
-  <!-- right side gear ornament -->
-  <g transform="translate(1020,300)" opacity="0.25" fill="none" stroke="#d7263d" stroke-width="2">
-    <circle r="90"/>
-    <circle r="60"/>
-    <circle r="30"/>
-    <g stroke="#d7263d" stroke-width="3">
-      <line x1="-100" y1="0" x2="-80" y2="0"/>
-      <line x1="100" y1="0" x2="80" y2="0"/>
-      <line x1="0" y1="-100" x2="0" y2="-80"/>
-      <line x1="0" y1="100" x2="0" y2="80"/>
-      <line x1="-70" y1="-70" x2="-56" y2="-56"/>
-      <line x1="70" y1="-70" x2="56" y2="-56"/>
-      <line x1="-70" y1="70" x2="-56" y2="56"/>
-      <line x1="70" y1="70" x2="56" y2="56"/>
-    </g>
-  </g>
-
-  <!-- scanlines overlay -->
-  <rect width="1200" height="630" fill="url(#scanlines)" opacity="0.5"/>
+  <!-- フッター情報 -->
+  <text x="60" y="580" font-family="sans-serif" font-size="16" fill="#b8bfe2" letter-spacing="4">A R T I C L E</text>
+  <text x="1140" y="580" font-family="serif" font-size="16" font-style="italic" fill="#8be9ff" text-anchor="end" letter-spacing="2">henohenonnono.log</text>
 </svg>
