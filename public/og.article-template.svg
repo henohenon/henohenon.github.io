@@ -1,184 +1,159 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
 
-    <!-- CRT scanline pattern -->
-    <pattern id="scan" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="3" width="1200" height="1" fill="#000" opacity="0.10"/>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="0.8" fill="#c6cbd6" opacity="0.07"/>
     </pattern>
 
-    <!-- Horizontal neon fade for accent lines -->
-    <linearGradient id="hLine" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0"    stop-color="#ff1a4e" stop-opacity="0"/>
-      <stop offset="0.12" stop-color="#ff1a4e"/>
-      <stop offset="0.88" stop-color="#ff1a4e"/>
-      <stop offset="1"    stop-color="#ff1a4e" stop-opacity="0"/>
-    </linearGradient>
+    <pattern id="hlines" x="0" y="0" width="10" height="22" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="21.5" x2="10" y2="21.5" stroke="#c6cbd6" stroke-width="0.5" opacity="0.022"/>
+    </pattern>
 
-    <!-- Bullet-trace gradient (streaks right then fades) -->
-    <linearGradient id="trace" x1="60" y1="0" x2="920" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0"    stop-color="#ff1a4e" stop-opacity="0"/>
-      <stop offset="0.05" stop-color="#ff1a4e" stop-opacity="0.90"/>
-      <stop offset="0.78" stop-color="#ff1a4e" stop-opacity="0.30"/>
-      <stop offset="1"    stop-color="#ff1a4e" stop-opacity="0"/>
-    </linearGradient>
-
-    <!-- Radial bg glow: deep purple centre → pitch black -->
-    <radialGradient id="bgG" cx="440" cy="340" r="650" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#1e0030"/>
-      <stop offset="50%"  stop-color="#0e001c"/>
-      <stop offset="100%" stop-color="#08000d"/>
+    <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+      <stop offset="30%" stop-color="#07090f" stop-opacity="0"/>
+      <stop offset="72%" stop-color="#d95570" stop-opacity="0.045"/>
+      <stop offset="100%" stop-color="#07090f" stop-opacity="0.84"/>
     </radialGradient>
 
-    <!-- Left-edge red ambient bleed from the stripe -->
-    <linearGradient id="leftEdge" x1="6" y1="0" x2="92" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ff1a4e" stop-opacity="0.18"/>
-      <stop offset="1" stop-color="#ff1a4e" stop-opacity="0"/>
+    <linearGradient id="eL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#07090f" stop-opacity="0.72"/>
+      <stop offset="8%" stop-color="#07090f" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Title text: bright top → muted purple bottom -->
-    <linearGradient id="titleG" x1="0" y1="262" x2="0" y2="342" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#f4ecf7"/>
-      <stop offset="100%" stop-color="#bfa0cc"/>
+    <linearGradient id="eR" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#07090f" stop-opacity="0.72"/>
+      <stop offset="8%" stop-color="#07090f" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Red neon glow behind title -->
-    <filter id="titleGlowF">
-      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ff1a4e" flood-opacity="0.30"/>
-    </filter>
+    <linearGradient id="eT" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#07090f" stop-opacity="0.54"/>
+      <stop offset="14%" stop-color="#07090f" stop-opacity="0"/>
+    </linearGradient>
 
-    <!-- Halo for bullet-hole dots -->
-    <filter id="dotHalo">
-      <feGaussianBlur stdDeviation="2.5" result="b"/>
+    <linearGradient id="scar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#d95570" stop-opacity="1"/>
+      <stop offset="28%"  stop-color="#d95570" stop-opacity="0.50"/>
+      <stop offset="55%"  stop-color="#d95570" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#d95570" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="vbar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#d95570" stop-opacity="0.04"/>
+      <stop offset="22%"  stop-color="#d95570" stop-opacity="0.60"/>
+      <stop offset="78%"  stop-color="#d95570" stop-opacity="0.60"/>
+      <stop offset="100%" stop-color="#d95570" stop-opacity="0.04"/>
+    </linearGradient>
+
+    <linearGradient id="tG" x1="84" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#eaecf3"/>
+      <stop offset="52%"  stop-color="#c6cbd6"/>
+      <stop offset="100%" stop-color="#68707e"/>
+    </linearGradient>
+
+    <filter id="tGlow" filterUnits="userSpaceOnUse" x="0" y="252" width="1200" height="200">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="b"/>
+      <feFlood flood-color="#d95570" flood-opacity="0.16" result="c"/>
+      <feComposite in="c" in2="b" operator="in" result="glow"/>
       <feMerge>
-        <feMergeNode in="b"/>
+        <feMergeNode in="glow"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
 
   </defs>
 
-  <!-- ━━━ BASE BACKGROUNDS ━━━ -->
-  <rect width="1200" height="630" fill="#08000d"/>
-  <rect width="1200" height="630" fill="url(#bgG)"/>
-  <rect x="6" y="0" width="88" height="630" fill="url(#leftEdge)"/>
+  <!-- base background -->
+  <rect width="1200" height="630" fill="#07090f"/>
 
-  <!-- ━━━ HEADER BAR ━━━ -->
-  <rect x="0" y="0" width="1200" height="112" fill="#110019"/>
+  <!-- dot grid texture -->
+  <rect width="1200" height="630" fill="url(#dots)"/>
 
-  <!-- Diagonal slash decorations right-side (mirrors site-header::before/::after) -->
-  <polygon points="1090,0 1099,0 1072,112 1063,112" fill="#ff1a4e" opacity="0.35"/>
-  <polygon points="1108,0 1110,0 1083,112 1081,112" fill="#ff1a4e" opacity="0.20"/>
+  <!-- horizontal log-line scanlines -->
+  <rect width="1200" height="630" fill="url(#hlines)"/>
 
-  <!-- Header bottom neon line -->
-  <rect x="0" y="110" width="1200" height="2" fill="url(#hLine)"/>
+  <!-- radial presence vignette -->
+  <rect width="1200" height="630" fill="url(#vig)"/>
 
-  <!-- Top-left L-bracket -->
-  <rect x="22" y="22" width="46" height="3" fill="#ff1a4e" opacity="0.80"/>
-  <rect x="22" y="22" width="3" height="32" fill="#ff1a4e" opacity="0.80"/>
+  <!-- edge darkening -->
+  <rect width="1200" height="630" fill="url(#eL)"/>
+  <rect width="1200" height="630" fill="url(#eR)"/>
+  <rect width="1200" height="630" fill="url(#eT)"/>
 
-  <!-- Site name -->
-  <text x="52" y="70"
-        font-family="serif"
-        font-size="28"
-        letter-spacing="5"
-        fill="#f4ecf7">へのへのんのの</text>
+  <!-- left crimson accent bar -->
+  <rect x="60" y="0" width="2" height="630" fill="url(#vbar)"/>
 
-  <!-- Sub-label -->
-  <text x="56" y="94"
-        font-family="sans-serif"
-        font-size="10"
-        letter-spacing="4"
-        fill="#9e7aaa">BLOG</text>
+  <!-- scar lines under header -->
+  <rect x="0" y="110" width="840" height="1" fill="url(#scar)"/>
+  <rect x="0" y="113" width="300" height="1" fill="url(#scar)" opacity="0.34"/>
 
-  <!-- ━━━ CONTENT AREA ━━━ -->
+  <!-- site name -->
+  <text
+    x="84" y="68"
+    font-family="monospace"
+    font-size="13"
+    fill="#c6cbd6"
+    opacity="0.38"
+    letter-spacing="6"
+  >へのへのんのの</text>
 
-  <!-- Thin horizontal reference lines -->
-  <line x1="56" y1="165" x2="1160" y2="165" stroke="#3a0045" stroke-width="0.5" opacity="0.55"/>
-  <line x1="56" y1="510" x2="1160" y2="510" stroke="#3a0045" stroke-width="0.5" opacity="0.55"/>
+  <!-- ARTICLE label -->
+  <text
+    x="84" y="95"
+    font-family="monospace"
+    font-size="10"
+    fill="#d95570"
+    opacity="0.62"
+    letter-spacing="5"
+  >ARTICLE</text>
 
-  <!-- Title card: dark background + left red stripe -->
-  <rect x="44" y="140" width="1112" height="345" fill="#0e0015" opacity="0.62"/>
-  <rect x="44" y="140" width="4"    height="345" fill="#ff1a4e"/>
+  <!-- decorative log separator above title -->
+  <text
+    x="84" y="204"
+    font-family="monospace"
+    font-size="10"
+    fill="#d95570"
+    opacity="0.20"
+    letter-spacing="1"
+  >// ──────────────────────────────────────────────</text>
 
-  <!-- ━━━ ARTICLE TITLE ━━━ -->
+  <!-- title left-border accent (post-list border-left motif) -->
+  <rect x="72" y="290" width="2" height="92" fill="#d95570" opacity="0.56"/>
 
-  <!-- RGB-split ghost — cyan, shifted right -->
-  <text x="69" y="338"
-        font-family="serif"
-        font-size="72"
-        fill="#00e5ff"
-        opacity="0.07">{{TITLE}}</text>
+  <!-- {{TITLE}}: crimson ghost depth layer -->
+  <text
+    x="84" y="367"
+    font-family="monospace"
+    font-size="72"
+    fill="#d95570"
+    opacity="0.07"
+    letter-spacing="2"
+  >{{TITLE}}</text>
 
-  <!-- RGB-split ghost — red, shifted left -->
-  <text x="55" y="336"
-        font-family="serif"
-        font-size="72"
-        fill="#ff1a4e"
-        opacity="0.13">{{TITLE}}</text>
+  <!-- {{TITLE}}: primary layer with gradient fill and glow -->
+  <text
+    x="84" y="367"
+    font-family="monospace"
+    font-size="72"
+    fill="url(#tG)"
+    filter="url(#tGlow)"
+    letter-spacing="2"
+  >{{TITLE}}</text>
 
-  <!-- Main title text -->
-  <text x="60" y="336"
-        font-family="serif"
-        font-size="72"
-        fill="url(#titleG)"
-        filter="url(#titleGlowF)">{{TITLE}}</text>
+  <!-- scar underlines after title -->
+  <rect x="84" y="387" width="560" height="1" fill="url(#scar)" opacity="0.72"/>
+  <rect x="84" y="390" width="200" height="1" fill="url(#scar)" opacity="0.28"/>
 
-  <!-- Bullet-trace accent line below title -->
-  <line x1="60" y1="383" x2="920" y2="383"
-        stroke="url(#trace)" stroke-width="1.5"/>
+  <!-- bottom scar -->
+  <rect x="0" y="556" width="480" height="1" fill="url(#scar)" opacity="0.48"/>
 
-  <!-- Diamond accent (mirrors hr::before ◆) -->
-  <text x="933" y="389"
-        font-family="serif"
-        font-size="12"
-        fill="#ff1a4e"
-        opacity="0.78">◆</text>
-
-  <!-- "ARTICLE" meta label -->
-  <text x="60" y="430"
-        font-family="sans-serif"
-        font-size="11"
-        letter-spacing="6"
-        fill="#9e7aaa">ARTICLE</text>
-
-  <!-- ━━━ BULLET-HOLE CLUSTER (machine-gun motif, upper-right body) ━━━ -->
-  <g filter="url(#dotHalo)">
-    <circle cx="1085" cy="196" r="3.5" fill="#ff1a4e" opacity="0.76"/>
-    <circle cx="1101" cy="184" r="2.5" fill="#ff1a4e" opacity="0.61"/>
-    <circle cx="1114" cy="199" r="3.0" fill="#ff1a4e" opacity="0.70"/>
-    <circle cx="1093" cy="210" r="2.5" fill="#ff1a4e" opacity="0.52"/>
-    <circle cx="1126" cy="187" r="2.0" fill="#ff1a4e" opacity="0.46"/>
-    <circle cx="1077" cy="208" r="2.0" fill="#ff1a4e" opacity="0.41"/>
-    <circle cx="1135" cy="203" r="2.5" fill="#ff1a4e" opacity="0.55"/>
-    <circle cx="1069" cy="194" r="1.5" fill="#ff1a4e" opacity="0.36"/>
-    <circle cx="1143" cy="178" r="1.5" fill="#ff1a4e" opacity="0.41"/>
-    <circle cx="1108" cy="216" r="2.0" fill="#ff1a4e" opacity="0.46"/>
-    <circle cx="1119" cy="172" r="1.5" fill="#ff1a4e" opacity="0.31"/>
-    <circle cx="1151" cy="195" r="2.0" fill="#ff1a4e" opacity="0.36"/>
-    <circle cx="1062" cy="183" r="1.0" fill="#ff1a4e" opacity="0.25"/>
-    <circle cx="1158" cy="183" r="1.5" fill="#ff1a4e" opacity="0.28"/>
-  </g>
-
-  <!-- Cyan ghost rings (RGB-split echo around two holes) -->
-  <circle cx="1085" cy="196" r="6.5" fill="none" stroke="#00e5ff" stroke-width="0.5" opacity="0.15"/>
-  <circle cx="1114" cy="199" r="5.5" fill="none" stroke="#00e5ff" stroke-width="0.5" opacity="0.12"/>
-
-  <!-- ━━━ FOOTER BAR ━━━ -->
-  <rect x="0" y="530" width="1200" height="100" fill="#110019"/>
-  <rect x="0" y="530" width="1200" height="1"   fill="#3a0045"/>
-
-  <!-- Bottom-right L-bracket -->
-  <rect x="1136" y="593" width="44" height="3" fill="#ff1a4e" opacity="0.60"/>
-  <rect x="1177" y="558" width="3" height="38" fill="#ff1a4e" opacity="0.60"/>
-
-  <!-- ━━━ OUTER FRAME NEON LINES ━━━ -->
-  <rect x="0" y="0"   width="1200" height="2" fill="url(#hLine)"/>
-  <rect x="0" y="628" width="1200" height="2" fill="url(#hLine)"/>
-
-  <!-- ━━━ LEFT ACCENT BORDER (drawn last — always on top) ━━━ -->
-  <rect x="0" y="0" width="6" height="630" fill="#ff1a4e"/>
-
-  <!-- ━━━ CRT SCANLINE OVERLAY (topmost decorative layer) ━━━ -->
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <!-- bottom site name ghost -->
+  <text
+    x="84" y="600"
+    font-family="monospace"
+    font-size="11"
+    fill="#c6cbd6"
+    opacity="0.13"
+    letter-spacing="5"
+  >へのへのんのの</text>
 
 </svg>

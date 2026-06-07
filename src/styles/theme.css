@@ -1,689 +1,335 @@
-/* マシンガンクイーン / マイキP feat. 重音テトSV / 暴走する愛の叫び──機関銃の連射に包まれた剥き出しの執着 */
-
-/* ═══════════════════════════════════════════
-   KEYFRAMES
-═══════════════════════════════════════════ */
-
-@keyframes glitch-body {
-  0%,  86%, 100% { transform: translate(0, 0) skewX(0deg); }
-  87% { transform: translate(-4px,  1px) skewX(-1.5deg); }
-  88% { transform: translate( 4px, -1px) skewX( 1.5deg); }
-  89% { transform: translate(-2px,  2px) skewX(-0.5deg); }
-  90% { transform: translate( 2px, -2px) skewX( 0.5deg); }
-  91% { transform: translate(0, 0) skewX(0deg); }
-}
-
-@keyframes rgb-split {
-  0%,  84%, 100% { text-shadow: none; }
-  85% { text-shadow: -5px 0 #ff1a4e, 5px 0 #00e5ff; }
-  86% { text-shadow:  5px 0 #ff1a4e, -5px 0 #00e5ff; }
-  87% { text-shadow: -3px 0 #00e5ff,  3px 0 #ff1a4e; }
-  88% { text-shadow: none; }
-  93% { text-shadow: -4px 0 #ff1a4e,  4px 0 #00e5ff; }
-  94% { text-shadow: none; }
-}
-
-@keyframes neon-pulse {
-  0%, 100% {
-    box-shadow:
-      0 0  6px rgba(255, 26, 78, 0.6),
-      0 0 20px rgba(255, 26, 78, 0.35),
-      0 0 50px rgba(255, 26, 78, 0.15);
-  }
-  50% {
-    box-shadow:
-      0 0  3px rgba(255, 26, 78, 0.4),
-      0 0 10px rgba(255, 26, 78, 0.2),
-      0 0 24px rgba(255, 26, 78, 0.08);
-  }
-}
-
-@keyframes text-neon {
-  0%, 100% {
-    text-shadow:
-      0 0  6px rgba(255, 26, 78, 0.8),
-      0 0 18px rgba(255, 26, 78, 0.5),
-      0 0 36px rgba(255, 26, 78, 0.25);
-  }
-  50% {
-    text-shadow:
-      0 0  3px rgba(255, 26, 78, 0.5),
-      0 0  9px rgba(255, 26, 78, 0.3);
-  }
-}
-
-@keyframes flicker {
-  0%, 18%, 22%, 58%, 60%, 66%, 100% { opacity: 1; }
-  20%, 21%   { opacity: 0.35; }
-  59%        { opacity: 0.08; }
-  61%, 65%   { opacity: 0.82; }
-}
-
-@keyframes scanline-drift {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-@keyframes bullet-strike {
-  0%         { transform: scaleX(0); transform-origin: left center; opacity: 0; }
-  10%        { opacity: 1; }
-  50%        { transform: scaleX(1); transform-origin: left center; }
-  51%        { transform: scaleX(1); transform-origin: right center; }
-  100%       { transform: scaleX(0); transform-origin: right center; opacity: 0; }
-}
-
-@keyframes oneshot-flash {
-  0%,  100%  { opacity: 0; }
-  5%,  15%   { opacity: 1; }
-  10%        { opacity: 0.4; }
-}
-
-/* ═══════════════════════════════════════════
-   ROOT VARIABLES
-═══════════════════════════════════════════ */
+/* INSOMNIA / ROMA feat. 奕夕 / 眠れない日々が重なるごとに扉の外で待ち続ける何か──凍りついた恐怖と静かな狂気 */
 
 :root {
-  --color-fg:     #f4ecf7;
-  --color-bg:     #08000d;
-  --color-accent: #ff1a4e;
-
-  --color-bg-raised:    #110019;
-  --color-bg-card:      #0e0015;
-  --color-border:       #3a0045;
-  --color-border-hot:   rgba(255, 26, 78, 0.6);
-  --color-muted:        #9e7aaa;
-  --color-accent-dim:   rgba(255, 26, 78, 0.18);
-  --color-accent-glow:  rgba(255, 26, 78, 0.45);
-  --color-cyan-ghost:   rgba(0, 229, 255, 0.12);
-
-  --spacing-unit: 1rem;
-
-  --font-heading: 'Impact', 'Arial Black', 'Franklin Gothic Medium',
-                  'Haettenschweiler', 'Helvetica Neue', sans-serif;
-  --font-body:    'Hiragino Sans', 'Yu Gothic Medium', 'Yu Gothic',
-                  'Meiryo', 'Noto Sans JP', 'Segoe UI',
-                  system-ui, sans-serif;
-
-  --line-height-body:    1.85;
-  --line-height-heading: 1.05;
-
-  --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
+  --color-bg:            #07090f;
+  --color-fg:            #c6cbd6;
+  --color-accent:        #d95570;
+  --spacing-unit:        1rem;
+  --font-heading:        'Courier New', 'Courier', monospace;
+  --font-body:           'Hiragino Sans', 'Yu Gothic', 'Meiryo',
+                         -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                         sans-serif;
+  --line-height-body:    1.9;
+  --line-height-heading: 1.15;
+  --ease-default:        cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ═══════════════════════════════════════════
-   GLOBAL BASE
-═══════════════════════════════════════════ */
+/* ── Keyframes ──────────────────────────────────────────────────── */
 
-*,
-*::before,
-*::after {
+@keyframes presence-breathe {
+  0%, 100% { opacity: 0;    }
+  50%      { opacity: 0.09; }
+}
+
+@keyframes lamp-flicker {
+  0%,  93%, 95.5%, 97.5%, 100% { opacity: 1;    }
+  94%                           { opacity: 0.80; }
+  96%                           { opacity: 0.92; }
+  98%                           { opacity: 0.85; }
+}
+
+@keyframes frozen-pulse {
+  0%, 100% { text-shadow: 0 0 0   rgba(217, 85, 112, 0);    }
+  50%      { text-shadow: 0 0 22px rgba(217, 85, 112, 0.11); }
+}
+
+@keyframes scar-grow {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes day-count-in {
+  from { opacity: 0; letter-spacing: 0.4em; }
+  to   { opacity: 1; letter-spacing: 0.12em; }
+}
+
+/* ── Base ───────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
   box-sizing: border-box;
-  margin:     0;
-  padding:    0;
 }
 
 html {
-  scroll-behavior: smooth;
-  font-size:       16px;
-}
-
-body {
   background-color: var(--color-bg);
   color:            var(--color-fg);
   font-family:      var(--font-body);
   line-height:      var(--line-height-body);
-  min-height:       100vh;
-  overflow-x:       hidden;
-  position:         relative;
 }
 
-/* CRT scanline grid overlay */
+body {
+  background-color: var(--color-bg);
+  margin:  0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* The presence — a vignette that slowly breathes at the edge of the room */
 body::before {
-  content:        '';
-  position:       fixed;
-  inset:          0;
-  pointer-events: none;
-  z-index:        900;
-  background:     repeating-linear-gradient(
-    to bottom,
-    transparent                   0px,
-    transparent                   3px,
-    rgba(0, 0, 0, 0.10)           3px,
-    rgba(0, 0, 0, 0.10)           4px
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 30%,
+    rgba(217, 85, 112, 0.055) 70%,
+    rgba(7, 9, 15, 0.72) 100%
   );
-  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 100;
+  animation: presence-breathe 13s ease-in-out infinite;
 }
 
-/* Moving hot-line streak */
+/* Edge darkness — walls closing in, paralysis */
 body::after {
-  content:        '';
-  position:       fixed;
-  top:            0;
-  left:           0;
-  width:          100%;
-  height:         3px;
-  background:     linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 26, 78, 0.18) 30%,
-    rgba(0, 229, 255, 0.08) 70%,
-    transparent
-  );
-  animation:      scanline-drift 10s linear infinite;
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(to right,
+      rgba(7, 9, 15, 0.6) 0%,
+      transparent 8%,
+      transparent 92%,
+      rgba(7, 9, 15, 0.6) 100%),
+    linear-gradient(to bottom,
+      rgba(7, 9, 15, 0.45) 0%,
+      transparent 14%);
   pointer-events: none;
-  z-index:        899;
+  z-index: 99;
 }
 
-/* ═══════════════════════════════════════════
-   TYPOGRAPHY
-═══════════════════════════════════════════ */
+/* ── Typography ─────────────────────────────────────────────────── */
 
 h1, h2, h3, h4, h5, h6 {
   font-family:    var(--font-heading);
   line-height:    var(--line-height-heading);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color:          var(--color-fg);
+  animation:      frozen-pulse 9s ease-in-out infinite;
 }
 
 p {
-  margin-bottom: calc(var(--spacing-unit) * 1.2);
+  margin: 0 0 calc(var(--spacing-unit) * 1.25);
 }
 
 a {
-  color:           var(--color-accent);
-  text-decoration: none;
+  color:                    var(--color-accent);
+  text-decoration:          underline;
+  text-decoration-color:    rgba(217, 85, 112, 0.35);
+  text-underline-offset:    3px;
   transition:
-    color        0.18s var(--ease-default),
-    text-shadow  0.18s var(--ease-default);
+    color                0.55s var(--ease-default),
+    text-decoration-color 0.55s var(--ease-default);
 }
 
-a:hover,
-a:focus-visible {
-  color:       var(--color-accent);
-  text-shadow:
-    0 0  8px var(--color-accent-glow),
-    0 0 20px var(--color-accent-dim);
-  outline:     none;
+a:hover {
+  color:                 #f07090;
+  text-decoration-color: rgba(240, 112, 144, 0.65);
 }
 
-strong, b {
-  color:       var(--color-accent);
-  font-weight: 900;
+::selection {
+  background: rgba(217, 85, 112, 0.32);
+  color: #f2f4f8;
 }
 
-em, i {
-  color:      var(--color-muted);
-  font-style: italic;
+/* ── Site Header ────────────────────────────────────────────────── */
+
+.site-header {
+  background-color: rgba(7, 9, 15, 0.97);
+  border-bottom:    1px solid rgba(217, 85, 112, 0.14);
+  padding:          calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  font-family:      var(--font-heading);
+  letter-spacing:   0.10em;
+  text-transform:   uppercase;
+  font-size:        0.82rem;
+  position:         relative;
+  animation:        lamp-flicker 19s ease-in-out infinite;
 }
 
-blockquote {
-  border-left:  3px solid var(--color-accent);
-  padding:      calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5);
-  margin:       calc(var(--spacing-unit) * 1.5) 0;
-  background:   var(--color-bg-card);
-  color:        var(--color-muted);
-  font-style:   italic;
-  position:     relative;
-  overflow:     hidden;
-}
-
-blockquote::after {
-  content:        '';
-  position:       absolute;
-  inset:          0;
-  background:     linear-gradient(
-    135deg,
-    var(--color-accent-dim) 0%,
-    transparent 55%
-  );
-  pointer-events: none;
-}
-
-hr {
-  border:     none;
-  height:     1px;
-  background: linear-gradient(
+/* The wound — a red scar that bleeds from the left on load */
+.site-header::after {
+  content:          '';
+  position:         absolute;
+  bottom:           -1px;
+  left:             0;
+  width:            100%;
+  height:           1px;
+  background:       linear-gradient(
     to right,
-    transparent,
-    var(--color-accent) 20%,
-    var(--color-accent) 80%,
-    transparent
+    var(--color-accent) 0%,
+    rgba(217, 85, 112, 0.3) 40%,
+    transparent 70%
   );
-  margin:    calc(var(--spacing-unit) * 2.5) 0;
-  position:  relative;
-  overflow:  visible;
-  animation: neon-pulse 3.5s ease-in-out infinite;
+  transform-origin: left center;
+  animation:        scar-grow 2.8s var(--ease-default) both;
 }
 
-hr::before {
-  content:    '◆';
-  position:   absolute;
-  left:       50%;
-  top:        50%;
-  transform:  translate(-50%, -50%);
-  font-size:  0.55rem;
-  color:      var(--color-accent);
-  background: var(--color-bg);
-  padding:    0 0.6em;
-  letter-spacing: 0.4em;
+.site-header a {
+  color:           var(--color-fg);
+  text-decoration: none;
+  transition:      color 0.45s var(--ease-default);
 }
 
-/* ─── Code ─── */
-
-code {
-  font-size:    0.875em;
-  background:   var(--color-bg-raised);
-  color:        var(--color-accent);
-  padding:      0.1em 0.4em;
-  border:       1px solid var(--color-border);
-}
-
-pre {
-  background:    var(--color-bg-raised);
-  border:        1px solid var(--color-border);
-  border-left:   3px solid var(--color-accent);
-  padding:       calc(var(--spacing-unit) * 1.25);
-  overflow-x:    auto;
-  font-size:     0.875rem;
-  line-height:   1.6;
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
-}
-
-pre code {
-  background: transparent;
-  border:     none;
-  padding:    0;
-  color:      var(--color-fg);
-}
-
-/* ─── Lists ─── */
-
-ul, ol {
-  padding-left: calc(var(--spacing-unit) * 1.5);
-  margin-bottom: calc(var(--spacing-unit) * 1.2);
-}
-
-li::marker {
+.site-header a:hover {
   color: var(--color-accent);
 }
 
-/* ═══════════════════════════════════════════
-   SITE HEADER
-═══════════════════════════════════════════ */
+/* ── Site Footer ────────────────────────────────────────────────── */
 
-.site-header {
-  background:    var(--color-bg-raised);
-  border-bottom: 2px solid var(--color-accent);
-  padding:       calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2);
-  position:      sticky;
-  top:           0;
-  z-index:       500;
-  animation:     neon-pulse 4s ease-in-out infinite;
-  overflow:      hidden;
+.site-footer {
+  background-color: rgba(7, 9, 15, 0.98);
+  border-top:       1px solid rgba(217, 85, 112, 0.10);
+  color:            rgba(198, 203, 214, 0.30);
+  font-family:      var(--font-heading);
+  font-size:        0.73rem;
+  letter-spacing:   0.14em;
+  padding:          calc(var(--spacing-unit) * 2);
+  text-align:       center;
 }
 
-/* Diagonal slash decoration */
-.site-header::before {
-  content:    '';
-  position:   absolute;
-  top:        -2px;
-  right:      calc(var(--spacing-unit) * 4);
-  width:      3px;
-  height:     calc(100% + 4px);
-  background: var(--color-accent);
-  transform:  skewX(-18deg);
-  opacity:    0.35;
-}
-
-.site-header::after {
-  content:    '';
-  position:   absolute;
-  top:        -2px;
-  right:      calc(var(--spacing-unit) * 4.6);
-  width:      1px;
-  height:     calc(100% + 4px);
-  background: var(--color-accent);
-  transform:  skewX(-18deg);
-  opacity:    0.2;
-}
-
-/* Site title */
-.site-header h1,
-.site-header .site-title {
-  font-size:      clamp(1.3rem, 3.5vw, 2.2rem);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color:          var(--color-fg);
-  display:        inline-block;
-  animation:
-    glitch-body 6s steps(1) infinite,
-    rgb-split   6s steps(1) infinite;
-}
-
-/* Nav links */
-.site-header nav {
-  margin-top: 0.4em;
-}
-
-.site-header nav a {
-  display:        inline-block;
-  margin-right:   calc(var(--spacing-unit) * 1.4);
-  font-family:    var(--font-heading);
-  font-size:      0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color:          var(--color-muted);
-  transition:
-    color         0.14s var(--ease-default),
-    letter-spacing 0.2s var(--ease-default);
-}
-
-.site-header nav a:hover,
-.site-header nav a:focus-visible {
-  color:          var(--color-accent);
-  letter-spacing: 0.28em;
-  text-shadow:    0 0 10px var(--color-accent-glow);
-}
-
-/* ═══════════════════════════════════════════
-   POST LIST
-═══════════════════════════════════════════ */
+/* ── Post List ──────────────────────────────────────────────────── */
 
 .post-list {
   list-style: none;
   padding:    0;
-  margin:     calc(var(--spacing-unit) * 2) 0;
-  display:    grid;
-  gap:        calc(var(--spacing-unit) * 1.1);
+  margin:     0;
 }
 
-.post-list li,
-.post-list-item {
-  background:  var(--color-bg-card);
-  border:      1px solid var(--color-border);
-  border-left: 4px solid var(--color-accent);
-  padding:     calc(var(--spacing-unit) * 1.1) calc(var(--spacing-unit) * 1.4);
-  position:    relative;
-  overflow:    hidden;
+.post-list li {
+  border-left:   2px solid rgba(217, 85, 112, 0.13);
+  margin-bottom: calc(var(--spacing-unit) * 1.2);
+  padding:       calc(var(--spacing-unit) * 0.65) calc(var(--spacing-unit) * 1.4);
+  position:      relative;
   transition:
-    border-color 0.14s var(--ease-default),
-    box-shadow   0.14s var(--ease-default),
-    transform    0.14s var(--ease-default);
+    border-left-color 0.65s var(--ease-default),
+    background-color  0.65s var(--ease-default);
 }
 
-/* Hover glow wash */
-.post-list li::before,
-.post-list-item::before {
-  content:        '';
-  position:       absolute;
-  inset:          0;
-  background:     linear-gradient(
-    110deg,
-    var(--color-accent-dim) 0%,
-    transparent 55%
-  );
-  opacity:        0;
-  transition:     opacity 0.2s var(--ease-default);
-  pointer-events: none;
-}
-
-/* Bullet-strike underline */
-.post-list li::after,
-.post-list-item::after {
-  content:          '';
-  position:         absolute;
-  bottom:           0;
-  left:             0;
-  width:            100%;
-  height:           1px;
-  background:       var(--color-accent);
-  transform:        scaleX(0);
-  transform-origin: left center;
-  transition:       transform 0.22s var(--ease-default);
-}
-
-.post-list li:hover,
-.post-list-item:hover {
-  border-color: var(--color-accent);
-  box-shadow:
-    0 0 14px var(--color-accent-dim),
-    inset 0 0 28px var(--color-accent-dim);
-  transform:    translateX(5px);
-}
-
-.post-list li:hover::before,
-.post-list-item:hover::before {
-  opacity: 1;
-}
-
-.post-list li:hover::after,
-.post-list-item:hover::after {
-  transform: scaleX(1);
+.post-list li:hover {
+  border-left-color: var(--color-accent);
+  background-color:  rgba(217, 85, 112, 0.04);
 }
 
 .post-list a {
-  font-family:    var(--font-heading);
-  font-size:      1.05rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color:          var(--color-fg);
-  display:        block;
-  transition:     color 0.14s var(--ease-default);
+  color:           var(--color-fg);
+  text-decoration: none;
+  transition:      color 0.45s var(--ease-default);
 }
 
-.post-list a:hover,
-.post-list a:focus-visible {
-  color:       var(--color-accent);
-  text-shadow: none;
+.post-list a:hover {
+  color: var(--color-accent);
 }
 
-.post-list time,
-.post-list .post-date {
+/* Day-counter style date — clinical, cold, log-like */
+.post-list .post-date,
+.post-list time {
   display:        block;
   font-family:    var(--font-heading);
-  font-size:      0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color:          var(--color-muted);
-  margin-top:     0.3em;
+  font-size:      0.74rem;
+  color:          rgba(198, 203, 214, 0.35);
+  letter-spacing: 0.10em;
+  margin-bottom:  0.2em;
+  animation:      day-count-in 1.2s var(--ease-default) both;
 }
 
-/* ═══════════════════════════════════════════
-   ARTICLE / POST
-═══════════════════════════════════════════ */
+/* ── Article / Post ─────────────────────────────────────────────── */
 
 article.post {
-  max-width:  72ch;
-  margin:     0 auto;
-  padding:    calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2);
+  position: relative;
 }
 
-article.post header {
-  border-bottom:  1px solid var(--color-border);
-  margin-bottom:  calc(var(--spacing-unit) * 2.2);
-  padding-bottom: calc(var(--spacing-unit) * 1.2);
-  position:       relative;
-}
-
-/* Animated accent underline */
-article.post header::after {
-  content:   '';
-  position:  absolute;
-  bottom:    -1px;
-  left:      0;
-  width:     4rem;
-  height:    3px;
-  background: var(--color-accent);
-  animation:  neon-pulse 3s ease-in-out infinite;
+article.post::before {
+  content:       '';
+  display:       block;
+  width:         100%;
+  height:        1px;
+  background:    linear-gradient(
+    to right,
+    var(--color-accent) 0%,
+    rgba(217, 85, 112, 0.25) 45%,
+    transparent 70%
+  );
+  opacity:       0.38;
+  margin-bottom: calc(var(--spacing-unit) * 2.2);
 }
 
 article.post h1 {
-  font-size:      clamp(1.9rem, 5.5vw, 3.2rem);
-  margin-bottom:  0.3em;
-  animation:
-    glitch-body 8s  steps(1) infinite,
-    rgb-split   8s  steps(1) infinite;
+  color:         var(--color-fg);
+  font-size:     clamp(1.35rem, 4vw, 2.1rem);
+  margin-bottom: calc(var(--spacing-unit) * 0.3);
 }
 
 article.post h2 {
-  font-size:      1.45rem;
-  color:          var(--color-accent);
-  margin-top:     calc(var(--spacing-unit) * 2.2);
-  margin-bottom:  calc(var(--spacing-unit) * 0.6);
-  padding-left:   1.1em;
-  position:       relative;
-  animation:      text-neon 5s ease-in-out infinite;
-}
-
-article.post h2::before {
-  content:   '//';
-  position:  absolute;
-  left:      0;
-  font-size: 0.85em;
-  color:     var(--color-muted);
-  opacity:   0.65;
+  color:       rgba(198, 203, 214, 0.78);
+  font-size:   1.2rem;
+  margin-top:  calc(var(--spacing-unit) * 2.5);
+  border-left: 2px solid rgba(217, 85, 112, 0.38);
+  padding-left: calc(var(--spacing-unit) * 0.8);
 }
 
 article.post h3 {
-  font-size:    1.15rem;
-  color:        var(--color-fg);
-  margin-top:   calc(var(--spacing-unit) * 1.6);
-  margin-bottom: calc(var(--spacing-unit) * 0.4);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 0.3em;
+  color:     rgba(198, 203, 214, 0.60);
+  font-size: 1.02rem;
 }
 
-article.post time,
-article.post .post-meta {
-  display:        block;
-  font-family:    var(--font-heading);
-  font-size:      0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color:          var(--color-muted);
-  margin-top:     0.55em;
+/* ── Blockquote — like a field report, a clinical note ──────────── */
+
+blockquote {
+  border-left: 2px solid var(--color-accent);
+  margin:      calc(var(--spacing-unit) * 1.75) 0;
+  padding:     calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.5);
+  background:  rgba(217, 85, 112, 0.03);
+  color:       rgba(198, 203, 214, 0.62);
+  font-style:  italic;
 }
 
-article.post img {
-  max-width:    100%;
-  display:      block;
-  margin:       calc(var(--spacing-unit) * 1.8) auto;
-  border:       1px solid var(--color-border);
-  filter:       brightness(0.92) contrast(1.08);
-  transition:   filter 0.2s var(--ease-default);
+/* ── Code — monospaced log entries ──────────────────────────────── */
+
+code {
+  font-family:   var(--font-heading);
+  font-size:     0.87em;
+  background:    rgba(198, 203, 214, 0.055);
+  color:         rgba(217, 85, 112, 0.88);
+  padding:       0.1em 0.38em;
+  border-radius: 2px;
 }
 
-article.post img:hover {
-  filter: brightness(1) contrast(1.12);
+pre {
+  font-family:  var(--font-heading);
+  background:   rgba(198, 203, 214, 0.03);
+  border-left:  2px solid rgba(217, 85, 112, 0.25);
+  padding:      calc(var(--spacing-unit) * 1.1);
+  overflow-x:   auto;
+  line-height:  1.65;
+  font-size:    0.88rem;
 }
 
-/* ═══════════════════════════════════════════
-   SITE FOOTER
-═══════════════════════════════════════════ */
-
-.site-footer {
-  border-top:     2px solid var(--color-border);
-  padding:        calc(var(--spacing-unit) * 2.2) calc(var(--spacing-unit) * 2);
-  text-align:     center;
-  color:          var(--color-muted);
-  font-size:      0.75rem;
-  font-family:    var(--font-heading);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background:     var(--color-bg-raised);
-  position:       relative;
-  overflow:       hidden;
+pre code {
+  background: none;
+  color:      var(--color-fg);
+  padding:    0;
 }
 
-/* Lyric ghost line */
-.site-footer::before {
-  content:        '"君だけはよそ見をしないで"';
-  display:        block;
-  font-family:    var(--font-body);
-  font-size:      0.68rem;
-  letter-spacing: 0.2em;
-  color:          var(--color-accent);
-  opacity:        0.45;
-  margin-bottom:  0.6em;
-  animation:      flicker 7s linear infinite;
-  font-style:     italic;
-  text-transform: none;
-}
-
-/* Decorative corner slash */
-.site-footer::after {
-  content:    '';
-  position:   absolute;
-  bottom:     0;
-  left:       0;
-  right:      0;
-  height:     2px;
-  background: linear-gradient(
-    to right,
-    var(--color-accent),
-    transparent 40%,
-    transparent 60%,
-    var(--color-accent)
-  );
-  animation:  neon-pulse 4s ease-in-out infinite;
-}
-
-.site-footer a {
-  color:      var(--color-muted);
-  transition: color 0.18s var(--ease-default);
-}
-
-.site-footer a:hover,
-.site-footer a:focus-visible {
-  color:       var(--color-accent);
-  text-shadow: 0 0 10px var(--color-accent-glow);
-}
-
-/* ═══════════════════════════════════════════
-   SCROLLBAR
-═══════════════════════════════════════════ */
+/* ── Scrollbar ──────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar {
-  width:  5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
+  width:      4px;
   background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background:    var(--color-accent);
-  border-radius: 0;
+  background:    rgba(217, 85, 112, 0.25);
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff4d75;
+  background: rgba(217, 85, 112, 0.48);
 }
 
-/* ═══════════════════════════════════════════
-   SELECTION & FOCUS
-═══════════════════════════════════════════ */
-
-::selection {
-  background: var(--color-accent);
-  color:      var(--color-bg);
-}
-
-:focus-visible {
-  outline:        2px solid var(--color-accent);
-  outline-offset: 3px;
-}
-
-/* ═══════════════════════════════════════════
-   REDUCED MOTION
-═══════════════════════════════════════════ */
+/* ── Reduced Motion ─────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation:  none !important;
     transition: none !important;
   }
