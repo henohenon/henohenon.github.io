@@ -1,159 +1,191 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <defs>
+<defs>
 
-    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="20" cy="20" r="0.8" fill="#c6cbd6" opacity="0.07"/>
-    </pattern>
+  <radialGradient id="rg-top" cx="600" cy="0" r="660" gradientUnits="userSpaceOnUse">
+    <stop offset="0%"   stop-color="#280410"/>
+    <stop offset="100%" stop-color="#280410" stop-opacity="0"/>
+  </radialGradient>
 
-    <pattern id="hlines" x="0" y="0" width="10" height="22" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="21.5" x2="10" y2="21.5" stroke="#c6cbd6" stroke-width="0.5" opacity="0.022"/>
-    </pattern>
+  <radialGradient id="rg-bot" cx="600" cy="630" r="756" gradientUnits="userSpaceOnUse">
+    <stop offset="0%"   stop-color="#1c0209"/>
+    <stop offset="100%" stop-color="#1c0209" stop-opacity="0"/>
+  </radialGradient>
 
-    <radialGradient id="vig" cx="50%" cy="50%" r="70%">
-      <stop offset="30%" stop-color="#07090f" stop-opacity="0"/>
-      <stop offset="72%" stop-color="#d95570" stop-opacity="0.045"/>
-      <stop offset="100%" stop-color="#07090f" stop-opacity="0.84"/>
-    </radialGradient>
+  <linearGradient id="hr-grad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+    <stop offset="0%"   stop-color="#9b1422" stop-opacity="0"/>
+    <stop offset="20%"  stop-color="#9b1422" stop-opacity="0.55"/>
+    <stop offset="50%"  stop-color="#e02535" stop-opacity="0.85"/>
+    <stop offset="80%"  stop-color="#9b1422" stop-opacity="0.55"/>
+    <stop offset="100%" stop-color="#9b1422" stop-opacity="0"/>
+  </linearGradient>
 
-    <linearGradient id="eL" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#07090f" stop-opacity="0.72"/>
-      <stop offset="8%" stop-color="#07090f" stop-opacity="0"/>
-    </linearGradient>
+  <linearGradient id="drip-grad" gradientUnits="userSpaceOnUse" x1="200" y1="0" x2="1000" y2="0">
+    <stop offset="0%"   stop-color="#0e0508" stop-opacity="0"/>
+    <stop offset="15%"  stop-color="#640812" stop-opacity="0.6"/>
+    <stop offset="45%"  stop-color="#c01828"/>
+    <stop offset="55%"  stop-color="#e02535"/>
+    <stop offset="68%"  stop-color="#c01828"/>
+    <stop offset="85%"  stop-color="#640812" stop-opacity="0.6"/>
+    <stop offset="100%" stop-color="#0e0508" stop-opacity="0"/>
+  </linearGradient>
 
-    <linearGradient id="eR" x1="1" y1="0" x2="0" y2="0">
-      <stop offset="0%" stop-color="#07090f" stop-opacity="0.72"/>
-      <stop offset="8%" stop-color="#07090f" stop-opacity="0"/>
-    </linearGradient>
+  <linearGradient id="blade-grad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#e02535" stop-opacity="0.9"/>
+    <stop offset="55%"  stop-color="#9b1422" stop-opacity="0.65"/>
+    <stop offset="100%" stop-color="#9b1422" stop-opacity="0"/>
+  </linearGradient>
 
-    <linearGradient id="eT" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#07090f" stop-opacity="0.54"/>
-      <stop offset="14%" stop-color="#07090f" stop-opacity="0"/>
-    </linearGradient>
+  <linearGradient id="hdr-bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#1c030a"/>
+    <stop offset="100%" stop-color="#0e0508"/>
+  </linearGradient>
 
-    <linearGradient id="scar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#d95570" stop-opacity="1"/>
-      <stop offset="28%"  stop-color="#d95570" stop-opacity="0.50"/>
-      <stop offset="55%"  stop-color="#d95570" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#d95570" stop-opacity="0"/>
-    </linearGradient>
+  <linearGradient id="title-grad" gradientUnits="userSpaceOnUse" x1="0" y1="283" x2="0" y2="363">
+    <stop offset="0%"   stop-color="#ede2d8"/>
+    <stop offset="100%" stop-color="#c4a8a0"/>
+  </linearGradient>
 
-    <linearGradient id="vbar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#d95570" stop-opacity="0.04"/>
-      <stop offset="22%"  stop-color="#d95570" stop-opacity="0.60"/>
-      <stop offset="78%"  stop-color="#d95570" stop-opacity="0.60"/>
-      <stop offset="100%" stop-color="#d95570" stop-opacity="0.04"/>
-    </linearGradient>
+  <linearGradient id="title-shimmer" gradientUnits="userSpaceOnUse" x1="0" y1="283" x2="0" y2="363">
+    <stop offset="0%"   stop-color="#fff5f6" stop-opacity="0.18"/>
+    <stop offset="45%"  stop-color="#ede2d8" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#9b1422" stop-opacity="0.12"/>
+  </linearGradient>
 
-    <linearGradient id="tG" x1="84" y1="0" x2="1100" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#eaecf3"/>
-      <stop offset="52%"  stop-color="#c6cbd6"/>
-      <stop offset="100%" stop-color="#68707e"/>
-    </linearGradient>
+  <pattern id="dot-pat" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+    <circle cx="30" cy="30" r="0.75" fill="#9b1422" fill-opacity="0.09"/>
+  </pattern>
 
-    <filter id="tGlow" filterUnits="userSpaceOnUse" x="0" y="252" width="1200" height="200">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="b"/>
-      <feFlood flood-color="#d95570" flood-opacity="0.16" result="c"/>
-      <feComposite in="c" in2="b" operator="in" result="glow"/>
-      <feMerge>
-        <feMergeNode in="glow"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+  <filter id="t-blur" x="-5%" y="-60%" width="110%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+  </filter>
 
-  </defs>
+  <filter id="s-glow" x="-18%" y="-90%" width="136%" height="280%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+    <feFlood flood-color="#9b1422" flood-opacity="0.78" result="col"/>
+    <feComposite in="col" in2="blur" operator="in" result="glow"/>
+    <feMerge>
+      <feMergeNode in="glow"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
-  <!-- base background -->
-  <rect width="1200" height="630" fill="#07090f"/>
+</defs>
 
-  <!-- dot grid texture -->
-  <rect width="1200" height="630" fill="url(#dots)"/>
+<!-- ── Background ── -->
+<rect width="1200" height="630" fill="#0e0508"/>
+<rect width="1200" height="630" fill="url(#rg-top)"/>
+<rect width="1200" height="630" fill="url(#rg-bot)"/>
+<rect width="1200" height="630" fill="url(#dot-pat)"/>
 
-  <!-- horizontal log-line scanlines -->
-  <rect width="1200" height="630" fill="url(#hlines)"/>
+<!-- ── Gothic corner brackets ── -->
+<polyline points="38,110 38,36 134,36"
+          fill="none" stroke="#9b1422" stroke-width="1" stroke-opacity="0.58"/>
+<polyline points="1066,36 1162,36 1162,110"
+          fill="none" stroke="#9b1422" stroke-width="1" stroke-opacity="0.58"/>
+<polyline points="38,520 38,594 134,594"
+          fill="none" stroke="#9b1422" stroke-width="1" stroke-opacity="0.58"/>
+<polyline points="1066,594 1162,594 1162,520"
+          fill="none" stroke="#9b1422" stroke-width="1" stroke-opacity="0.58"/>
 
-  <!-- radial presence vignette -->
-  <rect width="1200" height="630" fill="url(#vig)"/>
+<!-- Corner accent dots -->
+<circle cx="38"   cy="36"  r="2.2" fill="#9b1422" fill-opacity="0.55"/>
+<circle cx="1162" cy="36"  r="2.2" fill="#9b1422" fill-opacity="0.55"/>
+<circle cx="38"   cy="594" r="2.2" fill="#9b1422" fill-opacity="0.55"/>
+<circle cx="1162" cy="594" r="2.2" fill="#9b1422" fill-opacity="0.55"/>
 
-  <!-- edge darkening -->
-  <rect width="1200" height="630" fill="url(#eL)"/>
-  <rect width="1200" height="630" fill="url(#eR)"/>
-  <rect width="1200" height="630" fill="url(#eT)"/>
+<!-- ── Site Header ── -->
+<rect x="0" y="0" width="1200" height="112" fill="url(#hdr-bg)"/>
 
-  <!-- left crimson accent bar -->
-  <rect x="60" y="0" width="2" height="630" fill="url(#vbar)"/>
+<text
+  x="600" y="68"
+  font-family="serif"
+  font-size="30"
+  fill="#ede2d8"
+  text-anchor="middle"
+  letter-spacing="10"
+  filter="url(#s-glow)">へのへのんのの</text>
 
-  <!-- scar lines under header -->
-  <rect x="0" y="110" width="840" height="1" fill="url(#scar)"/>
-  <rect x="0" y="113" width="300" height="1" fill="url(#scar)" opacity="0.34"/>
+<!-- Header border (thin HR) -->
+<rect x="0" y="108" width="1200" height="1" fill="url(#hr-grad)"/>
+<!-- Drip accent (like .site-header::after) -->
+<rect x="200" y="109" width="800" height="2.5" fill="url(#drip-grad)" opacity="0.88"/>
+<!-- Diamond on header border -->
+<polygon points="600,103 606,109 600,115 594,109"
+         fill="#e02535" fill-opacity="0.58"/>
 
-  <!-- site name -->
-  <text
-    x="84" y="68"
-    font-family="monospace"
-    font-size="13"
-    fill="#c6cbd6"
-    opacity="0.38"
-    letter-spacing="6"
-  >へのへのんのの</text>
+<!-- ── Left blade bar (like article.post border-left + blade-drip) ── -->
+<rect x="60" y="128" width="2" height="385" fill="url(#blade-grad)"/>
 
-  <!-- ARTICLE label -->
-  <text
-    x="84" y="95"
-    font-family="monospace"
-    font-size="10"
-    fill="#d95570"
-    opacity="0.62"
-    letter-spacing="5"
-  >ARTICLE</text>
+<!-- ── Right decorative gothic diamond ── -->
+<polygon points="965,168 1108,315 965,462 822,315"
+         fill="none" stroke="#9b1422" stroke-width="0.9" stroke-opacity="0.15"/>
+<polygon points="965,212 1062,315 965,418 868,315"
+         fill="none" stroke="#9b1422" stroke-width="0.8" stroke-opacity="0.10"/>
+<polygon points="965,248 1022,315 965,382 908,315"
+         fill="none" stroke="#9b1422" stroke-width="0.7" stroke-opacity="0.07"/>
+<circle cx="965" cy="315" r="4" fill="#9b1422" fill-opacity="0.20"/>
+<circle cx="965" cy="315" r="1.5" fill="#e02535" fill-opacity="0.35"/>
 
-  <!-- decorative log separator above title -->
-  <text
-    x="84" y="204"
-    font-family="monospace"
-    font-size="10"
-    fill="#d95570"
-    opacity="0.20"
-    letter-spacing="1"
-  >// ──────────────────────────────────────────────</text>
+<!-- ── Article label ── -->
+<text
+  x="82" y="158"
+  font-family="serif"
+  font-size="12"
+  fill="#9b1422"
+  letter-spacing="5"
+  fill-opacity="0.88">A R T I C L E</text>
 
-  <!-- title left-border accent (post-list border-left motif) -->
-  <rect x="72" y="290" width="2" height="92" fill="#d95570" opacity="0.56"/>
+<line x1="82" y1="167" x2="318" y2="167"
+      stroke="#9b1422" stroke-width="0.5" stroke-opacity="0.38"/>
 
-  <!-- {{TITLE}}: crimson ghost depth layer -->
-  <text
-    x="84" y="367"
-    font-family="monospace"
-    font-size="72"
-    fill="#d95570"
-    opacity="0.07"
-    letter-spacing="2"
-  >{{TITLE}}</text>
+<!-- ── Title: crimson glow layer ── -->
+<text
+  x="82" y="355"
+  font-family="serif"
+  font-size="72"
+  fill="#9b1422"
+  fill-opacity="0.55"
+  letter-spacing="2"
+  filter="url(#t-blur)">{{TITLE}}</text>
 
-  <!-- {{TITLE}}: primary layer with gradient fill and glow -->
-  <text
-    x="84" y="367"
-    font-family="monospace"
-    font-size="72"
-    fill="url(#tG)"
-    filter="url(#tGlow)"
-    letter-spacing="2"
-  >{{TITLE}}</text>
+<!-- ── Title: main layer ── -->
+<text
+  x="82" y="355"
+  font-family="serif"
+  font-size="72"
+  fill="url(#title-grad)"
+  letter-spacing="2">{{TITLE}}</text>
 
-  <!-- scar underlines after title -->
-  <rect x="84" y="387" width="560" height="1" fill="url(#scar)" opacity="0.72"/>
-  <rect x="84" y="390" width="200" height="1" fill="url(#scar)" opacity="0.28"/>
+<!-- ── Title: shimmer overlay ── -->
+<text
+  x="82" y="355"
+  font-family="serif"
+  font-size="72"
+  fill="url(#title-shimmer)"
+  letter-spacing="2">{{TITLE}}</text>
 
-  <!-- bottom scar -->
-  <rect x="0" y="556" width="480" height="1" fill="url(#scar)" opacity="0.48"/>
+<!-- ── Bottom separator ── -->
+<rect x="0" y="516" width="1200" height="1" fill="url(#hr-grad)"/>
 
-  <!-- bottom site name ghost -->
-  <text
-    x="84" y="600"
-    font-family="monospace"
-    font-size="11"
-    fill="#c6cbd6"
-    opacity="0.13"
-    letter-spacing="5"
-  >へのへのんのの</text>
+<!-- Diamond ornaments on separator -->
+<polygon points="600,509 607,516 600,523 593,516"
+         fill="#9b1422" fill-opacity="0.72"/>
+<polygon points="568,513 573,516 568,519 563,516"
+         fill="#9b1422" fill-opacity="0.36"/>
+<polygon points="632,513 637,516 632,519 627,516"
+         fill="#9b1422" fill-opacity="0.36"/>
+<polygon points="536,514.5 540,516 536,517.5 532,516"
+         fill="#9b1422" fill-opacity="0.18"/>
+<polygon points="664,514.5 668,516 664,517.5 660,516"
+         fill="#9b1422" fill-opacity="0.18"/>
+
+<!-- ── Footer site name ── -->
+<text
+  x="600" y="571"
+  font-family="serif"
+  font-size="14"
+  fill="#9a7278"
+  text-anchor="middle"
+  letter-spacing="7">へのへのんのの</text>
 
 </svg>

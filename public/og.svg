@@ -1,103 +1,132 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="rg" cx="50%" cy="50%" r="62%">
-      <stop offset="28%" stop-color="#07090f" stop-opacity="0"/>
-      <stop offset="68%" stop-color="#d95570" stop-opacity="0.045"/>
-      <stop offset="100%" stop-color="#07090f" stop-opacity="0.76"/>
+    <radialGradient id="rg-t" gradientUnits="userSpaceOnUse" cx="600" cy="0" r="700">
+      <stop offset="0%" stop-color="#280410"/>
+      <stop offset="100%" stop-color="#0e0508" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="lx" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#07090f" stop-opacity="0.62"/>
-      <stop offset="9%"   stop-color="#07090f" stop-opacity="0"/>
-      <stop offset="91%"  stop-color="#07090f" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#07090f" stop-opacity="0.62"/>
+    <radialGradient id="rg-b" gradientUnits="userSpaceOnUse" cx="600" cy="630" r="740">
+      <stop offset="0%" stop-color="#1c0209"/>
+      <stop offset="100%" stop-color="#0e0508" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lg-h" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+      <stop offset="0%"   stop-color="#9b1422" stop-opacity="0"/>
+      <stop offset="15%"  stop-color="#9b1422" stop-opacity="0.52"/>
+      <stop offset="50%"  stop-color="#e02535" stop-opacity="0.92"/>
+      <stop offset="85%"  stop-color="#9b1422" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#9b1422" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="ly" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"  stop-color="#07090f" stop-opacity="0.46"/>
-      <stop offset="16%" stop-color="#07090f" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="sc" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"  stop-color="#d95570" stop-opacity="1"/>
-      <stop offset="42%" stop-color="#d95570" stop-opacity="0.28"/>
-      <stop offset="68%" stop-color="#d95570" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="scc" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#d95570" stop-opacity="0"/>
-      <stop offset="12%"  stop-color="#d95570" stop-opacity="0.85"/>
-      <stop offset="50%"  stop-color="#d95570" stop-opacity="1"/>
-      <stop offset="88%"  stop-color="#d95570" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#d95570" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="gb" x="-15%" y="-120%" width="130%" height="340%">
-      <feGaussianBlur stdDeviation="18"/>
+    <filter id="f-title" x="-10%" y="-70%" width="120%" height="240%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <pattern id="sl" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0.5" x2="1200" y2="0.5" stroke="#c6cbd6" stroke-width="0.5" stroke-opacity="0.022"/>
-    </pattern>
+    <filter id="f-sub" x="-6%" y="-100%" width="112%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
 
-  <!-- base -->
-  <rect width="1200" height="630" fill="#07090f"/>
-  <rect width="1200" height="630" fill="url(#sl)"/>
+  <!-- ── Background ── -->
+  <rect width="1200" height="630" fill="#0e0508"/>
+  <rect width="1200" height="630" fill="url(#rg-t)"/>
+  <rect width="1200" height="630" fill="url(#rg-b)"/>
 
-  <!-- presence + edge darkness -->
-  <rect width="1200" height="630" fill="url(#rg)"/>
-  <rect width="1200" height="630" fill="url(#lx)"/>
-  <rect width="1200" height="630" fill="url(#ly)"/>
+  <!-- very faint cross motif -->
+  <g opacity="0.038">
+    <rect x="595" y="75" width="10" height="480" rx="5" fill="#9b1422"/>
+    <rect x="330" y="245" width="540" height="8" rx="4" fill="#9b1422"/>
+  </g>
 
-  <!-- ambient depth ellipses — something breathing in the dark -->
-  <ellipse cx="600" cy="295" rx="500" ry="245" fill="none" stroke="#d95570" stroke-width="0.8" stroke-opacity="0.04"/>
-  <ellipse cx="600" cy="295" rx="330" ry="162" fill="none" stroke="#d95570" stroke-width="0.6" stroke-opacity="0.03"/>
+  <!-- ── Double frame ── -->
+  <rect x="22" y="22" width="1156" height="586" fill="none" stroke="#3d0812" stroke-width="1.6"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#260610" stroke-width="0.7"/>
 
-  <!-- header scar line -->
-  <rect x="0" y="56" width="1200" height="1" fill="url(#sc)" opacity="0.48"/>
+  <!-- ── Corner ornaments ── -->
+  <!-- top-left -->
+  <path d="M22,98 L22,22 L98,22" fill="none" stroke="#9b1422" stroke-width="1.4" opacity="0.62"/>
+  <path d="M35,98 L35,35 L98,35" fill="none" stroke="#9b1422" stroke-width="0.7" opacity="0.38"/>
+  <rect x="18.5" y="18.5" width="7" height="7" fill="#9b1422" opacity="0.68" transform="rotate(45,22,22)"/>
+  <circle cx="22" cy="60" r="2" fill="#9b1422" opacity="0.46"/>
+  <circle cx="60" cy="22" r="2" fill="#9b1422" opacity="0.46"/>
+  <!-- top-right -->
+  <path d="M1178,98 L1178,22 L1102,22" fill="none" stroke="#9b1422" stroke-width="1.4" opacity="0.62"/>
+  <path d="M1165,98 L1165,35 L1102,35" fill="none" stroke="#9b1422" stroke-width="0.7" opacity="0.38"/>
+  <rect x="1175.5" y="18.5" width="7" height="7" fill="#9b1422" opacity="0.68" transform="rotate(45,1178,22)"/>
+  <circle cx="1178" cy="60" r="2" fill="#9b1422" opacity="0.46"/>
+  <circle cx="1140" cy="22" r="2" fill="#9b1422" opacity="0.46"/>
+  <!-- bottom-left -->
+  <path d="M22,532 L22,608 L98,608" fill="none" stroke="#9b1422" stroke-width="1.4" opacity="0.62"/>
+  <path d="M35,532 L35,595 L98,595" fill="none" stroke="#9b1422" stroke-width="0.7" opacity="0.38"/>
+  <rect x="18.5" y="604.5" width="7" height="7" fill="#9b1422" opacity="0.68" transform="rotate(45,22,608)"/>
+  <circle cx="22" cy="570" r="2" fill="#9b1422" opacity="0.46"/>
+  <circle cx="60" cy="608" r="2" fill="#9b1422" opacity="0.46"/>
+  <!-- bottom-right -->
+  <path d="M1178,532 L1178,608 L1102,608" fill="none" stroke="#9b1422" stroke-width="1.4" opacity="0.62"/>
+  <path d="M1165,532 L1165,595 L1102,595" fill="none" stroke="#9b1422" stroke-width="0.7" opacity="0.38"/>
+  <rect x="1175.5" y="604.5" width="7" height="7" fill="#9b1422" opacity="0.68" transform="rotate(45,1178,608)"/>
+  <circle cx="1178" cy="570" r="2" fill="#9b1422" opacity="0.46"/>
+  <circle cx="1140" cy="608" r="2" fill="#9b1422" opacity="0.46"/>
 
-  <!-- log stamp -->
-  <text x="80" y="36" font-family="monospace" font-size="11"
-        fill="#c6cbd6" fill-opacity="0.22" letter-spacing="0.16em">LOG // 2026.06.08</text>
-  <text x="1120" y="36" text-anchor="end" font-family="monospace" font-size="11"
-        fill="#d95570" fill-opacity="0.32" letter-spacing="0.13em">SLEEPLESS</text>
+  <!-- ── Top horizontal rule ── -->
+  <rect x="0" y="118" width="1200" height="1" fill="url(#lg-h)"/>
+  <!-- center diamond -->
+  <rect x="596.5" y="114.5" width="7" height="7" fill="#c81828" opacity="0.92" transform="rotate(45,600,118)"/>
+  <!-- flanking diamonds -->
+  <rect x="397.5" y="116" width="5" height="5" fill="#9b1422" opacity="0.52" transform="rotate(45,400,118)"/>
+  <rect x="797.5" y="116" width="5" height="5" fill="#9b1422" opacity="0.52" transform="rotate(45,800,118)"/>
 
-  <!-- top-left bracket -->
-  <rect x="62" y="56" width="26" height="1" fill="#d95570" fill-opacity="0.42"/>
-  <rect x="62" y="56" width="1" height="24" fill="#d95570" fill-opacity="0.42"/>
-  <!-- top-right bracket -->
-  <rect x="1112" y="56" width="26" height="1" fill="#d95570" fill-opacity="0.42"/>
-  <rect x="1137" y="56" width="1" height="24" fill="#d95570" fill-opacity="0.42"/>
+  <!-- blood drips from top rule -->
+  <path d="M252,119 Q251,130 252,136 Q253,142 251,148" stroke="#9b1422" stroke-width="1.6" fill="none" opacity="0.30"/>
+  <ellipse cx="251" cy="150" rx="2" ry="2.8" fill="#9b1422" opacity="0.25"/>
+  <path d="M460,119 Q459,128 460,133 Q461,137 460,141" stroke="#9b1422" stroke-width="1.3" fill="none" opacity="0.25"/>
+  <ellipse cx="460" cy="142.5" rx="1.5" ry="2.2" fill="#9b1422" opacity="0.20"/>
+  <path d="M742,119 Q742,127 743,131 Q744,135 742,139" stroke="#9b1422" stroke-width="1.3" fill="none" opacity="0.25"/>
+  <ellipse cx="742" cy="140.5" rx="1.5" ry="2.2" fill="#9b1422" opacity="0.20"/>
+  <path d="M948,119 Q947,130 948,136 Q949,142 947,148" stroke="#9b1422" stroke-width="1.6" fill="none" opacity="0.28"/>
+  <ellipse cx="947" cy="150" rx="2" ry="2.8" fill="#9b1422" opacity="0.23"/>
 
-  <!-- ambient content rules -->
-  <rect x="80" y="130" width="1040" height="1" fill="#c6cbd6" fill-opacity="0.022"/>
-  <rect x="80" y="500" width="1040" height="1" fill="#c6cbd6" fill-opacity="0.022"/>
+  <!-- Gothic pointed arch above title -->
+  <path d="M448,233 Q524,186 600,182 Q676,186 752,233"
+        fill="none" stroke="#3d0812" stroke-width="1.3" opacity="0.52"/>
 
-  <!-- site name: rose glow layer -->
-  <text x="600" y="296" text-anchor="middle"
-        font-family="monospace" font-size="104"
-        fill="#d95570" fill-opacity="0.11"
-        filter="url(#gb)">へのへのんのの</text>
-  <!-- site name: main -->
-  <text x="600" y="296" text-anchor="middle"
-        font-family="monospace" font-size="104"
-        fill="#c6cbd6" letter-spacing="0.04em">へのへのんのの</text>
+  <!-- ── Site name — glow layer ── -->
+  <text x="600" y="344"
+        font-family="serif" font-size="116" font-weight="normal"
+        text-anchor="middle" letter-spacing="8"
+        fill="#8b1020" opacity="0.48"
+        filter="url(#f-title)">へのへのんのの</text>
+  <!-- Site name — main text -->
+  <text x="600" y="344"
+        font-family="serif" font-size="116" font-weight="normal"
+        text-anchor="middle" letter-spacing="8"
+        fill="#ede2d8">へのへのんのの</text>
 
-  <!-- scar separator -->
-  <rect x="220" y="326" width="760" height="1" fill="url(#scc)" opacity="0.62"/>
+  <!-- ── Middle separator with dagger cross ── -->
+  <rect x="152" y="388" width="445" height="1" fill="url(#lg-h)" opacity="0.52"/>
+  <rect x="603" y="388" width="445" height="1" fill="url(#lg-h)" opacity="0.52"/>
+  <!-- dagger shape at center -->
+  <line x1="600" y1="375" x2="600" y2="401" stroke="#9b1422" stroke-width="1.3" opacity="0.72"/>
+  <line x1="590" y1="382" x2="610" y2="382" stroke="#9b1422" stroke-width="1.3" opacity="0.72"/>
+  <rect x="596.5" y="384.5" width="7" height="7" fill="#9b1422" opacity="0.82" transform="rotate(45,600,388)"/>
 
-  <!-- song subtitle -->
-  <text x="600" y="374" text-anchor="middle"
-        font-family="monospace" font-size="32"
-        fill="#d95570" fill-opacity="0.84" letter-spacing="0.08em">INSOMNIA / ROMA feat. 奕夕</text>
+  <!-- ── Song title — glow layer ── -->
+  <text x="600" y="450"
+        font-family="serif" font-size="30" font-weight="normal"
+        text-anchor="middle" letter-spacing="1.5"
+        fill="#9b1422" opacity="0.65"
+        filter="url(#f-sub)">dearly devoured / R.I.P feat. SOLARIA II</text>
+  <!-- Song title — main text -->
+  <text x="600" y="450"
+        font-family="serif" font-size="30" font-weight="normal"
+        text-anchor="middle" letter-spacing="1.5"
+        fill="#b01c2c">dearly devoured / R.I.P feat. SOLARIA II</text>
 
-  <!-- bottom-left bracket -->
-  <rect x="62" y="574" width="26" height="1" fill="#d95570" fill-opacity="0.2"/>
-  <rect x="62" y="551" width="1" height="24" fill="#d95570" fill-opacity="0.2"/>
-  <!-- bottom-right bracket -->
-  <rect x="1112" y="574" width="26" height="1" fill="#d95570" fill-opacity="0.2"/>
-  <rect x="1137" y="551" width="1" height="24" fill="#d95570" fill-opacity="0.2"/>
+  <!-- TODAY'S TRACK label -->
+  <text x="600" y="491"
+        font-family="serif" font-size="13" font-weight="normal"
+        text-anchor="middle" letter-spacing="4.5"
+        fill="#6a2030" opacity="0.82">— TODAY'S TRACK —</text>
 
-  <!-- footer scar line -->
-  <rect x="0" y="574" width="1200" height="1" fill="url(#sc)" opacity="0.14"/>
-
-  <!-- footer echo -->
-  <text x="600" y="604" text-anchor="middle"
-        font-family="monospace" font-size="10"
-        fill="#c6cbd6" fill-opacity="0.14" letter-spacing="0.22em">へのへのんのの</text>
+  <!-- ── Bottom horizontal rule ── -->
+  <rect x="0" y="530" width="1200" height="1" fill="url(#lg-h)"/>
+  <rect x="596.5" y="526.5" width="7" height="7" fill="#9b1422" opacity="0.62" transform="rotate(45,600,530)"/>
 </svg>
