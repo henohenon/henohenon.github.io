@@ -1,280 +1,286 @@
-/* dearly devoured / R.I.P feat. SOLARIA II / 暗い愛と暴力――血に濡れた静寂のゴシックロマンス */
+/* 心一等 / koyori feat. 初音ミク / 夕暮れの別れ、遠ざかる汽笛 */
 
 :root {
-  --color-bg:            #0e0508;
-  --color-fg:            #ede2d8;
-  --color-accent:        #9b1422;
-  --spacing-unit:        1rem;
-  --font-heading:        'Palatino Linotype', 'Palatino', 'Book Antiqua', Georgia,
-                         'Hiragino Mincho ProN', 'Hiragino Mincho Pro',
-                         'Yu Mincho', serif;
-  --font-body:           'Garamond', Georgia,
-                         'Hiragino Mincho ProN', 'Hiragino Mincho Pro',
-                         'Yu Mincho', 'HGS明朝E', 'MS Mincho', serif;
-  --line-height-body:    1.85;
-  --line-height-heading: 1.25;
-  --ease-default:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --color-fg:             #f2ddd0;
+  --color-bg:             #1e1528;
+  --color-accent:         #e8896e;
+  --spacing-unit:         1rem;
+  --font-heading:         'Georgia', 'Palatino Linotype', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
+  --font-body:            'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'MS PGothic', -apple-system, BlinkMacSystemFont, sans-serif;
+  --line-height-body:     1.85;
+  --line-height-heading:  1.25;
+  --ease-default:         cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* 夕暮れパレット (補助) */
+  --_dusk-deep:   #160e22;
+  --_dusk-mid:    #2e1f42;
+  --_momo:        #d4738a;
+  --_horizon:     #c4604a;
+  --_glow:        rgba(232, 137, 110, 0.18);
 }
 
-/* ── reset & base ── */
+/* ─── リセット ─────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+/* ─── ボディ : 夜へ落ちる前の空 ─────────────────────────── */
 body {
   background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-body);
-  line-height: var(--line-height-body);
-  background-image:
-    radial-gradient(ellipse at 50%   0%, #280410 0%, transparent 55%),
-    radial-gradient(ellipse at 50% 100%, #1c0209 0%, transparent 60%);
-  animation: vision-flash 14s ease-in-out infinite;
+  color:            var(--color-fg);
+  font-family:      var(--font-body);
+  line-height:      var(--line-height-body);
+  margin:           0;
+  padding:          0;
+  background-image: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(196, 96, 74, 0.13) 0%,
+    transparent 62%
+  );
+  min-height: 100vh;
 }
 
-/* 「My vision flashing white」― 間欠的な白い閃光 */
-@keyframes vision-flash {
-  0%, 88%, 100% { box-shadow: inset 0 0 0px   0px rgba(255, 255, 255, 0); }
-  91%            { box-shadow: inset 0 0 120px 30px rgba(255, 255, 255, 0.06); }
-  93%            { box-shadow: inset 0 0 0px   0px rgba(255, 255, 255, 0); }
-  96%            { box-shadow: inset 0 0 60px  15px rgba(255, 255, 255, 0.03); }
-}
-
-/* ── links ── */
-a {
-  color: #d0404e;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(175, 28, 42, 0.38);
-  transition: color 0.45s var(--ease-default),
-              border-color 0.45s var(--ease-default),
-              text-shadow 0.45s var(--ease-default);
-}
-
-a:hover,
-a:focus-visible {
-  color: #f5c0c6;
-  border-color: rgba(245, 192, 198, 0.55);
-  text-shadow: 0 0 10px rgba(200, 50, 60, 0.5);
-}
-
-/* ── selection ── */
 ::selection {
-  background: rgba(155, 20, 34, 0.55);
-  color: #fff5f6;
+  background: rgba(232, 137, 110, 0.32);
+  color:      var(--color-fg);
 }
 
-/* ── site header ── */
+/* ─── サイトヘッダー : 地平線の残照 ─────────────────────── */
 .site-header {
-  font-family: var(--font-heading);
-  padding: calc(var(--spacing-unit) * 2.2) calc(var(--spacing-unit) * 1.5);
-  background: linear-gradient(180deg, rgba(28, 3, 10, 0.97) 0%, rgba(14, 5, 8, 0.88) 100%);
-  border-bottom: 1px solid rgba(155, 20, 34, 0.45);
-  position: relative;
-  overflow: hidden;
+  background:    linear-gradient(180deg, var(--_dusk-deep) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid rgba(212, 115, 138, 0.35);
+  padding:       calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  position:      relative;
+  overflow:      hidden;
 }
 
-/* 血が滲む縁取り */
+/* 水平線のグロー — 夕が爆ぜる */
 .site-header::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
-  height: 3px;
+  content:    '';
+  position:   absolute;
+  bottom:     0;
+  left:       0;
+  right:      0;
+  height:     3px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(100, 8, 18, 0.6) 15%,
-    #c01828 45%,
-    #e02535 55%,
-    #c01828 68%,
-    rgba(100, 8, 18, 0.6) 85%,
+    var(--_horizon) 25%,
+    var(--color-accent) 50%,
+    var(--_momo) 75%,
     transparent 100%
   );
-  animation: drip-shimmer 7s ease-in-out infinite;
+  animation: horizon-blaze 7s ease-in-out infinite alternate;
 }
 
-@keyframes drip-shimmer {
-  0%, 100% { opacity: 0.35; transform: scaleX(0.55); }
-  50%       { opacity: 1;    transform: scaleX(1); }
+@keyframes horizon-blaze {
+  from { opacity: 0.45; transform: scaleX(0.92); }
+  to   { opacity: 1;    transform: scaleX(1);    }
 }
 
 .site-header h1,
 .site-header .site-title {
-  font-size: clamp(1.55rem, 4vw, 2.75rem);
-  font-weight: normal;
-  letter-spacing: 0.16em;
-  color: var(--color-fg);
-  text-shadow:
-    0 0 20px rgba(155, 20, 34, 0.85),
-    0 0 50px rgba(155, 20, 34, 0.3);
-  margin: 0;
+  font-family: var(--font-heading);
+  font-size:   clamp(1.35rem, 4vw, 2.1rem);
+  letter-spacing: 0.06em;
+  color:       var(--color-fg);
+  text-shadow: 0 0 28px var(--_glow), 0 2px 10px rgba(0, 0, 0, 0.55);
+  margin:      0;
 }
 
-/* ── nav ── */
-nav a {
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.76rem;
-  border-bottom: none;
-  color: #b8a09a;
-  transition: color 0.35s var(--ease-default),
-              text-shadow 0.35s var(--ease-default);
+.site-header nav a {
+  color:       var(--color-accent);
+  text-decoration: none;
+  font-size:   0.88rem;
+  letter-spacing: 0.05em;
+  transition:  color 0.35s var(--ease-default),
+               text-shadow 0.35s var(--ease-default);
 }
 
-nav a:hover,
-nav a:focus-visible {
-  color: var(--color-fg);
-  text-shadow: 0 0 10px rgba(224, 45, 60, 0.65);
-  border-color: transparent;
+.site-header nav a:hover {
+  color:       var(--color-fg);
+  text-shadow: 0 0 10px var(--color-accent);
 }
 
-/* ── post list ── */
+/* ─── メインコンテンツ ───────────────────────────────────── */
+main {
+  max-width: 740px;
+  margin:    0 auto;
+  padding:   calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
+}
+
+/* ─── 記事リスト ─────────────────────────────────────────── */
 .post-list {
   list-style: none;
-  padding: 0;
-  margin: calc(var(--spacing-unit) * 2) 0;
+  padding:    0;
+  margin:     0;
 }
 
 .post-list li {
-  padding: calc(var(--spacing-unit) * 0.7) calc(var(--spacing-unit) * 0.4);
-  border-bottom: 1px solid rgba(155, 20, 34, 0.18);
-  transition: background 0.35s var(--ease-default),
-              padding-left 0.35s var(--ease-default),
-              border-color 0.35s var(--ease-default);
+  border-bottom: 1px solid rgba(212, 115, 138, 0.2);
+  padding:       calc(var(--spacing-unit) * 1.2) 0;
+  transition:    border-color 0.3s var(--ease-default);
 }
 
 .post-list li:hover {
-  background: rgba(100, 8, 20, 0.18);
-  padding-left: calc(var(--spacing-unit) * 0.8);
-  border-color: rgba(155, 20, 34, 0.45);
+  border-bottom-color: var(--color-accent);
 }
 
-/* ── article ── */
+.post-list a {
+  color:           var(--color-fg);
+  text-decoration: none;
+  font-size:       1.05rem;
+  transition:      color 0.3s var(--ease-default);
+}
+
+.post-list a:hover {
+  color: var(--color-accent);
+}
+
+.post-list time,
+.post-list .post-date {
+  font-size:      0.8rem;
+  color:          rgba(242, 221, 208, 0.45);
+  letter-spacing: 0.04em;
+  display:        block;
+  margin-top:     0.2em;
+}
+
+/* ─── 記事本文 ───────────────────────────────────────────── */
 article.post {
-  border-left: 2px solid rgba(155, 20, 34, 0.55);
-  padding-left: calc(var(--spacing-unit) * 1.5);
-  margin-top: calc(var(--spacing-unit) * 2.5);
-  position: relative;
+  animation: drift-in 0.65s var(--ease-default) both;
 }
 
-/* 刃の先端のような装飾 */
-article.post::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -1px;
-  width: 2px;
-  height: 0;
-  background: linear-gradient(180deg, #e02535 0%, rgba(155, 20, 34, 0) 100%);
-  animation: blade-drip 8s ease-out infinite;
-}
-
-@keyframes blade-drip {
-  0%, 60%  { height: 0;    opacity: 0; }
-  65%      { opacity: 1; }
-  85%      { height: 100%; opacity: 0.7; }
-  100%     { height: 100%; opacity: 0; }
+@keyframes drift-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 
 article.post h1,
 article.post h2,
-article.post h3 {
+article.post h3,
+article.post h4 {
   font-family: var(--font-heading);
-  font-weight: normal;
-  letter-spacing: 0.07em;
-  color: var(--color-fg);
   line-height: var(--line-height-heading);
+  color:       var(--color-fg);
 }
 
-article.post h2 {
-  position: relative;
-  padding-bottom: calc(var(--spacing-unit) * 0.4);
-}
-
+/* 桃色のアンダーライン装飾 */
+article.post h1::after,
 article.post h2::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 2.8em;
-  height: 1px;
-  background: var(--color-accent);
-  transition: width 0.55s var(--ease-default),
-              opacity 0.55s var(--ease-default);
-  opacity: 0.7;
+  content:       '';
+  display:       block;
+  height:        2px;
+  width:         2.8rem;
+  margin-top:    0.4em;
+  background:    linear-gradient(90deg, var(--_momo), transparent);
+  border-radius: 1px;
 }
 
-article.post:hover h2::after {
-  width: 5.5em;
-  opacity: 1;
+article.post a {
+  color:                var(--color-accent);
+  text-decoration:      underline;
+  text-underline-offset: 3px;
+  transition:           color 0.25s var(--ease-default);
 }
 
-/* ── blockquote (歌詞の余韻) ── */
-blockquote {
-  border-left: 3px solid var(--color-accent);
-  margin-left: 0;
-  padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 1.2);
-  color: #c4a8a0;
-  font-style: italic;
-  background: rgba(100, 8, 20, 0.08);
+article.post a:hover {
+  color: var(--_momo);
 }
 
-/* ── code ── */
-code {
-  background: rgba(155, 20, 34, 0.14);
-  color: #e8b0b8;
-  padding: 0.12em 0.38em;
-  border-radius: 2px;
-  font-size: 0.87em;
+article.post blockquote {
+  border-left:  3px solid var(--_momo);
+  margin-left:  0;
+  padding-left: calc(var(--spacing-unit) * 1.25);
+  color:        rgba(242, 221, 208, 0.7);
+  font-style:   italic;
+  position:     relative;
 }
 
-/* ── hr (骨のような仕切り) ── */
-hr {
-  border: none;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(155, 20, 34, 0.6) 30%,
-    rgba(224, 37, 53, 0.8) 50%,
-    rgba(155, 20, 34, 0.6) 70%,
-    transparent 100%
-  );
-  margin: calc(var(--spacing-unit) * 2.5) 0;
-}
-
-/* ── site footer ── */
-.site-footer {
-  margin-top: calc(var(--spacing-unit) * 4.5);
-  padding: calc(var(--spacing-unit) * 1.5);
-  border-top: 1px solid rgba(155, 20, 34, 0.25);
-  color: #9a7278;
-  font-size: 0.80rem;
-  letter-spacing: 0.06em;
-  text-align: center;
-}
-
-/* ── scrollbar ── */
-::-webkit-scrollbar {
-  width: 5px;
-  background: #0e0508;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #4a0a14;
+article.post code {
+  background:    var(--_dusk-mid);
+  border:        1px solid rgba(212, 115, 138, 0.28);
   border-radius: 3px;
-  transition: background 0.3s;
+  padding:       0.1em 0.38em;
+  font-size:     0.87em;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+article.post pre {
+  background:    var(--_dusk-deep);
+  border:        1px solid rgba(212, 115, 138, 0.22);
+  border-radius: 6px;
+  padding:       var(--spacing-unit);
+  overflow-x:    auto;
 }
 
-/* ── reduced motion ── */
+article.post pre code {
+  background: none;
+  border:     none;
+  padding:    0;
+}
+
+article.post hr {
+  border:       none;
+  height:       1px;
+  background:   linear-gradient(
+    90deg,
+    transparent,
+    var(--_momo) 30%,
+    var(--color-accent) 50%,
+    var(--_momo) 70%,
+    transparent
+  );
+  margin:       calc(var(--spacing-unit) * 2) 0;
+  opacity:      0.45;
+}
+
+/* ─── サイトフッター : 遠く遠くへ征く ──────────────────── */
+.site-footer {
+  margin-top:     calc(var(--spacing-unit) * 5);
+  padding:        calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+  text-align:     center;
+  font-size:      0.82rem;
+  color:          rgba(242, 221, 208, 0.38);
+  border-top:     1px solid rgba(212, 115, 138, 0.14);
+  background:     linear-gradient(180deg, transparent, rgba(22, 14, 34, 0.65));
+  letter-spacing: 0.04em;
+}
+
+.site-footer a {
+  color:           rgba(232, 137, 110, 0.5);
+  text-decoration: none;
+  transition:      color 0.3s var(--ease-default);
+}
+
+.site-footer a:hover {
+  color: var(--color-accent);
+}
+
+/* 汽笛 — フッターの小さなパルス */
+.site-footer::before {
+  content:   '〜';
+  display:   block;
+  font-size: 1.1rem;
+  color:     rgba(212, 115, 138, 0.3);
+  margin-bottom: 0.5em;
+  animation: whistle-fade 4s ease-in-out infinite alternate;
+}
+
+@keyframes whistle-fade {
+  from { opacity: 0.2; letter-spacing: 0.05em; }
+  to   { opacity: 0.6; letter-spacing: 0.3em;  }
+}
+
+/* ─── スクロールバー ─────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--_dusk-deep); }
+::-webkit-scrollbar-thumb { background: rgba(212, 115, 138, 0.5); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* ─── モーション配慮 ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation: none !important;
+    animation:  none !important;
     transition: none !important;
   }
 }
