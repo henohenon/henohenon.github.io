@@ -1,204 +1,151 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
+  <defs>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#160E38"/>
+      <stop offset="40%"  stop-color="#3A1A6E"/>
+      <stop offset="75%"  stop-color="#7D2470"/>
+      <stop offset="100%" stop-color="#B83070"/>
+    </linearGradient>
+    <pattern id="vLines" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <rect x="31" y="0" width="1" height="32" fill="white" fill-opacity="0.06"/>
+    </pattern>
+    <linearGradient id="beatGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+      <stop offset="0%"   stop-color="#C53680" stop-opacity="0"/>
+      <stop offset="12%"  stop-color="#C53680" stop-opacity="1"/>
+      <stop offset="88%"  stop-color="#C53680" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#C53680" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-5%" y="-60%" width="110%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
 
-<radialGradient id="gTopWarm" cx="600" cy="0" r="660" gradientUnits="userSpaceOnUse">
-  <stop offset="0%"   stop-color="#c4604a" stop-opacity="0.17"/>
-  <stop offset="100%" stop-color="#c4604a" stop-opacity="0"/>
-</radialGradient>
+  <!-- ░░ Base background (#F8F5FF) ░░ -->
+  <rect width="1200" height="630" fill="#F8F5FF"/>
 
-<linearGradient id="gDusk" x1="0" y1="370" x2="0" y2="630" gradientUnits="userSpaceOnUse">
-  <stop offset="0%"   stop-color="#2a1030" stop-opacity="0"/>
-  <stop offset="58%"  stop-color="#2a1030" stop-opacity="0.42"/>
-  <stop offset="100%" stop-color="#3a1810" stop-opacity="0.80"/>
-</linearGradient>
+  <!-- ░░ Dark gradient panel ░░ -->
+  <rect x="0" y="0" width="1200" height="415" fill="url(#panelGrad)"/>
 
-<radialGradient id="gSunset" cx="180" cy="518" r="500" gradientUnits="userSpaceOnUse">
-  <stop offset="0%"   stop-color="#e8896e" stop-opacity="0.33"/>
-  <stop offset="42%"  stop-color="#c4604a" stop-opacity="0.11"/>
-  <stop offset="100%" stop-color="#e8896e" stop-opacity="0"/>
-</radialGradient>
+  <!-- 4-beat scan-line overlay -->
+  <rect x="0" y="0" width="1200" height="415" fill="url(#vLines)"/>
 
-<linearGradient id="gHorizLine" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-  <stop offset="0%"   stop-color="#c4604a" stop-opacity="0"/>
-  <stop offset="18%"  stop-color="#c4604a" stop-opacity="0.88"/>
-  <stop offset="50%"  stop-color="#e8896e" stop-opacity="1"/>
-  <stop offset="82%"  stop-color="#d4738a" stop-opacity="0.88"/>
-  <stop offset="100%" stop-color="#d4738a" stop-opacity="0"/>
-</linearGradient>
+  <!-- ░░ Concentric pulse rings (dreamer radar) ░░ -->
+  <circle cx="600" cy="198" r="162" fill="none" stroke="#EDE8FF" stroke-width="1"   opacity="0.07"/>
+  <circle cx="600" cy="198" r="222" fill="none" stroke="#EDE8FF" stroke-width="0.8" opacity="0.05"/>
+  <circle cx="600" cy="198" r="292" fill="none" stroke="#EDE8FF" stroke-width="0.6" opacity="0.03"/>
+  <circle cx="600" cy="198" r="372" fill="none" stroke="#EDE8FF" stroke-width="0.5" opacity="0.02"/>
 
-<linearGradient id="gUnderline" x1="260" y1="0" x2="940" y2="0" gradientUnits="userSpaceOnUse">
-  <stop offset="0%"   stop-color="#d4738a" stop-opacity="0"/>
-  <stop offset="22%"  stop-color="#d4738a" stop-opacity="0.68"/>
-  <stop offset="50%"  stop-color="#e8896e" stop-opacity="0.90"/>
-  <stop offset="78%"  stop-color="#d4738a" stop-opacity="0.68"/>
-  <stop offset="100%" stop-color="#d4738a" stop-opacity="0"/>
-</linearGradient>
+  <!-- ░░ Starfield ░░ -->
+  <circle cx="75"   cy="52"  r="1.5" fill="#EDE8FF" opacity="0.70"/>
+  <circle cx="178"  cy="95"  r="1.0" fill="#EDE8FF" opacity="0.50"/>
+  <circle cx="310"  cy="38"  r="2.0" fill="#EDE8FF" opacity="0.60"/>
+  <circle cx="488"  cy="68"  r="1.0" fill="#EDE8FF" opacity="0.40"/>
+  <circle cx="695"  cy="33"  r="1.5" fill="#EDE8FF" opacity="0.65"/>
+  <circle cx="872"  cy="54"  r="1.0" fill="#EDE8FF" opacity="0.50"/>
+  <circle cx="1018" cy="82"  r="2.0" fill="#EDE8FF" opacity="0.60"/>
+  <circle cx="1150" cy="44"  r="1.5" fill="#EDE8FF" opacity="0.70"/>
+  <circle cx="88"   cy="190" r="1.0" fill="#EDE8FF" opacity="0.30"/>
+  <circle cx="1098" cy="175" r="1.5" fill="#EDE8FF" opacity="0.35"/>
+  <circle cx="142"  cy="352" r="1.0" fill="#EDE8FF" opacity="0.22"/>
+  <circle cx="1062" cy="322" r="1.0" fill="#EDE8FF" opacity="0.25"/>
+  <circle cx="55"   cy="288" r="1.5" fill="#EDE8FF" opacity="0.28"/>
+  <circle cx="1135" cy="258" r="1.0" fill="#EDE8FF" opacity="0.30"/>
+  <circle cx="230"  cy="162" r="1.0" fill="#EDE8FF" opacity="0.35"/>
+  <circle cx="965"  cy="132" r="1.5" fill="#EDE8FF" opacity="0.40"/>
+  <circle cx="548"  cy="48"  r="1.0" fill="#EDE8FF" opacity="0.45"/>
+  <circle cx="820"  cy="155" r="1.0" fill="#EDE8FF" opacity="0.30"/>
+  <circle cx="395"  cy="112" r="1.5" fill="#EDE8FF" opacity="0.35"/>
+  <circle cx="148"  cy="128" r="1.0" fill="#EDE8FF" opacity="0.32"/>
+  <circle cx="1040" cy="298" r="1.0" fill="#EDE8FF" opacity="0.20"/>
 
-<filter id="fTitleGlow" x="-12%" y="-30%" width="124%" height="160%">
-  <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur"/>
-  <feMerge>
-    <feMergeNode in="blur"/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
+  <!-- Diamond sparkles -->
+  <polygon points="214,140 218,144 214,148 210,144"       fill="#EDE8FF" opacity="0.38"/>
+  <polygon points="980,116 984,120 980,124 976,120"        fill="#EDE8FF" opacity="0.32"/>
+  <polygon points="84,376  88,380  84,384  80,380"         fill="#EDE8FF" opacity="0.18"/>
+  <polygon points="1112,292 1116,296 1112,300 1108,296"    fill="#EDE8FF" opacity="0.22"/>
+  <polygon points="432,55  436,59  432,63  428,59"         fill="#EDE8FF" opacity="0.28"/>
 
-<filter id="fSubGlow" x="-20%" y="-45%" width="140%" height="190%">
-  <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
-  <feMerge>
-    <feMergeNode in="blur"/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
+  <!-- Ghost music notes -->
+  <text x="62"   y="402" font-family="serif" font-size="52" fill="#EDE8FF" opacity="0.09">♪</text>
+  <text x="1082" y="150" font-family="serif" font-size="40" fill="#EDE8FF" opacity="0.08">♩</text>
+  <text x="36"   y="208" font-family="serif" font-size="28" fill="#EDE8FF" opacity="0.07">♫</text>
+  <text x="1116" y="370" font-family="serif" font-size="32" fill="#EDE8FF" opacity="0.08">♪</text>
 
-</defs>
+  <!-- ════════════════════════════════════════════
+       SITE NAME ― 主役
+       ════════════════════════════════════════════ -->
+  <text
+    x="600" y="248"
+    font-family="serif"
+    font-size="120"
+    text-anchor="middle"
+    fill="#EDE8FF"
+    letter-spacing="5">へのへのんのの</text>
 
-<!-- ── BACKGROUND LAYERS ── -->
-<rect width="1200" height="630" fill="#1e1528"/>
-<rect width="1200" height="630" fill="url(#gTopWarm)"/>
-<rect width="1200" height="630" fill="url(#gDusk)"/>
-<rect width="1200" height="630" fill="url(#gSunset)"/>
+  <!-- ════════════════════════════════════════════
+       Heartbeat / EKG line
+       spike centered at x≈600, straddles panel edge
+       ════════════════════════════════════════════ -->
+  <!-- wide soft glow backing -->
+  <path
+    d="M 0,392 L 476,392 L 519,377 L 543,407 L 567,322 L 589,466 L 613,392 L 637,408 L 658,382 L 681,392 L 1200,392"
+    fill="none" stroke="#C53680" stroke-width="12" opacity="0.13" stroke-linejoin="round"/>
+  <!-- medium halo -->
+  <path
+    d="M 0,392 L 476,392 L 519,377 L 543,407 L 567,322 L 589,466 L 613,392 L 637,408 L 658,382 L 681,392 L 1200,392"
+    fill="none" stroke="#C53680" stroke-width="5" opacity="0.22" stroke-linejoin="round"/>
+  <!-- crisp main line -->
+  <path
+    d="M 0,392 L 476,392 L 519,377 L 543,407 L 567,322 L 589,466 L 613,392 L 637,408 L 658,382 L 681,392 L 1200,392"
+    fill="none"
+    stroke="url(#beatGrad)"
+    stroke-width="2.5"
+    stroke-linejoin="round"
+    filter="url(#glow)"/>
 
-<!-- ── STARS ── -->
-<circle cx="92"   cy="44"  r="1.6" fill="#f2ddd0" opacity="0.55"/>
-<circle cx="178"  cy="27"  r="1.0" fill="#f2ddd0" opacity="0.40"/>
-<circle cx="245"  cy="62"  r="2.2" fill="#f2ddd0" opacity="0.42"/>
-<circle cx="318"  cy="54"  r="1.8" fill="#f2ddd0" opacity="0.48"/>
-<circle cx="452"  cy="36"  r="1.0" fill="#d4738a" opacity="0.44"/>
-<circle cx="568"  cy="19"  r="1.5" fill="#f2ddd0" opacity="0.62"/>
-<circle cx="684"  cy="49"  r="1.0" fill="#f2ddd0" opacity="0.38"/>
-<circle cx="800"  cy="32"  r="1.8" fill="#f2ddd0" opacity="0.50"/>
-<circle cx="928"  cy="57"  r="1.0" fill="#d4738a" opacity="0.40"/>
-<circle cx="1044" cy="26"  r="1.5" fill="#f2ddd0" opacity="0.56"/>
-<circle cx="1085" cy="78"  r="2.2" fill="#f2ddd0" opacity="0.40"/>
-<circle cx="1148" cy="45"  r="1.0" fill="#f2ddd0" opacity="0.38"/>
-<circle cx="58"   cy="98"  r="1.0" fill="#f2ddd0" opacity="0.34"/>
-<circle cx="198"  cy="112" r="1.5" fill="#f2ddd0" opacity="0.44"/>
-<circle cx="355"  cy="86"  r="1.0" fill="#f2ddd0" opacity="0.30"/>
-<circle cx="502"  cy="120" r="1.8" fill="#f2ddd0" opacity="0.40"/>
-<circle cx="624"  cy="93"  r="1.0" fill="#d4738a" opacity="0.34"/>
-<circle cx="750"  cy="108" r="1.5" fill="#f2ddd0" opacity="0.38"/>
-<circle cx="38"   cy="138" r="2.0" fill="#f2ddd0" opacity="0.32"/>
-<circle cx="878"  cy="84"  r="1.0" fill="#f2ddd0" opacity="0.30"/>
-<circle cx="994"  cy="117" r="1.8" fill="#f2ddd0" opacity="0.44"/>
-<circle cx="1110" cy="91"  r="1.0" fill="#d4738a" opacity="0.34"/>
-<circle cx="135"  cy="160" r="1.0" fill="#f2ddd0" opacity="0.25"/>
-<circle cx="272"  cy="174" r="1.3" fill="#f2ddd0" opacity="0.28"/>
-<circle cx="415"  cy="150" r="1.0" fill="#d4738a" opacity="0.22"/>
-<circle cx="558"  cy="170" r="1.5" fill="#f2ddd0" opacity="0.26"/>
-<circle cx="705"  cy="147" r="1.0" fill="#f2ddd0" opacity="0.22"/>
-<circle cx="845"  cy="178" r="1.3" fill="#d4738a" opacity="0.25"/>
-<circle cx="860"  cy="145" r="2.0" fill="#d4738a" opacity="0.36"/>
-<circle cx="980"  cy="157" r="1.0" fill="#f2ddd0" opacity="0.20"/>
-<circle cx="1118" cy="168" r="1.5" fill="#f2ddd0" opacity="0.24"/>
-<circle cx="330"  cy="195" r="1.0" fill="#f2ddd0" opacity="0.18"/>
-<circle cx="480"  cy="210" r="1.3" fill="#d4738a" opacity="0.16"/>
-<circle cx="660"  cy="200" r="1.0" fill="#f2ddd0" opacity="0.18"/>
-<circle cx="920"  cy="195" r="1.2" fill="#f2ddd0" opacity="0.17"/>
+  <!-- ════════════════════════════════════════════
+       Song info ― light area
+       ════════════════════════════════════════════ -->
 
-<!-- ── BORDER FRAME ── -->
-<rect x="28" y="28" width="1144" height="574" rx="6"
-      fill="none" stroke="#d4738a" stroke-width="1" stroke-opacity="0.22"/>
-<line x1="80"  y1="48"  x2="1120" y2="48"  stroke="#e8896e" stroke-width="0.5" stroke-opacity="0.13"/>
-<line x1="80"  y1="582" x2="1120" y2="582" stroke="#e8896e" stroke-width="0.5" stroke-opacity="0.13"/>
+  <!-- Subtle separator rule -->
+  <rect x="80" y="443" width="1040" height="1" fill="#C53680" opacity="0.10"/>
+  <!-- accent dots -->
+  <circle cx="480" cy="443" r="3" fill="#C53680" opacity="0.40"/>
+  <circle cx="600" cy="443" r="3" fill="#C53680" opacity="0.40"/>
+  <circle cx="720" cy="443" r="3" fill="#C53680" opacity="0.40"/>
 
-<!-- ── CORNER WAVE MARKS ── -->
-<text x="46"  y="68"  font-family="serif" font-size="22" fill="#d4738a" opacity="0.30">〜</text>
-<text x="1154" y="68" font-family="serif" font-size="22" fill="#d4738a" opacity="0.30" text-anchor="end">〜</text>
+  <!-- "今日の一曲" label -->
+  <text
+    x="600" y="475"
+    font-family="sans-serif"
+    font-size="15"
+    text-anchor="middle"
+    fill="#9980BB"
+    letter-spacing="4">今 日 の 一 曲  ♩</text>
 
-<!-- ── SITE NAME (MAIN TITLE) ── -->
-<text
-  x="600" y="291"
-  font-family="serif"
-  font-size="115"
-  font-weight="normal"
-  letter-spacing="0.1em"
-  text-anchor="middle"
-  fill="#f2ddd0"
-  filter="url(#fTitleGlow)"
->へのへのんのの</text>
+  <!-- Song title ― 副題 -->
+  <text
+    x="600" y="524"
+    font-family="sans-serif"
+    font-size="40"
+    text-anchor="middle"
+    fill="#C53680"
+    letter-spacing="2">ドリーマーズビート</text>
 
-<!-- ── DECORATIVE DIVIDER ── -->
-<rect x="260" y="317" width="680" height="1.5" fill="url(#gUnderline)"/>
+  <!-- Artist name -->
+  <text
+    x="600" y="570"
+    font-family="sans-serif"
+    font-size="22"
+    text-anchor="middle"
+    fill="#5B4278"
+    letter-spacing="1">40mP feat. 初音ミク</text>
 
-<!-- ── SONG SUBTITLE ── -->
-<text x="402" y="369" font-family="serif" font-size="18" fill="#d4738a" opacity="0.48" text-anchor="middle">〜</text>
-<text
-  x="600" y="372"
-  font-family="serif"
-  font-size="40"
-  letter-spacing="0.14em"
-  text-anchor="middle"
-  fill="#e8896e"
-  filter="url(#fSubGlow)"
-  opacity="0.92"
->心一等</text>
-<text x="798" y="369" font-family="serif" font-size="18" fill="#d4738a" opacity="0.48" text-anchor="middle">〜</text>
-
-<!-- ── ARTIST ── -->
-<text
-  x="600" y="414"
-  font-family="sans-serif"
-  font-size="19"
-  letter-spacing="0.18em"
-  text-anchor="middle"
-  fill="#d4738a"
-  opacity="0.62"
->koyori feat. 初音ミク</text>
-
-<!-- ── TRAIN SILHOUETTE ── -->
-<!-- Car body -->
-<rect x="830" y="448" width="205" height="28" rx="2" fill="#160e22" opacity="0.88"/>
-<!-- Locomotive cab (taller, at right) -->
-<rect x="1035" y="437" width="38" height="39" rx="2" fill="#160e22" opacity="0.88"/>
-<!-- Chimney -->
-<rect x="1045" y="426" width="9" height="14" rx="1" fill="#160e22" opacity="0.88"/>
-<!-- Car windows -->
-<rect x="845"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="866"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="887"  y="454" width="13" height="11" rx="1.5" fill="#e8896e" opacity="0.17"/>
-<rect x="908"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="929"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="950"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="971"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="992"  y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<rect x="1013" y="454" width="13" height="11" rx="1.5" fill="#2e1f42" opacity="0.95"/>
-<!-- Cab window warm glow -->
-<rect x="1042" y="444" width="17" height="14" rx="2" fill="#e8896e" opacity="0.27"/>
-<!-- Headlight glow -->
-<ellipse cx="1073" cy="457" rx="11" ry="7" fill="#e8896e" opacity="0.22"/>
-<!-- Wheels (bottom at y=488 = top rail) -->
-<circle cx="852"  cy="481" r="7" fill="#160e22" stroke="#2e1f42" stroke-width="1.5" opacity="0.90"/>
-<circle cx="888"  cy="481" r="7" fill="#160e22" stroke="#2e1f42" stroke-width="1.5" opacity="0.90"/>
-<circle cx="928"  cy="481" r="7" fill="#160e22" stroke="#2e1f42" stroke-width="1.5" opacity="0.90"/>
-<circle cx="968"  cy="481" r="7" fill="#160e22" stroke="#2e1f42" stroke-width="1.5" opacity="0.90"/>
-<circle cx="1008" cy="481" r="7" fill="#160e22" stroke="#2e1f42" stroke-width="1.5" opacity="0.90"/>
-<circle cx="1050" cy="481" r="8" fill="#160e22" stroke="#2e1f42" stroke-width="1.5" opacity="0.90"/>
-<!-- Rails -->
-<line x1="820" y1="488" x2="1200" y2="488" stroke="#2e1f42" stroke-width="2"   opacity="0.55"/>
-<line x1="820" y1="494" x2="1200" y2="494" stroke="#2e1f42" stroke-width="1.5" opacity="0.35"/>
-<!-- Steam puffs above chimney -->
-<circle cx="1049" cy="414" r="11" fill="#2e1f42" opacity="0.36"/>
-<circle cx="1060" cy="400" r="9"  fill="#2e1f42" opacity="0.25"/>
-<circle cx="1069" cy="388" r="8"  fill="#2e1f42" opacity="0.17"/>
-<circle cx="1077" cy="378" r="7"  fill="#2e1f42" opacity="0.12"/>
-
-<!-- ── HORIZON GLOW LINE ── -->
-<rect x="0" y="500" width="1200" height="1.5" fill="url(#gHorizLine)" opacity="0.68"/>
-<ellipse cx="200" cy="500" rx="290" ry="46" fill="#e8896e" opacity="0.053"/>
-<ellipse cx="200" cy="500" rx="155" ry="25" fill="#c4604a" opacity="0.082"/>
-
-<!-- Ground dark overlay below rails -->
-<rect x="0" y="496" width="1200" height="134" fill="#160e22" opacity="0.44"/>
-
-<!-- ── BOTTOM TAGLINE ── -->
-<text
-  x="600" y="557"
-  font-family="sans-serif"
-  font-size="15"
-  letter-spacing="0.20em"
-  text-anchor="middle"
-  fill="#f2ddd0"
-  opacity="0.25"
->へのへのんのの — 日々のこと、音楽のこと</text>
+  <!-- Bottom accent bar -->
+  <rect x="520" y="600" width="160" height="2" fill="#C53680" opacity="0.28" rx="1"/>
 
 </svg>

@@ -1,127 +1,92 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="g-sky" cx="50%" cy="0%" r="70%">
-      <stop offset="0%" stop-color="#c4604a" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="#1e1528" stop-opacity="0"/>
+    <linearGradient id="bgGr" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#F8F5FF"/>
+      <stop offset="100%" stop-color="#EDE8FF"/>
+    </linearGradient>
+    <linearGradient id="hdrGr" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#160E38"/>
+      <stop offset="40%"  stop-color="#3A1A6E"/>
+      <stop offset="75%"  stop-color="#7D2470"/>
+      <stop offset="100%" stop-color="#B83070"/>
+    </linearGradient>
+    <linearGradient id="aclGr" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#C53680"/>
+      <stop offset="55%"  stop-color="#7D2470"/>
+      <stop offset="100%" stop-color="#7D2470" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ttlGr" x1="0" y1="340" x2="0" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#2A1558"/>
+      <stop offset="100%" stop-color="#1B1730"/>
+    </linearGradient>
+    <pattern id="scanB" x="0" y="0" width="32" height="630" patternUnits="userSpaceOnUse">
+      <line x1="31" y1="0" x2="31" y2="630" stroke="#1B1730" stroke-width="0.8"/>
+    </pattern>
+    <pattern id="scanH" x="0" y="0" width="32" height="150" patternUnits="userSpaceOnUse">
+      <line x1="31" y1="0" x2="31" y2="150" stroke="white" stroke-width="0.8"/>
+    </pattern>
+    <radialGradient id="rPink" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#C53680" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#C53680" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="g-sun" cx="87%" cy="74%" r="46%">
-      <stop offset="0%"   stop-color="#e8896e" stop-opacity="0.30"/>
-      <stop offset="45%"  stop-color="#d4738a" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#1e1528" stop-opacity="0"/>
+    <radialGradient id="lPurp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#3A1A6E" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#3A1A6E" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="g-horizon" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#1e1528" stop-opacity="0"/>
-      <stop offset="15%"  stop-color="#c4604a" stop-opacity="0.80"/>
-      <stop offset="48%"  stop-color="#e8896e" stop-opacity="1"/>
-      <stop offset="80%"  stop-color="#d4738a" stop-opacity="0.80"/>
-      <stop offset="100%" stop-color="#1e1528" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="g-bar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#e8896e" stop-opacity="0"/>
-      <stop offset="22%"  stop-color="#e8896e"/>
-      <stop offset="68%"  stop-color="#d4738a"/>
-      <stop offset="100%" stop-color="#d4738a" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="g-rule" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#d4738a"/>
-      <stop offset="50%"  stop-color="#e8896e" stop-opacity="0.30"/>
-      <stop offset="100%" stop-color="#e8896e" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="g-floor" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#1e1528" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#160e22"/>
-    </linearGradient>
-    <linearGradient id="g-topbar" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#d4738a" stop-opacity="0"/>
-      <stop offset="8%"   stop-color="#d4738a" stop-opacity="0.35"/>
-      <stop offset="50%"  stop-color="#e8896e" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#d4738a" stop-opacity="0"/>
-    </linearGradient>
   </defs>
 
-  <!-- ── Background layers ── -->
-  <rect width="1200" height="630" fill="#1e1528"/>
-  <rect width="1200" height="630" fill="url(#g-sky)"/>
-  <rect width="1200" height="630" fill="url(#g-sun)"/>
-  <rect x="0" y="450" width="1200" height="180" fill="url(#g-floor)"/>
+  <!-- BACKGROUND -->
+  <rect width="1200" height="630" fill="url(#bgGr)"/>
+  <rect width="1200" height="630" fill="url(#scanB)" opacity="0.035"/>
 
-  <!-- ── Top border shimmer ── -->
-  <rect x="0" y="0" width="1200" height="2" fill="url(#g-topbar)"/>
+  <!-- AMBIENT GLOWS -->
+  <ellipse cx="1090" cy="400" rx="280" ry="240" fill="url(#rPink)"/>
+  <ellipse cx="200"  cy="270" rx="250" ry="180" fill="url(#lPurp)"/>
 
-  <!-- ── Dusk sun rings — right side, centered on horizon ── -->
-  <circle cx="1050" cy="462" r="242" fill="none" stroke="#c4604a" stroke-width="0.6" opacity="0.08"/>
-  <circle cx="1050" cy="462" r="200" fill="none" stroke="#c4604a" stroke-width="0.7" opacity="0.11"/>
-  <circle cx="1050" cy="462" r="160" fill="none" stroke="#d4738a" stroke-width="0.8" opacity="0.15"/>
-  <circle cx="1050" cy="462" r="122" fill="none" stroke="#d4738a" stroke-width="0.9" opacity="0.20"/>
-  <circle cx="1050" cy="462" r="86"  fill="none" stroke="#e8896e" stroke-width="1.1" opacity="0.28"/>
-  <circle cx="1050" cy="462" r="52"  fill="none" stroke="#e8896e" stroke-width="1.4" opacity="0.42"/>
-  <circle cx="1050" cy="462" r="26"  fill="#e8896e" opacity="0.15"/>
-  <circle cx="1050" cy="462" r="11"  fill="#e8896e" opacity="0.35"/>
+  <!-- CONCENTRIC CIRCLES — ドリーマーズビート 心拍 -->
+  <g transform="translate(1090,400)">
+    <circle r="55"  fill="none" stroke="#C53680" stroke-width="1.5" opacity="0.22"/>
+    <circle r="105" fill="none" stroke="#C53680" stroke-width="1.5" opacity="0.17"/>
+    <circle r="162" fill="none" stroke="#C53680" stroke-width="1"   opacity="0.13"/>
+    <circle r="220" fill="none" stroke="#7D2470" stroke-width="1"   opacity="0.09"/>
+    <circle r="280" fill="none" stroke="#7D2470" stroke-width="0.8" opacity="0.06"/>
+    <circle r="344" fill="none" stroke="#3A1A6E" stroke-width="0.8" opacity="0.04"/>
+    <circle r="5"   fill="#C53680" opacity="0.55"/>
+  </g>
 
-  <!-- ── Rail lines converging toward sunset (遠ざかる汽笛) ── -->
-  <line x1="0"   y1="630" x2="1050" y2="462" stroke="#d4738a" stroke-width="0.7" opacity="0.11"/>
-  <line x1="210" y1="630" x2="1050" y2="462" stroke="#d4738a" stroke-width="0.6" opacity="0.09"/>
-  <line x1="420" y1="630" x2="1050" y2="462" stroke="#c4604a" stroke-width="0.5" opacity="0.07"/>
-  <line x1="600" y1="630" x2="1050" y2="462" stroke="#c4604a" stroke-width="0.5" opacity="0.06"/>
+  <!-- SCATTERED MUSIC NOTES -->
+  <text x="1036" y="248" font-family="serif" font-size="46" fill="#C53680" opacity="0.18">♩</text>
+  <text x="935"  y="563" font-family="serif" font-size="34" fill="#7D2470" opacity="0.14">♪</text>
+  <text x="1148" y="544" font-family="serif" font-size="28" fill="#C53680" opacity="0.16">♫</text>
+  <text x="1006" y="180" font-family="serif" font-size="22" fill="#7D2470" opacity="0.12">♩</text>
+  <text x="116"  y="556" font-family="serif" font-size="16" fill="#C53680" opacity="0.09">♩</text>
 
-  <!-- ── Horizon glow band ── -->
-  <rect x="0" y="460" width="1200" height="3" fill="url(#g-horizon)"/>
+  <!-- HEADER BAND -->
+  <rect width="1200" height="150" fill="url(#hdrGr)"/>
+  <rect width="1200" height="150" fill="url(#scanH)" opacity="0.055"/>
 
-  <!-- ── Left editorial accent bar ── -->
-  <rect x="60" y="88" width="3" height="344" fill="url(#g-bar)"/>
+  <!-- Site name -->
+  <text x="70" y="97" font-family="serif" font-size="40" fill="#EDE8FF" letter-spacing="0.03em">へのへのんのの</text>
+  <!-- Beat-pulse ♩ -->
+  <text x="462" y="97" font-family="serif" font-size="28" fill="#C53680" opacity="0.9">♩</text>
 
-  <!-- ── Scattered star/light dots (upper right) ── -->
-  <circle cx="796"  cy="122" r="1.5" fill="#f2ddd0" opacity="0.20"/>
-  <circle cx="860"  cy="158" r="2.0" fill="#d4738a" opacity="0.36"/>
-  <circle cx="918"  cy="100" r="1.2" fill="#e8896e" opacity="0.26"/>
-  <circle cx="972"  cy="140" r="1.5" fill="#f2ddd0" opacity="0.18"/>
-  <circle cx="1022" cy="90"  r="1.0" fill="#d4738a" opacity="0.30"/>
-  <circle cx="1084" cy="124" r="2.0" fill="#e8896e" opacity="0.20"/>
-  <circle cx="1134" cy="154" r="1.5" fill="#f2ddd0" opacity="0.17"/>
-  <circle cx="1164" cy="104" r="1.0" fill="#d4738a" opacity="0.26"/>
-  <circle cx="838"  cy="83"  r="1.0" fill="#e8896e" opacity="0.18"/>
-  <circle cx="1007" cy="170" r="1.2" fill="#f2ddd0" opacity="0.14"/>
-  <circle cx="744"  cy="148" r="1.0" fill="#d4738a" opacity="0.22"/>
-  <circle cx="924"  cy="62"  r="1.2" fill="#e8896e" opacity="0.16"/>
-  <circle cx="1056" cy="56"  r="1.0" fill="#f2ddd0" opacity="0.12"/>
+  <!-- ACCENT SEPARATOR -->
+  <rect x="0" y="150" width="1200" height="4" fill="url(#aclGr)"/>
 
-  <!-- ── Site name ── -->
-  <text
-    x="82" y="67"
-    font-family="serif"
-    font-size="26"
-    fill="#e8896e"
-    opacity="0.90"
-  >へのへのんのの</text>
+  <!-- Left accent bar -->
+  <rect x="0" y="154" width="6" height="450" fill="#C53680"/>
 
-  <!-- ── Article title — shadow depth layer ── -->
-  <text
-    x="85" y="333"
-    font-family="serif"
-    font-size="74"
-    fill="#e8896e"
-    opacity="0.08"
-  >{{TITLE}}</text>
+  <!-- CONTENT DECORATION — layered horizontal rules (article h2 motif) -->
+  <rect x="90" y="193" width="200" height="2"   fill="#C53680" opacity="0.35"/>
+  <rect x="90" y="199" width="110" height="1.5" fill="#C53680" opacity="0.18"/>
 
-  <!-- ── Article title — main layer ── -->
-  <text
-    x="82" y="330"
-    font-family="serif"
-    font-size="74"
-    fill="#f2ddd0"
-  >{{TITLE}}</text>
+  <!-- ARTICLE TITLE -->
+  <!-- Drop-shadow layer -->
+  <text x="92" y="402" font-family="serif" font-size="68" fill="#C53680" opacity="0.07" letter-spacing="0.02em">{{TITLE}}</text>
+  <!-- Main title text -->
+  <text x="90" y="400" font-family="serif" font-size="68" fill="url(#ttlGr)" letter-spacing="0.02em">{{TITLE}}</text>
 
-  <!-- ── Title underline (like h1::after in theme.css) ── -->
-  <rect x="82" y="350" width="500" height="2" fill="url(#g-rule)" rx="1"/>
-
-  <!-- ── Whistle motif (〜 echoes footer animation) ── -->
-  <text
-    x="82" y="412"
-    font-family="serif"
-    font-size="18"
-    letter-spacing="12"
-    fill="#d4738a"
-    opacity="0.38"
-  >〜〜〜</text>
-
+  <!-- BOTTOM STRIP (matches site-footer) -->
+  <rect x="0" y="604" width="1200" height="26" fill="#12092A"/>
+  <text x="1128" y="622" font-family="serif" font-size="14" fill="#9980BB" letter-spacing="0.05em">♩</text>
 </svg>
