@@ -1,151 +1,125 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#160E38"/>
-      <stop offset="40%"  stop-color="#3A1A6E"/>
-      <stop offset="75%"  stop-color="#7D2470"/>
-      <stop offset="100%" stop-color="#B83070"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#f9f2dc"/>
+      <stop offset="38%"  stop-color="#edf2d5"/>
+      <stop offset="65%"  stop-color="#fdf8f0"/>
+      <stop offset="100%" stop-color="#f9f0d8"/>
     </linearGradient>
-    <pattern id="vLines" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-      <rect x="31" y="0" width="1" height="32" fill="white" fill-opacity="0.06"/>
-    </pattern>
-    <linearGradient id="beatGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
-      <stop offset="0%"   stop-color="#C53680" stop-opacity="0"/>
-      <stop offset="12%"  stop-color="#C53680" stop-opacity="1"/>
-      <stop offset="88%"  stop-color="#C53680" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#C53680" stop-opacity="0"/>
+    <linearGradient id="ray" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#fffcd2" stop-opacity="0"/>
+      <stop offset="50%"  stop-color="#fffcd2" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#fffcd2" stop-opacity="0"/>
     </linearGradient>
-    <filter id="glow" x="-5%" y="-60%" width="110%" height="220%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
 
-  <!-- ░░ Base background (#F8F5FF) ░░ -->
-  <rect width="1200" height="630" fill="#F8F5FF"/>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
 
-  <!-- ░░ Dark gradient panel ░░ -->
-  <rect x="0" y="0" width="1200" height="415" fill="url(#panelGrad)"/>
+  <!-- Window light ray — diagonal warmth, matching window-light CSS animation -->
+  <polygon points="195,0 775,0 638,630 58,630" fill="url(#ray)" opacity="0.58"/>
 
-  <!-- 4-beat scan-line overlay -->
-  <rect x="0" y="0" width="1200" height="415" fill="url(#vLines)"/>
+  <!-- Outer frame -->
+  <rect x="26" y="26" width="1148" height="578" rx="4" fill="none" stroke="#d9c9b0" stroke-width="1.5"/>
+  <!-- Inner frame -->
+  <rect x="36" y="36" width="1128" height="558" rx="2" fill="none" stroke="#d9c9b0" stroke-width="0.5" opacity="0.6"/>
 
-  <!-- ░░ Concentric pulse rings (dreamer radar) ░░ -->
-  <circle cx="600" cy="198" r="162" fill="none" stroke="#EDE8FF" stroke-width="1"   opacity="0.07"/>
-  <circle cx="600" cy="198" r="222" fill="none" stroke="#EDE8FF" stroke-width="0.8" opacity="0.05"/>
-  <circle cx="600" cy="198" r="292" fill="none" stroke="#EDE8FF" stroke-width="0.6" opacity="0.03"/>
-  <circle cx="600" cy="198" r="372" fill="none" stroke="#EDE8FF" stroke-width="0.5" opacity="0.02"/>
+  <!-- ── Leaf sprig — top-left ── -->
+  <g transform="translate(58,58)" opacity="0.66">
+    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
+    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
+    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
+    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
+  </g>
 
-  <!-- ░░ Starfield ░░ -->
-  <circle cx="75"   cy="52"  r="1.5" fill="#EDE8FF" opacity="0.70"/>
-  <circle cx="178"  cy="95"  r="1.0" fill="#EDE8FF" opacity="0.50"/>
-  <circle cx="310"  cy="38"  r="2.0" fill="#EDE8FF" opacity="0.60"/>
-  <circle cx="488"  cy="68"  r="1.0" fill="#EDE8FF" opacity="0.40"/>
-  <circle cx="695"  cy="33"  r="1.5" fill="#EDE8FF" opacity="0.65"/>
-  <circle cx="872"  cy="54"  r="1.0" fill="#EDE8FF" opacity="0.50"/>
-  <circle cx="1018" cy="82"  r="2.0" fill="#EDE8FF" opacity="0.60"/>
-  <circle cx="1150" cy="44"  r="1.5" fill="#EDE8FF" opacity="0.70"/>
-  <circle cx="88"   cy="190" r="1.0" fill="#EDE8FF" opacity="0.30"/>
-  <circle cx="1098" cy="175" r="1.5" fill="#EDE8FF" opacity="0.35"/>
-  <circle cx="142"  cy="352" r="1.0" fill="#EDE8FF" opacity="0.22"/>
-  <circle cx="1062" cy="322" r="1.0" fill="#EDE8FF" opacity="0.25"/>
-  <circle cx="55"   cy="288" r="1.5" fill="#EDE8FF" opacity="0.28"/>
-  <circle cx="1135" cy="258" r="1.0" fill="#EDE8FF" opacity="0.30"/>
-  <circle cx="230"  cy="162" r="1.0" fill="#EDE8FF" opacity="0.35"/>
-  <circle cx="965"  cy="132" r="1.5" fill="#EDE8FF" opacity="0.40"/>
-  <circle cx="548"  cy="48"  r="1.0" fill="#EDE8FF" opacity="0.45"/>
-  <circle cx="820"  cy="155" r="1.0" fill="#EDE8FF" opacity="0.30"/>
-  <circle cx="395"  cy="112" r="1.5" fill="#EDE8FF" opacity="0.35"/>
-  <circle cx="148"  cy="128" r="1.0" fill="#EDE8FF" opacity="0.32"/>
-  <circle cx="1040" cy="298" r="1.0" fill="#EDE8FF" opacity="0.20"/>
+  <!-- ── Leaf sprig — top-right (mirror) ── -->
+  <g transform="translate(1142,58) scale(-1,1)" opacity="0.66">
+    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
+    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
+    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
+    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
+  </g>
 
-  <!-- Diamond sparkles -->
-  <polygon points="214,140 218,144 214,148 210,144"       fill="#EDE8FF" opacity="0.38"/>
-  <polygon points="980,116 984,120 980,124 976,120"        fill="#EDE8FF" opacity="0.32"/>
-  <polygon points="84,376  88,380  84,384  80,380"         fill="#EDE8FF" opacity="0.18"/>
-  <polygon points="1112,292 1116,296 1112,300 1108,296"    fill="#EDE8FF" opacity="0.22"/>
-  <polygon points="432,55  436,59  432,63  428,59"         fill="#EDE8FF" opacity="0.28"/>
+  <!-- ── Leaf sprig — bottom-left (flip) ── -->
+  <g transform="translate(58,572) scale(1,-1)" opacity="0.44">
+    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
+    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
+    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
+    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
+  </g>
 
-  <!-- Ghost music notes -->
-  <text x="62"   y="402" font-family="serif" font-size="52" fill="#EDE8FF" opacity="0.09">♪</text>
-  <text x="1082" y="150" font-family="serif" font-size="40" fill="#EDE8FF" opacity="0.08">♩</text>
-  <text x="36"   y="208" font-family="serif" font-size="28" fill="#EDE8FF" opacity="0.07">♫</text>
-  <text x="1116" y="370" font-family="serif" font-size="32" fill="#EDE8FF" opacity="0.08">♪</text>
+  <!-- ── Leaf sprig — bottom-right (mirror + flip) ── -->
+  <g transform="translate(1142,572) scale(-1,-1)" opacity="0.44">
+    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
+    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
+    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
+    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
+  </g>
 
-  <!-- ════════════════════════════════════════════
-       SITE NAME ― 主役
-       ════════════════════════════════════════════ -->
+  <!-- Horizontal rules -->
+  <line x1="155" y1="166" x2="1045" y2="166" stroke="#d9c9b0" stroke-width="0.8"/>
+
+  <!-- Divider below site name -->
+  <line x1="220" y1="388" x2="980" y2="388" stroke="#d9c9b0" stroke-width="1"/>
+  <line x1="340" y1="394" x2="860" y2="394" stroke="#4a7a38" stroke-width="0.7" opacity="0.42"/>
+  <!-- Diamond accent at centre -->
+  <polygon points="600,388 607,394 600,400 593,394" fill="#4a7a38" opacity="0.32"/>
+
+  <!-- Bottom rule -->
+  <line x1="155" y1="518" x2="1045" y2="518" stroke="#d9c9b0" stroke-width="0.8"/>
+
+  <!-- Rose dots flanking song title -->
+  <circle cx="455" cy="441" r="3"   fill="#a84d5c" opacity="0.26"/>
+  <circle cx="745" cy="441" r="3"   fill="#a84d5c" opacity="0.26"/>
+  <circle cx="442" cy="441" r="1.8" fill="#a84d5c" opacity="0.16"/>
+  <circle cx="758" cy="441" r="1.8" fill="#a84d5c" opacity="0.16"/>
+
+  <!-- Tiny dew-drop dots scattered -->
+  <circle cx="205" cy="148" r="2"   fill="#4a7a38" opacity="0.18"/>
+  <circle cx="222" cy="162" r="1.4" fill="#4a7a38" opacity="0.13"/>
+  <circle cx="990" cy="148" r="2"   fill="#4a7a38" opacity="0.18"/>
+  <circle cx="973" cy="162" r="1.4" fill="#4a7a38" opacity="0.13"/>
+
+  <!-- ════════════ SITE NAME — 主役 ════════════ -->
   <text
-    x="600" y="248"
+    x="600" y="290"
     font-family="serif"
-    font-size="120"
+    font-size="116"
+    font-weight="normal"
+    fill="#2c2416"
     text-anchor="middle"
-    fill="#EDE8FF"
-    letter-spacing="5">へのへのんのの</text>
+    dominant-baseline="middle"
+    letter-spacing="10">へのへのんのの</text>
 
-  <!-- ════════════════════════════════════════════
-       Heartbeat / EKG line
-       spike centered at x≈600, straddles panel edge
-       ════════════════════════════════════════════ -->
-  <!-- wide soft glow backing -->
-  <path
-    d="M 0,392 L 476,392 L 519,377 L 543,407 L 567,322 L 589,466 L 613,392 L 637,408 L 658,382 L 681,392 L 1200,392"
-    fill="none" stroke="#C53680" stroke-width="12" opacity="0.13" stroke-linejoin="round"/>
-  <!-- medium halo -->
-  <path
-    d="M 0,392 L 476,392 L 519,377 L 543,407 L 567,322 L 589,466 L 613,392 L 637,408 L 658,382 L 681,392 L 1200,392"
-    fill="none" stroke="#C53680" stroke-width="5" opacity="0.22" stroke-linejoin="round"/>
-  <!-- crisp main line -->
-  <path
-    d="M 0,392 L 476,392 L 519,377 L 543,407 L 567,322 L 589,466 L 613,392 L 637,408 L 658,382 L 681,392 L 1200,392"
-    fill="none"
-    stroke="url(#beatGrad)"
-    stroke-width="2.5"
-    stroke-linejoin="round"
-    filter="url(#glow)"/>
-
-  <!-- ════════════════════════════════════════════
-       Song info ― light area
-       ════════════════════════════════════════════ -->
-
-  <!-- Subtle separator rule -->
-  <rect x="80" y="443" width="1040" height="1" fill="#C53680" opacity="0.10"/>
-  <!-- accent dots -->
-  <circle cx="480" cy="443" r="3" fill="#C53680" opacity="0.40"/>
-  <circle cx="600" cy="443" r="3" fill="#C53680" opacity="0.40"/>
-  <circle cx="720" cy="443" r="3" fill="#C53680" opacity="0.40"/>
-
-  <!-- "今日の一曲" label -->
+  <!-- ════════════ Song title — 副題 ════════════ -->
   <text
-    x="600" y="475"
-    font-family="sans-serif"
-    font-size="15"
+    x="600" y="441"
+    font-family="serif"
+    font-size="32"
+    fill="#4a7a38"
     text-anchor="middle"
-    fill="#9980BB"
-    letter-spacing="4">今 日 の 一 曲  ♩</text>
+    dominant-baseline="middle"
+    letter-spacing="3">LOVER'S RESPONSE</text>
 
-  <!-- Song title ― 副題 -->
+  <!-- ════════════ Artist info ════════════ -->
   <text
-    x="600" y="524"
+    x="600" y="481"
     font-family="sans-serif"
-    font-size="40"
+    font-size="18"
+    fill="#5c4e3a"
     text-anchor="middle"
-    fill="#C53680"
-    letter-spacing="2">ドリーマーズビート</text>
+    dominant-baseline="middle"
+    opacity="0.80">TONE feat. SF-A2 開発コード miki</text>
 
-  <!-- Artist name -->
+  <!-- Bottom label -->
   <text
-    x="600" y="570"
+    x="600" y="551"
     font-family="sans-serif"
-    font-size="22"
+    font-size="12"
+    fill="#5c4e3a"
     text-anchor="middle"
-    fill="#5B4278"
-    letter-spacing="1">40mP feat. 初音ミク</text>
-
-  <!-- Bottom accent bar -->
-  <rect x="520" y="600" width="160" height="2" fill="#C53680" opacity="0.28" rx="1"/>
+    dominant-baseline="middle"
+    letter-spacing="5"
+    opacity="0.48">今 日 の 一 曲</text>
 
 </svg>

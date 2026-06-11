@@ -1,92 +1,165 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGr" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#F8F5FF"/>
-      <stop offset="100%" stop-color="#EDE8FF"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#f9f2dc"/>
+      <stop offset="48%"  stop-color="#fdf8f0"/>
+      <stop offset="100%" stop-color="#f4ead8"/>
     </linearGradient>
-    <linearGradient id="hdrGr" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#160E38"/>
-      <stop offset="40%"  stop-color="#3A1A6E"/>
-      <stop offset="75%"  stop-color="#7D2470"/>
-      <stop offset="100%" stop-color="#B83070"/>
-    </linearGradient>
-    <linearGradient id="aclGr" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#C53680"/>
-      <stop offset="55%"  stop-color="#7D2470"/>
-      <stop offset="100%" stop-color="#7D2470" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="ttlGr" x1="0" y1="340" x2="0" y2="430" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#2A1558"/>
-      <stop offset="100%" stop-color="#1B1730"/>
-    </linearGradient>
-    <pattern id="scanB" x="0" y="0" width="32" height="630" patternUnits="userSpaceOnUse">
-      <line x1="31" y1="0" x2="31" y2="630" stroke="#1B1730" stroke-width="0.8"/>
-    </pattern>
-    <pattern id="scanH" x="0" y="0" width="32" height="150" patternUnits="userSpaceOnUse">
-      <line x1="31" y1="0" x2="31" y2="150" stroke="white" stroke-width="0.8"/>
-    </pattern>
-    <radialGradient id="rPink" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#C53680" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#C53680" stop-opacity="0"/>
+    <radialGradient id="sunGlow" cx="88%" cy="8%" r="52%">
+      <stop offset="0%"   stop-color="#fffce0" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#fffce0" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="lPurp" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#3A1A6E" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#3A1A6E" stop-opacity="0"/>
+    <radialGradient id="lowerWarm" cx="4%" cy="96%" r="38%">
+      <stop offset="0%"   stop-color="#f4ead8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#f4ead8" stop-opacity="0"/>
     </radialGradient>
+    <linearGradient id="leftBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#4a7a38" stop-opacity="0.55"/>
+      <stop offset="65%"  stop-color="#4a7a38" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#4a7a38" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="titleColor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#2c2416"/>
+      <stop offset="100%" stop-color="#3d3020"/>
+    </linearGradient>
   </defs>
 
-  <!-- BACKGROUND -->
-  <rect width="1200" height="630" fill="url(#bgGr)"/>
-  <rect width="1200" height="630" fill="url(#scanB)" opacity="0.035"/>
+  <!-- ── Background ── -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#sunGlow)"/>
+  <rect width="1200" height="630" fill="url(#lowerWarm)"/>
+  <!-- Diagonal window-light shaft -->
+  <polygon points="812,0 1082,0 902,630 632,630"
+           fill="#fffce0" opacity="0.20"/>
 
-  <!-- AMBIENT GLOWS -->
-  <ellipse cx="1090" cy="400" rx="280" ry="240" fill="url(#rPink)"/>
-  <ellipse cx="200"  cy="270" rx="250" ry="180" fill="url(#lPurp)"/>
+  <!-- ── Outer frame ── -->
+  <rect x="18" y="18" width="1164" height="594" rx="3"
+        fill="none" stroke="#d9c9b0" stroke-width="1.5"/>
 
-  <!-- CONCENTRIC CIRCLES — ドリーマーズビート 心拍 -->
-  <g transform="translate(1090,400)">
-    <circle r="55"  fill="none" stroke="#C53680" stroke-width="1.5" opacity="0.22"/>
-    <circle r="105" fill="none" stroke="#C53680" stroke-width="1.5" opacity="0.17"/>
-    <circle r="162" fill="none" stroke="#C53680" stroke-width="1"   opacity="0.13"/>
-    <circle r="220" fill="none" stroke="#7D2470" stroke-width="1"   opacity="0.09"/>
-    <circle r="280" fill="none" stroke="#7D2470" stroke-width="0.8" opacity="0.06"/>
-    <circle r="344" fill="none" stroke="#3A1A6E" stroke-width="0.8" opacity="0.04"/>
-    <circle r="5"   fill="#C53680" opacity="0.55"/>
-  </g>
+  <!-- ── Left accent bar ── -->
+  <rect x="52" y="56" width="2.5" height="518"
+        fill="url(#leftBar)" rx="1.25"/>
 
-  <!-- SCATTERED MUSIC NOTES -->
-  <text x="1036" y="248" font-family="serif" font-size="46" fill="#C53680" opacity="0.18">♩</text>
-  <text x="935"  y="563" font-family="serif" font-size="34" fill="#7D2470" opacity="0.14">♪</text>
-  <text x="1148" y="544" font-family="serif" font-size="28" fill="#C53680" opacity="0.16">♫</text>
-  <text x="1006" y="180" font-family="serif" font-size="22" fill="#7D2470" opacity="0.12">♩</text>
-  <text x="116"  y="556" font-family="serif" font-size="16" fill="#C53680" opacity="0.09">♩</text>
+  <!-- ── Header: site name ── -->
+  <text x="74" y="88"
+        font-family="serif" font-size="32" fill="#2c2416"
+        letter-spacing="0.07em" opacity="0.90">へのへのんのの</text>
 
-  <!-- HEADER BAND -->
-  <rect width="1200" height="150" fill="url(#hdrGr)"/>
-  <rect width="1200" height="150" fill="url(#scanH)" opacity="0.055"/>
+  <!-- Header divider -->
+  <line x1="52" y1="112" x2="1148" y2="112"
+        stroke="#d9c9b0" stroke-width="1"/>
+  <circle cx="52" cy="112" r="3.5" fill="#4a7a38" opacity="0.48"/>
 
-  <!-- Site name -->
-  <text x="70" y="97" font-family="serif" font-size="40" fill="#EDE8FF" letter-spacing="0.03em">へのへのんのの</text>
-  <!-- Beat-pulse ♩ -->
-  <text x="462" y="97" font-family="serif" font-size="28" fill="#C53680" opacity="0.9">♩</text>
+  <!-- 記事 badge -->
+  <rect x="74" y="127" width="52" height="22" rx="11"
+        fill="none" stroke="#4a7a38" stroke-width="1" opacity="0.52"/>
+  <text x="84" y="142"
+        font-family="sans-serif" font-size="11" fill="#4a7a38"
+        letter-spacing="0.08em">記事</text>
 
-  <!-- ACCENT SEPARATOR -->
-  <rect x="0" y="150" width="1200" height="4" fill="url(#aclGr)"/>
-
-  <!-- Left accent bar -->
-  <rect x="0" y="154" width="6" height="450" fill="#C53680"/>
-
-  <!-- CONTENT DECORATION — layered horizontal rules (article h2 motif) -->
-  <rect x="90" y="193" width="200" height="2"   fill="#C53680" opacity="0.35"/>
-  <rect x="90" y="199" width="110" height="1.5" fill="#C53680" opacity="0.18"/>
-
-  <!-- ARTICLE TITLE -->
-  <!-- Drop-shadow layer -->
-  <text x="92" y="402" font-family="serif" font-size="68" fill="#C53680" opacity="0.07" letter-spacing="0.02em">{{TITLE}}</text>
+  <!-- ── Title ── -->
+  <!-- Subtle warm shadow layer -->
+  <text x="76" y="362"
+        font-family="serif" font-size="66"
+        fill="#5c4e3a" letter-spacing="0.04em" opacity="0.16">{{TITLE}}</text>
   <!-- Main title text -->
-  <text x="90" y="400" font-family="serif" font-size="68" fill="url(#ttlGr)" letter-spacing="0.02em">{{TITLE}}</text>
+  <text x="74" y="360"
+        font-family="serif" font-size="66"
+        fill="url(#titleColor)" letter-spacing="0.04em">{{TITLE}}</text>
 
-  <!-- BOTTOM STRIP (matches site-footer) -->
-  <rect x="0" y="604" width="1200" height="26" fill="#12092A"/>
-  <text x="1128" y="622" font-family="serif" font-size="14" fill="#9980BB" letter-spacing="0.05em">♩</text>
+  <!-- Short green accent underline below title -->
+  <line x1="74" y1="390" x2="310" y2="390"
+        stroke="#4a7a38" stroke-width="1.5"
+        stroke-linecap="round" opacity="0.30"/>
+
+  <!-- ── Paper lines (diary / letter feeling) ── -->
+  <line x1="74" y1="440" x2="1126" y2="440"
+        stroke="#e8dcc8" stroke-width="0.5" opacity="0.55"/>
+  <line x1="74" y1="466" x2="1126" y2="466"
+        stroke="#e8dcc8" stroke-width="0.5" opacity="0.38"/>
+  <line x1="74" y1="492" x2="1126" y2="492"
+        stroke="#e8dcc8" stroke-width="0.5" opacity="0.22"/>
+
+  <!-- ── Bottom divider ── -->
+  <line x1="52" y1="510" x2="1148" y2="510"
+        stroke="#d9c9b0" stroke-width="1"/>
+  <circle cx="52"   cy="510" r="3.5" fill="#4a7a38" opacity="0.48"/>
+  <circle cx="1148" cy="510" r="3.5" fill="#4a7a38" opacity="0.48"/>
+
+  <!-- ── Bottom area: waiting rose dots (返事を待つ) ── -->
+  <circle cx="74"  cy="556" r="3"   fill="#a84d5c" opacity="0.38"/>
+  <circle cx="95"  cy="556" r="2.5" fill="#a84d5c" opacity="0.27"/>
+  <circle cx="114" cy="556" r="2"   fill="#a84d5c" opacity="0.17"/>
+  <circle cx="131" cy="556" r="1.5" fill="#a84d5c" opacity="0.10"/>
+  <line x1="147" y1="556" x2="232" y2="556"
+        stroke="#d9c9b0" stroke-width="1" opacity="0.60"/>
+
+  <!-- ── Botanical: top-right leaf cluster ── -->
+  <!-- Leaf 1 (large) -->
+  <path d="M 1082,40
+           C 1066,10 1112,4 1124,34
+           C 1134,58 1108,76 1090,58
+           C 1074,43 1077,36 1082,40 Z"
+        fill="#4a7a38" opacity="0.14"/>
+  <line x1="1103" y1="19" x2="1090" y2="58"
+        stroke="#4a7a38" stroke-width="1"
+        stroke-linecap="round" opacity="0.22"/>
+  <!-- Leaf 2 (medium, left) -->
+  <path d="M 1044,54
+           C 1030,26 1074,20 1084,50
+           C 1092,72 1068,86 1050,70
+           C 1034,56 1038,50 1044,54 Z"
+        fill="#4a7a38" opacity="0.11"/>
+  <line x1="1064" y1="34" x2="1050" y2="70"
+        stroke="#4a7a38" stroke-width="1"
+        stroke-linecap="round" opacity="0.18"/>
+  <!-- Leaf 3 (small, upper right) -->
+  <path d="M 1118,30
+           C 1108,6 1146,2 1154,26
+           C 1160,44 1142,56 1126,42
+           C 1112,31 1114,25 1118,30 Z"
+        fill="#4a7a38" opacity="0.09"/>
+  <!-- Leaf 4 (small, lower accent) -->
+  <path d="M 1062,82
+           C 1074,60 1104,64 1108,88
+           C 1112,106 1092,114 1074,100
+           C 1058,88 1054,88 1062,82 Z"
+        fill="#4a7a38" opacity="0.08"/>
+
+  <!-- ── Botanical: bottom-right leaf cluster ── -->
+  <!-- Leaf A (large) -->
+  <path d="M 1058,532
+           C 1042,502 1088,494 1098,524
+           C 1106,548 1082,562 1062,546
+           C 1044,532 1048,528 1058,532 Z"
+        fill="#4a7a38" opacity="0.14"/>
+  <line x1="1078" y1="510" x2="1062" y2="546"
+        stroke="#4a7a38" stroke-width="1"
+        stroke-linecap="round" opacity="0.22"/>
+  <!-- Leaf B (medium) -->
+  <path d="M 1096,542
+           C 1082,512 1126,504 1136,534
+           C 1144,558 1122,572 1102,554
+           C 1084,540 1088,536 1096,542 Z"
+        fill="#4a7a38" opacity="0.11"/>
+  <line x1="1116" y1="520" x2="1102" y2="554"
+        stroke="#4a7a38" stroke-width="1"
+        stroke-linecap="round" opacity="0.18"/>
+  <!-- Leaf C (small, far right) -->
+  <path d="M 1130,552
+           C 1118,528 1156,522 1162,548
+           C 1167,566 1148,576 1132,562
+           C 1118,550 1122,546 1130,552 Z"
+        fill="#4a7a38" opacity="0.09"/>
+  <!-- Leaf D (leftmost) -->
+  <path d="M 1032,550
+           C 1040,528 1072,534 1076,558
+           C 1080,576 1060,586 1042,570
+           C 1026,556 1026,552 1032,550 Z"
+        fill="#4a7a38" opacity="0.08"/>
+
+  <!-- Rose accent near bottom botanical -->
+  <circle cx="1058" cy="582" r="2.5" fill="#a84d5c" opacity="0.22"/>
+  <circle cx="1078" cy="589" r="2"   fill="#a84d5c" opacity="0.16"/>
+  <circle cx="1095" cy="580" r="1.5" fill="#a84d5c" opacity="0.11"/>
 </svg>
