@@ -1,165 +1,124 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#f9f2dc"/>
-      <stop offset="48%"  stop-color="#fdf8f0"/>
-      <stop offset="100%" stop-color="#f4ead8"/>
-    </linearGradient>
-    <radialGradient id="sunGlow" cx="88%" cy="8%" r="52%">
-      <stop offset="0%"   stop-color="#fffce0" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#fffce0" stop-opacity="0"/>
+    <pattern id="g" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="28" y2="0" stroke="rgba(255,26,170,0.07)" stroke-width="0.6"/>
+      <line x1="0" y1="0" x2="0" y2="28" stroke="rgba(255,26,170,0.07)" stroke-width="0.6"/>
+    </pattern>
+    <pattern id="sl" x="0" y="0" width="2" height="4" patternUnits="userSpaceOnUse">
+      <rect width="2" height="3" fill="transparent"/>
+      <rect y="3" width="2" height="1" fill="rgba(0,0,0,0.12)"/>
+    </pattern>
+    <radialGradient id="rg-bot" cx="50%" cy="110%" r="70%">
+      <stop offset="0%" stop-color="#ff1aaa" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#ff1aaa" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="lowerWarm" cx="4%" cy="96%" r="38%">
-      <stop offset="0%"   stop-color="#f4ead8" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#f4ead8" stop-opacity="0"/>
+    <radialGradient id="rg-tl" cx="0%" cy="0%" r="55%">
+      <stop offset="0%" stop-color="#280050" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#0b0012" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="leftBar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#4a7a38" stop-opacity="0.55"/>
-      <stop offset="65%"  stop-color="#4a7a38" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#4a7a38" stop-opacity="0.05"/>
+    <linearGradient id="lg-sep" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff1aaa" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ff1aaa" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff1aaa" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="titleColor" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#2c2416"/>
-      <stop offset="100%" stop-color="#3d3020"/>
-    </linearGradient>
+    <filter id="f-glow" x="-15%" y="-80%" width="130%" height="260%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="f-text" x="-5%" y="-40%" width="110%" height="180%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="f-sm" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <!-- ── Background ── -->
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#sunGlow)"/>
-  <rect width="1200" height="630" fill="url(#lowerWarm)"/>
-  <!-- Diagonal window-light shaft -->
-  <polygon points="812,0 1082,0 902,630 632,630"
-           fill="#fffce0" opacity="0.20"/>
+  <!-- BACKGROUND -->
+  <rect width="1200" height="630" fill="#0b0012"/>
+  <rect width="1200" height="630" fill="url(#rg-tl)"/>
+  <rect width="1200" height="630" fill="url(#rg-bot)"/>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <rect width="1200" height="630" fill="url(#sl)"/>
 
-  <!-- ── Outer frame ── -->
-  <rect x="18" y="18" width="1164" height="594" rx="3"
-        fill="none" stroke="#d9c9b0" stroke-width="1.5"/>
+  <!-- TOP BORDER -->
+  <rect x="0" y="0" width="1200" height="3" fill="#ff1aaa"/>
 
-  <!-- ── Left accent bar ── -->
-  <rect x="52" y="56" width="2.5" height="518"
-        fill="url(#leftBar)" rx="1.25"/>
+  <!-- OUTER FRAME -->
+  <rect x="26" y="26" width="1148" height="578" fill="none" stroke="rgba(255,26,170,0.18)" stroke-width="1"/>
 
-  <!-- ── Header: site name ── -->
-  <text x="74" y="88"
-        font-family="serif" font-size="32" fill="#2c2416"
-        letter-spacing="0.07em" opacity="0.90">へのへのんのの</text>
+  <!-- CORNER BRACKETS -->
+  <polyline points="26,66 26,26 66,26"       fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
+  <polyline points="1134,26 1174,26 1174,66" fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
+  <polyline points="26,564 26,604 66,604"    fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
+  <polyline points="1134,604 1174,604 1174,564" fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
 
-  <!-- Header divider -->
-  <line x1="52" y1="112" x2="1148" y2="112"
-        stroke="#d9c9b0" stroke-width="1"/>
-  <circle cx="52" cy="112" r="3.5" fill="#4a7a38" opacity="0.48"/>
+  <!-- HEADER -->
+  <rect x="58" y="50" width="3" height="52" fill="#ff1aaa" filter="url(#f-sm)"/>
+  <text x="74" y="78"
+    font-family="sans-serif" font-size="26" font-weight="900"
+    letter-spacing="5" fill="#f8eeff" filter="url(#f-sm)">へのへのんのの</text>
+  <text x="76" y="100"
+    font-family="sans-serif" font-size="11" font-weight="bold"
+    letter-spacing="8" fill="#ff1aaa">ARTICLE</text>
 
-  <!-- 記事 badge -->
-  <rect x="74" y="127" width="52" height="22" rx="11"
-        fill="none" stroke="#4a7a38" stroke-width="1" opacity="0.52"/>
-  <text x="84" y="142"
-        font-family="sans-serif" font-size="11" fill="#4a7a38"
-        letter-spacing="0.08em">記事</text>
+  <!-- SEPARATOR -->
+  <line x1="58"  y1="116" x2="1142" y2="116" stroke="rgba(255,26,170,0.28)" stroke-width="1"/>
+  <line x1="58"  y1="116" x2="280"  y2="116" stroke="url(#lg-sep)"          stroke-width="2"/>
 
-  <!-- ── Title ── -->
-  <!-- Subtle warm shadow layer -->
-  <text x="76" y="362"
-        font-family="serif" font-size="66"
-        fill="#5c4e3a" letter-spacing="0.04em" opacity="0.16">{{TITLE}}</text>
-  <!-- Main title text -->
-  <text x="74" y="360"
-        font-family="serif" font-size="66"
-        fill="url(#titleColor)" letter-spacing="0.04em">{{TITLE}}</text>
+  <!-- RIGHT GLITCH BARS -->
+  <rect x="1072" y="136" width="88"  height="2" fill="#ff1aaa" opacity="0.42"/>
+  <rect x="1092" y="143" width="66"  height="1" fill="#ff1aaa" opacity="0.20"/>
+  <rect x="1054" y="149" width="108" height="2" fill="#ff1aaa" opacity="0.14"/>
+  <rect x="1080" y="155" width="78"  height="1" fill="#ff1aaa" opacity="0.28"/>
+  <rect x="1062" y="161" width="98"  height="1" fill="#ff1aaa" opacity="0.10"/>
 
-  <!-- Short green accent underline below title -->
-  <line x1="74" y1="390" x2="310" y2="390"
-        stroke="#4a7a38" stroke-width="1.5"
-        stroke-linecap="round" opacity="0.30"/>
+  <!-- RIGHT EQ BARS (gabber visualizer) -->
+  <rect x="1092" y="188" width="2" height="98"  fill="rgba(255,26,170,0.50)"/>
+  <rect x="1103" y="204" width="2" height="64"  fill="rgba(255,26,170,0.27)"/>
+  <rect x="1114" y="182" width="2" height="118" fill="rgba(255,26,170,0.17)"/>
+  <rect x="1125" y="220" width="1" height="50"  fill="rgba(255,26,170,0.38)"/>
+  <rect x="1134" y="196" width="2" height="86"  fill="rgba(255,26,170,0.12)"/>
+  <rect x="1144" y="212" width="1" height="58"  fill="rgba(255,26,170,0.22)"/>
 
-  <!-- ── Paper lines (diary / letter feeling) ── -->
-  <line x1="74" y1="440" x2="1126" y2="440"
-        stroke="#e8dcc8" stroke-width="0.5" opacity="0.55"/>
-  <line x1="74" y1="466" x2="1126" y2="466"
-        stroke="#e8dcc8" stroke-width="0.5" opacity="0.38"/>
-  <line x1="74" y1="492" x2="1126" y2="492"
-        stroke="#e8dcc8" stroke-width="0.5" opacity="0.22"/>
+  <!-- LEFT THIN VERTICAL ACCENT -->
+  <rect x="56" y="136" width="1" height="342" fill="rgba(255,26,170,0.24)"/>
 
-  <!-- ── Bottom divider ── -->
-  <line x1="52" y1="510" x2="1148" y2="510"
-        stroke="#d9c9b0" stroke-width="1"/>
-  <circle cx="52"   cy="510" r="3.5" fill="#4a7a38" opacity="0.48"/>
-  <circle cx="1148" cy="510" r="3.5" fill="#4a7a38" opacity="0.48"/>
+  <!-- TITLE — glow layer -->
+  <text x="80" y="310"
+    font-family="sans-serif" font-size="70" font-weight="900"
+    fill="#ff1aaa" filter="url(#f-glow)" opacity="0.55">{{TITLE}}</text>
+  <!-- TITLE — glitch offset -->
+  <text x="84" y="314"
+    font-family="sans-serif" font-size="70" font-weight="900"
+    fill="#ff1aaa" opacity="0.10">{{TITLE}}</text>
+  <!-- TITLE — main -->
+  <text x="80" y="310"
+    font-family="sans-serif" font-size="70" font-weight="900"
+    fill="#f8eeff" filter="url(#f-text)">{{TITLE}}</text>
 
-  <!-- ── Bottom area: waiting rose dots (返事を待つ) ── -->
-  <circle cx="74"  cy="556" r="3"   fill="#a84d5c" opacity="0.38"/>
-  <circle cx="95"  cy="556" r="2.5" fill="#a84d5c" opacity="0.27"/>
-  <circle cx="114" cy="556" r="2"   fill="#a84d5c" opacity="0.17"/>
-  <circle cx="131" cy="556" r="1.5" fill="#a84d5c" opacity="0.10"/>
-  <line x1="147" y1="556" x2="232" y2="556"
-        stroke="#d9c9b0" stroke-width="1" opacity="0.60"/>
+  <!-- BOTTOM SEPARATOR -->
+  <line x1="58" y1="500" x2="1142" y2="500" stroke="rgba(255,26,170,0.20)" stroke-width="1"/>
+  <polygon points="58,494 64,500 58,506 52,500" fill="#ff1aaa" opacity="0.72"/>
 
-  <!-- ── Botanical: top-right leaf cluster ── -->
-  <!-- Leaf 1 (large) -->
-  <path d="M 1082,40
-           C 1066,10 1112,4 1124,34
-           C 1134,58 1108,76 1090,58
-           C 1074,43 1077,36 1082,40 Z"
-        fill="#4a7a38" opacity="0.14"/>
-  <line x1="1103" y1="19" x2="1090" y2="58"
-        stroke="#4a7a38" stroke-width="1"
-        stroke-linecap="round" opacity="0.22"/>
-  <!-- Leaf 2 (medium, left) -->
-  <path d="M 1044,54
-           C 1030,26 1074,20 1084,50
-           C 1092,72 1068,86 1050,70
-           C 1034,56 1038,50 1044,54 Z"
-        fill="#4a7a38" opacity="0.11"/>
-  <line x1="1064" y1="34" x2="1050" y2="70"
-        stroke="#4a7a38" stroke-width="1"
-        stroke-linecap="round" opacity="0.18"/>
-  <!-- Leaf 3 (small, upper right) -->
-  <path d="M 1118,30
-           C 1108,6 1146,2 1154,26
-           C 1160,44 1142,56 1126,42
-           C 1112,31 1114,25 1118,30 Z"
-        fill="#4a7a38" opacity="0.09"/>
-  <!-- Leaf 4 (small, lower accent) -->
-  <path d="M 1062,82
-           C 1074,60 1104,64 1108,88
-           C 1112,106 1092,114 1074,100
-           C 1058,88 1054,88 1062,82 Z"
-        fill="#4a7a38" opacity="0.08"/>
+  <!-- BOTTOM DECORATION -->
+  <rect x="80" y="526" width="148" height="2" fill="#ff1aaa" opacity="0.65" filter="url(#f-sm)"/>
+  <rect x="80" y="533" width="94"  height="1" fill="#ff1aaa" opacity="0.28"/>
+  <text x="100" y="552"
+    font-family="sans-serif" font-size="13" font-weight="bold"
+    letter-spacing="4" fill="rgba(248,238,255,0.26)">へのへのんのの</text>
+  <text x="1032" y="552"
+    font-family="sans-serif" font-size="11"
+    letter-spacing="4" fill="rgba(248,238,255,0.20)">BLOG POST</text>
 
-  <!-- ── Botanical: bottom-right leaf cluster ── -->
-  <!-- Leaf A (large) -->
-  <path d="M 1058,532
-           C 1042,502 1088,494 1098,524
-           C 1106,548 1082,562 1062,546
-           C 1044,532 1048,528 1058,532 Z"
-        fill="#4a7a38" opacity="0.14"/>
-  <line x1="1078" y1="510" x2="1062" y2="546"
-        stroke="#4a7a38" stroke-width="1"
-        stroke-linecap="round" opacity="0.22"/>
-  <!-- Leaf B (medium) -->
-  <path d="M 1096,542
-           C 1082,512 1126,504 1136,534
-           C 1144,558 1122,572 1102,554
-           C 1084,540 1088,536 1096,542 Z"
-        fill="#4a7a38" opacity="0.11"/>
-  <line x1="1116" y1="520" x2="1102" y2="554"
-        stroke="#4a7a38" stroke-width="1"
-        stroke-linecap="round" opacity="0.18"/>
-  <!-- Leaf C (small, far right) -->
-  <path d="M 1130,552
-           C 1118,528 1156,522 1162,548
-           C 1167,566 1148,576 1132,562
-           C 1118,550 1122,546 1130,552 Z"
-        fill="#4a7a38" opacity="0.09"/>
-  <!-- Leaf D (leftmost) -->
-  <path d="M 1032,550
-           C 1040,528 1072,534 1076,558
-           C 1080,576 1060,586 1042,570
-           C 1026,556 1026,552 1032,550 Z"
-        fill="#4a7a38" opacity="0.08"/>
-
-  <!-- Rose accent near bottom botanical -->
-  <circle cx="1058" cy="582" r="2.5" fill="#a84d5c" opacity="0.22"/>
-  <circle cx="1078" cy="589" r="2"   fill="#a84d5c" opacity="0.16"/>
-  <circle cx="1095" cy="580" r="1.5" fill="#a84d5c" opacity="0.11"/>
+  <!-- BOTTOM RIGHT GLITCH BARS -->
+  <rect x="1074" y="512" width="88"  height="2" fill="#ff1aaa" opacity="0.32"/>
+  <rect x="1096" y="520" width="64"  height="1" fill="#ff1aaa" opacity="0.17"/>
+  <rect x="1058" y="527" width="104" height="2" fill="#ff1aaa" opacity="0.12"/>
 </svg>

@@ -1,31 +1,41 @@
-/* LOVER'S RESPONSE / TONE feat. SF-A2 開発コード miki / 窓辺の陽だまりにそっと揺れる、返事を待つ淡い恋心 */
+/* ADDIKT ADDIKT / TONE feat. 鏡音リン / 甘苦い羨望と2000年代ガバテクノの狂熱——止まれない中毒 */
 
 :root {
-  --color-fg:      #2c2416;
-  --color-bg:      #fdf8f0;
-  --color-accent:  #4a7a38;
+  --color-bg:     #0b0012;
+  --color-fg:     #f8eeff;
+  --color-accent: #ff1aaa;
 
-  --spacing-unit:  1rem;
+  --spacing-unit: 1rem;
 
-  --font-heading:  'Georgia', 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', 'HGS明朝E', serif;
-  --font-body:     'Helvetica Neue', Arial, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-heading: 'Arial Black', 'Impact', 'Haettenschweiler',
+                  'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-body:    'Courier New', 'Courier',
+                  'Hiragino Sans', 'Yu Gothic', 'Meiryo',
+                  'MS PGothic', sans-serif;
 
-  --line-height-body:    1.9;
-  --line-height-heading: 1.3;
+  --line-height-body:    1.75;
+  --line-height-heading: 1.05;
 
-  --ease-default: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  --color-rose:       #a84d5c;
-  --color-bg-muted:   #f4ead8;
-  --color-bg-glass:   rgba(253, 248, 240, 0.82);
-  --color-border:     #d9c9b0;
-  --color-fg-soft:    #5c4e3a;
-  --color-leaf-glow:  rgba(74, 122, 56, 0.10);
+  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Reset / Base ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =====================================================
+   BASE
+   ===================================================== */
+
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -33,313 +43,486 @@ body {
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  font-size: 1rem;
-  transition: background-color 0.4s var(--ease-default),
-              color 0.4s var(--ease-default);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* ── Links ────────────────────────────────────────────────────── */
+/* スキャンライン — 2000年代 CRT モニター残像 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.14) 3px,
+    rgba(0, 0, 0, 0.14) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: multiply;
+}
+
+/* 底光 — 深夜の執着 */
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 26, 170, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  animation: bottom-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes bottom-pulse {
+  from { opacity: 0.5; transform: translateX(-50%) scale(1);   }
+  to   { opacity: 1;   transform: translateX(-50%) scale(1.08); }
+}
+
+/* =====================================================
+   SELECTION
+   ===================================================== */
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
+/* =====================================================
+   TYPOGRAPHY
+   ===================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  line-height: var(--line-height-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 a {
   color: var(--color-accent);
   text-decoration: underline;
-  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color 0.22s var(--ease-default),
-              text-decoration-color 0.22s var(--ease-default);
+  transition: color 0.15s var(--ease-default),
+              text-shadow 0.15s var(--ease-default);
 }
 
-a:hover,
-a:focus-visible {
-  color: var(--color-rose);
-  text-decoration-color: var(--color-rose);
-  outline: none;
+a:hover {
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 0 10px var(--color-accent),
+               0 0 24px rgba(255, 26, 170, 0.6);
 }
 
-a:focus-visible {
-  outline: 2px solid var(--color-rose);
-  outline-offset: 3px;
-  border-radius: 2px;
+p {
+  margin-block: calc(var(--spacing-unit) * 0.75);
 }
 
-/* ── Site Header ──────────────────────────────────────────────── */
-
-/* 窓から差し込む午後の光 ── 帯状のきらめきをゆっくり横断させる */
-@keyframes window-light {
-  0%   { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
-  15%  { opacity: 1; }
-  85%  { opacity: 1; }
-  100% { transform: translateX(220%) skewX(-18deg); opacity: 0; }
-}
+/* =====================================================
+   SITE HEADER
+   ===================================================== */
 
 .site-header {
-  background: linear-gradient(
-    160deg,
-    #f9f2dc 0%,
-    #edf2d5 38%,
-    #fdf8f0 65%,
-    #f9f0d8 100%
-  );
-  border-bottom: 1px solid var(--color-border);
-  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
   position: relative;
+  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2);
+  background:
+    linear-gradient(
+      160deg,
+      #180030 0%,
+      #0d0020 50%,
+      #0b0012 100%
+    );
+  border-bottom: 2px solid var(--color-accent);
   overflow: hidden;
+  z-index: 10;
 }
 
-.site-header::after {
+/* グリッドノイズ背景 */
+.site-header::before {
   content: '';
   position: absolute;
   inset: 0;
-  width: 60%;
-  background: linear-gradient(
-    105deg,
-    transparent 0%,
-    rgba(255, 252, 210, 0.60) 50%,
-    transparent 100%
-  );
-  animation: window-light 9s ease-in-out infinite;
-  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,26,170,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,26,170,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: grid-drift 20s linear infinite;
+}
+
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 28px 28px; }
 }
 
 .site-header h1,
 .site-header .site-title {
-  font-family: var(--font-heading);
-  font-size: clamp(1.45rem, 4vw, 2.5rem);
-  line-height: var(--line-height-heading);
+  position: relative;
+  z-index: 1;
+  font-size: clamp(2.2rem, 7vw, 4.5rem);
   color: var(--color-fg);
-  margin: 0 0 calc(var(--spacing-unit) * 0.25);
-  letter-spacing: 0.05em;
+  text-shadow:
+    0 0 8px  var(--color-accent),
+    0 0 28px rgba(255, 26, 170, 0.55),
+    3px 3px 0 rgba(0, 0, 0, 0.8);
+  animation: glitch 9s infinite;
 }
 
-.site-header nav {
-  margin-top: calc(var(--spacing-unit) * 0.6);
+/* グリッチアニメーション — フラッシングライツ警告の残響 */
+@keyframes glitch {
+  0%,  85%, 100% {
+    clip-path: none;
+    transform: translate(0, 0);
+    filter: none;
+  }
+  86% {
+    clip-path: inset(25% 0 55% 0);
+    transform: translate(-4px, 0);
+    filter: hue-rotate(90deg);
+  }
+  87% {
+    clip-path: inset(65% 0 10% 0);
+    transform: translate(4px, 0);
+    filter: hue-rotate(-90deg);
+  }
+  88% {
+    clip-path: none;
+    transform: translate(0, 0);
+    filter: none;
+  }
+  89% {
+    clip-path: inset(8% 0 78% 0);
+    transform: translate(-2px, 1px);
+    filter: hue-rotate(45deg);
+  }
+  90% {
+    clip-path: none;
+    transform: translate(0, 0);
+    filter: none;
+  }
 }
 
-.site-header nav a {
-  color: var(--color-fg-soft);
-  font-size: 0.875rem;
-  letter-spacing: 0.07em;
+.site-header a {
   text-decoration: none;
-  margin-inline-end: calc(var(--spacing-unit) * 1.5);
-  transition: color 0.2s var(--ease-default);
+  color: inherit;
 }
 
-.site-header nav a:hover {
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+/* =====================================================
+   SITE NAV
+   ===================================================== */
+
+.site-nav {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(var(--spacing-unit) * 0.75);
+  display: flex;
+  gap: calc(var(--spacing-unit) * 1.5);
+  flex-wrap: wrap;
 }
 
-/* ── Post List ────────────────────────────────────────────────── */
-
-/* 木の葉がのぞいている ── カード右上に小さな葉がそっと揺れる */
-@keyframes leaf-peek {
-  0%, 100% { transform: rotate(-4deg) translateY(0px);  opacity: 0.45; }
-  40%       { transform: rotate(2deg)  translateY(-3px); opacity: 0.70; }
-  70%       { transform: rotate(-1deg) translateY(-1px); opacity: 0.55; }
+.site-nav a,
+nav a {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(248, 238, 255, 0.6);
+  text-decoration: none;
+  padding: 0.2em 0.5em;
+  border: 1px solid transparent;
+  transition:
+    color       0.2s var(--ease-default),
+    border-color 0.2s var(--ease-default),
+    text-shadow  0.2s var(--ease-default);
 }
+
+.site-nav a:hover,
+nav a:hover {
+  color: var(--color-fg);
+  border-color: var(--color-accent);
+  text-shadow: 0 0 8px var(--color-accent);
+}
+
+/* =====================================================
+   POST LIST
+   ===================================================== */
 
 .post-list {
   list-style: none;
-  padding: 0;
   margin: calc(var(--spacing-unit) * 2) 0;
-  display: grid;
-  gap: calc(var(--spacing-unit) * 1.4);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 0.5);
 }
 
-.post-list li,
-.post-list .post-card {
-  background: var(--color-bg-muted);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 1.6);
+.post-list li {
   position: relative;
-  transition: transform 0.32s var(--ease-default),
-              box-shadow 0.32s var(--ease-default),
-              border-color 0.32s var(--ease-default),
-              background-color 0.32s var(--ease-default);
+  border-left: 3px solid var(--color-accent);
+  padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.2);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 26, 170, 0.07) 0%,
+    transparent 100%
+  );
+  transition:
+    background   0.2s var(--ease-default),
+    border-color 0.2s var(--ease-default),
+    transform    0.15s var(--ease-default),
+    box-shadow   0.2s var(--ease-default);
 }
 
-.post-list li::before,
-.post-list .post-card::before {
-  content: '🌿';
+.post-list li::before {
+  content: '▶';
   position: absolute;
-  top: calc(var(--spacing-unit) * 0.55);
-  right: calc(var(--spacing-unit) * 0.85);
-  font-size: 0.9rem;
-  animation: leaf-peek 5s ease-in-out infinite;
-  transform-origin: center bottom;
+  left: calc(var(--spacing-unit) * 1.2);
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  color: var(--color-accent);
+  font-size: 0.65em;
+  transition: transform 0.15s var(--ease-default);
 }
 
-.post-list li:hover,
-.post-list .post-card:hover {
-  transform: translateY(-4px);
-  background-color: #f9f4e8;
-  border-color: var(--color-accent);
-  box-shadow:
-    0 8px 24px rgba(74, 122, 56, 0.13),
-    0 2px 6px  rgba(44, 36, 22, 0.07);
+.post-list li:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 26, 170, 0.16) 0%,
+    transparent 100%
+  );
+  border-color: #fff;
+  transform: translateX(6px);
+  box-shadow: -4px 0 16px rgba(255, 26, 170, 0.3);
 }
 
-/* post-list の nth-child でリーフアニメに時差をつけて自然に */
-.post-list li:nth-child(2)::before,
-.post-list .post-card:nth-child(2)::before { animation-delay: -1.8s; }
-.post-list li:nth-child(3)::before,
-.post-list .post-card:nth-child(3)::before { animation-delay: -3.3s; }
-.post-list li:nth-child(4)::before,
-.post-list .post-card:nth-child(4)::before { animation-delay: -0.9s; }
-.post-list li:nth-child(5)::before,
-.post-list .post-card:nth-child(5)::before { animation-delay: -4.1s; }
-
-/* ── Article / Post ───────────────────────────────────────────── */
-article.post {
-  max-width: 72ch;
-  margin-inline: auto;
-  padding: calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
+.post-list li:hover::before {
+  transform: translateY(-50%) scale(1);
 }
 
-article.post h1,
-article.post h2,
-article.post h3,
-article.post h4 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
+.post-list li:hover > a {
+  padding-left: calc(var(--spacing-unit) * 1);
+}
+
+.post-list a {
   color: var(--color-fg);
-  margin-top: calc(var(--spacing-unit) * 2.2);
-  margin-bottom: calc(var(--spacing-unit) * 0.55);
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  transition: color 0.15s var(--ease-default),
+              padding-left 0.15s var(--ease-default);
+}
+
+.post-list a:hover {
+  color: var(--color-accent);
+  text-shadow: none;
+}
+
+/* 日付などのメタ情報 */
+.post-list .post-meta,
+.post-list time {
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(248, 238, 255, 0.4);
+  letter-spacing: 0.12em;
+  font-family: var(--font-heading);
+  margin-top: 0.2em;
+}
+
+/* =====================================================
+   ARTICLE / POST
+   ===================================================== */
+
+article.post {
+  position: relative;
+  padding: calc(var(--spacing-unit) * 2.5);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 26, 170, 0.22);
+  box-shadow:
+    0   0  40px rgba(255, 26, 170, 0.04),
+    inset 0 0 60px rgba(0, 0, 0, 0.25);
+}
+
+/* コーナーアクセント — 4:3 レトロフレーム感 */
+article.post::before,
+article.post::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--color-accent);
+  border-style: solid;
+}
+article.post::before {
+  top: -1px; left: -1px;
+  border-width: 2px 0 0 2px;
+}
+article.post::after {
+  bottom: -1px; right: -1px;
+  border-width: 0 2px 2px 0;
 }
 
 article.post h1 {
-  font-size: clamp(1.5rem, 4.5vw, 2.2rem);
-  letter-spacing: 0.04em;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  color: var(--color-fg);
+  text-shadow: 0 0 18px rgba(255, 26, 170, 0.45);
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
 }
 
 article.post h2 {
-  font-size: 1.35rem;
-  border-bottom: 1px solid var(--color-border);
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+  color: var(--color-fg);
+  margin-top: calc(var(--spacing-unit) * 2);
   padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(255, 26, 170, 0.3);
+}
+
+article.post h2::before {
+  content: '▶ ';
+  color: var(--color-accent);
+  font-size: 0.75em;
+  vertical-align: middle;
 }
 
 article.post h3 {
-  font-size: 1.1rem;
-  color: var(--color-fg-soft);
+  font-size: 1rem;
+  color: var(--color-accent);
+  letter-spacing: 0.15em;
+  margin-top: calc(var(--spacing-unit) * 1.5);
 }
 
-article.post h4 {
-  font-size: 0.95rem;
-  color: var(--color-fg-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+article.post a {
+  color: var(--color-accent);
 }
 
-article.post p {
-  margin-block: calc(var(--spacing-unit) * 0.8);
+article.post a:hover {
+  color: #fff;
 }
 
 article.post blockquote {
-  border-left: 3px solid var(--color-accent);
-  margin-inline-start: 0;
-  padding: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 1.4);
-  color: var(--color-fg-soft);
-  background: var(--color-leaf-glow);
-  border-radius: 0 6px 6px 0;
+  margin: calc(var(--spacing-unit) * 1.5) 0;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+  border-left: 4px solid var(--color-accent);
+  background: rgba(255, 26, 170, 0.05);
+  color: rgba(248, 238, 255, 0.8);
   font-style: italic;
-  letter-spacing: 0.02em;
+}
+
+article.post code {
+  font-family: var(--font-body);
+  font-size: 0.88em;
+  background: rgba(255, 26, 170, 0.12);
+  color: var(--color-accent);
+  padding: 0.15em 0.4em;
+  border-radius: 2px;
+}
+
+article.post pre {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 26, 170, 0.2);
+  padding: var(--spacing-unit);
+  overflow-x: auto;
+}
+
+article.post pre code {
+  background: none;
+  color: var(--color-fg);
+  padding: 0;
 }
 
 article.post hr {
   border: none;
-  border-top: 1px solid var(--color-border);
-  margin-block: calc(var(--spacing-unit) * 2);
+  border-top: 1px solid rgba(255, 26, 170, 0.25);
+  margin: calc(var(--spacing-unit) * 2) 0;
+  position: relative;
 }
 
-article.post code {
-  font-size: 0.875em;
-  background: var(--color-bg-muted);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  padding: 0.1em 0.4em;
-  color: var(--color-rose);
-}
-
-article.post pre {
-  background: var(--color-bg-muted);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.4);
-  overflow-x: auto;
-  line-height: 1.6;
-}
-
-article.post pre code {
-  background: transparent;
-  border: none;
-  padding: 0;
-  color: var(--color-fg);
-  font-size: 0.875em;
-}
-
-/* 記事タイトル下のメタ情報（日付・タグ行など） */
-article.post .post-meta {
-  font-size: 0.82rem;
-  color: var(--color-fg-soft);
-  letter-spacing: 0.06em;
-  margin-top: calc(var(--spacing-unit) * 0.3);
-  margin-bottom: calc(var(--spacing-unit) * 1.6);
-}
-
-/* ── Tags / Badges ────────────────────────────────────────────── */
-.tag,
-.post-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 0.18em 0.65em;
-  border-radius: 20px;
-  background: var(--color-leaf-glow);
+article.post hr::after {
+  content: '◆';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-bg);
+  padding: 0 0.5em;
   color: var(--color-accent);
-  border: 1px solid rgba(74, 122, 56, 0.28);
-  letter-spacing: 0.05em;
-  transition: background 0.22s var(--ease-default),
-              border-color 0.22s var(--ease-default);
+  font-size: 0.6rem;
 }
 
-.tag:hover,
-.post-tag:hover {
-  background: rgba(74, 122, 56, 0.2);
-  border-color: rgba(74, 122, 56, 0.55);
+/* 投稿メタ (日付・タグ) */
+.post-meta,
+article.post .post-date,
+article.post time {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: rgba(248, 238, 255, 0.38);
+  text-transform: uppercase;
 }
 
-/* ── Site Footer ──────────────────────────────────────────────── */
+/* =====================================================
+   SITE FOOTER
+   ===================================================== */
+
 .site-footer {
-  border-top: 1px solid var(--color-border);
-  background: var(--color-bg-muted);
-  color: var(--color-fg-soft);
-  font-size: 0.83rem;
+  position: relative;
+  margin-top: calc(var(--spacing-unit) * 4);
+  padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+  border-top: 1px solid rgba(255, 26, 170, 0.28);
   text-align: center;
-  padding: calc(var(--spacing-unit) * 1.6) calc(var(--spacing-unit) * 2);
-  letter-spacing: 0.05em;
-  line-height: 1.7;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(248, 238, 255, 0.3);
+}
+
+/* センターの光の帯 */
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: var(--color-accent);
+  box-shadow: 0 0 14px var(--color-accent),
+              0 0 30px rgba(255, 26, 170, 0.5);
+  animation: footer-beat 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes footer-beat {
+  from { width: 60px;  opacity: 0.7; }
+  to   { width: 120px; opacity: 1;   }
 }
 
 .site-footer a {
-  color: var(--color-fg-soft);
-  text-decoration-color: var(--color-border);
+  color: rgba(248, 238, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.15s var(--ease-default);
 }
 
 .site-footer a:hover {
-  color: var(--color-rose);
-  text-decoration-color: var(--color-rose);
-}
-
-/* ── Selection ────────────────────────────────────────────────── */
-::selection {
-  background: rgba(74, 122, 56, 0.20);
-  color: var(--color-fg);
-}
-
-/* ── Reduced Motion ───────────────────────────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
+  color: var(--color-accent);
+  text-shadow: 0 0 8px var(--color-accent);
 }

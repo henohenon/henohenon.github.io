@@ -1,125 +1,146 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#f9f2dc"/>
-      <stop offset="38%"  stop-color="#edf2d5"/>
-      <stop offset="65%"  stop-color="#fdf8f0"/>
-      <stop offset="100%" stop-color="#f9f0d8"/>
-    </linearGradient>
-    <linearGradient id="ray" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#fffcd2" stop-opacity="0"/>
-      <stop offset="50%"  stop-color="#fffcd2" stop-opacity="0.52"/>
-      <stop offset="100%" stop-color="#fffcd2" stop-opacity="0"/>
-    </linearGradient>
+    <filter id="f-glow-xl" x="-25%" y="-100%" width="150%" height="300%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <filter id="f-glow-md" x="-15%" y="-80%" width="130%" height="260%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+    <filter id="f-glow-sm" x="-10%" y="-80%" width="120%" height="260%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <pattern id="p-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#ff1aaa" stroke-width="0.5" stroke-opacity="0.07"/>
+    </pattern>
+    <pattern id="p-scan" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect y="3" width="1200" height="1" fill="#000000" fill-opacity="0.14"/>
+    </pattern>
+    <radialGradient id="g-bottom" cx="600" cy="800" r="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ff1aaa" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff1aaa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-vignette" cx="600" cy="252" r="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#0b0012" stop-opacity="0"/>
+      <stop offset="70%"  stop-color="#0b0012" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0b0012" stop-opacity="0.55"/>
+    </radialGradient>
   </defs>
 
   <!-- Background -->
-  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="#0b0012"/>
 
-  <!-- Window light ray — diagonal warmth, matching window-light CSS animation -->
-  <polygon points="195,0 775,0 638,630 58,630" fill="url(#ray)" opacity="0.58"/>
+  <!-- Grid overlay (echoes site-header::before) -->
+  <rect width="1200" height="630" fill="url(#p-grid)"/>
 
-  <!-- Outer frame -->
-  <rect x="26" y="26" width="1148" height="578" rx="4" fill="none" stroke="#d9c9b0" stroke-width="1.5"/>
-  <!-- Inner frame -->
-  <rect x="36" y="36" width="1128" height="558" rx="2" fill="none" stroke="#d9c9b0" stroke-width="0.5" opacity="0.6"/>
+  <!-- Bottom atmospheric pink glow (echoes body::after) -->
+  <rect width="1200" height="630" fill="url(#g-bottom)"/>
 
-  <!-- ── Leaf sprig — top-left ── -->
-  <g transform="translate(58,58)" opacity="0.66">
-    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
-    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
-    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
-    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
-  </g>
+  <!-- Vignette — focus center -->
+  <rect width="1200" height="630" fill="url(#g-vignette)"/>
 
-  <!-- ── Leaf sprig — top-right (mirror) ── -->
-  <g transform="translate(1142,58) scale(-1,1)" opacity="0.66">
-    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
-    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
-    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
-    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
-  </g>
+  <!-- Scanlines (echoes body::before) -->
+  <rect width="1200" height="630" fill="url(#p-scan)" opacity="0.75"/>
 
-  <!-- ── Leaf sprig — bottom-left (flip) ── -->
-  <g transform="translate(58,572) scale(1,-1)" opacity="0.44">
-    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
-    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
-    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
-    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
-  </g>
+  <!-- Top border (echoes site-header border-bottom) -->
+  <rect x="0" y="0" width="1200" height="3" fill="#ff1aaa"/>
 
-  <!-- ── Leaf sprig — bottom-right (mirror + flip) ── -->
-  <g transform="translate(1142,572) scale(-1,-1)" opacity="0.44">
-    <path d="M 0,52 C 18,32 34,9 58,0 C 42,24 24,42 0,52 Z" fill="#4a7a38" opacity="0.62"/>
-    <path d="M 0,52 C 9,36 20,20 40,13 C 30,30 15,44 0,52 Z" fill="#4a7a38" opacity="0.34"/>
-    <line x1="0" y1="52" x2="38" y2="10" stroke="#4a7a38" stroke-width="1.2" stroke-linecap="round" opacity="0.48"/>
-    <path d="M 20,30 C 32,18 46,15 50,24 C 39,28 27,30 20,30 Z" fill="#4a7a38" opacity="0.52" transform="rotate(-14,20,30)"/>
-  </g>
+  <!-- Bottom border (echoes site-footer border-top) -->
+  <rect x="0" y="627" width="1200" height="3" fill="#ff1aaa" fill-opacity="0.35"/>
 
-  <!-- Horizontal rules -->
-  <line x1="155" y1="166" x2="1045" y2="166" stroke="#d9c9b0" stroke-width="0.8"/>
+  <!-- Inner frame (echoes article.post border) -->
+  <rect x="30" y="24" width="1140" height="582" fill="none" stroke="#ff1aaa" stroke-width="0.5" stroke-opacity="0.18"/>
 
-  <!-- Divider below site name -->
-  <line x1="220" y1="388" x2="980" y2="388" stroke="#d9c9b0" stroke-width="1"/>
-  <line x1="340" y1="394" x2="860" y2="394" stroke="#4a7a38" stroke-width="0.7" opacity="0.42"/>
-  <!-- Diamond accent at centre -->
-  <polygon points="600,388 607,394 600,400 593,394" fill="#4a7a38" opacity="0.32"/>
+  <!-- Corner brackets (echoes article.post::before / ::after) -->
+  <path d="M 46,44 L 46,108 M 46,44 L 110,44"     stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
+  <path d="M 1154,44 L 1154,108 M 1154,44 L 1090,44" stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
+  <path d="M 46,586 L 46,522 M 46,586 L 110,586"   stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
+  <path d="M 1154,586 L 1154,522 M 1154,586 L 1090,586" stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
 
-  <!-- Bottom rule -->
-  <line x1="155" y1="518" x2="1045" y2="518" stroke="#d9c9b0" stroke-width="0.8"/>
+  <!-- Flanking accent lines — left (echoes post-list border-left aesthetic) -->
+  <line x1="55" y1="206" x2="178" y2="206" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
+  <line x1="55" y1="252" x2="148" y2="252" stroke="#ff1aaa" stroke-width="1.2" stroke-opacity="0.55"/>
+  <line x1="55" y1="298" x2="178" y2="298" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
 
-  <!-- Rose dots flanking song title -->
-  <circle cx="455" cy="441" r="3"   fill="#a84d5c" opacity="0.26"/>
-  <circle cx="745" cy="441" r="3"   fill="#a84d5c" opacity="0.26"/>
-  <circle cx="442" cy="441" r="1.8" fill="#a84d5c" opacity="0.16"/>
-  <circle cx="758" cy="441" r="1.8" fill="#a84d5c" opacity="0.16"/>
+  <!-- Flanking accent lines — right -->
+  <line x1="1022" y1="206" x2="1145" y2="206" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
+  <line x1="1052" y1="252" x2="1145" y2="252" stroke="#ff1aaa" stroke-width="1.2" stroke-opacity="0.55"/>
+  <line x1="1022" y1="298" x2="1145" y2="298" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
 
-  <!-- Tiny dew-drop dots scattered -->
-  <circle cx="205" cy="148" r="2"   fill="#4a7a38" opacity="0.18"/>
-  <circle cx="222" cy="162" r="1.4" fill="#4a7a38" opacity="0.13"/>
-  <circle cx="990" cy="148" r="2"   fill="#4a7a38" opacity="0.18"/>
-  <circle cx="973" cy="162" r="1.4" fill="#4a7a38" opacity="0.13"/>
+  <!-- ===== SITE NAME ===== -->
+  <!-- Chromatic aberration — red shift (CRT glitch) -->
+  <text x="597" y="252"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="120" font-weight="900"
+    letter-spacing="7"
+    fill="#ff2060" fill-opacity="0.20">へのへのんのの</text>
+  <!-- Chromatic aberration — cyan shift -->
+  <text x="603" y="252"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="120" font-weight="900"
+    letter-spacing="7"
+    fill="#00ffe4" fill-opacity="0.14">へのへのんのの</text>
+  <!-- Outer pink glow -->
+  <text x="600" y="252"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="120" font-weight="900"
+    letter-spacing="7"
+    fill="#ff1aaa" fill-opacity="0.42"
+    filter="url(#f-glow-xl)">へのへのんのの</text>
+  <!-- Inner pink glow -->
+  <text x="600" y="252"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="120" font-weight="900"
+    letter-spacing="7"
+    fill="#ff1aaa" fill-opacity="0.36"
+    filter="url(#f-glow-md)">へのへのんのの</text>
+  <!-- Main text -->
+  <text x="600" y="252"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="120" font-weight="900"
+    letter-spacing="7"
+    fill="#f8eeff">へのへのんのの</text>
 
-  <!-- ════════════ SITE NAME — 主役 ════════════ -->
-  <text
-    x="600" y="290"
-    font-family="serif"
-    font-size="116"
-    font-weight="normal"
-    fill="#2c2416"
+  <!-- Divider with center diamond (echoes article.post hr::after ◆) -->
+  <line x1="200" y1="346" x2="589" y2="346" stroke="#ff1aaa" stroke-width="1" stroke-opacity="0.45"/>
+  <polygon points="600,338 609,346 600,354 591,346" fill="#ff1aaa" fill-opacity="0.72"/>
+  <line x1="611" y1="346" x2="1000" y2="346" stroke="#ff1aaa" stroke-width="1" stroke-opacity="0.45"/>
+
+  <!-- NOW PLAYING label -->
+  <text x="600" y="374"
     text-anchor="middle"
-    dominant-baseline="middle"
-    letter-spacing="10">へのへのんのの</text>
+    font-family="monospace" font-size="11"
+    letter-spacing="6"
+    fill="#ff1aaa" fill-opacity="0.44">NOW PLAYING</text>
 
-  <!-- ════════════ Song title — 副題 ════════════ -->
-  <text
-    x="600" y="441"
-    font-family="serif"
-    font-size="32"
-    fill="#4a7a38"
+  <!-- ===== SONG TITLE (subtitle) ===== -->
+  <!-- Glow -->
+  <text x="600" y="413"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="38" font-weight="700"
+    letter-spacing="4"
+    fill="#ff1aaa" fill-opacity="0.52"
+    filter="url(#f-glow-sm)">ADDIKT ADDIKT</text>
+  <!-- Main -->
+  <text x="600" y="413"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="38" font-weight="700"
+    letter-spacing="4"
+    fill="#ff1aaa">ADDIKT ADDIKT</text>
+
+  <!-- Artist info -->
+  <text x="600" y="458"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif" font-size="22"
+    letter-spacing="2"
+    fill="#f8eeff" fill-opacity="0.50">TONE feat. 鏡音リン</text>
+
+  <!-- Bottom watermark (echoes site-header repeating identity) -->
+  <text x="600" y="558"
     text-anchor="middle"
-    dominant-baseline="middle"
-    letter-spacing="3">LOVER'S RESPONSE</text>
+    font-family="monospace" font-size="12"
+    letter-spacing="9"
+    fill="#f8eeff" fill-opacity="0.14">へのへのんのの</text>
 
-  <!-- ════════════ Artist info ════════════ -->
-  <text
-    x="600" y="481"
-    font-family="sans-serif"
-    font-size="18"
-    fill="#5c4e3a"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    opacity="0.80">TONE feat. SF-A2 開発コード miki</text>
-
-  <!-- Bottom label -->
-  <text
-    x="600" y="551"
-    font-family="sans-serif"
-    font-size="12"
-    fill="#5c4e3a"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    letter-spacing="5"
-    opacity="0.48">今 日 の 一 曲</text>
-
+  <!-- Footer accent line (echoes site-footer::before) -->
+  <line x1="552" y1="571" x2="648" y2="571" stroke="#ff1aaa" stroke-width="1.5" stroke-opacity="0.38"/>
 </svg>
