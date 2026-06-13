@@ -1,146 +1,201 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <filter id="f-glow-xl" x="-25%" y="-100%" width="150%" height="300%">
-      <feGaussianBlur stdDeviation="24"/>
-    </filter>
-    <filter id="f-glow-md" x="-15%" y="-80%" width="130%" height="260%">
-      <feGaussianBlur stdDeviation="9"/>
-    </filter>
-    <filter id="f-glow-sm" x="-10%" y="-80%" width="120%" height="260%">
-      <feGaussianBlur stdDeviation="4"/>
-    </filter>
-    <pattern id="p-grid" width="28" height="28" patternUnits="userSpaceOnUse">
-      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#ff1aaa" stroke-width="0.5" stroke-opacity="0.07"/>
-    </pattern>
-    <pattern id="p-scan" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <rect y="3" width="1200" height="1" fill="#000000" fill-opacity="0.14"/>
-    </pattern>
-    <radialGradient id="g-bottom" cx="600" cy="800" r="700" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#ff1aaa" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ff1aaa" stop-opacity="0"/>
+    <radialGradient id="rg1" gradientUnits="userSpaceOnUse" cx="240" cy="365" r="720">
+      <stop offset="0%" stop-color="#ff2d78" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="g-vignette" cx="600" cy="252" r="700" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#0b0012" stop-opacity="0"/>
-      <stop offset="70%"  stop-color="#0b0012" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0b0012" stop-opacity="0.55"/>
+    <radialGradient id="rg2" gradientUnits="userSpaceOnUse" cx="984" cy="113" r="660">
+      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#9333ea" stop-opacity="0"/>
     </radialGradient>
+    <radialGradient id="rg3" gradientUnits="userSpaceOnUse" cx="600" cy="620" r="600">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lg-title" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+      <stop offset="0%"   stop-color="#ff2d78"/>
+      <stop offset="25%"  stop-color="#ff8ab8"/>
+      <stop offset="50%"  stop-color="#ffd166"/>
+      <stop offset="75%"  stop-color="#ff8ab8"/>
+      <stop offset="100%" stop-color="#ff2d78"/>
+    </linearGradient>
+    <linearGradient id="lg-hr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#ff2d78" stop-opacity="0"/>
+      <stop offset="20%"  stop-color="#ff2d78"/>
+      <stop offset="50%"  stop-color="#ffd166"/>
+      <stop offset="80%"  stop-color="#ff2d78"/>
+      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lg-edge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#ff2d78" stop-opacity="0"/>
+      <stop offset="22%"  stop-color="#ff2d78" stop-opacity="0.88"/>
+      <stop offset="50%"  stop-color="#ffd166" stop-opacity="0.88"/>
+      <stop offset="78%"  stop-color="#ff2d78" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="f-glow-title" x="-25%" y="-55%" width="150%" height="210%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="f-glow-sub" x="-20%" y="-70%" width="140%" height="240%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="f-blob" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="36"/>
+    </filter>
+    <pattern id="scanlines" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="1200" height="1" fill="#f7ecff"/>
+    </pattern>
+    <clipPath id="cp-grid">
+      <rect x="0" y="455" width="1200" height="175"/>
+    </clipPath>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#0b0012"/>
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#0c0919"/>
+  <rect width="1200" height="630" fill="url(#rg1)"/>
+  <rect width="1200" height="630" fill="url(#rg2)"/>
+  <rect width="1200" height="630" fill="url(#rg3)"/>
 
-  <!-- Grid overlay (echoes site-header::before) -->
-  <rect width="1200" height="630" fill="url(#p-grid)"/>
+  <!-- Soft glow blobs -->
+  <circle cx="95"  cy="115" r="150" fill="#ff2d78" opacity="0.055" filter="url(#f-blob)"/>
+  <circle cx="1105" cy="100" r="140" fill="#9333ea" opacity="0.07"  filter="url(#f-blob)"/>
+  <circle cx="600"  cy="520" r="180" fill="#251248" opacity="0.55"  filter="url(#f-blob)"/>
 
-  <!-- Bottom atmospheric pink glow (echoes body::after) -->
-  <rect width="1200" height="630" fill="url(#g-bottom)"/>
+  <!-- Scanlines -->
+  <rect width="1200" height="630" fill="url(#scanlines)" opacity="0.033"/>
 
-  <!-- Vignette — focus center -->
-  <rect width="1200" height="630" fill="url(#g-vignette)"/>
+  <!-- City grid bottom -->
+  <g clip-path="url(#cp-grid)">
+    <g stroke="#9966cc" stroke-width="0.8" opacity="0.22">
+      <line x1="600" y1="440" x2="0"    y2="630"/>
+      <line x1="600" y1="440" x2="100"  y2="630"/>
+      <line x1="600" y1="440" x2="200"  y2="630"/>
+      <line x1="600" y1="440" x2="300"  y2="630"/>
+      <line x1="600" y1="440" x2="400"  y2="630"/>
+      <line x1="600" y1="440" x2="500"  y2="630"/>
+      <line x1="600" y1="440" x2="600"  y2="630"/>
+      <line x1="600" y1="440" x2="700"  y2="630"/>
+      <line x1="600" y1="440" x2="800"  y2="630"/>
+      <line x1="600" y1="440" x2="900"  y2="630"/>
+      <line x1="600" y1="440" x2="1000" y2="630"/>
+      <line x1="600" y1="440" x2="1100" y2="630"/>
+      <line x1="600" y1="440" x2="1200" y2="630"/>
+    </g>
+    <g stroke="#ff2d78" stroke-width="0.7" opacity="0.14">
+      <line x1="0" y1="490" x2="1200" y2="490"/>
+      <line x1="0" y1="535" x2="1200" y2="535"/>
+      <line x1="0" y1="580" x2="1200" y2="580"/>
+    </g>
+  </g>
 
-  <!-- Scanlines (echoes body::before) -->
-  <rect width="1200" height="630" fill="url(#p-scan)" opacity="0.75"/>
+  <!-- Top / bottom neon borders -->
+  <rect x="0" y="0"     width="1200" height="2.5" fill="url(#lg-edge)"/>
+  <rect x="0" y="627.5" width="1200" height="2.5" fill="url(#lg-edge)"/>
 
-  <!-- Top border (echoes site-header border-bottom) -->
-  <rect x="0" y="0" width="1200" height="3" fill="#ff1aaa"/>
+  <!-- Corner L-brackets -->
+  <g stroke="#ff2d78" stroke-width="2.5" fill="none" opacity="0.8">
+    <polyline points="26,82 26,26 82,26"/>
+    <polyline points="1174,82 1174,26 1118,26"/>
+    <polyline points="26,548 26,604 82,604"/>
+    <polyline points="1174,548 1174,604 1118,604"/>
+  </g>
 
-  <!-- Bottom border (echoes site-footer border-top) -->
-  <rect x="0" y="627" width="1200" height="3" fill="#ff1aaa" fill-opacity="0.35"/>
+  <!-- Sparkle diamonds — hot pink -->
+  <g fill="#ff2d78">
+    <polygon points="110,89  116,101 110,113 104,101" opacity="0.90"/>
+    <polygon points="1090,89 1096,101 1090,113 1084,101" opacity="0.90"/>
+    <polygon points="188,144 193,154 188,164 183,154" opacity="0.64"/>
+    <polygon points="1012,144 1017,154 1012,164 1007,154" opacity="0.64"/>
+  </g>
+  <!-- Gold -->
+  <g fill="#ffd166">
+    <polygon points="162,192 168,203 162,214 156,203" opacity="0.80"/>
+    <polygon points="1038,192 1044,203 1038,214 1032,203" opacity="0.80"/>
+    <polygon points="88,382 93,390 88,398 83,390" opacity="0.54"/>
+    <polygon points="1112,382 1117,390 1112,398 1107,390" opacity="0.54"/>
+  </g>
+  <!-- Soft pink -->
+  <g fill="#ff8ab8">
+    <polygon points="228,111 233,120 228,129 223,120" opacity="0.58"/>
+    <polygon points="972,111 977,120 972,129 967,120" opacity="0.58"/>
+    <polygon points="140,462 144,469 140,476 136,469" opacity="0.42"/>
+    <polygon points="1060,462 1064,469 1060,476 1056,469" opacity="0.42"/>
+  </g>
 
-  <!-- Inner frame (echoes article.post border) -->
-  <rect x="30" y="24" width="1140" height="582" fill="none" stroke="#ff1aaa" stroke-width="0.5" stroke-opacity="0.18"/>
+  <!-- Dot particles -->
+  <g fill="#f7ecff">
+    <circle cx="155"  cy="228" r="2.5" opacity="0.44"/>
+    <circle cx="1045" cy="228" r="2.5" opacity="0.44"/>
+    <circle cx="116"  cy="442" r="2"   opacity="0.34"/>
+    <circle cx="1084" cy="442" r="2"   opacity="0.34"/>
+    <circle cx="258"  cy="76"  r="2"   opacity="0.28"/>
+    <circle cx="942"  cy="76"  r="2"   opacity="0.28"/>
+    <circle cx="330"  cy="50"  r="1.5" opacity="0.22"/>
+    <circle cx="870"  cy="50"  r="1.5" opacity="0.22"/>
+  </g>
 
-  <!-- Corner brackets (echoes article.post::before / ::after) -->
-  <path d="M 46,44 L 46,108 M 46,44 L 110,44"     stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
-  <path d="M 1154,44 L 1154,108 M 1154,44 L 1090,44" stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
-  <path d="M 46,586 L 46,522 M 46,586 L 110,586"   stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
-  <path d="M 1154,586 L 1154,522 M 1154,586 L 1090,586" stroke="#ff1aaa" stroke-width="2.5" fill="none" stroke-linecap="square"/>
-
-  <!-- Flanking accent lines — left (echoes post-list border-left aesthetic) -->
-  <line x1="55" y1="206" x2="178" y2="206" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
-  <line x1="55" y1="252" x2="148" y2="252" stroke="#ff1aaa" stroke-width="1.2" stroke-opacity="0.55"/>
-  <line x1="55" y1="298" x2="178" y2="298" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
-
-  <!-- Flanking accent lines — right -->
-  <line x1="1022" y1="206" x2="1145" y2="206" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
-  <line x1="1052" y1="252" x2="1145" y2="252" stroke="#ff1aaa" stroke-width="1.2" stroke-opacity="0.55"/>
-  <line x1="1022" y1="298" x2="1145" y2="298" stroke="#ff1aaa" stroke-width="0.6" stroke-opacity="0.30"/>
-
-  <!-- ===== SITE NAME ===== -->
-  <!-- Chromatic aberration — red shift (CRT glitch) -->
-  <text x="597" y="252"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="120" font-weight="900"
-    letter-spacing="7"
-    fill="#ff2060" fill-opacity="0.20">へのへのんのの</text>
-  <!-- Chromatic aberration — cyan shift -->
-  <text x="603" y="252"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="120" font-weight="900"
-    letter-spacing="7"
-    fill="#00ffe4" fill-opacity="0.14">へのへのんのの</text>
-  <!-- Outer pink glow -->
-  <text x="600" y="252"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="120" font-weight="900"
-    letter-spacing="7"
-    fill="#ff1aaa" fill-opacity="0.42"
-    filter="url(#f-glow-xl)">へのへのんのの</text>
-  <!-- Inner pink glow -->
-  <text x="600" y="252"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="120" font-weight="900"
-    letter-spacing="7"
-    fill="#ff1aaa" fill-opacity="0.36"
-    filter="url(#f-glow-md)">へのへのんのの</text>
-  <!-- Main text -->
-  <text x="600" y="252"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="120" font-weight="900"
-    letter-spacing="7"
-    fill="#f8eeff">へのへのんのの</text>
-
-  <!-- Divider with center diamond (echoes article.post hr::after ◆) -->
-  <line x1="200" y1="346" x2="589" y2="346" stroke="#ff1aaa" stroke-width="1" stroke-opacity="0.45"/>
-  <polygon points="600,338 609,346 600,354 591,346" fill="#ff1aaa" fill-opacity="0.72"/>
-  <line x1="611" y1="346" x2="1000" y2="346" stroke="#ff1aaa" stroke-width="1" stroke-opacity="0.45"/>
-
-  <!-- NOW PLAYING label -->
-  <text x="600" y="374"
+  <!-- ══ SITE TITLE (main hero) ══ -->
+  <!-- neon glow halo -->
+  <text x="600" y="278"
     text-anchor="middle"
-    font-family="monospace" font-size="11"
-    letter-spacing="6"
-    fill="#ff1aaa" fill-opacity="0.44">NOW PLAYING</text>
-
-  <!-- ===== SONG TITLE (subtitle) ===== -->
-  <!-- Glow -->
-  <text x="600" y="413"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="38" font-weight="700"
-    letter-spacing="4"
-    fill="#ff1aaa" fill-opacity="0.52"
-    filter="url(#f-glow-sm)">ADDIKT ADDIKT</text>
-  <!-- Main -->
-  <text x="600" y="413"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="38" font-weight="700"
-    letter-spacing="4"
-    fill="#ff1aaa">ADDIKT ADDIKT</text>
-
-  <!-- Artist info -->
-  <text x="600" y="458"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif" font-size="22"
-    letter-spacing="2"
-    fill="#f8eeff" fill-opacity="0.50">TONE feat. 鏡音リン</text>
-
-  <!-- Bottom watermark (echoes site-header repeating identity) -->
-  <text x="600" y="558"
+    font-family="sans-serif"
+    font-size="122"
+    font-weight="bold"
+    fill="#ff2d78"
+    opacity="0.38"
+    letter-spacing="5"
+    filter="url(#f-glow-title)">へのへのんのの</text>
+  <!-- visible gradient text -->
+  <text x="600" y="278"
     text-anchor="middle"
-    font-family="monospace" font-size="12"
-    letter-spacing="9"
-    fill="#f8eeff" fill-opacity="0.14">へのへのんのの</text>
+    font-family="sans-serif"
+    font-size="122"
+    font-weight="bold"
+    fill="url(#lg-title)"
+    letter-spacing="5">へのへのんのの</text>
 
-  <!-- Footer accent line (echoes site-footer::before) -->
-  <line x1="552" y1="571" x2="648" y2="571" stroke="#ff1aaa" stroke-width="1.5" stroke-opacity="0.38"/>
+  <!-- Divider -->
+  <rect x="260" y="306" width="680" height="1.5" fill="url(#lg-hr)" opacity="0.75"/>
+  <!-- Diamond accent on divider -->
+  <polygon points="600,299 607,307 600,315 593,307" fill="#ffd166" opacity="0.96"/>
+
+  <!-- ══ SONG SUBTITLE ══ -->
+  <!-- glow halo -->
+  <text x="600" y="367"
+    text-anchor="middle"
+    font-family="sans-serif"
+    font-size="36"
+    font-weight="bold"
+    fill="#ff2d78"
+    opacity="0.36"
+    letter-spacing="12"
+    filter="url(#f-glow-sub)">マチアプリンセス</text>
+  <!-- visible subtitle -->
+  <text x="600" y="367"
+    text-anchor="middle"
+    font-family="sans-serif"
+    font-size="36"
+    font-weight="bold"
+    fill="#ff8ab8"
+    letter-spacing="12">マチアプリンセス</text>
+
+  <!-- ══ ARTIST INFO ══ -->
+  <text x="600" y="424"
+    text-anchor="middle"
+    font-family="sans-serif"
+    font-size="18"
+    fill="#f7ecff"
+    opacity="0.38"
+    letter-spacing="1.5">吉本おじさん, なみぐる feat. 雨衣, 玉姫</text>
+
+  <!-- ══ FOOTER TAGLINE ══ -->
+  <text x="600" y="589"
+    text-anchor="middle"
+    font-family="sans-serif"
+    font-size="13"
+    fill="#ff2d78"
+    opacity="0.52"
+    letter-spacing="5">✦  It's a Match!!  ✦</text>
 </svg>

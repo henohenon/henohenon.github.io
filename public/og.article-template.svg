@@ -1,124 +1,114 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="g" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="0" x2="28" y2="0" stroke="rgba(255,26,170,0.07)" stroke-width="0.6"/>
-      <line x1="0" y1="0" x2="0" y2="28" stroke="rgba(255,26,170,0.07)" stroke-width="0.6"/>
-    </pattern>
-    <pattern id="sl" x="0" y="0" width="2" height="4" patternUnits="userSpaceOnUse">
-      <rect width="2" height="3" fill="transparent"/>
-      <rect y="3" width="2" height="1" fill="rgba(0,0,0,0.12)"/>
-    </pattern>
-    <radialGradient id="rg-bot" cx="50%" cy="110%" r="70%">
-      <stop offset="0%" stop-color="#ff1aaa" stop-opacity="0.13"/>
-      <stop offset="100%" stop-color="#ff1aaa" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rg-tl" cx="0%" cy="0%" r="55%">
-      <stop offset="0%" stop-color="#280050" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#0b0012" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="lg-sep" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff1aaa" stop-opacity="1"/>
-      <stop offset="50%" stop-color="#ff1aaa" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#ff1aaa" stop-opacity="0"/>
+    <filter id="f-neon" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="f-glow-t" x="-10%" y="-60%" width="120%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="g-line" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#0c0919"/>
+      <stop offset="18%"  stop-color="#ff2d78"/>
+      <stop offset="50%"  stop-color="#ffd166"/>
+      <stop offset="82%"  stop-color="#ff2d78"/>
+      <stop offset="100%" stop-color="#0c0919"/>
     </linearGradient>
-    <filter id="f-glow" x="-15%" y="-80%" width="130%" height="260%">
-      <feGaussianBlur stdDeviation="14"/>
-    </filter>
-    <filter id="f-text" x="-5%" y="-40%" width="110%" height="180%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge>
-        <feMergeNode in="b"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="f-sm" x="-20%" y="-80%" width="140%" height="260%">
-      <feGaussianBlur stdDeviation="3" result="b"/>
-      <feMerge>
-        <feMergeNode in="b"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <linearGradient id="g-name" x1="418" y1="0" x2="782" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#ff2d78"/>
+      <stop offset="32%"  stop-color="#ff8ab8"/>
+      <stop offset="62%"  stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#ff8ab8"/>
+    </linearGradient>
+    <pattern id="p-dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="14" cy="14" r="0.75" fill="#5b21b6" opacity="0.45"/>
+    </pattern>
   </defs>
 
-  <!-- BACKGROUND -->
-  <rect width="1200" height="630" fill="#0b0012"/>
-  <rect width="1200" height="630" fill="url(#rg-tl)"/>
-  <rect width="1200" height="630" fill="url(#rg-bot)"/>
-  <rect width="1200" height="630" fill="url(#g)"/>
-  <rect width="1200" height="630" fill="url(#sl)"/>
+  <!-- ── BACKGROUND ── -->
+  <rect width="1200" height="630" fill="#0c0919"/>
+  <rect width="1200" height="630" fill="url(#p-dots)"/>
 
-  <!-- TOP BORDER -->
-  <rect x="0" y="0" width="1200" height="3" fill="#ff1aaa"/>
+  <!-- Ambient radial glows (matching body bg-image) -->
+  <ellipse cx="210"  cy="390" rx="570" ry="285" fill="#ff2d78" fill-opacity="0.07"/>
+  <ellipse cx="1035" cy="100" rx="480" ry="205" fill="#9333ea" fill-opacity="0.08"/>
+  <ellipse cx="600"  cy="582" rx="440" ry="148" fill="#ffd166" fill-opacity="0.04"/>
 
-  <!-- OUTER FRAME -->
-  <rect x="26" y="26" width="1148" height="578" fill="none" stroke="rgba(255,26,170,0.18)" stroke-width="1"/>
+  <!-- ── OUTER FRAME ── -->
+  <rect x="16" y="16" width="1168" height="598" rx="20" fill="none"
+        stroke="#ff2d78" stroke-width="1.5" stroke-opacity="0.55"
+        filter="url(#f-neon)"/>
 
-  <!-- CORNER BRACKETS -->
-  <polyline points="26,66 26,26 66,26"       fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
-  <polyline points="1134,26 1174,26 1174,66" fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
-  <polyline points="26,564 26,604 66,604"    fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
-  <polyline points="1134,604 1174,604 1174,564" fill="none" stroke="#ff1aaa" stroke-width="2.5"/>
+  <!-- Corner brackets -->
+  <path d="M36 76 L36 36 L96 36"    fill="none" stroke="#ff2d78" stroke-width="2.5" stroke-linecap="round" filter="url(#f-neon)"/>
+  <path d="M1164 76 L1164 36 L1104 36" fill="none" stroke="#ff2d78" stroke-width="2.5" stroke-linecap="round" filter="url(#f-neon)"/>
+  <path d="M36 554 L36 594 L96 594"    fill="none" stroke="#ff2d78" stroke-width="2.5" stroke-linecap="round" filter="url(#f-neon)"/>
+  <path d="M1164 554 L1164 594 L1104 594" fill="none" stroke="#ff2d78" stroke-width="2.5" stroke-linecap="round" filter="url(#f-neon)"/>
 
-  <!-- HEADER -->
-  <rect x="58" y="50" width="3" height="52" fill="#ff1aaa" filter="url(#f-sm)"/>
-  <text x="74" y="78"
-    font-family="sans-serif" font-size="26" font-weight="900"
-    letter-spacing="5" fill="#f8eeff" filter="url(#f-sm)">へのへのんのの</text>
-  <text x="76" y="100"
-    font-family="sans-serif" font-size="11" font-weight="bold"
-    letter-spacing="8" fill="#ff1aaa">ARTICLE</text>
+  <!-- ── HEADER ── -->
+  <!-- Site name -->
+  <text x="600" y="86"
+        text-anchor="middle" font-family="serif" font-size="28" letter-spacing="8"
+        fill="url(#g-name)" filter="url(#f-neon)">へのへのんのの</text>
 
-  <!-- SEPARATOR -->
-  <line x1="58"  y1="116" x2="1142" y2="116" stroke="rgba(255,26,170,0.28)" stroke-width="1"/>
-  <line x1="58"  y1="116" x2="280"  y2="116" stroke="url(#lg-sep)"          stroke-width="2"/>
+  <!-- Flanking diamonds -->
+  <polygon points="408,72 415,80 408,88 401,80" fill="#ffd166" fill-opacity="0.65" filter="url(#f-neon)"/>
+  <polygon points="792,72 799,80 792,88 785,80" fill="#ffd166" fill-opacity="0.65" filter="url(#f-neon)"/>
+  <polygon points="382,88 386,93 382,98 378,93" fill="#ff2d78" fill-opacity="0.35"/>
+  <polygon points="818,88 822,93 818,98 814,93" fill="#ff2d78" fill-opacity="0.35"/>
 
-  <!-- RIGHT GLITCH BARS -->
-  <rect x="1072" y="136" width="88"  height="2" fill="#ff1aaa" opacity="0.42"/>
-  <rect x="1092" y="143" width="66"  height="1" fill="#ff1aaa" opacity="0.20"/>
-  <rect x="1054" y="149" width="108" height="2" fill="#ff1aaa" opacity="0.14"/>
-  <rect x="1080" y="155" width="78"  height="1" fill="#ff1aaa" opacity="0.28"/>
-  <rect x="1062" y="161" width="98"  height="1" fill="#ff1aaa" opacity="0.10"/>
+  <!-- Header HR -->
+  <rect x="0" y="114" width="1200" height="1.5" fill="url(#g-line)"/>
+  <!-- Center diamond on HR -->
+  <polygon points="600,107 609,115 600,123 591,115" fill="#ff2d78" fill-opacity="0.92" filter="url(#f-neon)"/>
 
-  <!-- RIGHT EQ BARS (gabber visualizer) -->
-  <rect x="1092" y="188" width="2" height="98"  fill="rgba(255,26,170,0.50)"/>
-  <rect x="1103" y="204" width="2" height="64"  fill="rgba(255,26,170,0.27)"/>
-  <rect x="1114" y="182" width="2" height="118" fill="rgba(255,26,170,0.17)"/>
-  <rect x="1125" y="220" width="1" height="50"  fill="rgba(255,26,170,0.38)"/>
-  <rect x="1134" y="196" width="2" height="86"  fill="rgba(255,26,170,0.12)"/>
-  <rect x="1144" y="212" width="1" height="58"  fill="rgba(255,26,170,0.22)"/>
+  <!-- ── TITLE CARD ── -->
+  <rect x="56" y="155" width="1088" height="316" rx="18"
+        fill="#120a2e" fill-opacity="0.65"
+        stroke="#ff2d78" stroke-width="1" stroke-opacity="0.22"/>
 
-  <!-- LEFT THIN VERTICAL ACCENT -->
-  <rect x="56" y="136" width="1" height="342" fill="rgba(255,26,170,0.24)"/>
+  <!-- Card top neon accent -->
+  <rect x="160" y="155" width="880" height="1.5" fill="url(#g-line)" opacity="0.32"/>
+  <!-- Card bottom neon accent -->
+  <rect x="160" y="470" width="880" height="1.5" fill="url(#g-line)" opacity="0.32"/>
 
-  <!-- TITLE — glow layer -->
-  <text x="80" y="310"
-    font-family="sans-serif" font-size="70" font-weight="900"
-    fill="#ff1aaa" filter="url(#f-glow)" opacity="0.55">{{TITLE}}</text>
-  <!-- TITLE — glitch offset -->
-  <text x="84" y="314"
-    font-family="sans-serif" font-size="70" font-weight="900"
-    fill="#ff1aaa" opacity="0.10">{{TITLE}}</text>
-  <!-- TITLE — main -->
-  <text x="80" y="310"
-    font-family="sans-serif" font-size="70" font-weight="900"
-    fill="#f8eeff" filter="url(#f-text)">{{TITLE}}</text>
+  <!-- Small inner sparkles (upper card, above title) -->
+  <polygon points="96,184 100,191 96,198 92,191"  fill="#ff2d78" fill-opacity="0.28"/>
+  <polygon points="1104,184 1108,191 1104,198 1100,191" fill="#ff2d78" fill-opacity="0.28"/>
+  <polygon points="76,206 79,211 76,216 73,211"   fill="#ffd166" fill-opacity="0.2"/>
+  <polygon points="1124,206 1127,211 1124,216 1121,211" fill="#ffd166" fill-opacity="0.2"/>
 
-  <!-- BOTTOM SEPARATOR -->
-  <line x1="58" y1="500" x2="1142" y2="500" stroke="rgba(255,26,170,0.20)" stroke-width="1"/>
-  <polygon points="58,494 64,500 58,506 52,500" fill="#ff1aaa" opacity="0.72"/>
+  <!-- Side accent dots -->
+  <circle cx="40"   cy="312" r="2.5" fill="#ff2d78" fill-opacity="0.48" filter="url(#f-neon)"/>
+  <circle cx="40"   cy="332" r="1.5" fill="#ff2d78" fill-opacity="0.26"/>
+  <circle cx="40"   cy="349" r="1"   fill="#ff2d78" fill-opacity="0.14"/>
+  <circle cx="1160" cy="312" r="2.5" fill="#ff2d78" fill-opacity="0.48" filter="url(#f-neon)"/>
+  <circle cx="1160" cy="332" r="1.5" fill="#ff2d78" fill-opacity="0.26"/>
+  <circle cx="1160" cy="349" r="1"   fill="#ff2d78" fill-opacity="0.14"/>
 
-  <!-- BOTTOM DECORATION -->
-  <rect x="80" y="526" width="148" height="2" fill="#ff1aaa" opacity="0.65" filter="url(#f-sm)"/>
-  <rect x="80" y="533" width="94"  height="1" fill="#ff1aaa" opacity="0.28"/>
-  <text x="100" y="552"
-    font-family="sans-serif" font-size="13" font-weight="bold"
-    letter-spacing="4" fill="rgba(248,238,255,0.26)">へのへのんのの</text>
-  <text x="1032" y="552"
-    font-family="sans-serif" font-size="11"
-    letter-spacing="4" fill="rgba(248,238,255,0.20)">BLOG POST</text>
+  <!-- {{TITLE}} – pink glow halo -->
+  <text x="600" y="332"
+        text-anchor="middle" font-family="serif" font-size="72"
+        fill="#ff8ab8" fill-opacity="0.20"
+        filter="url(#f-glow-t)">{{TITLE}}</text>
 
-  <!-- BOTTOM RIGHT GLITCH BARS -->
-  <rect x="1074" y="512" width="88"  height="2" fill="#ff1aaa" opacity="0.32"/>
-  <rect x="1096" y="520" width="64"  height="1" fill="#ff1aaa" opacity="0.17"/>
-  <rect x="1058" y="527" width="104" height="2" fill="#ff1aaa" opacity="0.12"/>
+  <!-- {{TITLE}} – main layer -->
+  <text x="600" y="332"
+        text-anchor="middle" font-family="serif" font-size="72"
+        fill="#f7ecff">{{TITLE}}</text>
+
+  <!-- ── BOTTOM SECTION ── -->
+  <!-- Bottom HR -->
+  <rect x="0" y="504" width="1200" height="1.5" fill="url(#g-line)" opacity="0.48"/>
+
+  <!-- Sparkles near bottom HR -->
+  <polygon points="488,518 492,526 488,534 484,526" fill="#ffd166" fill-opacity="0.38"/>
+  <polygon points="600,517 607,526 600,535 593,526" fill="#ff2d78" fill-opacity="0.58" filter="url(#f-neon)"/>
+  <polygon points="712,518 716,526 712,534 708,526" fill="#ffd166" fill-opacity="0.38"/>
+
+  <!-- Footer tagline -->
+  <text x="600" y="576"
+        text-anchor="middle" font-family="serif" font-size="12" letter-spacing="5"
+        fill="#f7ecff" fill-opacity="0.28">へのへのんのの · blog</text>
 </svg>
