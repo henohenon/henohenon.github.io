@@ -1,201 +1,123 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="rg1" gradientUnits="userSpaceOnUse" cx="240" cy="365" r="720">
-      <stop offset="0%" stop-color="#ff2d78" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rg2" gradientUnits="userSpaceOnUse" cx="984" cy="113" r="660">
-      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#9333ea" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rg3" gradientUnits="userSpaceOnUse" cx="600" cy="620" r="600">
-      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="lg-title" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
-      <stop offset="0%"   stop-color="#ff2d78"/>
-      <stop offset="25%"  stop-color="#ff8ab8"/>
-      <stop offset="50%"  stop-color="#ffd166"/>
-      <stop offset="75%"  stop-color="#ff8ab8"/>
-      <stop offset="100%" stop-color="#ff2d78"/>
-    </linearGradient>
-    <linearGradient id="lg-hr" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#ff2d78" stop-opacity="0"/>
-      <stop offset="20%"  stop-color="#ff2d78"/>
-      <stop offset="50%"  stop-color="#ffd166"/>
-      <stop offset="80%"  stop-color="#ff2d78"/>
-      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="lg-edge" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#ff2d78" stop-opacity="0"/>
-      <stop offset="22%"  stop-color="#ff2d78" stop-opacity="0.88"/>
-      <stop offset="50%"  stop-color="#ffd166" stop-opacity="0.88"/>
-      <stop offset="78%"  stop-color="#ff2d78" stop-opacity="0.88"/>
-      <stop offset="100%" stop-color="#ff2d78" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="f-glow-title" x="-25%" y="-55%" width="150%" height="210%">
-      <feGaussianBlur stdDeviation="14" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="f-glow-sub" x="-20%" y="-70%" width="140%" height="240%">
-      <feGaussianBlur stdDeviation="7" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="f-blob" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="36"/>
-    </filter>
-    <pattern id="scanlines" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="0" width="1200" height="1" fill="#f7ecff"/>
-    </pattern>
-    <clipPath id="cp-grid">
-      <rect x="0" y="455" width="1200" height="175"/>
-    </clipPath>
-  </defs>
 
-  <!-- Base background -->
-  <rect width="1200" height="630" fill="#0c0919"/>
-  <rect width="1200" height="630" fill="url(#rg1)"/>
-  <rect width="1200" height="630" fill="url(#rg2)"/>
-  <rect width="1200" height="630" fill="url(#rg3)"/>
+<defs>
+  <pattern id="scan" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
+    <rect x="0" y="3" width="1200" height="1" fill="#9a648c" opacity="0.045"/>
+  </pattern>
+  <radialGradient id="centerGlow" cx="50%" cy="46%" r="40%">
+    <stop offset="0%" stop-color="#e0d4ee"/>
+    <stop offset="100%" stop-color="#f0ecf8" stop-opacity="0"/>
+  </radialGradient>
+</defs>
 
-  <!-- Soft glow blobs -->
-  <circle cx="95"  cy="115" r="150" fill="#ff2d78" opacity="0.055" filter="url(#f-blob)"/>
-  <circle cx="1105" cy="100" r="140" fill="#9333ea" opacity="0.07"  filter="url(#f-blob)"/>
-  <circle cx="600"  cy="520" r="180" fill="#251248" opacity="0.55"  filter="url(#f-blob)"/>
+<!-- ── Background ────────────────────────────────────────── -->
+<rect width="1200" height="630" fill="#f0ecf8"/>
+<rect width="1200" height="630" fill="url(#centerGlow)"/>
+<rect width="1200" height="630" fill="url(#scan)"/>
 
-  <!-- Scanlines -->
-  <rect width="1200" height="630" fill="url(#scanlines)" opacity="0.033"/>
+<!-- ── Top accent bar (site-header border 再現) ──────────── -->
+<rect x="0" y="0" width="1200" height="3" fill="#7b4060"/>
 
-  <!-- City grid bottom -->
-  <g clip-path="url(#cp-grid)">
-    <g stroke="#9966cc" stroke-width="0.8" opacity="0.22">
-      <line x1="600" y1="440" x2="0"    y2="630"/>
-      <line x1="600" y1="440" x2="100"  y2="630"/>
-      <line x1="600" y1="440" x2="200"  y2="630"/>
-      <line x1="600" y1="440" x2="300"  y2="630"/>
-      <line x1="600" y1="440" x2="400"  y2="630"/>
-      <line x1="600" y1="440" x2="500"  y2="630"/>
-      <line x1="600" y1="440" x2="600"  y2="630"/>
-      <line x1="600" y1="440" x2="700"  y2="630"/>
-      <line x1="600" y1="440" x2="800"  y2="630"/>
-      <line x1="600" y1="440" x2="900"  y2="630"/>
-      <line x1="600" y1="440" x2="1000" y2="630"/>
-      <line x1="600" y1="440" x2="1100" y2="630"/>
-      <line x1="600" y1="440" x2="1200" y2="630"/>
-    </g>
-    <g stroke="#ff2d78" stroke-width="0.7" opacity="0.14">
-      <line x1="0" y1="490" x2="1200" y2="490"/>
-      <line x1="0" y1="535" x2="1200" y2="535"/>
-      <line x1="0" y1="580" x2="1200" y2="580"/>
-    </g>
-  </g>
+<!-- ── Bottom dark strip (footer 再現) ───────────────────── -->
+<rect x="0" y="572" width="1200" height="58" fill="#140f1e"/>
+<rect x="0" y="571" width="1200" height="1.5" fill="#2e2040"/>
 
-  <!-- Top / bottom neon borders -->
-  <rect x="0" y="0"     width="1200" height="2.5" fill="url(#lg-edge)"/>
-  <rect x="0" y="627.5" width="1200" height="2.5" fill="url(#lg-edge)"/>
+<!-- ── Corner brackets ───────────────────────────────────── -->
+<path d="M68 14 V34"   stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M68 14 H92"   stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M1132 14 V34" stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M1108 14 H1132" stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M68 558 V538"   stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M68 558 H92"    stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M1132 558 V538" stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
+<path d="M1108 558 H1132" stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.42"/>
 
-  <!-- Corner L-brackets -->
-  <g stroke="#ff2d78" stroke-width="2.5" fill="none" opacity="0.8">
-    <polyline points="26,82 26,26 82,26"/>
-    <polyline points="1174,82 1174,26 1118,26"/>
-    <polyline points="26,548 26,604 82,604"/>
-    <polyline points="1174,548 1174,604 1118,604"/>
-  </g>
+<!-- ── Side dashed guide lines ────────────────────────────── -->
+<line x1="80" y1="26" x2="80" y2="544" stroke="#7b4060" stroke-width="0.75" stroke-dasharray="2,13" opacity="0.15"/>
+<line x1="1120" y1="26" x2="1120" y2="544" stroke="#7b4060" stroke-width="0.75" stroke-dasharray="2,13" opacity="0.15"/>
 
-  <!-- Sparkle diamonds — hot pink -->
-  <g fill="#ff2d78">
-    <polygon points="110,89  116,101 110,113 104,101" opacity="0.90"/>
-    <polygon points="1090,89 1096,101 1090,113 1084,101" opacity="0.90"/>
-    <polygon points="188,144 193,154 188,164 183,154" opacity="0.64"/>
-    <polygon points="1012,144 1017,154 1012,164 1007,154" opacity="0.64"/>
-  </g>
-  <!-- Gold -->
-  <g fill="#ffd166">
-    <polygon points="162,192 168,203 162,214 156,203" opacity="0.80"/>
-    <polygon points="1038,192 1044,203 1038,214 1032,203" opacity="0.80"/>
-    <polygon points="88,382 93,390 88,398 83,390" opacity="0.54"/>
-    <polygon points="1112,382 1117,390 1112,398 1107,390" opacity="0.54"/>
-  </g>
-  <!-- Soft pink -->
-  <g fill="#ff8ab8">
-    <polygon points="228,111 233,120 228,129 223,120" opacity="0.58"/>
-    <polygon points="972,111 977,120 972,129 967,120" opacity="0.58"/>
-    <polygon points="140,462 144,469 140,476 136,469" opacity="0.42"/>
-    <polygon points="1060,462 1064,469 1060,476 1056,469" opacity="0.42"/>
-  </g>
+<!-- ── Ambient dots (scattered pixels / 深夜の静電気) ──────── -->
+<circle cx="148"  cy="198" r="1.5" fill="#7b4060" opacity="0.24"/>
+<circle cx="165"  cy="338" r="1"   fill="#9a7aaa"  opacity="0.2"/>
+<circle cx="130"  cy="460" r="2"   fill="#7b4060"  opacity="0.13"/>
+<circle cx="198"  cy="112" r="1"   fill="#c4a0c0"  opacity="0.18"/>
+<circle cx="1055" cy="178" r="1.5" fill="#7b4060"  opacity="0.24"/>
+<circle cx="1072" cy="408" r="1"   fill="#9a7aaa"  opacity="0.2"/>
+<circle cx="1040" cy="488" r="2"   fill="#7b4060"  opacity="0.13"/>
+<circle cx="1008" cy="108" r="1"   fill="#c4a0c0"  opacity="0.18"/>
+<!-- top-center trio -->
+<circle cx="600" cy="48" r="2"   fill="#7b4060" opacity="0.28"/>
+<circle cx="575" cy="48" r="1.5" fill="#7b4060" opacity="0.15"/>
+<circle cx="625" cy="48" r="1.5" fill="#7b4060" opacity="0.15"/>
 
-  <!-- Dot particles -->
-  <g fill="#f7ecff">
-    <circle cx="155"  cy="228" r="2.5" opacity="0.44"/>
-    <circle cx="1045" cy="228" r="2.5" opacity="0.44"/>
-    <circle cx="116"  cy="442" r="2"   opacity="0.34"/>
-    <circle cx="1084" cy="442" r="2"   opacity="0.34"/>
-    <circle cx="258"  cy="76"  r="2"   opacity="0.28"/>
-    <circle cx="942"  cy="76"  r="2"   opacity="0.28"/>
-    <circle cx="330"  cy="50"  r="1.5" opacity="0.22"/>
-    <circle cx="870"  cy="50"  r="1.5" opacity="0.22"/>
-  </g>
+<!-- ── SITE NAME — glitch ghost: accent ──────────────────── -->
+<text x="600" y="288"
+  text-anchor="middle"
+  font-family="serif"
+  font-size="118"
+  fill="#7b4060"
+  opacity="0.38"
+  transform="translate(-3,0)">へのへのんのの</text>
 
-  <!-- ══ SITE TITLE (main hero) ══ -->
-  <!-- neon glow halo -->
-  <text x="600" y="278"
-    text-anchor="middle"
-    font-family="sans-serif"
-    font-size="122"
-    font-weight="bold"
-    fill="#ff2d78"
-    opacity="0.38"
-    letter-spacing="5"
-    filter="url(#f-glow-title)">へのへのんのの</text>
-  <!-- visible gradient text -->
-  <text x="600" y="278"
-    text-anchor="middle"
-    font-family="sans-serif"
-    font-size="122"
-    font-weight="bold"
-    fill="url(#lg-title)"
-    letter-spacing="5">へのへのんのの</text>
+<!-- ── SITE NAME — glitch ghost: cyan ───────────────────── -->
+<text x="600" y="288"
+  text-anchor="middle"
+  font-family="serif"
+  font-size="118"
+  fill="#50b4dc"
+  opacity="0.16"
+  transform="translate(3,1)">へのへのんのの</text>
 
-  <!-- Divider -->
-  <rect x="260" y="306" width="680" height="1.5" fill="url(#lg-hr)" opacity="0.75"/>
-  <!-- Diamond accent on divider -->
-  <polygon points="600,299 607,307 600,315 593,307" fill="#ffd166" opacity="0.96"/>
+<!-- ── SITE NAME — main (主役) ───────────────────────────── -->
+<text x="600" y="288"
+  text-anchor="middle"
+  font-family="serif"
+  font-size="118"
+  fill="#1e1528"
+  letter-spacing="2">へのへのんのの</text>
 
-  <!-- ══ SONG SUBTITLE ══ -->
-  <!-- glow halo -->
-  <text x="600" y="367"
-    text-anchor="middle"
-    font-family="sans-serif"
-    font-size="36"
-    font-weight="bold"
-    fill="#ff2d78"
-    opacity="0.36"
-    letter-spacing="12"
-    filter="url(#f-glow-sub)">マチアプリンセス</text>
-  <!-- visible subtitle -->
-  <text x="600" y="367"
-    text-anchor="middle"
-    font-family="sans-serif"
-    font-size="36"
-    font-weight="bold"
-    fill="#ff8ab8"
-    letter-spacing="12">マチアプリンセス</text>
+<!-- ── Dashed separator ────────────────────────────────────── -->
+<line x1="188" y1="338" x2="1012" y2="338"
+  stroke="#7b4060" stroke-width="1" stroke-dasharray="4,8" opacity="0.3"/>
 
-  <!-- ══ ARTIST INFO ══ -->
-  <text x="600" y="424"
-    text-anchor="middle"
-    font-family="sans-serif"
-    font-size="18"
-    fill="#f7ecff"
-    opacity="0.38"
-    letter-spacing="1.5">吉本おじさん, なみぐる feat. 雨衣, 玉姫</text>
+<!-- ── 今日の曲 tiny label ────────────────────────────────── -->
+<text x="600" y="375"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="13"
+  fill="#9a7aaa"
+  letter-spacing="5">今日の曲</text>
 
-  <!-- ══ FOOTER TAGLINE ══ -->
-  <text x="600" y="589"
-    text-anchor="middle"
-    font-family="sans-serif"
-    font-size="13"
-    fill="#ff2d78"
-    opacity="0.52"
-    letter-spacing="5">✦  It's a Match!!  ✦</text>
+<!-- ── Song title (副題) ────────────────────────────────────── -->
+<text x="600" y="418"
+  text-anchor="middle"
+  font-family="serif"
+  font-size="38"
+  fill="#7b4060"
+  letter-spacing="2">SOSORRY!</text>
+
+<!-- ── Artist info ─────────────────────────────────────────── -->
+<text x="600" y="458"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="19"
+  fill="#9a7aaa"
+  letter-spacing="0.5">ePiaeon feat. 初音ミク V3 (English)</text>
+
+<!-- ── Date (very subtle) ──────────────────────────────────── -->
+<text x="600" y="516"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="13"
+  fill="#c4b0d4"
+  letter-spacing="3">2026.06.15</text>
+
+<!-- ── Footer text in dark strip ──────────────────────────── -->
+<text x="600" y="606"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="14"
+  fill="#5c4870"
+  letter-spacing="6">へのへのんのの</text>
+
 </svg>
