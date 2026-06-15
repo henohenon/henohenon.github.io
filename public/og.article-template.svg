@@ -1,61 +1,108 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0%" stop-color="#e6dcf2"/>
-    <stop offset="100%" stop-color="#f5f1fb"/>
-  </linearGradient>
-  <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#1e1528"/>
-    <stop offset="100%" stop-color="#3d2256"/>
-  </linearGradient>
-  <pattern id="scn" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-    <rect x="0" y="3" width="1200" height="1" fill="#9a648c" fill-opacity="0.05"/>
-  </pattern>
-</defs>
+  <defs>
+    <pattern id="starPat" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M40 2L42 38 78 40 42 42 40 78 38 42 2 40 38 38z" fill="#c4913a" fill-opacity="0.022"/>
+    </pattern>
+    <linearGradient id="bladeH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#b01c2a" stop-opacity="0"/>
+      <stop offset="15%"  stop-color="#b01c2a"/>
+      <stop offset="50%"  stop-color="#c4913a"/>
+      <stop offset="85%"  stop-color="#b01c2a"/>
+      <stop offset="100%" stop-color="#b01c2a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="divGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#574d68" stop-opacity="0"/>
+      <stop offset="20%"  stop-color="#574d68" stop-opacity="0.50"/>
+      <stop offset="50%"  stop-color="#9086a0" stop-opacity="0.60"/>
+      <stop offset="80%"  stop-color="#574d68" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#574d68" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#dfd6bf"/>
+      <stop offset="55%"  stop-color="#c4913a"/>
+      <stop offset="100%" stop-color="#8c6522"/>
+    </linearGradient>
+    <radialGradient id="atmoCrimson" cx="18%" cy="45%" r="55%">
+      <stop offset="0%"   stop-color="#b01c2a" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#b01c2a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="atmoGold" cx="82%" cy="20%" r="45%">
+      <stop offset="0%"   stop-color="#c4913a" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#c4913a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="titleBlur" x="0" y="240" width="1200" height="160" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="11"/>
+    </filter>
+  </defs>
 
-<!-- Base background -->
-<rect width="1200" height="630" fill="#f0ecf8"/>
-<!-- Lavender gradient wash -->
-<rect width="1200" height="630" fill="url(#bg)" opacity="0.55"/>
-<!-- Scanlines -->
-<rect width="1200" height="630" fill="url(#scn)"/>
+  <!-- base background -->
+  <rect width="1200" height="630" fill="#0c0a0f"/>
+  <!-- star/cross tiling (mirrors body background-image pattern) -->
+  <rect width="1200" height="630" fill="url(#starPat)"/>
+  <!-- atmospheric colour glows -->
+  <rect width="1200" height="630" fill="url(#atmoCrimson)"/>
+  <rect width="1200" height="630" fill="url(#atmoGold)"/>
 
-<!-- Decorative concentric rings — empty room, stage with nobody on it -->
-<circle cx="1110" cy="595" r="340" stroke="#7b4060" stroke-width="1.5" fill="none" opacity="0.09"/>
-<circle cx="1110" cy="595" r="272" stroke="#7b4060" stroke-width="1" fill="none" opacity="0.07"/>
-<circle cx="1110" cy="595" r="204" stroke="#7b4060" stroke-width="0.8" fill="none" opacity="0.055"/>
-<circle cx="1110" cy="595" r="136" stroke="#7b4060" stroke-width="0.5" fill="none" opacity="0.04"/>
+  <!-- top header band -->
+  <rect x="0" y="0" width="1200" height="90" fill="#16101e"/>
+  <rect x="0" y="88" width="1200" height="2" fill="url(#bladeH)" opacity="0.68"/>
 
-<!-- Glitch blocks — right side, just below header -->
-<rect x="1080" y="107" width="80" height="2.5" fill="#7b4060" fill-opacity="0.32"/>
-<rect x="1120" y="113" width="40" height="1.5" fill="#7b4060" fill-opacity="0.18"/>
-<rect x="1092" y="118" width="68" height="1" fill="#50b4dc" fill-opacity="0.14"/>
+  <!-- bottom footer band -->
+  <rect x="0" y="545" width="1200" height="85" fill="#16101e"/>
+  <rect x="0" y="543" width="1200" height="1.5" fill="url(#bladeH)" opacity="0.42"/>
 
-<!-- ── Header ── -->
-<rect x="0" y="0" width="1200" height="96" fill="#140f1e"/>
-<rect x="0" y="0" width="1200" height="96" fill="url(#scn)"/>
-<rect x="0" y="96" width="1200" height="3" fill="#7b4060"/>
+  <!-- vertical side borders -->
+  <line x1="52"   y1="90" x2="52"   y2="543" stroke="#574d68" stroke-width="1"   stroke-opacity="0.40"/>
+  <line x1="62"   y1="90" x2="62"   y2="543" stroke="#b01c2a" stroke-width="0.5" stroke-opacity="0.20"/>
+  <line x1="1148" y1="90" x2="1148" y2="543" stroke="#574d68" stroke-width="1"   stroke-opacity="0.40"/>
+  <line x1="1138" y1="90" x2="1138" y2="543" stroke="#b01c2a" stroke-width="0.5" stroke-opacity="0.20"/>
 
-<!-- Site name -->
-<text x="60" y="57" font-family="serif" font-size="30" fill="#ede0f8" letter-spacing="6">へのへのんのの</text>
-<text x="62" y="80" font-family="sans-serif" font-size="11" fill="#9a7aaa" letter-spacing="5">b l o g</text>
-<text x="1140" y="57" font-family="sans-serif" font-size="11" fill="#5c4870" letter-spacing="3" text-anchor="end">a r t i c l e</text>
+  <!-- corner diamond ornaments -->
+  <polygon points="52,88   62,97   52,106  42,97"      fill="none" stroke="#c4913a" stroke-width="0.9" stroke-opacity="0.55"/>
+  <polygon points="1148,88  1158,97  1148,106 1138,97"  fill="none" stroke="#c4913a" stroke-width="0.9" stroke-opacity="0.55"/>
+  <polygon points="52,543  62,534  52,525  42,534"     fill="none" stroke="#c4913a" stroke-width="0.9" stroke-opacity="0.55"/>
+  <polygon points="1148,543 1158,534 1148,525 1138,534" fill="none" stroke="#c4913a" stroke-width="0.9" stroke-opacity="0.55"/>
 
-<!-- ── Left accent bar ── -->
-<rect x="46" y="108" width="2" height="462" fill="#7b4060" fill-opacity="0.2"/>
+  <!-- header: site name -->
+  <text x="82" y="57" font-family="serif" font-size="26" fill="#dfd6bf" fill-opacity="0.88" letter-spacing="0.05em">へのへのんのの</text>
 
-<!-- ── Dashed horizontal rules ── -->
-<line x1="60" y1="140" x2="1140" y2="140" stroke="#7b4060" stroke-width="0.7" stroke-dasharray="3,11" opacity="0.15"/>
-<line x1="60" y1="502" x2="1140" y2="502" stroke="#7b4060" stroke-width="0.7" stroke-dasharray="3,11" opacity="0.15"/>
+  <!-- header: 4-pointed star ornament -->
+  <path d="M1068 45 L1070 37 L1072 45 L1080 47 L1072 49 L1070 57 L1068 49 L1060 47 Z" fill="#c4913a" opacity="0.28"/>
 
-<!-- ── Title ── -->
-<!-- Accent glitch offset (+3, +3) -->
-<text x="63" y="383" font-family="serif" font-size="76" fill="#7b4060" fill-opacity="0.2" letter-spacing="2">{{TITLE}}</text>
-<!-- Cyan glitch offset (−1, −1) -->
-<text x="59" y="379" font-family="serif" font-size="76" fill="#50b4dc" fill-opacity="0.08" letter-spacing="2">{{TITLE}}</text>
-<!-- Main title -->
-<text x="60" y="380" font-family="serif" font-size="76" fill="url(#tg)" letter-spacing="2">{{TITLE}}</text>
+  <!-- header: rotated sword glyph -->
+  <text x="1118" y="62" font-family="serif" font-size="30" fill="#b01c2a" fill-opacity="0.28" transform="rotate(45 1118 52)">⚔</text>
 
-<!-- ── Bottom bar ── -->
-<rect x="0" y="612" width="1200" height="18" fill="#7b4060"/>
+  <!-- title area — top divider with centred diamond -->
+  <rect x="82" y="230" width="1036" height="1" fill="url(#divGrad)" opacity="0.55"/>
+  <polygon points="600,226 605,231 600,236 595,231" fill="#c4913a" fill-opacity="0.40"/>
+
+  <!-- title: crimson glow halo -->
+  <text
+    x="600" y="340"
+    font-family="serif"
+    font-size="72"
+    fill="#b01c2a"
+    fill-opacity="0.55"
+    text-anchor="middle"
+    letter-spacing="0.04em"
+    filter="url(#titleBlur)"
+  >{{TITLE}}</text>
+
+  <!-- title: main gradient text -->
+  <text
+    x="600" y="340"
+    font-family="serif"
+    font-size="72"
+    fill="url(#titleGrad)"
+    text-anchor="middle"
+    letter-spacing="0.04em"
+  >{{TITLE}}</text>
+
+  <!-- title area — bottom divider with centred diamond -->
+  <rect x="82" y="415" width="1036" height="1" fill="url(#divGrad)" opacity="0.55"/>
+  <polygon points="600,411 605,416 600,421 595,416" fill="#c4913a" fill-opacity="0.40"/>
+
+  <!-- footer: ornamental separator and label -->
+  <text x="600" y="594" font-family="serif" font-size="13" fill="#574d68" fill-opacity="0.65" text-anchor="middle" letter-spacing="0.18em">— ✦ —</text>
+  <text x="600" y="614" font-family="serif" font-size="11" fill="#574d68" fill-opacity="0.45" text-anchor="middle" letter-spacing="0.14em">記　事</text>
 </svg>
