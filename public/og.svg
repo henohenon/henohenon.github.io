@@ -1,195 +1,171 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
-  <radialGradient id="rg-cr" gradientUnits="userSpaceOnUse" cx="200" cy="270" r="620">
-    <stop offset="0%" stop-color="#b01c2a" stop-opacity="0.13"/>
-    <stop offset="100%" stop-color="#b01c2a" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="rg-au" gradientUnits="userSpaceOnUse" cx="1055" cy="82" r="490">
-    <stop offset="0%" stop-color="#c4913a" stop-opacity="0.09"/>
-    <stop offset="100%" stop-color="#c4913a" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="rg-title-halo" gradientUnits="userSpaceOnUse" cx="600" cy="268" r="440">
-    <stop offset="0%" stop-color="#b01c2a" stop-opacity="0.07"/>
-    <stop offset="100%" stop-color="#b01c2a" stop-opacity="0"/>
-  </radialGradient>
-  <linearGradient id="lg-title" gradientUnits="userSpaceOnUse" x1="600" y1="203" x2="600" y2="320">
-    <stop offset="0%" stop-color="#f2dc8e"/>
-    <stop offset="36%" stop-color="#c4913a"/>
-    <stop offset="100%" stop-color="#6e4510"/>
-  </linearGradient>
-  <linearGradient id="lg-blade" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#0c0a0f" stop-opacity="0"/>
-    <stop offset="18%" stop-color="#b01c2a" stop-opacity="0.72"/>
-    <stop offset="50%" stop-color="#c4913a" stop-opacity="1"/>
-    <stop offset="82%" stop-color="#b01c2a" stop-opacity="0.72"/>
-    <stop offset="100%" stop-color="#0c0a0f" stop-opacity="0"/>
-  </linearGradient>
-  <linearGradient id="lg-blade2" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#0c0a0f" stop-opacity="0"/>
-    <stop offset="28%" stop-color="#b01c2a" stop-opacity="0.32"/>
-    <stop offset="50%" stop-color="#b01c2a" stop-opacity="0.45"/>
-    <stop offset="72%" stop-color="#b01c2a" stop-opacity="0.32"/>
-    <stop offset="100%" stop-color="#0c0a0f" stop-opacity="0"/>
-  </linearGradient>
-  <linearGradient id="lg-top-rule" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#0c0a0f" stop-opacity="0"/>
-    <stop offset="15%" stop-color="#c4913a" stop-opacity="0.35"/>
-    <stop offset="50%" stop-color="#c4913a" stop-opacity="0.55"/>
-    <stop offset="85%" stop-color="#c4913a" stop-opacity="0.35"/>
-    <stop offset="100%" stop-color="#0c0a0f" stop-opacity="0"/>
-  </linearGradient>
-  <filter id="f-glow-cr" x="-35%" y="-65%" width="170%" height="230%">
-    <feGaussianBlur stdDeviation="15"/>
-  </filter>
-  <filter id="f-glow-au" x="-20%" y="-40%" width="140%" height="180%">
-    <feGaussianBlur stdDeviation="7"/>
-  </filter>
-</defs>
+  <defs>
 
-<!-- ── BACKGROUND ── -->
-<rect width="1200" height="630" fill="#0c0a0f"/>
-<rect width="1200" height="630" fill="url(#rg-cr)"/>
-<rect width="1200" height="630" fill="url(#rg-au)"/>
-<rect width="1200" height="630" fill="url(#rg-title-halo)"/>
+    <radialGradient id="topHaze" cx="50%" cy="-5%" rx="55%" ry="48%">
+      <stop offset="0%" stop-color="#c89030" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#c89030" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- Faint 4-pointed star motif (matching CSS body pattern) -->
-<g fill="#c4913a" fill-opacity="0.024">
-  <path d="M10,0.5L10.5,9.5L19.5,10L10.5,10.5L10,19.5L9.5,10.5L0.5,10L9.5,9.5z" transform="translate(98,60)"/>
-  <path d="M10,0.5L10.5,9.5L19.5,10L10.5,10.5L10,19.5L9.5,10.5L0.5,10L9.5,9.5z" transform="translate(1065,488)"/>
-  <path d="M10,0.5L10.5,9.5L19.5,10L10.5,10.5L10,19.5L9.5,10.5L0.5,10L9.5,9.5z" transform="translate(58,455)"/>
-  <path d="M10,0.5L10.5,9.5L19.5,10L10.5,10.5L10,19.5L9.5,10.5L0.5,10L9.5,9.5z" transform="translate(1082,90)"/>
-  <path d="M7,0.35L7.35,6.65L13.65,7L7.35,7.35L7,13.65L6.65,7.35L0.35,7L6.65,6.65z" transform="translate(172,540)"/>
-  <path d="M7,0.35L7.35,6.65L13.65,7L7.35,7.35L7,13.65L6.65,7.35L0.35,7L6.65,6.65z" transform="translate(1002,30)"/>
-  <path d="M6,0.3L6.3,5.7L11.7,6L6.3,6.3L6,11.7L5.7,6.3L0.3,6L5.7,5.7z" transform="translate(552,572)"/>
-  <path d="M6,0.3L6.3,5.7L11.7,6L6.3,6.3L6,11.7L5.7,6.3L0.3,6L5.7,5.7z" transform="translate(638,48)"/>
-  <path d="M6,0.3L6.3,5.7L11.7,6L6.3,6.3L6,11.7L5.7,6.3L0.3,6L5.7,5.7z" transform="translate(318,30)"/>
-  <path d="M6,0.3L6.3,5.7L11.7,6L6.3,6.3L6,11.7L5.7,6.3L0.3,6L5.7,5.7z" transform="translate(870,572)"/>
-</g>
+    <radialGradient id="wingBloom" cx="600" cy="155" r="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#f0d870" stop-opacity="0.30"/>
+      <stop offset="38%"  stop-color="#c89030" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#c89030" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- Subtle vertical grain lines (decayed kingdom texture) -->
-<g stroke="#c4913a" stroke-opacity="0.012" stroke-width="0.5">
-  <line x1="240" y1="0" x2="240" y2="630"/>
-  <line x1="480" y1="0" x2="480" y2="630"/>
-  <line x1="720" y1="0" x2="720" y2="630"/>
-  <line x1="960" y1="0" x2="960" y2="630"/>
-</g>
+    <radialGradient id="wingFill" cx="600" cy="155" r="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#c89030" stop-opacity="0.28"/>
+      <stop offset="55%"  stop-color="#c89030" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#c89030" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- ── FRAME BORDERS ── -->
-<rect x="28" y="28" width="1144" height="574" fill="none" stroke="#b01c2a" stroke-width="1" stroke-opacity="0.38"/>
-<rect x="40" y="40" width="1120" height="550" fill="none" stroke="#c4913a" stroke-width="0.5" stroke-opacity="0.2"/>
+    <filter id="titleGlow" x="-15%" y="-50%" width="130%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-<!-- ── CORNER L-BRACKETS ── -->
-<!-- TL outer -->
-<path d="M28,118 L28,28 L118,28" fill="none" stroke="#c4913a" stroke-width="2" stroke-opacity="0.72" stroke-linecap="square"/>
-<!-- TL inner -->
-<path d="M40,106 L40,40 L106,40" fill="none" stroke="#c4913a" stroke-width="0.7" stroke-opacity="0.34"/>
-<!-- TR outer -->
-<path d="M1172,118 L1172,28 L1082,28" fill="none" stroke="#c4913a" stroke-width="2" stroke-opacity="0.72" stroke-linecap="square"/>
-<!-- TR inner -->
-<path d="M1160,106 L1160,40 L1094,40" fill="none" stroke="#c4913a" stroke-width="0.7" stroke-opacity="0.34"/>
-<!-- BL outer -->
-<path d="M28,512 L28,602 L118,602" fill="none" stroke="#c4913a" stroke-width="2" stroke-opacity="0.72" stroke-linecap="square"/>
-<!-- BL inner -->
-<path d="M40,524 L40,590 L106,590" fill="none" stroke="#c4913a" stroke-width="0.7" stroke-opacity="0.34"/>
-<!-- BR outer -->
-<path d="M1172,512 L1172,602 L1082,602" fill="none" stroke="#c4913a" stroke-width="2" stroke-opacity="0.72" stroke-linecap="square"/>
-<!-- BR inner -->
-<path d="M1160,524 L1160,590 L1094,590" fill="none" stroke="#c4913a" stroke-width="0.7" stroke-opacity="0.34"/>
+    <filter id="wingGlow" x="-15%" y="-35%" width="130%" height="170%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-<!-- Corner endpoint dots (crimson) -->
-<circle cx="118" cy="28"   r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="1082" cy="28"  r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="28"   cy="118" r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="1172" cy="118" r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="118"  cy="602" r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="1082" cy="602" r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="28"   cy="512" r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<circle cx="1172" cy="512" r="2" fill="#b01c2a" fill-opacity="0.55"/>
-<!-- Corner vertex squares (gold) -->
-<rect x="25.5" y="25.5" width="5" height="5" fill="none" stroke="#c4913a" stroke-width="0.75" stroke-opacity="0.5"/>
-<rect x="1169.5" y="25.5" width="5" height="5" fill="none" stroke="#c4913a" stroke-width="0.75" stroke-opacity="0.5"/>
-<rect x="25.5" y="599.5" width="5" height="5" fill="none" stroke="#c4913a" stroke-width="0.75" stroke-opacity="0.5"/>
-<rect x="1169.5" y="599.5" width="5" height="5" fill="none" stroke="#c4913a" stroke-width="0.75" stroke-opacity="0.5"/>
+    <filter id="dotGlow" x="-300%" y="-300%" width="700%" height="700%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-<!-- ── TOP RULE ── -->
-<rect x="130" y="160" width="940" height="0.75" fill="url(#lg-top-rule)" opacity="0.42"/>
+  </defs>
 
-<!-- ── SWORD CROSS ORNAMENTS (flanking, subtle) ── -->
-<!-- Left flank -->
-<g transform="translate(92,315) rotate(45)" fill="#b01c2a" fill-opacity="0.07">
-  <rect x="-1.5" y="-28" width="3" height="56"/>
-  <rect x="-14" y="-1.5" width="28" height="3"/>
-  <rect x="-10" y="-1.5" width="20" height="3" transform="translate(0,18)"/>
-</g>
-<!-- Right flank -->
-<g transform="translate(1108,315) rotate(45)" fill="#b01c2a" fill-opacity="0.07">
-  <rect x="-1.5" y="-28" width="3" height="56"/>
-  <rect x="-14" y="-1.5" width="28" height="3"/>
-  <rect x="-10" y="-1.5" width="20" height="3" transform="translate(0,18)"/>
-</g>
+  <!-- ─── background ─── -->
+  <rect width="1200" height="630" fill="#0c0f1e"/>
+  <rect width="1200" height="630" fill="url(#topHaze)"/>
 
-<!-- ── SITE NAME — GLOW LAYERS ── -->
-<!-- Crimson glow (blurred behind) -->
-<text x="600" y="312"
-  text-anchor="middle"
-  font-family="serif"
-  font-size="120"
-  fill="#b01c2a"
-  fill-opacity="0.52"
-  filter="url(#f-glow-cr)">へのへのんのの</text>
-<!-- Gold bloom (softer) -->
-<text x="600" y="312"
-  text-anchor="middle"
-  font-family="serif"
-  font-size="120"
-  fill="#c4913a"
-  fill-opacity="0.2"
-  filter="url(#f-glow-au)">へのへのんのの</text>
+  <!-- ─── wing bloom ─── -->
+  <ellipse cx="600" cy="155" rx="640" ry="215"
+           fill="url(#wingBloom)" filter="url(#wingGlow)"/>
 
-<!-- ── SITE NAME — MAIN TEXT ── -->
-<text x="600" y="312"
-  text-anchor="middle"
-  font-family="serif"
-  font-size="120"
-  fill="url(#lg-title)"
-  letter-spacing="0.015em">へのへのんのの</text>
+  <!-- ─── wing filled shapes ─── -->
+  <path d="M 600 155 C 728 84, 960 50, 1164 117 C 1052 182, 824 197, 600 155 Z"
+        fill="url(#wingFill)" filter="url(#wingGlow)"/>
+  <path d="M 600 155 C 472 84, 240 50, 36 117 C 148 182, 376 197, 600 155 Z"
+        fill="url(#wingFill)" filter="url(#wingGlow)"/>
 
-<!-- ── BLADE DIVIDER ── -->
-<rect x="155" y="360" width="890" height="1.5" fill="url(#lg-blade)" opacity="0.78"/>
-<rect x="255" y="365" width="690" height="0.5" fill="url(#lg-blade2)" opacity="0.58"/>
+  <!-- ─── right wing feather arcs ─── -->
+  <path d="M 600 155 C 726 86, 950 60, 1152 110"  stroke="#c89030" stroke-width="1.6" fill="none" opacity="0.52"/>
+  <path d="M 600 155 C 750 103, 980 80, 1160 136"  stroke="#c89030" stroke-width="1.0" fill="none" opacity="0.38"/>
+  <path d="M 600 155 C 754 122, 978 120, 1138 176" stroke="#c89030" stroke-width="0.8" fill="none" opacity="0.27"/>
+  <path d="M 600 155 C 735 146, 946 163, 1098 220" stroke="#c89030" stroke-width="0.7" fill="none" opacity="0.19"/>
+  <path d="M 600 155 C 708 54, 894 26, 1096 70"   stroke="#c89030" stroke-width="1.0" fill="none" opacity="0.30"/>
+  <path d="M 600 155 C 666 36, 793 10, 978 38"    stroke="#c89030" stroke-width="0.6" fill="none" opacity="0.17"/>
 
-<!-- Diamond ornament at divider midpoint -->
-<polygon points="600,352 609,360 600,368 591,360" fill="#c4913a" fill-opacity="0.82"/>
-<polygon points="600,355.5 605.5,360 600,364.5 594.5,360" fill="#16101e" fill-opacity="0.92"/>
-<circle cx="600" cy="360" r="1.2" fill="#c4913a" fill-opacity="0.65"/>
+  <!-- ─── left wing feather arcs (mirror) ─── -->
+  <path d="M 600 155 C 474 86, 250 60, 48 110"   stroke="#c89030" stroke-width="1.6" fill="none" opacity="0.52"/>
+  <path d="M 600 155 C 450 103, 220 80, 40 136"  stroke="#c89030" stroke-width="1.0" fill="none" opacity="0.38"/>
+  <path d="M 600 155 C 446 122, 222 120, 62 176"  stroke="#c89030" stroke-width="0.8" fill="none" opacity="0.27"/>
+  <path d="M 600 155 C 465 146, 254 163, 102 220" stroke="#c89030" stroke-width="0.7" fill="none" opacity="0.19"/>
+  <path d="M 600 155 C 492 54, 306 26, 104 70"   stroke="#c89030" stroke-width="1.0" fill="none" opacity="0.30"/>
+  <path d="M 600 155 C 534 36, 407 10, 222 38"   stroke="#c89030" stroke-width="0.6" fill="none" opacity="0.17"/>
 
-<!-- ── SONG TITLE ── -->
-<text x="600" y="420"
-  text-anchor="middle"
-  font-family="serif"
-  font-size="36"
-  fill="#b01c2a"
-  fill-opacity="0.86"
-  letter-spacing="0.1em">Sticky Situation</text>
+  <!-- ─── wing origin point ─── -->
+  <circle cx="600" cy="155" r="22" fill="#f0d870" opacity="0.18" filter="url(#dotGlow)"/>
+  <circle cx="600" cy="155" r="6"  fill="#ffeea0" opacity="0.58" filter="url(#dotGlow)"/>
+  <circle cx="600" cy="155" r="2"  fill="#ffffff"  opacity="0.90"/>
 
-<!-- ── ARTIST NAME ── -->
-<text x="600" y="462"
-  text-anchor="middle"
-  font-family="sans-serif"
-  font-size="17"
-  fill="#574d68"
-  letter-spacing="0.1em">Vane Lily, Monochrome Media, suzie feat. Kevin</text>
+  <!-- ─── sparks near right wing ─── -->
+  <circle cx="800" cy="86"  r="2.6" fill="#c89030" opacity="0.70" filter="url(#dotGlow)"/>
+  <circle cx="880" cy="60"  r="1.8" fill="#ddb848" opacity="0.54"/>
+  <circle cx="958" cy="80"  r="1.4" fill="#c89030" opacity="0.44"/>
+  <circle cx="1033" cy="110" r="2.0" fill="#c89030" opacity="0.50" filter="url(#dotGlow)"/>
+  <circle cx="1110" cy="134" r="1.2" fill="#c89030" opacity="0.34"/>
+  <circle cx="1160" cy="93"  r="1.5" fill="#ddb848" opacity="0.30"/>
+  <circle cx="702"  cy="46"  r="1.8" fill="#c89030" opacity="0.38"/>
+  <circle cx="822"  cy="36"  r="1.0" fill="#c89030" opacity="0.28"/>
 
-<!-- ── BOTTOM RULE ── -->
-<rect x="385" y="520" width="430" height="0.5" fill="url(#lg-blade2)" opacity="0.45"/>
+  <!-- ─── sparks near left wing (mirror) ─── -->
+  <circle cx="400" cy="86"  r="2.6" fill="#c89030" opacity="0.70" filter="url(#dotGlow)"/>
+  <circle cx="320" cy="60"  r="1.8" fill="#ddb848" opacity="0.54"/>
+  <circle cx="242" cy="80"  r="1.4" fill="#c89030" opacity="0.44"/>
+  <circle cx="167" cy="110" r="2.0" fill="#c89030" opacity="0.50" filter="url(#dotGlow)"/>
+  <circle cx="90"  cy="134" r="1.2" fill="#c89030" opacity="0.34"/>
+  <circle cx="40"  cy="93"  r="1.5" fill="#ddb848" opacity="0.30"/>
+  <circle cx="498" cy="46"  r="1.8" fill="#c89030" opacity="0.38"/>
+  <circle cx="378" cy="36"  r="1.0" fill="#c89030" opacity="0.28"/>
 
-<!-- ── FOOTER ORNAMENT (mirrors CSS .site-footer::before) ── -->
-<text x="600" y="558"
-  text-anchor="middle"
-  font-family="serif"
-  font-size="14"
-  fill="#b01c2a"
-  fill-opacity="0.3"
-  letter-spacing="0.22em">&#x2015;&#x2003;&#x2736;&#x2003;&#x2015;</text>
+  <!-- ─── distant stars (cream) ─── -->
+  <circle cx="146" cy="50"  r="1.1" fill="#e0d9cc" opacity="0.34"/>
+  <circle cx="294" cy="33"  r="0.8" fill="#e0d9cc" opacity="0.28"/>
+  <circle cx="450" cy="44"  r="1.0" fill="#e0d9cc" opacity="0.26"/>
+  <circle cx="600" cy="26"  r="0.9" fill="#e0d9cc" opacity="0.36"/>
+  <circle cx="750" cy="38"  r="1.2" fill="#e0d9cc" opacity="0.27"/>
+  <circle cx="906" cy="34"  r="0.8" fill="#e0d9cc" opacity="0.31"/>
+  <circle cx="1068" cy="46" r="0.9" fill="#e0d9cc" opacity="0.25"/>
+  <circle cx="1174" cy="60" r="1.1" fill="#e0d9cc" opacity="0.29"/>
+  <circle cx="216"  cy="18" r="0.7" fill="#e0d9cc" opacity="0.22"/>
+  <circle cx="990"  cy="20" r="0.8" fill="#e0d9cc" opacity="0.24"/>
+  <circle cx="70"   cy="28" r="0.6" fill="#e0d9cc" opacity="0.20"/>
+
+  <!-- ─── lower ambient sparks ─── -->
+  <circle cx="68"   cy="408" r="0.9" fill="#c89030" opacity="0.15"/>
+  <circle cx="152"  cy="478" r="1.0" fill="#c89030" opacity="0.12"/>
+  <circle cx="1118" cy="435" r="0.9" fill="#c89030" opacity="0.15"/>
+  <circle cx="1070" cy="520" r="1.1" fill="#c89030" opacity="0.10"/>
+  <circle cx="86"   cy="560" r="0.8" fill="#e0d9cc" opacity="0.10"/>
+  <circle cx="1130" cy="580" r="0.8" fill="#e0d9cc" opacity="0.08"/>
+
+  <!-- ─── border frame ─── -->
+  <rect x="1" y="1" width="1198" height="628"
+        fill="none" stroke="#c89030" stroke-width="1.5" opacity="0.36"/>
+  <rect x="14" y="14" width="1172" height="602"
+        fill="none" stroke="#c89030" stroke-width="0.5" opacity="0.13"/>
+
+  <!-- ─── site title (主役) ─── -->
+  <text x="600" y="375"
+        text-anchor="middle"
+        font-family="serif"
+        font-size="108"
+        letter-spacing="6"
+        fill="#c89030"
+        filter="url(#titleGlow)">へのへのんのの</text>
+
+  <!-- ─── divider ─── -->
+  <line x1="455" y1="406" x2="592" y2="406" stroke="#c89030" stroke-width="1" opacity="0.46"/>
+  <rect x="596" y="402" width="8" height="8" fill="#c89030" opacity="0.55"
+        transform="rotate(45 600 406)"/>
+  <line x1="608" y1="406" x2="745" y2="406" stroke="#c89030" stroke-width="1" opacity="0.46"/>
+
+  <!-- ─── song name (副題) ─── -->
+  <text x="600" y="452"
+        text-anchor="middle"
+        font-family="serif"
+        font-size="38"
+        letter-spacing="3"
+        fill="#c89030"
+        opacity="0.74">Shining Wings</text>
+
+  <!-- ─── artist ─── -->
+  <text x="600" y="494"
+        text-anchor="middle"
+        font-family="serif"
+        font-size="22"
+        letter-spacing="1"
+        fill="#e0d9cc"
+        opacity="0.40">wintermute feat. 宮舞モカ</text>
+
+  <!-- ─── bottom date ─── -->
+  <text x="600" y="582"
+        text-anchor="middle"
+        font-family="serif"
+        font-size="16"
+        letter-spacing="4"
+        fill="#e0d9cc"
+        opacity="0.18">2026 · 06 · 17</text>
 
 </svg>
