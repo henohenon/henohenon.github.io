@@ -1,152 +1,139 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<radialGradient id="a1" cx="18%" cy="28%" r="55%" gradientUnits="objectBoundingBox"><stop offset="0%" stop-color="#c462ff" stop-opacity=".12"/><stop offset="100%" stop-color="#c462ff" stop-opacity="0"/></radialGradient>
-<radialGradient id="a2" cx="82%" cy="72%" r="55%" gradientUnits="objectBoundingBox"><stop offset="0%" stop-color="#ff6b35" stop-opacity=".10"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></radialGradient>
-<radialGradient id="a3" cx="50%" cy="5%" r="45%" gradientUnits="objectBoundingBox"><stop offset="0%" stop-color="#ffd040" stop-opacity=".09"/><stop offset="100%" stop-color="#ffd040" stop-opacity="0"/></radialGradient>
-<radialGradient id="gw" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffd040" stop-opacity=".55"/><stop offset="100%" stop-color="#ffd040" stop-opacity="0"/></radialGradient>
-<radialGradient id="gc" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c462ff" stop-opacity=".55"/><stop offset="100%" stop-color="#c462ff" stop-opacity="0"/></radialGradient>
-<radialGradient id="ga" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff6b35" stop-opacity=".55"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></radialGradient>
-<linearGradient id="rb" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#c462ff" stop-opacity="0"/><stop offset="18%" stop-color="#c462ff"/><stop offset="38%" stop-color="#ff6b35"/><stop offset="58%" stop-color="#ffd040"/><stop offset="78%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#c462ff" stop-opacity="0"/></linearGradient>
-<linearGradient id="dv" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff6b35" stop-opacity="0"/><stop offset="30%" stop-color="#ffd040" stop-opacity=".85"/><stop offset="50%" stop-color="#ff6b35" stop-opacity=".95"/><stop offset="70%" stop-color="#ffd040" stop-opacity=".85"/><stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/></linearGradient>
-<filter id="fo" x="-40%" y="-300%" width="180%" height="700%"><feGaussianBlur stdDeviation="18"/></filter>
-<filter id="fp" x="-55%" y="-450%" width="210%" height="1000%"><feGaussianBlur stdDeviation="42"/></filter>
-<filter id="fs" x="-25%" y="-200%" width="150%" height="500%"><feGaussianBlur stdDeviation="9"/></filter>
-<filter id="fa" x="-30%" y="-200%" width="160%" height="500%"><feGaussianBlur stdDeviation="10"/></filter>
-</defs>
+  <defs>
+    <radialGradient id="bg-glow" cx="50%" cy="15%" r="60%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#52b0ee" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#52b0ee" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="h-line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#52b0ee" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#52b0ee" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#52b0ee" stop-opacity="0.78"/>
+      <stop offset="70%" stop-color="#52b0ee" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#52b0ee" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="h-line-thin" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#52b0ee" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#52b0ee" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#52b0ee" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="iris-grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a3a5c" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#0d1a2e" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#07090f" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="3" width="1200" height="1" fill="#000000" fill-opacity="0.065"/>
+    </pattern>
+    <filter id="glow-title" x="-18%" y="-90%" width="136%" height="280%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow-accent" x="-14%" y="-90%" width="128%" height="280%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
 
-<!-- background -->
-<rect width="1200" height="630" fill="#09091c"/>
-<rect width="1200" height="630" fill="url(#a1)"/>
-<rect width="1200" height="630" fill="url(#a2)"/>
-<rect width="1200" height="630" fill="url(#a3)"/>
+  <!-- ── Base background ── -->
+  <rect width="1200" height="630" fill="#07090f"/>
 
-<!-- stars -->
-<g fill="#f2eedd">
-<circle cx="42" cy="24" r="1" opacity=".55"/><circle cx="118" cy="57" r="1.2" opacity=".75"/><circle cx="278" cy="14" r=".8" opacity=".5"/><circle cx="378" cy="42" r="1" opacity=".65"/><circle cx="512" cy="27" r="1.5" opacity=".85"/><circle cx="642" cy="17" r="1" opacity=".6"/><circle cx="715" cy="54" r=".8" opacity=".45"/><circle cx="842" cy="21" r="1.2" opacity=".7"/><circle cx="1098" cy="17" r="1.5" opacity=".55"/><circle cx="1153" cy="61" r=".8" opacity=".45"/><circle cx="1178" cy="31" r="1" opacity=".65"/><circle cx="60" cy="117" r=".8" opacity=".4"/><circle cx="155" cy="147" r="1" opacity=".55"/><circle cx="312" cy="127" r="1.2" opacity=".45"/><circle cx="477" cy="97" r=".8" opacity=".65"/><circle cx="575" cy="141" r="1" opacity=".45"/><circle cx="788" cy="111" r="1.5" opacity=".75"/><circle cx="1058" cy="127" r="1" opacity=".55"/><circle cx="1140" cy="101" r=".8" opacity=".45"/><circle cx="28" cy="196" r="1" opacity=".38"/><circle cx="198" cy="221" r=".8" opacity=".45"/><circle cx="70" cy="447" r="1" opacity=".45"/><circle cx="180" cy="501" r=".8" opacity=".35"/><circle cx="1128" cy="401" r="1" opacity=".55"/><circle cx="1168" cy="547" r=".8" opacity=".45"/><circle cx="20" cy="557" r="1.2" opacity=".38"/><circle cx="98" cy="601" r=".8" opacity=".28"/><circle cx="450" cy="579" r="1" opacity=".35"/><circle cx="746" cy="567" r=".8" opacity=".45"/><circle cx="1078" cy="589" r="1" opacity=".38"/><circle cx="348" cy="558" r=".8" opacity=".32"/><circle cx="905" cy="24" r="1" opacity=".55"/><circle cx="825" cy="58" r=".8" opacity=".45"/><circle cx="425" cy="80" r="1.5" opacity=".55"/><circle cx="775" cy="95" r="1" opacity=".5"/>
-</g>
+  <!-- ── Top radial glow (site-header::before) ── -->
+  <rect width="1200" height="630" fill="url(#bg-glow)"/>
 
-<!-- colored micro-sparks -->
-<circle cx="310" cy="210" r="2" fill="#ffd040" opacity=".42"/><circle cx="880" cy="85" r="1.8" fill="#c462ff" opacity=".5"/><circle cx="340" cy="470" r="1.5" fill="#c462ff" opacity=".4"/><circle cx="862" cy="490" r="2" fill="#ff6b35" opacity=".5"/><circle cx="1000" cy="530" r="1.5" fill="#ff6b35" opacity=".4"/><circle cx="688" cy="525" r="2" fill="#ffd040" opacity=".4"/>
+  <!-- ── Scan line texture (body background-image) ── -->
+  <rect width="1200" height="630" fill="url(#scan)"/>
 
-<!-- burst 1 · upper-right · warm yellow · (965,130) r=130 -->
-<g transform="translate(965,130)">
-<circle r="48" fill="url(#gw)" opacity=".55"/>
-<g stroke="#ffd040" stroke-linecap="round">
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(45)"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(90)"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(135)"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(180)"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(225)"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(270)"/>
-<line x1="0" y1="0" x2="130" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(315)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(22.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(67.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(112.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(157.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(202.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(247.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(292.5)"/>
-<line x1="0" y1="0" x2="92" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(337.5)"/>
-</g>
-<g fill="#ffd040">
-<circle cx="130" cy="0" r="3.5"/><circle cx="130" cy="0" r="3.5" transform="rotate(45)"/><circle cx="130" cy="0" r="3.5" transform="rotate(90)"/><circle cx="130" cy="0" r="3.5" transform="rotate(135)"/><circle cx="130" cy="0" r="3.5" transform="rotate(180)"/><circle cx="130" cy="0" r="3.5" transform="rotate(225)"/><circle cx="130" cy="0" r="3.5" transform="rotate(270)"/><circle cx="130" cy="0" r="3.5" transform="rotate(315)"/>
-</g>
-<g fill="#ffd040" opacity=".6">
-<circle cx="92" cy="0" r="2" transform="rotate(22.5)"/><circle cx="92" cy="0" r="2" transform="rotate(67.5)"/><circle cx="92" cy="0" r="2" transform="rotate(112.5)"/><circle cx="92" cy="0" r="2" transform="rotate(157.5)"/><circle cx="92" cy="0" r="2" transform="rotate(202.5)"/><circle cx="92" cy="0" r="2" transform="rotate(247.5)"/><circle cx="92" cy="0" r="2" transform="rotate(292.5)"/><circle cx="92" cy="0" r="2" transform="rotate(337.5)"/>
-</g>
-<circle r="6" fill="#ffd040"/><circle r="2.8" fill="#ffffff" opacity=".85"/>
-</g>
+  <!-- ── Eye / iris background shape (eye-shimmer motif) ── -->
+  <ellipse cx="600" cy="282" rx="430" ry="205" fill="url(#iris-grad)"/>
+  <path d="M 185 282 Q 600 138 1015 282 Q 600 426 185 282 Z"
+        fill="none" stroke="#52b0ee" stroke-opacity="0.055" stroke-width="1.5"/>
+  <path d="M 272 282 Q 600 180 928 282 Q 600 384 272 282 Z"
+        fill="none" stroke="#52b0ee" stroke-opacity="0.038" stroke-width="1"/>
+  <circle cx="600" cy="282" r="90" fill="none" stroke="#52b0ee" stroke-opacity="0.042" stroke-width="1"/>
+  <circle cx="600" cy="282" r="48" fill="none" stroke="#52b0ee" stroke-opacity="0.032" stroke-width="0.5"/>
 
-<!-- burst 2 · upper-left · cool purple · (218,132) r=105 -->
-<g transform="translate(218,132)">
-<circle r="38" fill="url(#gc)" opacity=".5"/>
-<g stroke="#c462ff" stroke-linecap="round">
-<line x1="0" y1="0" x2="105" y2="0" stroke-width="1.8" stroke-opacity=".8"/>
-<line x1="0" y1="0" x2="105" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(60)"/>
-<line x1="0" y1="0" x2="105" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(120)"/>
-<line x1="0" y1="0" x2="105" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(180)"/>
-<line x1="0" y1="0" x2="105" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(240)"/>
-<line x1="0" y1="0" x2="105" y2="0" stroke-width="1.8" stroke-opacity=".8" transform="rotate(300)"/>
-<line x1="0" y1="0" x2="72" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(30)"/>
-<line x1="0" y1="0" x2="72" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(90)"/>
-<line x1="0" y1="0" x2="72" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(150)"/>
-<line x1="0" y1="0" x2="72" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(210)"/>
-<line x1="0" y1="0" x2="72" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(270)"/>
-<line x1="0" y1="0" x2="72" y2="0" stroke-width="1.1" stroke-opacity=".55" transform="rotate(330)"/>
-</g>
-<g fill="#c462ff">
-<circle cx="105" cy="0" r="3"/><circle cx="105" cy="0" r="3" transform="rotate(60)"/><circle cx="105" cy="0" r="3" transform="rotate(120)"/><circle cx="105" cy="0" r="3" transform="rotate(180)"/><circle cx="105" cy="0" r="3" transform="rotate(240)"/><circle cx="105" cy="0" r="3" transform="rotate(300)"/>
-</g>
-<g fill="#c462ff" opacity=".55">
-<circle cx="72" cy="0" r="1.8" transform="rotate(30)"/><circle cx="72" cy="0" r="1.8" transform="rotate(90)"/><circle cx="72" cy="0" r="1.8" transform="rotate(150)"/><circle cx="72" cy="0" r="1.8" transform="rotate(210)"/><circle cx="72" cy="0" r="1.8" transform="rotate(270)"/><circle cx="72" cy="0" r="1.8" transform="rotate(330)"/>
-</g>
-<circle r="5" fill="#c462ff"/><circle r="2.2" fill="#ffffff" opacity=".85"/>
-</g>
+  <!-- ── Outer card border ── -->
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#52b0ee" stroke-opacity="0.1" stroke-width="1"/>
 
-<!-- burst 3 · lower-left · orange · (152,488) r=80 -->
-<g transform="translate(152,488)">
-<circle r="30" fill="url(#ga)" opacity=".5"/>
-<g stroke="#ff6b35" stroke-linecap="round">
-<line x1="0" y1="0" x2="80" y2="0" stroke-width="1.5" stroke-opacity=".8"/>
-<line x1="0" y1="0" x2="80" y2="0" stroke-width="1.5" stroke-opacity=".8" transform="rotate(72)"/>
-<line x1="0" y1="0" x2="80" y2="0" stroke-width="1.5" stroke-opacity=".8" transform="rotate(144)"/>
-<line x1="0" y1="0" x2="80" y2="0" stroke-width="1.5" stroke-opacity=".8" transform="rotate(216)"/>
-<line x1="0" y1="0" x2="80" y2="0" stroke-width="1.5" stroke-opacity=".8" transform="rotate(288)"/>
-<line x1="0" y1="0" x2="55" y2="0" stroke-width="1" stroke-opacity=".6" transform="rotate(36)"/>
-<line x1="0" y1="0" x2="55" y2="0" stroke-width="1" stroke-opacity=".6" transform="rotate(108)"/>
-<line x1="0" y1="0" x2="55" y2="0" stroke-width="1" stroke-opacity=".6" transform="rotate(180)"/>
-<line x1="0" y1="0" x2="55" y2="0" stroke-width="1" stroke-opacity=".6" transform="rotate(252)"/>
-<line x1="0" y1="0" x2="55" y2="0" stroke-width="1" stroke-opacity=".6" transform="rotate(324)"/>
-</g>
-<g fill="#ff6b35">
-<circle cx="80" cy="0" r="2.5"/><circle cx="80" cy="0" r="2.5" transform="rotate(72)"/><circle cx="80" cy="0" r="2.5" transform="rotate(144)"/><circle cx="80" cy="0" r="2.5" transform="rotate(216)"/><circle cx="80" cy="0" r="2.5" transform="rotate(288)"/>
-</g>
-<g fill="#ff6b35" opacity=".6">
-<circle cx="55" cy="0" r="1.8" transform="rotate(36)"/><circle cx="55" cy="0" r="1.8" transform="rotate(108)"/><circle cx="55" cy="0" r="1.8" transform="rotate(180)"/><circle cx="55" cy="0" r="1.8" transform="rotate(252)"/><circle cx="55" cy="0" r="1.8" transform="rotate(324)"/>
-</g>
-<circle r="4" fill="#ff6b35"/><circle r="2" fill="#ffffff" opacity=".85"/>
-</g>
+  <!-- ── Corner brackets (tech accent) ── -->
+  <path d="M 58 42 L 40 42 L 40 62" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
+  <path d="M 1142 42 L 1160 42 L 1160 62" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
+  <path d="M 58 588 L 40 588 L 40 568" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
+  <path d="M 1142 588 L 1160 588 L 1160 568" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
 
-<!-- burst 4 · lower-right · small warm · (1062,478) r=65 -->
-<g transform="translate(1062,478)">
-<circle r="22" fill="url(#gw)" opacity=".45"/>
-<g stroke="#ffd040" stroke-linecap="round">
-<line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(45)"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(90)"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(135)"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(180)"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(225)"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(270)"/><line x1="0" y1="0" x2="65" y2="0" stroke-width="1.5" stroke-opacity=".7" transform="rotate(315)"/>
-<line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(22.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(67.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(112.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(157.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(202.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(247.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(292.5)"/><line x1="0" y1="0" x2="44" y2="0" stroke-width="1" stroke-opacity=".5" transform="rotate(337.5)"/>
-</g>
-<g fill="#ffd040" opacity=".8">
-<circle cx="65" cy="0" r="2.5"/><circle cx="65" cy="0" r="2.5" transform="rotate(45)"/><circle cx="65" cy="0" r="2.5" transform="rotate(90)"/><circle cx="65" cy="0" r="2.5" transform="rotate(135)"/><circle cx="65" cy="0" r="2.5" transform="rotate(180)"/><circle cx="65" cy="0" r="2.5" transform="rotate(225)"/><circle cx="65" cy="0" r="2.5" transform="rotate(270)"/><circle cx="65" cy="0" r="2.5" transform="rotate(315)"/>
-</g>
-<circle r="3.5" fill="#ffd040"/><circle r="1.8" fill="#ffffff" opacity=".85"/>
-</g>
+  <!-- ── Floating particles (揺らぐ記憶) ── -->
+  <circle cx="122" cy="86"  r="1.5" fill="#52b0ee" fill-opacity="0.32"/>
+  <circle cx="278" cy="152" r="1"   fill="#52b0ee" fill-opacity="0.2"/>
+  <circle cx="68"  cy="295" r="1.5" fill="#52b0ee" fill-opacity="0.24"/>
+  <circle cx="174" cy="460" r="1"   fill="#52b0ee" fill-opacity="0.17"/>
+  <circle cx="1078" cy="102" r="1.5" fill="#52b0ee" fill-opacity="0.32"/>
+  <circle cx="1136" cy="234" r="1"  fill="#52b0ee" fill-opacity="0.2"/>
+  <circle cx="998"  cy="364" r="1.5" fill="#52b0ee" fill-opacity="0.24"/>
+  <circle cx="1112" cy="496" r="1"  fill="#52b0ee" fill-opacity="0.17"/>
+  <circle cx="448" cy="65"  r="1"   fill="#52b0ee" fill-opacity="0.14"/>
+  <circle cx="766" cy="52"  r="1.5" fill="#52b0ee" fill-opacity="0.18"/>
+  <circle cx="344" cy="548" r="1.5" fill="#c9d5ea" fill-opacity="0.09"/>
+  <circle cx="912" cy="556" r="1"   fill="#c9d5ea" fill-opacity="0.09"/>
+  <circle cx="600" cy="26"  r="1"   fill="#52b0ee" fill-opacity="0.1"/>
+  <circle cx="508" cy="600" r="1"   fill="#52b0ee" fill-opacity="0.08"/>
+  <circle cx="698" cy="602" r="1.5" fill="#52b0ee" fill-opacity="0.1"/>
+  <circle cx="165" cy="195" r="1"   fill="#c9d5ea" fill-opacity="0.06"/>
+  <circle cx="1036" cy="185" r="1"  fill="#c9d5ea" fill-opacity="0.06"/>
+  <circle cx="385" cy="320" r="1"   fill="#52b0ee" fill-opacity="0.1"/>
+  <circle cx="815" cy="325" r="1"   fill="#52b0ee" fill-opacity="0.1"/>
 
-<!-- frame border -->
-<rect x="22" y="22" width="1156" height="586" rx="4" fill="none" stroke="#ff6b35" stroke-width=".8" stroke-opacity=".28"/>
+  <!-- ── Top thin accent line ── -->
+  <line x1="0" y1="1" x2="1200" y2="1" stroke="#52b0ee" stroke-opacity="0.07" stroke-width="1"/>
 
-<!-- site name · glow layers -->
-<text x="600" y="295" text-anchor="middle" font-family="sans-serif" font-size="112" font-weight="900" fill="#c462ff" opacity=".18" filter="url(#fp)">へのへのんのの</text>
-<text x="600" y="295" text-anchor="middle" font-family="sans-serif" font-size="112" font-weight="900" fill="#ff6b35" opacity=".65" filter="url(#fo)">へのへのんのの</text>
-<text x="600" y="295" text-anchor="middle" font-family="sans-serif" font-size="112" font-weight="900" fill="#ffd040" opacity=".22" filter="url(#fs)">へのへのんのの</text>
-<!-- site name · main -->
-<text x="600" y="295" text-anchor="middle" font-family="sans-serif" font-size="112" font-weight="900" fill="#f2eedd" letter-spacing="4">へのへのんのの</text>
+  <!-- ══ MAIN: Site name ══ -->
+  <text
+    x="600" y="260"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif"
+    font-size="114" font-weight="bold"
+    letter-spacing="8"
+    fill="#c9d5ea"
+    filter="url(#glow-title)"
+  >へのへのんのの</text>
 
-<!-- divider -->
-<rect x="360" y="330" width="480" height="1.5" fill="url(#dv)"/>
+  <!-- ── Separator line (drift-line) ── -->
+  <line x1="155" y1="334" x2="1045" y2="334" stroke="url(#h-line)" stroke-width="1" opacity="0.72"/>
+  <line x1="220" y1="342" x2="980"  y2="342" stroke="url(#h-line-thin)" stroke-width="0.5" opacity="0.5"/>
 
-<!-- song name sparkles -->
-<text x="342" y="375" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#ffd040" opacity=".82">✦</text>
-<text x="858" y="375" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#ffd040" opacity=".82">✦</text>
+  <!-- ── Song title (副題) ── -->
+  <text
+    x="600" y="392"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif"
+    font-size="38" letter-spacing="6"
+    fill="#52b0ee"
+    filter="url(#glow-accent)"
+  >ミライオモイ</text>
 
-<!-- song name · glow -->
-<text x="600" y="375" text-anchor="middle" font-family="sans-serif" font-size="38" font-weight="700" fill="#ff6b35" opacity=".38" filter="url(#fa)">シャニムニ花火</text>
-<!-- song name · main -->
-<text x="600" y="375" text-anchor="middle" font-family="sans-serif" font-size="38" font-weight="700" fill="#ff6b35" letter-spacing="3">シャニムニ花火</text>
+  <!-- ── Artist info ── -->
+  <text
+    x="600" y="446"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif"
+    font-size="19" letter-spacing="4"
+    fill="#c9d5ea" fill-opacity="0.38"
+  >よもうわべ feat. 唄音ウタ</text>
 
-<!-- artist -->
-<text x="600" y="416" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#8b87aa" letter-spacing="1">ピノキオピー, マキシラ feat. 初音ミク</text>
+  <!-- ── Bottom accent line ── -->
+  <line x1="120" y1="570" x2="1080" y2="570" stroke="#52b0ee" stroke-opacity="0.07" stroke-width="1"/>
 
-<!-- rainbow stripes -->
-<rect x="0" y="0" width="1200" height="3" fill="url(#rb)" opacity=".55"/>
-<rect x="0" y="627" width="1200" height="3" fill="url(#rb)"/>
+  <!-- ── Date stamp (footer) ── -->
+  <text
+    x="600" y="597"
+    text-anchor="middle" dominant-baseline="middle"
+    font-family="sans-serif"
+    font-size="13" letter-spacing="5"
+    fill="#c9d5ea" fill-opacity="0.2"
+  >2026 · 06 · 19</text>
 </svg>
