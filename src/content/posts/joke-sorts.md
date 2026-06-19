@@ -133,20 +133,16 @@ func Banzai(arr) {
 // o: [0, 1, 2]
 ```
 
-# スピリチュアルソート/インテリジェンスデザインソート
+# インテリジェンスデザインソート
 
-計算量: O(n)
+計算量: O(Understand)
 
 この配列は全知の創造者によって設計された秩序の中に存在している。したがって現在の順序が最も完璧な順序である。
 
 ```go
 func IntelligentDesignSort(arr) {
   understand()
-  var result = new Array(arr.len)
-  for (var i = 0 i < arr.len i++) {
-    result[i] = arr[i]
-  }
-  return result
+  return arr
 }
 
 // i: [8, 2, 5, 7, 6]
@@ -170,6 +166,7 @@ func MiracleSort(arr) {
 // i: [8, 2, 5, 7, 6]
 // o: [2, 5, 6, 7, 8]
 ```
+ちなみに[くいなちゃん語録](https://kuina.ch/quotes/quotes_41-48#9888547364472003)にインテリジェンスデザインとミラクルを足して二で割ったような、スピリチュアルソートというのが乗っている。こっちのほうが個人的には好きだが、一般性の観点から泣く泣く除外
 
 # コミューンソート
 
