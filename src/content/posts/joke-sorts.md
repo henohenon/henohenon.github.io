@@ -50,14 +50,14 @@ func QuantumBogoSort(arr) {
 
 ```go
 func StalinSort(arr) {
-  var result = ;
-  var current = arr[0];
-  for (var i = 0; i < arr.len; i++){
-    if(current > arr[i]) continue;
-    current = arr[i];
-    result.push(current);
+  var result = 
+  var current = arr[0]
+  for (var i = 0 i < arr.len i++){
+    if(current > arr[i]) continue
+    current = arr[i]
+    result.push(current)
   }
-  return result;
+  return result
 }
 
 // i: [2, 5, 8, 7, 6]
@@ -72,15 +72,15 @@ func StalinSort(arr) {
 
 ```go
 func BrainwashSort(arr) {
-  var current = arr[0];
-  for (var i = 1; i < arr.len; i++) {
+  var current = arr[0]
+  for (var i = 1 i < arr.len i++) {
     if (arr[i] < current) {
-      arr[i] = current;
+      arr[i] = current
     } else {
-      current = arr[i];
+      current = arr[i]
     }
   }
-  return arr;
+  return arr
 }
 
 // i: [2, 5, 8, 7, 6]
@@ -96,9 +96,9 @@ func BrainwashSort(arr) {
 ```go
 func ThanosSort(arr) {    
   while (!isSorted(arr)) {
-    half(arr);
+    half(arr)
   }
-  return arr;
+  return arr
 }
 
 // i: [8, 2, 5, 7, 6, 1]
@@ -112,7 +112,7 @@ func ThanosSort(arr) {
 天上天下唯我独尊。究極の独裁
 ```go
 func AutocracySort(arr) {
-  return arr[0];
+  return arr[0]
 }
 
 // i: [8, 2, 5, 7, 6]
@@ -126,7 +126,7 @@ func AutocracySort(arr) {
 
 ```go
 func Banzai(arr) {
-  return [0, 1, 2];
+  return [0, 1, 2]
 }
 
 // i: [8, 2, 5, 7, 6]
@@ -141,10 +141,10 @@ func Banzai(arr) {
 
 ```go
 func IntelligentDesignSort(arr) {
-  understand();
+  understand()
   var result = new Array(arr.len)
-  for (var i = 0; i < arr.len; i++) {
-    result[i] = arr[i];
+  for (var i = 0 i < arr.len i++) {
+    result[i] = arr[i]
   }
   return result
 }
@@ -162,9 +162,9 @@ func IntelligentDesignSort(arr) {
 ```go
 func MiracleSort(arr) {
   while (!isSorted(arr)) {
-    pray();
+    pray()
   }
-  return arr;
+  return arr
 }
 
 // i: [8, 2, 5, 7, 6]
@@ -179,8 +179,8 @@ func MiracleSort(arr) {
 
 ```go
 func CommuneSort(arr) {
-  var value = arr.sum() / arr.len;
-  return new Array(arr.len).fill(value);
+  var value = arr.sum() / arr.len
+  return new Array(arr.len).fill(value)
 }
 
 // i: [8, 2, 5, 7, 6]
@@ -195,9 +195,9 @@ func CommuneSort(arr) {
 
 ```go
 func KimSort(arr) {
-    var result = new Array(arr.len);
-    result[arr.len - 1] = arr.sum();
-    return result;
+    var result = new Array(arr.len)
+    result[arr.len - 1] = arr.sum()
+    return result
 }
 
 // i: [8, 2, 5, 7, 6]
@@ -211,11 +211,11 @@ func KimSort(arr) {
 n番目を0からnの合計として表す。ソートできてるな！ヨシッ！
 ```go
 func StackSort(arr) {
-  var result = new Array(arr.len);
-  var sum = 0;
-  for (var i = 0; i < arr.len; i++) {
-    sum += arr[i];
-    result[i] = sum;
+  var result = new Array(arr.len)
+  var sum = 0
+  for (var i = 0 i < arr.len i++) {
+    sum += arr[i]
+    result[i] = sum
   }
   return result
 }
@@ -233,10 +233,10 @@ n番目をnとして出力します。検索してみたところDBのインデ�
 ```go
 func IndexSort(arr) {
   var result = new Array(arr.len)
-  for (var i = 0; i < arr.len; i++) {
-    result[i] = i;
+  for (var i = 0 i < arr.len i++) {
+    result[i] = i
   }
-  return result;
+  return result
 }
 
 // i: [8, 2, 5, 7, 6]
