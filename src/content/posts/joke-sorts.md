@@ -50,7 +50,7 @@ func QuantumBogoSort(arr) {
 
 ```go
 func StalinSort(arr) {
-  var result = [];
+  var result = ;
   var current = arr[0];
   for (var i = 0; i < arr.len; i++){
     if(current > arr[i]) continue;
@@ -60,15 +60,15 @@ func StalinSort(arr) {
   return result;
 }
 
-// i: [8, 2, 5, 7, 6]
-// o: [8]
+// i: [2, 5, 8, 7, 6]
+// o: [2, 5, 8]
 ```
 
 # 洗脳ソート (Abeソート)
 
 計算量: O(n)
 
-昇順でない要素を削除ではなく、現在の最大値に上書き。
+昇順でない要素を削除ではなく、そこまでの最大値で上書きする。スターリンソートに比べ、入力の長さが保たれている優れたソートといえる
 
 ```go
 func BrainwashSort(arr) {
@@ -83,8 +83,8 @@ func BrainwashSort(arr) {
   return arr;
 }
 
-// i: [8, 2, 5, 7, 6]
-// o: [8, 8, 8, 8, 8]
+// i: [2, 5, 8, 7, 6]
+// o: [2, 5, 8, 8, 8]
 ```
 
 # サノスソート
@@ -101,8 +101,8 @@ func ThanosSort(arr) {
   return arr;
 }
 
-// i: [8, 2, 5, 7, 6]
-// o: [5, 7] (ランダム)
+// i: [8, 2, 5, 7, 6, 1]
+// o: [2, 5, 7], [2, 5, 6]...(ランダム)
 ```
 
 # オートクラシーソート
