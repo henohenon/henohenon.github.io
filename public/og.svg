@@ -1,139 +1,178 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bg-glow" cx="50%" cy="15%" r="60%" gradientUnits="objectBoundingBox">
-      <stop offset="0%" stop-color="#52b0ee" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#52b0ee" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="h-line" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#52b0ee" stop-opacity="0"/>
-      <stop offset="30%" stop-color="#52b0ee" stop-opacity="0.55"/>
-      <stop offset="50%" stop-color="#52b0ee" stop-opacity="0.78"/>
-      <stop offset="70%" stop-color="#52b0ee" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#52b0ee" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="h-line-thin" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#52b0ee" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#52b0ee" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#52b0ee" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="iris-grad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1a3a5c" stop-opacity="0.32"/>
-      <stop offset="55%" stop-color="#0d1a2e" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#07090f" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="scan" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="3" width="1200" height="1" fill="#000000" fill-opacity="0.065"/>
+    <pattern id="sl" x="0" y="0" width="1200" height="3" patternUnits="userSpaceOnUse">
+      <rect width="1200" height="2" fill="none"/>
+      <rect y="2" width="1200" height="1" fill="#000000" fill-opacity="0.07"/>
     </pattern>
-    <filter id="glow-title" x="-18%" y="-90%" width="136%" height="280%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="glow-accent" x="-14%" y="-90%" width="128%" height="280%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <pattern id="dg" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="15" cy="15" r="0.6" fill="#5dcfcc" fill-opacity="0.07"/>
+    </pattern>
+    <radialGradient id="vig" cx="50%" cy="42%" r="70%">
+      <stop offset="50%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.58"/>
+    </radialGradient>
+    <radialGradient id="tglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5dcfcc" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#5dcfcc" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="sglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5dcfcc" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#5dcfcc" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <!-- ── Base background ── -->
-  <rect width="1200" height="630" fill="#07090f"/>
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#0b0d1a"/>
+  <rect width="1200" height="630" fill="url(#dg)"/>
 
-  <!-- ── Top radial glow (site-header::before) ── -->
-  <rect width="1200" height="630" fill="url(#bg-glow)"/>
+  <!-- Inner panel -->
+  <rect x="32" y="26" width="1136" height="578" fill="#0f1221"/>
+  <rect x="32" y="26" width="1136" height="578" fill="none" stroke="#5dcfcc" stroke-opacity="0.14" stroke-width="1"/>
 
-  <!-- ── Scan line texture (body background-image) ── -->
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <!-- Top accent bar -->
+  <rect x="32" y="26" width="1136" height="2" fill="#5dcfcc" fill-opacity="0.55"/>
 
-  <!-- ── Eye / iris background shape (eye-shimmer motif) ── -->
-  <ellipse cx="600" cy="282" rx="430" ry="205" fill="url(#iris-grad)"/>
-  <path d="M 185 282 Q 600 138 1015 282 Q 600 426 185 282 Z"
-        fill="none" stroke="#52b0ee" stroke-opacity="0.055" stroke-width="1.5"/>
-  <path d="M 272 282 Q 600 180 928 282 Q 600 384 272 282 Z"
-        fill="none" stroke="#52b0ee" stroke-opacity="0.038" stroke-width="1"/>
-  <circle cx="600" cy="282" r="90" fill="none" stroke="#52b0ee" stroke-opacity="0.042" stroke-width="1"/>
-  <circle cx="600" cy="282" r="48" fill="none" stroke="#52b0ee" stroke-opacity="0.032" stroke-width="0.5"/>
+  <!-- Corner brackets -->
+  <path d="M32,70 L32,26 L84,26" stroke="#5dcfcc" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
+  <path d="M1116,26 L1168,26 L1168,70" stroke="#5dcfcc" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
+  <path d="M32,560 L32,604 L84,604" stroke="#5dcfcc" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
+  <path d="M1168,560 L1168,604 L1116,604" stroke="#5dcfcc" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
 
-  <!-- ── Outer card border ── -->
-  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#52b0ee" stroke-opacity="0.1" stroke-width="1"/>
+  <!-- Left circuit trace -->
+  <g stroke="#5dcfcc" stroke-opacity="0.13" fill="none" stroke-width="1">
+    <line x1="62" y1="148" x2="62" y2="492"/>
+    <line x1="62" y1="210" x2="82" y2="210"/>
+    <circle cx="85" cy="210" r="3" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+    <line x1="62" y1="300" x2="94" y2="300"/>
+    <rect x="91" y="297" width="5" height="5" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+    <line x1="62" y1="390" x2="82" y2="390"/>
+    <circle cx="85" cy="390" r="3" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+    <line x1="62" y1="452" x2="106" y2="452"/>
+    <line x1="106" y1="452" x2="106" y2="428"/>
+    <circle cx="106" cy="425" r="2" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+  </g>
 
-  <!-- ── Corner brackets (tech accent) ── -->
-  <path d="M 58 42 L 40 42 L 40 62" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
-  <path d="M 1142 42 L 1160 42 L 1160 62" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
-  <path d="M 58 588 L 40 588 L 40 568" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
-  <path d="M 1142 588 L 1160 588 L 1160 568" fill="none" stroke="#52b0ee" stroke-opacity="0.34" stroke-width="1.5" stroke-linecap="square"/>
+  <!-- Right circuit trace -->
+  <g stroke="#5dcfcc" stroke-opacity="0.13" fill="none" stroke-width="1">
+    <line x1="1138" y1="148" x2="1138" y2="492"/>
+    <line x1="1138" y1="225" x2="1118" y2="225"/>
+    <circle cx="1115" cy="225" r="3" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+    <line x1="1138" y1="325" x2="1108" y2="325"/>
+    <rect x="1101" y="322" width="5" height="5" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+    <line x1="1138" y1="415" x2="1118" y2="415"/>
+    <circle cx="1115" cy="415" r="3" fill="#5dcfcc" fill-opacity="0.13" stroke="none"/>
+  </g>
 
-  <!-- ── Floating particles (揺らぐ記憶) ── -->
-  <circle cx="122" cy="86"  r="1.5" fill="#52b0ee" fill-opacity="0.32"/>
-  <circle cx="278" cy="152" r="1"   fill="#52b0ee" fill-opacity="0.2"/>
-  <circle cx="68"  cy="295" r="1.5" fill="#52b0ee" fill-opacity="0.24"/>
-  <circle cx="174" cy="460" r="1"   fill="#52b0ee" fill-opacity="0.17"/>
-  <circle cx="1078" cy="102" r="1.5" fill="#52b0ee" fill-opacity="0.32"/>
-  <circle cx="1136" cy="234" r="1"  fill="#52b0ee" fill-opacity="0.2"/>
-  <circle cx="998"  cy="364" r="1.5" fill="#52b0ee" fill-opacity="0.24"/>
-  <circle cx="1112" cy="496" r="1"  fill="#52b0ee" fill-opacity="0.17"/>
-  <circle cx="448" cy="65"  r="1"   fill="#52b0ee" fill-opacity="0.14"/>
-  <circle cx="766" cy="52"  r="1.5" fill="#52b0ee" fill-opacity="0.18"/>
-  <circle cx="344" cy="548" r="1.5" fill="#c9d5ea" fill-opacity="0.09"/>
-  <circle cx="912" cy="556" r="1"   fill="#c9d5ea" fill-opacity="0.09"/>
-  <circle cx="600" cy="26"  r="1"   fill="#52b0ee" fill-opacity="0.1"/>
-  <circle cx="508" cy="600" r="1"   fill="#52b0ee" fill-opacity="0.08"/>
-  <circle cx="698" cy="602" r="1.5" fill="#52b0ee" fill-opacity="0.1"/>
-  <circle cx="165" cy="195" r="1"   fill="#c9d5ea" fill-opacity="0.06"/>
-  <circle cx="1036" cy="185" r="1"  fill="#c9d5ea" fill-opacity="0.06"/>
-  <circle cx="385" cy="320" r="1"   fill="#52b0ee" fill-opacity="0.1"/>
-  <circle cx="815" cy="325" r="1"   fill="#52b0ee" fill-opacity="0.1"/>
+  <!-- Top horizontal separator -->
+  <line x1="32" y1="110" x2="1168" y2="110" stroke="#5dcfcc" stroke-opacity="0.1" stroke-width="1"/>
+  <g stroke="#5dcfcc" stroke-opacity="0.28" stroke-width="1">
+    <line x1="600" y1="106" x2="600" y2="114"/>
+    <line x1="400" y1="108" x2="400" y2="112"/>
+    <line x1="800" y1="108" x2="800" y2="112"/>
+    <line x1="200" y1="109" x2="200" y2="111"/>
+    <line x1="1000" y1="109" x2="1000" y2="111"/>
+  </g>
 
-  <!-- ── Top thin accent line ── -->
-  <line x1="0" y1="1" x2="1200" y2="1" stroke="#52b0ee" stroke-opacity="0.07" stroke-width="1"/>
+  <!-- Scattered memory fragment bars -->
+  <g fill="#5dcfcc">
+    <rect x="145" y="84" width="55" height="2" fill-opacity="0.06"/>
+    <rect x="896" y="90" width="30" height="1.5" fill-opacity="0.05"/>
+    <rect x="345" y="542" width="68" height="2" fill-opacity="0.05"/>
+    <rect x="728" y="557" width="40" height="1.5" fill-opacity="0.06"/>
+    <rect x="178" y="558" width="24" height="2" fill-opacity="0.04"/>
+    <rect x="978" y="76" width="50" height="1.5" fill-opacity="0.05"/>
+    <rect x="276" y="80" width="20" height="2" fill-opacity="0.05"/>
+    <rect x="818" y="547" width="60" height="2" fill-opacity="0.05"/>
+  </g>
 
-  <!-- ══ MAIN: Site name ══ -->
-  <text
-    x="600" y="260"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif"
-    font-size="114" font-weight="bold"
-    letter-spacing="8"
-    fill="#c9d5ea"
-    filter="url(#glow-title)"
-  >へのへのんのの</text>
+  <!-- CRT artifact bands -->
+  <rect x="32" y="184" width="820" height="1" fill="#5dcfcc" fill-opacity="0.04"/>
+  <rect x="32" y="185" width="380" height="1" fill="#ff3d5e" fill-opacity="0.03"/>
+  <rect x="200" y="388" width="600" height="1" fill="#5dcfcc" fill-opacity="0.03"/>
 
-  <!-- ── Separator line (drift-line) ── -->
-  <line x1="155" y1="334" x2="1045" y2="334" stroke="url(#h-line)" stroke-width="1" opacity="0.72"/>
-  <line x1="220" y1="342" x2="980"  y2="342" stroke="url(#h-line-thin)" stroke-width="0.5" opacity="0.5"/>
+  <!-- Title atmospheric glow -->
+  <ellipse cx="600" cy="278" rx="440" ry="115" fill="url(#tglow)"/>
 
-  <!-- ── Song title (副題) ── -->
-  <text
-    x="600" y="392"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif"
-    font-size="38" letter-spacing="6"
-    fill="#52b0ee"
-    filter="url(#glow-accent)"
-  >ミライオモイ</text>
+  <!-- Song subtitle glow -->
+  <ellipse cx="600" cy="418" rx="200" ry="50" fill="url(#sglow)"/>
 
-  <!-- ── Artist info ── -->
-  <text
-    x="600" y="446"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif"
-    font-size="19" letter-spacing="4"
-    fill="#c9d5ea" fill-opacity="0.38"
-  >よもうわべ feat. 唄音ウタ</text>
+  <!-- === Watermarks & terminal labels === -->
 
-  <!-- ── Bottom accent line ── -->
-  <line x1="120" y1="570" x2="1080" y2="570" stroke="#52b0ee" stroke-opacity="0.07" stroke-width="1"/>
+  <text x="600" y="60" text-anchor="middle"
+        font-family="monospace" font-size="10"
+        fill="#5dcfcc" fill-opacity="0.28"
+        letter-spacing="5">PROGRAM No.V · No.4 · No.X</text>
 
-  <!-- ── Date stamp (footer) ── -->
-  <text
-    x="600" y="597"
-    text-anchor="middle" dominant-baseline="middle"
-    font-family="sans-serif"
-    font-size="13" letter-spacing="5"
-    fill="#c9d5ea" fill-opacity="0.2"
-  >2026 · 06 · 19</text>
+  <text x="58" y="94"
+        font-family="monospace" font-size="10"
+        fill="#5dcfcc" fill-opacity="0.28"
+        letter-spacing="2">&gt; MEMORY_ACCESS :: READ_OK</text>
+
+  <text x="1142" y="94" text-anchor="end"
+        font-family="monospace" font-size="10"
+        fill="#5dcfcc" fill-opacity="0.2"
+        letter-spacing="1">2026-06-20</text>
+
+  <!-- === Main title — glitch copies === -->
+
+  <!-- Red glitch offset -->
+  <text x="604" y="294" text-anchor="middle"
+        font-family="monospace" font-size="104"
+        fill="#ff3d5e" fill-opacity="0.25"
+        letter-spacing="2">へのへのんのの</text>
+
+  <!-- Teal glitch offset -->
+  <text x="596" y="294" text-anchor="middle"
+        font-family="monospace" font-size="104"
+        fill="#5dcfcc" fill-opacity="0.25"
+        letter-spacing="2">へのへのんのの</text>
+
+  <!-- Main title -->
+  <text x="600" y="294" text-anchor="middle"
+        font-family="monospace" font-size="104"
+        fill="#d0d8f0"
+        letter-spacing="2">へのへのんのの</text>
+
+  <!-- === Separator with diamond ornament === -->
+  <line x1="138" y1="330" x2="575" y2="330" stroke="#5dcfcc" stroke-opacity="0.14" stroke-width="1"/>
+  <line x1="625" y1="330" x2="1062" y2="330" stroke="#5dcfcc" stroke-opacity="0.14" stroke-width="1"/>
+  <polygon points="600,323 608,330 600,337 592,330" fill="#5dcfcc" fill-opacity="0.28"/>
+
+  <!-- "TODAY'S MEMORY" label -->
+  <text x="600" y="368" text-anchor="middle"
+        font-family="monospace" font-size="10"
+        fill="#5dcfcc" fill-opacity="0.44"
+        letter-spacing="7">TODAY'S MEMORY</text>
+
+  <!-- Song title -->
+  <text x="600" y="422" text-anchor="middle"
+        font-family="monospace" font-size="40"
+        fill="#5dcfcc"
+        letter-spacing="5">メモリー</text>
+
+  <!-- Artist info -->
+  <text x="600" y="466" text-anchor="middle"
+        font-family="monospace" font-size="13"
+        fill="#58607e"
+        letter-spacing="1">大漠波新 feat. 初音ミク V4X · NT · V6</text>
+
+  <!-- Bottom separator -->
+  <line x1="32" y1="498" x2="1168" y2="498" stroke="#5dcfcc" stroke-opacity="0.1" stroke-width="1"/>
+
+  <!-- Bottom watermarks -->
+  <text x="600" y="533" text-anchor="middle"
+        font-family="monospace" font-size="9"
+        fill="#5dcfcc" fill-opacity="0.18"
+        letter-spacing="5">VOCALOID_DREAM :: MEMORY_INTACT</text>
+
+  <text x="600" y="574" text-anchor="middle"
+        font-family="monospace" font-size="11"
+        fill="#58607e" fill-opacity="0.55"
+        letter-spacing="3">へのへのんのの</text>
+
+  <!-- Scanlines overlay -->
+  <rect width="1200" height="630" fill="url(#sl)"/>
+
+  <!-- Vignette -->
+  <rect width="1200" height="630" fill="url(#vig)"/>
 </svg>
