@@ -1,80 +1,157 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="rg1" gradientUnits="userSpaceOnUse" cx="600" cy="0" r="560">
-      <stop offset="0%" stop-color="#3a0034" stop-opacity="0.72"/>
-      <stop offset="100%" stop-color="#3a0034" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rg2" gradientUnits="userSpaceOnUse" cx="600" cy="630" r="440">
-      <stop offset="0%" stop-color="#6b1a38" stop-opacity="0.42"/>
-      <stop offset="100%" stop-color="#6b1a38" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="rg3" gradientUnits="userSpaceOnUse" cx="600" cy="310" r="350">
-      <stop offset="0%" stop-color="#e8184e" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#e8184e" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="ltitle" gradientUnits="userSpaceOnUse" x1="190" y1="222" x2="1010" y2="312">
-      <stop offset="0%" stop-color="#ff6fa8"/>
-      <stop offset="35%" stop-color="#f5b0ca"/>
-      <stop offset="65%" stop-color="#e8184e"/>
-      <stop offset="100%" stop-color="#a00030"/>
-    </linearGradient>
-    <linearGradient id="lsep" gradientUnits="userSpaceOnUse" x1="280" y1="336" x2="920" y2="336">
-      <stop offset="0%" stop-color="#ff6fa8" stop-opacity="0"/>
-      <stop offset="18%" stop-color="#ff6fa8" stop-opacity="0.85"/>
-      <stop offset="50%" stop-color="#e8184e" stop-opacity="0.65"/>
-      <stop offset="82%" stop-color="#e8184e" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#e8184e" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="lbtm" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
-      <stop offset="0%" stop-color="#ff6fa8" stop-opacity="0.88"/>
-      <stop offset="38%" stop-color="#ff6fa8" stop-opacity="0"/>
-      <stop offset="62%" stop-color="#e8184e" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#e8184e" stop-opacity="0.88"/>
-    </linearGradient>
-    <filter id="ftitle" x="-12%" y="-30%" width="124%" height="160%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="fsub" x="-22%" y="-45%" width="144%" height="190%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect width="1200" height="630" fill="#0c0014"/>
-  <rect width="1200" height="630" fill="url(#rg1)"/>
-  <rect width="1200" height="630" fill="url(#rg2)"/>
-  <rect width="1200" height="630" fill="url(#rg3)"/>
-  <ellipse cx="-30" cy="315" rx="320" ry="230" fill="none" stroke="#ff6fa8" stroke-width="1" stroke-opacity="0.13"/>
-  <ellipse cx="-30" cy="315" rx="182" ry="130" fill="#ff6fa8" fill-opacity="0.04"/>
-  <ellipse cx="1230" cy="315" rx="320" ry="230" fill="none" stroke="#e8184e" stroke-width="1" stroke-opacity="0.13"/>
-  <ellipse cx="1230" cy="315" rx="182" ry="130" fill="#e8184e" fill-opacity="0.04"/>
-  <circle cx="600" cy="310" r="198" fill="none" stroke="#ff6fa8" stroke-width="0.7" stroke-opacity="0.08"/>
-  <circle cx="600" cy="310" r="272" fill="none" stroke="#e8184e" stroke-width="0.7" stroke-opacity="0.06"/>
-  <circle cx="600" cy="310" r="346" fill="none" stroke="#ff6fa8" stroke-width="0.7" stroke-opacity="0.04"/>
-  <path d="M40,78 L40,40 L78,40" stroke="#ff6fa8" stroke-width="1.2" stroke-opacity="0.38" fill="none"/>
-  <path d="M1160,78 L1160,40 L1122,40" stroke="#e8184e" stroke-width="1.2" stroke-opacity="0.38" fill="none"/>
-  <path d="M40,552 L40,590 L78,590" stroke="#ff6fa8" stroke-width="1.2" stroke-opacity="0.38" fill="none"/>
-  <path d="M1160,552 L1160,590 L1122,590" stroke="#e8184e" stroke-width="1.2" stroke-opacity="0.38" fill="none"/>
-  <polygon points="96,102 102,108 96,114 90,108" fill="#ff6fa8" fill-opacity="0.48"/>
-  <polygon points="54,352 59,357 54,362 49,357" fill="#ff6fa8" fill-opacity="0.38"/>
-  <polygon points="148,506 153,511 148,516 143,511" fill="#ff6fa8" fill-opacity="0.32"/>
-  <polygon points="276,76 281,81 276,86 271,81" fill="#ff6fa8" fill-opacity="0.28"/>
-  <polygon points="70,196 75,201 70,206 65,201" fill="#ff6fa8" fill-opacity="0.30"/>
-  <polygon points="1104,102 1110,108 1104,114 1098,108" fill="#e8184e" fill-opacity="0.48"/>
-  <polygon points="1146,352 1151,357 1146,362 1141,357" fill="#e8184e" fill-opacity="0.38"/>
-  <polygon points="1052,506 1057,511 1052,516 1047,511" fill="#e8184e" fill-opacity="0.32"/>
-  <polygon points="924,76 929,81 924,86 919,81" fill="#e8184e" fill-opacity="0.28"/>
-  <polygon points="1130,196 1135,201 1130,206 1125,201" fill="#e8184e" fill-opacity="0.30"/>
-  <polygon points="484,52 487,55 484,58 481,55" fill="#f2e8f9" fill-opacity="0.22"/>
-  <polygon points="716,52 719,55 716,58 713,55" fill="#f2e8f9" fill-opacity="0.22"/>
-  <polygon points="600,50 604,54 600,58 596,54" fill="#f2e8f9" fill-opacity="0.16"/>
-  <polygon points="484,572 487,575 484,578 481,575" fill="#f2e8f9" fill-opacity="0.18"/>
-  <polygon points="716,572 719,575 716,578 713,575" fill="#f2e8f9" fill-opacity="0.18"/>
-  <text x="600" y="310" text-anchor="middle" font-family="serif" font-size="112" font-weight="normal" letter-spacing="5" fill="url(#ltitle)" filter="url(#ftitle)">へのへのんのの</text>
-  <rect x="280" y="336" width="640" height="1" fill="url(#lsep)"/>
-  <polygon points="600,331 606,336 600,341 594,336" fill="#e8184e" fill-opacity="0.78"/>
-  <text x="600" y="382" text-anchor="middle" font-family="serif" font-size="36" letter-spacing="8" fill="#e8184e" fill-opacity="0.9" filter="url(#fsub)">はんぶんこ</text>
-  <text x="600" y="420" text-anchor="middle" font-family="sans-serif" font-size="18" letter-spacing="2" fill="#f2e8f9" fill-opacity="0.46">えいぷ feat. 初音ミク, 重音テトSV</text>
-  <rect x="14" y="14" width="1172" height="602" fill="none" stroke="#ff6fa8" stroke-width="0.5" stroke-opacity="0.10"/>
-  <rect x="0" y="628" width="1200" height="2" fill="url(#lbtm)"/>
+<defs>
+<linearGradient id="g-bg" x1="0.45" y1="0" x2="0.55" y2="1">
+  <stop offset="0%"   stop-color="#0e0c24"/>
+  <stop offset="38%"  stop-color="#1c1035"/>
+  <stop offset="72%"  stop-color="#2c1400"/>
+  <stop offset="100%" stop-color="#3e1800"/>
+</linearGradient>
+<radialGradient id="g-fire" cx="50%" cy="120%" r="65%">
+  <stop offset="0%"  stop-color="#ff6018" stop-opacity="0.44"/>
+  <stop offset="38%" stop-color="#e03820" stop-opacity="0.22"/>
+  <stop offset="65%" stop-color="#e03820" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="g-sky" cx="50%" cy="-5%" r="62%">
+  <stop offset="0%"  stop-color="#1e3a6e" stop-opacity="0.32"/>
+  <stop offset="62%" stop-color="#1e3a6e" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="g-warm" cx="50%" cy="44%" r="28%">
+  <stop offset="0%"   stop-color="#ff6018" stop-opacity="0.11"/>
+  <stop offset="100%" stop-color="#ff6018" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="g-div" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0%"   stop-color="#ff6018" stop-opacity="0"/>
+  <stop offset="20%"  stop-color="#ff6018"/>
+  <stop offset="80%"  stop-color="#ff6018"/>
+  <stop offset="100%" stop-color="#ff6018" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0%"   stop-color="#f5a800" stop-opacity="0"/>
+  <stop offset="50%"  stop-color="#f5a800" stop-opacity="0.44"/>
+  <stop offset="100%" stop-color="#f5a800" stop-opacity="0"/>
+</linearGradient>
+<filter id="f-hero" x="-28%" y="-28%" width="156%" height="156%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="5"  result="b1"/>
+  <feFlood flood-color="#f5a800" flood-opacity="0.92" result="c1"/>
+  <feComposite in="c1" in2="b1" operator="in" result="s1"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="b2"/>
+  <feFlood flood-color="#ff6018" flood-opacity="0.72" result="c2"/>
+  <feComposite in="c2" in2="b2" operator="in" result="s2"/>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="50" result="b3"/>
+  <feFlood flood-color="#e03820" flood-opacity="0.40" result="c3"/>
+  <feComposite in="c3" in2="b3" operator="in" result="s3"/>
+  <feMerge>
+    <feMergeNode in="s3"/>
+    <feMergeNode in="s2"/>
+    <feMergeNode in="s1"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+<filter id="f-accent" x="-18%" y="-28%" width="136%" height="156%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="9"  result="b"/>
+  <feFlood flood-color="#ff6018" flood-opacity="0.58" result="c"/>
+  <feComposite in="c" in2="b" operator="in" result="s"/>
+  <feMerge>
+    <feMergeNode in="s"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+<filter id="f-pink" x="-18%" y="-28%" width="136%" height="156%">
+  <feGaussianBlur in="SourceAlpha" stdDeviation="7"  result="b"/>
+  <feFlood flood-color="#d94070" flood-opacity="0.50" result="c"/>
+  <feComposite in="c" in2="b" operator="in" result="s"/>
+  <feMerge>
+    <feMergeNode in="s"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+</defs>
+
+<!-- background layers -->
+<rect width="1200" height="630" fill="#0b091a"/>
+<rect width="1200" height="630" fill="url(#g-bg)"/>
+<rect width="1200" height="630" fill="url(#g-fire)"/>
+<rect width="1200" height="630" fill="url(#g-sky)"/>
+<rect width="1200" height="630" fill="url(#g-warm)"/>
+
+<!-- flame silhouettes at bottom -->
+<path d="M148,630 C138,610 130,592 136,574 C140,560 147,568 149,556 C151,568 158,560 162,574 C168,592 160,610 148,630Z" fill="#f5a800" opacity="0.14"/>
+<path d="M332,630 C311,599 296,573 306,546 C313,526 325,536 329,519 C332,532 336,521 339,509 C343,521 346,532 350,519 C354,536 366,526 373,546 C382,573 367,599 332,630Z" fill="#e03820" opacity="0.20"/>
+<path d="M488,630 C470,606 459,585 466,562 C470,546 480,554 483,539 C486,551 489,541 492,531 C495,541 498,551 501,539 C504,554 514,546 518,562 C525,585 514,606 488,630Z" fill="#ff6018" opacity="0.17"/>
+<path d="M600,630 C577,596 557,568 566,537 C573,513 586,525 592,504 C595,516 598,504 600,492 C602,504 605,516 608,504 C614,525 627,513 634,537 C643,568 623,596 600,630Z" fill="#ff6018" opacity="0.30"/>
+<path d="M712,630 C730,606 741,585 734,562 C730,546 720,554 717,539 C714,551 711,541 708,531 C705,541 702,551 699,539 C696,554 686,546 682,562 C675,585 686,606 712,630Z" fill="#ff6018" opacity="0.17"/>
+<path d="M868,630 C889,599 904,573 894,546 C887,526 875,536 871,519 C868,532 864,521 861,509 C857,521 854,532 850,519 C846,536 834,526 827,546 C818,573 833,599 868,630Z" fill="#e03820" opacity="0.20"/>
+<path d="M1052,630 C1062,610 1070,592 1064,574 C1060,560 1053,568 1051,556 C1049,568 1042,560 1038,574 C1032,592 1040,610 1052,630Z" fill="#f5a800" opacity="0.14"/>
+
+<!-- ember sparks -->
+<circle cx="471"  cy="120" r="2.5" fill="#f5a800" opacity="0.55"/>
+<circle cx="716"  cy="84"  r="2"   fill="#ff6018" opacity="0.42"/>
+<circle cx="305"  cy="196" r="3"   fill="#f5a800" opacity="0.30"/>
+<circle cx="887"  cy="162" r="2"   fill="#f5a800" opacity="0.36"/>
+<circle cx="140"  cy="272" r="2"   fill="#ff6018" opacity="0.26"/>
+<circle cx="1063" cy="291" r="2.5" fill="#f5a800" opacity="0.30"/>
+<circle cx="924"  cy="416" r="2"   fill="#ff6018" opacity="0.18"/>
+<circle cx="270"  cy="390" r="1.5" fill="#f5a800" opacity="0.24"/>
+<circle cx="600"  cy="72"  r="2"   fill="#ff6018" opacity="0.35"/>
+<circle cx="88"   cy="145" r="1.5" fill="#f5a800" opacity="0.18"/>
+<circle cx="1109" cy="213" r="2"   fill="#ff6018" opacity="0.24"/>
+<circle cx="430"  cy="506" r="1.5" fill="#f5a800" opacity="0.14"/>
+<circle cx="769"  cy="522" r="2"   fill="#ff6018" opacity="0.14"/>
+<circle cx="536"  cy="160" r="1.5" fill="#f5a800" opacity="0.26"/>
+<circle cx="663"  cy="186" r="1.5" fill="#ff6018" opacity="0.20"/>
+<circle cx="362"  cy="308" r="1.5" fill="#f5a800" opacity="0.16"/>
+<circle cx="838"  cy="328" r="1.5" fill="#ff6018" opacity="0.16"/>
+<circle cx="194"  cy="440" r="2"   fill="#f5a800" opacity="0.12"/>
+<circle cx="1005" cy="400" r="1.5" fill="#ff6018" opacity="0.16"/>
+
+<!-- frame -->
+<rect x="18" y="18" width="1164" height="594" rx="5" ry="5" fill="none" stroke="#ff6018" stroke-width="1.5" stroke-opacity="0.28"/>
+<rect x="18" y="18"    width="1164" height="2.5" fill="url(#g-div)" opacity="0.55"/>
+<rect x="18" y="609.5" width="1164" height="2.5" fill="url(#g-div)" opacity="0.55"/>
+
+<!-- ── SITE NAME ── -->
+<text
+  x="600" y="278"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-weight="900"
+  font-size="128"
+  fill="#f0e5cc"
+  letter-spacing="8"
+  filter="url(#f-hero)">へのへのんのの</text>
+
+<!-- divider -->
+<rect x="155" y="325" width="890" height="2"   fill="url(#g-div)"/>
+<rect x="255" y="329" width="690" height="0.5" fill="url(#g-gold)"/>
+
+<!-- ── SONG NAME ── -->
+<text
+  x="600" y="392"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="40"
+  fill="#ff6018"
+  letter-spacing="3"
+  filter="url(#f-accent)">Burn Me Again</text>
+
+<!-- ── ARTIST ── -->
+<text
+  x="600" y="446"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="24"
+  fill="#d94070"
+  letter-spacing="2"
+  filter="url(#f-pink)">Mwk feat. 巡音ルカ</text>
+
+<!-- tagline -->
+<text
+  x="600" y="496"
+  text-anchor="middle"
+  font-family="sans-serif"
+  font-size="14"
+  fill="#f0e5cc"
+  opacity="0.26"
+  letter-spacing="6">today's soundtrack</text>
+
 </svg>
