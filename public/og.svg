@@ -1,157 +1,112 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<linearGradient id="g-bg" x1="0.45" y1="0" x2="0.55" y2="1">
-  <stop offset="0%"   stop-color="#0e0c24"/>
-  <stop offset="38%"  stop-color="#1c1035"/>
-  <stop offset="72%"  stop-color="#2c1400"/>
-  <stop offset="100%" stop-color="#3e1800"/>
-</linearGradient>
-<radialGradient id="g-fire" cx="50%" cy="120%" r="65%">
-  <stop offset="0%"  stop-color="#ff6018" stop-opacity="0.44"/>
-  <stop offset="38%" stop-color="#e03820" stop-opacity="0.22"/>
-  <stop offset="65%" stop-color="#e03820" stop-opacity="0"/>
-</radialGradient>
-<radialGradient id="g-sky" cx="50%" cy="-5%" r="62%">
-  <stop offset="0%"  stop-color="#1e3a6e" stop-opacity="0.32"/>
-  <stop offset="62%" stop-color="#1e3a6e" stop-opacity="0"/>
-</radialGradient>
-<radialGradient id="g-warm" cx="50%" cy="44%" r="28%">
-  <stop offset="0%"   stop-color="#ff6018" stop-opacity="0.11"/>
-  <stop offset="100%" stop-color="#ff6018" stop-opacity="0"/>
-</radialGradient>
-<linearGradient id="g-div" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%"   stop-color="#ff6018" stop-opacity="0"/>
-  <stop offset="20%"  stop-color="#ff6018"/>
-  <stop offset="80%"  stop-color="#ff6018"/>
-  <stop offset="100%" stop-color="#ff6018" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="g-gold" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0%"   stop-color="#f5a800" stop-opacity="0"/>
-  <stop offset="50%"  stop-color="#f5a800" stop-opacity="0.44"/>
-  <stop offset="100%" stop-color="#f5a800" stop-opacity="0"/>
-</linearGradient>
-<filter id="f-hero" x="-28%" y="-28%" width="156%" height="156%">
-  <feGaussianBlur in="SourceAlpha" stdDeviation="5"  result="b1"/>
-  <feFlood flood-color="#f5a800" flood-opacity="0.92" result="c1"/>
-  <feComposite in="c1" in2="b1" operator="in" result="s1"/>
-  <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="b2"/>
-  <feFlood flood-color="#ff6018" flood-opacity="0.72" result="c2"/>
-  <feComposite in="c2" in2="b2" operator="in" result="s2"/>
-  <feGaussianBlur in="SourceAlpha" stdDeviation="50" result="b3"/>
-  <feFlood flood-color="#e03820" flood-opacity="0.40" result="c3"/>
-  <feComposite in="c3" in2="b3" operator="in" result="s3"/>
-  <feMerge>
-    <feMergeNode in="s3"/>
-    <feMergeNode in="s2"/>
-    <feMergeNode in="s1"/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
-<filter id="f-accent" x="-18%" y="-28%" width="136%" height="156%">
-  <feGaussianBlur in="SourceAlpha" stdDeviation="9"  result="b"/>
-  <feFlood flood-color="#ff6018" flood-opacity="0.58" result="c"/>
-  <feComposite in="c" in2="b" operator="in" result="s"/>
-  <feMerge>
-    <feMergeNode in="s"/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
-<filter id="f-pink" x="-18%" y="-28%" width="136%" height="156%">
-  <feGaussianBlur in="SourceAlpha" stdDeviation="7"  result="b"/>
-  <feFlood flood-color="#d94070" flood-opacity="0.50" result="c"/>
-  <feComposite in="c" in2="b" operator="in" result="s"/>
-  <feMerge>
-    <feMergeNode in="s"/>
-    <feMergeNode in="SourceGraphic"/>
-  </feMerge>
-</filter>
-</defs>
+  <defs>
+    <pattern id="scan" x="0" y="0" width="2" height="4" patternUnits="userSpaceOnUse">
+      <rect y="3" width="2" height="1" fill="rgba(0,0,0,0.20)"/>
+    </pattern>
+    <linearGradient id="ember" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#7a0f28"/>
+      <stop offset="35%"  stop-color="#e05275"/>
+      <stop offset="60%"  stop-color="#f07090"/>
+      <stop offset="100%" stop-color="#7a0f28"/>
+    </linearGradient>
+    <linearGradient id="sep" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#0c0a0d"/>
+      <stop offset="20%"  stop-color="#7a0f28"/>
+      <stop offset="50%"  stop-color="#e05275"/>
+      <stop offset="80%"  stop-color="#7a0f28"/>
+      <stop offset="100%" stop-color="#0c0a0d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="44%" r="46%">
+      <stop offset="0%"   stop-color="#1e1822" stop-opacity="0.68"/>
+      <stop offset="100%" stop-color="#0c0a0d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sidebar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#e05275"/>
+      <stop offset="50%"  stop-color="#7a0f28"/>
+      <stop offset="100%" stop-color="#e05275"/>
+    </linearGradient>
+  </defs>
 
-<!-- background layers -->
-<rect width="1200" height="630" fill="#0b091a"/>
-<rect width="1200" height="630" fill="url(#g-bg)"/>
-<rect width="1200" height="630" fill="url(#g-fire)"/>
-<rect width="1200" height="630" fill="url(#g-sky)"/>
-<rect width="1200" height="630" fill="url(#g-warm)"/>
+  <!-- BG base -->
+  <rect width="1200" height="630" fill="#0c0a0d"/>
+  <!-- Center glow lift -->
+  <rect width="1200" height="630" fill="url(#glow)"/>
 
-<!-- flame silhouettes at bottom -->
-<path d="M148,630 C138,610 130,592 136,574 C140,560 147,568 149,556 C151,568 158,560 162,574 C168,592 160,610 148,630Z" fill="#f5a800" opacity="0.14"/>
-<path d="M332,630 C311,599 296,573 306,546 C313,526 325,536 329,519 C332,532 336,521 339,509 C343,521 346,532 350,519 C354,536 366,526 373,546 C382,573 367,599 332,630Z" fill="#e03820" opacity="0.20"/>
-<path d="M488,630 C470,606 459,585 466,562 C470,546 480,554 483,539 C486,551 489,541 492,531 C495,541 498,551 501,539 C504,554 514,546 518,562 C525,585 514,606 488,630Z" fill="#ff6018" opacity="0.17"/>
-<path d="M600,630 C577,596 557,568 566,537 C573,513 586,525 592,504 C595,516 598,504 600,492 C602,504 605,516 608,504 C614,525 627,513 634,537 C643,568 623,596 600,630Z" fill="#ff6018" opacity="0.30"/>
-<path d="M712,630 C730,606 741,585 734,562 C730,546 720,554 717,539 C714,551 711,541 708,531 C705,541 702,551 699,539 C696,554 686,546 682,562 C675,585 686,606 712,630Z" fill="#ff6018" opacity="0.17"/>
-<path d="M868,630 C889,599 904,573 894,546 C887,526 875,536 871,519 C868,532 864,521 861,509 C857,521 854,532 850,519 C846,536 834,526 827,546 C818,573 833,599 868,630Z" fill="#e03820" opacity="0.20"/>
-<path d="M1052,630 C1062,610 1070,592 1064,574 C1060,560 1053,568 1051,556 C1049,568 1042,560 1038,574 C1032,592 1040,610 1052,630Z" fill="#f5a800" opacity="0.14"/>
+  <!-- Concentric circles — cult eye motif -->
+  <circle cx="600" cy="278" r="352" fill="none" stroke="#2c2830" stroke-width="1"   opacity="0.22"/>
+  <circle cx="600" cy="278" r="276" fill="none" stroke="#2c2830" stroke-width="0.7" opacity="0.18"/>
+  <circle cx="600" cy="278" r="200" fill="none" stroke="#7a0f28" stroke-width="0.5" opacity="0.14"/>
+  <circle cx="600" cy="278" r="124" fill="none" stroke="#7a0f28" stroke-width="0.4" opacity="0.10"/>
 
-<!-- ember sparks -->
-<circle cx="471"  cy="120" r="2.5" fill="#f5a800" opacity="0.55"/>
-<circle cx="716"  cy="84"  r="2"   fill="#ff6018" opacity="0.42"/>
-<circle cx="305"  cy="196" r="3"   fill="#f5a800" opacity="0.30"/>
-<circle cx="887"  cy="162" r="2"   fill="#f5a800" opacity="0.36"/>
-<circle cx="140"  cy="272" r="2"   fill="#ff6018" opacity="0.26"/>
-<circle cx="1063" cy="291" r="2.5" fill="#f5a800" opacity="0.30"/>
-<circle cx="924"  cy="416" r="2"   fill="#ff6018" opacity="0.18"/>
-<circle cx="270"  cy="390" r="1.5" fill="#f5a800" opacity="0.24"/>
-<circle cx="600"  cy="72"  r="2"   fill="#ff6018" opacity="0.35"/>
-<circle cx="88"   cy="145" r="1.5" fill="#f5a800" opacity="0.18"/>
-<circle cx="1109" cy="213" r="2"   fill="#ff6018" opacity="0.24"/>
-<circle cx="430"  cy="506" r="1.5" fill="#f5a800" opacity="0.14"/>
-<circle cx="769"  cy="522" r="2"   fill="#ff6018" opacity="0.14"/>
-<circle cx="536"  cy="160" r="1.5" fill="#f5a800" opacity="0.26"/>
-<circle cx="663"  cy="186" r="1.5" fill="#ff6018" opacity="0.20"/>
-<circle cx="362"  cy="308" r="1.5" fill="#f5a800" opacity="0.16"/>
-<circle cx="838"  cy="328" r="1.5" fill="#ff6018" opacity="0.16"/>
-<circle cx="194"  cy="440" r="2"   fill="#f5a800" opacity="0.12"/>
-<circle cx="1005" cy="400" r="1.5" fill="#ff6018" opacity="0.16"/>
+  <!-- Inverted triangle — occult symbol -->
+  <polygon points="600,66 1014,530 186,530"
+           fill="none" stroke="#7a0f28" stroke-width="0.8" opacity="0.10"/>
 
-<!-- frame -->
-<rect x="18" y="18" width="1164" height="594" rx="5" ry="5" fill="none" stroke="#ff6018" stroke-width="1.5" stroke-opacity="0.28"/>
-<rect x="18" y="18"    width="1164" height="2.5" fill="url(#g-div)" opacity="0.55"/>
-<rect x="18" y="609.5" width="1164" height="2.5" fill="url(#g-div)" opacity="0.55"/>
+  <!-- Crosshairs -->
+  <line x1="0"   y1="278" x2="1200" y2="278" stroke="#2c2830" stroke-width="0.5" opacity="0.28"/>
+  <line x1="600" y1="0"   x2="600"  y2="630" stroke="#2c2830" stroke-width="0.5" opacity="0.20"/>
 
-<!-- ── SITE NAME ── -->
-<text
-  x="600" y="278"
-  text-anchor="middle"
-  font-family="sans-serif"
-  font-weight="900"
-  font-size="128"
-  fill="#f0e5cc"
-  letter-spacing="8"
-  filter="url(#f-hero)">へのへのんのの</text>
+  <!-- Scanlines -->
+  <rect width="1200" height="630" fill="url(#scan)"/>
 
-<!-- divider -->
-<rect x="155" y="325" width="890" height="2"   fill="url(#g-div)"/>
-<rect x="255" y="329" width="690" height="0.5" fill="url(#g-gold)"/>
+  <!-- Surface panel behind site name -->
+  <rect x="0" y="192" width="1200" height="130" fill="#141118" opacity="0.42"/>
 
-<!-- ── SONG NAME ── -->
-<text
-  x="600" y="392"
-  text-anchor="middle"
-  font-family="sans-serif"
-  font-size="40"
-  fill="#ff6018"
-  letter-spacing="3"
-  filter="url(#f-accent)">Burn Me Again</text>
+  <!-- Top / bottom burn lines -->
+  <rect x="0" y="0"   width="1200" height="3" fill="url(#ember)"/>
+  <rect x="0" y="627" width="1200" height="3" fill="url(#ember)"/>
 
-<!-- ── ARTIST ── -->
-<text
-  x="600" y="446"
-  text-anchor="middle"
-  font-family="sans-serif"
-  font-size="24"
-  fill="#d94070"
-  letter-spacing="2"
-  filter="url(#f-pink)">Mwk feat. 巡音ルカ</text>
+  <!-- Side bars -->
+  <rect x="0"    y="0" width="4" height="630" fill="url(#sidebar)"/>
+  <rect x="1196" y="0" width="4" height="630" fill="#7a0f28" opacity="0.45"/>
 
-<!-- tagline -->
-<text
-  x="600" y="496"
-  text-anchor="middle"
-  font-family="sans-serif"
-  font-size="14"
-  fill="#f0e5cc"
-  opacity="0.26"
-  letter-spacing="6">today's soundtrack</text>
+  <!-- Corner cross markers -->
+  <line x1="34"   y1="20"  x2="34"   y2="55"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="20"   y1="37"  x2="55"   y2="37"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="1166" y1="20"  x2="1166" y2="55"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="1148" y1="37"  x2="1180" y2="37"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="34"   y1="575" x2="34"   y2="610" stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="20"   y1="593" x2="55"   y2="593" stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="1166" y1="575" x2="1166" y2="610" stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <line x1="1148" y1="593" x2="1180" y2="593" stroke="#e05275" stroke-width="1" opacity="0.55"/>
 
+  <!-- Site name — glitch ghost: cyan -->
+  <text x="604" y="282" text-anchor="middle"
+        font-family="sans-serif" font-size="112" font-weight="bold"
+        fill="rgba(80,200,220,0.22)" letter-spacing="6">へのへのんのの</text>
+  <!-- Site name — glitch ghost: crimson -->
+  <text x="596" y="284" text-anchor="middle"
+        font-family="sans-serif" font-size="112" font-weight="bold"
+        fill="rgba(224,82,117,0.26)" letter-spacing="6">へのへのんのの</text>
+
+  <!-- Site name — main -->
+  <text x="600" y="280" text-anchor="middle"
+        font-family="sans-serif" font-size="112" font-weight="bold"
+        fill="#dcd8da" letter-spacing="6">へのへのんのの</text>
+
+  <!-- Ember separator -->
+  <rect x="252" y="328" width="696" height="1.5" fill="url(#sep)"/>
+  <circle cx="252" cy="328.75" r="2.2" fill="#7a0f28"/>
+  <circle cx="948" cy="328.75" r="2.2" fill="#7a0f28"/>
+
+  <!-- TODAY'S SONG label -->
+  <text x="600" y="364" text-anchor="middle"
+        font-family="monospace" font-size="11" fill="#7a7278" letter-spacing="8">TODAY'S SONG</text>
+
+  <!-- Flanking rule lines for song title -->
+  <line x1="444" y1="400" x2="494" y2="400" stroke="#7a0f28" stroke-width="1.5" opacity="0.80"/>
+  <line x1="706" y1="400" x2="756" y2="400" stroke="#7a0f28" stroke-width="1.5" opacity="0.80"/>
+
+  <!-- Song title -->
+  <text x="600" y="414" text-anchor="middle"
+        font-family="sans-serif" font-size="44" font-weight="bold"
+        fill="#e05275" letter-spacing="14">カルト</text>
+
+  <!-- Artist name -->
+  <text x="600" y="457" text-anchor="middle"
+        font-family="sans-serif" font-size="17" fill="#7a7278" letter-spacing="3">ぴーなた feat. 重音テト</text>
+
+  <!-- Date watermark -->
+  <text x="600" y="576" text-anchor="middle"
+        font-family="monospace" font-size="11" fill="#7a7278" letter-spacing="6" opacity="0.44">2026.06.24</text>
 </svg>
