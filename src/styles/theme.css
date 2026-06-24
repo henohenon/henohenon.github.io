@@ -1,55 +1,45 @@
-`src/styles/theme.css` の内容として、以下の純粋な CSS を出力します。
-
----
-
-/* カルト / ぴーなた feat. 重音テト / 盲目の信仰と空のパレット——崩れる誓いが呪いに蝕まれ、残るのは真紅の灰 */
+/* オクスリクラ / マキシウキョウ feat. 重音テトSV / 病床に差し込む朝の光——やさしく見守る手のひら */
 
 :root {
-  /* ── core palette ─────────────────────────────────────────────── */
-  /* 背景: ほぼ虚空のチャコール黒 (わずかに紫の下地 = 傷の色) */
-  --color-bg:      #0c0a0d;
-  /* 本文: 焼け落ちた紙のような灰白 — 空のパレットの残滓 */
-  --color-fg:      #dcd8da;
-  /* アクセント: 真っ赤に染め上げた後に残るローズクリムゾン */
-  /* contrast ratio vs --color-bg ≈ 5.5 : 1  (WCAG AA ✓) */
-  --color-accent:  #e05275;
+  --color-fg: #281a15;
+  --color-bg: #fdf6ed;
+  --color-accent: #c97b8d;
 
-  /* ── extended palette ─────────────────────────────────────────── */
-  --color-surface: #141118;
-  --color-border:  #2c2830;
-  --color-muted:   #7a7278;
-  --color-embers:  #7a0f28;
-
-  /* ── spacing ──────────────────────────────────────────────────── */
   --spacing-unit: 1rem;
 
-  /* ── typography ───────────────────────────────────────────────── */
-  --font-heading: 'Arial Black', 'Franklin Gothic Medium', 'Impact',
-                  'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --font-body:    'Helvetica Neue', 'Arial',
-                  'Hiragino Sans', 'Yu Gothic Medium', 'Yu Gothic',
-                  'Meiryo', sans-serif;
+  --font-heading: 'Georgia', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', serif;
+  --font-body: 'Hiragino Sans', 'Yu Gothic', 'YuGothic', 'Meiryo', 'Noto Sans JP', system-ui, sans-serif;
 
-  --line-height-body:    1.875;
-  --line-height-heading: 1.1;
+  --line-height-body: 1.9;
+  --line-height-heading: 1.35;
 
-  /* ── easing ───────────────────────────────────────────────────── */
   --ease-default: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  /* ── misc ─────────────────────────────────────────────────────── */
-  --glitch-offset: 3px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   BASE
-═══════════════════════════════════════════════════════════════════ */
-
-*, *::before, *::after {
-  box-sizing: border-box;
+@keyframes gentle-breathe {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.82; }
 }
 
-html {
-  scroll-behavior: smooth;
+@keyframes warm-drift {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+
+@keyframes soft-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pill-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
 }
 
 body {
@@ -57,500 +47,151 @@ body {
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  /* スキャンライン — ローファイ監視モニター越しに見る世界 */
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 3px,
-    rgba(0, 0, 0, 0.22) 3px,
-    rgba(0, 0, 0, 0.22) 4px
+  background-image:
+    radial-gradient(ellipse 60% 40% at 15% 8%,  #fff4e6 0%, transparent 70%),
+    radial-gradient(ellipse 50% 45% at 85% 92%, #fce8f0 0%, transparent 70%);
+  background-attachment: fixed;
+}
+
+.site-header {
+  background: linear-gradient(135deg, #fff4e6 0%, #fce8f0 55%, #fdf3f8 100%);
+  border-bottom: 2px solid var(--color-accent);
+  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 3);
+  animation: gentle-breathe 7s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-header::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 70%
   );
-  min-height: 100vh;
+  background-size: 200% 100%;
+  animation: pill-shimmer 6s linear infinite;
+  pointer-events: none;
 }
 
-/* ── テキスト選択 ── */
-::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+.site-header h1,
+.site-header .site-title {
+  font-family: var(--font-heading);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+  line-height: var(--line-height-heading);
 }
 
-/* ── フォーカス ── */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-  border-radius: 1px;
+.site-footer {
+  background: linear-gradient(180deg, transparent 0%, rgba(252, 232, 240, 0.55) 100%);
+  border-top: 1px solid rgba(201, 123, 141, 0.35);
+  color: var(--color-fg);
+  opacity: 0.75;
+  padding: calc(var(--spacing-unit) * 2);
+  text-align: center;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
 }
 
-/* ── 水平線 ── */
-hr {
-  border: none;
-  border-top: 1px solid var(--color-border);
-  margin: calc(var(--spacing-unit) * 2) 0;
+.post-list {
+  list-style: none;
+  padding: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   TYPOGRAPHY
-═══════════════════════════════════════════════════════════════════ */
+.post-list li {
+  border-left: 3px solid var(--color-accent);
+  padding-left: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: calc(var(--spacing-unit) * 1.75);
+  animation: soft-appear 0.55s var(--ease-default) both;
+  transition: border-color 0.3s var(--ease-default),
+              transform    0.3s var(--ease-default);
+}
 
-h1, h2, h3, h4, h5, h6 {
+.post-list li:hover {
+  border-color: #e8a0b4;
+  transform: translateX(5px);
+}
+
+.post-list li:nth-child(2)  { animation-delay: 0.08s; }
+.post-list li:nth-child(3)  { animation-delay: 0.16s; }
+.post-list li:nth-child(4)  { animation-delay: 0.24s; }
+.post-list li:nth-child(5)  { animation-delay: 0.32s; }
+
+article.post {
+  animation: soft-appear 0.65s var(--ease-default) both;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 10px;
+  padding: calc(var(--spacing-unit) * 2.5);
+  box-shadow:
+    0 2px 18px rgba(201, 123, 141, 0.12),
+    0 1px 4px  rgba(40,  26,  21,  0.06);
+}
+
+article.post h1,
+article.post h2,
+article.post h3 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.03em;
-  color: var(--color-fg);
-  margin-top: calc(var(--spacing-unit) * 2);
-  margin-bottom: calc(var(--spacing-unit) * 0.75);
+  color: var(--color-accent);
 }
 
-p {
-  margin: 0 0 calc(var(--spacing-unit) * 1.1);
+article.post h1 {
+  animation: warm-drift 5.5s ease-in-out infinite;
+  display: inline-block;
 }
 
-/* ── リンク ── */
 a {
   color: var(--color-accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: color 0.28s var(--ease-default),
-              border-color 0.28s var(--ease-default),
-              opacity 0.28s var(--ease-default);
+  text-decoration-color: rgba(201, 123, 141, 0.38);
+  text-underline-offset: 4px;
+  transition: color                  0.25s var(--ease-default),
+              text-decoration-color  0.25s var(--ease-default);
 }
 
 a:hover {
-  color: #f07090;
-  border-bottom-color: currentColor;
+  color: #a5566e;
+  text-decoration-color: rgba(165, 86, 110, 0.65);
 }
 
-/* ── コード ── */
-code {
-  background-color: var(--color-border);
-  border-radius: 2px;
-  color: #f0809a;
-  font-size: 0.875em;
-  padding: 0.1em 0.4em;
-  letter-spacing: 0.02em;
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  margin: calc(var(--spacing-unit) * 2.5) 0;
+  opacity: 0.45;
 }
 
-pre {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-left: 3px solid var(--color-embers);
-  border-radius: 2px;
-  overflow-x: auto;
-  padding: calc(var(--spacing-unit) * 1.2);
-}
-
-pre code {
-  background: none;
-  border-radius: 0;
-  padding: 0;
-  font-size: 0.9em;
-}
-
-/* ── ブロック引用 — 信者の証言 ── */
 blockquote {
-  border-left: 3px solid var(--color-embers);
-  color: var(--color-muted);
-  margin: calc(var(--spacing-unit) * 1.5) 0;
-  padding: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 1.25);
+  border-left: 4px solid var(--color-accent);
+  background: rgba(252, 232, 240, 0.38);
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+  border-radius: 0 8px 8px 0;
   font-style: italic;
+  color: #5a3040;
   position: relative;
 }
 
 blockquote::before {
   content: '';
   position: absolute;
-  left: -3px;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-accent),
-    var(--color-embers)
-  );
-  animation: glowPulse 3s ease-in-out infinite alternate;
+  top: -1px;
+  left: -4px;
+  width: 4px;
+  height: 8px;
+  background: #e8a0b4;
+  border-radius: 2px 2px 0 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   KEYFRAMES
-═══════════════════════════════════════════════════════════════════ */
-
-/* グリッチ — 切って貼ったツギハギ、信号の乱れ */
-@keyframes glitch {
-  0%, 90%, 100% {
-    text-shadow: none;
-    transform: none;
-    clip-path: none;
-  }
-  91% {
-    text-shadow:
-      calc(var(--glitch-offset) * -1) 0 2px rgba(224, 82, 117, 0.95),
-      var(--glitch-offset) 0 2px rgba(80, 200, 220, 0.75);
-    transform: translateX(2px) skewX(-4deg);
-  }
-  92% {
-    text-shadow:
-      var(--glitch-offset) 1px 2px rgba(224, 82, 117, 0.9),
-      calc(var(--glitch-offset) * -1) -1px 2px rgba(80, 200, 220, 0.65);
-    transform: translateX(-1px);
-  }
-  93% {
-    text-shadow: none;
-    transform: translateX(1px) scaleX(1.005);
-  }
-  94% {
-    text-shadow:
-      2px 0 2px rgba(224, 82, 117, 0.8),
-      -2px 0 2px rgba(80, 200, 220, 0.6);
-    transform: none;
-  }
-  95% {
-    text-shadow: none;
-    transform: skewX(1deg);
-  }
+code,
+pre {
+  background: rgba(253, 232, 240, 0.5);
+  border: 1px solid rgba(201, 123, 141, 0.25);
+  border-radius: 4px;
+  font-size: 0.88em;
 }
-
-/* エンバーライン — 誓いが燃えて呪いになる */
-@keyframes burnLine {
-  0% {
-    background-position: 0% 50%;
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    background-position: 200% 50%;
-    opacity: 0.6;
-  }
-}
-
-/* ヘッダーグロー — 祭壇の赤い光 */
-@keyframes headerGlow {
-  from {
-    opacity: 0.35;
-    transform: translateX(-5%);
-  }
-  to {
-    opacity: 0.85;
-    transform: translateX(5%);
-  }
-}
-
-/* 拍動 — 花束の色は覚えてないのに */
-@keyframes glowPulse {
-  from { opacity: 0.5; }
-  to   { opacity: 1;   }
-}
-
-/* フリッカー — 盲目な信者が 1.2.3 */
-@keyframes flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    opacity: 1;
-  }
-  20%, 22%, 24%, 55% {
-    opacity: 0.4;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   SITE HEADER
-═══════════════════════════════════════════════════════════════════ */
-
-.site-header {
-  background-color: var(--color-surface);
-  border-bottom: 2px solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
-  position: relative;
-  overflow: hidden;
-}
-
-/* 赤い光の残影 */
-.site-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    110deg,
-    transparent 20%,
-    rgba(224, 82, 117, 0.07) 45%,
-    rgba(224, 82, 117, 0.18) 60%,
-    transparent 80%
-  );
-  pointer-events: none;
-  animation: headerGlow 7s ease-in-out infinite alternate;
-}
-
-/* 下辺のエンバーライン */
-.site-header::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    var(--color-embers),
-    var(--color-accent) 40%,
-    #f07090 60%,
-    var(--color-embers)
-  );
-  background-size: 200% 100%;
-  animation: burnLine 5s linear infinite;
-}
-
-/* サイトタイトル — グリッチ発動 */
-.site-header h1,
-.site-header .site-title {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  letter-spacing: 0.05em;
-  position: relative;
-  display: inline-block;
-  animation: glitch 9s 1.5s infinite;
-  margin: 0;
-}
-
-.site-header nav a {
-  color: var(--color-muted);
-  letter-spacing: 0.06em;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  margin-right: calc(var(--spacing-unit) * 1.25);
-  border-bottom: none;
-  transition: color 0.28s var(--ease-default);
-}
-
-.site-header nav a:hover {
-  color: var(--color-accent);
-  border-bottom: none;
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   SITE FOOTER
-═══════════════════════════════════════════════════════════════════ */
-
-.site-footer {
-  background-color: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  color: var(--color-muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
-  text-align: center;
-  /* かすかなフリッカー — 蝕まれたままで離れられないの */
-  animation: flicker 8s 4s infinite;
-}
-
-.site-footer a {
-  color: var(--color-muted);
-  border-bottom: none;
-}
-
-.site-footer a:hover {
-  color: var(--color-accent);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   POST LIST
-═══════════════════════════════════════════════════════════════════ */
-
-.post-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.post-list li {
-  border-bottom: 1px solid var(--color-border);
-  padding: calc(var(--spacing-unit) * 1.2) 0;
-  padding-left: 0;
-  position: relative;
-  transition: padding-left 0.35s var(--ease-default);
-}
-
-/* 左辺の真紅スライン — 嫌いになって/誓いになって の反復 */
-.post-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--color-accent),
-    var(--color-embers)
-  );
-  transition: width 0.35s var(--ease-default);
-}
-
-.post-list li:hover {
-  padding-left: calc(var(--spacing-unit) * 0.9);
-}
-
-.post-list li:hover::before {
-  width: 3px;
-}
-
-.post-list li a {
-  color: var(--color-fg);
-  border-bottom: none;
-  transition: color 0.28s var(--ease-default);
-}
-
-.post-list li:hover a {
-  color: var(--color-accent);
-}
-
-.post-list .post-date {
-  color: var(--color-muted);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  display: block;
-  margin-top: 0.2em;
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   ARTICLE / POST
-═══════════════════════════════════════════════════════════════════ */
-
-article.post {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 1px;
-  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5);
-  position: relative;
-  overflow: hidden;
-}
-
-/* 上辺エンバーライン — 信仰は時に人を殺すのに */
-article.post::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    var(--color-embers) 0%,
-    var(--color-accent) 40%,
-    #f07090 60%,
-    var(--color-embers) 100%
-  );
-  background-size: 200% 100%;
-  animation: burnLine 6s linear infinite;
-}
-
-/* 右端の微光 — 空のパレットに残る最後の色 */
-article.post::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1px;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--color-accent),
-    transparent 40%,
-    transparent 60%,
-    var(--color-embers)
-  );
-  opacity: 0.35;
-}
-
-article.post h1 {
-  font-size: 1.75rem;
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: calc(var(--spacing-unit) * 0.6);
-  margin-bottom: calc(var(--spacing-unit) * 1.2);
-}
-
-article.post h2 {
-  border-left: 3px solid var(--color-accent);
-  padding-left: calc(var(--spacing-unit) * 0.7);
-  margin-left: -3px;
-}
-
-article.post h3 {
-  color: var(--color-muted);
-  letter-spacing: 0.05em;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-/* 記事内の強調 */
-article.post strong {
-  color: var(--color-accent);
-  font-weight: 700;
-}
-
-article.post em {
-  color: #c0b8be;
-}
-
-/* ── 記事ヘッダー ── */
-.post-header {
-  margin-bottom: calc(var(--spacing-unit) * 2);
-}
-
-.post-header .post-meta {
-  color: var(--color-muted);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* ── タグ / カテゴリ ── */
-.tag,
-.category {
-  background-color: var(--color-border);
-  border: 1px solid var(--color-embers);
-  border-radius: 1px;
-  color: var(--color-muted);
-  display: inline-block;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  margin: 0.2em 0.3em 0.2em 0;
-  padding: 0.15em 0.55em;
-  text-transform: uppercase;
-  transition: background-color 0.28s var(--ease-default),
-              color 0.28s var(--ease-default);
-}
-
-.tag:hover,
-.category:hover {
-  background-color: var(--color-embers);
-  color: var(--color-fg);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   SCROLLBAR (Chromium)
-═══════════════════════════════════════════════════════════════════ */
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-embers);
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
-}
-
-/* ═══════════════════════════════════════════════════════════════════
-   REDUCED MOTION
-═══════════════════════════════════════════════════════════════════ */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -558,20 +199,5 @@ article.post em {
   *::after {
     animation: none !important;
     transition: none !important;
-    scroll-behavior: auto !important;
   }
 }
-
----
-
-**設計メモ（参考）**
-
-| 変数 | 値 | 意図 |
-|---|---|---|
-| `--color-bg` | `#0c0a0d` | 虚空に近い紫黒 — 盲目な信者の闇 |
-| `--color-fg` | `#dcd8da` | 焼け落ちた紙灰白 — 空のパレットの残骸 |
-| `--color-accent` | `#e05275` | ローズクリムゾン — 「真っ赤に染め上げて」/タグ pink(対暗背景コントラスト比 ≈5.5:1、AA ✓) |
-| `--color-embers` | `#7a0f28` | 深い燠火 — 誓いが呪いに変わる瞬間 |
-| グリッチ | `.site-header h1` | デジタル信号の乱れ = ツギハギのアイデンティティ |
-| スキャンライン | `body::background-image` | ローファイモニター越しに見るカルト映像 |
-| エンバーライン | `article.post::before` | 燃え尽きない信仰の残り火 |

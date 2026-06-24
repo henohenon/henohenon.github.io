@@ -1,109 +1,118 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Scanline: 3px gap + 1px dark, repeating every 4px -->
-    <pattern id="sl" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <rect y="3" width="1200" height="1" fill="#000000" fill-opacity="0.22"/>
-    </pattern>
-    <!-- Horizontal ember gradient -->
-    <linearGradient id="hEmber" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#7a0f28"/>
-      <stop offset="35%"  stop-color="#e05275"/>
-      <stop offset="60%"  stop-color="#f07090"/>
-      <stop offset="100%" stop-color="#7a0f28"/>
-    </linearGradient>
-    <!-- Vertical ember gradient -->
-    <linearGradient id="vEmber" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#e05275"/>
-      <stop offset="50%"  stop-color="#f07090"/>
-      <stop offset="100%" stop-color="#7a0f28"/>
-    </linearGradient>
-    <!-- Radial glow behind title -->
-    <radialGradient id="rGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%"   stop-color="#e05275" stop-opacity="0.09"/>
-      <stop offset="100%" stop-color="#e05275" stop-opacity="0"/>
+    <radialGradient id="glow-tl" cx="180" cy="50" r="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fff4e6" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#fff4e6" stop-opacity="0"/>
     </radialGradient>
-    <!-- Title fill: top-bright to bottom-dim -->
-    <linearGradient id="titleFill" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#f4f0f2"/>
-      <stop offset="100%" stop-color="#bab6b8"/>
+    <radialGradient id="glow-br" cx="1020" cy="585" r="530" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fce8f0" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#fce8f0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shimmer" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="22%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="78%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="hrule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c97b8d" stop-opacity="0"/>
+      <stop offset="12%"  stop-color="#c97b8d" stop-opacity="0.52"/>
+      <stop offset="88%"  stop-color="#c97b8d" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#c97b8d" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hrule-faint" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#c97b8d" stop-opacity="0"/>
+      <stop offset="12%"  stop-color="#c97b8d" stop-opacity="0.28"/>
+      <stop offset="88%"  stop-color="#c97b8d" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#c97b8d" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vbar-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#c97b8d" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#c97b8d" stop-opacity="0.18"/>
+    </radialGradient>
   </defs>
 
-  <!-- ── Background ── -->
-  <rect width="1200" height="630" fill="#0c0a0d"/>
+  <!-- ── Base background ─────────────────────────────────── -->
+  <rect width="1200" height="630" fill="#fdf6ed"/>
+  <rect width="1200" height="630" fill="url(#glow-tl)"/>
+  <rect width="1200" height="630" fill="url(#glow-br)"/>
+  <rect width="1200" height="630" fill="url(#shimmer)"/>
 
-  <!-- ── Surface card ── -->
-  <rect x="50" y="50" width="1100" height="530" fill="#141118"/>
+  <!-- ── Top accent bar ─────────────────────────────────── -->
+  <rect x="0" y="0" width="1200" height="5" fill="#c97b8d" opacity="0.88"/>
 
-  <!-- ── Scanlines ── -->
-  <rect width="1200" height="630" fill="url(#sl)"/>
+  <!-- ── Soft bloom circles (background depth) ─────────── -->
+  <circle cx="1118" cy="88"  r="100" fill="#fce8f0" opacity="0.26"/>
+  <circle cx="82"   cy="568" r="72"  fill="#fff4e6" opacity="0.48"/>
+  <circle cx="1062" cy="518" r="50"  fill="#fce8f0" opacity="0.25"/>
+  <circle cx="580"  cy="40"  r="38"  fill="#fce8f0" opacity="0.14"/>
 
-  <!-- ── Ritual rings (faint cult ambiance) ── -->
-  <circle cx="600" cy="295" r="270" fill="none" stroke="#2c2830" stroke-width="1" opacity="0.4"/>
-  <circle cx="600" cy="295" r="200" fill="none" stroke="#7a0f28"  stroke-width="1" opacity="0.22"/>
+  <!-- ── Pill / capsule shapes — medicine motif ─────────── -->
+  <!-- large outline pill, top-right -->
+  <rect x="910" y="46"  width="174" height="54" rx="27" ry="27"
+        fill="none" stroke="#c97b8d" stroke-width="1.6" opacity="0.22"/>
+  <!-- filled small pill, top-right offset -->
+  <rect x="956" y="34"  width="118" height="38" rx="19" ry="19"
+        fill="#e8a0b4" opacity="0.09"/>
+  <!-- outline pill, bottom-right -->
+  <rect x="972" y="540" width="145" height="46" rx="23" ry="23"
+        fill="none" stroke="#c97b8d" stroke-width="1.3" opacity="0.19"/>
+  <!-- filled small pill, bottom-right -->
+  <rect x="876" y="559" width="90"  height="32" rx="16" ry="16"
+        fill="#c97b8d" opacity="0.08"/>
+  <!-- tiny accent pill near left edge bottom -->
+  <rect x="84"  y="558" width="52"  height="20" rx="10" ry="10"
+        fill="#e8a0b4" opacity="0.13"/>
 
-  <!-- ── Radial ember glow behind title ── -->
-  <ellipse cx="600" cy="295" rx="550" ry="210" fill="url(#rGlow)"/>
+  <!-- ── Dot / tablet decorations, right edge ───────────── -->
+  <circle cx="1150" cy="296" r="7.5" fill="#c97b8d" opacity="0.14"/>
+  <circle cx="1169" cy="323" r="4.5" fill="#e8a0b4" opacity="0.22"/>
+  <circle cx="1155" cy="350" r="6"   fill="#c97b8d" opacity="0.11"/>
+  <circle cx="1172" cy="374" r="3.5" fill="#e8a0b4" opacity="0.17"/>
+  <circle cx="1157" cy="396" r="5"   fill="#c97b8d" opacity="0.09"/>
 
-  <!-- ── Crosshair at ritual center ── -->
-  <line x1="564" y1="295" x2="636" y2="295" stroke="#2c2830" stroke-width="0.5" opacity="0.55"/>
-  <line x1="600" y1="259" x2="600" y2="331" stroke="#2c2830" stroke-width="0.5" opacity="0.55"/>
+  <!-- ── Left vertical accent bar (post-list border-left) ── -->
+  <rect x="72" y="168" width="4" height="368" rx="2" fill="url(#vbar-glow)"/>
+  <!-- top nub -->
+  <rect x="72" y="158" width="4" height="12" rx="2" fill="#e8a0b4" opacity="0.95"/>
 
-  <!-- ── Top ember line ── -->
-  <rect x="50" y="50" width="1100" height="3" fill="url(#hEmber)"/>
+  <!-- ── Horizontal rules ───────────────────────────────── -->
+  <rect x="0" y="141" width="1200" height="1.5" fill="url(#hrule)"/>
+  <rect x="0" y="534" width="1200" height="1"   fill="url(#hrule-faint)"/>
 
-  <!-- ── Left accent bar ── -->
-  <rect x="50" y="50" width="4" height="530" fill="url(#vEmber)"/>
+  <!-- ── Site name ─────────────────────────────────────── -->
+  <text
+    x="100"
+    y="104"
+    font-family="serif"
+    font-size="30"
+    fill="#c97b8d"
+    letter-spacing="4"
+    opacity="0.93"
+  >へのへのんのの</text>
 
-  <!-- ── Right subtle accent ── -->
-  <rect x="1146" y="50" width="1" height="530" fill="url(#vEmber)" opacity="0.28"/>
+  <!-- ── Article title — pink stroke glow layer ─────────── -->
+  <text
+    x="96"
+    y="368"
+    font-family="serif"
+    font-size="74"
+    fill="none"
+    stroke="#e8a0b4"
+    stroke-width="3.5"
+    stroke-opacity="0.34"
+    letter-spacing="3"
+  >{{TITLE}}</text>
 
-  <!-- ── Corner bracket ornaments ── -->
-  <path d="M88 88 L88 74 L124 74"     fill="none" stroke="#e05275" stroke-width="1.5" stroke-linecap="square" opacity="0.52"/>
-  <path d="M1076 74 L1112 74 L1112 88" fill="none" stroke="#e05275" stroke-width="1.5" stroke-linecap="square" opacity="0.52"/>
-  <path d="M88 542 L88 556 L124 556"   fill="none" stroke="#7a0f28" stroke-width="1.5" stroke-linecap="square" opacity="0.52"/>
-  <path d="M1076 556 L1112 556 L1112 542" fill="none" stroke="#7a0f28" stroke-width="1.5" stroke-linecap="square" opacity="0.52"/>
+  <!-- ── Article title — main fill layer ───────────────── -->
+  <text
+    x="96"
+    y="368"
+    font-family="serif"
+    font-size="74"
+    fill="#281a15"
+    letter-spacing="3"
+  >{{TITLE}}</text>
 
-  <!-- ── ARTICLE section label ── -->
-  <text x="104" y="150" font-family="sans-serif" font-size="12" fill="#7a7278" letter-spacing="0.14em">ARTICLE</text>
-  <rect x="104" y="157" width="52" height="1" fill="#7a0f28" opacity="0.7"/>
-
-  <!-- ── Separator 1 (above title) ── -->
-  <line x1="104" y1="183" x2="1096" y2="183" stroke="#2c2830" stroke-width="1"/>
-  <rect x="104" y="180.5" width="44" height="3" fill="#e05275" opacity="0.82"/>
-  <circle cx="1096" cy="183" r="2" fill="#2c2830" opacity="0.7"/>
-
-  <!-- ── {{TITLE}} — glitch ghost cyan (left-up 3px) ── -->
-  <text x="597" y="316"
-        font-family="sans-serif" font-size="68"
-        fill="#50c8dc" fill-opacity="0.13"
-        text-anchor="middle" letter-spacing="0.03em">{{TITLE}}</text>
-
-  <!-- ── {{TITLE}} — glitch ghost rose (right-down 3px) ── -->
-  <text x="603" y="322"
-        font-family="sans-serif" font-size="68"
-        fill="#e05275" fill-opacity="0.19"
-        text-anchor="middle" letter-spacing="0.03em">{{TITLE}}</text>
-
-  <!-- ── {{TITLE}} — main title ── -->
-  <text x="600" y="319"
-        font-family="sans-serif" font-size="68"
-        fill="url(#titleFill)"
-        text-anchor="middle" letter-spacing="0.03em">{{TITLE}}</text>
-
-  <!-- ── Separator 2 (below title) ── -->
-  <line x1="104" y1="416" x2="1096" y2="416" stroke="#2c2830" stroke-width="1"/>
-  <rect x="104" y="413.5" width="28" height="3" fill="#7a0f28" opacity="0.82"/>
-  <circle cx="104" cy="416" r="2" fill="#2c2830" opacity="0.7"/>
-
-  <!-- ── Site name ── -->
-  <text x="104" y="522"
-        font-family="sans-serif" font-size="22"
-        fill="#7a7278" letter-spacing="0.08em">へのへのんのの</text>
-
-  <!-- ── Bottom-right ember dots ── -->
-  <circle cx="1096" cy="522" r="3.5" fill="#e05275" opacity="0.62"/>
-  <circle cx="1081" cy="522" r="3.5" fill="#7a0f28" opacity="0.62"/>
-  <circle cx="1066" cy="522" r="2.5" fill="#2c2830" opacity="0.88"/>
-
+  <!-- ── Bottom accent bar ─────────────────────────────── -->
+  <rect x="0" y="624" width="1200" height="6" fill="#c97b8d" opacity="0.28"/>
 </svg>

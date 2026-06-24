@@ -1,112 +1,127 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="scan" x="0" y="0" width="2" height="4" patternUnits="userSpaceOnUse">
-      <rect y="3" width="2" height="1" fill="rgba(0,0,0,0.20)"/>
-    </pattern>
-    <linearGradient id="ember" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#7a0f28"/>
-      <stop offset="35%"  stop-color="#e05275"/>
-      <stop offset="60%"  stop-color="#f07090"/>
-      <stop offset="100%" stop-color="#7a0f28"/>
-    </linearGradient>
-    <linearGradient id="sep" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#0c0a0d"/>
-      <stop offset="20%"  stop-color="#7a0f28"/>
-      <stop offset="50%"  stop-color="#e05275"/>
-      <stop offset="80%"  stop-color="#7a0f28"/>
-      <stop offset="100%" stop-color="#0c0a0d"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="44%" r="46%">
-      <stop offset="0%"   stop-color="#1e1822" stop-opacity="0.68"/>
-      <stop offset="100%" stop-color="#0c0a0d" stop-opacity="0"/>
+    <radialGradient id="g-warm" gradientUnits="userSpaceOnUse" cx="180" cy="50" r="800">
+      <stop offset="0%" stop-color="#fff4e6"/>
+      <stop offset="100%" stop-color="#fff4e6" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="sidebar" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#e05275"/>
-      <stop offset="50%"  stop-color="#7a0f28"/>
-      <stop offset="100%" stop-color="#e05275"/>
+    <radialGradient id="g-pink" gradientUnits="userSpaceOnUse" cx="1020" cy="580" r="750">
+      <stop offset="0%" stop-color="#fce8f0"/>
+      <stop offset="100%" stop-color="#fce8f0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sep-grad" gradientUnits="userSpaceOnUse" x1="220" y1="0" x2="980" y2="0">
+      <stop offset="0%"   stop-color="#c97b8d" stop-opacity="0"/>
+      <stop offset="20%"  stop-color="#c97b8d" stop-opacity="0.65"/>
+      <stop offset="50%"  stop-color="#c97b8d" stop-opacity="0.9"/>
+      <stop offset="80%"  stop-color="#c97b8d" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#c97b8d" stop-opacity="0"/>
     </linearGradient>
+    <filter id="f-ray" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+    <filter id="f-glow" x="-15%" y="-50%" width="130%" height="200%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
   </defs>
 
-  <!-- BG base -->
-  <rect width="1200" height="630" fill="#0c0a0d"/>
-  <!-- Center glow lift -->
-  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- ── Base background ── -->
+  <rect width="1200" height="630" fill="#fdf6ed"/>
+  <rect width="1200" height="630" fill="url(#g-warm)"/>
+  <rect width="1200" height="630" fill="url(#g-pink)"/>
 
-  <!-- Concentric circles — cult eye motif -->
-  <circle cx="600" cy="278" r="352" fill="none" stroke="#2c2830" stroke-width="1"   opacity="0.22"/>
-  <circle cx="600" cy="278" r="276" fill="none" stroke="#2c2830" stroke-width="0.7" opacity="0.18"/>
-  <circle cx="600" cy="278" r="200" fill="none" stroke="#7a0f28" stroke-width="0.5" opacity="0.14"/>
-  <circle cx="600" cy="278" r="124" fill="none" stroke="#7a0f28" stroke-width="0.4" opacity="0.10"/>
+  <!-- ── Morning light shafts (病床に差し込む朝の光) ── -->
+  <g filter="url(#f-ray)" opacity="0.52">
+    <polygon points="0,0 560,0 1200,630 0,630"         fill="#fff4e6"/>
+    <polygon points="0,0 320,0 980,630 0,630"           fill="#fffaf5"/>
+    <polygon points="130,0 440,0 1160,630 830,630"      fill="#fce8f0" opacity="0.55"/>
+  </g>
 
-  <!-- Inverted triangle — occult symbol -->
-  <polygon points="600,66 1014,530 186,530"
-           fill="none" stroke="#7a0f28" stroke-width="0.8" opacity="0.10"/>
+  <!-- ── Pill / capsule shapes (オクスリクラ = medicine motif) ── -->
+  <g fill="none" stroke="#c97b8d" stroke-width="1.4" stroke-linecap="round" opacity="0.22">
+    <!-- top-left cluster -->
+    <rect x="62"   y="52"  width="40" height="16" rx="8"/>
+    <rect x="42"   y="87"  width="32" height="13" rx="6.5" transform="rotate(-22 58 93)"/>
+    <rect x="102"  y="70"  width="28" height="12" rx="6"   transform="rotate(14 116 76)"/>
+    <!-- top-right cluster -->
+    <rect x="1098" y="50"  width="40" height="16" rx="8"/>
+    <rect x="1126" y="82"  width="32" height="13" rx="6.5" transform="rotate(20 1142 89)"/>
+    <rect x="1070" y="35"  width="28" height="12" rx="6"   transform="rotate(-10 1084 41)"/>
+    <!-- bottom-left cluster -->
+    <rect x="60"   y="532" width="40" height="16" rx="8"/>
+    <rect x="44"   y="560" width="32" height="13" rx="6.5" transform="rotate(16 60 567)"/>
+    <!-- bottom-right cluster -->
+    <rect x="1098" y="528" width="40" height="16" rx="8"/>
+    <rect x="1118" y="556" width="32" height="13" rx="6.5" transform="rotate(-18 1134 563)"/>
+    <rect x="1082" y="574" width="28" height="12" rx="6"/>
+  </g>
 
-  <!-- Crosshairs -->
-  <line x1="0"   y1="278" x2="1200" y2="278" stroke="#2c2830" stroke-width="0.5" opacity="0.28"/>
-  <line x1="600" y1="0"   x2="600"  y2="630" stroke="#2c2830" stroke-width="0.5" opacity="0.20"/>
+  <!-- ── Floating light motes ── -->
+  <g fill="#c97b8d" opacity="0.18">
+    <circle cx="28"   cy="175" r="2.5"/>
+    <circle cx="46"   cy="382" r="1.8"/>
+    <circle cx="24"   cy="490" r="1.5"/>
+    <circle cx="1172" cy="140" r="2.5"/>
+    <circle cx="1154" cy="355" r="1.8"/>
+    <circle cx="1176" cy="472" r="1.5"/>
+    <circle cx="195"  cy="20"  r="2"/>
+    <circle cx="986"  cy="18"  r="2"/>
+    <circle cx="163"  cy="608" r="1.8"/>
+    <circle cx="1018" cy="610" r="1.8"/>
+    <circle cx="600"  cy="16"  r="1.5"/>
+    <circle cx="600"  cy="612" r="1.5"/>
+  </g>
 
-  <!-- Scanlines -->
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <!-- ── Border lines ── -->
+  <line x1="50"   y1="28"  x2="1150" y2="28"  stroke="#c97b8d" stroke-width="0.8" stroke-opacity="0.3"/>
+  <line x1="50"   y1="602" x2="1150" y2="602" stroke="#c97b8d" stroke-width="0.8" stroke-opacity="0.3"/>
 
-  <!-- Surface panel behind site name -->
-  <rect x="0" y="192" width="1200" height="130" fill="#141118" opacity="0.42"/>
+  <!-- ── Corner ornaments ── -->
+  <g stroke="#c97b8d" stroke-width="1.4" fill="none" stroke-opacity="0.5" stroke-linecap="round">
+    <path d="M50,28   L50,62   M50,28   L84,28"/>
+    <path d="M1150,28  L1150,62  M1150,28  L1116,28"/>
+    <path d="M50,602  L50,568  M50,602  L84,602"/>
+    <path d="M1150,602 L1150,568 M1150,602 L1116,602"/>
+  </g>
 
-  <!-- Top / bottom burn lines -->
-  <rect x="0" y="0"   width="1200" height="3" fill="url(#ember)"/>
-  <rect x="0" y="627" width="1200" height="3" fill="url(#ember)"/>
+  <!-- ── Site title — glow layer ── -->
+  <text x="600" y="285"
+        font-family="serif"
+        font-size="118"
+        fill="#e8a0b4"
+        text-anchor="middle"
+        filter="url(#f-glow)"
+        opacity="0.58"
+        letter-spacing="4">へのへのんのの</text>
 
-  <!-- Side bars -->
-  <rect x="0"    y="0" width="4" height="630" fill="url(#sidebar)"/>
-  <rect x="1196" y="0" width="4" height="630" fill="#7a0f28" opacity="0.45"/>
+  <!-- ── Site title — main ── -->
+  <text x="600" y="285"
+        font-family="serif"
+        font-size="118"
+        fill="#c97b8d"
+        text-anchor="middle"
+        letter-spacing="4">へのへのんのの</text>
 
-  <!-- Corner cross markers -->
-  <line x1="34"   y1="20"  x2="34"   y2="55"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="20"   y1="37"  x2="55"   y2="37"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="1166" y1="20"  x2="1166" y2="55"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="1148" y1="37"  x2="1180" y2="37"  stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="34"   y1="575" x2="34"   y2="610" stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="20"   y1="593" x2="55"   y2="593" stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="1166" y1="575" x2="1166" y2="610" stroke="#e05275" stroke-width="1" opacity="0.55"/>
-  <line x1="1148" y1="593" x2="1180" y2="593" stroke="#e05275" stroke-width="1" opacity="0.55"/>
+  <!-- ── Separator ── -->
+  <line x1="220" y1="320" x2="980" y2="320" stroke="url(#sep-grad)" stroke-width="1.5"/>
 
-  <!-- Site name — glitch ghost: cyan -->
-  <text x="604" y="282" text-anchor="middle"
-        font-family="sans-serif" font-size="112" font-weight="bold"
-        fill="rgba(80,200,220,0.22)" letter-spacing="6">へのへのんのの</text>
-  <!-- Site name — glitch ghost: crimson -->
-  <text x="596" y="284" text-anchor="middle"
-        font-family="sans-serif" font-size="112" font-weight="bold"
-        fill="rgba(224,82,117,0.26)" letter-spacing="6">へのへのんのの</text>
+  <!-- Diamond accents -->
+  <polygon points="204,320 211,327 218,320 211,313" fill="#c97b8d" opacity="0.48"/>
+  <polygon points="982,320 989,327 996,320 989,313" fill="#c97b8d" opacity="0.48"/>
 
-  <!-- Site name — main -->
-  <text x="600" y="280" text-anchor="middle"
-        font-family="sans-serif" font-size="112" font-weight="bold"
-        fill="#dcd8da" letter-spacing="6">へのへのんのの</text>
+  <!-- ── Song subtitle ── -->
+  <text x="600" y="384"
+        font-family="serif"
+        font-size="40"
+        fill="#281a15"
+        text-anchor="middle"
+        opacity="0.65"
+        letter-spacing="6">オクスリクラ</text>
 
-  <!-- Ember separator -->
-  <rect x="252" y="328" width="696" height="1.5" fill="url(#sep)"/>
-  <circle cx="252" cy="328.75" r="2.2" fill="#7a0f28"/>
-  <circle cx="948" cy="328.75" r="2.2" fill="#7a0f28"/>
-
-  <!-- TODAY'S SONG label -->
-  <text x="600" y="364" text-anchor="middle"
-        font-family="monospace" font-size="11" fill="#7a7278" letter-spacing="8">TODAY'S SONG</text>
-
-  <!-- Flanking rule lines for song title -->
-  <line x1="444" y1="400" x2="494" y2="400" stroke="#7a0f28" stroke-width="1.5" opacity="0.80"/>
-  <line x1="706" y1="400" x2="756" y2="400" stroke="#7a0f28" stroke-width="1.5" opacity="0.80"/>
-
-  <!-- Song title -->
-  <text x="600" y="414" text-anchor="middle"
-        font-family="sans-serif" font-size="44" font-weight="bold"
-        fill="#e05275" letter-spacing="14">カルト</text>
-
-  <!-- Artist name -->
-  <text x="600" y="457" text-anchor="middle"
-        font-family="sans-serif" font-size="17" fill="#7a7278" letter-spacing="3">ぴーなた feat. 重音テト</text>
-
-  <!-- Date watermark -->
-  <text x="600" y="576" text-anchor="middle"
-        font-family="monospace" font-size="11" fill="#7a7278" letter-spacing="6" opacity="0.44">2026.06.24</text>
+  <!-- ── Artist ── -->
+  <text x="600" y="436"
+        font-family="sans-serif"
+        font-size="21"
+        fill="#281a15"
+        text-anchor="middle"
+        opacity="0.42"
+        letter-spacing="1">マキシウキョウ feat. 重音テトSV</text>
 </svg>
