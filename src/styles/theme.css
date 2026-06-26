@@ -1,177 +1,204 @@
-/* シーリグラブ / mnmnmnmn feat. 知声 / 口答えする声を愛して、乱れた電子の中で二人踊る */
+/* Cutie Mew Mew Magic / Toby Fox, かめりあ feat. 初音ミク V3 / 深海を割る魔法少女革命 — 闇と水中を越えるボスバトルのキューティエネルギー */
 
 :root {
-  --color-fg: #e8e1f6;
-  --color-bg: #07050d;
-  --color-accent: #ff2b7e;
-  --spacing-unit: 1rem;
-  --font-heading: 'Courier New', 'Courier', 'HGｺﾞｼｯｸE', monospace;
-  --font-body: 'Segoe UI', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', 'Meiryo', sans-serif;
-  --line-height-body: 1.9;
-  --line-height-heading: 1.1;
-  --ease-default: cubic-bezier(0.23, 1, 0.32, 1);
+  --color-bg:            #06071e;
+  --color-fg:            #eedeff;
+  --color-accent:        #ff2d82;
+  --color-accent-cool:   #00e8ff;
+  --color-surface:       #0d0f2c;
+
+  --spacing-unit:        1rem;
+
+  --font-heading:        'Courier New', Courier, monospace;
+  --font-body:           'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans JP',
+                         system-ui, sans-serif;
+
+  --line-height-body:    1.88;
+  --line-height-heading: 1.15;
+
+  --ease-default:        cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --glow-pink:           0 0 6px #ff2d82, 0 0 22px rgba(255, 45, 130, 0.45);
+  --glow-cyan:           0 0 6px #00e8ff, 0 0 22px rgba(0, 232, 255, 0.35);
 }
 
+/* ── reset helpers ── */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+/* ── body: 深海の闇 ── */
 body {
   background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-body);
-  line-height: var(--line-height-body);
+  color:            var(--color-fg);
+  font-family:      var(--font-body);
+  line-height:      var(--line-height-body);
+  min-height:       100vh;
   background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(255, 43, 126, 0.025) 3px,
-      rgba(255, 43, 126, 0.025) 4px
-    );
+    radial-gradient(ellipse at 25% 15%, rgba(90, 0, 120, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 85%, rgba(0, 20, 80, 0.5)   0%, transparent 55%);
 }
 
-::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+/* ── CRT スキャンライン (チップチューン美学) ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent            0px,
+    transparent            3px,
+    rgba(0, 0, 0, 0.07)   3px,
+    rgba(0, 0, 0, 0.07)   4px
+  );
+  animation: scanlines 10s linear infinite;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
+@keyframes scanlines {
+  from { background-position: 0 0;    }
+  to   { background-position: 0 40px; }
 }
 
-::-webkit-scrollbar {
-  width: 3px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-}
-
-/* ─── キーフレーム ─── */
-
-@keyframes glitch-clip {
-  0%,  88%, 100% { transform: translate(0, 0);   clip-path: none; }
-  90%             { transform: translate(-4px, 1px); clip-path: inset(15% 0 55% 0); }
-  92%             { transform: translate( 4px,-1px); clip-path: inset(60% 0  8% 0); }
-  94%             { transform: translate(-2px, 2px); clip-path: inset(40% 0 25% 0); }
-  96%             { transform: translate( 2px,-2px); clip-path: inset( 5% 0 70% 0); }
-  98%             { transform: translate(-1px, 1px); clip-path: inset(30% 0 45% 0); }
+/* ── typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-heading);
+  color:       var(--color-accent);
+  text-shadow: var(--glow-pink);
+  letter-spacing: 0.04em;
+  position: relative;
+  display: inline-block;
 }
 
-@keyframes glitch-shadow {
-  0%,  88%, 100% { text-shadow: none; }
-  90%             { text-shadow: -3px 0 #00ffd0, 3px 0 var(--color-accent); }
-  93%             { text-shadow:  3px 0 #00ffd0,-3px 0 var(--color-accent); }
-  96%             { text-shadow: -2px 0 #00ffd0, 2px 0 var(--color-accent); }
+/* ピクセルスパーク (ステップアニメ) */
+h1::after, h2::after {
+  content: ' ✦';
+  font-size: 0.55em;
+  vertical-align: super;
+  color: var(--color-accent-cool);
+  animation: spark-step 0.8s steps(2, end) infinite;
 }
 
-@keyframes float-rebel {
-  0%,  100% { transform: translateY(0px)   rotate(0deg); }
-  30%        { transform: translateY(-7px)  rotate(-0.4deg); }
-  70%        { transform: translateY( 4px)  rotate( 0.3deg); }
+@keyframes spark-step {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-@keyframes scanline-pass {
-  0%   { top: -10%; opacity: 0.06; }
-  50%  { opacity: 0.12; }
-  100% { top: 110%; opacity: 0.06; }
+/* グリッチ — カオスバトルエネルギー */
+h1 {
+  animation: glitch 6s steps(1, end) infinite;
 }
 
-@keyframes flicker-bar {
-  0%,  94%, 100% { opacity: 1; }
-  95%             { opacity: 0.5; }
-  96%             { opacity: 1; }
-  97%             { opacity: 0.3; }
-  99%             { opacity: 1; }
+@keyframes glitch {
+  0%,  92%, 100% { text-shadow: var(--glow-pink); transform: none; }
+  93%            { text-shadow: 3px 0 var(--color-accent-cool), -3px 0 var(--color-accent);
+                   transform: skewX(-4deg) translateX(-2px); }
+  95%            { text-shadow: -2px 0 var(--color-accent-cool), 2px 0 var(--color-accent);
+                   transform: skewX(3deg)  translateX(1px); }
+  97%            { text-shadow: var(--glow-pink); transform: none; }
 }
 
-@keyframes pulse-dot {
-  0%,  100% { box-shadow: 0 0 0   2px var(--color-accent); }
-  50%        { box-shadow: 0 0 12px 4px var(--color-accent); }
+a {
+  color: var(--color-accent-cool);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: transparent;
+  transition:
+    color                  0.22s var(--ease-default),
+    text-decoration-color  0.22s var(--ease-default),
+    text-shadow            0.22s var(--ease-default);
 }
 
-/* ─── .site-header ─── */
+a:hover,
+a:focus-visible {
+  color: var(--color-accent);
+  text-decoration-color: currentColor;
+  text-shadow: var(--glow-pink);
+  outline: none;
+}
 
+/* ── .site-header: ネオンピンク深海 ── */
 .site-header {
+  background: linear-gradient(135deg, #100a30 0%, #1a003e 45%, #001a40 100%);
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: var(--glow-pink), 0 4px 40px rgba(255, 45, 130, 0.18);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
   position: relative;
   overflow: hidden;
-  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 1.5);
-  background: linear-gradient(175deg, #160828 0%, #07050d 70%);
-  border-bottom: 1px solid rgba(255, 43, 126, 0.45);
 }
 
+/* 水流シマー */
 .site-header::before {
   content: '';
   position: absolute;
-  left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-accent), #00ffd0, transparent);
-  top: 0;
-  animation: flicker-bar 9s infinite;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent                      0%,
+    rgba(0, 232, 255, 0.05)         20%,
+    transparent                      40%
+  );
+  background-size: 200% 100%;
+  animation: water-flow 5s linear infinite;
 }
 
+@keyframes water-flow {
+  from { background-position:   0% 0; }
+  to   { background-position: 200% 0; }
+}
+
+/* "Mew Mew" フローティングラベル */
 .site-header::after {
-  content: '';
+  content: '🐱 ✦ She is saving the day ✦ 🐱';
   position: absolute;
-  left: 0; right: 0;
-  height: 60px;
-  background: linear-gradient(transparent, rgba(255, 43, 126, 0.06), transparent);
-  animation: scanline-pass 6s linear infinite;
-}
-
-.site-header h1,
-.site-header .site-title {
+  bottom: 4px;
+  right: var(--spacing-unit);
+  font-size: 0.62rem;
   font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  letter-spacing: 0.06em;
-  color: var(--color-fg);
-  position: relative;
-  z-index: 1;
-  animation: glitch-clip 8s infinite, glitch-shadow 8s infinite;
-}
-
-.site-header h1::before {
-  content: attr(data-text);
-  position: absolute;
-  left: 0; top: 0;
+  letter-spacing: 0.18em;
   color: var(--color-accent);
-  clip-path: inset(50% 0 30% 0);
-  transform: translate(-2px, 0);
-  opacity: 0.6;
+  opacity: 0.55;
+  animation: mew-blink 2.4s steps(3, end) infinite;
   pointer-events: none;
 }
 
-/* ─── nav ─── */
-
-nav {
-  position: relative;
-  z-index: 1;
+@keyframes mew-blink {
+  0%,  100% { opacity: 0.55; }
+  50%        { opacity: 0.15; }
 }
 
-nav a {
+/* ── .site-footer ── */
+.site-footer {
+  background: #09091e;
+  border-top: 2px solid var(--color-accent-cool);
+  box-shadow: 0 -4px 24px rgba(0, 232, 255, 0.14);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  text-align: center;
   font-family: var(--font-heading);
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  color: rgba(232, 225, 246, 0.55);
-  text-decoration: none;
-  margin-right: calc(var(--spacing-unit) * 1.5);
-  transition:
-    color            0.2s var(--ease-default),
-    text-shadow      0.2s var(--ease-default);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: rgba(238, 222, 255, 0.45);
 }
 
-nav a:hover,
-nav a[aria-current] {
-  color: #00ffd0;
-  text-shadow: 0 0 10px #00ffd0;
+.site-footer::before {
+  content: '救世 mew  ✦  Cutie Revolution  ✦  キューティ革命';
+  display: block;
+  color: var(--color-accent-cool);
+  text-shadow: var(--glow-cyan);
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
+  animation: pulse-cool 2.8s ease-in-out infinite;
 }
 
-/* ─── .post-list ─── */
+@keyframes pulse-cool {
+  0%,  100% { opacity: 1;   text-shadow: var(--glow-cyan); }
+  50%        { opacity: 0.4; text-shadow: none;             }
+}
 
+/* ── .post-list ── */
 .post-list {
   list-style: none;
   padding: 0;
@@ -179,169 +206,138 @@ nav a[aria-current] {
 }
 
 .post-list li {
-  border-left: 2px solid transparent;
-  padding: calc(var(--spacing-unit) * 0.55) calc(var(--spacing-unit) * 1.1);
-  margin-bottom: calc(var(--spacing-unit) * 0.8);
-  animation: float-rebel 14s ease-in-out infinite;
+  border-left: 3px solid transparent;
+  padding:     calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.25);
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
+  background: rgba(255, 45, 130, 0.04);
+  border-radius: 0 5px 5px 0;
   transition:
-    border-color  0.3s var(--ease-default),
-    background    0.3s var(--ease-default);
+    border-left-color 0.2s var(--ease-default),
+    background        0.2s var(--ease-default),
+    transform         0.2s var(--ease-default),
+    box-shadow        0.2s var(--ease-default);
 }
-
-.post-list li:nth-child(2) { animation-delay: -4s; }
-.post-list li:nth-child(3) { animation-delay: -8s; }
-.post-list li:nth-child(4) { animation-delay: -11s; }
-.post-list li:nth-child(5) { animation-delay: -2s; }
 
 .post-list li:hover {
-  border-color: var(--color-accent);
-  background: rgba(255, 43, 126, 0.06);
+  border-left-color: var(--color-accent);
+  background: rgba(255, 45, 130, 0.1);
+  transform: translateX(5px);
+  box-shadow: inset 0 0 24px rgba(255, 45, 130, 0.07);
 }
 
-.post-list a {
-  color: var(--color-fg);
-  text-decoration: none;
-  font-size: 1.05rem;
-  transition: color 0.2s var(--ease-default);
-}
-
-.post-list a:hover {
-  color: var(--color-accent);
-}
-
-.post-list time,
-.post-list .post-date {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  color: rgba(232, 225, 246, 0.35);
-  margin-left: calc(var(--spacing-unit) * 0.8);
-}
-
-/* ─── article.post ─── */
-
+/* ── article.post ── */
 article.post {
-  max-width: 68ch;
-  margin: 0 auto;
-  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
-}
-
-article.post h1 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  color: var(--color-fg);
-  letter-spacing: 0.04em;
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
-  animation: glitch-clip 11s infinite 1.5s, glitch-shadow 11s infinite 1.5s;
-}
-
-article.post h2,
-article.post h3 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  color: var(--color-fg);
-  letter-spacing: 0.03em;
-  margin-top: calc(var(--spacing-unit) * 2);
-  padding-left: calc(var(--spacing-unit) * 0.8);
-  border-left: 3px solid var(--color-accent);
-}
-
-article.post p {
-  margin-bottom: calc(var(--spacing-unit) * 1.2);
-}
-
-article.post a {
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: rgba(255, 43, 126, 0.5);
-  transition:
-    color              0.15s var(--ease-default),
-    text-decoration-color 0.15s var(--ease-default);
-}
-
-article.post a:hover {
-  color: #00ffd0;
-  text-decoration-color: #00ffd0;
-}
-
-article.post blockquote {
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 45, 130, 0.22);
+  border-radius: 6px;
+  padding: calc(var(--spacing-unit) * 2);
   position: relative;
-  margin: calc(var(--spacing-unit) * 1.5) 0;
-  padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5);
-  border-left: 3px solid var(--color-accent);
-  background: rgba(255, 43, 126, 0.04);
-  color: rgba(232, 225, 246, 0.75);
-  font-style: italic;
+  overflow: hidden;
 }
 
-article.post blockquote::before {
+/* 左上コーナーネオン */
+article.post::before {
   content: '';
   position: absolute;
-  left: -3px; top: 0; bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--color-accent), #00ffd0);
-  animation: flicker-bar 7s infinite 0.5s;
+  top: 0; left: 0;
+  width: 64px; height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  box-shadow: var(--glow-pink);
+  animation: corner-pulse-pink 3s ease-in-out infinite;
 }
 
-article.post code {
+/* 右下コーナーシアン */
+article.post::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 64px; height: 3px;
+  background: linear-gradient(270deg, var(--color-accent-cool), transparent);
+  box-shadow: var(--glow-cyan);
+  animation: corner-pulse-cyan 3s ease-in-out infinite;
+}
+
+@keyframes corner-pulse-pink {
+  0%,  100% { opacity: 1; }
+  50%        { opacity: 0.3; }
+}
+
+@keyframes corner-pulse-cyan {
+  0%,  100% { opacity: 0.3; }
+  50%        { opacity: 1;   }
+}
+
+/* ── hr: ボスバトル HP バー ── */
+hr {
+  border: none;
+  height: 3px;
+  border-radius: 2px;
+  margin: calc(var(--spacing-unit) * 2) 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent)      0%,
+    var(--color-accent-cool) 50%,
+    var(--color-accent)      100%
+  );
+  background-size: 200% 100%;
+  box-shadow: var(--glow-pink);
+  animation: hp-scan 2s linear infinite;
+}
+
+@keyframes hp-scan {
+  from { background-position:  200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ── blockquote: 歌詞フィール ── */
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  margin:  calc(var(--spacing-unit) * 1.5) 0;
+  padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.25);
+  background: rgba(255, 45, 130, 0.06);
+  font-style: italic;
+  color: rgba(238, 222, 255, 0.82);
+  box-shadow: inset 4px 0 14px rgba(255, 45, 130, 0.07);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ── code / pre: チップチューンモノスペース ── */
+code, pre {
   font-family: var(--font-heading);
-  background: rgba(255, 43, 126, 0.12);
-  color: #ff85b8;
-  padding: 0.1em 0.4em;
-  border-radius: 2px;
-  font-size: 0.875em;
+  background: rgba(0, 232, 255, 0.07);
+  border: 1px solid rgba(0, 232, 255, 0.2);
+  border-radius: 3px;
+  font-size: 0.87em;
+  color: var(--color-accent-cool);
+  text-shadow: 0 0 7px rgba(0, 232, 255, 0.4);
 }
 
-article.post pre {
-  background: rgba(255, 43, 126, 0.06);
-  border: 1px solid rgba(255, 43, 126, 0.2);
-  border-radius: 2px;
+code { padding: 0.1em 0.4em; }
+pre  {
   padding: calc(var(--spacing-unit) * 1.2);
   overflow-x: auto;
+  line-height: 1.6;
 }
 
-article.post pre code {
-  background: none;
-  padding: 0;
-  color: #c8b8e0;
+/* ── selection ── */
+::selection {
+  background: var(--color-accent);
+  color: #06071e;
 }
 
-article.post hr {
-  border: none;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
-  margin: calc(var(--spacing-unit) * 2.5) 0;
-  opacity: 0.5;
+/* ── scrollbar ── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+  box-shadow: var(--glow-pink);
 }
 
-/* ─── .site-footer ─── */
-
-.site-footer {
-  border-top: 1px solid rgba(255, 43, 126, 0.2);
-  padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
-  text-align: center;
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  letter-spacing: 0.2em;
-  color: rgba(232, 225, 246, 0.28);
-  position: relative;
-}
-
-.site-footer::before {
-  content: '▶';
-  display: block;
-  color: var(--color-accent);
-  font-size: 0.6rem;
-  margin-bottom: calc(var(--spacing-unit) * 0.5);
-  animation: pulse-dot 3s ease-in-out infinite;
-}
-
-/* ─── reduced motion ─── */
-
+/* ── prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation: none !important;
+    animation:  none !important;
     transition: none !important;
   }
 }

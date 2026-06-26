@@ -1,137 +1,149 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
 <defs>
 
-  <pattern id="sl" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-    <rect y="3" width="1200" height="1" fill="rgba(255,43,126,0.028)"/>
-  </pattern>
+<radialGradient id="rg-purple" cx="25%" cy="15%" r="55%">
+  <stop offset="0%" stop-color="#5a0078" stop-opacity="0.38"/>
+  <stop offset="100%" stop-color="#06071e" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="rg-blue" cx="75%" cy="85%" r="55%">
+  <stop offset="0%" stop-color="#001450" stop-opacity="0.52"/>
+  <stop offset="100%" stop-color="#06071e" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="rg-spot" cx="50%" cy="44%" r="30%">
+  <stop offset="0%" stop-color="#3a0055" stop-opacity="0.38"/>
+  <stop offset="100%" stop-color="#06071e" stop-opacity="0"/>
+</radialGradient>
 
-  <linearGradient id="bgG" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%" stop-color="#160828"/>
-    <stop offset="48%" stop-color="#0a0614"/>
-    <stop offset="100%" stop-color="#07050d"/>
-  </linearGradient>
+<pattern id="scanlines" width="2" height="4" patternUnits="userSpaceOnUse">
+  <rect y="3" width="2" height="1" fill="#000" fill-opacity="0.09"/>
+</pattern>
 
-  <linearGradient id="hL" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
-    <stop offset="0%"   stop-color="#07050d"/>
-    <stop offset="18%"  stop-color="#ff2b7e"/>
-    <stop offset="62%"  stop-color="#00ffd0"/>
-    <stop offset="100%" stop-color="#07050d"/>
-  </linearGradient>
+<linearGradient id="hp-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+  <stop offset="0%" stop-color="#ff2d82"/>
+  <stop offset="32%" stop-color="#cc44ff"/>
+  <stop offset="62%" stop-color="#00e8ff"/>
+  <stop offset="100%" stop-color="#ff2d82"/>
+</linearGradient>
 
-  <linearGradient id="hL2" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
-    <stop offset="0%"   stop-color="#07050d"/>
-    <stop offset="28%"  stop-color="#ff2b7e" stop-opacity="0.45"/>
-    <stop offset="72%"  stop-color="#ff2b7e" stop-opacity="0.45"/>
-    <stop offset="100%" stop-color="#07050d"/>
-  </linearGradient>
-
-  <filter id="glow" x="-8%" y="-35%" width="116%" height="170%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-
-  <filter id="sglow" x="-15%" y="-55%" width="130%" height="210%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-
-  <clipPath id="gc1"><rect x="0" y="164" width="1200" height="46"/></clipPath>
-  <clipPath id="gc2"><rect x="0" y="234" width="1200" height="36"/></clipPath>
+<filter id="blur-xl" x="-50%" y="-50%" width="200%" height="200%">
+  <feGaussianBlur stdDeviation="18"/>
+</filter>
+<filter id="blur-lg" x="-35%" y="-35%" width="170%" height="170%">
+  <feGaussianBlur stdDeviation="8"/>
+</filter>
+<filter id="blur-sm" x="-20%" y="-20%" width="140%" height="140%">
+  <feGaussianBlur stdDeviation="3.5"/>
+</filter>
+<filter id="glow" x="-30%" y="-50%" width="160%" height="200%">
+  <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+  <feMerge>
+    <feMergeNode in="b"/>
+    <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
 
 </defs>
 
-<!-- ── BACKGROUND ── -->
-<rect width="1200" height="630" fill="#07050d"/>
-<rect width="1200" height="630" fill="url(#bgG)"/>
-<rect width="1200" height="630" fill="url(#sl)"/>
+<!-- BACKGROUND -->
+<rect width="1200" height="630" fill="#06071e"/>
+<rect width="1200" height="630" fill="url(#rg-purple)"/>
+<rect width="1200" height="630" fill="url(#rg-blue)"/>
+<rect width="1200" height="630" fill="url(#rg-spot)"/>
+<rect width="1200" height="630" fill="url(#scanlines)"/>
 
-<!-- ── FRAME ── -->
-<rect x="0" y="0"   width="1200" height="2" fill="url(#hL)"/>
-<rect x="0" y="628" width="1200" height="2" fill="url(#hL)" opacity="0.28"/>
-<rect x="0"    y="0" width="1" height="630" fill="#ff2b7e" opacity="0.22"/>
-<rect x="1199" y="0" width="1" height="630" fill="#ff2b7e" opacity="0.22"/>
+<!-- DEEP SEA BUBBLE RINGS -->
+<circle cx="145" cy="472" r="68" fill="none" stroke="#00e8ff" stroke-width="1" opacity="0.055"/>
+<circle cx="145" cy="472" r="44" fill="none" stroke="#00e8ff" stroke-width="0.6" opacity="0.04"/>
+<circle cx="1058" cy="192" r="84" fill="none" stroke="#ff2d82" stroke-width="1" opacity="0.055"/>
+<circle cx="1058" cy="192" r="55" fill="none" stroke="#ff2d82" stroke-width="0.6" opacity="0.04"/>
+<circle cx="892" cy="516" r="40" fill="none" stroke="#00e8ff" stroke-width="0.7" opacity="0.04"/>
+<circle cx="296" cy="148" r="52" fill="none" stroke="#cc44ff" stroke-width="0.7" opacity="0.05"/>
+<circle cx="978" cy="548" r="25" fill="none" stroke="#00e8ff" stroke-width="0.5" opacity="0.036"/>
+<circle cx="232" cy="502" r="18" fill="none" stroke="#ff2d82" stroke-width="0.5" opacity="0.04"/>
+<circle cx="725" cy="80" r="30" fill="none" stroke="#cc44ff" stroke-width="0.5" opacity="0.038"/>
 
-<!-- Corner TL -->
-<rect x="28" y="28" width="26" height="2" fill="#ff2b7e" opacity="0.72"/>
-<rect x="28" y="28" width="2" height="26" fill="#ff2b7e" opacity="0.72"/>
-<!-- Corner TR -->
-<rect x="1146" y="28" width="26" height="2" fill="#ff2b7e" opacity="0.72"/>
-<rect x="1170" y="28" width="2"  height="26" fill="#ff2b7e" opacity="0.72"/>
-<!-- Corner BL -->
-<rect x="28" y="600" width="26" height="2" fill="#ff2b7e" opacity="0.32"/>
-<rect x="28" y="576" width="2"  height="26" fill="#ff2b7e" opacity="0.32"/>
-<!-- Corner BR -->
-<rect x="1146" y="600" width="26" height="2" fill="#ff2b7e" opacity="0.32"/>
-<rect x="1170" y="576" width="2"  height="26" fill="#ff2b7e" opacity="0.32"/>
+<!-- MAGIC CIRCLE (very subtle, behind title) -->
+<circle cx="600" cy="268" r="248" fill="none" stroke="#ff2d82" stroke-width="0.5" opacity="0.09"/>
+<circle cx="600" cy="268" r="224" fill="none" stroke="#cc44ff" stroke-width="0.4" opacity="0.07"/>
+<circle cx="600" cy="268" r="200" fill="none" stroke="#ff2d82" stroke-width="0.3" opacity="0.055"/>
+<line x1="600" y1="20" x2="600" y2="516" stroke="#ff2d82" stroke-width="0.4" opacity="0.07"/>
+<line x1="352" y1="268" x2="848" y2="268" stroke="#ff2d82" stroke-width="0.4" opacity="0.07"/>
+<line x1="425" y1="92" x2="775" y2="444" stroke="#cc44ff" stroke-width="0.3" opacity="0.055"/>
+<line x1="775" y1="92" x2="425" y2="444" stroke="#cc44ff" stroke-width="0.3" opacity="0.055"/>
 
-<!-- ── GLITCH LAYERS ── -->
-<g clip-path="url(#gc1)">
-  <text x="594" y="292" text-anchor="middle" font-family="monospace" font-size="110"
-        fill="#00ffd0" opacity="0.45" letter-spacing="6">へのへのんのの</text>
-</g>
-<g clip-path="url(#gc2)">
-  <text x="606" y="291" text-anchor="middle" font-family="monospace" font-size="110"
-        fill="#ff2b7e" opacity="0.45" letter-spacing="6">へのへのんのの</text>
-</g>
+<!-- OUTER FRAME -->
+<rect x="22" y="22" width="1156" height="586" fill="none" stroke="#ff2d82" stroke-width="1" opacity="0.28"/>
 
-<!-- ── MAIN TITLE ── -->
-<text x="600" y="292" text-anchor="middle" font-family="monospace" font-size="110"
-      fill="#e8e1f6" letter-spacing="6" filter="url(#glow)">へのへのんのの</text>
+<!-- CORNER BRACKETS -->
+<polyline points="22,118 22,22 118,22" fill="none" stroke="#ff2d82" stroke-width="3.5" stroke-linejoin="miter" filter="url(#glow)" opacity="0.92"/>
+<polyline points="1082,22 1178,22 1178,118" fill="none" stroke="#00e8ff" stroke-width="3.5" stroke-linejoin="miter" filter="url(#glow)" opacity="0.92"/>
+<polyline points="22,512 22,608 118,608" fill="none" stroke="#00e8ff" stroke-width="3.5" stroke-linejoin="miter" filter="url(#glow)" opacity="0.92"/>
+<polyline points="1082,608 1178,608 1178,512" fill="none" stroke="#ff2d82" stroke-width="3.5" stroke-linejoin="miter" filter="url(#glow)" opacity="0.92"/>
 
-<!-- ── SEPARATOR ── -->
-<rect x="80" y="336" width="1040" height="1" fill="url(#hL2)"/>
+<!-- SCATTERED SPARKLES -->
+<text x="86" y="178" font-family="serif" font-size="22" fill="#ff2d82" filter="url(#glow)" opacity="0.72">✦</text>
+<text x="1082" y="200" font-family="serif" font-size="18" fill="#00e8ff" filter="url(#glow)" opacity="0.68">✦</text>
+<text x="133" y="428" font-family="serif" font-size="14" fill="#00e8ff" filter="url(#glow)" opacity="0.60">★</text>
+<text x="1042" y="438" font-family="serif" font-size="16" fill="#ff2d82" filter="url(#glow)" opacity="0.60">★</text>
+<text x="372" y="84" font-family="serif" font-size="12" fill="#cc44ff" opacity="0.50">✦</text>
+<text x="818" y="90" font-family="serif" font-size="14" fill="#ff2d82" opacity="0.48">✦</text>
+<text x="256" y="572" font-family="serif" font-size="11" fill="#00e8ff" opacity="0.42">✦</text>
+<text x="942" y="578" font-family="serif" font-size="11" fill="#ff2d82" opacity="0.42">✦</text>
+<text x="554" y="66" font-family="serif" font-size="10" fill="#cc44ff" opacity="0.38">★</text>
+<text x="640" y="64" font-family="serif" font-size="10" fill="#00e8ff" opacity="0.38">★</text>
+<text x="180" y="306" font-family="serif" font-size="9" fill="#ff2d82" opacity="0.32">◆</text>
+<text x="1010" y="302" font-family="serif" font-size="9" fill="#00e8ff" opacity="0.32">◆</text>
+<text x="104" y="538" font-family="serif" font-size="8" fill="#cc44ff" opacity="0.28">◆</text>
+<text x="1084" y="536" font-family="serif" font-size="8" fill="#cc44ff" opacity="0.28">◆</text>
 
-<!-- ── SUBTITLE ── -->
-<text x="600" y="372" text-anchor="middle" font-family="monospace" font-size="13"
-      fill="rgba(232,225,246,0.3)" letter-spacing="10">TODAY'S SONG</text>
+<!-- MAIN TITLE: へのへのんのの -->
+<!-- Layer 1: wide pink glow halo -->
+<text x="600" y="288" text-anchor="middle"
+  font-family="monospace" font-size="110" letter-spacing="0.03em"
+  fill="#ff2d82" opacity="0.30" filter="url(#blur-xl)">へのへのんのの</text>
+<!-- Layer 2: medium pink glow -->
+<text x="600" y="288" text-anchor="middle"
+  font-family="monospace" font-size="110" letter-spacing="0.03em"
+  fill="#ff2d82" opacity="0.40" filter="url(#blur-lg)">へのへのんのの</text>
+<!-- Layer 3: tight purple-pink bloom -->
+<text x="600" y="288" text-anchor="middle"
+  font-family="monospace" font-size="110" letter-spacing="0.03em"
+  fill="#cc88ff" opacity="0.52" filter="url(#blur-sm)">へのへのんのの</text>
+<!-- Layer 4: actual bright lavender text -->
+<text x="600" y="288" text-anchor="middle"
+  font-family="monospace" font-size="110" letter-spacing="0.03em"
+  fill="#eedeff">へのへのんのの</text>
 
-<text x="600" y="424" text-anchor="middle" font-family="monospace" font-size="42"
-      fill="#ff2b7e" letter-spacing="4" filter="url(#sglow)">シーリグラブ</text>
+<!-- HP BAR DIVIDER -->
+<rect x="95" y="352" width="1010" height="3.5" fill="url(#hp-grad)" rx="1.75" filter="url(#glow)" opacity="0.85"/>
+<rect x="95" y="345" width="4.5" height="18" fill="#ff2d82" rx="1.5" opacity="0.84"/>
+<rect x="1100.5" y="345" width="4.5" height="18" fill="#ff2d82" rx="1.5" opacity="0.84"/>
 
-<text x="600" y="468" text-anchor="middle" font-family="monospace" font-size="22"
-      fill="rgba(232,225,246,0.42)" letter-spacing="4">mnmnmnmn feat. 知声</text>
+<!-- SUBTITLE: Song name -->
+<text x="600" y="408" text-anchor="middle"
+  font-family="monospace" font-size="37" letter-spacing="0.08em"
+  fill="#ff2d82" opacity="0.42" filter="url(#blur-lg)">Cutie Mew Mew Magic</text>
+<text x="600" y="408" text-anchor="middle"
+  font-family="monospace" font-size="37" letter-spacing="0.08em"
+  fill="#ff2d82" filter="url(#glow)" opacity="0.96">Cutie Mew Mew Magic</text>
 
-<!-- ── EQUALIZER BARS ── -->
-<g opacity="0.2">
-  <!-- Left cluster -->
-  <rect x="100" y="574" width="11" height="28" rx="1" fill="#ff2b7e"/>
-  <rect x="118" y="560" width="11" height="42" rx="1" fill="#ff2b7e"/>
-  <rect x="136" y="570" width="11" height="32" rx="1" fill="#ff2b7e"/>
-  <rect x="154" y="554" width="11" height="48" rx="1" fill="#ff2b7e"/>
-  <rect x="172" y="564" width="11" height="38" rx="1" fill="#00ffd0"/>
-  <rect x="190" y="577" width="11" height="25" rx="1" fill="#00ffd0"/>
-  <rect x="208" y="550" width="11" height="52" rx="1" fill="#ff2b7e"/>
-  <rect x="226" y="567" width="11" height="35" rx="1" fill="#ff2b7e"/>
-  <rect x="244" y="557" width="11" height="45" rx="1" fill="#00ffd0"/>
-  <rect x="262" y="572" width="11" height="30" rx="1" fill="#00ffd0"/>
-  <!-- Center cluster -->
-  <rect x="480" y="564" width="11" height="38" rx="1" fill="#ff2b7e"/>
-  <rect x="498" y="550" width="11" height="52" rx="1" fill="#ff2b7e"/>
-  <rect x="516" y="560" width="11" height="42" rx="1" fill="#ff2b7e"/>
-  <rect x="534" y="547" width="11" height="55" rx="1" fill="#ff2b7e"/>
-  <rect x="552" y="554" width="11" height="48" rx="1" fill="#00ffd0"/>
-  <rect x="570" y="542" width="11" height="60" rx="1" fill="#00ffd0"/>
-  <rect x="588" y="550" width="11" height="52" rx="1" fill="#00ffd0"/>
-  <rect x="606" y="542" width="11" height="60" rx="1" fill="#ff2b7e"/>
-  <rect x="624" y="547" width="11" height="55" rx="1" fill="#ff2b7e"/>
-  <rect x="642" y="554" width="11" height="48" rx="1" fill="#ff2b7e"/>
-  <rect x="660" y="560" width="11" height="42" rx="1" fill="#ff2b7e"/>
-  <rect x="678" y="552" width="11" height="50" rx="1" fill="#00ffd0"/>
-  <rect x="696" y="564" width="11" height="38" rx="1" fill="#00ffd0"/>
-  <!-- Right cluster -->
-  <rect x="928"  y="564" width="11" height="38" rx="1" fill="#00ffd0"/>
-  <rect x="946"  y="574" width="11" height="28" rx="1" fill="#00ffd0"/>
-  <rect x="964"  y="557" width="11" height="45" rx="1" fill="#ff2b7e"/>
-  <rect x="982"  y="570" width="11" height="32" rx="1" fill="#ff2b7e"/>
-  <rect x="1000" y="552" width="11" height="50" rx="1" fill="#ff2b7e"/>
-  <rect x="1018" y="567" width="11" height="35" rx="1" fill="#ff2b7e"/>
-  <rect x="1036" y="550" width="11" height="52" rx="1" fill="#00ffd0"/>
-  <rect x="1054" y="577" width="11" height="25" rx="1" fill="#00ffd0"/>
-  <rect x="1072" y="560" width="11" height="42" rx="1" fill="#ff2b7e"/>
-  <rect x="1090" y="570" width="11" height="32" rx="1" fill="#ff2b7e"/>
-</g>
+<!-- ARTIST INFO -->
+<text x="600" y="456" text-anchor="middle"
+  font-family="monospace" font-size="20" letter-spacing="0.10em"
+  fill="#00e8ff" opacity="0.76">Toby Fox × かめりあ feat. 初音ミク V3</text>
 
-<!-- Bottom ambient glow -->
-<rect x="0" y="592" width="1200" height="38" fill="rgba(255,43,126,0.032)"/>
+<!-- Thin accent lines flanking artist -->
+<line x1="95" y1="481" x2="448" y2="481" stroke="#00e8ff" stroke-width="0.6" opacity="0.22"/>
+<line x1="752" y1="481" x2="1105" y2="481" stroke="#00e8ff" stroke-width="0.6" opacity="0.22"/>
+<text x="600" y="485" text-anchor="middle" font-family="serif" font-size="9" fill="#00e8ff" opacity="0.35">✦</text>
+
+<!-- BOTTOM DEEP SEA WAVE -->
+<path d="M0 602 Q150 593 300 602 Q450 611 600 602 Q750 593 900 602 Q1050 611 1200 602 L1200 630 L0 630 Z"
+  fill="#00e8ff" opacity="0.022"/>
+
+<!-- FLAVOR TEXT -->
+<text x="600" y="576" text-anchor="middle"
+  font-family="monospace" font-size="11.5" letter-spacing="0.20em"
+  fill="#ff2d82" opacity="0.40">🐱  ✦  She is saving the day  ✦  🐱</text>
 
 </svg>
