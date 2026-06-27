@@ -1,343 +1,336 @@
-/* Cutie Mew Mew Magic / Toby Fox, かめりあ feat. 初音ミク V3 / 深海を割る魔法少女革命 — 闇と水中を越えるボスバトルのキューティエネルギー */
+/* Don't Let Me Down / d0tc0mmie feat. Synthesizer V AI Megpoid / 地獄仕事・夜明け前の反骨 */
 
 :root {
-  --color-bg:            #06071e;
-  --color-fg:            #eedeff;
-  --color-accent:        #ff2d82;
-  --color-accent-cool:   #00e8ff;
-  --color-surface:       #0d0f2c;
+  --color-bg:             #09090f;
+  --color-fg:             #e8eaf2;
+  --color-accent:         #ff3c5a;
 
-  --spacing-unit:        1rem;
+  --spacing-unit:         1rem;
 
-  --font-heading:        'Courier New', Courier, monospace;
-  --font-body:           'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans JP',
-                         system-ui, sans-serif;
+  --font-heading:         'Impact', 'Oswald', 'Arial Narrow', Arial,
+                          'Hiragino Sans', sans-serif;
+  --font-body:            'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic',
+                          'Meiryo', system-ui, -apple-system,
+                          BlinkMacSystemFont, sans-serif;
 
-  --line-height-body:    1.88;
-  --line-height-heading: 1.15;
+  --line-height-body:     1.82;
+  --line-height-heading:  1.05;
 
-  --ease-default:        cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-default:         cubic-bezier(0.23, 1, 0.32, 1);
 
-  --glow-pink:           0 0 6px #ff2d82, 0 0 22px rgba(255, 45, 130, 0.45);
-  --glow-cyan:           0 0 6px #00e8ff, 0 0 22px rgba(0, 232, 255, 0.35);
+  --_dawn:                rgba(255, 90, 40, 0.09);
+  --_glitch-r:            rgba(255, 60, 90, 0.75);
+  --_glitch-c:            rgba(0, 210, 255, 0.55);
 }
 
-/* ── reset helpers ── */
+/* ── Reset ── */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* ── body: 深海の闇 ── */
+/* ── Body ─ dark office, threat of dawn at the horizon ── */
 body {
   background-color: var(--color-bg);
-  color:            var(--color-fg);
-  font-family:      var(--font-body);
-  line-height:      var(--line-height-body);
-  min-height:       100vh;
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  font-size: 1rem;
   background-image:
-    radial-gradient(ellipse at 25% 15%, rgba(90, 0, 120, 0.35) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 85%, rgba(0, 20, 80, 0.5)   0%, transparent 55%);
+    radial-gradient(ellipse 90% 35% at 50% 115%,
+      var(--_dawn) 0%, transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255, 60, 90, 0.018) 3px,
+      rgba(255, 60, 90, 0.018) 4px
+    );
 }
 
-/* ── CRT スキャンライン (チップチューン美学) ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent            0px,
-    transparent            3px,
-    rgba(0, 0, 0, 0.07)   3px,
-    rgba(0, 0, 0, 0.07)   4px
-  );
-  animation: scanlines 10s linear infinite;
-}
-
-@keyframes scanlines {
-  from { background-position: 0 0;    }
-  to   { background-position: 0 40px; }
-}
-
-/* ── typography ── */
+/* ── Global typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  color:       var(--color-accent);
-  text-shadow: var(--glow-pink);
-  letter-spacing: 0.04em;
-  position: relative;
-  display: inline-block;
-}
-
-/* ピクセルスパーク (ステップアニメ) */
-h1::after, h2::after {
-  content: ' ✦';
-  font-size: 0.55em;
-  vertical-align: super;
-  color: var(--color-accent-cool);
-  animation: spark-step 0.8s steps(2, end) infinite;
-}
-
-@keyframes spark-step {
-  0%   { opacity: 1; }
-  50%  { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* グリッチ — カオスバトルエネルギー */
-h1 {
-  animation: glitch 6s steps(1, end) infinite;
-}
-
-@keyframes glitch {
-  0%,  92%, 100% { text-shadow: var(--glow-pink); transform: none; }
-  93%            { text-shadow: 3px 0 var(--color-accent-cool), -3px 0 var(--color-accent);
-                   transform: skewX(-4deg) translateX(-2px); }
-  95%            { text-shadow: -2px 0 var(--color-accent-cool), 2px 0 var(--color-accent);
-                   transform: skewX(3deg)  translateX(1px); }
-  97%            { text-shadow: var(--glow-pink); transform: none; }
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-fg);
 }
 
 a {
-  color: var(--color-accent-cool);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: transparent;
-  transition:
-    color                  0.22s var(--ease-default),
-    text-decoration-color  0.22s var(--ease-default),
-    text-shadow            0.22s var(--ease-default);
-}
-
-a:hover,
-a:focus-visible {
   color: var(--color-accent);
-  text-decoration-color: currentColor;
-  text-shadow: var(--glow-pink);
-  outline: none;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    color           0.18s var(--ease-default),
+    border-color    0.18s var(--ease-default);
 }
 
-/* ── .site-header: ネオンピンク深海 ── */
+a:hover {
+  color: #ff6b82;
+  border-bottom-color: #ff6b82;
+}
+
+::selection {
+  background-color: rgba(255, 60, 90, 0.35);
+  color: var(--color-fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+time {
+  color: rgba(255, 140, 66, 0.85);
+  font-size: 0.85em;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 60, 90, 0.38);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* ── Site Header ─ flickering fluorescent ceiling of a dark office ── */
 .site-header {
-  background: linear-gradient(135deg, #100a30 0%, #1a003e 45%, #001a40 100%);
+  background-color: #0c0c18;
   border-bottom: 2px solid var(--color-accent);
-  box-shadow: var(--glow-pink), 0 4px 40px rgba(255, 45, 130, 0.18);
   padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
   position: relative;
   overflow: hidden;
 }
 
-/* 水流シマー */
-.site-header::before {
+.site-header::after {
   content: '';
   position: absolute;
   inset: 0;
-  pointer-events: none;
   background: repeating-linear-gradient(
     90deg,
-    transparent                      0%,
-    rgba(0, 232, 255, 0.05)         20%,
-    transparent                      40%
+    transparent,
+    transparent 6px,
+    rgba(255, 60, 90, 0.025) 6px,
+    rgba(255, 60, 90, 0.025) 7px
   );
-  background-size: 200% 100%;
-  animation: water-flow 5s linear infinite;
-}
-
-@keyframes water-flow {
-  from { background-position:   0% 0; }
-  to   { background-position: 200% 0; }
-}
-
-/* "Mew Mew" フローティングラベル */
-.site-header::after {
-  content: '🐱 ✦ She is saving the day ✦ 🐱';
-  position: absolute;
-  bottom: 4px;
-  right: var(--spacing-unit);
-  font-size: 0.62rem;
-  font-family: var(--font-heading);
-  letter-spacing: 0.18em;
-  color: var(--color-accent);
-  opacity: 0.55;
-  animation: mew-blink 2.4s steps(3, end) infinite;
   pointer-events: none;
 }
 
-@keyframes mew-blink {
-  0%,  100% { opacity: 0.55; }
-  50%        { opacity: 0.15; }
+.site-header h1,
+.site-header .site-title {
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  animation: grinding-glitch 9s steps(1) infinite;
+  text-shadow:
+    2px  0 0 var(--_glitch-r),
+    -2px 0 0 var(--_glitch-c);
 }
 
-/* ── .site-footer ── */
+@keyframes grinding-glitch {
+  0%, 82%, 100% {
+    text-shadow:
+      2px  0 0 var(--_glitch-r),
+      -2px 0 0 var(--_glitch-c);
+    transform: translate(0, 0);
+    clip-path: none;
+  }
+  83% {
+    text-shadow:
+      -4px 0 0 var(--_glitch-r),
+       4px 0 0 var(--_glitch-c);
+    transform: translate(3px, -2px);
+    clip-path: inset(30% 0 40% 0);
+  }
+  84% {
+    text-shadow:
+       4px 0 0 var(--_glitch-r),
+      -4px 0 0 var(--_glitch-c);
+    transform: translate(-2px, 2px);
+    clip-path: inset(60% 0 10% 0);
+  }
+  85% {
+    text-shadow:
+      2px  0 0 var(--_glitch-r),
+      -2px 0 0 var(--_glitch-c);
+    transform: translate(0, 0);
+    clip-path: none;
+  }
+  92% {
+    text-shadow:
+      -2px 0 0 var(--_glitch-r),
+       2px 0 0 var(--_glitch-c);
+    transform: translate(1px, 0);
+  }
+  93% {
+    text-shadow:
+      2px  0 0 var(--_glitch-r),
+      -2px 0 0 var(--_glitch-c);
+    transform: translate(0, 0);
+  }
+}
+
+/* ── Site Footer ── */
 .site-footer {
-  background: #09091e;
-  border-top: 2px solid var(--color-accent-cool);
-  box-shadow: 0 -4px 24px rgba(0, 232, 255, 0.14);
-  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  background-color: #0c0c18;
+  border-top: 1px solid rgba(255, 60, 90, 0.25);
+  color: #5a5b72;
+  padding: calc(var(--spacing-unit) * 1.75) calc(var(--spacing-unit) * 2);
   text-align: center;
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  color: rgba(238, 222, 255, 0.45);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
 }
 
-.site-footer::before {
-  content: '救世 mew  ✦  Cutie Revolution  ✦  キューティ革命';
-  display: block;
-  color: var(--color-accent-cool);
-  text-shadow: var(--glow-cyan);
-  margin-bottom: calc(var(--spacing-unit) * 0.5);
-  animation: pulse-cool 2.8s ease-in-out infinite;
+.site-footer a {
+  color: rgba(255, 60, 90, 0.65);
 }
 
-@keyframes pulse-cool {
-  0%,  100% { opacity: 1;   text-shadow: var(--glow-cyan); }
-  50%        { opacity: 0.4; text-shadow: none;             }
+.site-footer a:hover {
+  color: var(--color-accent);
 }
 
-/* ── .post-list ── */
+/* ── Post List ─ each entry like a punch card on the time clock ── */
 .post-list {
   list-style: none;
+  margin: 0;
   padding: 0;
-  margin: calc(var(--spacing-unit) * 2) 0;
 }
 
 .post-list li {
   border-left: 3px solid transparent;
-  padding:     calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.25);
-  margin-bottom: calc(var(--spacing-unit) * 0.5);
-  background: rgba(255, 45, 130, 0.04);
-  border-radius: 0 5px 5px 0;
+  padding: calc(var(--spacing-unit) * 0.7) calc(var(--spacing-unit) * 1.2);
+  margin-bottom: 2px;
   transition:
-    border-left-color 0.2s var(--ease-default),
-    background        0.2s var(--ease-default),
-    transform         0.2s var(--ease-default),
-    box-shadow        0.2s var(--ease-default);
+    border-left-color  0.15s var(--ease-default),
+    background-color   0.15s var(--ease-default);
 }
 
 .post-list li:hover {
   border-left-color: var(--color-accent);
-  background: rgba(255, 45, 130, 0.1);
-  transform: translateX(5px);
-  box-shadow: inset 0 0 24px rgba(255, 45, 130, 0.07);
+  background-color: rgba(255, 60, 90, 0.07);
 }
 
-/* ── article.post ── */
+.post-list a {
+  font-weight: 600;
+  font-size: 1.04rem;
+}
+
+/* ── Article Post ─ drag the body forward, word by word ── */
 article.post {
-  background: var(--color-surface);
-  border: 1px solid rgba(255, 45, 130, 0.22);
-  border-radius: 6px;
-  padding: calc(var(--spacing-unit) * 2);
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
+}
+
+article.post h1,
+article.post h2,
+article.post h3 {
   position: relative;
-  overflow: hidden;
+  margin-top: calc(var(--spacing-unit) * 2.2);
 }
 
-/* 左上コーナーネオン */
-article.post::before {
+article.post h1::after,
+article.post h2::after {
   content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 64px; height: 3px;
-  background: linear-gradient(90deg, var(--color-accent), transparent);
-  box-shadow: var(--glow-pink);
-  animation: corner-pulse-pink 3s ease-in-out infinite;
+  display: block;
+  margin-top: 0.3em;
+  height: 2px;
+  width: 2.2em;
+  background: var(--color-accent);
+  transition: width 0.45s var(--ease-default);
 }
 
-/* 右下コーナーシアン */
-article.post::after {
-  content: '';
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 64px; height: 3px;
-  background: linear-gradient(270deg, var(--color-accent-cool), transparent);
-  box-shadow: var(--glow-cyan);
-  animation: corner-pulse-cyan 3s ease-in-out infinite;
+article.post h1:hover::after,
+article.post h2:hover::after {
+  width: 100%;
 }
 
-@keyframes corner-pulse-pink {
-  0%,  100% { opacity: 1; }
-  50%        { opacity: 0.3; }
-}
-
-@keyframes corner-pulse-cyan {
-  0%,  100% { opacity: 0.3; }
-  50%        { opacity: 1;   }
-}
-
-/* ── hr: ボスバトル HP バー ── */
-hr {
-  border: none;
-  height: 3px;
-  border-radius: 2px;
-  margin: calc(var(--spacing-unit) * 2) 0;
-  background: linear-gradient(
-    90deg,
-    var(--color-accent)      0%,
-    var(--color-accent-cool) 50%,
-    var(--color-accent)      100%
-  );
-  background-size: 200% 100%;
-  box-shadow: var(--glow-pink);
-  animation: hp-scan 2s linear infinite;
-}
-
-@keyframes hp-scan {
-  from { background-position:  200% 0; }
-  to   { background-position: -200% 0; }
-}
-
-/* ── blockquote: 歌詞フィール ── */
-blockquote {
+article.post blockquote {
   border-left: 3px solid var(--color-accent);
-  margin:  calc(var(--spacing-unit) * 1.5) 0;
-  padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.25);
-  background: rgba(255, 45, 130, 0.06);
+  margin: calc(var(--spacing-unit) * 1.5) 0;
+  padding: calc(var(--spacing-unit) * 0.9) calc(var(--spacing-unit) * 1.4);
+  background-color: rgba(255, 60, 90, 0.05);
+  color: #9a9bb8;
   font-style: italic;
-  color: rgba(238, 222, 255, 0.82);
-  box-shadow: inset 4px 0 14px rgba(255, 45, 130, 0.07);
-  border-radius: 0 4px 4px 0;
 }
 
-/* ── code / pre: チップチューンモノスペース ── */
-code, pre {
-  font-family: var(--font-heading);
-  background: rgba(0, 232, 255, 0.07);
-  border: 1px solid rgba(0, 232, 255, 0.2);
+article.post hr {
+  border: none;
+  border-top: 1px solid rgba(255, 60, 90, 0.22);
+  margin: calc(var(--spacing-unit) * 2.5) 0;
+}
+
+article.post code {
+  font-size: 0.88em;
+  padding: 0.15em 0.45em;
+  background-color: #161625;
+  color: #ff8c42;
   border-radius: 3px;
-  font-size: 0.87em;
-  color: var(--color-accent-cool);
-  text-shadow: 0 0 7px rgba(0, 232, 255, 0.4);
 }
 
-code { padding: 0.1em 0.4em; }
-pre  {
-  padding: calc(var(--spacing-unit) * 1.2);
+article.post pre {
+  background-color: #0e0e1c;
+  border: 1px solid rgba(255, 60, 90, 0.18);
+  border-radius: 4px;
+  padding: var(--spacing-unit);
   overflow-x: auto;
   line-height: 1.6;
 }
 
-/* ── selection ── */
-::selection {
-  background: var(--color-accent);
-  color: #06071e;
+article.post pre code {
+  background: none;
+  padding: 0;
+  color: #c4c6e0;
+  font-size: 0.9em;
 }
 
-/* ── scrollbar ── */
-::-webkit-scrollbar       { width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 3px;
-  box-shadow: var(--glow-pink);
+/* ── "I rise unbroken" ─ accent on emphasized text ── */
+article.post strong {
+  color: #ff8c42;
+  font-weight: 700;
 }
 
-/* ── prefers-reduced-motion ── */
+article.post em {
+  color: #c0c2dc;
+  font-style: italic;
+}
+
+/* ── Overtime counter ─ clock-hand underline sweep on nav links ── */
+nav a {
+  position: relative;
+  overflow: hidden;
+}
+
+nav a::before {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transition: left 0.28s var(--ease-default);
+}
+
+nav a:hover::before {
+  left: 0;
+}
+
+/* ── "地獄仕事" ─ a low-key red-shift pulse on the accent marker ── */
+@keyframes heartbeat-overtime {
+  0%, 100% { opacity: 1;    transform: scaleX(1);    }
+  45%       { opacity: 0.7; transform: scaleX(0.95); }
+  50%       { opacity: 1;   transform: scaleX(1.04); }
+}
+
+.post-list li:hover > *:first-child a::before,
+article.post h1::after {
+  animation: heartbeat-overtime 2.6s ease-in-out infinite;
+}
+
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation:  none !important;
+    animation: none !important;
     transition: none !important;
   }
 }
