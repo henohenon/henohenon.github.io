@@ -1,333 +1,453 @@
-/* Don't Let Me Down / d0tc0mmie feat. Synthesizer V AI Megpoid / 地獄仕事・夜明け前の反骨 */
+/* PHD / 柊マグネタイト feat. 重音テトSV / ミッドナイト・グリッチ・ラブ ── コードの中に生きる少女が、画面の向こうのキミの胸へダイブする */
 
 :root {
-  --color-bg:             #09090f;
-  --color-fg:             #e8eaf2;
-  --color-accent:         #ff3c5a;
-
-  --spacing-unit:         1rem;
-
-  --font-heading:         'Impact', 'Oswald', 'Arial Narrow', Arial,
-                          'Hiragino Sans', sans-serif;
-  --font-body:            'Hiragino Sans', 'Yu Gothic UI', 'Yu Gothic',
-                          'Meiryo', system-ui, -apple-system,
-                          BlinkMacSystemFont, sans-serif;
-
-  --line-height-body:     1.82;
-  --line-height-heading:  1.05;
-
-  --ease-default:         cubic-bezier(0.23, 1, 0.32, 1);
-
-  --_dawn:                rgba(255, 90, 40, 0.09);
-  --_glitch-r:            rgba(255, 60, 90, 0.75);
-  --_glitch-c:            rgba(0, 210, 255, 0.55);
+  --color-bg: #07071a;
+  --color-fg: #dde4ff;
+  --color-accent: #00f0ff;
+  --color-accent-alt: #ff5599;
+  --color-chrome: #7a96cc;
+  --spacing-unit: 1rem;
+  --font-heading: 'Courier New', 'Osaka-Mono', 'Courier', monospace;
+  --font-body: 'Hiragino Sans', 'Yu Gothic', 'Yu Gothic UI', 'Meiryo', 'MS PGothic', system-ui, -apple-system, sans-serif;
+  --line-height-body: 1.8;
+  --line-height-heading: 1.15;
+  --ease-default: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* ── Reset ── */
+/* ── Keyframes ─────────────────────────────────────────── */
+
+@keyframes glitch-rgb {
+  0%, 90%, 100% {
+    text-shadow:
+      -1px 0 0 var(--color-accent-alt),
+       1px 0 0 var(--color-accent);
+    transform: none;
+  }
+  91% {
+    text-shadow:
+       3px 0 0 var(--color-accent-alt),
+      -3px 0 0 var(--color-accent);
+    transform: skewX(-4deg);
+  }
+  93% {
+    text-shadow:
+      -3px 0 0 var(--color-accent-alt),
+       3px 0 0 var(--color-accent);
+    transform: skewX(3deg);
+  }
+  95% {
+    text-shadow:
+       2px 0 0 var(--color-accent-alt),
+      -2px 0 0 var(--color-accent);
+    transform: skewX(-1deg);
+  }
+}
+
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 4px var(--color-accent),
+      0 0 14px rgba(0, 240, 255, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 0 8px var(--color-accent),
+      0 0 32px rgba(0, 240, 255, 0.5),
+      0 0 56px rgba(0, 240, 255, 0.12);
+  }
+}
+
+@keyframes scanline-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 0 120px; }
+}
+
+@keyframes blink-step {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes pixel-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes border-chase {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ── Global ────────────────────────────────────────────── */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* ── Body ─ dark office, threat of dawn at the horizon ── */
 body {
   background-color: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  font-size: 1rem;
+  margin: 0;
+  padding: 0;
   background-image:
-    radial-gradient(ellipse 90% 35% at 50% 115%,
-      var(--_dawn) 0%, transparent 70%),
     repeating-linear-gradient(
       0deg,
       transparent,
       transparent 3px,
-      rgba(255, 60, 90, 0.018) 3px,
-      rgba(255, 60, 90, 0.018) 4px
+      rgba(0, 240, 255, 0.018) 3px,
+      rgba(0, 240, 255, 0.018) 4px
     );
+  animation: scanline-drift 10s linear infinite;
 }
 
-/* ── Global typography ── */
+::selection {
+  background: rgba(255, 85, 153, 0.38);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 240, 255, 0.32);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* ── Typography ────────────────────────────────────────── */
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
   letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-fg);
+  margin-block: calc(var(--spacing-unit) * 1.4) calc(var(--spacing-unit) * 0.6);
 }
+
+h1 {
+  font-size: clamp(1.7rem, 4.5vw, 2.6rem);
+  color: var(--color-accent);
+  animation: glitch-rgb 9s infinite;
+}
+
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  color: var(--color-fg);
+  animation: glitch-rgb 13s 2s infinite;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--color-chrome);
+}
+
+h4, h5, h6 {
+  color: var(--color-chrome);
+  font-size: 1rem;
+}
+
+/* ── Links ─────────────────────────────────────────────── */
 
 a {
   color: var(--color-accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 240, 255, 0.35);
+  text-underline-offset: 4px;
   transition:
-    color           0.18s var(--ease-default),
-    border-color    0.18s var(--ease-default);
+    color 0.18s var(--ease-default),
+    text-shadow 0.18s var(--ease-default),
+    text-decoration-color 0.18s var(--ease-default);
 }
 
-a:hover {
-  color: #ff6b82;
-  border-bottom-color: #ff6b82;
+a:hover,
+a:focus-visible {
+  color: #ffffff;
+  text-shadow:
+    0 0 6px var(--color-accent),
+    0 0 18px rgba(0, 240, 255, 0.5);
+  text-decoration-color: var(--color-accent);
+  outline: none;
 }
 
-::selection {
-  background-color: rgba(255, 60, 90, 0.35);
-  color: var(--color-fg);
-}
-
-:focus-visible {
+a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 3px;
+  border-radius: 2px;
 }
 
-time {
-  color: rgba(255, 140, 66, 0.85);
-  font-size: 0.85em;
-}
+/* ── Site Header ───────────────────────────────────────── */
 
-/* ── Scrollbar ── */
-::-webkit-scrollbar       { width: 5px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 60, 90, 0.38);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
-
-/* ── Site Header ─ flickering fluorescent ceiling of a dark office ── */
 .site-header {
-  background-color: #0c0c18;
-  border-bottom: 2px solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
   position: relative;
+  background: rgba(2, 2, 18, 0.95);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.45);
+  padding: calc(var(--spacing-unit) * 1.4) calc(var(--spacing-unit) * 2);
   overflow: hidden;
+  animation: neon-pulse 5s ease-in-out infinite;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 240, 255, 0.05) 3px,
+    rgba(0, 240, 255, 0.05) 4px
+  );
+  pointer-events: none;
+  animation: scanline-drift 5s linear infinite;
 }
 
 .site-header::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
     90deg,
-    transparent,
-    transparent 6px,
-    rgba(255, 60, 90, 0.025) 6px,
-    rgba(255, 60, 90, 0.025) 7px
+    var(--color-accent),
+    var(--color-accent-alt),
+    var(--color-accent),
+    var(--color-accent-alt),
+    var(--color-accent)
   );
-  pointer-events: none;
+  background-size: 200% 100%;
+  animation: border-chase 3s linear infinite;
 }
 
-.site-header h1,
-.site-header .site-title {
-  font-size: clamp(1.6rem, 4.5vw, 3rem);
-  animation: grinding-glitch 9s steps(1) infinite;
-  text-shadow:
-    2px  0 0 var(--_glitch-r),
-    -2px 0 0 var(--_glitch-c);
-}
-
-@keyframes grinding-glitch {
-  0%, 82%, 100% {
-    text-shadow:
-      2px  0 0 var(--_glitch-r),
-      -2px 0 0 var(--_glitch-c);
-    transform: translate(0, 0);
-    clip-path: none;
-  }
-  83% {
-    text-shadow:
-      -4px 0 0 var(--_glitch-r),
-       4px 0 0 var(--_glitch-c);
-    transform: translate(3px, -2px);
-    clip-path: inset(30% 0 40% 0);
-  }
-  84% {
-    text-shadow:
-       4px 0 0 var(--_glitch-r),
-      -4px 0 0 var(--_glitch-c);
-    transform: translate(-2px, 2px);
-    clip-path: inset(60% 0 10% 0);
-  }
-  85% {
-    text-shadow:
-      2px  0 0 var(--_glitch-r),
-      -2px 0 0 var(--_glitch-c);
-    transform: translate(0, 0);
-    clip-path: none;
-  }
-  92% {
-    text-shadow:
-      -2px 0 0 var(--_glitch-r),
-       2px 0 0 var(--_glitch-c);
-    transform: translate(1px, 0);
-  }
-  93% {
-    text-shadow:
-      2px  0 0 var(--_glitch-r),
-      -2px 0 0 var(--_glitch-c);
-    transform: translate(0, 0);
-  }
-}
-
-/* ── Site Footer ── */
-.site-footer {
-  background-color: #0c0c18;
-  border-top: 1px solid rgba(255, 60, 90, 0.25);
-  color: #5a5b72;
-  padding: calc(var(--spacing-unit) * 1.75) calc(var(--spacing-unit) * 2);
-  text-align: center;
-  font-size: 0.82rem;
-  letter-spacing: 0.03em;
-}
-
-.site-footer a {
-  color: rgba(255, 60, 90, 0.65);
-}
-
-.site-footer a:hover {
+.site-header a {
+  text-decoration: none;
   color: var(--color-accent);
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  font-size: 1.1rem;
 }
 
-/* ── Post List ─ each entry like a punch card on the time clock ── */
+.site-header a:hover {
+  color: #ffffff;
+  text-shadow:
+    0 0 8px var(--color-accent),
+    0 0 24px rgba(0, 240, 255, 0.6);
+}
+
+.site-header nav {
+  margin-block-start: calc(var(--spacing-unit) * 0.6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-unit) * 0.3) calc(var(--spacing-unit) * 1.4);
+}
+
+.site-header nav a {
+  color: var(--color-chrome);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  position: relative;
+  padding-block-end: 2px;
+}
+
+.site-header nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s var(--ease-default);
+}
+
+.site-header nav a:hover {
+  color: var(--color-fg);
+  text-shadow: none;
+}
+
+.site-header nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Site Footer ───────────────────────────────────────── */
+
+.site-footer {
+  position: relative;
+  border-top: 1px solid rgba(0, 240, 255, 0.2);
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-chrome);
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: 'PLASTIC HEART DOWNLOAD ░░░ SAVE MY SOUL ░░░ BOOT UP ░░░';
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  color: rgba(0, 240, 255, 0.28);
+  margin-block-end: var(--spacing-unit);
+  animation: blink-step 3.2s step-end infinite;
+}
+
+/* ── Post List ─────────────────────────────────────────── */
+
 .post-list {
   list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 .post-list li {
-  border-left: 3px solid transparent;
-  padding: calc(var(--spacing-unit) * 0.7) calc(var(--spacing-unit) * 1.2);
-  margin-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+  padding: calc(var(--spacing-unit) * 1.1) calc(var(--spacing-unit) * 0.2);
   transition:
-    border-left-color  0.15s var(--ease-default),
-    background-color   0.15s var(--ease-default);
+    border-color 0.2s var(--ease-default),
+    background 0.2s var(--ease-default),
+    padding-left 0.2s var(--ease-default);
+  animation: pixel-in 0.45s var(--ease-default) both;
 }
 
 .post-list li:hover {
-  border-left-color: var(--color-accent);
-  background-color: rgba(255, 60, 90, 0.07);
+  border-bottom-color: rgba(0, 240, 255, 0.5);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 240, 255, 0.05) 0%,
+    transparent 80%
+  );
+  padding-left: calc(var(--spacing-unit) * 0.6);
 }
 
 .post-list a {
-  font-weight: 600;
-  font-size: 1.04rem;
-}
-
-/* ── Article Post ─ drag the body forward, word by word ── */
-article.post {
-  max-width: 72ch;
-  margin: 0 auto;
-  padding: calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
-}
-
-article.post h1,
-article.post h2,
-article.post h3 {
-  position: relative;
-  margin-top: calc(var(--spacing-unit) * 2.2);
-}
-
-article.post h1::after,
-article.post h2::after {
-  content: '';
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
   display: block;
-  margin-top: 0.3em;
-  height: 2px;
-  width: 2.2em;
+}
+
+.post-list time {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(0, 240, 255, 0.45);
+  letter-spacing: 0.08em;
+  margin-block-start: 2px;
+  font-family: var(--font-heading);
+}
+
+/* ── Article / Post ────────────────────────────────────── */
+
+article.post {
+  animation: pixel-in 0.5s var(--ease-default) both;
+}
+
+article.post header {
+  position: relative;
+  padding-block-end: calc(var(--spacing-unit) * 1.1);
+  margin-block-end: calc(var(--spacing-unit) * 1.6);
+  border-bottom: 1px solid rgba(255, 85, 153, 0.4);
+}
+
+article.post header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 38%;
+  height: 1px;
   background: var(--color-accent);
-  transition: width 0.45s var(--ease-default);
+  animation: neon-pulse 3.5s ease-in-out infinite;
 }
 
-article.post h1:hover::after,
-article.post h2:hover::after {
-  width: 100%;
-}
-
-article.post blockquote {
-  border-left: 3px solid var(--color-accent);
-  margin: calc(var(--spacing-unit) * 1.5) 0;
-  padding: calc(var(--spacing-unit) * 0.9) calc(var(--spacing-unit) * 1.4);
-  background-color: rgba(255, 60, 90, 0.05);
-  color: #9a9bb8;
-  font-style: italic;
-}
-
-article.post hr {
-  border: none;
-  border-top: 1px solid rgba(255, 60, 90, 0.22);
-  margin: calc(var(--spacing-unit) * 2.5) 0;
+article.post p {
+  margin-block: calc(var(--spacing-unit) * 0.85);
 }
 
 article.post code {
-  font-size: 0.88em;
-  padding: 0.15em 0.45em;
-  background-color: #161625;
-  color: #ff8c42;
+  font-family: var(--font-heading);
+  font-size: 0.87em;
+  background: rgba(0, 240, 255, 0.07);
+  color: var(--color-accent);
+  border: 1px solid rgba(0, 240, 255, 0.22);
   border-radius: 3px;
+  padding: 0.1em 0.38em;
 }
 
 article.post pre {
-  background-color: #0e0e1c;
-  border: 1px solid rgba(255, 60, 90, 0.18);
+  background: rgba(0, 0, 20, 0.88);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-left: 3px solid var(--color-accent);
   border-radius: 4px;
-  padding: var(--spacing-unit);
+  padding: calc(var(--spacing-unit) * 1.2);
   overflow-x: auto;
-  line-height: 1.6;
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: #b4d0ff;
 }
 
 article.post pre code {
   background: none;
+  border: none;
   padding: 0;
-  color: #c4c6e0;
-  font-size: 0.9em;
+  font-size: inherit;
+  color: inherit;
 }
 
-/* ── "I rise unbroken" ─ accent on emphasized text ── */
-article.post strong {
-  color: #ff8c42;
-  font-weight: 700;
-}
-
-article.post em {
-  color: #c0c2dc;
+article.post blockquote {
+  border-left: 3px solid var(--color-accent-alt);
+  margin-inline: 0;
+  padding-inline-start: calc(var(--spacing-unit) * 1.2);
+  color: var(--color-chrome);
   font-style: italic;
+  background: rgba(255, 85, 153, 0.04);
+  border-radius: 0 3px 3px 0;
 }
 
-/* ── Overtime counter ─ clock-hand underline sweep on nav links ── */
-nav a {
-  position: relative;
-  overflow: hidden;
+article.post img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-radius: 2px;
+  filter: saturate(1.1) contrast(1.05);
+  transition: filter 0.25s var(--ease-default);
 }
 
-nav a::before {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: -100%;
-  width: 100%;
+article.post img:hover {
+  filter: saturate(1.3) contrast(1.1) brightness(1.05);
+}
+
+article.post hr {
+  border: none;
   height: 1px;
-  background: var(--color-accent);
-  transition: left 0.28s var(--ease-default);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent),
+    var(--color-accent-alt),
+    var(--color-accent),
+    transparent
+  );
+  margin-block: calc(var(--spacing-unit) * 2);
+  opacity: 0.5;
 }
 
-nav a:hover::before {
-  left: 0;
-}
+/* ── Reduced Motion ────────────────────────────────────── */
 
-/* ── "地獄仕事" ─ a low-key red-shift pulse on the accent marker ── */
-@keyframes heartbeat-overtime {
-  0%, 100% { opacity: 1;    transform: scaleX(1);    }
-  45%       { opacity: 0.7; transform: scaleX(0.95); }
-  50%       { opacity: 1;   transform: scaleX(1.04); }
-}
-
-.post-list li:hover > *:first-child a::before,
-article.post h1::after {
-  animation: heartbeat-overtime 2.6s ease-in-out infinite;
-}
-
-/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;

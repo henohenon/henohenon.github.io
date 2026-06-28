@@ -1,89 +1,133 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="hl" patternUnits="userSpaceOnUse" x="0" y="0" width="1200" height="4">
-      <rect width="1200" height="3" fill="transparent"/>
-      <rect y="3" width="1200" height="1" fill="rgba(255,60,90,0.018)"/>
-    </pattern>
-    <pattern id="vl" patternUnits="userSpaceOnUse" x="0" y="0" width="7" height="88">
-      <rect width="6" height="88" fill="transparent"/>
-      <rect x="6" width="1" height="88" fill="rgba(255,60,90,0.025)"/>
-    </pattern>
-    <radialGradient id="dawn" cx="50%" cy="110%" r="65%">
-      <stop offset="0%" stop-color="#ff5a28" stop-opacity="0.16"/>
-      <stop offset="50%" stop-color="#ff3c5a" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#09090f" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="tg" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#e8eaf2"/>
-      <stop offset="55%" stop-color="#e8eaf2"/>
-      <stop offset="100%" stop-color="#ff8c42"/>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#00f0ff"/>
+      <stop offset="50%"  stop-color="#ff5599"/>
+      <stop offset="100%" stop-color="#00f0ff"/>
     </linearGradient>
+    <radialGradient id="bgDepth" cx="32%" cy="52%" r="68%">
+      <stop offset="0%"   stop-color="#0e0e2e"/>
+      <stop offset="100%" stop-color="#07071a"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#ffffff"/>
+      <stop offset="28%"  stop-color="#dde4ff"/>
+      <stop offset="72%"  stop-color="#b4d0ff"/>
+      <stop offset="100%" stop-color="#7ab0ee"/>
+    </linearGradient>
+    <pattern id="scanPat" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect y="3" width="1200" height="1" fill="#00f0ff" fill-opacity="0.018"/>
+    </pattern>
+    <pattern id="dotPat" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="0" cy="0" r="1" fill="#00f0ff" fill-opacity="0.07"/>
+    </pattern>
+    <filter id="glow" x="-10%" y="-40%" width="120%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowLine" x="-10%" y="-120%" width="120%" height="340%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="630" fill="#09090f"/>
-  <!-- Dawn glow -->
-  <rect width="1200" height="630" fill="url(#dawn)"/>
-  <!-- Horizontal scan lines -->
-  <rect width="1200" height="630" fill="url(#hl)"/>
+  <!-- BACKGROUND -->
+  <rect width="1200" height="630" fill="#07071a"/>
+  <rect width="1200" height="630" fill="url(#bgDepth)" opacity="0.72"/>
+  <rect width="1200" height="630" fill="url(#dotPat)"/>
+  <rect width="1200" height="630" fill="url(#scanPat)"/>
 
-  <!-- ── Header ── -->
-  <rect width="1200" height="88" fill="#0c0c18"/>
-  <rect width="1200" height="88" fill="url(#vl)"/>
-  <rect y="88" width="1200" height="2" fill="#ff3c5a"/>
+  <!-- TOP BAR -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#accentGrad)"/>
+  <rect x="0" y="3" width="1200" height="20" fill="url(#accentGrad)" opacity="0.09"/>
 
-  <!-- Site name: glitch cyan layer -->
-  <text x="78" y="58" font-family="sans-serif" font-size="28" letter-spacing="0.08em"
-        fill="rgba(0,210,255,0.5)">へのへのんのの</text>
-  <!-- Site name: glitch red layer -->
-  <text x="82" y="58" font-family="sans-serif" font-size="28" letter-spacing="0.08em"
-        fill="rgba(255,60,90,0.65)">へのへのんのの</text>
-  <!-- Site name: main -->
-  <text x="80" y="58" font-family="sans-serif" font-size="28" letter-spacing="0.08em"
-        fill="#e8eaf2">へのへのんのの</text>
+  <!-- BOTTOM BAR -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#accentGrad)"/>
+  <rect x="0" y="607" width="1200" height="20" fill="url(#accentGrad)" opacity="0.07"/>
 
-  <!-- BLOG label (top-right) -->
-  <text x="1140" y="58" text-anchor="end" font-family="sans-serif" font-size="11"
-        letter-spacing="0.28em" fill="#3d3e58">BLOG</text>
+  <!-- LEFT VERTICAL BAR -->
+  <rect x="62" y="6" width="1" height="551" fill="#00f0ff" opacity="0.2"/>
 
-  <!-- ── Main area ── -->
-  <!-- Left vertical accent bar -->
-  <rect x="60" y="116" width="3" height="437" fill="#ff3c5a" opacity="0.5"/>
-  <!-- Soft horizontal rule -->
-  <line x1="78" y1="148" x2="1140" y2="148" stroke="rgba(255,60,90,0.1)" stroke-width="1"/>
+  <!-- Bar accent dots -->
+  <circle cx="62" cy="148" r="3.5" fill="#00f0ff" opacity="0.65" filter="url(#glowLine)"/>
+  <circle cx="62" cy="320" r="4.5" fill="#ff5599" opacity="0.60" filter="url(#glowLine)"/>
+  <circle cx="62" cy="362" r="3"   fill="#00f0ff" opacity="0.42"/>
+  <circle cx="62" cy="557" r="3"   fill="#00f0ff" opacity="0.42" filter="url(#glowLine)"/>
 
-  <!-- Glitch interference strips — left edge -->
-  <rect x="0" y="193" width="55" height="2" fill="rgba(255,60,90,0.4)"/>
-  <rect x="0" y="196" width="32" height="1" fill="rgba(0,210,255,0.3)"/>
-  <rect x="0" y="462" width="42" height="2" fill="rgba(255,60,90,0.25)"/>
-  <rect x="0" y="465" width="26" height="1" fill="rgba(0,210,255,0.2)"/>
+  <!-- CORNER BRACKETS -->
+  <path d="M64,20 L64,72 L116,72"   stroke="#00f0ff" stroke-width="1.5" fill="none" opacity="0.78" filter="url(#glowLine)"/>
+  <path d="M1136,20 L1136,72 L1084,72" stroke="#ff5599" stroke-width="1.5" fill="none" opacity="0.65"/>
+  <path d="M64,610 L64,558 L116,558" stroke="#00f0ff" stroke-width="1.5" fill="none" opacity="0.78"/>
+  <path d="M1136,610 L1136,558 L1084,558" stroke="#ff5599" stroke-width="1.5" fill="none" opacity="0.65"/>
 
-  <!-- Glitch interference strips — right edge -->
-  <rect x="1145" y="278" width="55" height="2" fill="rgba(255,60,90,0.3)"/>
-  <rect x="1155" y="281" width="45" height="1" fill="rgba(0,210,255,0.22)"/>
-  <rect x="1150" y="398" width="50" height="1" fill="rgba(255,60,90,0.2)"/>
+  <!-- PIXEL CLUSTER — upper right -->
+  <rect x="992"  y="112" width="9" height="9" fill="#00f0ff" opacity="0.44" rx="1"/>
+  <rect x="1007" y="112" width="9" height="9" fill="#00f0ff" opacity="0.22" rx="1"/>
+  <rect x="1022" y="112" width="9" height="9" fill="#ff5599" opacity="0.38" rx="1"/>
+  <rect x="1037" y="112" width="9" height="9" fill="#00f0ff" opacity="0.18" rx="1"/>
+  <rect x="999"  y="127" width="9" height="9" fill="#ff5599" opacity="0.28" rx="1"/>
+  <rect x="1014" y="127" width="9" height="9" fill="#00f0ff" opacity="0.42" rx="1"/>
+  <rect x="1029" y="127" width="9" height="9" fill="#7a96cc" opacity="0.36" rx="1"/>
+  <rect x="1044" y="127" width="9" height="9" fill="#ff5599" opacity="0.20" rx="1"/>
+  <rect x="992"  y="142" width="9" height="9" fill="#7a96cc" opacity="0.26" rx="1"/>
+  <rect x="1007" y="142" width="9" height="9" fill="#ff5599" opacity="0.30" rx="1"/>
+  <rect x="1022" y="142" width="9" height="9" fill="#00f0ff" opacity="0.28" rx="1"/>
+  <rect x="1037" y="142" width="9" height="9" fill="#7a96cc" opacity="0.18" rx="1"/>
 
-  <!-- ── Title: {{TITLE}} ── -->
-  <!-- Cyan glitch layer -->
-  <text x="88" y="368" font-family="sans-serif" font-size="68" letter-spacing="0.03em"
-        fill="rgba(0,210,255,0.45)">{{TITLE}}</text>
-  <!-- Red glitch layer -->
-  <text x="93" y="368" font-family="sans-serif" font-size="68" letter-spacing="0.03em"
-        fill="rgba(255,60,90,0.6)">{{TITLE}}</text>
-  <!-- Main title layer -->
-  <text x="90" y="368" font-family="sans-serif" font-size="68" letter-spacing="0.03em"
-        fill="url(#tg)">{{TITLE}}</text>
+  <!-- CIRCUIT LINES — upper right -->
+  <line x1="1060" y1="112" x2="1060" y2="200" stroke="#7a96cc" stroke-width="1" opacity="0.20"/>
+  <line x1="1060" y1="200" x2="1110" y2="200" stroke="#7a96cc" stroke-width="1" opacity="0.20"/>
+  <circle cx="1060" cy="112" r="2"   fill="#7a96cc" opacity="0.35"/>
+  <circle cx="1110" cy="200" r="2.5" fill="#00f0ff" opacity="0.40" filter="url(#glowLine)"/>
 
-  <!-- Title accent underline (like h2::after in CSS) -->
-  <rect x="90" y="390" width="72" height="3" fill="#ff3c5a"/>
+  <!-- CIRCUIT LINES — lower right -->
+  <line x1="930"  y1="442" x2="1060" y2="442" stroke="#7a96cc" stroke-width="1" opacity="0.13"/>
+  <line x1="1060" y1="442" x2="1060" y2="502" stroke="#ff5599" stroke-width="1" opacity="0.17"/>
+  <circle cx="930"  cy="442" r="2"   fill="#7a96cc" opacity="0.24"/>
+  <circle cx="1060" cy="502" r="2.5" fill="#ff5599" opacity="0.28"/>
 
-  <!-- ── Footer zone ── -->
-  <line x1="60" y1="553" x2="1140" y2="553" stroke="rgba(255,60,90,0.2)" stroke-width="1"/>
-  <text x="90" y="592" font-family="sans-serif" font-size="11" letter-spacing="0.3em"
-        fill="#3d3e58">ARTICLE</text>
+  <!-- GLITCH ACCENT BLOCKS — right margin -->
+  <rect x="1094" y="376" width="34" height="2" fill="#00f0ff" opacity="0.28"/>
+  <rect x="1083" y="384" width="48" height="1" fill="#00f0ff" opacity="0.14"/>
+  <rect x="1098" y="392" width="28" height="2" fill="#ff5599" opacity="0.24"/>
 
-  <!-- Bottom-right decorative glitch bars -->
-  <rect x="1090" y="563" width="50" height="2" fill="rgba(255,60,90,0.35)"/>
-  <rect x="1100" y="567" width="40" height="1" fill="rgba(0,210,255,0.25)"/>
-  <rect x="1112" y="571" width="28" height="2" fill="rgba(255,60,90,0.2)"/>
+  <!-- ARTICLE LABEL -->
+  <text x="82" y="148" font-family="monospace" font-size="12"
+        letter-spacing="0.24em" fill="#00f0ff" opacity="0.72">// POST</text>
+  <line x1="82"  y1="158" x2="285" y2="158" stroke="#00f0ff" stroke-width="1"   opacity="0.20"/>
+  <line x1="82"  y1="158" x2="165" y2="158" stroke="#00f0ff" stroke-width="1.5" opacity="0.38" filter="url(#glowLine)"/>
+
+  <!-- TITLE — glitch shadow layer 1 (pink, +3/+3) -->
+  <text x="83" y="323" font-family="monospace" font-size="68"
+        fill="#ff5599" opacity="0.24" letter-spacing="0.02em">{{TITLE}}</text>
+
+  <!-- TITLE — glitch shadow layer 2 (cyan, -3/-3) -->
+  <text x="77" y="317" font-family="monospace" font-size="68"
+        fill="#00f0ff" opacity="0.20" letter-spacing="0.02em">{{TITLE}}</text>
+
+  <!-- TITLE — main layer -->
+  <text x="80" y="320" font-family="monospace" font-size="68"
+        fill="url(#titleGrad)" letter-spacing="0.02em">{{TITLE}}</text>
+
+  <!-- SEPARATOR UNDER TITLE -->
+  <line x1="82" y1="357" x2="880" y2="357" stroke="#00f0ff"  stroke-width="1"   opacity="0.17"/>
+  <line x1="82" y1="357" x2="315" y2="357" stroke="#ff5599"  stroke-width="1.5" opacity="0.52" filter="url(#glowLine)"/>
+
+  <!-- TEXTURE DATA LINES (subtle, decorative) -->
+  <text x="82" y="406" font-family="monospace" font-size="10"
+        fill="#00f0ff" opacity="0.10" letter-spacing="0.13em">0x48 45 4E 4F 48 45 4E 4F 4E 4E 4F 4E 4F ────</text>
+  <text x="82" y="423" font-family="monospace" font-size="10"
+        fill="#7a96cc" opacity="0.08" letter-spacing="0.13em">BOOT_SEQUENCE: LOADING ./ARTICLE.EXE ░░░ █</text>
+
+  <!-- FOOTER RULE -->
+  <line x1="62" y1="555" x2="1138" y2="555" stroke="#00f0ff" stroke-width="1" opacity="0.14"/>
+
+  <!-- SITE NAME -->
+  <text x="82" y="595" font-family="monospace" font-size="24"
+        letter-spacing="0.10em" fill="#dde4ff">へのへのんのの</text>
+
+  <!-- FOOTER RIGHT LABEL -->
+  <text x="1128" y="595" font-family="monospace" font-size="11"
+        letter-spacing="0.18em" fill="#00f0ff" opacity="0.38"
+        text-anchor="end">MIDNIGHT · GLITCH · LOVE ░</text>
 </svg>
