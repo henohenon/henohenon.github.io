@@ -1,199 +1,197 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
-  <linearGradient id="g-bar" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#00f0ff"/>
-    <stop offset="50%" stop-color="#ff5599"/>
-    <stop offset="100%" stop-color="#00f0ff"/>
-  </linearGradient>
-  <linearGradient id="g-sep" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%" stop-color="#00f0ff" stop-opacity="0"/>
-    <stop offset="20%" stop-color="#00f0ff" stop-opacity="0.55"/>
-    <stop offset="50%" stop-color="#ff5599" stop-opacity="0.8"/>
-    <stop offset="80%" stop-color="#00f0ff" stop-opacity="0.55"/>
-    <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
-  </linearGradient>
-  <radialGradient id="g-cx" cx="50%" cy="42%" r="52%">
-    <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.055"/>
-    <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="g-pk" cx="50%" cy="47%" r="38%">
-    <stop offset="0%" stop-color="#ff5599" stop-opacity="0.05"/>
-    <stop offset="100%" stop-color="#ff5599" stop-opacity="0"/>
-  </radialGradient>
-  <radialGradient id="g-vig" cx="50%" cy="50%" r="72%">
-    <stop offset="0%" stop-color="#000" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#000" stop-opacity="0.75"/>
-  </radialGradient>
-  <pattern id="p-scan" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-    <rect y="3" width="1200" height="1" fill="#00f0ff" fill-opacity="0.022"/>
-  </pattern>
-  <pattern id="p-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-    <path d="M60 0H0V60" fill="none" stroke="#00f0ff" stroke-width="0.4" stroke-opacity="0.055"/>
-  </pattern>
-  <filter id="f-title" x="-15%" y="-28%" width="130%" height="156%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="11" result="b1"/>
-    <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b2"/>
-    <feMerge>
-      <feMergeNode in="b1"/>
-      <feMergeNode in="b2"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
-  <filter id="f-song" x="-25%" y="-45%" width="150%" height="190%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/>
-    <feMerge>
-      <feMergeNode in="b"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
-  <filter id="f-dot" x="-300%" y="-300%" width="700%" height="700%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
-    <feMerge>
-      <feMergeNode in="b"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
-</defs>
+  <defs>
 
-<!-- ── Background ── -->
-<rect width="1200" height="630" fill="#07071a"/>
-<rect width="1200" height="630" fill="url(#p-grid)"/>
-<rect width="1200" height="630" fill="url(#g-cx)"/>
-<rect width="1200" height="630" fill="url(#g-pk)"/>
-<rect width="1200" height="630" fill="url(#p-scan)"/>
-<rect width="1200" height="630" fill="url(#g-vig)"/>
+    <pattern id="scan" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="3" width="1" height="1" fill="black" fill-opacity="0.07"/>
+    </pattern>
 
-<!-- ── Accent bars ── -->
-<rect x="0" y="0" width="1200" height="3" fill="url(#g-bar)"/>
-<rect x="0" y="627" width="1200" height="3" fill="url(#g-bar)"/>
+    <radialGradient id="warmGlow" cx="50%" cy="44%" r="42%">
+      <stop offset="0%" stop-color="#7a5800" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#09071a" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- ── Inner frame hints ── -->
-<line x1="0" y1="20" x2="1200" y2="20" stroke="#00f0ff" stroke-width="0.5" stroke-opacity="0.11"/>
-<line x1="0" y1="610" x2="1200" y2="610" stroke="#00f0ff" stroke-width="0.5" stroke-opacity="0.11"/>
+    <radialGradient id="cornerTL" cx="0%" cy="0%" r="38%">
+      <stop offset="0%" stop-color="#1a1030" stop-opacity="0.68"/>
+      <stop offset="100%" stop-color="#1a1030" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- ── Corner brackets ── -->
-<polyline points="58,110 58,58 155,58" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.58"/>
-<circle cx="58" cy="58" r="3.5" fill="#00f0ff" fill-opacity="0.68" filter="url(#f-dot)"/>
-<polyline points="1142,110 1142,58 1045,58" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.58"/>
-<circle cx="1142" cy="58" r="3.5" fill="#00f0ff" fill-opacity="0.68" filter="url(#f-dot)"/>
-<polyline points="58,520 58,572 155,572" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.58"/>
-<circle cx="58" cy="572" r="3.5" fill="#00f0ff" fill-opacity="0.68" filter="url(#f-dot)"/>
-<polyline points="1142,520 1142,572 1045,572" fill="none" stroke="#00f0ff" stroke-width="1.5" stroke-opacity="0.58"/>
-<circle cx="1142" cy="572" r="3.5" fill="#00f0ff" fill-opacity="0.68" filter="url(#f-dot)"/>
+    <radialGradient id="cornerTR" cx="100%" cy="0%" r="32%">
+      <stop offset="0%" stop-color="#1a1030" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1a1030" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- ── Decorative data strips (left) ── -->
-<g fill="#00f0ff" fill-opacity="0.085">
-  <rect x="60" y="195" width="88" height="2.5"/>
-  <rect x="60" y="202" width="62" height="2.5"/>
-  <rect x="60" y="209" width="78" height="2.5"/>
-  <rect x="60" y="216" width="48" height="2.5"/>
-</g>
-<!-- ── Decorative data strips (right) ── -->
-<g fill="#ff5599" fill-opacity="0.08">
-  <rect x="1052" y="195" width="88" height="2.5"/>
-  <rect x="1068" y="202" width="72" height="2.5"/>
-  <rect x="1058" y="209" width="82" height="2.5"/>
-  <rect x="1074" y="216" width="58" height="2.5"/>
-</g>
+    <radialGradient id="inkStain" cx="100%" cy="100%" r="32%">
+      <stop offset="0%" stop-color="#6b1515" stop-opacity="0.40"/>
+      <stop offset="45%" stop-color="#6b1515" stop-opacity="0.11"/>
+      <stop offset="70%" stop-color="#6b1515" stop-opacity="0"/>
+    </radialGradient>
 
-<!-- ── Side accent dashes ── -->
-<line x1="30" y1="172" x2="30" y2="205" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.32"/>
-<line x1="30" y1="214" x2="30" y2="268" stroke="#ff5599" stroke-width="1" stroke-opacity="0.2"/>
-<line x1="1170" y1="172" x2="1170" y2="205" stroke="#00f0ff" stroke-width="1" stroke-opacity="0.32"/>
-<line x1="1170" y1="214" x2="1170" y2="268" stroke="#ff5599" stroke-width="1" stroke-opacity="0.2"/>
+    <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#7a5800" stop-opacity="0"/>
+      <stop offset="18%"  stop-color="#d49a0c" stop-opacity="0.85"/>
+      <stop offset="50%"  stop-color="#f5c842" stop-opacity="1"/>
+      <stop offset="82%"  stop-color="#d49a0c" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#7a5800" stop-opacity="0"/>
+    </linearGradient>
 
-<!-- ── Background circles (depth / lens rings) ── -->
-<circle cx="600" cy="295" r="275" fill="none" stroke="#00f0ff" stroke-width="0.6" stroke-opacity="0.038"/>
-<circle cx="600" cy="295" r="350" fill="none" stroke="#ff5599" stroke-width="0.4" stroke-opacity="0.028"/>
+    <linearGradient id="goldShort" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="transparent"/>
+      <stop offset="22%"  stop-color="#d49a0c" stop-opacity="0.52"/>
+      <stop offset="50%"  stop-color="#f5c842" stop-opacity="0.72"/>
+      <stop offset="78%"  stop-color="#d49a0c" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
 
-<!-- ── Scattered particles ── -->
-<circle cx="108" cy="388" r="1.5" fill="#00f0ff" fill-opacity="0.32"/>
-<circle cx="182" cy="325" r="1" fill="#ff5599" fill-opacity="0.28"/>
-<circle cx="148" cy="460" r="1.2" fill="#00f0ff" fill-opacity="0.22"/>
-<circle cx="245" cy="496" r="1" fill="#7a96cc" fill-opacity="0.28"/>
-<circle cx="82" cy="515" r="1.8" fill="#00f0ff" fill-opacity="0.18"/>
-<circle cx="340" cy="138" r="1" fill="#00f0ff" fill-opacity="0.18"/>
-<circle cx="475" cy="158" r="1.5" fill="#ff5599" fill-opacity="0.14"/>
-<circle cx="715" cy="152" r="1" fill="#00f0ff" fill-opacity="0.16"/>
-<circle cx="848" cy="140" r="1.2" fill="#ff5599" fill-opacity="0.14"/>
-<circle cx="1092" cy="388" r="1.5" fill="#ff5599" fill-opacity="0.32"/>
-<circle cx="1018" cy="325" r="1" fill="#00f0ff" fill-opacity="0.28"/>
-<circle cx="1052" cy="460" r="1.2" fill="#ff5599" fill-opacity="0.22"/>
-<circle cx="955" cy="496" r="1" fill="#7a96cc" fill-opacity="0.28"/>
-<circle cx="1118" cy="515" r="1.8" fill="#00f0ff" fill-opacity="0.18"/>
+    <linearGradient id="titleColor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#f5c842"/>
+      <stop offset="28%"  stop-color="#f0e2b6"/>
+      <stop offset="72%"  stop-color="#f0e2b6"/>
+      <stop offset="100%" stop-color="#c8880a"/>
+    </linearGradient>
 
-<!-- ── Binary decoration text (background artifact) ── -->
-<text x="62" y="143" font-family="monospace" font-size="9" fill="#00f0ff" fill-opacity="0.11" letter-spacing="2">01101000 01100101 01101110 01101111 01101110 01101111</text>
-<text x="62" y="532" font-family="monospace" font-size="9" fill="#ff5599" fill-opacity="0.09" letter-spacing="2">11000010 10110100 10100100 11001000 01000100 00100100</text>
+    <filter id="titleGlow" x="-15%" y="-75%" width="130%" height="250%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="blur1"/>
+      <feFlood flood-color="#d49a0c" flood-opacity="0.55" result="c1"/>
+      <feComposite in="c1" in2="blur1" operator="in" result="g1"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="26" result="blur2"/>
+      <feFlood flood-color="#f5c842" flood-opacity="0.18" result="c2"/>
+      <feComposite in="c2" in2="blur2" operator="in" result="g2"/>
+      <feMerge>
+        <feMergeNode in="g2"/>
+        <feMergeNode in="g1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-<!-- ═══════════════════════════════════════════
-     MAIN TITLE: へのへのんのの
-     ═══════════════════════════════════════════ -->
+    <filter id="songGlow" x="-10%" y="-70%" width="120%" height="240%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#d49a0c" flood-opacity="0.50" result="c"/>
+      <feComposite in="c" in2="blur" operator="in" result="g"/>
+      <feMerge>
+        <feMergeNode in="g"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
 
-<!-- Glitch layer: pink offset -->
-<text x="594" y="285"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="120"
-  fill="#ff5599"
-  fill-opacity="0.42">へのへのんのの</text>
+  </defs>
 
-<!-- Glitch layer: cyan offset -->
-<text x="607" y="288"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="120"
-  fill="#00f0ff"
-  fill-opacity="0.26">へのへのんのの</text>
+  <!-- ── Base background ── -->
+  <rect width="1200" height="630" fill="#09071a"/>
 
-<!-- Main title -->
-<text x="600" y="286"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="120"
-  fill="#dde4ff"
-  filter="url(#f-title)">へのへのんのの</text>
+  <!-- ── Scan lines ── -->
+  <rect width="1200" height="630" fill="url(#scan)"/>
 
-<!-- ── Separator ── -->
-<rect x="175" y="335" width="850" height="1" fill="url(#g-sep)"/>
-<!-- Diamond accent -->
-<rect x="596" y="331" width="8" height="8" fill="#ff5599" fill-opacity="0.88" transform="rotate(45 600 335)"/>
+  <!-- ── Atmospheric gradients ── -->
+  <rect width="1200" height="630" fill="url(#warmGlow)"/>
+  <rect width="1200" height="630" fill="url(#cornerTL)"/>
+  <rect width="1200" height="630" fill="url(#cornerTR)"/>
+  <rect width="1200" height="630" fill="url(#inkStain)"/>
 
-<!-- ── "今日の曲" label ── -->
-<text x="600" y="375"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="13"
-  fill="#00f0ff"
-  fill-opacity="0.45"
-  letter-spacing="6">── 今日の曲 ──</text>
+  <!-- ── Top gold border ── -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#goldH)" opacity="0.90"/>
 
-<!-- ═══════════════════════════════════════════
-     SONG TITLE: PHD
-     ═══════════════════════════════════════════ -->
-<text x="600" y="418"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="44"
-  fill="#ff5599"
-  filter="url(#f-song)"
-  letter-spacing="10">PHD</text>
+  <!-- ── Inner frame ── -->
+  <rect x="25" y="25" width="1150" height="580" fill="none" stroke="#d49a0c" stroke-width="0.8" stroke-opacity="0.18"/>
 
-<!-- ── Artist name ── -->
-<text x="600" y="462"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="22"
-  fill="#7a96cc"
-  letter-spacing="1">柊マグネタイト feat. 重音テトSV</text>
+  <!-- ── Corner ornaments ── -->
+  <g fill="none" stroke="#d49a0c" stroke-width="1.8" stroke-linecap="square" stroke-opacity="0.52">
+    <polyline points="46,65 46,44 67,44"/>
+    <polyline points="1133,44 1154,44 1154,65"/>
+    <polyline points="46,565 46,586 67,586"/>
+    <polyline points="1133,586 1154,586 1154,565"/>
+  </g>
 
-<!-- ── Footer ── -->
-<text x="600" y="550"
-  text-anchor="middle"
-  font-family="monospace"
-  font-size="12"
-  fill="#00f0ff"
-  fill-opacity="0.28"
-  letter-spacing="5">MIDNIGHT GLITCH LOVE ░░░ BOOT UP ░░░ 2026.06.29</text>
+  <!-- ── Gold star, top-right ── -->
+  <text x="1118" y="90" font-family="serif" font-size="42" fill="#f5c842" text-anchor="middle" opacity="0.30">★</text>
+  <!-- Tiny star top-left -->
+  <text x="86" y="76" font-family="serif" font-size="17" fill="#d49a0c" text-anchor="middle" opacity="0.20">★</text>
+
+  <!-- ── Radiating light lines (golden child spotlight / crown) ── -->
+  <g stroke="#f5c842" stroke-width="0.8" opacity="0.09">
+    <line x1="600" y1="158" x2="600" y2="50"/>
+    <line x1="600" y1="158" x2="510" y2="58"/>
+    <line x1="600" y1="158" x2="690" y2="58"/>
+    <line x1="600" y1="158" x2="428" y2="84"/>
+    <line x1="600" y1="158" x2="772" y2="84"/>
+    <line x1="600" y1="158" x2="364" y2="118"/>
+    <line x1="600" y1="158" x2="836" y2="118"/>
+  </g>
+
+  <!-- ── Crack lines (perfectionism fracturing, left side) ── -->
+  <g stroke="#d49a0c" stroke-width="0.7" stroke-linecap="round" opacity="0.09">
+    <line x1="62" y1="128" x2="195" y2="202"/>
+    <line x1="195" y1="202" x2="160" y2="268"/>
+    <line x1="195" y1="202" x2="248" y2="220"/>
+    <line x1="248" y1="220" x2="236" y2="268"/>
+  </g>
+  <!-- Crack lines (right side) -->
+  <g stroke="#d49a0c" stroke-width="0.6" stroke-linecap="round" opacity="0.07">
+    <line x1="1096" y1="368" x2="1043" y2="416"/>
+    <line x1="1043" y1="416" x2="1063" y2="466"/>
+    <line x1="1043" y1="416" x2="1016" y2="431"/>
+  </g>
+
+  <!-- ── Subtle gold aura ellipse behind title ── -->
+  <ellipse cx="600" cy="278" rx="520" ry="86" fill="#7a5800" fill-opacity="0.07"/>
+
+  <!-- ── Thin decorative rule above site name ── -->
+  <rect x="295" y="198" width="610" height="0.8" fill="url(#goldShort)" opacity="0.45"/>
+
+  <!-- ── SITE NAME — MAIN HERO ── -->
+  <text
+    x="600" y="278"
+    font-family="serif"
+    font-size="126"
+    fill="url(#titleColor)"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    filter="url(#titleGlow)"
+    letter-spacing="5"
+  >へのへのんのの</text>
+
+  <!-- ── Gold rule below site name ── -->
+  <rect x="138" y="342" width="924" height="1.5" fill="url(#goldH)" opacity="0.68"/>
+
+  <!-- ── Song title ── -->
+  <text
+    x="600" y="392"
+    font-family="serif"
+    font-size="40"
+    fill="#d49a0c"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    filter="url(#songGlow)"
+    letter-spacing="5"
+  >Golden Child</text>
+
+  <!-- ── Artist ── -->
+  <text
+    x="600" y="440"
+    font-family="sans-serif"
+    font-size="22"
+    fill="#f0e2b6"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    opacity="0.55"
+    letter-spacing="3"
+  >THØRNS feat. 星尘Infinity</text>
+
+  <!-- ── Short rule below artist ── -->
+  <rect x="432" y="472" width="336" height="0.8" fill="url(#goldShort)" opacity="0.28"/>
+
+  <!-- ── Faint site name echo at bottom ── -->
+  <text
+    x="600" y="548"
+    font-family="serif"
+    font-size="14"
+    fill="#d49a0c"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    opacity="0.20"
+    letter-spacing="14"
+  >へのへのんのの</text>
+
+  <!-- ── Bottom gold border ── -->
+  <rect x="0" y="627" width="1200" height="3" fill="url(#goldH)" opacity="0.45"/>
 
 </svg>
