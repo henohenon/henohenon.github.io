@@ -1,99 +1,122 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="3" width="1" height="1" fill="#000000" fill-opacity="0.11"/>
-    </pattern>
-    <radialGradient id="vignette" cx="50%" cy="50%" r="70%" gradientUnits="objectBoundingBox">
-      <stop offset="35%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.58"/>
+    <radialGradient id="g-tl" cx="180" cy="50" r="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3ecfbf" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="topBeam" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#f0c842" stop-opacity="0"/>
-      <stop offset="20%"  stop-color="#f0c842" stop-opacity="0.80"/>
-      <stop offset="50%"  stop-color="#aed068" stop-opacity="0.90"/>
-      <stop offset="80%"  stop-color="#f0c842" stop-opacity="0.80"/>
-      <stop offset="100%" stop-color="#f0c842" stop-opacity="0"/>
-    </linearGradient>
-    <radialGradient id="bgGlow" cx="600" cy="240" r="420" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#152a10"/>
-      <stop offset="100%" stop-color="#0c1a0a"/>
+    <radialGradient id="g-br" cx="1020" cy="580" r="590" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3ecfbf" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0"/>
     </radialGradient>
-    <filter id="glowFx" x="-25%" y="-25%" width="150%" height="150%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
+    <radialGradient id="g-center" cx="600" cy="315" r="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e2821" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#0e2821" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="f-title" x="-10%" y="-30%" width="120%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="blur"/>
+      <feFlood flood-color="#3ecfbf" flood-opacity="0.28" result="tint"/>
+      <feComposite in="tint" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
+    <filter id="f-accent" x="-60%" y="-800%" width="220%" height="1700%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="f-star" x="-400%" y="-400%" width="900%" height="900%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="p-scan" patternUnits="userSpaceOnUse" width="1200" height="4">
+      <line x1="0" y1="3" x2="1200" y2="3" stroke="#3ecfbf" stroke-opacity="0.012" stroke-width="1"/>
+    </pattern>
   </defs>
 
-  <!-- BG -->
-  <rect width="1200" height="630" fill="#0c1a0a"/>
-  <rect width="1200" height="630" fill="url(#bgGlow)"/>
+  <!-- Base background -->
+  <rect width="1200" height="630" fill="#070d0b"/>
 
-  <!-- Outer frame -->
-  <rect x="16" y="16" width="1168" height="598" fill="none" stroke="#1d3818" stroke-width="2"/>
+  <!-- Atmospheric glow layers -->
+  <rect width="1200" height="630" fill="url(#g-tl)"/>
+  <rect width="1200" height="630" fill="url(#g-br)"/>
+  <rect width="1200" height="630" fill="url(#g-center)"/>
 
-  <!-- Inner panel -->
-  <rect x="32" y="32" width="1136" height="566" fill="#101f0d"/>
-  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#1d3818" stroke-width="1"/>
+  <!-- Scanline veil -->
+  <rect width="1200" height="630" fill="url(#p-scan)"/>
 
-  <!-- Top scan beam -->
-  <rect x="32" y="32" width="1136" height="2" fill="url(#topBeam)" opacity="0.65"/>
+  <!-- Abandoned Eden rings -->
+  <circle cx="600" cy="278" r="258" fill="none" stroke="#3ecfbf" stroke-opacity="0.055" stroke-width="1"/>
+  <circle cx="600" cy="278" r="212" fill="none" stroke="#3ecfbf" stroke-opacity="0.030" stroke-width="0.75"/>
 
-  <!-- Corner L-brackets -->
-  <polyline points="52,72 52,50 74,50"     fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
-  <polyline points="1148,72 1148,50 1126,50" fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
-  <polyline points="52,560 52,582 74,582"   fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
-  <polyline points="1148,560 1148,582 1126,582" fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
+  <!-- Top and bottom border lines -->
+  <line x1="0" y1="0.5" x2="1200" y2="0.5" stroke="#3ecfbf" stroke-opacity="0.13" stroke-width="1"/>
+  <line x1="0" y1="629.5" x2="1200" y2="629.5" stroke="#3ecfbf" stroke-opacity="0.10" stroke-width="1"/>
 
-  <!-- Date / metadata -->
-  <text x="600" y="82" text-anchor="middle" font-family="monospace" font-size="11"
-        fill="#6e9648" letter-spacing="0.36em" opacity="0.6">2026-07-01  ·  blog</text>
-  <line x1="90" y1="98" x2="1110" y2="98" stroke="#1d3818" stroke-width="1.5" stroke-dasharray="4,5"/>
+  <!-- Corner bracket ornaments -->
+  <polyline points="55,118 55,38 135,38" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
+  <polyline points="1145,118 1145,38 1065,38" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
+  <polyline points="55,512 55,592 135,592" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
+  <polyline points="1145,512 1145,592 1065,592" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
 
-  <!-- SITE TITLE: phosphor glow layer -->
-  <text x="600" y="270" text-anchor="middle" font-family="monospace" font-size="112"
-        fill="#aed068" fill-opacity="0.22" letter-spacing="0.04em"
-        filter="url(#glowFx)">へのへのんのの</text>
-  <!-- chromatic aberration: cyan left -->
-  <text x="595" y="273" text-anchor="middle" font-family="monospace" font-size="112"
-        fill="#38e87a" fill-opacity="0.28" letter-spacing="0.04em">へのへのんのの</text>
-  <!-- chromatic aberration: accent right-up -->
-  <text x="605" y="267" text-anchor="middle" font-family="monospace" font-size="112"
-        fill="#f0c842" fill-opacity="0.16" letter-spacing="0.04em">へのへのんのの</text>
-  <!-- main title -->
-  <text x="600" y="270" text-anchor="middle" font-family="monospace" font-size="112"
-        fill="#aed068" letter-spacing="0.04em">へのへのんのの</text>
+  <!-- Scattered stars — garden lanterns in the dark -->
+  <circle cx="142" cy="168" r="1.2" fill="#3ecfbf" fill-opacity="0.32"/>
+  <circle cx="178" cy="428" r="0.9" fill="#3ecfbf" fill-opacity="0.22"/>
+  <circle cx="302" cy="72"  r="0.9" fill="#3ecfbf" fill-opacity="0.18"/>
+  <circle cx="892" cy="76"  r="1.0" fill="#3ecfbf" fill-opacity="0.22"/>
+  <circle cx="1052" cy="162" r="1.2" fill="#3ecfbf" fill-opacity="0.32"/>
+  <circle cx="1026" cy="460" r="0.9" fill="#3ecfbf" fill-opacity="0.22"/>
+  <circle cx="415" cy="568" r="0.8" fill="#3ecfbf" fill-opacity="0.18"/>
+  <circle cx="788" cy="572" r="0.8" fill="#3ecfbf" fill-opacity="0.18"/>
+  <circle cx="348" cy="192" r="0.7" fill="#3ecfbf" fill-opacity="0.14"/>
+  <circle cx="852" cy="188" r="0.7" fill="#3ecfbf" fill-opacity="0.14"/>
+  <circle cx="228" cy="310" r="0.7" fill="#3ecfbf" fill-opacity="0.12"/>
+  <circle cx="972" cy="316" r="0.7" fill="#3ecfbf" fill-opacity="0.12"/>
 
-  <!-- Divider -->
-  <circle cx="136" cy="315" r="3"   fill="#f0c842" opacity="0.50"/>
-  <circle cx="600" cy="315" r="2"   fill="#6e9648" opacity="0.45"/>
-  <circle cx="1064" cy="315" r="3"  fill="#f0c842" opacity="0.50"/>
-  <line x1="136" y1="315" x2="1064" y2="315" stroke="#1d3818" stroke-width="2" stroke-dasharray="7,4"/>
+  <!-- Guiding star — 道標 -->
+  <circle cx="600" cy="116" r="2.8" fill="#3ecfbf" fill-opacity="0.82" filter="url(#f-star)"/>
+  <line x1="600" y1="124" x2="600" y2="152" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="0.75"/>
 
-  <!-- TODAY'S TRACK label -->
-  <text x="600" y="353" text-anchor="middle" font-family="monospace" font-size="11"
-        fill="#6e9648" letter-spacing="0.44em" opacity="0.65">&#x25B8;  TODAY'S TRACK  &#x25B8;</text>
+  <!-- Site name — MAIN HERO -->
+  <text
+    x="600"
+    y="308"
+    font-family="serif"
+    font-size="118"
+    fill="#c2eae4"
+    text-anchor="middle"
+    letter-spacing="5"
+    filter="url(#f-title)">へのへのんのの</text>
 
-  <!-- Song title -->
-  <text x="600" y="408" text-anchor="middle" font-family="monospace" font-size="40"
-        fill="#f0c842" letter-spacing="0.07em">Do That Again</text>
+  <!-- Separator with bright centre accent -->
+  <line x1="462" y1="346" x2="738" y2="346" stroke="#3ecfbf" stroke-opacity="0.18" stroke-width="1"/>
+  <line x1="572" y1="346" x2="628" y2="346" stroke="#3ecfbf" stroke-opacity="0.90" stroke-width="1" filter="url(#f-accent)"/>
 
-  <!-- Artist -->
-  <text x="600" y="446" text-anchor="middle" font-family="monospace" font-size="17"
-        fill="#6e9648" letter-spacing="0.04em">Teirrel feat. Synthesizer V 2 AI Megpoid</text>
+  <!-- Song name — subtitle -->
+  <text
+    x="600"
+    y="396"
+    font-family="serif"
+    font-size="36"
+    fill="#3ecfbf"
+    fill-opacity="0.80"
+    text-anchor="middle"
+    letter-spacing="2.5">Eden's Heart</text>
 
-  <!-- Bottom separator -->
-  <line x1="90" y1="474" x2="1110" y2="474" stroke="#1d3818" stroke-width="1.5" stroke-dasharray="4,5"/>
-
-  <!-- Ticker — loop motif -->
-  <text x="600" y="518" text-anchor="middle" font-family="monospace" font-size="9"
-        fill="#6e9648" letter-spacing="0.34em" opacity="0.38">&#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN</text>
-
-  <!-- Footer echo -->
-  <text x="600" y="550" text-anchor="middle" font-family="monospace" font-size="10"
-        fill="#6e9648" letter-spacing="0.22em" opacity="0.32">へのへのんのの</text>
-
-  <!-- Scanlines overlay -->
-  <rect width="1200" height="630" fill="url(#scanlines)"/>
-
-  <!-- Vignette -->
-  <rect width="1200" height="630" fill="url(#vignette)"/>
+  <!-- Artist name -->
+  <text
+    x="600"
+    y="438"
+    font-family="sans-serif"
+    font-size="20"
+    fill="#dff0eb"
+    fill-opacity="0.40"
+    text-anchor="middle"
+    letter-spacing="1.5">ULTIMA feat. 初音ミク V6</text>
 </svg>

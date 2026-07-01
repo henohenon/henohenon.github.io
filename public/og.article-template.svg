@@ -1,174 +1,153 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-
-    <pattern id="sl" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
-      <rect width="1200" height="3" fill="none"/>
-      <rect y="3" width="1200" height="1" fill="#000000" opacity="0.09"/>
-    </pattern>
-
-    <pattern id="dg" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
-      <circle cx="0"  cy="0"  r="0.75" fill="#1d3818"/>
-      <circle cx="18" cy="0"  r="0.75" fill="#1d3818"/>
-      <circle cx="0"  cy="18" r="0.75" fill="#1d3818"/>
-      <circle cx="18" cy="18" r="0.75" fill="#1d3818"/>
-    </pattern>
-
-    <radialGradient id="vig" cx="600" cy="315" r="680" gradientUnits="userSpaceOnUse">
-      <stop offset="30%"  stop-color="#0c1a0a" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.70"/>
+    <radialGradient id="rg-tl" cx="180" cy="50" r="660" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3ecfbf" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0"/>
     </radialGradient>
-
-    <linearGradient id="topline" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#f0c842"/>
-      <stop offset="50%"  stop-color="#f0c842" stop-opacity="0.60"/>
-      <stop offset="88%"  stop-color="#aed068" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#aed068" stop-opacity="0"/>
+    <radialGradient id="rg-br" cx="1020" cy="580" r="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3ecfbf" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rg-veil" cx="600" cy="315" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0e2821" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0e2821" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lg-bar" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#3ecfbf" stop-opacity="0.22"/>
+      <stop offset="38%"  stop-color="#3ecfbf" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0.18"/>
     </linearGradient>
-
-    <linearGradient id="leftbar" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#f0c842"/>
-      <stop offset="52%"  stop-color="#1d3818"/>
-      <stop offset="100%" stop-color="#1d3818" stop-opacity="0.25"/>
+    <linearGradient id="lg-title" x1="0" y1="300" x2="0" y2="378" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#dff0eb"/>
+      <stop offset="100%" stop-color="#a8dcd5"/>
     </linearGradient>
-
-    <linearGradient id="titlegrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#f0c842"/>
-      <stop offset="30%"  stop-color="#f0c842"/>
-      <stop offset="72%"  stop-color="#aed068"/>
-      <stop offset="100%" stop-color="#6e9648"/>
-    </linearGradient>
-
-    <filter id="glow" x="-8%" y="-60%" width="116%" height="220%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+    <filter id="f-title" x="-5%" y="-130%" width="110%" height="360%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
+      <feFlood flood-color="#3ecfbf" flood-opacity="0.26" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
       <feMerge>
-        <feMergeNode in="b"/>
+        <feMergeNode in="glow"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-
-    <filter id="yglow" x="-12%" y="-90%" width="124%" height="280%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="b"/>
+    <filter id="f-sm" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="blur"/>
       <feMerge>
-        <feMergeNode in="b"/>
+        <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-
-    <clipPath id="titcl">
-      <rect x="80" y="126" width="1040" height="360"/>
+    <pattern id="scanlines" x="0" y="0" width="1200" height="4" patternUnits="userSpaceOnUse">
+      <rect y="3" width="1200" height="1" fill="#3ecfbf" fill-opacity="0.012"/>
+    </pattern>
+    <clipPath id="clip-canvas">
+      <rect width="1200" height="630"/>
     </clipPath>
-
-    <clipPath id="tckcl">
-      <rect x="78" y="502" width="985" height="56"/>
-    </clipPath>
-
   </defs>
 
-  <!-- ══ BACKGROUND ══ -->
-  <rect width="1200" height="630" fill="#0c1a0a"/>
-  <rect width="1200" height="630" fill="url(#dg)" opacity="0.68"/>
-  <rect x="53" y="53" width="1094" height="524" fill="#101f0d" opacity="0.30"/>
+  <!-- BACKGROUND -->
+  <rect width="1200" height="630" fill="#070d0b"/>
+  <rect width="1200" height="630" fill="url(#rg-tl)"/>
+  <rect width="1200" height="630" fill="url(#rg-br)"/>
+  <rect width="1200" height="630" fill="url(#rg-veil)"/>
+  <rect width="1200" height="630" fill="url(#scanlines)"/>
 
-  <!-- Circuit traces -->
-  <g stroke="#1d3818" stroke-width="1" opacity="0.44">
-    <line x1="0"   y1="190" x2="465"  y2="190"/>
-    <line x1="735" y1="190" x2="1200" y2="190"/>
-    <line x1="0"   y1="440" x2="375"  y2="440"/>
-    <line x1="825" y1="440" x2="1200" y2="440"/>
-    <line x1="922" y1="0"   x2="922"  y2="136"/>
-    <line x1="922" y1="494" x2="922"  y2="630"/>
-    <line x1="278" y1="0"   x2="278"  y2="78"/>
-    <line x1="278" y1="552" x2="278"  y2="630"/>
+  <!-- DECORATIVE: Eden concentric rings (right) -->
+  <g clip-path="url(#clip-canvas)" opacity="0.065" stroke="#3ecfbf" fill="none">
+    <circle cx="1148" cy="315" r="232" stroke-width="0.8"/>
+    <circle cx="1148" cy="315" r="174" stroke-width="0.6"/>
+    <circle cx="1148" cy="315" r="116" stroke-width="0.6"/>
+    <circle cx="1148" cy="315" r="58"  stroke-width="1.0"/>
+    <line x1="1148" y1="83"  x2="1148" y2="547" stroke-width="0.5"/>
+    <line x1="916"  y1="315" x2="1200" y2="315" stroke-width="0.5"/>
   </g>
 
-  <!-- Glitch artifact lines -->
-  <rect x="0"   y="206" width="515" height="1" fill="#38e87a" opacity="0.055"/>
-  <rect x="665" y="386" width="535" height="1" fill="#f0c842" opacity="0.048"/>
+  <!-- DECORATIVE: arc paths (garden paths / serpent-glide) -->
+  <g clip-path="url(#clip-canvas)" fill="none" stroke="#3ecfbf">
+    <path d="M 1000 80 Q 1160 210 1110 430" stroke-width="0.5" stroke-opacity="0.06"/>
+    <path d="M 1050 60 Q 1195 230 1158 470" stroke-width="0.3" stroke-opacity="0.04"/>
+  </g>
 
-  <!-- ══ FRAME ══ -->
-  <rect x="50" y="50" width="1100" height="530" fill="none" stroke="#1d3818" stroke-width="2"/>
-  <rect x="57" y="57" width="1086" height="516" fill="none" stroke="#1d3818" stroke-width="1" opacity="0.32"/>
+  <!-- PARTICLES: fireflies / garden stars -->
+  <g fill="#3ecfbf">
+    <circle cx="874"  cy="148" r="1.5" fill-opacity="0.30"/>
+    <circle cx="912"  cy="212" r="1.0" fill-opacity="0.22"/>
+    <circle cx="958"  cy="172" r="2.0" fill-opacity="0.12"/>
+    <circle cx="842"  cy="268" r="1.0" fill-opacity="0.24"/>
+    <circle cx="886"  cy="406" r="1.5" fill-opacity="0.18"/>
+    <circle cx="845"  cy="468" r="1.0" fill-opacity="0.15"/>
+    <circle cx="100"  cy="168" r="1.0" fill-opacity="0.17"/>
+    <circle cx="136"  cy="488" r="1.5" fill-opacity="0.13"/>
+    <circle cx="76"   cy="528" r="1.0" fill-opacity="0.15"/>
+    <circle cx="1038" cy="108" r="1.0" fill-opacity="0.18"/>
+    <circle cx="1082" cy="522" r="1.5" fill-opacity="0.14"/>
+    <circle cx="780"  cy="134" r="1.0" fill-opacity="0.16"/>
+    <circle cx="800"  cy="490" r="1.0" fill-opacity="0.14"/>
+  </g>
 
-  <!-- Top glowing accent line -->
-  <rect x="50" y="50" width="1100" height="2" fill="url(#topline)"/>
+  <!-- LEFT EDGE ACCENT BAR -->
+  <rect x="0" y="0" width="3" height="630" fill="url(#lg-bar)"/>
 
-  <!-- Left accent bar -->
-  <rect x="50" y="50" width="3" height="530" fill="url(#leftbar)"/>
+  <!-- TOP ACCENT LINE -->
+  <line x1="0" y1="0.75" x2="1200" y2="0.75" stroke="#3ecfbf" stroke-width="1.5" stroke-opacity="0.28"/>
 
-  <!-- Corner L-brackets -->
-  <path d="M50,84 L50,50 L84,50" fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.88"/>
-  <path d="M1116,50 L1150,50 L1150,84" fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.88"/>
-  <path d="M50,546 L50,580 L84,580" fill="none" stroke="#aed068" stroke-width="1.5" opacity="0.50"/>
-  <path d="M1116,580 L1150,580 L1150,546" fill="none" stroke="#aed068" stroke-width="1.5" opacity="0.50"/>
+  <!-- HEADER: diamond ornament + site name -->
+  <g transform="translate(56,57)" filter="url(#f-sm)">
+    <polygon points="0,-11 11,0 0,11 -11,0"
+             fill="none" stroke="#3ecfbf" stroke-width="1.2" stroke-opacity="0.72"/>
+    <polygon points="0,-5.5 5.5,0 0,5.5 -5.5,0"
+             fill="#3ecfbf" fill-opacity="0.28"/>
+  </g>
+  <text x="82" y="65"
+        font-family="serif"
+        font-size="23"
+        fill="#dff0eb"
+        fill-opacity="0.50"
+        letter-spacing="0.08em">へのへのんのの</text>
 
-  <!-- ══ HEADER STRIP ══ -->
-  <text x="82" y="94"
-        font-family="monospace" font-size="11"
-        letter-spacing="5" fill="#6e9648">▸ ARTICLE</text>
+  <!-- Header separator line -->
+  <line x1="20" y1="90" x2="1180" y2="90"
+        stroke="#3ecfbf" stroke-width="0.5" stroke-opacity="0.13"/>
 
-  <!-- Pixel squares decoration -->
-  <rect x="855" y="77" width="5" height="5" fill="#f0c842" opacity="0.44"/>
-  <rect x="867" y="77" width="5" height="5" fill="#f0c842" opacity="0.29"/>
-  <rect x="879" y="77" width="5" height="5" fill="#aed068" opacity="0.20"/>
+  <!-- ARTICLE LABEL -->
+  <text x="60" y="134"
+        font-family="sans-serif"
+        font-size="11"
+        fill="#3ecfbf"
+        fill-opacity="0.52"
+        letter-spacing="0.24em">A R T I C L E</text>
 
-  <!-- Site name -->
-  <text x="1118" y="96"
-        font-family="monospace" font-size="23"
-        fill="#aed068" text-anchor="end"
-        filter="url(#glow)">へのへのんのの</text>
+  <!-- MAIN TITLE -->
+  <text x="60" y="362"
+        font-family="serif"
+        font-size="72"
+        fill="url(#lg-title)"
+        letter-spacing="0.04em"
+        filter="url(#f-title)">{{TITLE}}</text>
 
-  <!-- Header separator -->
-  <line x1="82"  y1="118" x2="1118" y2="118" stroke="#1d3818" stroke-width="1"/>
-  <line x1="82"  y1="118" x2="338"  y2="118" stroke="#f0c842" stroke-width="1" opacity="0.38"/>
+  <!-- Accent bar — 道標 underline (matching article.post > header::after) -->
+  <rect x="60" y="390" width="56" height="2"
+        fill="#3ecfbf" fill-opacity="0.88"
+        filter="url(#f-sm)"/>
 
-  <!-- ══ TITLE AREA ══ -->
-  <!-- Tick mark above title -->
-  <rect x="82" y="150" width="30" height="2" fill="#f0c842" opacity="0.46"/>
-  <rect x="82" y="150" width="2"  height="11" fill="#f0c842" opacity="0.46"/>
+  <!-- FOOTER separator -->
+  <line x1="20" y1="548" x2="1180" y2="548"
+        stroke="#3ecfbf" stroke-width="0.5" stroke-opacity="0.10"/>
 
-  <!-- Glitch shadow (cyan offset) -->
-  <text x="84" y="338"
-        font-family="serif" font-size="68"
-        fill="#38e87a" opacity="0.22"
-        clip-path="url(#titcl)">{{TITLE}}</text>
+  <!-- Footer site name -->
+  <text x="60" y="586"
+        font-family="sans-serif"
+        font-size="12"
+        fill="#dff0eb"
+        fill-opacity="0.26"
+        letter-spacing="0.10em">へのへのんのの</text>
 
-  <!-- Glow shadow (yellow, blurred) -->
-  <text x="80" y="338"
-        font-family="serif" font-size="68"
-        fill="#f0c842" opacity="0.13"
-        filter="url(#yglow)"
-        clip-path="url(#titcl)">{{TITLE}}</text>
+  <!-- Footer diamond ornament (right) -->
+  <g transform="translate(1144,574)">
+    <polygon points="0,-8.5 8.5,0 0,8.5 -8.5,0"
+             fill="none" stroke="#3ecfbf" stroke-width="0.8" stroke-opacity="0.20"/>
+  </g>
 
-  <!-- Main title (gradient + phosphor glow) -->
-  <text x="80" y="338"
-        font-family="serif" font-size="68"
-        fill="url(#titlegrad)"
-        filter="url(#glow)"
-        clip-path="url(#titcl)">{{TITLE}}</text>
-
-  <!-- Tick mark below title area -->
-  <rect x="82" y="476" width="30" height="2" fill="#6e9648" opacity="0.30"/>
-
-  <!-- ══ BOTTOM STRIP ══ -->
-  <line x1="82"  y1="498" x2="1118" y2="498" stroke="#1d3818" stroke-width="1"/>
-  <line x1="793" y1="498" x2="1118" y2="498" stroke="#aed068" stroke-width="1" opacity="0.26"/>
-
-  <!-- Ticker text -->
-  <text x="82" y="530"
-        font-family="monospace" font-size="11"
-        letter-spacing="4"
-        fill="#6e9648" opacity="0.52"
-        clip-path="url(#tckcl)">▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN</text>
-
-  <!-- Blog name bottom-right -->
-  <text x="1118" y="562"
-        font-family="monospace" font-size="11"
-        letter-spacing="3"
-        fill="#6e9648" opacity="0.58"
-        text-anchor="end">へのへのんのの</text>
-
-  <!-- ══ OVERLAYS ══ -->
-  <rect width="1200" height="630" fill="url(#sl)" opacity="0.52"/>
-  <rect width="1200" height="630" fill="url(#vig)"/>
-
+  <!-- BOTTOM ACCENT LINE -->
+  <line x1="0" y1="629.25" x2="1200" y2="629.25" stroke="#3ecfbf" stroke-width="1.5" stroke-opacity="0.28"/>
 </svg>

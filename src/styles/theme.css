@@ -1,324 +1,267 @@
-/* Do That Again / Teirrel feat. Synthesizer V 2 AI Megpoid
-   ムード : ループする自己否定 — Game Boy のリン光グリーンに溶ける空虚な夜 */
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   WCAG AA メモ
-   bg  #0c1a0a ↔ fg  #aed068 : コントラスト比 ≈ 11.3 : 1  ✓
-   bg  #101f0d ↔ fg  #aed068 : コントラスト比 ≈ 10.6 : 1  ✓
-   bg  #0c1a0a ↔ acc #f0c842 : コントラスト比 ≈ 13.4 : 1  ✓
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* Eden's Heart / ULTIMA feat. 初音ミク V6 / 廃園の深闇に灯る、碧い道標 */
 
 :root {
-  /* 曲の三層構造をパレットで表現:
-     深夜の暗闇(bg) / 蛍光リン光グリーン(fg) / ひまわり糖衣(accent) */
-  --color-bg:      #0c1a0a;
-  --color-fg:      #aed068;
-  --color-accent:  #f0c842;
+  --color-fg:            #dff0eb;
+  --color-bg:            #070d0b;
+  --color-accent:        #3ecfbf;
 
-  --spacing-unit: 1rem;
+  --spacing-unit:        1rem;
 
-  --font-heading: ui-monospace, 'Cascadia Code', 'Consolas',
-                  'Courier New', monospace;
-  --font-body:    'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP',
-                  ui-monospace, 'Cascadia Code', 'Consolas',
-                  'Courier New', monospace;
+  --font-heading:        'Palatino Linotype', 'Palatino', 'Book Antiqua', Georgia,
+                         'Hiragino Mincho ProN', 'Yu Mincho', '游明朝', serif;
+  --font-body:           'Helvetica Neue', Arial,
+                         'Hiragino Sans', 'ヒラギノ角ゴシック',
+                         'Yu Gothic', '游ゴシック',
+                         'Meiryo', 'メイリオ', sans-serif;
 
-  --line-height-body:    1.9;
-  --line-height-heading: 1.15;
+  --line-height-body:    1.85;
+  --line-height-heading: 1.2;
 
-  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* 内部トークン (base.css は参照しない) */
-  --_bg-panel:     #101f0d;
-  --_border:       #1d3818;
-  --_fg-muted:     #6e9648;
-  --_accent-glow:  rgba(240, 200, 66, 0.14);
-  --_glitch-cyan:  #38e87a;
+  --ease-default:        cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ─── Selection ───────────────────────────────────────── */
-::selection {
-  background-color: var(--color-accent);
-  color: #0c1a0a;
-}
+/* ── base ──────────────────────────────────────────── */
 
-/* ─── Global ──────────────────────────────────────────── */
-html {
-  background-color: var(--color-bg);
-  scroll-behavior: smooth;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 body {
   background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-body);
-  line-height: var(--line-height-body);
-  position: relative;
-  overflow-x: hidden;
+  color:            var(--color-fg);
+  font-family:      var(--font-body);
+  line-height:      var(--line-height-body);
+  background-image:
+    radial-gradient(ellipse 60% 40% at 15%  8%, rgba(62,207,191,.055) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 35% at 85% 92%, rgba(62,207,191,.040) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 20% at 50% 50%, rgba(14, 40, 33, .50) 0%, transparent 70%);
 }
 
-/* CRT スキャンライン — 画面越しに見ているような粗さ */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent     0px,
-    transparent     3px,
-    rgba(0,0,0,.10) 3px,
-    rgba(0,0,0,.10) 4px
-  );
-  pointer-events: none;
-  z-index: 9998;
-}
+/* ── typography ────────────────────────────────────── */
 
-/* フォスファーヴィネット — 周辺が滲んで暗くなる */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 85% 75% at 50% 50%,
-    transparent 45%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
-  pointer-events: none;
-  z-index: 9997;
-}
-
-/* ─── Typography ──────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  color: var(--color-accent);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  animation: glitch-heading 9s linear infinite;
+  font-family:    var(--font-heading);
+  line-height:    var(--line-height-heading);
+  color:          #c2eae4;
+  letter-spacing: .04em;
+  font-weight:    normal;
 }
+
+h1 { font-size: 2.25rem; text-shadow: 0 0 36px rgba(62,207,191,.22); }
+h2 { font-size: 1.6rem;  border-bottom: 1px solid rgba(62,207,191,.15); padding-bottom: .3em; }
+h3 { font-size: 1.25rem; color: #a8dcd5; }
+
+p  { margin-block: calc(var(--spacing-unit) * .9); }
+
+/* ── links ─────────────────────────────────────────── */
 
 a {
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  transition: color 0.25s var(--ease-default),
-              text-shadow 0.25s var(--ease-default);
+  color:           var(--color-accent);
+  text-decoration: none;
+  border-bottom:   1px solid rgba(62,207,191,.3);
+  transition:      color            .35s var(--ease-default),
+                   border-color     .35s var(--ease-default),
+                   text-shadow      .35s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: var(--color-fg);
-  text-shadow: 0 0 10px var(--color-accent);
-  outline: 1px dashed var(--color-accent);
-  outline-offset: 3px;
-  text-decoration: none;
+  color:        #90e4dc;
+  border-color: #90e4dc;
+  text-shadow:  0 0 14px rgba(62,207,191,.65);
+  outline:      none;
 }
 
-p {
-  margin-block: calc(var(--spacing-unit) * 0.9);
+/* ── selection ─────────────────────────────────────── */
+
+::selection {
+  background: rgba(62,207,191,.25);
+  color:      #ffffff;
 }
 
-blockquote {
-  border-left: 3px solid var(--_fg-muted);
-  padding-left: calc(var(--spacing-unit) * 1.25);
-  margin-left: 0;
-  color: var(--_fg-muted);
-  font-style: italic;
-}
+/* ── scrollbar (Chromium) ───────────────────────────── */
 
-code {
-  font-family: var(--font-heading);
-  font-size: 0.875em;
-  background-color: var(--_bg-panel);
-  color: var(--color-accent);
-  border: 1px solid var(--_border);
-  padding: 0.1em 0.4em;
-  border-radius: 2px;
-}
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: #040807; }
+::-webkit-scrollbar-thumb { background: rgba(62,207,191,.28); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(62,207,191,.52); }
 
-pre {
-  font-family: var(--font-heading);
-  font-size: 0.875em;
-  background-color: var(--_bg-panel);
-  color: var(--color-fg);
-  border: 1px solid var(--_border);
-  border-left: 3px solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 1.25);
-  overflow-x: auto;
-}
+/* ── site-header ────────────────────────────────────── */
 
-pre code {
-  background: none;
-  border: none;
-  padding: 0;
-}
-
-/* ─── Site header ─────────────────────────────────────── */
 .site-header {
-  background-color: var(--_bg-panel);
-  border-bottom: 2px solid var(--_border);
-  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2)
-           calc(var(--spacing-unit) * 2);
-  position: relative;
-  overflow: hidden;
+  position:     relative;
+  overflow:     hidden;
+  padding:      calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5);
+  border-bottom: 1px solid rgba(62,207,191,.13);
+  background:
+    linear-gradient(180deg, rgba(7,13,11,.0) 0%, rgba(7,13,11,.55) 100%),
+    linear-gradient(90deg,  rgba(62,207,191,.06) 0%, transparent 60%);
 }
 
-/* ループするサブタイトル — "do that again" を永遠に刻む */
-.site-header::after {
-  content: '▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN  ▸ DO THAT AGAIN';
-  position: absolute;
-  bottom: 4px;
-  left: 0;
-  white-space: nowrap;
-  font-family: var(--font-heading);
-  font-size: 0.5rem;
-  color: var(--_fg-muted);
-  letter-spacing: 0.32em;
-  opacity: 0.45;
-  will-change: transform;
-  animation: ticker 28s linear infinite;
+/* scan-line veil */
+.site-header::before {
+  content:         '';
+  position:        absolute;
+  inset:           0;
+  background:      repeating-linear-gradient(
+                     0deg,
+                     transparent,
+                     transparent 3px,
+                     rgba(62,207,191,.012) 3px,
+                     rgba(62,207,191,.012) 4px
+                   );
+  pointer-events:  none;
 }
 
-@keyframes ticker {
-  from { transform: translateX(60vw); }
-  to   { transform: translateX(-100%); }
+/* guiding-star glow on the title */
+.site-header .site-title,
+.site-header h1 {
+  animation: guiding-star 5s ease-in-out infinite;
 }
 
-/* ─── Site footer ─────────────────────────────────────── */
+/* ── site-footer ────────────────────────────────────── */
+
 .site-footer {
-  background-color: var(--_bg-panel);
-  border-top: 2px solid var(--_border);
-  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2);
-  color: var(--_fg-muted);
-  font-family: var(--font-heading);
-  font-size: 0.72rem;
-  text-align: center;
-  letter-spacing: 0.18em;
+  border-top:  1px solid rgba(62,207,191,.10);
+  margin-top:  calc(var(--spacing-unit) * 4);
+  padding:     calc(var(--spacing-unit) * 1.75) calc(var(--spacing-unit) * 2);
+  text-align:  center;
+  font-size:   .82rem;
+  color:       rgba(223,240,235,.42);
+  letter-spacing: .08em;
 }
 
-/* ─── Post list ───────────────────────────────────────── */
+/* ── post-list ──────────────────────────────────────── */
+
 .post-list {
   list-style: none;
-  padding: 0;
-  margin-block: calc(var(--spacing-unit) * 2);
+  padding:    0;
+  margin:     0;
 }
 
 .post-list li {
-  border-left: 2px solid var(--_border);
-  padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.25);
-  margin-bottom: calc(var(--spacing-unit) * 0.5);
-  position: relative;
-  transition: border-color 0.3s var(--ease-default),
-              background-color 0.3s var(--ease-default),
-              padding-left 0.25s var(--ease-default);
+  position:      relative;
+  padding:       calc(var(--spacing-unit) * 1.1) 0
+                 calc(var(--spacing-unit) * 1.1) calc(var(--spacing-unit) * 1);
+  border-bottom: 1px solid rgba(62,207,191,.09);
+  transition:    border-color .3s var(--ease-default);
 }
 
+/* serpent-stripe accent on hover */
 .post-list li::before {
-  content: '> ';
-  font-family: var(--font-heading);
-  color: var(--_fg-muted);
-  transition: color 0.3s var(--ease-default);
+  content:    '';
+  position:   absolute;
+  left:       0;
+  top:        50%;
+  transform:  translateY(-50%);
+  width:      0;
+  height:     1px;
+  background: linear-gradient(90deg, var(--color-accent), transparent);
+  transition: width .45s var(--ease-default);
+  opacity:    .75;
 }
 
-.post-list li:hover {
-  border-color: var(--color-accent);
-  background-color: var(--_accent-glow);
-  padding-left: calc(var(--spacing-unit) * 1.7);
-}
+.post-list li:hover { border-color: rgba(62,207,191,.28); }
+.post-list li:hover::before { width: .8rem; }
 
-.post-list li:hover::before {
-  color: var(--color-accent);
-}
+/* ── article.post ───────────────────────────────────── */
 
-/* ─── Article / Post ──────────────────────────────────── */
 article.post {
-  background-color: var(--_bg-panel);
-  border: 1px solid var(--_border);
-  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5);
-  position: relative;
-  box-shadow:
-    0 0 0 1px var(--_border),
-    0 0 48px rgba(0, 0, 0, 0.45),
-    inset 0 0 60px rgba(0, 0, 0, 0.12);
+  max-width:     72ch;
+  margin-inline: auto;
+  padding:       calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2.5);
 }
 
-/* 上端をゆっくり明滅する光線 — 「rewind」の一瞬の光 */
-article.post::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--color-accent) 25%,
-    var(--color-fg) 50%,
-    var(--color-accent) 75%,
-    transparent 100%
-  );
-  opacity: 0.65;
-  animation: scan-top 6s ease-in-out infinite alternate;
+article.post > header {
+  margin-bottom:  calc(var(--spacing-unit) * 2);
+  padding-bottom: calc(var(--spacing-unit) * 1);
+  border-bottom:  1px solid rgba(62,207,191,.18);
+  position:       relative;
 }
 
-@keyframes scan-top {
-  from { transform: scaleX(0.15); opacity: 0.25; }
-  to   { transform: scaleX(1);    opacity: 0.75; }
+/* short accent bar — the "guiding star" underline */
+article.post > header::after {
+  content:       '';
+  position:      absolute;
+  bottom:        -1px;
+  left:          0;
+  width:         3.5rem;
+  height:        1px;
+  background:    var(--color-accent);
+  box-shadow:    0 0 10px rgba(62,207,191,.75);
+  animation:     accent-bar-breathe 4s ease-in-out infinite;
 }
 
-article.post h1:first-child,
-article.post h2:first-child {
-  border-bottom: 2px dashed var(--_border);
-  padding-bottom: calc(var(--spacing-unit) * 0.5);
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
+/* ── blockquote (lyric / aside) ─────────────────────── */
+
+blockquote {
+  margin:      calc(var(--spacing-unit) * 1.5) 0;
+  padding:     calc(var(--spacing-unit) * .8) calc(var(--spacing-unit) * 1.5);
+  border-left: 2px solid rgba(62,207,191,.45);
+  color:       rgba(223,240,235,.72);
+  font-style:  italic;
+  position:    relative;
 }
 
-/* ─── Glitch on headings ──────────────────────────────── */
-/* 9 秒に一度、"do that again" のループが乱れる           */
-@keyframes glitch-heading {
-  0%,  81%, 100% {
-    text-shadow: none;
-    transform: translate(0, 0);
-    opacity: 1;
+blockquote::before {
+  content:    '';
+  position:   absolute;
+  top:        0; left: 0;
+  width:      2px; height: 100%;
+  background: linear-gradient(180deg, var(--color-accent) 0%, rgba(62,207,191,.08) 100%);
+  animation:  serpent-glide 7s ease-in-out infinite;
+}
+
+/* ── code ───────────────────────────────────────────── */
+
+code, pre {
+  font-family: 'SF Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  background:  rgba(62,207,191,.07);
+  border:      1px solid rgba(62,207,191,.14);
+  border-radius: 3px;
+}
+
+code {
+  padding:   .15em .45em;
+  font-size: .875em;
+  color:     #7adcd4;
+}
+
+pre { padding: var(--spacing-unit); overflow-x: auto; }
+pre code { background: none; border: none; padding: 0; }
+
+/* ── keyframes ──────────────────────────────────────── */
+
+@keyframes guiding-star {
+  0%, 100% {
+    text-shadow:
+      0 0 22px rgba(62,207,191,.18),
+      0 0 48px rgba(62,207,191,.04);
   }
-  82% {
-    text-shadow: -4px 0 var(--_glitch-cyan), 4px 0 var(--color-accent);
-    transform: translate(3px, 0);
-  }
-  83% {
-    text-shadow: 4px 0 var(--_glitch-cyan), -4px 0 var(--color-accent);
-    transform: translate(-3px, 0);
-  }
-  84% {
-    text-shadow: none;
-    transform: translate(0, 0);
-  }
-  86% {
-    text-shadow: -2px 0 var(--color-fg), 2px 0 var(--_glitch-cyan);
-    transform: translate(2px, -1px);
-  }
-  87% {
-    text-shadow: none;
-    transform: translate(0, 0);
-  }
-  /* 一瞬の「リワインド」フリッカー */
-  89.5% {
-    opacity: 0.45;
-    text-shadow: 0 0 14px var(--color-accent);
-  }
-  90% {
-    opacity: 1;
-    text-shadow: none;
-    transform: translate(0, 0);
+  50% {
+    text-shadow:
+      0 0 32px rgba(62,207,191,.48),
+      0 0 70px rgba(62,207,191,.16),
+      0 0 100px rgba(62,207,191,.05);
   }
 }
 
-/* ─── Reduced motion ──────────────────────────────────── */
+@keyframes accent-bar-breathe {
+  0%, 100% { opacity: .7; box-shadow: 0 0  8px rgba(62,207,191,.55); }
+  50%       { opacity: 1;  box-shadow: 0 0 16px rgba(62,207,191,.90); }
+}
+
+@keyframes serpent-glide {
+  0%, 100% { transform: scaleY(1.00); opacity: .45; }
+  35%       { transform: scaleY(1.06); opacity: .90; }
+  65%       { transform: scaleY(0.96); opacity: .70; }
+}
+
+/* ── prefers-reduced-motion ─────────────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation: none !important;
+    animation:  none !important;
     transition: none !important;
   }
 }
