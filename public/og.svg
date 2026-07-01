@@ -1,197 +1,99 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-
-    <pattern id="scan" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="3" width="1" height="1" fill="black" fill-opacity="0.07"/>
+    <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="3" width="1" height="1" fill="#000000" fill-opacity="0.11"/>
     </pattern>
-
-    <radialGradient id="warmGlow" cx="50%" cy="44%" r="42%">
-      <stop offset="0%" stop-color="#7a5800" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#09071a" stop-opacity="0"/>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="70%" gradientUnits="objectBoundingBox">
+      <stop offset="35%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.58"/>
     </radialGradient>
-
-    <radialGradient id="cornerTL" cx="0%" cy="0%" r="38%">
-      <stop offset="0%" stop-color="#1a1030" stop-opacity="0.68"/>
-      <stop offset="100%" stop-color="#1a1030" stop-opacity="0"/>
-    </radialGradient>
-
-    <radialGradient id="cornerTR" cx="100%" cy="0%" r="32%">
-      <stop offset="0%" stop-color="#1a1030" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#1a1030" stop-opacity="0"/>
-    </radialGradient>
-
-    <radialGradient id="inkStain" cx="100%" cy="100%" r="32%">
-      <stop offset="0%" stop-color="#6b1515" stop-opacity="0.40"/>
-      <stop offset="45%" stop-color="#6b1515" stop-opacity="0.11"/>
-      <stop offset="70%" stop-color="#6b1515" stop-opacity="0"/>
-    </radialGradient>
-
-    <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#7a5800" stop-opacity="0"/>
-      <stop offset="18%"  stop-color="#d49a0c" stop-opacity="0.85"/>
-      <stop offset="50%"  stop-color="#f5c842" stop-opacity="1"/>
-      <stop offset="82%"  stop-color="#d49a0c" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#7a5800" stop-opacity="0"/>
+    <linearGradient id="topBeam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#f0c842" stop-opacity="0"/>
+      <stop offset="20%"  stop-color="#f0c842" stop-opacity="0.80"/>
+      <stop offset="50%"  stop-color="#aed068" stop-opacity="0.90"/>
+      <stop offset="80%"  stop-color="#f0c842" stop-opacity="0.80"/>
+      <stop offset="100%" stop-color="#f0c842" stop-opacity="0"/>
     </linearGradient>
-
-    <linearGradient id="goldShort" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="transparent"/>
-      <stop offset="22%"  stop-color="#d49a0c" stop-opacity="0.52"/>
-      <stop offset="50%"  stop-color="#f5c842" stop-opacity="0.72"/>
-      <stop offset="78%"  stop-color="#d49a0c" stop-opacity="0.52"/>
-      <stop offset="100%" stop-color="transparent"/>
-    </linearGradient>
-
-    <linearGradient id="titleColor" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#f5c842"/>
-      <stop offset="28%"  stop-color="#f0e2b6"/>
-      <stop offset="72%"  stop-color="#f0e2b6"/>
-      <stop offset="100%" stop-color="#c8880a"/>
-    </linearGradient>
-
-    <filter id="titleGlow" x="-15%" y="-75%" width="130%" height="250%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="blur1"/>
-      <feFlood flood-color="#d49a0c" flood-opacity="0.55" result="c1"/>
-      <feComposite in="c1" in2="blur1" operator="in" result="g1"/>
-      <feGaussianBlur in="SourceAlpha" stdDeviation="26" result="blur2"/>
-      <feFlood flood-color="#f5c842" flood-opacity="0.18" result="c2"/>
-      <feComposite in="c2" in2="blur2" operator="in" result="g2"/>
-      <feMerge>
-        <feMergeNode in="g2"/>
-        <feMergeNode in="g1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <radialGradient id="bgGlow" cx="600" cy="240" r="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#152a10"/>
+      <stop offset="100%" stop-color="#0c1a0a"/>
+    </radialGradient>
+    <filter id="glowFx" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="9"/>
     </filter>
-
-    <filter id="songGlow" x="-10%" y="-70%" width="120%" height="240%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
-      <feFlood flood-color="#d49a0c" flood-opacity="0.50" result="c"/>
-      <feComposite in="c" in2="blur" operator="in" result="g"/>
-      <feMerge>
-        <feMergeNode in="g"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
   </defs>
 
-  <!-- ── Base background ── -->
-  <rect width="1200" height="630" fill="#09071a"/>
+  <!-- BG -->
+  <rect width="1200" height="630" fill="#0c1a0a"/>
+  <rect width="1200" height="630" fill="url(#bgGlow)"/>
 
-  <!-- ── Scan lines ── -->
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <!-- Outer frame -->
+  <rect x="16" y="16" width="1168" height="598" fill="none" stroke="#1d3818" stroke-width="2"/>
 
-  <!-- ── Atmospheric gradients ── -->
-  <rect width="1200" height="630" fill="url(#warmGlow)"/>
-  <rect width="1200" height="630" fill="url(#cornerTL)"/>
-  <rect width="1200" height="630" fill="url(#cornerTR)"/>
-  <rect width="1200" height="630" fill="url(#inkStain)"/>
+  <!-- Inner panel -->
+  <rect x="32" y="32" width="1136" height="566" fill="#101f0d"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#1d3818" stroke-width="1"/>
 
-  <!-- ── Top gold border ── -->
-  <rect x="0" y="0" width="1200" height="3" fill="url(#goldH)" opacity="0.90"/>
+  <!-- Top scan beam -->
+  <rect x="32" y="32" width="1136" height="2" fill="url(#topBeam)" opacity="0.65"/>
 
-  <!-- ── Inner frame ── -->
-  <rect x="25" y="25" width="1150" height="580" fill="none" stroke="#d49a0c" stroke-width="0.8" stroke-opacity="0.18"/>
+  <!-- Corner L-brackets -->
+  <polyline points="52,72 52,50 74,50"     fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
+  <polyline points="1148,72 1148,50 1126,50" fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
+  <polyline points="52,560 52,582 74,582"   fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
+  <polyline points="1148,560 1148,582 1126,582" fill="none" stroke="#f0c842" stroke-width="2.5" opacity="0.65"/>
 
-  <!-- ── Corner ornaments ── -->
-  <g fill="none" stroke="#d49a0c" stroke-width="1.8" stroke-linecap="square" stroke-opacity="0.52">
-    <polyline points="46,65 46,44 67,44"/>
-    <polyline points="1133,44 1154,44 1154,65"/>
-    <polyline points="46,565 46,586 67,586"/>
-    <polyline points="1133,586 1154,586 1154,565"/>
-  </g>
+  <!-- Date / metadata -->
+  <text x="600" y="82" text-anchor="middle" font-family="monospace" font-size="11"
+        fill="#6e9648" letter-spacing="0.36em" opacity="0.6">2026-07-01  ·  blog</text>
+  <line x1="90" y1="98" x2="1110" y2="98" stroke="#1d3818" stroke-width="1.5" stroke-dasharray="4,5"/>
 
-  <!-- ── Gold star, top-right ── -->
-  <text x="1118" y="90" font-family="serif" font-size="42" fill="#f5c842" text-anchor="middle" opacity="0.30">★</text>
-  <!-- Tiny star top-left -->
-  <text x="86" y="76" font-family="serif" font-size="17" fill="#d49a0c" text-anchor="middle" opacity="0.20">★</text>
+  <!-- SITE TITLE: phosphor glow layer -->
+  <text x="600" y="270" text-anchor="middle" font-family="monospace" font-size="112"
+        fill="#aed068" fill-opacity="0.22" letter-spacing="0.04em"
+        filter="url(#glowFx)">へのへのんのの</text>
+  <!-- chromatic aberration: cyan left -->
+  <text x="595" y="273" text-anchor="middle" font-family="monospace" font-size="112"
+        fill="#38e87a" fill-opacity="0.28" letter-spacing="0.04em">へのへのんのの</text>
+  <!-- chromatic aberration: accent right-up -->
+  <text x="605" y="267" text-anchor="middle" font-family="monospace" font-size="112"
+        fill="#f0c842" fill-opacity="0.16" letter-spacing="0.04em">へのへのんのの</text>
+  <!-- main title -->
+  <text x="600" y="270" text-anchor="middle" font-family="monospace" font-size="112"
+        fill="#aed068" letter-spacing="0.04em">へのへのんのの</text>
 
-  <!-- ── Radiating light lines (golden child spotlight / crown) ── -->
-  <g stroke="#f5c842" stroke-width="0.8" opacity="0.09">
-    <line x1="600" y1="158" x2="600" y2="50"/>
-    <line x1="600" y1="158" x2="510" y2="58"/>
-    <line x1="600" y1="158" x2="690" y2="58"/>
-    <line x1="600" y1="158" x2="428" y2="84"/>
-    <line x1="600" y1="158" x2="772" y2="84"/>
-    <line x1="600" y1="158" x2="364" y2="118"/>
-    <line x1="600" y1="158" x2="836" y2="118"/>
-  </g>
+  <!-- Divider -->
+  <circle cx="136" cy="315" r="3"   fill="#f0c842" opacity="0.50"/>
+  <circle cx="600" cy="315" r="2"   fill="#6e9648" opacity="0.45"/>
+  <circle cx="1064" cy="315" r="3"  fill="#f0c842" opacity="0.50"/>
+  <line x1="136" y1="315" x2="1064" y2="315" stroke="#1d3818" stroke-width="2" stroke-dasharray="7,4"/>
 
-  <!-- ── Crack lines (perfectionism fracturing, left side) ── -->
-  <g stroke="#d49a0c" stroke-width="0.7" stroke-linecap="round" opacity="0.09">
-    <line x1="62" y1="128" x2="195" y2="202"/>
-    <line x1="195" y1="202" x2="160" y2="268"/>
-    <line x1="195" y1="202" x2="248" y2="220"/>
-    <line x1="248" y1="220" x2="236" y2="268"/>
-  </g>
-  <!-- Crack lines (right side) -->
-  <g stroke="#d49a0c" stroke-width="0.6" stroke-linecap="round" opacity="0.07">
-    <line x1="1096" y1="368" x2="1043" y2="416"/>
-    <line x1="1043" y1="416" x2="1063" y2="466"/>
-    <line x1="1043" y1="416" x2="1016" y2="431"/>
-  </g>
+  <!-- TODAY'S TRACK label -->
+  <text x="600" y="353" text-anchor="middle" font-family="monospace" font-size="11"
+        fill="#6e9648" letter-spacing="0.44em" opacity="0.65">&#x25B8;  TODAY'S TRACK  &#x25B8;</text>
 
-  <!-- ── Subtle gold aura ellipse behind title ── -->
-  <ellipse cx="600" cy="278" rx="520" ry="86" fill="#7a5800" fill-opacity="0.07"/>
+  <!-- Song title -->
+  <text x="600" y="408" text-anchor="middle" font-family="monospace" font-size="40"
+        fill="#f0c842" letter-spacing="0.07em">Do That Again</text>
 
-  <!-- ── Thin decorative rule above site name ── -->
-  <rect x="295" y="198" width="610" height="0.8" fill="url(#goldShort)" opacity="0.45"/>
+  <!-- Artist -->
+  <text x="600" y="446" text-anchor="middle" font-family="monospace" font-size="17"
+        fill="#6e9648" letter-spacing="0.04em">Teirrel feat. Synthesizer V 2 AI Megpoid</text>
 
-  <!-- ── SITE NAME — MAIN HERO ── -->
-  <text
-    x="600" y="278"
-    font-family="serif"
-    font-size="126"
-    fill="url(#titleColor)"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    filter="url(#titleGlow)"
-    letter-spacing="5"
-  >へのへのんのの</text>
+  <!-- Bottom separator -->
+  <line x1="90" y1="474" x2="1110" y2="474" stroke="#1d3818" stroke-width="1.5" stroke-dasharray="4,5"/>
 
-  <!-- ── Gold rule below site name ── -->
-  <rect x="138" y="342" width="924" height="1.5" fill="url(#goldH)" opacity="0.68"/>
+  <!-- Ticker — loop motif -->
+  <text x="600" y="518" text-anchor="middle" font-family="monospace" font-size="9"
+        fill="#6e9648" letter-spacing="0.34em" opacity="0.38">&#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN  &#x25B8; DO THAT AGAIN</text>
 
-  <!-- ── Song title ── -->
-  <text
-    x="600" y="392"
-    font-family="serif"
-    font-size="40"
-    fill="#d49a0c"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    filter="url(#songGlow)"
-    letter-spacing="5"
-  >Golden Child</text>
+  <!-- Footer echo -->
+  <text x="600" y="550" text-anchor="middle" font-family="monospace" font-size="10"
+        fill="#6e9648" letter-spacing="0.22em" opacity="0.32">へのへのんのの</text>
 
-  <!-- ── Artist ── -->
-  <text
-    x="600" y="440"
-    font-family="sans-serif"
-    font-size="22"
-    fill="#f0e2b6"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    opacity="0.55"
-    letter-spacing="3"
-  >THØRNS feat. 星尘Infinity</text>
+  <!-- Scanlines overlay -->
+  <rect width="1200" height="630" fill="url(#scanlines)"/>
 
-  <!-- ── Short rule below artist ── -->
-  <rect x="432" y="472" width="336" height="0.8" fill="url(#goldShort)" opacity="0.28"/>
-
-  <!-- ── Faint site name echo at bottom ── -->
-  <text
-    x="600" y="548"
-    font-family="serif"
-    font-size="14"
-    fill="#d49a0c"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    opacity="0.20"
-    letter-spacing="14"
-  >へのへのんのの</text>
-
-  <!-- ── Bottom gold border ── -->
-  <rect x="0" y="627" width="1200" height="3" fill="url(#goldH)" opacity="0.45"/>
-
+  <!-- Vignette -->
+  <rect width="1200" height="630" fill="url(#vignette)"/>
 </svg>
