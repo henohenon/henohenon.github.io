@@ -1,122 +1,130 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="g-tl" cx="180" cy="50" r="660" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#3ecfbf" stop-opacity="0.07"/>
-      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0"/>
+    <radialGradient id="rg-ember" cx="0" cy="0" r="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5a0f14" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#0d0c14" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="g-br" cx="1020" cy="580" r="590" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#3ecfbf" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#3ecfbf" stop-opacity="0"/>
+    <radialGradient id="rg-void" cx="1200" cy="630" r="720" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e0c37" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#0d0c14" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="g-center" cx="600" cy="315" r="360" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#0e2821" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#0e2821" stop-opacity="0"/>
+    <radialGradient id="rg-moon" cx="920" cy="108" r="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c8b8a8" stop-opacity="0.07"/>
+      <stop offset="55%" stop-color="#c8b8a8" stop-opacity="0.02"/>
+      <stop offset="100%" stop-color="#0d0c14" stop-opacity="0"/>
     </radialGradient>
-    <filter id="f-title" x="-10%" y="-30%" width="120%" height="160%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="blur"/>
-      <feFlood flood-color="#3ecfbf" flood-opacity="0.28" result="tint"/>
-      <feComposite in="tint" in2="blur" operator="in" result="glow"/>
+    <linearGradient id="lg-accent" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#cf5050" stop-opacity="0"/>
+      <stop offset="18%" stop-color="#cf5050" stop-opacity="0.62"/>
+      <stop offset="82%" stop-color="#cf5050" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="#cf5050" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lg-accent-mid" x1="0" y1="0" x2="1200" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#cf5050" stop-opacity="0"/>
+      <stop offset="28%" stop-color="#cf5050" stop-opacity="0.28"/>
+      <stop offset="72%" stop-color="#cf5050" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#cf5050" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="f-title" x="-6%" y="-25%" width="112%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="11" result="blur"/>
+      <feFlood flood-color="#cf5050" flood-opacity="0.3" result="c"/>
+      <feComposite in="c" in2="blur" operator="in" result="glow"/>
       <feMerge>
         <feMergeNode in="glow"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <filter id="f-accent" x="-60%" y="-800%" width="220%" height="1700%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+    <filter id="f-song" x="-12%" y="-50%" width="124%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#cf5050" flood-opacity="0.42" result="c"/>
+      <feComposite in="c" in2="blur" operator="in" result="glow"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="glow"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <filter id="f-star" x="-400%" y="-400%" width="900%" height="900%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <pattern id="p-scan" patternUnits="userSpaceOnUse" width="1200" height="4">
-      <line x1="0" y1="3" x2="1200" y2="3" stroke="#3ecfbf" stroke-opacity="0.012" stroke-width="1"/>
-    </pattern>
   </defs>
 
-  <!-- Base background -->
-  <rect width="1200" height="630" fill="#070d0b"/>
+  <!-- background -->
+  <rect width="1200" height="630" fill="#0d0c14"/>
+  <rect width="1200" height="630" fill="url(#rg-ember)"/>
+  <rect width="1200" height="630" fill="url(#rg-void)"/>
+  <rect width="1200" height="630" fill="url(#rg-moon)"/>
 
-  <!-- Atmospheric glow layers -->
-  <rect width="1200" height="630" fill="url(#g-tl)"/>
-  <rect width="1200" height="630" fill="url(#g-br)"/>
-  <rect width="1200" height="630" fill="url(#g-center)"/>
+  <!-- shadow streaks — diagonal parallelograms, very faint -->
+  <g fill="#070610" opacity="0.55">
+    <polygon points="80,0 195,0 430,630 315,630"/>
+    <polygon points="530,0 590,0 790,630 730,630"/>
+    <polygon points="910,0 958,0 1110,630 1062,630"/>
+  </g>
 
-  <!-- Scanline veil -->
-  <rect width="1200" height="630" fill="url(#p-scan)"/>
+  <!-- faint moon circle suggestion -->
+  <circle cx="920" cy="108" r="52" fill="none" stroke="#ddd5c8" stroke-width="1" opacity="0.07"/>
+  <circle cx="920" cy="108" r="44" fill="none" stroke="#ddd5c8" stroke-width="0.5" opacity="0.04"/>
 
-  <!-- Abandoned Eden rings -->
-  <circle cx="600" cy="278" r="258" fill="none" stroke="#3ecfbf" stroke-opacity="0.055" stroke-width="1"/>
-  <circle cx="600" cy="278" r="212" fill="none" stroke="#3ecfbf" stroke-opacity="0.030" stroke-width="0.75"/>
+  <!-- frame: top accent line -->
+  <rect x="0" y="90" width="1200" height="1" fill="url(#lg-accent)"/>
+  <!-- frame: bottom accent line -->
+  <rect x="0" y="540" width="1200" height="1" fill="url(#lg-accent)"/>
 
-  <!-- Top and bottom border lines -->
-  <line x1="0" y1="0.5" x2="1200" y2="0.5" stroke="#3ecfbf" stroke-opacity="0.13" stroke-width="1"/>
-  <line x1="0" y1="629.5" x2="1200" y2="629.5" stroke="#3ecfbf" stroke-opacity="0.10" stroke-width="1"/>
+  <!-- corner brackets -->
+  <rect x="54" y="54" width="52" height="1.5" fill="#cf5050" opacity="0.48"/>
+  <rect x="54" y="54" width="1.5" height="38" fill="#cf5050" opacity="0.48"/>
+  <rect x="1094" y="54" width="52" height="1.5" fill="#cf5050" opacity="0.48"/>
+  <rect x="1144.5" y="54" width="1.5" height="38" fill="#cf5050" opacity="0.48"/>
+  <rect x="54" y="576" width="52" height="1.5" fill="#cf5050" opacity="0.48"/>
+  <rect x="54" y="539" width="1.5" height="38" fill="#cf5050" opacity="0.48"/>
+  <rect x="1094" y="576" width="52" height="1.5" fill="#cf5050" opacity="0.48"/>
+  <rect x="1144.5" y="539" width="1.5" height="38" fill="#cf5050" opacity="0.48"/>
 
-  <!-- Corner bracket ornaments -->
-  <polyline points="55,118 55,38 135,38" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
-  <polyline points="1145,118 1145,38 1065,38" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
-  <polyline points="55,512 55,592 135,592" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
-  <polyline points="1145,512 1145,592 1065,592" fill="none" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="1" stroke-linejoin="miter"/>
-
-  <!-- Scattered stars — garden lanterns in the dark -->
-  <circle cx="142" cy="168" r="1.2" fill="#3ecfbf" fill-opacity="0.32"/>
-  <circle cx="178" cy="428" r="0.9" fill="#3ecfbf" fill-opacity="0.22"/>
-  <circle cx="302" cy="72"  r="0.9" fill="#3ecfbf" fill-opacity="0.18"/>
-  <circle cx="892" cy="76"  r="1.0" fill="#3ecfbf" fill-opacity="0.22"/>
-  <circle cx="1052" cy="162" r="1.2" fill="#3ecfbf" fill-opacity="0.32"/>
-  <circle cx="1026" cy="460" r="0.9" fill="#3ecfbf" fill-opacity="0.22"/>
-  <circle cx="415" cy="568" r="0.8" fill="#3ecfbf" fill-opacity="0.18"/>
-  <circle cx="788" cy="572" r="0.8" fill="#3ecfbf" fill-opacity="0.18"/>
-  <circle cx="348" cy="192" r="0.7" fill="#3ecfbf" fill-opacity="0.14"/>
-  <circle cx="852" cy="188" r="0.7" fill="#3ecfbf" fill-opacity="0.14"/>
-  <circle cx="228" cy="310" r="0.7" fill="#3ecfbf" fill-opacity="0.12"/>
-  <circle cx="972" cy="316" r="0.7" fill="#3ecfbf" fill-opacity="0.12"/>
-
-  <!-- Guiding star — 道標 -->
-  <circle cx="600" cy="116" r="2.8" fill="#3ecfbf" fill-opacity="0.82" filter="url(#f-star)"/>
-  <line x1="600" y1="124" x2="600" y2="152" stroke="#3ecfbf" stroke-opacity="0.22" stroke-width="0.75"/>
-
-  <!-- Site name — MAIN HERO -->
+  <!-- site title — main hero -->
   <text
-    x="600"
-    y="308"
+    x="600" y="275"
     font-family="serif"
-    font-size="118"
-    fill="#c2eae4"
+    font-size="116"
+    font-weight="normal"
+    fill="#ddd5c8"
     text-anchor="middle"
-    letter-spacing="5"
-    filter="url(#f-title)">へのへのんのの</text>
+    dominant-baseline="middle"
+    letter-spacing="7"
+    filter="url(#f-title)"
+  >へのへのんのの</text>
 
-  <!-- Separator with bright centre accent -->
-  <line x1="462" y1="346" x2="738" y2="346" stroke="#3ecfbf" stroke-opacity="0.18" stroke-width="1"/>
-  <line x1="572" y1="346" x2="628" y2="346" stroke="#3ecfbf" stroke-opacity="0.90" stroke-width="1" filter="url(#f-accent)"/>
+  <!-- divider under title -->
+  <rect x="180" y="358" width="840" height="1" fill="url(#lg-accent-mid)"/>
 
-  <!-- Song name — subtitle -->
+  <!-- "TODAY'S SONG" caption -->
   <text
-    x="600"
-    y="396"
-    font-family="serif"
-    font-size="36"
-    fill="#3ecfbf"
-    fill-opacity="0.80"
-    text-anchor="middle"
-    letter-spacing="2.5">Eden's Heart</text>
-
-  <!-- Artist name -->
-  <text
-    x="600"
-    y="438"
+    x="600" y="388"
     font-family="sans-serif"
-    font-size="20"
-    fill="#dff0eb"
-    fill-opacity="0.40"
+    font-size="11"
+    fill="#524a44"
     text-anchor="middle"
-    letter-spacing="1.5">ULTIMA feat. 初音ミク V6</text>
+    dominant-baseline="middle"
+    letter-spacing="5"
+  >TODAY'S SONG</text>
+
+  <!-- song title -->
+  <text
+    x="600" y="432"
+    font-family="serif"
+    font-size="38"
+    font-style="italic"
+    fill="#cf5050"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="2"
+    filter="url(#f-song)"
+  >Chasing Shadows</text>
+
+  <!-- artist name -->
+  <text
+    x="600" y="480"
+    font-family="sans-serif"
+    font-size="18"
+    fill="#7a7068"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="0.5"
+  >bitbreaker feat. Synthesizer V 2 AI Megpoid</text>
 </svg>
