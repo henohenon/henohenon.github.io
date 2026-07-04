@@ -1,118 +1,100 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
-      <stop offset="25%" stop-color="transparent"/>
-      <stop offset="100%" stop-color="#1a1206" stop-opacity="0.30"/>
+    <pattern id="scan" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="3" fill="none"/>
+      <rect y="3" width="4" height="1" fill="#000000" fill-opacity="0.045"/>
+    </pattern>
+    <radialGradient id="gl-top" cx="600" cy="0" r="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"  stop-color="#e0456a" stop-opacity="0.13"/>
+      <stop offset="62%" stop-color="#e0456a" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="grid" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M50 0 L0 0 0 50" fill="none" stroke="#c8b42e" stroke-width="0.7"/>
-    </pattern>
-    <pattern id="scanlines" x="0" y="0" width="1200" height="7" patternUnits="userSpaceOnUse">
-      <rect width="1200" height="1.5" fill="white" fill-opacity="0.06"/>
-    </pattern>
-    <linearGradient id="scan-grad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="transparent"/>
-      <stop offset="45%" stop-color="#8c1e1e" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="transparent"/>
+    <radialGradient id="gl-br" cx="1100" cy="650" r="380" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"  stop-color="#e0456a" stop-opacity="0.06"/>
+      <stop offset="70%" stop-color="#e0456a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gl-halo" cx="600" cy="250" r="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#e0456a" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#e0456a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fade-tb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#0d0810" stop-opacity="0.35"/>
+      <stop offset="14%"  stop-color="#0d0810" stop-opacity="0"/>
+      <stop offset="86%"  stop-color="#0d0810" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0d0810" stop-opacity="0.35"/>
     </linearGradient>
-    <radialGradient id="red-glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#8c1e1e" stop-opacity="0.24"/>
-      <stop offset="100%" stop-color="#8c1e1e" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="title-shadow" x="-5%" y="-10%" width="110%" height="125%">
-      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#fffde0" flood-opacity="0.50"/>
-    </filter>
   </defs>
 
-  <!-- ── BACKGROUND ──────────────────────────────────────── -->
-  <rect width="1200" height="630" fill="#e9e19c"/>
-  <rect width="1200" height="630" fill="url(#grid)" opacity="0.45"/>
+  <!-- ── Background ── -->
+  <rect width="1200" height="630" fill="#0d0810"/>
+  <rect width="1200" height="630" fill="url(#gl-top)"/>
+  <rect width="1200" height="630" fill="url(#gl-br)"/>
+  <rect width="1200" height="630" fill="url(#gl-halo)"/>
+  <rect width="1200" height="630" fill="url(#scan)"/>
+  <rect width="1200" height="630" fill="url(#fade-tb)"/>
 
-  <!-- ── TOP HEADER BAND ─────────────────────────────────── -->
-  <rect x="0" y="0" width="1200" height="80" fill="#c8b42e"/>
-  <rect x="0" y="0" width="1200" height="80" fill="url(#scanlines)"/>
-  <rect x="0" y="77" width="1200" height="3" fill="#8c1e1e"/>
+  <!-- ── 空になる／いただきます — empty plate / void rings ── -->
+  <ellipse cx="602" cy="316" rx="278" ry="274" fill="none"
+           stroke="#e0456a" stroke-width="1.2" stroke-opacity="0.09"
+           transform="rotate(-0.3 602 316)"/>
+  <ellipse cx="602" cy="316" rx="253" ry="249" fill="none"
+           stroke="#e0456a" stroke-width="0.6" stroke-opacity="0.055"
+           transform="rotate(-0.3 602 316)"/>
 
-  <!-- ── BOTTOM FOOTER BAND ─────────────────────────────── -->
-  <rect x="0" y="572" width="1200" height="58" fill="#c8b42e"/>
-  <rect x="0" y="572" width="1200" height="1" fill="#8c1e1e"/>
-  <rect x="0" y="573" width="1200" height="57" fill="url(#scanlines)"/>
+  <!-- ── Frame — TV broadcast guide marks ── -->
+  <line x1="56"  y1="34"  x2="1144" y2="34"  stroke="#e0456a" stroke-width="1" stroke-opacity="0.30"/>
+  <line x1="56"  y1="596" x2="1144" y2="596" stroke="#e0456a" stroke-width="1" stroke-opacity="0.18"/>
+  <line x1="56"  y1="34"  x2="56"   y2="78"  stroke="#e0456a" stroke-width="1" stroke-opacity="0.30"/>
+  <line x1="1144" y1="34" x2="1144" y2="78"  stroke="#e0456a" stroke-width="1" stroke-opacity="0.30"/>
+  <line x1="56"  y1="596" x2="56"   y2="552" stroke="#e0456a" stroke-width="1" stroke-opacity="0.18"/>
+  <line x1="1144" y1="596" x2="1144" y2="552" stroke="#e0456a" stroke-width="1" stroke-opacity="0.18"/>
 
-  <!-- ── SIDE ACCENT BARS ────────────────────────────────── -->
-  <rect x="0" y="0" width="4" height="630" fill="#8c1e1e"/>
-  <rect x="1196" y="0" width="4" height="630" fill="#8c1e1e"/>
+  <!-- ── Site name ─ 主役 ── -->
+  <text
+    x="600" y="248"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="serif"
+    font-size="112"
+    fill="#ece0e8"
+    letter-spacing="9"
+  >へのへのんのの</text>
 
-  <!-- ── INNER DASHED FRAME (labyrinth walls) ───────────── -->
-  <rect x="34" y="97" width="1132" height="463"
-        fill="none" stroke="#8c1e1e" stroke-width="1"
-        stroke-dasharray="10 6" opacity="0.25"/>
+  <!-- Accent rule (微かに傾く — 錆び付いた蝶番) -->
+  <rect x="430" y="312" width="342" height="2" fill="#e0456a" rx="1"
+        transform="rotate(-0.18 601 313)"/>
 
-  <!-- ── PRESENCE GLOW (watching from top-right) ────────── -->
-  <ellipse cx="1058" cy="150" rx="148" ry="74" fill="url(#red-glow)"/>
+  <!-- 今日の一曲 label -->
+  <text
+    x="600" y="348"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="sans-serif"
+    font-size="13"
+    fill="#e0456a"
+    fill-opacity="0.52"
+    letter-spacing="5"
+  >今日の一曲</text>
 
-  <!-- ── SCAN BAR (the loop that never ends) ─────────────── -->
-  <rect x="0" y="494" width="435" height="2" fill="url(#scan-grad)"/>
+  <!-- ── Song title ─ 副題 ── -->
+  <text
+    x="600" y="388"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="serif"
+    font-size="40"
+    fill="#e0456a"
+    letter-spacing="3"
+  >いただきます</text>
 
-  <!-- ── CORNER MAZE FRAGMENTS ──────────────────────────── -->
-  <g stroke="#8c1e1e" stroke-width="1.2" fill="none" opacity="0.24">
-    <!-- top-left -->
-    <path d="M52 102 L52 144 L91 144 L91 121"/>
-    <path d="M52 164 L73 164 L73 196 L109 196"/>
-    <path d="M111 102 L111 128 L136 128"/>
-    <!-- top-right -->
-    <path d="M1148 102 L1148 144 L1109 144 L1109 121"/>
-    <path d="M1148 164 L1127 164 L1127 196 L1091 196"/>
-    <path d="M1089 102 L1089 128 L1064 128"/>
-    <!-- bottom-left -->
-    <path d="M52 548 L52 506 L91 506 L91 529"/>
-    <path d="M52 486 L73 486 L73 455 L109 455"/>
-    <!-- bottom-right -->
-    <path d="M1148 548 L1148 506 L1109 506 L1109 529"/>
-    <path d="M1148 486 L1127 486 L1127 455 L1091 455"/>
-  </g>
-
-  <!-- ── VIGNETTE ────────────────────────────────────────── -->
-  <rect width="1200" height="630" fill="url(#vignette)"/>
-
-  <!-- ══════════════════════════════════════════════════════ -->
-  <!-- CONTENT                                               -->
-  <!-- ══════════════════════════════════════════════════════ -->
-
-  <!-- SITE NAME — primary, the star -->
-  <text x="600" y="314"
-        font-family="serif"
-        font-size="110"
-        fill="#1a1206"
-        text-anchor="middle"
-        letter-spacing="-1"
-        filter="url(#title-shadow)">へのへのんのの</text>
-
-  <!-- Separator rule -->
-  <line x1="278" y1="337" x2="922" y2="337"
-        stroke="#8c1e1e" stroke-width="1.2" opacity="0.48"/>
-
-  <!-- Song name — subtitle -->
-  <text x="600" y="395"
-        font-family="serif"
-        font-size="32"
-        fill="#8c1e1e"
-        text-anchor="middle"
-        letter-spacing="0.06em">Lost in Peace</text>
-
-  <!-- Artist name -->
-  <text x="600" y="433"
-        font-family="sans-serif"
-        font-size="20"
-        fill="#5c4e18"
-        text-anchor="middle"
-        letter-spacing="0.10em">阿修 feat. 重音テト</text>
-
-  <!-- Footer label -->
-  <text x="600" y="606"
-        font-family="serif"
-        font-size="14"
-        fill="#5c4e18"
-        text-anchor="middle"
-        letter-spacing="0.20em"
-        opacity="0.68">今日の一曲</text>
+  <!-- ── Artist ─ 補足 ── -->
+  <text
+    x="600" y="434"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="sans-serif"
+    font-size="19"
+    fill="#ece0e8"
+    fill-opacity="0.40"
+    letter-spacing="1"
+  >ぴーなた feat. ゲキヤク</text>
 </svg>

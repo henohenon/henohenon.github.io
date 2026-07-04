@@ -1,276 +1,340 @@
-/* Lost in Peace / 阿修 feat. 重音テト / 黄色い迷宮に閉じ込められた静かな狂気 ── 抜け出せない、でも「lovely peaceful place」 */
+歌詞を丁寧に読みました。「食べ残す → 食べ尽くす → 私が空になる」という崩壊の弧、「錆び付いた蝶番のズレた音色」、「変な色彩 TVショー」── これらを軸にテーマを組みます。
+
+**ムード：** 甘腐れ──カワイイの皮を被った解離と空洞。くすんだ暗闇に刺さる生肉色のピンク。錆びた蝶番のような、微かにズレた揺れ。
+
+---
+
+/* いただきます / ぴーなた feat. ゲキヤク / 甘く腐った空洞──食べ尽くした末に私が空になる */
 
 :root {
-  --color-fg:            #1a1206;
-  --color-bg:            #e9e19c;
-  --color-accent:        #8c1e1e;
+  /* ── color ── */
+  /* bg: 血の乾いた闇、わずかに紫みを帯びた漆黒 */
+  --color-bg:     #0d0810;
+  /* fg: 青白い肌のような、ほんのりピンクを帯びたオフホワイト */
+  --color-fg:     #ece0e8;
+  /* accent: 切り口の赤みがかったピンク──生肉色 */
+  --color-accent: #e0456a;
 
-  --spacing-unit:        1rem;
+  /* ── spacing ── */
+  --spacing-unit: 1rem;
 
-  --font-heading:        'Georgia', 'Palatino Linotype', 'Book Antiqua',
-                         'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho',
-                         'HGS明朝E', serif;
-  --font-body:           system-ui, -apple-system, 'Hiragino Sans',
-                         'Yu Gothic', 'YuGothic', 'Meiryo',
-                         'MS PGothic', sans-serif;
+  /* ── typography ── */
+  /* 明朝体（仮名）+ セリフ（欧文）── 少しだけ古くて、堅くて、ズレた活字 */
+  --font-heading: 'Georgia', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
+  /* 本文は読みやすいゴシック系を優先 */
+  --font-body:    'Hiragino Sans', 'Yu Gothic Medium', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
 
-  --line-height-body:    1.85;
-  --line-height-heading: 1.25;
+  --line-height-body:    1.9;
+  --line-height-heading: 1.15;
 
-  --ease-default:        cubic-bezier(0.4, 0.0, 0.6, 1);
-
-  --_bg-deep:            #c8b42e;
-  --_surface:            #f3edb5;
-  --_muted:              #5c4e18;
+  /* ── motion ── */
+  /* わずかにオーバーシュートする、ズレた感触のイージング */
+  --ease-default: cubic-bezier(0.22, 1.12, 0.36, 0.96);
 }
 
-/* ─── BODY ───────────────────────────────────────────────── */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-  font-family: var(--font-body);
-  line-height: var(--line-height-body);
-  animation: bg-pulse 24s ease-in-out infinite;
-}
-
-@keyframes bg-pulse {
-  0%, 100% { background-color: #e9e19c; }
-  35%       { background-color: #ddd48a; }
-  70%       { background-color: #f0e8aa; }
-}
-
-/* vignette — empty space closing in */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 85% 75% at 50% 50%,
-    transparent 32%,
-    rgba(26, 18, 6, 0.22) 100%
-  );
-  pointer-events: none;
-  z-index: 9990;
-}
-
-/* grain — old damp carpet, mold, decay */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.70' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.06;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 9989;
-}
-
-/* ─── TYPOGRAPHY ─────────────────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  color: var(--color-fg);
-  letter-spacing: -0.015em;
-}
-
-a {
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  transition: color 0.5s var(--ease-default),
-              opacity 0.5s var(--ease-default);
-}
-
-a:hover {
-  color: #5a1010;
-  opacity: 0.82;
-}
-
-/* ─── SITE HEADER ────────────────────────────────────────── */
-.site-header {
-  position: relative;
-  background-color: var(--_bg-deep);
-  color: var(--color-fg);
-  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2);
-  border-bottom: 3px solid var(--color-accent);
-  overflow: hidden;
-}
-
-/* overhead fluorescent hum — horizontal banding */
-.site-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04) 0px,
-    rgba(255, 255, 255, 0.04) 2px,
-    transparent 2px,
-    transparent 6px
-  );
-  pointer-events: none;
-  animation: banding 0.1s steps(1) infinite;
-}
-
-@keyframes banding {
-  0%, 60%  { opacity: 1; }
-  61%, 100% { opacity: 0.85; }
-}
-
-/* the presence — watching from behind */
-.site-header::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: calc(var(--spacing-unit) * 2.5);
-  width: 5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: radial-gradient(
-    ellipse,
-    rgba(140, 30, 30, 0.26) 0%,
-    transparent 70%
-  );
-  transform: translateY(-50%);
-  animation: watching 11s ease-in-out infinite;
-}
-
-@keyframes watching {
-  0%, 100% { opacity: 0.20; transform: translateY(-50%) scale(0.85); }
-  50%       { opacity: 0.80; transform: translateY(-50%) scale(1.30); }
-}
-
-.site-header .site-title,
-.site-header h1 {
-  font-family: var(--font-heading);
-  color: var(--color-fg);
-  letter-spacing: -0.02em;
-  text-shadow: 0 1px 0 rgba(255, 255, 200, 0.35);
-  animation: title-flicker 22s step-end infinite;
-}
-
-@keyframes title-flicker {
-  0%, 91%, 94%, 97%, 100% { opacity: 1; }
-  92%, 95%, 98%            { opacity: 0.78; }
-}
-
-/* ─── SITE FOOTER ────────────────────────────────────────── */
-.site-footer {
-  background-color: var(--_bg-deep);
-  color: var(--_muted);
-  border-top: 1px solid rgba(140, 30, 30, 0.38);
-  padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
-  font-size: 0.85rem;
-  text-align: center;
-  letter-spacing: 0.05em;
-}
-
-/* ─── POST LIST ──────────────────────────────────────────── */
-.post-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.post-list li {
-  position: relative;
-  border-bottom: 1px dashed rgba(140, 30, 30, 0.28);
-  padding: calc(var(--spacing-unit) * 0.85) calc(var(--spacing-unit) * 0.75);
-  transition: background-color 0.7s var(--ease-default),
-              padding-left     0.7s var(--ease-default);
-}
-
-.post-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: var(--color-accent);
-  transform: scaleY(0);
-  transform-origin: bottom center;
-  transition: transform 0.5s var(--ease-default);
-}
-
-.post-list li:hover {
-  background-color: var(--_surface);
-  padding-left: calc(var(--spacing-unit) * 1.4);
-}
-
-.post-list li:hover::before {
-  transform: scaleY(1);
-}
-
-/* ─── ARTICLE / POST ─────────────────────────────────────── */
-article.post {
-  position: relative;
-  background-color: var(--_surface);
-  border-left: 3px solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2);
-  box-shadow: 0 2px 20px rgba(26, 18, 6, 0.10);
-  overflow: hidden;
-  animation: post-breathe 15s ease-in-out infinite;
-}
-
-@keyframes post-breathe {
-  0%, 100% { box-shadow: 0 2px 20px rgba(26, 18, 6, 0.10); }
-  50%       { box-shadow: 0 4px 40px rgba(26, 18, 6, 0.19); }
-}
-
-/* looping scan bar — "right back where I started out" */
-article.post::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--color-accent) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: loop-scan 8s linear infinite;
-}
-
-@keyframes loop-scan {
-  from { transform: translateX(-100%); }
-  to   { transform: translateX(340%); }
-}
-
-/* "Hey, is anyone there?" — a faint echo glow at article top-right */
-article.post::after {
-  content: '';
-  position: absolute;
-  top: -2rem;
-  right: -2rem;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(233, 225, 156, 0.55) 0%,
-    transparent 70%
-  );
-  animation: echo-pulse 16s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes echo-pulse {
-  0%, 100% { opacity: 0.3; transform: scale(0.9); }
-  50%       { opacity: 0.7; transform: scale(1.2); }
-}
-
-/* ─── REDUCED MOTION ─────────────────────────────────────── */
+/* ── motion safety ── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
   }
 }
+
+/* ══════════════════════════════════════════
+   Base
+══════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-bg);
+}
+
+/* 変な色彩 TVショー ── 上部の淡いグロー + 水平スキャンライン */
+body {
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  line-height: var(--line-height-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(
+      ellipse 100% 45% at 50% -4%,
+      color-mix(in srgb, var(--color-accent) 11%, transparent) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 45% 30% at 95% 105%,
+      color-mix(in srgb, var(--color-accent) 5%, transparent) 0%,
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.045) 3px,
+      rgba(0, 0, 0, 0.045) 4px
+    );
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ── global link ── */
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  transition: opacity 0.35s var(--ease-default);
+}
+
+a:hover {
+  opacity: 0.68;
+}
+
+/* ══════════════════════════════════════════
+   Site Header
+══════════════════════════════════════════ */
+.site-header {
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-accent) 7%, var(--color-bg)) 0%,
+    transparent 100%
+  );
+}
+
+.site-header a {
+  color: var(--color-fg);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  transition:
+    color          0.5s var(--ease-default),
+    letter-spacing 0.5s var(--ease-default);
+}
+
+.site-header a:hover {
+  color: var(--color-accent);
+  letter-spacing: 0.22em;
+}
+
+/* サイトタイトル ── 蛍光灯の起動、最初の一瞬だけ瞬く */
+.site-title {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  letter-spacing: 0.08em;
+  animation: flicker-wake 1.8s var(--ease-default) both;
+}
+
+/* ══════════════════════════════════════════
+   Site Footer
+══════════════════════════════════════════ */
+.site-footer {
+  margin-top: calc(var(--spacing-unit) * 10);
+  padding: calc(var(--spacing-unit) * 3);
+  border-top: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  color: color-mix(in srgb, var(--color-fg) 42%, transparent);
+  font-size: 0.82rem;
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════
+   Post List
+══════════════════════════════════════════ */
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: calc(var(--spacing-unit) * 4) auto;
+  max-width: 68ch;
+}
+
+.post-list li {
+  padding-left: calc(var(--spacing-unit) * 1.8);
+  margin-bottom: calc(var(--spacing-unit) * 2.5);
+  border-left: 2px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  transition:
+    border-color 0.4s var(--ease-default),
+    transform    0.4s var(--ease-default);
+}
+
+/* ホバーで微かに傾く ── 蝶番がズレる */
+.post-list li:hover {
+  border-left-color: var(--color-accent);
+  transform: translateX(5px) rotate(-0.12deg);
+}
+
+.post-list a {
+  display: block;
+  color: var(--color-fg);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  transition: color 0.3s var(--ease-default);
+}
+
+.post-list a:hover {
+  color: var(--color-accent);
+}
+
+.post-list time {
+  display: block;
+  font-size: 0.78rem;
+  color: color-mix(in srgb, var(--color-fg) 48%, transparent);
+  letter-spacing: 0.05em;
+  margin-top: 0.28rem;
+}
+
+/* ══════════════════════════════════════════
+   Article / Post
+══════════════════════════════════════════ */
+article.post {
+  max-width: 68ch;
+  margin: calc(var(--spacing-unit) * 5) auto;
+  padding: 0 calc(var(--spacing-unit) * 2);
+}
+
+article.post h1,
+article.post h2,
+article.post h3,
+article.post h4 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-heading);
+  letter-spacing: 0.04em;
+  color: var(--color-fg);
+}
+
+/* h1 ── 錆び付いた蝶番の揺れ */
+article.post h1 {
+  font-size: clamp(1.7rem, 5vw, 2.5rem);
+  margin-bottom: calc(var(--spacing-unit) * 2.2);
+  animation: hinge-settle 11s ease-in-out infinite;
+  transform-origin: left bottom;
+}
+
+article.post h1::after {
+  content: '';
+  display: block;
+  width: 2.6rem;
+  height: 2px;
+  background: var(--color-accent);
+  margin-top: calc(var(--spacing-unit) * 0.7);
+  animation: hinge-settle 11s ease-in-out infinite reverse;
+  transform-origin: left center;
+}
+
+article.post h2 {
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
+  margin-top: calc(var(--spacing-unit) * 3);
+  margin-bottom: var(--spacing-unit);
+  padding-bottom: calc(var(--spacing-unit) * 0.4);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+article.post h3 {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  margin-top: calc(var(--spacing-unit) * 2.2);
+  margin-bottom: calc(var(--spacing-unit) * 0.6);
+}
+
+article.post p {
+  margin-bottom: calc(var(--spacing-unit) * 1.4);
+}
+
+article.post a {
+  color: var(--color-accent);
+  text-underline-offset: 0.22em;
+  transition: opacity 0.28s var(--ease-default);
+}
+
+article.post a:hover {
+  opacity: 0.68;
+}
+
+/* 引用 ── 閉じ込められた誰かの声 */
+article.post blockquote {
+  margin: calc(var(--spacing-unit) * 2.5) 0;
+  padding:
+    calc(var(--spacing-unit) * 1.2)
+    calc(var(--spacing-unit) * 1.8);
+  border-left: 3px solid var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  color: color-mix(in srgb, var(--color-fg) 78%, var(--color-accent));
+  font-style: italic;
+  border-radius: 0 4px 4px 0;
+}
+
+article.post code {
+  background-color: color-mix(in srgb, var(--color-accent) 13%, var(--color-bg));
+  color: color-mix(in srgb, var(--color-accent) 88%, var(--color-fg));
+  padding: 0.1em 0.45em;
+  border-radius: 3px;
+  font-size: 0.87em;
+}
+
+article.post pre {
+  background-color: color-mix(in srgb, var(--color-accent) 7%, var(--color-bg));
+  border: 1px solid color-mix(in srgb, var(--color-accent) 18%, transparent);
+  border-radius: 6px;
+  padding: calc(var(--spacing-unit) * 1.5);
+  overflow-x: auto;
+}
+
+article.post pre code {
+  background: none;
+  padding: 0;
+  color: var(--color-fg);
+  font-size: 0.9em;
+}
+
+article.post hr {
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  margin: calc(var(--spacing-unit) * 3.5) 0;
+}
+
+/* ══════════════════════════════════════════
+   Keyframes
+══════════════════════════════════════════ */
+
+/* 錆び付いている蝶番がほら──奏でてる少しズレた音色が私みたい */
+@keyframes hinge-settle {
+  0%,  100% { transform: rotate(0deg); }
+  11%        { transform: rotate(-0.45deg); }
+  27%        { transform: rotate(0.32deg); }
+  46%        { transform: rotate(-0.22deg); }
+  63%        { transform: rotate(0.28deg); }
+  81%        { transform: rotate(-0.12deg); }
+}
+
+/* 蛍光灯の起動──点いては消え、ようやく定着する */
+@keyframes flicker-wake {
+  0%   { opacity: 0;    filter: brightness(4)   saturate(0); }
+  7%   { opacity: 0.85; filter: brightness(2.2) saturate(0.25); }
+  13%  { opacity: 0.2;  filter: brightness(1)   saturate(0); }
+  21%  { opacity: 1;    filter: brightness(1.6) saturate(0.6); }
+  32%  { opacity: 0.6;  filter: brightness(1)   saturate(0.8); }
+  44%  { opacity: 1;    filter: brightness(1)   saturate(1); }
+  100% { opacity: 1;    filter: brightness(1)   saturate(1); }
+}
+
+---
+
+**設計メモ：**
+
+| 要素 | 意図 |
+|---|---|
+| `#0d0810` (bg) | 漆黒にわずかな紫紅──乾いた血の暗さ |
+| `#ece0e8` (fg) | 青白い肌色のオフホワイト、コントラスト比 **≈16:1** ✓ |
+| `#e0456a` (accent) | 生肉色のピンク、bg対比 **≈5.1:1** で AA通過 ✓ |
+| `flicker-wake` | 「貴方が私じゃないみたい」── 蛍光灯が自分を見失いながら起動する |
+| `hinge-settle` (11s, 逆位相) | 「錆び付いている蝶番がほら──私みたい！！」の微細な揺れ |
+| `rotate(-0.12deg)` on hover | ホバーで世界が少しだけ傾く、解離の感触 |
+| スキャンライン (4px周期) | 「変な色彩 詰め込んだ TVショー」── 現実とスクリーンの間 |
+| セリフ見出し + ゴシック本文 | 堅い活字 vs. 日常語、「正しい方が分からなくなって」 |
