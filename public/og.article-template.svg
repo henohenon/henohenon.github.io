@@ -1,92 +1,138 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- 空の雰囲気: 上-左の青灰 → 下-右の淡白 -->
-    <linearGradient id="sky" x1="0.15" y1="0" x2="0.85" y2="1">
-      <stop offset="0%"   stop-color="#ccd6eb"/>
-      <stop offset="28%"  stop-color="#d8e2f2"/>
-      <stop offset="58%"  stop-color="#e5e8f5"/>
-      <stop offset="80%"  stop-color="#eeecf7"/>
-      <stop offset="100%" stop-color="#f2f1f9"/>
-    </linearGradient>
+    <!-- Monsoon rain grid — vertical lines every 73 px -->
+    <pattern id="rain" x="0" y="0" width="73" height="630" patternUnits="userSpaceOnUse">
+      <rect x="72" y="0" width="1" height="630" fill="#00c0d8" fill-opacity="0.025"/>
+    </pattern>
 
-    <!-- 曇り空の切れ間から差す光 (header::before に対応) -->
-    <radialGradient id="cloudlight" cx="780" cy="0" r="580" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="#d2e1ff" stop-opacity="0.38"/>
-      <stop offset="100%" stop-color="#d2e1ff" stop-opacity="0"/>
+    <!-- Deep-sea radial glow from canvas bottom -->
+    <radialGradient id="seaDepth" cx="50%" cy="100%" r="75%">
+      <stop offset="0%"   stop-color="#006e9b" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#090d1a" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- アクセント線: solid → transparent (h1::after に対応) -->
-    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#3d5f8f"/>
-      <stop offset="100%" stop-color="#3d5f8f" stop-opacity="0"/>
+    <!-- Dark tonal depth — upper-left corner -->
+    <radialGradient id="cornerDepth" cx="12%" cy="12%" r="55%">
+      <stop offset="0%"   stop-color="#003755" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#090d1a" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Tide sweep — horizontal luminance gradient -->
+    <linearGradient id="tideGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#090d1a" stop-opacity="0"/>
+      <stop offset="20%"  stop-color="#00c0d8" stop-opacity="0.45"/>
+      <stop offset="50%"  stop-color="#00c0d8" stop-opacity="1"/>
+      <stop offset="80%"  stop-color="#00c0d8" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#090d1a" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- 上端アクセントバー -->
-    <linearGradient id="topedge" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"   stop-color="#3d5f8f" stop-opacity="0.65"/>
-      <stop offset="52%"  stop-color="#3d5f8f" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#3d5f8f" stop-opacity="0"/>
+    <!-- Title text gradient: pale seafoam → electric teal -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"  stop-color="#c8dde8"/>
+      <stop offset="65%" stop-color="#00c0d8"/>
     </linearGradient>
 
-    <!-- カード影 (article.post の box-shadow に対応) -->
-    <filter id="cardshadow" x="-4%" y="-5%" width="108%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="14"
-                    flood-color="#233764" flood-opacity="0.08"/>
+    <!-- Site name gradient -->
+    <linearGradient id="siteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="20%"  stop-color="#c8dde8"/>
+      <stop offset="100%" stop-color="#00c0d8"/>
+    </linearGradient>
+
+    <!-- Title glow — blurred teal halo beneath main text -->
+    <filter id="titleGlow" x="-5%" y="-30%" width="110%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
     </filter>
   </defs>
 
-  <!-- ── 空グラデーション背景 ── -->
-  <rect width="1200" height="630" fill="url(#sky)"/>
+  <!-- ════ Background layers ════ -->
+  <rect width="1200" height="630" fill="#090d1a"/>
+  <rect width="1200" height="630" fill="url(#seaDepth)"/>
+  <rect width="1200" height="630" fill="url(#cornerDepth)"/>
 
-  <!-- ── 雲間の光 ── -->
-  <rect width="1200" height="630" fill="url(#cloudlight)"/>
+  <!-- Monsoon rain grid -->
+  <rect width="1200" height="630" fill="url(#rain)"/>
 
-  <!-- ── 雲: 柔らかい楕円の重なり ── -->
-  <!-- 右上クラスター -->
-  <ellipse cx="1045" cy="84"  rx="338" ry="92"  fill="#d4dff0" opacity="0.42"/>
-  <ellipse cx="1152" cy="150" rx="192" ry="56"  fill="#dce8f5" opacity="0.28"/>
-  <ellipse cx="868"  cy="49"  rx="242" ry="59"  fill="#dde5f2" opacity="0.33"/>
-  <!-- 左のうす雲 -->
-  <ellipse cx="158"  cy="68"  rx="214" ry="60"  fill="#d8e2f2" opacity="0.28"/>
-  <ellipse cx="40"   cy="142" rx="136" ry="45"  fill="#dce4ee" opacity="0.22"/>
+  <!-- ════ Top accent — reiß'nde Flut tide bar ════ -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#tideGrad)"/>
 
-  <!-- ── 上端アクセントライン ── -->
-  <rect x="0" y="0" width="560" height="3" fill="url(#topedge)"/>
+  <!-- ════ Left vertical accent bar ════ -->
+  <rect x="68" y="72" width="2" height="487" fill="#00c0d8" fill-opacity="0.27"/>
 
-  <!-- ── メインカード (article.post スタイル) ── -->
-  <rect x="60" y="124" width="1080" height="392"
-        rx="6" ry="6"
-        fill="white" fill-opacity="0.60"
-        stroke="#cdd3e5" stroke-width="1"
-        filter="url(#cardshadow)"/>
+  <!-- ════ Site name header ════ -->
+  <text
+    x="88" y="108"
+    font-family="serif"
+    font-size="30"
+    letter-spacing="4"
+    fill="url(#siteGrad)"
+  >へのへのんのの</text>
 
-  <!-- 左アクセントバー (blockquote border-left に対応) -->
-  <rect x="60" y="124" width="4" height="392" rx="2" fill="#3d5f8f"/>
+  <!-- Separator line under site name -->
+  <line x1="82" y1="132" x2="540" y2="132" stroke="#00c0d8" stroke-opacity="0.1" stroke-width="1"/>
 
-  <!-- ── 記事タイトル ── -->
-  <text x="108" y="354"
-        font-family="serif"
-        font-size="68"
-        fill="#1a2338"
-        letter-spacing="3">{{TITLE}}</text>
+  <!-- ════ Article label ════ -->
+  <text
+    x="90" y="170"
+    font-family="sans-serif"
+    font-size="12"
+    letter-spacing="5"
+    fill="#7faab8"
+    fill-opacity="0.65"
+  >ARTICLE</text>
 
-  <!-- タイトル下のビーム線 (article h1::after に対応) -->
-  <rect x="108" y="386" width="224" height="2" rx="1" fill="url(#beam)"/>
+  <!-- ════ Title area ════ -->
 
-  <!-- ── 点線セパレーター (post-list border-bottom に対応) ── -->
-  <line x1="60" y1="546" x2="1140" y2="546"
-        stroke="#bcc3d9" stroke-width="1" stroke-dasharray="4 8"/>
+  <!-- Lichtblick: brightened left-bar segment behind title -->
+  <rect x="68" y="276" width="2" height="88" fill="#00c0d8" fill-opacity="0.78"/>
 
-  <!-- ── サイト名 ── -->
-  <text x="108" y="596"
-        font-family="serif"
-        font-size="26"
-        fill="#3d5f8f"
-        letter-spacing="4">へのへのんのの</text>
+  <!-- Glow halo layer (blurred, semi-transparent) -->
+  <text
+    x="88" y="342"
+    font-family="serif"
+    font-size="72"
+    letter-spacing="1"
+    fill="#00c0d8"
+    fill-opacity="0.18"
+    filter="url(#titleGlow)"
+  >{{TITLE}}</text>
 
-  <!-- 右下: 装飾ドット -->
-  <circle cx="1076" cy="589" r="3.5" fill="#c8cee2"/>
-  <circle cx="1094" cy="589" r="3.5" fill="#c8cee2"/>
-  <circle cx="1112" cy="589" r="3.5" fill="#c8cee2"/>
-  <circle cx="1130" cy="589" r="3.5" fill="#c8cee2"/>
+  <!-- Main title text -->
+  <text
+    x="88" y="342"
+    font-family="serif"
+    font-size="72"
+    letter-spacing="1"
+    fill="url(#titleGrad)"
+  >{{TITLE}}</text>
+
+  <!-- Title underline — Lichtblick sweep -->
+  <rect x="68" y="360" width="980" height="1" fill="url(#tideGrad)" fill-opacity="0.45"/>
+
+  <!-- ════ Lower area — 濁流 / the flood ════ -->
+
+  <!-- Wave line 1 -->
+  <path
+    d="M -10 510 Q 200 494 400 507 Q 600 520 800 507 Q 1000 494 1210 505"
+    fill="none"
+    stroke="#00c0d8"
+    stroke-opacity="0.07"
+    stroke-width="1.5"/>
+
+  <!-- Wave line 2 -->
+  <path
+    d="M -10 524 Q 210 513 420 523 Q 630 533 840 523 Q 1050 513 1210 521"
+    fill="none"
+    stroke="#00c0d8"
+    stroke-opacity="0.044"
+    stroke-width="1"/>
+
+  <!-- Ripple rings — Kreislauf meiner Sehnsucht -->
+  <ellipse cx="600" cy="650" rx="370" ry="44"
+    fill="none" stroke="#00c0d8" stroke-opacity="0.09" stroke-width="1"/>
+  <ellipse cx="600" cy="655" rx="530" ry="62"
+    fill="none" stroke="#00c0d8" stroke-opacity="0.055" stroke-width="1"/>
+
+  <!-- ════ Bottom accent ════ -->
+  <line x1="0" y1="598" x2="1200" y2="598" stroke="#00c0d8" stroke-opacity="0.09" stroke-width="1"/>
+  <rect x="0" y="627" width="1200" height="3" fill="url(#tideGrad)"/>
 </svg>
