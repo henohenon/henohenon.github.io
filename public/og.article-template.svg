@@ -1,138 +1,159 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Monsoon rain grid — vertical lines every 73 px -->
-    <pattern id="rain" x="0" y="0" width="73" height="630" patternUnits="userSpaceOnUse">
-      <rect x="72" y="0" width="1" height="630" fill="#00c0d8" fill-opacity="0.025"/>
-    </pattern>
 
-    <!-- Deep-sea radial glow from canvas bottom -->
-    <radialGradient id="seaDepth" cx="50%" cy="100%" r="75%">
-      <stop offset="0%"   stop-color="#006e9b" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#090d1a" stop-opacity="0"/>
+    <!-- Background atmosphere — matching CSS body background-image -->
+    <radialGradient id="g-atm1" cx="216" cy="50" r="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4632af" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#0c0e1c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-atm2" cx="1020" cy="580" r="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e145a" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#0c0e1c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="g-center" cx="600" cy="318" r="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8b96ff" stop-opacity="0.055"/>
+      <stop offset="100%" stop-color="#0c0e1c" stop-opacity="0"/>
     </radialGradient>
 
-    <!-- Dark tonal depth — upper-left corner -->
-    <radialGradient id="cornerDepth" cx="12%" cy="12%" r="55%">
-      <stop offset="0%"   stop-color="#003755" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#090d1a" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- Tide sweep — horizontal luminance gradient -->
-    <linearGradient id="tideGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"   stop-color="#090d1a" stop-opacity="0"/>
-      <stop offset="20%"  stop-color="#00c0d8" stop-opacity="0.45"/>
-      <stop offset="50%"  stop-color="#00c0d8" stop-opacity="1"/>
-      <stop offset="80%"  stop-color="#00c0d8" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#090d1a" stop-opacity="0"/>
+    <!-- Separator line gradient -->
+    <linearGradient id="g-sep" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#8b96ff" stop-opacity="0"/>
+      <stop offset="14%"  stop-color="#8b96ff" stop-opacity="0.20"/>
+      <stop offset="86%"  stop-color="#8b96ff" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#8b96ff" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Title text gradient: pale seafoam → electric teal -->
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%"  stop-color="#c8dde8"/>
-      <stop offset="65%" stop-color="#00c0d8"/>
+    <!-- Train-pass sweep gradient (bottom) -->
+    <linearGradient id="g-train" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#8b96ff" stop-opacity="0"/>
+      <stop offset="28%"  stop-color="#8b96ff" stop-opacity="0.65"/>
+      <stop offset="72%"  stop-color="#8b96ff" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#8b96ff" stop-opacity="0"/>
     </linearGradient>
 
-    <!-- Site name gradient -->
-    <linearGradient id="siteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="20%"  stop-color="#c8dde8"/>
-      <stop offset="100%" stop-color="#00c0d8"/>
+    <!-- Title text gradient -->
+    <linearGradient id="g-title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#cdd1e5"/>
+      <stop offset="55%"  stop-color="#b0b9ff"/>
+      <stop offset="100%" stop-color="#8b96ff"/>
     </linearGradient>
 
-    <!-- Title glow — blurred teal halo beneath main text -->
-    <filter id="titleGlow" x="-5%" y="-30%" width="110%" height="160%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="6"/>
+    <!-- Tiny star glow -->
+    <filter id="f-xs" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+
+    <!-- Site-name glow -->
+    <filter id="f-sm" x="-20%" y="-100%" width="140%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Title accent bloom — accent-coloured glow layer (no SourceGraphic) -->
+    <filter id="f-title-glow" x="-5%" y="-120%" width="110%" height="340%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="18" result="blur"/>
+      <feFlood flood-color="#8b96ff" flood-opacity="0.50" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge><feMergeNode in="glow"/></feMerge>
+    </filter>
+
   </defs>
 
-  <!-- ════ Background layers ════ -->
-  <rect width="1200" height="630" fill="#090d1a"/>
-  <rect width="1200" height="630" fill="url(#seaDepth)"/>
-  <rect width="1200" height="630" fill="url(#cornerDepth)"/>
+  <!-- ▌ Base background -->
+  <rect width="1200" height="630" fill="#0c0e1c"/>
 
-  <!-- Monsoon rain grid -->
-  <rect width="1200" height="630" fill="url(#rain)"/>
+  <!-- ▌ Atmospheric overlays -->
+  <rect width="1200" height="630" fill="url(#g-atm1)"/>
+  <rect width="1200" height="630" fill="url(#g-atm2)"/>
+  <rect width="1200" height="630" fill="url(#g-center)"/>
 
-  <!-- ════ Top accent — reiß'nde Flut tide bar ════ -->
-  <rect x="0" y="0" width="1200" height="3" fill="url(#tideGrad)"/>
+  <!-- ▌ Stars — midnight solitude -->
+  <circle cx="108" cy="38"   r="1"   fill="#cdd1e5" opacity="0.30"/>
+  <circle cx="212" cy="22"   r="1.5" fill="#8b96ff" opacity="0.50"/>
+  <circle cx="338" cy="46"   r="1"   fill="#cdd1e5" opacity="0.22"/>
+  <circle cx="486" cy="18"   r="1"   fill="#8b96ff" opacity="0.38"/>
+  <circle cx="592" cy="50"   r="1.5" fill="#cdd1e5" opacity="0.28"/>
+  <circle cx="718" cy="28"   r="1"   fill="#8b96ff" opacity="0.42"/>
+  <circle cx="842" cy="52"   r="1"   fill="#cdd1e5" opacity="0.20"/>
+  <circle cx="958" cy="16"   r="1.5" fill="#8b96ff" opacity="0.35"/>
+  <circle cx="1082" cy="44"  r="1"   fill="#cdd1e5" opacity="0.28"/>
+  <circle cx="1152" cy="24"  r="1"   fill="#8b96ff" opacity="0.40"/>
+  <!-- Brighter accent stars with glow -->
+  <circle cx="432"  cy="56"  r="2.2" fill="#8b96ff" opacity="0.68" filter="url(#f-xs)"/>
+  <circle cx="868"  cy="33"  r="2"   fill="#8b96ff" opacity="0.58" filter="url(#f-xs)"/>
+  <circle cx="1098" cy="62"  r="2"   fill="#b0b9ff" opacity="0.52" filter="url(#f-xs)"/>
+  <!-- Lower scatter -->
+  <circle cx="170"  cy="492" r="1"   fill="#8b96ff" opacity="0.16"/>
+  <circle cx="748"  cy="562" r="1"   fill="#8b96ff" opacity="0.16"/>
+  <circle cx="1105" cy="524" r="1.5" fill="#cdd1e5" opacity="0.14"/>
+  <circle cx="1148" cy="592" r="1"   fill="#cdd1e5" opacity="0.12"/>
 
-  <!-- ════ Left vertical accent bar ════ -->
-  <rect x="68" y="72" width="2" height="487" fill="#00c0d8" fill-opacity="0.27"/>
+  <!-- ▌ Frame: left accent bar — post-list li::before motif -->
+  <rect x="54" y="72" width="2"  height="490" fill="#8b96ff" opacity="0.32"/>
+  <rect x="52" y="72" width="6"  height="490" fill="#8b96ff" opacity="0.055"/>
+  <!-- Right subtle border -->
+  <rect x="1144" y="72" width="1" height="490" fill="#8b96ff" opacity="0.10"/>
 
-  <!-- ════ Site name header ════ -->
+  <!-- ▌ Site name -->
   <text
-    x="88" y="108"
+    x="80" y="128"
     font-family="serif"
     font-size="30"
-    letter-spacing="4"
-    fill="url(#siteGrad)"
+    fill="#8b96ff"
+    letter-spacing="5"
+    opacity="0.90"
+    filter="url(#f-sm)"
   >へのへのんのの</text>
 
-  <!-- Separator line under site name -->
-  <line x1="82" y1="132" x2="540" y2="132" stroke="#00c0d8" stroke-opacity="0.1" stroke-width="1"/>
+  <!-- Separator under site name -->
+  <rect x="80" y="152" width="1064" height="1" fill="url(#g-sep)"/>
 
-  <!-- ════ Article label ════ -->
+  <!-- ▌ Voice ripple circles — この声、だれか聴こえますか？ -->
+  <!-- Emanating silently from the left bar origin, spreading into the dark -->
+  <circle cx="55" cy="318" r="150" fill="none" stroke="#8b96ff" stroke-width="1" stroke-opacity="0.09"/>
+  <circle cx="55" cy="318" r="248" fill="none" stroke="#8b96ff" stroke-width="1" stroke-opacity="0.06"/>
+  <circle cx="55" cy="318" r="352" fill="none" stroke="#8b96ff" stroke-width="1" stroke-opacity="0.04"/>
+  <circle cx="55" cy="318" r="462" fill="none" stroke="#8b96ff" stroke-width="1" stroke-opacity="0.025"/>
+
+  <!-- ▌ Title area raised panel — --_bg-raised -->
+  <rect x="72" y="205" width="1056" height="238" rx="3" fill="#12152b" opacity="0.42"/>
+  <rect x="80" y="207" width="1064" height="1" fill="url(#g-sep)"/>
+
+  <!-- ▌ {{TITLE}} — accent bloom layer (periwinkle glow, no text) -->
   <text
-    x="90" y="170"
+    x="92" y="358"
+    font-family="serif"
+    font-size="68"
+    fill="#cdd1e5"
+    letter-spacing="2"
+    filter="url(#f-title-glow)"
+  >{{TITLE}}</text>
+
+  <!-- ▌ {{TITLE}} — main gradient text layer -->
+  <text
+    x="92" y="358"
+    font-family="serif"
+    font-size="68"
+    fill="url(#g-title)"
+    letter-spacing="2"
+  >{{TITLE}}</text>
+
+  <!-- ▌ Bottom separator -->
+  <rect x="80" y="528" width="1064" height="1" fill="url(#g-sep)"/>
+
+  <!-- Bottom-right article label -->
+  <text
+    x="1120" y="576"
     font-family="sans-serif"
-    font-size="12"
-    letter-spacing="5"
-    fill="#7faab8"
-    fill-opacity="0.65"
-  >ARTICLE</text>
+    font-size="16"
+    fill="#69728f"
+    letter-spacing="3"
+    text-anchor="end"
+    opacity="0.72"
+  >article</text>
 
-  <!-- ════ Title area ════ -->
+  <!-- ▌ Train-pass light — 通り過ぎる光、一度だけ -->
+  <rect x="0" y="618" width="1200" height="1.5" fill="url(#g-train)"/>
 
-  <!-- Lichtblick: brightened left-bar segment behind title -->
-  <rect x="68" y="276" width="2" height="88" fill="#00c0d8" fill-opacity="0.78"/>
-
-  <!-- Glow halo layer (blurred, semi-transparent) -->
-  <text
-    x="88" y="342"
-    font-family="serif"
-    font-size="72"
-    letter-spacing="1"
-    fill="#00c0d8"
-    fill-opacity="0.18"
-    filter="url(#titleGlow)"
-  >{{TITLE}}</text>
-
-  <!-- Main title text -->
-  <text
-    x="88" y="342"
-    font-family="serif"
-    font-size="72"
-    letter-spacing="1"
-    fill="url(#titleGrad)"
-  >{{TITLE}}</text>
-
-  <!-- Title underline — Lichtblick sweep -->
-  <rect x="68" y="360" width="980" height="1" fill="url(#tideGrad)" fill-opacity="0.45"/>
-
-  <!-- ════ Lower area — 濁流 / the flood ════ -->
-
-  <!-- Wave line 1 -->
-  <path
-    d="M -10 510 Q 200 494 400 507 Q 600 520 800 507 Q 1000 494 1210 505"
-    fill="none"
-    stroke="#00c0d8"
-    stroke-opacity="0.07"
-    stroke-width="1.5"/>
-
-  <!-- Wave line 2 -->
-  <path
-    d="M -10 524 Q 210 513 420 523 Q 630 533 840 523 Q 1050 513 1210 521"
-    fill="none"
-    stroke="#00c0d8"
-    stroke-opacity="0.044"
-    stroke-width="1"/>
-
-  <!-- Ripple rings — Kreislauf meiner Sehnsucht -->
-  <ellipse cx="600" cy="650" rx="370" ry="44"
-    fill="none" stroke="#00c0d8" stroke-opacity="0.09" stroke-width="1"/>
-  <ellipse cx="600" cy="655" rx="530" ry="62"
-    fill="none" stroke="#00c0d8" stroke-opacity="0.055" stroke-width="1"/>
-
-  <!-- ════ Bottom accent ════ -->
-  <line x1="0" y1="598" x2="1200" y2="598" stroke="#00c0d8" stroke-opacity="0.09" stroke-width="1"/>
-  <rect x="0" y="627" width="1200" height="3" fill="url(#tideGrad)"/>
 </svg>

@@ -1,52 +1,85 @@
-/* selfish you / suzie feat. 鏡音リン — 押し寄せる孤独な monsoon / 抜け出せない感情の濁流 */
+/* サミシガリスト / YM feat. Synthesizer V 2 AI Megpoid / 深夜の孤独とそれでも歌い続ける声 */
 
 :root {
-  /* ── Palette: 嵐の深海・閃光のLichtblick ── */
-  --color-bg:     #090d1a;   /* midnight ocean floor         */
-  --color-fg:     #c8dde8;   /* pale seafoam, moonlit crest  */
-  --color-accent: #00c0d8;   /* Lichtblick — electric teal in the flood */
+  --color-bg:     #0c0e1c;
+  --color-fg:     #cdd1e5;
+  --color-accent: #8b96ff;
 
   --spacing-unit: 1rem;
 
-  --font-heading: 'Trebuchet MS', 'Arial Narrow', 'Hiragino Sans', 'Yu Gothic',
-                  'Meiryo', sans-serif;
-  --font-body:    'Segoe UI', 'Helvetica Neue', 'Hiragino Sans', 'Yu Gothic UI',
-                  'Meiryo', 'Noto Sans JP', sans-serif;
+  --font-heading: 'Georgia', 'Times New Roman', 'Hiragino Mincho ProN', 'Yu Mincho', '游明朝', serif;
+  --font-body:    -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI',
+                  'Yu Gothic', '游ゴシック', 'Meiryo', 'メイリオ', sans-serif;
 
-  --line-height-body:    1.85;
-  --line-height-heading: 1.2;
+  --line-height-body:    1.88;
+  --line-height-heading: 1.25;
 
-  --ease-default: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-default: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  /* ── internal design tokens ── */
-  --_bg-raise:        #0d1220;
-  --_bg-float:        #111826;
-  --_fg-dim:          #7faab8;
-  --_accent-glow:     rgba(0, 192, 216, 0.18);
-  --_border-subtle:   rgba(0, 192, 216, 0.09);
-  --_border-mid:      rgba(0, 192, 216, 0.22);
+  --_bg-raised:      #12152b;
+  --_bg-subtle:      #0e1020;
+  --_fg-muted:       #69728f;
+  --_accent-glow:    rgba(139, 150, 255, 0.45);
+  --_accent-dim:     rgba(139, 150, 255, 0.12);
+  --_accent-bright:  #b0b9ff;
 }
 
-/* ════════════════════════════════════════
-   Base
-   ════════════════════════════════════════ */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  margin: 0;
   background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 80% 45% at 18% 8%,  rgba(70, 50, 175, 0.11) 0%, transparent 100%),
+    radial-gradient(ellipse 60% 35% at 85% 92%, rgba(30, 20,  90, 0.10) 0%, transparent 100%);
   color: var(--color-fg);
   font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
   line-height: var(--line-height-body);
-  /* 深海の底から差し込む光の層 */
-  background-image:
-    radial-gradient(ellipse 130% 55% at 50% 110%,
-      rgba(0, 110, 155, 0.22) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 35% at 15% 15%,
-      rgba(0, 55, 85, 0.14) 0%, transparent 55%);
+  margin: 0;
   min-height: 100vh;
+}
+
+::selection {
+  background: rgba(139, 150, 255, 0.28);
+  color: #fff;
+}
+
+/* ── Main layout ── */
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2.5) var(--spacing-unit);
+}
+
+/* ── Site Header ── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(12, 14, 28, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--_accent-dim);
+  padding: calc(var(--spacing-unit) * 1.25) calc(var(--spacing-unit) * 2);
+  box-shadow: 0 1px 24px rgba(0, 0, 20, 0.55);
+  animation: header-breathe 7s ease-in-out infinite;
+}
+
+.site-header a,
+.site-header h1,
+.site-header .site-title {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px var(--_accent-glow);
+  animation: glow-pulse 5s ease-in-out infinite;
 }
 
 /* ── Typography ── */
@@ -55,14 +88,13 @@ h1, h2, h3, h4, h5, h6 {
   line-height: var(--line-height-heading);
   color: var(--color-fg);
   letter-spacing: 0.025em;
-  margin-top: calc(var(--spacing-unit) * 2);
-  margin-bottom: calc(var(--spacing-unit) * 0.6);
+  margin-top: calc(var(--spacing-unit) * 2.2);
+  margin-bottom: var(--spacing-unit);
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: calc(var(--spacing-unit) * 1.1);
-}
+h1 { font-size: clamp(1.55rem, 4vw,  2.2rem);  }
+h2 { font-size: clamp(1.25rem, 3vw,  1.65rem); }
+h3 { font-size: clamp(1.05rem, 2.5vw, 1.3rem); }
 
 a {
   color: var(--color-accent);
@@ -70,329 +102,179 @@ a {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition:
-    color       0.35s var(--ease-default),
-    text-shadow 0.35s var(--ease-default);
+    color        0.28s var(--ease-default),
+    text-shadow  0.28s var(--ease-default);
 }
 
-a:hover {
-  color: #5de2f0;
-  text-shadow: 0 0 16px rgba(0, 192, 216, 0.45);
+a:hover,
+a:focus-visible {
+  color: var(--_accent-bright);
+  text-shadow: 0 0 12px var(--_accent-glow);
+  outline: none;
 }
 
-::selection {
-  background: rgba(0, 192, 216, 0.28);
-  color: #ffffff;
+hr {
+  border: none;
+  border-top: 1px solid var(--_accent-dim);
+  margin: calc(var(--spacing-unit) * 2.5) 0;
 }
 
 blockquote {
-  margin: calc(var(--spacing-unit) * 1.5) 0;
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
-  border-left: 3px solid var(--color-accent);
-  background: var(--_bg-float);
-  color: var(--_fg-dim);
+  border-left: 2px solid var(--color-accent);
+  margin-left: 0;
+  padding-left: calc(var(--spacing-unit) * 1.2);
+  color: var(--_fg-muted);
   font-style: italic;
-  border-radius: 0 3px 3px 0;
 }
 
 code {
-  font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
-  font-size: 0.875em;
-  background: var(--_bg-float);
-  color: var(--color-accent);
-  padding: 0.1em 0.4em;
+  background: var(--_bg-raised);
+  border: 1px solid var(--_accent-dim);
   border-radius: 3px;
-  border: 1px solid var(--_border-subtle);
+  padding: 0.1em 0.4em;
+  font-size: 0.88em;
+  color: var(--color-accent);
 }
 
 pre {
-  background: var(--_bg-float);
-  border: 1px solid var(--_border-subtle);
+  background: var(--_bg-raised);
+  border: 1px solid var(--_accent-dim);
   border-radius: 4px;
   padding: calc(var(--spacing-unit) * 1.2);
   overflow-x: auto;
+  color: var(--color-fg);
 }
 
 pre code {
   background: none;
   border: none;
   padding: 0;
+  color: inherit;
 }
 
-/* ── Scrollbar (webkit) ── */
-::-webkit-scrollbar       { width: 5px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 192, 216, 0.22);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 192, 216, 0.42);
-}
-
-/* ════════════════════════════════════════
-   .site-header
-   「Gefang'n in mein'm Monsun」
-   ════════════════════════════════════════ */
-.site-header {
-  position: relative;
-  padding:
-    calc(var(--spacing-unit) * 1.8)
-    calc(var(--spacing-unit) * 2.5);
-  background: linear-gradient(180deg, #07090f 0%, rgba(9, 13, 26, 0.75) 100%);
-  border-bottom: 1px solid var(--_border-subtle);
-  overflow: hidden;
-}
-
-/* vertical rain lines — monsoon grid */
-.site-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent            0px,
-    transparent            72px,
-    rgba(0,192,216,0.025) 72px,
-    rgba(0,192,216,0.025) 73px
-  );
-  pointer-events: none;
-}
-
-/* the tide line that endlessly sweeps — reiß'nde Flut */
-.site-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -60%;
-  width: 220%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(0,192,216,0.5) 25%,
-    #00c0d8             50%,
-    rgba(0,192,216,0.5) 75%,
-    transparent         100%
-  );
-  animation: tide-sweep 7s ease-in-out infinite alternate;
-}
-
-.site-header h1,
-.site-header .site-title {
-  margin: 0;
-  font-size: clamp(1.35rem, 4vw, 2.1rem);
-  letter-spacing: 0.06em;
-  background: linear-gradient(130deg, #c8dde8 30%, #00c0d8 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: title-drift 9s ease-in-out infinite alternate;
-}
-
-.site-header nav {
-  margin-top: calc(var(--spacing-unit) * 0.6);
-  display: flex;
-  gap: calc(var(--spacing-unit) * 1.6);
-  flex-wrap: wrap;
-}
-
-.site-header nav a {
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--_fg-dim);
-  text-decoration: none;
-  transition: color 0.35s var(--ease-default);
-}
-
-.site-header nav a:hover {
-  color: var(--color-accent);
-  text-shadow: 0 0 12px var(--_accent-glow);
-}
-
-/* ════════════════════════════════════════
-   .post-list
-   「Ein Kreislauf meiner Sehnsucht」
-   ════════════════════════════════════════ */
+/* ── Post List ── */
 .post-list {
   list-style: none;
-  padding: 0;
   margin: calc(var(--spacing-unit) * 2) 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: calc(var(--spacing-unit) * 1.1);
 }
 
 .post-list li {
-  border-left: 2px solid transparent;
-  padding: calc(var(--spacing-unit) * 0.55) calc(var(--spacing-unit) * 1.2);
+  position: relative;
+  overflow: hidden;
+  background: var(--_bg-raised);
+  border: 1px solid rgba(139, 150, 255, 0.07);
+  border-radius: 4px;
+  padding: calc(var(--spacing-unit) * 1.1) calc(var(--spacing-unit) * 1.5);
   transition:
-    border-color 0.4s var(--ease-default),
-    transform    0.4s var(--ease-default),
-    background   0.4s var(--ease-default);
-  border-radius: 0 3px 3px 0;
+    border-color 0.32s var(--ease-default),
+    box-shadow   0.32s var(--ease-default),
+    transform    0.32s var(--ease-default);
+}
+
+/* left accent bar — like a light glimpsed from a passing train window */
+.post-list li::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--color-accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-default);
 }
 
 .post-list li:hover {
-  border-left-color: var(--color-accent);
+  border-color: rgba(139, 150, 255, 0.22);
+  box-shadow: 0 0 22px rgba(139, 150, 255, 0.16);
   transform: translateX(5px);
-  background: rgba(0, 192, 216, 0.04);
 }
 
-.post-list a {
-  display: block;
-  text-decoration: none;
-  color: var(--color-fg);
-  font-size: 1.02rem;
-  transition: color 0.3s var(--ease-default);
-}
-
-.post-list li:hover a {
-  color: var(--color-accent);
-}
-
-.post-list time {
-  display: block;
-  font-size: 0.76rem;
-  color: var(--_fg-dim);
-  letter-spacing: 0.05em;
-  margin-top: 0.15em;
-}
-
-/* ════════════════════════════════════════
-   article.post
-   「Selbst wenn ich in dieser Flut einen
-     Lichtblick seh'」
-   ════════════════════════════════════════ */
-article.post {
-  position: relative;
-  background: var(--_bg-raise);
-  border: 1px solid var(--_border-subtle);
-  border-radius: 4px;
-  padding:
-    calc(var(--spacing-unit) * 2.2)
-    calc(var(--spacing-unit) * 2.8);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  overflow: hidden;
-  transition:
-    border-color 0.45s var(--ease-default),
-    box-shadow   0.45s var(--ease-default);
-}
-
-/* Lichtblick — the glimmer that sweeps in on hover */
-article.post::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--color-accent) 50%,
-    transparent 100%
-  );
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition:
-    transform 0.65s var(--ease-default),
-    opacity   0.4s  var(--ease-default);
-}
-
-article.post:hover {
-  border-color: var(--_border-mid);
-  box-shadow:
-    0 0 40px rgba(0, 192, 216, 0.07),
-    0 6px 28px rgba(0, 0, 0, 0.55);
-}
-
-article.post:hover::before {
+.post-list li:hover::before {
   opacity: 1;
-  transform: scaleX(1);
 }
 
-article.post h1,
-article.post h2 {
-  margin-top: 0;
+/* ── Article ── */
+article.post {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
 }
 
-.post-meta,
+article.post > header {
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  padding-bottom: var(--spacing-unit);
+  border-bottom: 1px solid var(--_accent-dim);
+}
+
+article.post h1 {
+  text-shadow: 0 0 36px rgba(139, 150, 255, 0.14);
+}
+
+article.post p {
+  margin-bottom: calc(var(--spacing-unit) * 1.25);
+}
+
+article.post time,
+article.post .post-date,
 article.post .post-meta {
-  font-size: 0.78rem;
-  color: var(--_fg-dim);
+  color: var(--_fg-muted);
+  font-size: 0.875rem;
   letter-spacing: 0.06em;
-  margin-bottom: calc(var(--spacing-unit) * 1.4);
-  padding-bottom: calc(var(--spacing-unit) * 0.75);
-  border-bottom: 1px solid var(--_border-subtle);
 }
 
-/* ════════════════════════════════════════
-   .site-footer
-   「Kreislauf meiner Wehmut, endlos」
-   ════════════════════════════════════════ */
+/* ── Site Footer ── */
 .site-footer {
-  position: relative;
-  padding:
-    calc(var(--spacing-unit) * 2)
-    calc(var(--spacing-unit) * 2.5);
-  border-top: 1px solid var(--_border-subtle);
-  background: linear-gradient(0deg, #060810 0%, var(--color-bg) 100%);
-  color: var(--_fg-dim);
-  font-size: 0.8rem;
+  margin-top: calc(var(--spacing-unit) * 5);
+  padding: calc(var(--spacing-unit) * 2);
+  border-top: 1px solid rgba(139, 150, 255, 0.07);
+  background-color: var(--_bg-subtle);
   text-align: center;
-  letter-spacing: 0.04em;
+  color: var(--_fg-muted);
+  font-size: 0.875rem;
+  position: relative;
   overflow: hidden;
 }
 
-/* Kreislauf — two ripple rings, endlessly expanding */
-.site-footer::before,
+/* light that passes and fades — 一人きり、まだ歌ってる */
 .site-footer::after {
   content: '';
   position: absolute;
-  bottom: -18px;
-  left: 50%;
-  width: 320px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 192, 216, 0.1);
-  animation: ripple-out 5.5s ease-out infinite;
-  pointer-events: none;
+  bottom: 0;
+  left: -70%;
+  width: 55%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0;
+  animation: train-pass 9s ease-in-out infinite;
 }
 
-.site-footer::after {
-  animation-delay: 2.75s;
-  border-color: rgba(0, 192, 216, 0.06);
+/* ── Keyframes ── */
+
+/* barely-there breathing — the silence of a lonely night */
+@keyframes header-breathe {
+  0%, 100% { border-bottom-color: rgba(139, 150, 255, 0.10); }
+  50%       { border-bottom-color: rgba(139, 150, 255, 0.20); }
 }
 
-/* ════════════════════════════════════════
-   Keyframes
-   ════════════════════════════════════════ */
-
-/* 「in meiner reiß'nden Flut」— the ceaseless tidal sweep */
-@keyframes tide-sweep {
-  from { transform: translateX(-18%); }
-  to   { transform: translateX(18%);  }
+/* この声だれか聴こえますか？ — a voice calling softly into the dark */
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 18px rgba(139, 150, 255, 0.42); }
+  50%       { text-shadow: 0 0 30px rgba(139, 150, 255, 0.68),
+                           0 0 55px rgba(139, 150, 255, 0.22); }
 }
 
-/* 「Treib' wie'n Floß ohne Ruder」— a title adrift */
-@keyframes title-drift {
-  0%   { filter: brightness(1.0); }
-  55%  { filter: brightness(1.18) drop-shadow(0 0 10px rgba(0, 192, 216, 0.38)); }
-  100% { filter: brightness(1.0); }
+/* train window light sweeping past — once, then quiet again */
+@keyframes train-pass {
+  0%   { left: -70%; opacity: 0;   }
+  8%   { opacity: 0.55; }
+  92%  { opacity: 0.55; }
+  100% { left: 165%;  opacity: 0;   }
 }
 
-/* 「Kreislauf meiner Sehnsucht, endlos」— rings that keep expanding, never closing */
-@keyframes ripple-out {
-  0%   { transform: translateX(-50%) scale(0.25); opacity: 0.7; }
-  100% { transform: translateX(-50%) scale(3.2);  opacity: 0;   }
-}
-
-/* ════════════════════════════════════════
-   Reduced motion
-   ════════════════════════════════════════ */
+/* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
