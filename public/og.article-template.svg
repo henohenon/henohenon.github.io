@@ -116,7 +116,7 @@
   <circle cx="55" cy="318" r="352" fill="none" stroke="#8b96ff" stroke-width="1" stroke-opacity="0.04"/>
   <circle cx="55" cy="318" r="462" fill="none" stroke="#8b96ff" stroke-width="1" stroke-opacity="0.025"/>
 
-  <!-- ▌ Title area raised panel — --_bg-raised -->
+  <!-- ▌ Title area raised panel (bg-raised) -->
   <rect x="72" y="205" width="1056" height="238" rx="3" fill="#12152b" opacity="0.42"/>
   <rect x="80" y="207" width="1064" height="1" fill="url(#g-sep)"/>
 
