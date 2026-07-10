@@ -1,60 +1,79 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="g1" cx="15%" cy="20%" r="55%">
-      <stop offset="0%" stop-color="#ff4d6a" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ff4d6a" stop-opacity="0"/>
+    <radialGradient id="glow1" cx="15%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffcc33" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="g2" cx="85%" cy="78%" r="60%">
-      <stop offset="0%" stop-color="#7a8cff" stop-opacity="0.09"/>
-      <stop offset="100%" stop-color="#7a8cff" stop-opacity="0"/>
+    <radialGradient id="glow2" cx="88%" cy="82%" r="55%">
+      <stop offset="0%" stop-color="#ff4fa3" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#ff4fa3" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="ringfade" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0c0a0d" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0c0a0d" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a0e33"/>
+      <stop offset="70%" stop-color="#1b0a20"/>
+    </linearGradient>
+    <linearGradient id="titleStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffcc33"/>
+      <stop offset="100%" stop-color="#ff4fa3"/>
+    </linearGradient>
+    <pattern id="marquee" width="120" height="630" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="24" height="630" fill="#ffcc33"/>
+      <rect x="48" y="0" width="16" height="630" fill="#ff4fa3"/>
+    </pattern>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <!-- 背景 -->
-  <rect x="0" y="0" width="1200" height="630" fill="#0c0a0d"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#g1)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#g2)"/>
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#1b0a20"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glow1)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glow2)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#marquee)" opacity="0.05"/>
 
-  <!-- 二声のデュエット：左右の境界線 -->
-  <rect x="0" y="0" width="6" height="630" fill="#ff4d6a"/>
-  <rect x="1194" y="0" width="6" height="630" fill="#7a8cff"/>
+  <!-- dashed frame like site-header border -->
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#ffcc33" stroke-width="4" stroke-dasharray="14 12" opacity="0.8"/>
+  <rect x="46" y="46" width="1108" height="538" fill="none" stroke="#ff4fa3" stroke-width="2" stroke-dasharray="6 10" opacity="0.5"/>
 
-  <!-- 上下の細い罫線 -->
-  <line x1="70" y1="88" x2="1130" y2="88" stroke="#2a2226" stroke-width="1"/>
-  <line x1="70" y1="560" x2="1130" y2="560" stroke="#2a2226" stroke-width="1"/>
+  <!-- twinkle stars -->
+  <g fill="#ffcc33">
+    <circle cx="95" cy="95" r="5"/>
+    <circle cx="1120" cy="90" r="4"/>
+    <circle cx="1140" cy="540" r="6"/>
+    <circle cx="80" cy="560" r="4"/>
+    <circle cx="1080" cy="200" r="3"/>
+  </g>
+  <g fill="#ff4fa3">
+    <path d="M1105 555 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6 z"/>
+    <path d="M110 200 l5 13 13 5 -13 5 -5 13 -5 -13 -13 -5 13 -5 z"/>
+  </g>
 
-  <!-- 指切りの輪：交差する二つの円（テト / 千冬） -->
-  <circle cx="562" cy="150" r="34" fill="none" stroke="#ff4d6a" stroke-width="1.4" stroke-dasharray="4 5" opacity="0.55"/>
-  <circle cx="612" cy="150" r="34" fill="none" stroke="#7a8cff" stroke-width="1.4" stroke-dasharray="4 5" opacity="0.55"/>
+  <!-- crown / neon deco flanking title -->
+  <g stroke="#ffcc33" stroke-width="3" fill="none" opacity="0.7">
+    <path d="M150 300 q60 -60 120 0" />
+    <path d="M930 300 q60 -60 120 0" />
+  </g>
+  <text x="600" y="185" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="34" fill="#ffcc33" letter-spacing="0.5em" opacity="0.9">✦ 女 神 大 会 ✦</text>
 
-  <!-- 背後の大きな輪（円環のモチーフ） -->
-  <circle cx="600" cy="300" r="255" fill="none" stroke="#ff4d6a" stroke-width="1" stroke-dasharray="2 8" opacity="0.18"/>
-  <circle cx="600" cy="300" r="285" fill="none" stroke="#7a8cff" stroke-width="1" stroke-dasharray="2 8" opacity="0.12"/>
+  <!-- SITE TITLE (main) -->
+  <text x="600" y="330" text-anchor="middle" font-family="'Century Gothic', 'Hiragino Sans', sans-serif" font-size="128" font-weight="700" fill="#fbeee0" letter-spacing="0.06em" filter="url(#softGlow)">へのへのんのの</text>
+  <text x="600" y="330" text-anchor="middle" font-family="'Century Gothic', 'Hiragino Sans', sans-serif" font-size="128" font-weight="700" fill="none" stroke="url(#titleStroke)" stroke-width="1.5" letter-spacing="0.06em">へのへのんのの</text>
 
-  <!-- サイト名：主役 -->
-  <text x="600" y="330" text-anchor="middle" font-family="serif" font-size="128" font-weight="700"
-        fill="#ece4e1" style="letter-spacing:0.04em">へのへのんのの</text>
+  <!-- divider -->
+  <line x1="400" y1="390" x2="800" y2="390" stroke="#ffcc33" stroke-width="2" stroke-dasharray="10 8" opacity="0.7"/>
 
-  <!-- サイト名の脈打つ点（鼓動） -->
-  <circle cx="330" cy="300" r="4.5" fill="#ff4d6a" opacity="0.85"/>
-  <circle cx="870" cy="300" r="4.5" fill="#7a8cff" opacity="0.85"/>
+  <!-- SUBTITLE: song info -->
+  <text x="600" y="452" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="40" font-weight="600" fill="#ff4fa3" letter-spacing="0.05em">今日の曲 「女神大会」</text>
+  <text x="600" y="498" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="26" fill="#fbeee0" opacity="0.85" letter-spacing="0.03em">じょるじん feat. 鏡音リン V4X</text>
 
-  <!-- 区切り -->
-  <line x1="530" y1="368" x2="670" y2="368" stroke="#2a2226" stroke-width="1"/>
-
-  <!-- 副題：今日の曲 -->
-  <text x="600" y="424" text-anchor="middle" font-family="sans-serif" font-size="38" font-weight="600"
-        fill="#ff4d6a" style="letter-spacing:0.02em">このゆびとまれ</text>
-
-  <!-- アーティスト -->
-  <text x="600" y="466" text-anchor="middle" font-family="sans-serif" font-size="22"
-        fill="#7a8cff" opacity="0.9">LonePi feat. 重音テトSV, 花隈千冬</text>
-
-  <!-- フッター的な一言 -->
-  <text x="70" y="606" font-family="sans-serif" font-size="18" fill="#ece4e1" opacity="0.45">へのへのんのの</text>
-  <text x="1130" y="606" text-anchor="end" font-family="sans-serif" font-size="18" fill="#ece4e1" opacity="0.45">今日の曲でできた場所</text>
+  <!-- bottom neon tag -->
+  <g>
+    <rect x="470" y="540" width="260" height="46" rx="23" fill="none" stroke="#ffcc33" stroke-width="2" opacity="0.8"/>
+    <text x="600" y="570" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="20" fill="#ffcc33" letter-spacing="0.3em">DEEP NIGHT NEON</text>
+  </g>
 </svg>

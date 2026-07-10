@@ -1,174 +1,177 @@
-/* 曲名: このゆびとまれ / アーティスト: LonePi feat. 重音テトSV, 花隈千冬 */
-/* 一言ムード: 同調圧力と自己嫌悪が渦を巻く、指切りの輪の中で交互に責め合う二声の告発劇 */
+/* 曲名: 女神大会 / アーティスト: じょるじん feat. 鏡音リン V4X (Unknown) / 一言ムード: 北風と太陽が張り合う神々のドタバタ美神コンテスト、電波でギラギラな深夜ネオン舞台 */
 
 :root {
-  --color-fg: #ece4e1;
-  --color-bg: #0c0a0d;
-  --color-accent: #ff4d6a;
-  --color-accent-2: #7a8cff;
-  --color-line: #2a2226;
-
+  --color-fg: #fbeee0;
+  --color-bg: #1b0a20;
+  --color-accent: #ffcc33;
+  --color-accent-secondary: #ff4fa3;
   --spacing-unit: 1rem;
-
-  --font-heading: 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Hiragino Sans', serif;
-  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', -apple-system,
-    BlinkMacSystemFont, sans-serif;
-
-  --line-height-body: 1.85;
-  --line-height-heading: 1.35;
-
-  --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-* {
-  box-sizing: border-box;
+  --font-heading: 'Futura', 'Century Gothic', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  --line-height-body: 1.75;
+  --line-height-heading: 1.3;
+  --ease-default: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 html {
-  background: var(--color-bg);
+  background-color: var(--color-bg);
 }
 
 body {
-  background:
-    radial-gradient(circle at 15% 20%, rgba(255, 77, 106, 0.06), transparent 45%),
-    radial-gradient(circle at 85% 75%, rgba(122, 140, 255, 0.05), transparent 50%),
-    var(--color-bg);
+  background-color: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6,
+.site-title {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  color: var(--color-fg);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
 a {
   color: var(--color-accent);
-  text-decoration underline;
-  text-decoration-color: rgba(255, 77, 106, 0.4);
-  text-underline-offset: 0.2em;
-  transition: color 0.3s var(--ease-default), text-decoration-color 0.3s var(--ease-default);
 }
 
 a:hover,
-a:focus-visible {
-  color: var(--color-accent-2);
-  text-decoration-color: currentColor;
+a:focus {
+  color: var(--color-accent-secondary);
 }
 
-::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
-}
-
-/* ---- ヘッダー：円環（指切り・輪になる）を仄めかす境界線 ---- */
 .site-header {
-  background: linear-gradient(180deg, rgba(255, 77, 106, 0.08), transparent 70%);
-  border-bottom: 1px solid var(--color-line);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 204, 51, 0.25), transparent 60%),
+    radial-gradient(circle at 85% 80%, rgba(255, 79, 163, 0.2), transparent 55%),
+    linear-gradient(135deg, #2a0e33, #1b0a20 70%);
+  border-bottom: 0.25rem dashed var(--color-accent);
+  padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+  color: var(--color-fg);
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0 2%,
+    transparent 2% 6%,
+    var(--color-accent-secondary) 6% 8%,
+    transparent 8% 12%
+  );
+  opacity: 0.14;
+  animation: marquee-lights 6s linear infinite;
+  pointer-events: none;
 }
 
 .site-header::after {
-  content: '';
-  display: block;
-  width: 3rem;
-  height: 3rem;
-  margin: calc(var(--spacing-unit) * 0.5) auto 0;
-  border-radius: 50%;
-  border: 1px dashed rgba(255, 77, 106, 0.35);
-  animation: heartbeat 2.4s var(--ease-default) infinite;
-}
-
-/* ---- フッター：墓場までピエロ、静かな余韻 ---- */
-.site-footer {
-  border-top: 1px solid var(--color-line);
-  color: rgba(236, 228, 225, 0.6);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  font-size: 0.9em;
-}
-
-/* ---- 記事一覧 ---- */
-.post-list {
-  display: block;
-}
-
-.post-list li,
-.post-list article {
-  border-bottom: 1px solid var(--color-line);
-  padding: var(--spacing-unit) 0;
-  transition: background-color 0.3s var(--ease-default);
-}
-
-.post-list li:hover,
-.post-list article:hover {
-  background-color: rgba(255, 77, 106, 0.04);
-}
-
-/* ---- 個別記事：二声（重音テト / 花隈千冬）が交差するデュエット感 ---- */
-article.post {
-  background: var(--color-bg);
-  border-left: 3px solid var(--color-accent);
-  border-right: 3px solid var(--color-accent-2);
-  border-radius: 2px;
-  padding: calc(var(--spacing-unit) * 1.25);
-}
-
-article.post h1,
-article.post h2 {
-  position: relative;
-  display: inline-block;
-}
-
-article.post h1::before,
-article.post h2::before {
-  content: '';
+  content: '✦';
   position: absolute;
-  left: -1.2em;
-  top: 50%;
-  width: 0.4em;
-  height: 0.4em;
-  border-radius: 50%;
-  background: var(--color-accent);
-  transform: translateY(-50%);
-  animation: heartbeat 1.8s var(--ease-default) infinite;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  animation: twinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
 }
 
-article.post blockquote {
-  border-left: 2px solid var(--color-accent-2);
+.site-header .site-title,
+.site-header h1 {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 0.5rem rgba(255, 204, 51, 0.7), 0 0 1rem rgba(255, 79, 163, 0.5);
+}
+
+.post-list {
+  display: grid;
+  gap: calc(var(--spacing-unit) * 1.25);
+  padding: var(--spacing-unit) 0;
+}
+
+.post-list article,
+article.post {
+  background: linear-gradient(160deg, rgba(255, 79, 163, 0.1), rgba(255, 204, 51, 0.05));
+  border: 1px solid rgba(255, 204, 51, 0.3);
+  border-radius: 0.75rem;
+  padding: calc(var(--spacing-unit) * 1.25);
+  transition: transform 0.3s var(--ease-default), box-shadow 0.3s var(--ease-default),
+    border-color 0.3s var(--ease-default);
+}
+
+article.post:hover,
+.post-list article:hover {
+  transform: translateY(-0.25rem) scale(1.01);
+  border-color: var(--color-accent-secondary);
+  box-shadow: 0 0.5rem 1.5rem rgba(255, 79, 163, 0.35);
+}
+
+article.post h2 a,
+.post-list h2 a,
+.post-list h3 a {
+  color: var(--color-accent);
+  text-decoration: none;
+  background-image: linear-gradient(90deg, var(--color-accent), var(--color-accent-secondary));
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.3s var(--ease-default), color 0.3s var(--ease-default);
+}
+
+article.post h2 a:hover,
+.post-list h2 a:hover,
+.post-list h3 a:hover {
+  background-size: 100% 2px;
+  color: var(--color-accent-secondary);
+}
+
+.site-footer {
+  position: relative;
+  background: linear-gradient(0deg, #2a0e33, #1b0a20 80%);
+  border-top: 0.25rem dashed var(--color-accent-secondary);
+  text-align: center;
+  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+  font-size: 0.85rem;
+  color: var(--color-fg);
+}
+
+blockquote {
+  border-left: 0.25rem solid var(--color-accent);
   padding-left: var(--spacing-unit);
-  color: rgba(236, 228, 225, 0.75);
-  font-style: italic;
+  color: var(--color-fg);
+  opacity: 0.9;
 }
 
-/* ---- 鼓動：加虐/被虐が拮抗する緊張感 ---- */
-@keyframes heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
+code, pre {
+  background: rgba(255, 204, 51, 0.08);
+  border: 1px solid rgba(255, 204, 51, 0.25);
+  border-radius: 0.4rem;
+}
+
+@keyframes marquee-lights {
+  from {
+    transform: translateX(0);
   }
-  20% {
-    transform: scale(1.15);
-    opacity: 1;
+  to {
+    transform: translateX(-10%);
   }
-  40% {
-    transform: scale(0.95);
-    opacity: 0.6;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
   }
