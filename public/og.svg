@@ -1,79 +1,77 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glow1" cx="15%" cy="20%" r="60%">
-      <stop offset="0%" stop-color="#ffcc33" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#ffcc33" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glow2" cx="88%" cy="82%" r="55%">
-      <stop offset="0%" stop-color="#ff4fa3" stop-opacity="0.30"/>
-      <stop offset="100%" stop-color="#ff4fa3" stop-opacity="0"/>
-    </radialGradient>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2a0e33"/>
-      <stop offset="70%" stop-color="#1b0a20"/>
+      <stop offset="0%" stop-color="#fff6fb"/>
+      <stop offset="35%" stop-color="#ffe9f5"/>
+      <stop offset="70%" stop-color="#e8f9ff"/>
+      <stop offset="100%" stop-color="#fff6fb"/>
     </linearGradient>
-    <linearGradient id="titleStroke" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ffcc33"/>
-      <stop offset="100%" stop-color="#ff4fa3"/>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c2007a"/>
+      <stop offset="100%" stop-color="#00b6c9"/>
     </linearGradient>
-    <pattern id="marquee" width="120" height="630" patternUnits="userSpaceOnUse">
-      <rect x="0" y="0" width="24" height="630" fill="#ffcc33"/>
-      <rect x="48" y="0" width="16" height="630" fill="#ff4fa3"/>
-    </pattern>
-    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c2007a"/>
+      <stop offset="45%" stop-color="#ff6fc0"/>
+      <stop offset="100%" stop-color="#00b6c9"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd6ec" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffd6ec" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
   <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#1b0a20"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glow1)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glow2)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#marquee)" opacity="0.05"/>
+  <rect width="1200" height="630" fill="#fff6fb"/>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
 
-  <!-- dashed frame like site-header border -->
-  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#ffcc33" stroke-width="4" stroke-dasharray="14 12" opacity="0.8"/>
-  <rect x="46" y="46" width="1108" height="538" fill="none" stroke="#ff4fa3" stroke-width="2" stroke-dasharray="6 10" opacity="0.5"/>
+  <!-- top ribbon -->
+  <rect x="0" y="0" width="1200" height="16" fill="url(#ribbonGrad)"/>
+  <rect x="0" y="16" width="1200" height="6" fill="#ffd6ec"/>
 
-  <!-- twinkle stars -->
-  <g fill="#ffcc33">
-    <circle cx="95" cy="95" r="5"/>
-    <circle cx="1120" cy="90" r="4"/>
-    <circle cx="1140" cy="540" r="6"/>
-    <circle cx="80" cy="560" r="4"/>
-    <circle cx="1080" cy="200" r="3"/>
+  <!-- bottom ribbon -->
+  <rect x="0" y="614" width="1200" height="16" fill="url(#ribbonGrad)"/>
+  <line x1="0" y1="609" x2="1200" y2="609" stroke="#00b6c9" stroke-width="4" stroke-dasharray="14 10"/>
+
+  <!-- decorative bubbles -->
+  <circle cx="110" cy="140" r="46" fill="#ffffff" opacity="0.5"/>
+  <circle cx="175" cy="88" r="20" fill="#00b6c9" opacity="0.35"/>
+  <circle cx="90" cy="500" r="30" fill="#ffd6ec" opacity="0.7"/>
+  <circle cx="1080" cy="120" r="38" fill="#ffd6ec" opacity="0.6"/>
+  <circle cx="1132" cy="200" r="18" fill="#c2007a" opacity="0.3"/>
+  <circle cx="1100" cy="500" r="50" fill="#00b6c9" opacity="0.22"/>
+  <circle cx="1000" cy="560" r="22" fill="#ffffff" opacity="0.5"/>
+  <circle cx="150" cy="560" r="16" fill="#c2007a" opacity="0.25"/>
+  <circle cx="60" cy="320" r="10" fill="#00b6c9" opacity="0.4"/>
+  <circle cx="1150" cy="330" r="12" fill="#c2007a" opacity="0.3"/>
+
+  <!-- sparkle stars -->
+  <g fill="#ffffff" opacity="0.85">
+    <path d="M 250 190 l 6 16 l 16 2 l -12 12 l 4 16 l -14 -9 l -14 9 l 4 -16 l -12 -12 l 16 -2 z"/>
+    <path d="M 955 470 l 5 13 l 13 2 l -10 10 l 3 13 l -11 -7 l -11 7 l 3 -13 l -10 -10 l 13 -2 z"/>
   </g>
-  <g fill="#ff4fa3">
-    <path d="M1105 555 l6 16 16 6 -16 6 -6 16 -6 -16 -16 -6 16 -6 z"/>
-    <path d="M110 200 l5 13 13 5 -13 5 -5 13 -5 -13 -13 -5 13 -5 z"/>
+  <g fill="#ffd6ec" opacity="0.9">
+    <path d="M 200 470 l 4 10 l 10 1 l -7 8 l 2 10 l -9 -5 l -9 5 l 2 -10 l -7 -8 l 10 -1 z"/>
+    <path d="M 1000 180 l 4 10 l 10 1 l -7 8 l 2 10 l -9 -5 l -9 5 l 2 -10 l -7 -8 l 10 -1 z"/>
   </g>
 
-  <!-- crown / neon deco flanking title -->
-  <g stroke="#ffcc33" stroke-width="3" fill="none" opacity="0.7">
-    <path d="M150 300 q60 -60 120 0" />
-    <path d="M930 300 q60 -60 120 0" />
-  </g>
-  <text x="600" y="185" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="34" fill="#ffcc33" letter-spacing="0.5em" opacity="0.9">✦ 女 神 大 会 ✦</text>
+  <!-- glow behind title -->
+  <ellipse cx="600" cy="268" rx="500" ry="230" fill="url(#glow)"/>
 
-  <!-- SITE TITLE (main) -->
-  <text x="600" y="330" text-anchor="middle" font-family="'Century Gothic', 'Hiragino Sans', sans-serif" font-size="128" font-weight="700" fill="#fbeee0" letter-spacing="0.06em" filter="url(#softGlow)">へのへのんのの</text>
-  <text x="600" y="330" text-anchor="middle" font-family="'Century Gothic', 'Hiragino Sans', sans-serif" font-size="128" font-weight="700" fill="none" stroke="url(#titleStroke)" stroke-width="1.5" letter-spacing="0.06em">へのへのんのの</text>
+  <!-- site name shadow -->
+  <text x="605" y="302" font-family="sans-serif" font-size="128" font-weight="700" text-anchor="middle" fill="#ffd6ec" letter-spacing="4">へのへのんのの</text>
+  <!-- site name (main hero) -->
+  <text x="600" y="296" font-family="sans-serif" font-size="128" font-weight="700" text-anchor="middle" fill="url(#titleGrad)" letter-spacing="4">へのへのんのの</text>
 
-  <!-- divider -->
-  <line x1="400" y1="390" x2="800" y2="390" stroke="#ffcc33" stroke-width="2" stroke-dasharray="10 8" opacity="0.7"/>
+  <!-- badge -->
+  <rect x="465" y="350" width="270" height="36" rx="18" fill="#2b1638" opacity="0.06"/>
+  <text x="600" y="374" font-family="sans-serif" font-size="19" font-weight="700" text-anchor="middle" fill="#00b6c9" letter-spacing="6">TODAY'S SONG</text>
 
-  <!-- SUBTITLE: song info -->
-  <text x="600" y="452" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="40" font-weight="600" fill="#ff4fa3" letter-spacing="0.05em">今日の曲 「女神大会」</text>
-  <text x="600" y="498" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="26" fill="#fbeee0" opacity="0.85" letter-spacing="0.03em">じょるじん feat. 鏡音リン V4X</text>
+  <!-- song title (subtitle) -->
+  <text x="330" y="440" font-family="sans-serif" font-size="32" fill="#00b6c9" opacity="0.85">♪</text>
+  <text x="600" y="434" font-family="sans-serif" font-size="40" font-weight="700" text-anchor="middle" fill="#c2007a">Gimme more!</text>
+  <text x="870" y="440" font-family="sans-serif" font-size="32" fill="#c2007a" opacity="0.85">♫</text>
 
-  <!-- bottom neon tag -->
-  <g>
-    <rect x="470" y="540" width="260" height="46" rx="23" fill="none" stroke="#ffcc33" stroke-width="2" opacity="0.8"/>
-    <text x="600" y="570" text-anchor="middle" font-family="'Hiragino Sans', sans-serif" font-size="20" fill="#ffcc33" letter-spacing="0.3em">DEEP NIGHT NEON</text>
-  </g>
+  <!-- artist -->
+  <text x="600" y="472" font-family="sans-serif" font-size="23" text-anchor="middle" fill="#2b1638" opacity="0.65">めろくる feat. various</text>
 </svg>
