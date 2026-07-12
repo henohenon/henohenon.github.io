@@ -1,0 +1,15 @@
+:root {
+  color-scheme: light dark;
+  font: 18px/1.5 system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+#app {
+  min-height: 100svh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
