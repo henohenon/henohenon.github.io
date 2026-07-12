@@ -1,65 +1,63 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#fff6fb"/>
-      <stop offset="35%" stop-color="#ffe9f5"/>
-      <stop offset="70%" stop-color="#e8f9ff"/>
-      <stop offset="100%" stop-color="#fff6fb"/>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1c1f2b"/>
+      <stop offset="55%" stop-color="#12141c"/>
+      <stop offset="100%" stop-color="#0b0c12"/>
     </linearGradient>
-    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0.2">
-      <stop offset="0%" stop-color="#c2007a"/>
-      <stop offset="45%" stop-color="#ff6fc0"/>
-      <stop offset="100%" stop-color="#00b6c9"/>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffb199"/>
+      <stop offset="100%" stop-color="#ff4d3d"/>
     </linearGradient>
-    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#c2007a"/>
-      <stop offset="100%" stop-color="#00b6c9"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="6%" r="60%">
+      <stop offset="0%" stop-color="#ff4d3d" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#ff4d3d" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="trackDashes" width="40" height="6" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="24" height="6" fill="#ffb199"/>
+    </pattern>
+    <pattern id="hazard" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="26" height="13" fill="#ff4d3d"/>
+      <rect y="13" width="26" height="13" fill="#12141c"/>
+    </pattern>
   </defs>
 
-  <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- soft confetti circles scattered across the canvas -->
-  <circle cx="70" cy="150" r="10" fill="#ffd6ec" opacity="0.9"/>
-  <circle cx="1140" cy="170" r="14" fill="#c2007a" opacity="0.18"/>
-  <circle cx="1080" cy="500" r="22" fill="#00b6c9" opacity="0.15"/>
-  <circle cx="60" cy="520" r="16" fill="#ffd6ec" opacity="0.8"/>
-  <circle cx="150" cy="470" r="7" fill="#c2007a" opacity="0.35"/>
-  <circle cx="1050" cy="130" r="8" fill="#ffd6ec" opacity="0.9"/>
+  <g stroke="#ffb199" stroke-width="2" opacity="0.14">
+    <line x1="680" y1="-30" x2="1260" y2="200"/>
+    <line x1="740" y1="-30" x2="1320" y2="200"/>
+    <line x1="800" y1="-30" x2="1380" y2="200"/>
+    <line x1="860" y1="-30" x2="1440" y2="200"/>
+    <line x1="920" y1="-30" x2="1500" y2="200"/>
+  </g>
+  <g stroke="#ff4d3d" stroke-width="3" opacity="0.10">
+    <line x1="-60" y1="540" x2="380" y2="720"/>
+    <line x1="0" y1="540" x2="440" y2="720"/>
+    <line x1="60" y1="540" x2="500" y2="720"/>
+  </g>
 
-  <!-- sparkle stars for idol-pop sparkle -->
-  <path d="M100,470 L104,479 L113,483 L104,487 L100,496 L96,487 L87,483 L96,479 Z" fill="#00b6c9" opacity="0.55"/>
-  <path d="M1120,540 L1125,552 L1137,557 L1125,562 L1120,574 L1115,562 L1103,557 L1115,552 Z" fill="#c2007a" opacity="0.4"/>
-  <path d="M1150,420 L1153,427 L1160,430 L1153,433 L1150,440 L1147,433 L1140,430 L1147,427 Z" fill="#ffd6ec"/>
-  <path d="M55,300 L58,307 L65,310 L58,313 L55,320 L52,313 L45,310 L52,307 Z" fill="#c2007a" opacity="0.5"/>
+  <rect x="1176" y="0" width="24" height="630" fill="url(#hazard)" opacity="0.22"/>
 
-  <!-- top gradient band -->
-  <rect x="0" y="0" width="1200" height="112" fill="url(#headerGrad)"/>
-  <rect x="0" y="106" width="1200" height="6" fill="#ffd6ec"/>
+  <circle cx="70" cy="56" r="7" fill="#ff4d3d"/>
+  <circle cx="98" cy="56" r="7" fill="#ffb199" opacity="0.55"/>
+  <circle cx="126" cy="56" r="7" fill="#ffb199" opacity="0.3"/>
 
-  <!-- bubbles inside the band -->
-  <circle cx="1060" cy="40" r="22" fill="#ffffff" opacity="0.28"/>
-  <circle cx="1110" cy="72" r="13" fill="#ffffff" opacity="0.3"/>
-  <circle cx="150" cy="80" r="10" fill="#ffffff" opacity="0.35"/>
+  <text x="150" y="64" font-family="sans-serif" font-size="30" font-weight="800" fill="#f3efe7" letter-spacing="0.04em">へのへのんのの</text>
+  <line x1="150" y1="78" x2="430" y2="78" stroke="#ff4d3d" stroke-width="3"/>
 
-  <!-- site name -->
-  <text x="60" y="70" font-family="sans-serif" font-size="34" font-weight="bold" fill="#c2007a" opacity="0.45">へのへのんのの</text>
-  <text x="58" y="68" font-family="sans-serif" font-size="34" font-weight="bold" fill="#ffffff">へのへのんのの</text>
+  <rect x="60" y="128" width="150" height="34" rx="4" fill="#ff4d3d"/>
+  <text x="80" y="151" font-family="sans-serif" font-size="18" font-weight="700" fill="#12141c" letter-spacing="0.08em">NOW READING</text>
 
-  <!-- title card shadow (pop box-shadow style) -->
-  <rect x="90" y="198" width="1020" height="290" rx="30" fill="#ffd6ec"/>
-  <!-- title card -->
-  <rect x="90" y="190" width="1020" height="290" rx="30" fill="#fffdfe" stroke="#ffd6ec" stroke-width="5"/>
+  <rect x="60" y="188" width="1080" height="330" rx="14" fill="#1c1f2b" opacity="0.92" stroke="#333750" stroke-width="2"/>
+  <rect x="60" y="188" width="8" height="330" rx="4" fill="#ff4d3d"/>
 
-  <!-- small decorative stars flanking the title card -->
-  <path d="M140,230 L145,242 L157,247 L145,252 L140,264 L135,252 L123,247 L135,242 Z" fill="#00b6c9" opacity="0.6"/>
-  <path d="M1060,430 L1064,439 L1073,443 L1064,447 L1060,456 L1056,447 L1047,443 L1056,439 Z" fill="#c2007a" opacity="0.5"/>
+  <text x="102" y="330" font-family="sans-serif" font-size="76" font-weight="800" fill="none" stroke="#0b0c12" stroke-width="2" opacity="0.5">{{TITLE}}</text>
+  <text x="100" y="328" font-family="sans-serif" font-size="76" font-weight="800" fill="url(#titleGrad)">{{TITLE}}</text>
 
-  <!-- title -->
-  <text x="600" y="342" font-family="sans-serif" font-size="68" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="#c2007a" opacity="0.3">{{TITLE}}</text>
-  <text x="596" y="338" font-family="sans-serif" font-size="68" font-weight="bold" text-anchor="middle" dominant-baseline="middle" fill="url(#titleGrad)">{{TITLE}}</text>
+  <text x="102" y="470" font-family="sans-serif" font-size="22" font-weight="600" fill="#f3efe7" opacity="0.6" letter-spacing="0.06em">ARTICLE / 夜の駅ホーム日誌</text>
 
-  <!-- bottom dashed accent line -->
-  <line x1="60" y1="600" x2="1140" y2="600" stroke="#00b6c9" stroke-width="4" stroke-dasharray="14 10" opacity="0.7"/>
+  <rect x="0" y="606" width="1200" height="4" fill="#ff4d3d"/>
+  <rect x="0" y="596" width="1200" height="6" fill="url(#trackDashes)" opacity="0.8"/>
 </svg>
