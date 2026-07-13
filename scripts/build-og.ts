@@ -27,8 +27,13 @@ const ARTICLE_PNG_DIR = path.join(DIST_DIR, "og");
 /** 長すぎる記事タイトルは末尾に省略記号を付けて切り詰める (テンプレが破綻しない上限) */
 const TITLE_MAX_LEN = 28;
 
+/** resvg は XML コメント内の `--` を許容しない。日替わり生成 SVG はコメントを含みうるため、描画前に丸ごと除去する */
+function stripComments(svg: string): string {
+  return svg.replace(/<!--[\s\S]*?-->/g, "");
+}
+
 function rasterize(svg: string): Buffer {
-  const resvg = new Resvg(svg, {
+  const resvg = new Resvg(stripComments(svg), {
     fitTo: { mode: "width", value: 1200 },
     font: { loadSystemFonts: true },
   });
