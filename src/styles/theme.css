@@ -1,18 +1,18 @@
-/* 曲名: GUILTY / アーティスト: Mage-P feat. 奕夕 / 一言ムード: 深夜の法廷で読み上げられる判決、鏡の中の自分に有罪を告げられる息苦しさ */
+/* NUMB LIFE / SO87 feat. 初音ミク V4 (English) — 一言ムード: 洪水に呑まれた無感覚な夜、道化のような自分と踊りながら泳ぎ方を学ぶ */
 
 :root {
-  --color-fg: #e9e6da;
-  --color-bg: #0a0d1a;
-  --color-accent: #f2c230;
-  --color-accent-dim: #a68a2a;
-  --color-danger: #c23a3a;
+  --color-fg: #e7e2f4;
+  --color-bg: #0d0c1a;
+  --color-accent: #45e0c4;
+  --color-accent-2: #ff4fa0;
+  --color-surface: #17152b;
+  --color-border: #322e52;
   --spacing-unit: 1rem;
-  --font-heading: 'Georgia', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
-  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic',
-    'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  --line-height-body: 1.8;
+  --font-heading: 'Century Gothic', 'Futura', 'Consolas', 'Yu Gothic', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', 'Segoe UI', sans-serif;
+  --line-height-body: 1.85;
   --line-height-heading: 1.25;
-  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 * {
@@ -24,17 +24,12 @@ html {
 }
 
 body {
-  background:
-    repeating-linear-gradient(
-      135deg,
-      rgba(242, 194, 48, 0.035) 0,
-      rgba(242, 194, 48, 0.035) 18px,
-      transparent 18px,
-      transparent 36px
-    ),
-    radial-gradient(circle at 50% -10%, rgba(242, 194, 48, 0.08), transparent 55%),
-    var(--color-bg);
+  margin: 0;
   color: var(--color-fg);
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(69, 224, 196, 0.08), transparent 55%),
+    radial-gradient(ellipse at 80% 110%, rgba(255, 79, 160, 0.07), transparent 55%),
+    var(--color-bg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
   letter-spacing: 0.01em;
@@ -44,132 +39,155 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
   color: var(--color-fg);
-  text-transform: none;
-  position: relative;
+  letter-spacing: 0.02em;
 }
 
 a {
   color: var(--color-accent);
-  text-decoration: none;
-  border-bottom: 1px solid var(--color-accent-dim);
-  transition: color 0.25s var(--ease-default), border-color 0.25s var(--ease-default),
-    text-shadow 0.25s var(--ease-default);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.3s var(--ease-default), text-shadow 0.3s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: #fff3c4;
-  border-color: var(--color-accent);
-  text-shadow: 0 0 6px rgba(242, 194, 48, 0.6);
+  color: var(--color-accent-2);
+  text-shadow: 0 0 10px rgba(255, 79, 160, 0.45);
+}
+
+::selection {
+  background: var(--color-accent-2);
+  color: #0d0c1a;
 }
 
 .site-header {
-  border-bottom: 3px double var(--color-accent-dim);
-  background: linear-gradient(180deg, rgba(242, 194, 48, 0.06), transparent);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+  position: relative;
+  padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 1.5);
+  background: linear-gradient(180deg, #16142a 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-border);
+  overflow: hidden;
 }
 
-.site-header::after {
-  content: "GUILTY";
-  display: block;
-  margin-top: calc(var(--spacing-unit) * 0.5);
-  font-family: var(--font-heading);
-  font-size: 0.65rem;
-  letter-spacing: 0.5em;
-  color: var(--color-danger);
-  opacity: 0.75;
-  animation: verdict-flicker 6s var(--ease-default) infinite;
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 220%;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(69, 224, 196, 0.05) 0,
+    rgba(69, 224, 196, 0.05) 2px,
+    transparent 2px,
+    transparent 10px
+  );
+  animation: numb-flood 9s linear infinite;
+  pointer-events: none;
+}
+
+.site-header h1,
+.site-header .site-title {
+  position: relative;
+  font-size: 1.9rem;
+  text-transform: lowercase;
+  animation: numb-flicker 6s var(--ease-default) infinite;
 }
 
 .site-footer {
-  border-top: 1px solid var(--color-accent-dim);
-  color: #b9b6a8;
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  font-size: 0.85em;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  color: #b9b3d1;
+  font-size: 0.85rem;
 }
 
 .post-list {
-  list-style: none;
+  display: block;
   padding: 0;
+  margin: calc(var(--spacing-unit) * 2) 0;
+  list-style: none;
 }
 
-.post-list li {
-  border-bottom: 1px solid rgba(242, 194, 48, 0.18);
+.post-list li,
+.post-list > * {
   padding: var(--spacing-unit) 0;
-  transition: transform 0.2s var(--ease-default);
+  border-bottom: 1px dashed var(--color-border);
+  transition: padding-left 0.35s var(--ease-default);
 }
 
-.post-list li:hover {
-  transform: translateX(4px);
+.post-list li:hover,
+.post-list > *:hover {
+  padding-left: calc(var(--spacing-unit) * 0.5);
+  border-bottom-color: var(--color-accent);
 }
 
 article.post {
-  background: rgba(242, 194, 48, 0.03);
-  border-left: 3px solid var(--color-accent-dim);
-  padding: calc(var(--spacing-unit) * 1.25);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset;
+  position: relative;
+  margin: calc(var(--spacing-unit) * 2) auto;
+  padding: calc(var(--spacing-unit) * 1.75);
+  max-width: 42rem;
+  background: linear-gradient(165deg, var(--color-surface) 0%, #100e20 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow: 0 18px 40px -20px rgba(69, 224, 196, 0.12);
 }
 
-article.post h1,
-article.post h2 {
-  animation: gavel-drop 0.9s var(--ease-default) both;
-}
-
-article.post h1::before,
-article.post h2::before {
+article.post::after {
   content: "";
   position: absolute;
-  left: -1.4em;
-  top: 0.15em;
-  width: 0.5em;
-  height: 0.5em;
-  background: var(--color-danger);
-  border-radius: 50%;
-  opacity: 0.85;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  opacity: 0.7;
+  transform-origin: left;
+  animation: numb-swim 4.5s var(--ease-default) infinite;
+}
+
+article.post h2,
+article.post h3 {
+  color: var(--color-accent);
 }
 
 article.post blockquote {
-  border-left: 2px solid var(--color-danger);
+  margin: var(--spacing-unit) 0;
   padding-left: var(--spacing-unit);
-  color: #d8d4c4;
+  border-left: 3px solid var(--color-accent-2);
+  color: #cfc9e6;
   font-style: italic;
 }
 
-@keyframes gavel-drop {
-  0% {
-    transform: translateY(-0.6em) rotate(-1.5deg);
-    opacity: 0;
-  }
-  60% {
-    transform: translateY(0.05em) rotate(0.5deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
+code, pre {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  background: #0a0916;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
 }
 
-@keyframes verdict-flicker {
-  0%, 92%, 100% {
-    opacity: 0.75;
-  }
-  94% {
-    opacity: 0.15;
-  }
-  96% {
-    opacity: 0.75;
-  }
-  98% {
-    opacity: 0.2;
-  }
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: calc(var(--spacing-unit) * 2) 0;
+}
+
+@keyframes numb-flood {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+@keyframes numb-flicker {
+  0%, 92%, 100% { opacity: 1; }
+  94% { opacity: 0.75; }
+  96% { opacity: 0.95; }
+}
+
+@keyframes numb-swim {
+  0%, 100% { transform: scaleX(0.85); opacity: 0.55; }
+  50% { transform: scaleX(1); opacity: 0.9; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
   }
