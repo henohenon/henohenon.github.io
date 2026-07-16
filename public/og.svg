@@ -1,65 +1,101 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="tealGlow" cx="20%" cy="-10%" r="70%">
-      <stop offset="0%" stop-color="#45e0c4" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#45e0c4" stop-opacity="0"/>
+    <radialGradient id="bgGlowTL" cx="15%" cy="-5%" r="65%">
+      <stop offset="0%" stop-color="#ffd6e1" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#ffd6e1" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="pinkGlow" cx="82%" cy="112%" r="70%">
-      <stop offset="0%" stop-color="#ff4fa0" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#ff4fa0" stop-opacity="0"/>
+    <radialGradient id="bgGlowTR" cx="100%" cy="8%" r="55%">
+      <stop offset="0%" stop-color="#ffe3ea" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#ffe3ea" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#45e0c4"/>
-      <stop offset="100%" stop-color="#ff4fa0"/>
+    <radialGradient id="bgGlowBR" cx="90%" cy="105%" r="60%">
+      <stop offset="0%" stop-color="#ffc2d4" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#ffc2d4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="headerBand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d81b52"/>
+      <stop offset="45%" stop-color="#ff5f86"/>
+      <stop offset="100%" stop-color="#7a1030"/>
     </linearGradient>
-    <linearGradient id="waveGradA" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#45e0c4" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ff4fa0" stop-opacity="0.10"/>
+    <linearGradient id="titleFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7a1030"/>
+      <stop offset="100%" stop-color="#3a1420"/>
     </linearGradient>
-    <linearGradient id="waveGradB" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff4fa0" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#45e0c4" stop-opacity="0.08"/>
-    </linearGradient>
-    <pattern id="stripes" width="10" height="10" patternTransform="rotate(90)" patternUnits="userSpaceOnUse">
-      <rect width="10" height="2" fill="#45e0c4" opacity="0.06"/>
-    </pattern>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
   </defs>
 
-  <rect x="0" y="0" width="1200" height="630" fill="#0d0c1a"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#tealGlow)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#pinkGlow)"/>
-  <rect x="0" y="0" width="1200" height="320" fill="url(#stripes)"/>
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#fff3f6"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlowTL)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlowTR)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlowBR)"/>
 
-  <g opacity="0.14" stroke="#ff4fa0" stroke-width="2" fill="none">
-    <circle cx="1050" cy="120" r="70"/>
-    <circle cx="1025" cy="105" r="6" fill="#ff4fa0" stroke="none"/>
-    <circle cx="1075" cy="105" r="6" fill="#ff4fa0" stroke="none"/>
-    <path d="M1010,145 Q1050,175 1090,145"/>
+  <!-- soft scattered petal dots -->
+  <g fill="#d81b52" opacity="0.16">
+    <circle cx="90" cy="90" r="10"/>
+    <circle cx="150" cy="150" r="5"/>
+    <circle cx="1110" cy="80" r="9"/>
+    <circle cx="1050" cy="150" r="5"/>
+    <circle cx="70" cy="540" r="7"/>
+    <circle cx="1130" cy="560" r="8"/>
+    <circle cx="1080" cy="500" r="4"/>
+    <circle cx="60" cy="470" r="4"/>
   </g>
 
-  <line x1="0" y1="486" x2="1200" y2="486" stroke="#322e52" stroke-width="1" stroke-dasharray="6 8" opacity="0.7"/>
+  <!-- top accent band -->
+  <rect x="0" y="0" width="1200" height="10" fill="url(#headerBand)"/>
+  <rect x="0" y="620" width="1200" height="10" fill="#7a1030"/>
 
-  <path d="M0,560 C150,535 300,585 450,558 C600,532 750,588 900,556 C1050,530 1150,570 1200,552 L1200,630 L0,630 Z" fill="url(#waveGradA)"/>
-  <path d="M0,585 C160,565 320,605 480,582 C640,560 800,608 960,580 C1080,562 1150,590 1200,578 L1200,630 L0,630 Z" fill="url(#waveGradB)"/>
+  <!-- thin diagonal texture strip, echoes .site-header::after -->
+  <g opacity="0.08" stroke="#ffffff" stroke-width="2">
+    <line x1="-50" y1="0" x2="120" y2="630"/>
+    <line x1="30" y1="0" x2="200" y2="630"/>
+    <line x1="1080" y1="0" x2="1250" y2="630"/>
+    <line x1="1160" y1="0" x2="1330" y2="630"/>
+  </g>
 
-  <rect x="0" y="0" width="1200" height="3" fill="url(#barGrad)" opacity="0.55"/>
-  <rect x="0" y="627" width="1200" height="3" fill="url(#barGrad)" opacity="0.55"/>
+  <!-- heart motif, faint, upper right -->
+  <path d="M 980 60 C 960 30, 910 30, 900 70 C 890 30, 840 30, 820 60 C 800 100, 900 170, 900 170 C 900 170, 1000 100, 980 60 Z"
+        fill="#d81b52" opacity="0.10"/>
 
-  <text x="600" y="150" text-anchor="middle" font-family="sans-serif" font-size="22" letter-spacing="8" fill="#ff4fa0" opacity="0.85">TODAY'S SONG BLOG</text>
+  <!-- decorative border card -->
+  <rect x="70" y="70" width="1060" height="490" rx="28" fill="#ffffff" opacity="0.55" stroke="#f3b9c9" stroke-width="2"/>
 
-  <text x="600" y="300" text-anchor="middle" font-family="sans-serif" font-size="132" font-weight="700" fill="#45e0c4" opacity="0.35" filter="url(#glow)">へのへのんのの</text>
-  <text x="600" y="300" text-anchor="middle" font-family="sans-serif" font-size="132" font-weight="700" fill="#e7e2f4" letter-spacing="6">へのへのんのの</text>
+  <!-- small kicker label -->
+  <g>
+    <circle cx="330" cy="215" r="6" fill="#d81b52">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/>
+    </circle>
+    <text x="352" y="223" font-family="'Hiragino Sans','sans-serif'" font-size="24" fill="#d81b52" letter-spacing="2">
+      today's theme song
+    </text>
+  </g>
 
-  <rect x="500" y="335" width="200" height="3" fill="url(#barGrad)" opacity="0.8"/>
+  <!-- MAIN: site name -->
+  <text x="600" y="345" text-anchor="middle"
+        font-family="'Hiragino Maru Gothic ProN','sans-serif'"
+        font-size="128" font-weight="700" fill="url(#titleFade)" letter-spacing="4">
+    へのへのんのの
+  </text>
 
-  <text x="600" y="392" text-anchor="middle" font-family="sans-serif" font-size="40" letter-spacing="4" fill="#45e0c4">NUMB LIFE</text>
+  <!-- divider -->
+  <line x1="430" y1="400" x2="770" y2="400" stroke="#f3b9c9" stroke-width="2"/>
+  <circle cx="600" cy="400" r="5" fill="#d81b52"/>
 
-  <text x="600" y="434" text-anchor="middle" font-family="sans-serif" font-size="24" fill="#ff4fa0" opacity="0.85">SO87 feat. 初音ミク V4 (English)</text>
+  <!-- subtitle: song title -->
+  <text x="600" y="462" text-anchor="middle"
+        font-family="'Hiragino Sans','sans-serif'" font-size="38" font-weight="600" fill="#d81b52">
+    CONTINUING HEART
+  </text>
+
+  <!-- artist / small info -->
+  <text x="600" y="504" text-anchor="middle"
+        font-family="'Hiragino Sans','sans-serif'" font-size="24" fill="#7a1030" opacity="0.85">
+    TONE feat. 初音ミク
+  </text>
+
+  <!-- footer mood tag -->
+  <text x="600 " y="565" text-anchor="middle"
+        font-family="'Hiragino Sans','sans-serif'" font-size="20" fill="#3a1420" opacity="0.55" letter-spacing="1">
+    儚さを抱きしめる、ピンクと紅の切ない多幸感
+  </text>
 </svg>
