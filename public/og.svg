@@ -1,101 +1,81 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGlowTL" cx="15%" cy="-5%" r="65%">
-      <stop offset="0%" stop-color="#ffd6e1" stop-opacity="0.9"/>
-      <stop offset="55%" stop-color="#ffd6e1" stop-opacity="0"/>
+    <radialGradient id="glowA" cx="12%" cy="18%" r="45%">
+      <stop offset="0%" stop-color="#e0114a" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#e0114a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bgGlowTR" cx="100%" cy="8%" r="55%">
-      <stop offset="0%" stop-color="#ffe3ea" stop-opacity="0.95"/>
-      <stop offset="45%" stop-color="#ffe3ea" stop-opacity="0"/>
+    <radialGradient id="glowB" cx="88%" cy="85%" r="42%">
+      <stop offset="0%" stop-color="#e0114a" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#e0114a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="bgGlowBR" cx="90%" cy="105%" r="60%">
-      <stop offset="0%" stop-color="#ffc2d4" stop-opacity="0.55"/>
-      <stop offset="60%" stop-color="#ffc2d4" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="headerBand" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#d81b52"/>
-      <stop offset="45%" stop-color="#ff5f86"/>
-      <stop offset="100%" stop-color="#7a1030"/>
-    </linearGradient>
-    <linearGradient id="titleFade" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#7a1030"/>
-      <stop offset="100%" stop-color="#3a1420"/>
+    <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd1dd"/>
+      <stop offset="100%" stop-color="#ffe3ec"/>
     </linearGradient>
   </defs>
 
-  <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#fff3f6"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlowTL)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlowTR)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlowBR)"/>
+  <!-- base background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#ffe3ec"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowA)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowB)"/>
 
-  <!-- soft scattered petal dots -->
-  <g fill="#d81b52" opacity="0.16">
-    <circle cx="90" cy="90" r="10"/>
-    <circle cx="150" cy="150" r="5"/>
-    <circle cx="1110" cy="80" r="9"/>
-    <circle cx="1050" cy="150" r="5"/>
-    <circle cx="70" cy="540" r="7"/>
-    <circle cx="1130" cy="560" r="8"/>
-    <circle cx="1080" cy="500" r="4"/>
-    <circle cx="60" cy="470" r="4"/>
-  </g>
+  <!-- top bitten-ribbon band -->
+  <path d="M0,0 L1200,0 L1200,86 L1125,74 L1050,86 L975,74 L900,86 L825,74 L750,86 L675,74 L600,86 L525,74 L450,86 L375,74 L300,86 L225,74 L150,86 L75,74 L0,86 Z"
+        fill="url(#bandGrad)" stroke="#e0114a" stroke-width="3" stroke-linejoin="round"/>
 
-  <!-- top accent band -->
-  <rect x="0" y="0" width="1200" height="10" fill="url(#headerBand)"/>
-  <rect x="0" y="620" width="1200" height="10" fill="#7a1030"/>
+  <!-- small blood drips from the ribbon teeth -->
+  <path d="M146,74 L154,74 Q155,89 150,100 Q145,89 146,74 Z" fill="#e0114a" opacity="0.85"/>
+  <path d="M446,74 L454,74 Q455,92 450,105 Q445,92 446,74 Z" fill="#e0114a" opacity="0.85"/>
+  <path d="M746,74 L754,74 Q755,88 750,98 Q745,88 746,74 Z" fill="#e0114a" opacity="0.85"/>
+  <path d="M1046,74 L1054,74 Q1055,91 1050,103 Q1045,91 1046,74 Z" fill="#e0114a" opacity="0.85"/>
 
-  <!-- thin diagonal texture strip, echoes .site-header::after -->
-  <g opacity="0.08" stroke="#ffffff" stroke-width="2">
-    <line x1="-50" y1="0" x2="120" y2="630"/>
-    <line x1="30" y1="0" x2="200" y2="630"/>
-    <line x1="1080" y1="0" x2="1250" y2="630"/>
-    <line x1="1160" y1="0" x2="1330" y2="630"/>
-  </g>
+  <!-- bottom bitten band (footer echo) -->
+  <path d="M0,630 L1200,630 L1200,544 L1125,556 L1050,544 L975,556 L900,544 L825,556 L750,544 L675,556 L600,544 L525,556 L450,544 L375,556 L300,544 L225,556 L150,544 L75,556 L0,544 Z"
+        fill="#7a0f1f" stroke="#ff8fab" stroke-width="3" stroke-dasharray="10 8"/>
 
-  <!-- heart motif, faint, upper right -->
-  <path d="M 980 60 C 960 30, 910 30, 900 70 C 890 30, 840 30, 820 60 C 800 100, 900 170, 900 170 C 900 170, 1000 100, 980 60 Z"
-        fill="#d81b52" opacity="0.10"/>
+  <!-- watching eyes -->
+  <circle cx="108" cy="150" r="6" fill="#e0114a"/>
+  <circle cx="110" cy="148" r="1.6" fill="#ffe3ec"/>
+  <circle cx="1092" cy="150" r="6" fill="#e0114a"/>
+  <circle cx="1094" cy="148" r="1.6" fill="#ffe3ec"/>
+  <circle cx="108" cy="500" r="6" fill="#e0114a"/>
+  <circle cx="110" cy="498" r="1.6" fill="#ffe3ec"/>
+  <circle cx="1092" cy="500" r="6" fill="#e0114a"/>
+  <circle cx="1094" cy="498" r="1.6" fill="#ffe3ec"/>
 
-  <!-- decorative border card -->
-  <rect x="70" y="70" width="1060" height="490" rx="28" fill="#ffffff" opacity="0.55" stroke="#f3b9c9" stroke-width="2"/>
+  <!-- heart backdrop, bitten -->
+  <path d="M 600,200 C 600,145 545,90 475,90 C 395,90 350,145 350,200 C 350,270 440,340 600,430 C 760,340 850,270 850,200 C 850,145 805,90 725,90 C 655,90 600,145 600,200 Z"
+        fill="#ff8fab" opacity="0.55"/>
 
-  <!-- small kicker label -->
-  <g>
-    <circle cx="330" cy="215" r="6" fill="#d81b52">
-      <animate attributeName="opacity" values="0.5;1;0.5" dur="3.4s" repeatCount="indefinite"/>
-    </circle>
-    <text x="352" y="223" font-family="'Hiragino Sans','sans-serif'" font-size="24" fill="#d81b52" letter-spacing="2">
-      today's theme song
-    </text>
-  </g>
+  <!-- fang notch at heart's crown -->
+  <path d="M585,92 L600,140 L596,92 Z" fill="#3a0d16" opacity="0.8"/>
+  <path d="M615,92 L600,140 L604,92 Z" fill="#3a0d16" opacity="0.8"/>
 
-  <!-- MAIN: site name -->
-  <text x="600" y="345" text-anchor="middle"
-        font-family="'Hiragino Maru Gothic ProN','sans-serif'"
-        font-size="128" font-weight="700" fill="url(#titleFade)" letter-spacing="4">
-    へのへのんのの
-  </text>
+  <!-- bite taken out of the heart -->
+  <circle cx="790" cy="150" r="55" fill="#ffe3ec"/>
+  <path d="M742,168 L742,188 L724,178 Z" fill="#ffe3ec"/>
+  <path d="M735,140 L735,160 L715,150 Z" fill="#ffe3ec"/>
+  <path d="M742,112 L742,132 L724,122 Z" fill="#ffe3ec"/>
 
-  <!-- divider -->
-  <line x1="430" y1="400" x2="770" y2="400" stroke="#f3b9c9" stroke-width="2"/>
-  <circle cx="600" cy="400" r="5" fill="#d81b52"/>
+  <!-- drips from the bite -->
+  <path d="M766,204 L774,204 Q775,218 770,230 Q765,218 766,204 Z" fill="#e0114a" opacity="0.85"/>
+  <path d="M796,200 L804,200 Q805,212 800,222 Q795,212 796,200 Z" fill="#e0114a" opacity="0.85"/>
 
-  <!-- subtitle: song title -->
-  <text x="600" y="462" text-anchor="middle"
-        font-family="'Hiragino Sans','sans-serif'" font-size="38" font-weight="600" fill="#d81b52">
-    CONTINUING HEART
-  </text>
+  <!-- kicker -->
+  <text x="600" y="440" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="700"
+        letter-spacing="5" fill="#ff8fab">TODAY&#8217;S OBSESSION</text>
 
-  <!-- artist / small info -->
-  <text x="600" y="504" text-anchor="middle"
-        font-family="'Hiragino Sans','sans-serif'" font-size="24" fill="#7a1030" opacity="0.85">
-    TONE feat. 初音ミク
-  </text>
+  <!-- site name (hero), shadow + main -->
+  <text x="604" y="292" text-anchor="middle" font-family="sans-serif" font-size="128" font-weight="900"
+        fill="#7a0f1f" opacity="0.35">へのへのんのの</text>
+  <text x="600" y="286" text-anchor="middle" font-family="sans-serif" font-size="128" font-weight="900"
+        fill="#3a0d16" letter-spacing="4">へのへのんのの</text>
 
-  <!-- footer mood tag -->
-  <text x="600 " y="565" text-anchor="middle"
-        font-family="'Hiragino Sans','sans-serif'" font-size="20" fill="#3a1420" opacity="0.55" letter-spacing="1">
-    儚さを抱きしめる、ピンクと紅の切ない多幸感
-  </text>
+  <!-- song title subtitle -->
+  <text x="600" y="486" text-anchor="middle" font-family="sans-serif" font-size="38" font-style="italic" font-weight="700"
+        fill="#e0114a" letter-spacing="1">Teeth Mark Love</text>
+
+  <!-- artist -->
+  <text x="600" y="524" text-anchor="middle" font-family="sans-serif" font-size="21"
+        fill="#7a0f1f" opacity="0.8">Mayonazy feat. Synthesizer V AI Megpoid</text>
 </svg>
