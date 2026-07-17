@@ -1,81 +1,102 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glowA" cx="12%" cy="18%" r="45%">
-      <stop offset="0%" stop-color="#e0114a" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#e0114a" stop-opacity="0"/>
+    <radialGradient id="glowPink" cx="10%" cy="-5%" r="65%">
+      <stop offset="0%" stop-color="#ff2f92" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#ff2f92" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowB" cx="88%" cy="85%" r="42%">
-      <stop offset="0%" stop-color="#e0114a" stop-opacity="0.09"/>
-      <stop offset="100%" stop-color="#e0114a" stop-opacity="0"/>
+    <radialGradient id="glowGold" cx="100%" cy="6%" r="55%">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffd1dd"/>
-      <stop offset="100%" stop-color="#ffe3ec"/>
+    <radialGradient id="vignette" cx="50%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2f92"/>
+      <stop offset="55%" stop-color="#ff8ec2"/>
+      <stop offset="100%" stop-color="#ffd166"/>
     </linearGradient>
+    <linearGradient id="beam1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb3d9" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffb3d9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beam2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="neonGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
   </defs>
 
   <!-- base background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#ffe3ec"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowA)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowB)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#180f16"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowPink)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowGold)"/>
 
-  <!-- top bitten-ribbon band -->
-  <path d="M0,0 L1200,0 L1200,86 L1125,74 L1050,86 L975,74 L900,86 L825,74 L750,86 L675,74 L600,86 L525,74 L450,86 L375,74 L300,86 L225,74 L150,86 L75,74 L0,86 Z"
-        fill="url(#bandGrad)" stroke="#e0114a" stroke-width="3" stroke-linejoin="round"/>
+  <!-- stage spotlight beams -->
+  <polygon points="0,0 320,0 60,630 0,630" fill="url(#beam1)"/>
+  <polygon points="1200,0 900,0 1150,630 1200,630" fill="url(#beam2)"/>
 
-  <!-- small blood drips from the ribbon teeth -->
-  <path d="M146,74 L154,74 Q155,89 150,100 Q145,89 146,74 Z" fill="#e0114a" opacity="0.85"/>
-  <path d="M446,74 L454,74 Q455,92 450,105 Q445,92 446,74 Z" fill="#e0114a" opacity="0.85"/>
-  <path d="M746,74 L754,74 Q755,88 750,98 Q745,88 746,74 Z" fill="#e0114a" opacity="0.85"/>
-  <path d="M1046,74 L1054,74 Q1055,91 1050,103 Q1045,91 1046,74 Z" fill="#e0114a" opacity="0.85"/>
+  <!-- faint receipt-mark watermark -->
+  <text x="1010" y="260" font-size="300" font-family="sans-serif" font-weight="700"
+        fill="#ffd166" opacity="0.05" text-anchor="middle"
+        transform="rotate(-8 1010 260)">¥</text>
 
-  <!-- bottom bitten band (footer echo) -->
-  <path d="M0,630 L1200,630 L1200,544 L1125,556 L1050,544 L975,556 L900,544 L825,556 L750,544 L675,556 L600,544 L525,556 L450,544 L375,556 L300,544 L225,556 L150,544 L75,556 L0,544 Z"
-        fill="#7a0f1f" stroke="#ff8fab" stroke-width="3" stroke-dasharray="10 8"/>
+  <!-- outer dashed frame -->
+  <rect x="40" y="40" width="1120" height="550" rx="22" fill="none"
+        stroke="#ff2f92" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <rect x="52" y="52" width="1096" height="526" rx="16" fill="none"
+        stroke="#ffd166" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="10 8"/>
 
-  <!-- watching eyes -->
-  <circle cx="108" cy="150" r="6" fill="#e0114a"/>
-  <circle cx="110" cy="148" r="1.6" fill="#ffe3ec"/>
-  <circle cx="1092" cy="150" r="6" fill="#e0114a"/>
-  <circle cx="1094" cy="148" r="1.6" fill="#ffe3ec"/>
-  <circle cx="108" cy="500" r="6" fill="#e0114a"/>
-  <circle cx="110" cy="498" r="1.6" fill="#ffe3ec"/>
-  <circle cx="1092" cy="500" r="6" fill="#e0114a"/>
-  <circle cx="1094" cy="498" r="1.6" fill="#ffe3ec"/>
+  <!-- sparkle dots -->
+  <circle cx="120" cy="120" r="4" fill="#ffd166" opacity="0.5"/>
+  <circle cx="150" cy="150" r="2" fill="#ff2f92" opacity="0.6"/>
+  <circle cx="1080" cy="500" r="4" fill="#ff2f92" opacity="0.45"/>
+  <circle cx="1050" cy="540" r="2.5" fill="#ffd166" opacity="0.55"/>
+  <circle cx="150" cy="500" r="3" fill="#ffb3d9" opacity="0.4"/>
+  <circle cx="1090" cy="130" r="2.5" fill="#ffb3d9" opacity="0.4"/>
 
-  <!-- heart backdrop, bitten -->
-  <path d="M 600,200 C 600,145 545,90 475,90 C 395,90 350,145 350,200 C 350,270 440,340 600,430 C 760,340 850,270 850,200 C 850,145 805,90 725,90 C 655,90 600,145 600,200 Z"
-        fill="#ff8fab" opacity="0.55"/>
+  <!-- small pill tag -->
+  <rect x="470" y="112" width="260" height="42" rx="21" fill="#ffffff" fill-opacity="0.04"
+        stroke="#ffd166" stroke-width="1.2" stroke-dasharray="5 5" stroke-opacity="0.6"/>
+  <text x="600" y="139" font-size="17" font-family="sans-serif" font-weight="600"
+        fill="#ffd166" text-anchor="middle" letter-spacing="2">TODAY&#8217;S SONG ♪</text>
 
-  <!-- fang notch at heart's crown -->
-  <path d="M585,92 L600,140 L596,92 Z" fill="#3a0d16" opacity="0.8"/>
-  <path d="M615,92 L600,140 L604,92 Z" fill="#3a0d16" opacity="0.8"/>
+  <!-- site name: hero -->
+  <text x="600" y="332" font-size="136" font-family="sans-serif" font-weight="700"
+        fill="#ff2f92" opacity="0.55" text-anchor="middle" filter="url(#neonGlow)">へのへのんのの</text>
+  <text x="600" y="332" font-size="136" font-family="sans-serif" font-weight="700"
+        fill="url(#titleGrad)" text-anchor="middle">へのへのんのの</text>
 
-  <!-- bite taken out of the heart -->
-  <circle cx="790" cy="150" r="55" fill="#ffe3ec"/>
-  <path d="M742,168 L742,188 L724,178 Z" fill="#ffe3ec"/>
-  <path d="M735,140 L735,160 L715,150 Z" fill="#ffe3ec"/>
-  <path d="M742,112 L742,132 L724,122 Z" fill="#ffe3ec"/>
+  <!-- divider -->
+  <line x1="480" y1="382" x2="720" y2="382" stroke="#ffd166" stroke-width="2"
+        stroke-dasharray="6 7" stroke-opacity="0.55" stroke-linecap="round"/>
 
-  <!-- drips from the bite -->
-  <path d="M766,204 L774,204 Q775,218 770,230 Q765,218 766,204 Z" fill="#e0114a" opacity="0.85"/>
-  <path d="M796,200 L804,200 Q805,212 800,222 Q795,212 796,200 Z" fill="#e0114a" opacity="0.85"/>
+  <!-- song subtitle -->
+  <text x="600" y="440" font-size="40" font-family="sans-serif" font-weight="600"
+        fill="#ff2f92" opacity="0.4" text-anchor="middle" filter="url(#softGlow)">ダミーロマンス</text>
+  <text x="600" y="440" font-size="40" font-family="sans-serif" font-weight="600"
+        fill="#ffb3d9" text-anchor="middle">ダミーロマンス</text>
 
-  <!-- kicker -->
-  <text x="600" y="440" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="700"
-        letter-spacing="5" fill="#ff8fab">TODAY&#8217;S OBSESSION</text>
+  <!-- artist line -->
+  <text x="600" y="480" font-size="21" font-family="sans-serif" font-weight="400"
+        fill="#ffb3d9" opacity="0.75" text-anchor="middle">DECO*27, Hayato Yamamoto, OTOIRO feat. 初音ミク</text>
 
-  <!-- site name (hero), shadow + main -->
-  <text x="604" y="292" text-anchor="middle" font-family="sans-serif" font-size="128" font-weight="900"
-        fill="#7a0f1f" opacity="0.35">へのへのんのの</text>
-  <text x="600" y="286" text-anchor="middle" font-family="sans-serif" font-size="128" font-weight="900"
-        fill="#3a0d16" letter-spacing="4">へのへのんのの</text>
+  <!-- bottom tagline -->
+  <text x="600" y="562" font-size="19" font-family="sans-serif" font-weight="400"
+        fill="#fbe4ee" opacity="0.45" text-anchor="middle" letter-spacing="1">今日も、誰かの一曲から生まれる、ひとつの部屋。</text>
 
-  <!-- song title subtitle -->
-  <text x="600" y="486" text-anchor="middle" font-family="sans-serif" font-size="38" font-style="italic" font-weight="700"
-        fill="#e0114a" letter-spacing="1">Teeth Mark Love</text>
-
-  <!-- artist -->
-  <text x="600" y="524" text-anchor="middle" font-family="sans-serif" font-size="21"
-        fill="#7a0f1f" opacity="0.8">Mayonazy feat. Synthesizer V AI Megpoid</text>
+  <!-- vignette overlay -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
 </svg>
