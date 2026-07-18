@@ -1,102 +1,75 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <radialGradient id="glowPink" cx="10%" cy="-5%" r="65%">
-      <stop offset="0%" stop-color="#ff2f92" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#ff2f92" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowGold" cx="100%" cy="6%" r="55%">
-      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="46%" r="72%">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="78%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
-    </radialGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff2f92"/>
-      <stop offset="55%" stop-color="#ff8ec2"/>
-      <stop offset="100%" stop-color="#ffd166"/>
-    </linearGradient>
-    <linearGradient id="beam1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffb3d9" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ffb3d9" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="beam2" x1="100%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="neonGlow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="16" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="6"/>
-    </filter>
-  </defs>
+<defs>
+  <radialGradient id="bgGlow" cx="20%" cy="-5%" r="85%">
+    <stop offset="0%" stop-color="#2a0f2e"/>
+    <stop offset="55%" stop-color="#1f1023"/>
+    <stop offset="100%" stop-color="#150a17"/>
+  </radialGradient>
 
-  <!-- base background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#180f16"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowPink)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowGold)"/>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#ffce3d" stop-opacity="0.9"/>
+    <stop offset="60%" stop-color="#ff3d78" stop-opacity="0.35"/>
+    <stop offset="100%" stop-color="#ff3d78" stop-opacity="0"/>
+  </radialGradient>
 
-  <!-- stage spotlight beams -->
-  <polygon points="0,0 320,0 60,630 0,630" fill="url(#beam1)"/>
-  <polygon points="1200,0 900,0 1150,630 1200,630" fill="url(#beam2)"/>
+  <pattern id="clawStripe" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
+    <rect width="30" height="30" fill="#150a17"/>
+    <rect x="0" y="0" width="9" height="30" fill="#ff3d78" opacity="0.9"/>
+    <rect x="15" y="0" width="3" height="30" fill="#ffce3d" opacity="0.85"/>
+  </pattern>
 
-  <!-- faint receipt-mark watermark -->
-  <text x="1010" y="260" font-size="300" font-family="sans-serif" font-weight="700"
-        fill="#ffd166" opacity="0.05" text-anchor="middle"
-        transform="rotate(-8 1010 260)">¥</text>
+  <filter id="glowStrong" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur1"/>
+    <feMerge>
+      <feMergeNode in="blur1"/>
+      <feMergeNode in="blur1"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
 
-  <!-- outer dashed frame -->
-  <rect x="40" y="40" width="1120" height="550" rx="22" fill="none"
-        stroke="#ff2f92" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="2 10" stroke-linecap="round"/>
-  <rect x="52" y="52" width="1096" height="526" rx="16" fill="none"
-        stroke="#ffd166" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="10 8"/>
+  <filter id="glowSoft" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1"/>
+    <feMerge>
+      <feMergeNode in="blur1"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+</defs>
 
-  <!-- sparkle dots -->
-  <circle cx="120" cy="120" r="4" fill="#ffd166" opacity="0.5"/>
-  <circle cx="150" cy="150" r="2" fill="#ff2f92" opacity="0.6"/>
-  <circle cx="1080" cy="500" r="4" fill="#ff2f92" opacity="0.45"/>
-  <circle cx="1050" cy="540" r="2.5" fill="#ffd166" opacity="0.55"/>
-  <circle cx="150" cy="500" r="3" fill="#ffb3d9" opacity="0.4"/>
-  <circle cx="1090" cy="130" r="2.5" fill="#ffb3d9" opacity="0.4"/>
+<rect x="0" y="0" width="1200" height="630" fill="#150a17"/>
+<rect x="0" y="0" width="1200" height="630" fill="url(#bgGlow)"/>
 
-  <!-- small pill tag -->
-  <rect x="470" y="112" width="260" height="42" rx="21" fill="#ffffff" fill-opacity="0.04"
-        stroke="#ffd166" stroke-width="1.2" stroke-dasharray="5 5" stroke-opacity="0.6"/>
-  <text x="600" y="139" font-size="17" font-family="sans-serif" font-weight="600"
-        fill="#ffd166" text-anchor="middle" letter-spacing="2">TODAY&#8217;S SONG ♪</text>
+<g opacity="0.55">
+  <ellipse cx="1010" cy="120" rx="80" ry="110" fill="url(#eyeGlow)" transform="rotate(-18 1010 120)"/>
+  <ellipse cx="1140" cy="160" rx="70" ry="95" fill="url(#eyeGlow)" transform="rotate(-14 1140 160)"/>
+  <ellipse cx="1010" cy="120" rx="6" ry="46" fill="#150a17" transform="rotate(-18 1010 120)"/>
+  <ellipse cx="1140" cy="160" rx="5" ry="40" fill="#150a17" transform="rotate(-14 1140 160)"/>
+</g>
 
-  <!-- site name: hero -->
-  <text x="600" y="332" font-size="136" font-family="sans-serif" font-weight="700"
-        fill="#ff2f92" opacity="0.55" text-anchor="middle" filter="url(#neonGlow)">へのへのんのの</text>
-  <text x="600" y="332" font-size="136" font-family="sans-serif" font-weight="700"
-        fill="url(#titleGrad)" text-anchor="middle">へのへのんのの</text>
+<g opacity="0.5" stroke-linecap="round">
+  <path d="M40 560 L190 470" stroke="#ff3d78" stroke-width="10" fill="none"/>
+  <path d="M60 590 L210 500" stroke="#b26bff" stroke-width="7" fill="none"/>
+  <path d="M80 620 L230 530" stroke="#ffce3d" stroke-width="4" fill="none"/>
+</g>
 
-  <!-- divider -->
-  <line x1="480" y1="382" x2="720" y2="382" stroke="#ffd166" stroke-width="2"
-        stroke-dasharray="6 7" stroke-opacity="0.55" stroke-linecap="round"/>
+<rect x="0" y="0" width="1200" height="10" fill="url(#clawStripe)" opacity="0.9"/>
+<rect x="0" y="620" width="1200" height="10" fill="url(#clawStripe)" opacity="0.9"/>
 
-  <!-- song subtitle -->
-  <text x="600" y="440" font-size="40" font-family="sans-serif" font-weight="600"
-        fill="#ff2f92" opacity="0.4" text-anchor="middle" filter="url(#softGlow)">ダミーロマンス</text>
-  <text x="600" y="440" font-size="40" font-family="sans-serif" font-weight="600"
-        fill="#ffb3d9" text-anchor="middle">ダミーロマンス</text>
+<rect x="28" y="28" width="1144" height="574" fill="none" stroke="#3a1f3f" stroke-width="2" stroke-dasharray="10 8" opacity="0.7" rx="6"/>
 
-  <!-- artist line -->
-  <text x="600" y="480" font-size="21" font-family="sans-serif" font-weight="400"
-        fill="#ffb3d9" opacity="0.75" text-anchor="middle">DECO*27, Hayato Yamamoto, OTOIRO feat. 初音ミク</text>
+<text x="600" y="150" text-anchor="middle" font-family="sans-serif" font-size="24" letter-spacing="6" fill="#b26bff" opacity="0.85">B L O G</text>
 
-  <!-- bottom tagline -->
-  <text x="600" y="562" font-size="19" font-family="sans-serif" font-weight="400"
-        fill="#fbe4ee" opacity="0.45" text-anchor="middle" letter-spacing="1">今日も、誰かの一曲から生まれる、ひとつの部屋。</text>
+<g>
+  <text x="600" y="330" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="126" letter-spacing="4" fill="#ff3d78" filter="url(#glowStrong)" opacity="0.55">へのへのんのの</text>
+  <text x="600" y="330" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="126" letter-spacing="4" fill="#f3e9f4">へのへのんのの</text>
+</g>
 
-  <!-- vignette overlay -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
+<rect x="440" y="372" width="320" height="6" fill="url(#clawStripe)" opacity="0.9"/>
+
+<text x="600" y="424" text-anchor="middle" font-family="sans-serif" font-size="22" letter-spacing="6" fill="#b26bff" opacity="0.9">TODAY'S TRACK</text>
+
+<text x="600" y="476" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="42" letter-spacing="2" fill="#ff3d78" filter="url(#glowSoft)">streetcat</text>
+
+<text x="600" y="516" text-anchor="middle" font-family="sans-serif" font-size="26" letter-spacing="2" fill="#cbb7cf">Various artists</text>
+
 </svg>

@@ -1,194 +1,180 @@
-/* 曲名: ダミーロマンス / アーティスト: DECO*27, Hayato Yamamoto, OTOIRO feat. 初音ミク
-   一言ムード: 地雷系ホストクラブの照明の下で、恋という名の請求書を握りしめて笑う、切なくて可愛くて依存的な片想い */
+/* streetcat / Various artists — 傷跡ごと愛せ、路地裏で牙を剥く獣のムード */
+/* 自暴自棄なのに生々しく生きている、紫と深紅の夜、猫の瞳に反射するヘッドライト */
 
 :root {
-  --color-fg: #fbe4ee;
-  --color-bg: #180f16;
-  --color-accent: #ff2f92;
-  --color-accent-gold: #ffd166;
-  --color-accent-soft: #ffb3d9;
+  --color-fg: #f3e9f4;
+  --color-bg: #150a17;
+  --color-bg-raised: #1f1023;
+  --color-accent: #ff3d78;
+  --color-accent-2: #b26bff;
+  --color-claw: #ffce3d;
+  --color-border: #3a1f3f;
+
   --spacing-unit: 1rem;
-  --font-heading: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', 'Yu Gothic Medium',
-    'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
-  --font-body: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', -apple-system, BlinkMacSystemFont,
-    sans-serif;
+
+  --font-heading: 'Impact', 'Arial Narrow Bold', 'Hiragino Sans', '游ゴシック体', 'Yu Gothic', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
+    'Yu Gothic', 'Meiryo', 'Segoe UI', sans-serif;
+
   --line-height-body: 1.85;
-  --line-height-heading: 1.3;
-  --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
+  --line-height-heading: 1.05;
+
+  --ease-default: cubic-bezier(0.65, -0.15, 0.25, 1.2);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
-  background: var(--color-bg);
-  color: var(--color-fg);
+  background-color: var(--color-bg);
 }
 
 body {
-  background:
-    radial-gradient(circle at 12% -10%, rgba(255, 47, 146, 0.2), transparent 45%),
-    radial-gradient(circle at 100% 8%, rgba(255, 209, 102, 0.12), transparent 42%),
+  background: radial-gradient(ellipse at 20% -10%, #2a0f2e 0%, var(--color-bg) 55%),
     var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
+  letter-spacing: 0.01em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.02em;
+  color: var(--color-fg);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 6px rgba(255, 61, 120, 0.55), 0 0 18px rgba(178, 107, 255, 0.35);
+  position: relative;
 }
 
 a {
-  color: var(--color-accent);
-  text-decoration-color: rgba(255, 47, 146, 0.5);
-  transition:
-    color var(--ease-default) 0.2s,
-    text-shadow var(--ease-default) 0.2s;
+  color: var(--color-accent-2);
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.2em;
+  transition: color 0.25s var(--ease-default), text-shadow 0.25s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: var(--color-accent-gold);
-  text-shadow: 0 0 8px rgba(255, 47, 146, 0.55);
-}
-
-strong,
-b {
   color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(255, 61, 120, 0.8);
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: #1a0210;
 }
 
 .site-header {
-  background: linear-gradient(180deg, rgba(255, 47, 146, 0.14), transparent);
-  border-bottom: 2px dashed var(--color-accent-gold);
-  padding-bottom: calc(var(--spacing-unit) * 0.75);
+  background: linear-gradient(180deg, var(--color-bg-raised) 0%, var(--color-bg) 100%);
+  border-bottom: 2px solid var(--color-border);
+  box-shadow: 0 6px 24px rgba(255, 61, 120, 0.12);
+  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
 }
 
-.site-header h1 {
-  display: inline-block;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: dummy-jitter 3.6s var(--ease-default) infinite;
-}
-
-.site-header p,
-.site-header .description {
-  color: var(--color-accent-soft);
+.site-header::after {
+  content: '';
+  display: block;
+  height: 3px;
+  margin-top: var(--spacing-unit);
+  background: repeating-linear-gradient(
+    115deg,
+    var(--color-accent) 0px,
+    var(--color-accent) 8px,
+    transparent 8px,
+    transparent 14px,
+    var(--color-claw) 14px,
+    var(--color-claw) 16px,
+    transparent 16px,
+    transparent 30px
+  );
+  opacity: 0.85;
 }
 
 .site-footer {
-  border-top: 1px dashed rgba(255, 209, 102, 0.4);
-  color: var(--color-accent-soft);
-  font-size: 0.85em;
-  padding-top: calc(var(--spacing-unit) * 0.75);
+  background: var(--color-bg-raised);
+  border-top: 1px solid var(--color-border);
+  color: #cbb7cf;
+  padding: calc(var(--spacing-unit) * 2) var(--spacing-unit);
+  font-size: 0.9em;
+}
+
+.post-list {
+  padding: 0;
+  list-style: none;
 }
 
 .post-list li,
 .post-list article {
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-  padding: calc(var(--spacing-unit) * 0.75) 0;
-  transition: transform var(--ease-default) 0.25s;
+  border-bottom: 1px dashed var(--color-border);
+  padding: var(--spacing-unit) 0;
+  transition: transform 0.3s var(--ease-default), padding-left 0.3s var(--ease-default);
 }
 
 .post-list li:hover,
 .post-list article:hover {
-  transform: translateX(4px);
-}
-
-.post-list a {
-  font-weight: 600;
-}
-
-.post-list time {
-  color: var(--color-accent-gold);
-  font-size: 0.8em;
-  letter-spacing: 0.05em;
+  padding-left: calc(var(--spacing-unit) * 0.6);
+  border-left: 3px solid var(--color-accent);
 }
 
 article.post {
-  position: relative;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 47, 146, 0.25);
-  border-radius: 0.6rem;
+  background: linear-gradient(160deg, var(--color-bg-raised) 0%, var(--color-bg) 80%);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
   padding: calc(var(--spacing-unit) * 1.5);
-}
-
-article.post::before {
-  content: '¥';
-  position: absolute;
-  top: -0.6rem;
-  right: 0.6rem;
-  font-size: 6rem;
-  font-family: var(--font-heading);
-  color: rgba(255, 209, 102, 0.07);
-  pointer-events: none;
-}
-
-article.post blockquote {
-  border-left: 3px dashed var(--color-accent-gold);
-  padding-left: var(--spacing-unit);
-  margin-left: 0;
-  font-family: 'Courier New', monospace;
-  color: var(--color-accent-soft);
-  opacity: 0.92;
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 0 0 rgba(255, 61, 120, 0);
+  animation: headlight-pulse 6s ease-in-out infinite;
 }
 
 article.post h1,
 article.post h2 {
-  animation: dummy-pulse 4.5s var(--ease-default) infinite;
+  border-bottom: 2px solid var(--color-accent);
+  display: inline-block;
+  padding-bottom: 0.15em;
 }
 
-article.post hr {
-  border: none;
-  border-top: 1px dashed rgba(255, 209, 102, 0.35);
-  margin: calc(var(--spacing-unit) * 1.5) 0;
+article.post blockquote {
+  border-left: 3px solid var(--color-accent-2);
+  padding-left: var(--spacing-unit);
+  color: #d8c7dc;
+  font-style: italic;
 }
 
-@keyframes dummy-jitter {
-  0%,
-  100% {
-    transform: translateY(0) skewX(0deg);
-  }
-  20% {
-    transform: translateY(-1px) skewX(-1deg);
-  }
-  40% {
-    transform: translateY(1px) skewX(1deg);
-  }
-  60% {
-    transform: translateY(-1px) skewX(-0.5deg);
-  }
-  80% {
-    transform: translateY(1px) skewX(0.5deg);
-  }
+code, pre {
+  background: #0d0510;
+  border: 1px solid var(--color-border);
+  color: var(--color-claw);
 }
 
-@keyframes dummy-pulse {
-  0%,
-  100% {
-    opacity: 1;
+@keyframes headlight-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(255, 61, 120, 0);
   }
   50% {
-    opacity: 0.82;
+    box-shadow: 0 0 22px rgba(255, 61, 120, 0.18);
   }
+}
+
+@keyframes scratch-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px) skewX(-2deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg);
+  }
+}
+
+.post-list li,
+.post-list article {
+  animation: scratch-in 0.5s var(--ease-default) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  * {
     animation: none !important;
     transition: none !important;
   }
