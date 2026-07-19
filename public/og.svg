@@ -1,75 +1,102 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
-<defs>
-  <radialGradient id="bgGlow" cx="20%" cy="-5%" r="85%">
-    <stop offset="0%" stop-color="#2a0f2e"/>
-    <stop offset="55%" stop-color="#1f1023"/>
-    <stop offset="100%" stop-color="#150a17"/>
-  </radialGradient>
+  <defs>
+    <radialGradient id="glowTL" cx="20%" cy="-10%" r="70%">
+      <stop offset="0%" stop-color="#ff3b52" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#ff3b52" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBR" cx="82%" cy="112%" r="75%">
+      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="spot" cx="50%" cy="40%" r="42%">
+      <stop offset="0%" stop-color="#ff3b52" stop-opacity="0.20"/>
+      <stop offset="60%" stop-color="#ff3b52" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#ff3b52" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="72%">
+      <stop offset="55%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <linearGradient id="curtainL" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#150d10" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#150d10" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="curtainR" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#150d10" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#150d10" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
 
-  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%">
-    <stop offset="0%" stop-color="#ffce3d" stop-opacity="0.9"/>
-    <stop offset="60%" stop-color="#ff3d78" stop-opacity="0.35"/>
-    <stop offset="100%" stop-color="#ff3d78" stop-opacity="0"/>
-  </radialGradient>
+  <!-- base -->
+  <rect x="0" y="0" width="1200" height="630" fill="#0a0709"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowTL)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowBR)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#spot)"/>
 
-  <pattern id="clawStripe" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
-    <rect width="30" height="30" fill="#150a17"/>
-    <rect x="0" y="0" width="9" height="30" fill="#ff3d78" opacity="0.9"/>
-    <rect x="15" y="0" width="3" height="30" fill="#ffce3d" opacity="0.85"/>
-  </pattern>
+  <!-- theater curtains -->
+  <rect x="0" y="0" width="230" height="630" fill="url(#curtainL)"/>
+  <rect x="970" y="0" width="230" height="630" fill="url(#curtainR)"/>
+  <path d="M0,0 C60,180 30,450 0,630" fill="none" stroke="#3a1620" stroke-width="2" opacity="0.5"/>
+  <path d="M40,0 C100,180 70,450 40,630" fill="none" stroke="#3a1620" stroke-width="1.5" opacity="0.35"/>
+  <path d="M1200,0 C1140,180 1170,450 1200,630" fill="none" stroke="#3a1620" stroke-width="2" opacity="0.5"/>
+  <path d="M1160,0 C1100,180 1130,450 1160,630" fill="none" stroke="#3a1620" stroke-width="1.5" opacity="0.35"/>
 
-  <filter id="glowStrong" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur1"/>
-    <feMerge>
-      <feMergeNode in="blur1"/>
-      <feMergeNode in="blur1"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
+  <!-- jester crown motif along top edge -->
+  <polyline points="0,46 40,4 80,46 120,4 160,46 200,4 240,46 280,4 320,46 360,4 400,46 440,4 480,46 520,4 560,46 600,4 640,46 680,4 720,46 760,4 800,46 840,4 880,46 920,4 960,46 1000,4 1040,46 1080,4 1120,46 1160,4 1200,46"
+    fill="none" stroke="#7a1626" stroke-width="2" opacity="0.55"/>
+  <circle cx="40" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="120" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="200" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="280" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="360" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="440" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="520" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="600" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="680" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="760" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="840" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="920" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="1000" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <circle cx="1080" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
+  <circle cx="1160" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
 
-  <filter id="glowSoft" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1"/>
-    <feMerge>
-      <feMergeNode in="blur1"/>
-      <feMergeNode in="SourceGraphic"/>
-    </feMerge>
-  </filter>
-</defs>
+  <!-- faint crack lines behind the title -->
+  <path d="M600,300 L170,95" stroke="#7a1626" stroke-width="1" opacity="0.28"/>
+  <path d="M600,300 L1040,70" stroke="#7a1626" stroke-width="1" opacity="0.28"/>
+  <path d="M600,300 L110,545" stroke="#7a1626" stroke-width="1" opacity="0.22"/>
+  <path d="M600,300 L1100,565" stroke="#7a1626" stroke-width="1" opacity="0.22"/>
 
-<rect x="0" y="0" width="1200" height="630" fill="#150a17"/>
-<rect x="0" y="0" width="1200" height="630" fill="url(#bgGlow)"/>
+  <!-- blood drip accents -->
+  <path d="M300,60 q6,26 0,40 q-6,-4 -6,-18 q0,-14 6,-22 z" fill="#ff3b52" opacity="0.45"/>
+  <path d="M905,58 q7,30 0,46 q-7,-5 -7,-21 q0,-16 7,-25 z" fill="#ff3b52" opacity="0.4"/>
 
-<g opacity="0.55">
-  <ellipse cx="1010" cy="120" rx="80" ry="110" fill="url(#eyeGlow)" transform="rotate(-18 1010 120)"/>
-  <ellipse cx="1140" cy="160" rx="70" ry="95" fill="url(#eyeGlow)" transform="rotate(-14 1140 160)"/>
-  <ellipse cx="1010" cy="120" rx="6" ry="46" fill="#150a17" transform="rotate(-18 1010 120)"/>
-  <ellipse cx="1140" cy="160" rx="5" ry="40" fill="#150a17" transform="rotate(-14 1140 160)"/>
-</g>
+  <!-- small overline label -->
+  <text x="600" y="112" text-anchor="middle" font-family="sans-serif" font-size="22"
+        fill="#b9a9a4" letter-spacing="8" opacity="0.85">本 日 の 一 曲</text>
 
-<g opacity="0.5" stroke-linecap="round">
-  <path d="M40 560 L190 470" stroke="#ff3d78" stroke-width="10" fill="none"/>
-  <path d="M60 590 L210 500" stroke="#b26bff" stroke-width="7" fill="none"/>
-  <path d="M80 620 L230 530" stroke="#ffce3d" stroke-width="4" fill="none"/>
-</g>
+  <!-- site title (chromatic aberration layers) -->
+  <text x="597" y="300" text-anchor="middle" font-family="serif" font-size="132"
+        fill="#5ac8dc" opacity="0.30" letter-spacing="6">へのへのんのの</text>
+  <text x="603" y="300" text-anchor="middle" font-family="serif" font-size="132"
+        fill="#ff3b52" opacity="0.45" letter-spacing="6">へのへのんのの</text>
+  <text x="600" y="300" text-anchor="middle" font-family="serif" font-size="132"
+        fill="#e9e2da" letter-spacing="6">へのへのんのの</text>
 
-<rect x="0" y="0" width="1200" height="10" fill="url(#clawStripe)" opacity="0.9"/>
-<rect x="0" y="620" width="1200" height="10" fill="url(#clawStripe)" opacity="0.9"/>
+  <!-- divider -->
+  <line x1="440" y1="345" x2="760" y2="345" stroke="#ff3b52" stroke-width="3"
+        stroke-dasharray="6 8" opacity="0.75"/>
 
-<rect x="28" y="28" width="1144" height="574" fill="none" stroke="#3a1f3f" stroke-width="2" stroke-dasharray="10 8" opacity="0.7" rx="6"/>
+  <!-- subtitle: today's song -->
+  <text x="600" y="404" text-anchor="middle" font-family="serif" font-style="italic"
+        font-size="42" fill="#ff3b52" letter-spacing="4">SE7EN</text>
+  <text x="600" y="444" text-anchor="middle" font-family="sans-serif" font-size="23"
+        fill="#b9a9a4" letter-spacing="2">ive feat. 初音ミク</text>
 
-<text x="600" y="150" text-anchor="middle" font-family="sans-serif" font-size="24" letter-spacing="6" fill="#b26bff" opacity="0.85">B L O G</text>
+  <!-- bottom tagline -->
+  <text x="600" y="582" text-anchor="middle" font-family="sans-serif" font-size="17"
+        fill="#b9a9a4" letter-spacing="3" opacity="0.6">断罪する道化師が嗤う、血と灰の劇場</text>
 
-<g>
-  <text x="600" y="330" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="126" letter-spacing="4" fill="#ff3d78" filter="url(#glowStrong)" opacity="0.55">へのへのんのの</text>
-  <text x="600" y="330" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="126" letter-spacing="4" fill="#f3e9f4">へのへのんのの</text>
-</g>
-
-<rect x="440" y="372" width="320" height="6" fill="url(#clawStripe)" opacity="0.9"/>
-
-<text x="600" y="424" text-anchor="middle" font-family="sans-serif" font-size="22" letter-spacing="6" fill="#b26bff" opacity="0.9">TODAY'S TRACK</text>
-
-<text x="600" y="476" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="42" letter-spacing="2" fill="#ff3d78" filter="url(#glowSoft)">streetcat</text>
-
-<text x="600" y="516" text-anchor="middle" font-family="sans-serif" font-size="26" letter-spacing="2" fill="#cbb7cf">Various artists</text>
-
+  <!-- vignette on top -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#3a1620" stroke-width="10" opacity="0.6"/>
 </svg>
