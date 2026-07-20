@@ -1,67 +1,61 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glowTL" cx="20%" cy="-10%" r="65%">
-      <stop offset="0%" stop-color="#ff3b52" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#ff3b52" stop-opacity="0"/>
+    <radialGradient id="bgGrad" cx="50%" cy="0%" r="85%">
+      <stop offset="0%" stop-color="#150a0a"/>
+      <stop offset="70%" stop-color="#0a0505"/>
     </radialGradient>
-    <radialGradient id="glowBR" cx="82%" cy="112%" r="70%">
-      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="spotlight" cx="34%" cy="52%" r="48%">
-      <stop offset="0%" stop-color="#ff3b52" stop-opacity="0.14"/>
-      <stop offset="60%" stop-color="#ff3b52" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#ff3b52" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="curtainL" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="curtainR" x1="100%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="glowSmall" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="-0.8" dy="0" stdDeviation="0" flood-color="#5ac8dc" flood-opacity="0.35"/>
-      <feDropShadow dx="1.2" dy="0" stdDeviation="0" flood-color="#ff3b52" flood-opacity="0.55"/>
-    </filter>
-    <filter id="glowBig" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="-2" dy="0" stdDeviation="0" flood-color="#5ac8dc" flood-opacity="0.3"/>
-      <feDropShadow dx="3" dy="0" stdDeviation="0" flood-color="#ff3b52" flood-opacity="0.6"/>
-    </filter>
-    <pattern id="harlequin" width="64" height="64" patternUnits="userSpaceOnUse">
-      <rect width="64" height="64" fill="none"/>
-      <polygon points="32,42 46,58 32,74 18,58" fill="#7a1626" fill-opacity="0.12" stroke="#7a1626" stroke-opacity="0.4" stroke-width="1"/>
+    <pattern id="scan" width="5" height="5" patternUnits="userSpaceOnUse">
+      <rect width="5" height="1" fill="#ff3355" opacity="0.05"/>
     </pattern>
   </defs>
 
-  <rect x="0" y="0" width="1200" height="630" fill="#0a0709"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowTL)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowBR)"/>
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#0a0505"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
 
-  <path d="M0,0 L168,0 Q86,150 0,258 Z" fill="url(#curtainL)"/>
-  <path d="M1200,0 L1032,0 Q1114,150 1200,258 Z" fill="url(#curtainR)"/>
-  <circle cx="70" cy="252" r="4.5" fill="#ff3b52" fill-opacity="0.55"/>
-  <circle cx="1130" cy="252" r="4.5" fill="#ff3b52" fill-opacity="0.55"/>
+  <!-- top accent bar + blood drips -->
+  <rect x="0" y="0" width="1200" height="6" fill="#ff3355"/>
+  <path d="M140,6 q6,20 0,34 q-6,-14 0,-34 Z" fill="#ff3355" opacity="0.85"/>
+  <path d="M300,6 q5,14 0,24 q-5,-10 0,-24 Z" fill="#7a1524" opacity="0.9"/>
+  <path d="M470,6 q7,26 0,44 q-7,-18 0,-44 Z" fill="#ff3355" opacity="0.75"/>
+  <path d="M660,6 q5,12 0,20 q-5,-8 0,-20 Z" fill="#7a1524" opacity="0.85"/>
+  <path d="M860,6 q6,18 0,30 q-6,-12 0,-30 Z" fill="#ff3355" opacity="0.8"/>
+  <path d="M1040,6 q5,10 0,18 q-5,-8 0,-18 Z" fill="#7a1524" opacity="0.9"/>
 
-  <path d="M1128,44 L1090,102 L1118,118 L1064,182" fill="none" stroke="#5ac8dc" stroke-opacity="0.35" stroke-width="2"/>
-  <path d="M1150,60 L1104,96 L1132,132" fill="none" stroke="#ff3b52" stroke-opacity="0.4" stroke-width="2"/>
+  <!-- site name -->
+  <text x="60" y="98" font-family="sans-serif" font-size="34" font-weight="bold" letter-spacing="3" fill="#e9e2df">へのへのんのの<tspan fill="#33ffb0">_</tspan></text>
+  <rect x="60" y="116" width="250" height="4" fill="#ff3355"/>
 
-  <line x1="0" y1="7" x2="1200" y2="7" stroke="#ff3b52" stroke-opacity="0.65" stroke-width="5" stroke-dasharray="6,10"/>
-  <line x1="0" y1="623" x2="1200" y2="623" stroke="#7a1626" stroke-opacity="0.8" stroke-width="2" stroke-dasharray="2,10"/>
+  <!-- live indicator -->
+  <circle cx="1136" cy="86" r="7" fill="#ff3355"/>
+  <text x="1000" y="94" font-family="monospace" font-size="20" fill="#33ffb0" opacity="0.85" text-anchor="end">LIVE_CHAT</text>
 
-  <rect x="0" y="576" width="1200" height="54" fill="url(#harlequin)"/>
-  <line x1="0" y1="576" x2="1200" y2="576" stroke="#3a1620" stroke-width="1"/>
+  <!-- decorative chat bubbles -->
+  <g fill="none" stroke="#33ffb0" stroke-width="1.5" opacity="0.28">
+    <rect x="1005" y="150" width="140" height="28" rx="14"/>
+    <rect x="1035" y="196" width="110" height="28" rx="14"/>
+    <rect x="985" y="242" width="160" height="28" rx="14"/>
+    <rect x="1020" y="288" width="120" height="28" rx="14"/>
+    <rect x="1055" y="334" width="90" height="28" rx="14"/>
+  </g>
 
-  <ellipse cx="440" cy="330" rx="620" ry="300" fill="url(#spotlight)"/>
+  <!-- diagonal glitch slashes -->
+  <g stroke-width="4" opacity="0.35">
+    <line x1="900" y1="630" x2="1050" y2="470" stroke="#ff3355"/>
+    <line x1="960" y1="630" x2="1110" y2="470" stroke="#33ffb0"/>
+    <line x1="1020" y1="630" x2="1170" y2="470" stroke="#7a1524"/>
+  </g>
 
-  <text x="64" y="92" font-family="serif" font-size="34" letter-spacing="6" fill="#e9e2da" filter="url(#glowSmall)">へのへのんのの</text>
-  <line x1="64" y1="112" x2="284" y2="112" stroke="#7a1626" stroke-width="1.5" stroke-dasharray="4,5"/>
+  <!-- title panel -->
+  <rect x="60" y="230" width="1080" height="220" fill="#150a0a" opacity="0.92" stroke="#7a1524" stroke-width="1"/>
+  <rect x="60" y="230" width="6" height="220" fill="#ff3355"/>
 
-  <polygon points="64,168 78,182 64,196 50,182" fill="none" stroke="#ff3b52" stroke-opacity="0.7" stroke-width="2"/>
-  <line x1="92" y1="182" x2="220" y2="182" stroke="#3a1620" stroke-width="1"/>
+  <!-- title (glitch layers, same string) -->
+  <text x="106" y="357" font-family="sans-serif" font-size="60" font-weight="bold" fill="#33ffb0" opacity="0.5">{{TITLE}}</text>
+  <text x="114" y="363" font-family="sans-serif" font-size="60" font-weight="bold" fill="#7a1524" opacity="0.6">{{TITLE}}</text>
+  <text x="110" y="360" font-family="sans-serif" font-size="60" font-weight="bold" fill="#e9e2df">{{TITLE}}</text>
 
-  <text x="62" y="352" font-family="serif" font-size="68" fill="#e9e2da" filter="url(#glowBig)">{{TITLE}}</text>
-
-  <line x1="64" y1="440" x2="640" y2="440" stroke="#3a1620" stroke-width="1" stroke-dasharray="1,6"/>
+  <!-- footer -->
+  <rect x="0" y="624" width="1200" height="6" fill="#7a1524" opacity="0.7"/>
 </svg>

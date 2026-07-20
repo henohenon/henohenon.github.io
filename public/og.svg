@@ -1,102 +1,95 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glowTL" cx="20%" cy="-10%" r="70%">
-      <stop offset="0%" stop-color="#ff3b52" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#ff3b52" stop-opacity="0"/>
+    <radialGradient id="bgGrad" cx="50%" cy="-10%" r="85%">
+      <stop offset="0%" stop-color="#1f0c0c"/>
+      <stop offset="45%" stop-color="#150a0a"/>
+      <stop offset="100%" stop-color="#0a0505"/>
     </radialGradient>
-    <radialGradient id="glowBR" cx="82%" cy="112%" r="75%">
-      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="spot" cx="50%" cy="40%" r="42%">
-      <stop offset="0%" stop-color="#ff3b52" stop-opacity="0.20"/>
-      <stop offset="60%" stop-color="#ff3b52" stop-opacity="0.05"/>
-      <stop offset="100%" stop-color="#ff3b52" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="50%" r="72%">
-      <stop offset="55%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
-    </radialGradient>
-    <linearGradient id="curtainL" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#150d10" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#150d10" stop-opacity="0"/>
+    <linearGradient id="dripGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff3355"/>
+      <stop offset="100%" stop-color="#7a1524"/>
     </linearGradient>
-    <linearGradient id="curtainR" x1="100%" y1="0%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#150d10" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#150d10" stop-opacity="0"/>
+    <linearGradient id="titleGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e9e2df"/>
     </linearGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="none"/>
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#ff3355" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
   </defs>
 
-  <!-- base -->
-  <rect x="0" y="0" width="1200" height="630" fill="#0a0709"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowTL)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowBR)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#spot)"/>
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#0a0505"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
 
-  <!-- theater curtains -->
-  <rect x="0" y="0" width="230" height="630" fill="url(#curtainL)"/>
-  <rect x="970" y="0" width="230" height="630" fill="url(#curtainR)"/>
-  <path d="M0,0 C60,180 30,450 0,630" fill="none" stroke="#3a1620" stroke-width="2" opacity="0.5"/>
-  <path d="M40,0 C100,180 70,450 40,630" fill="none" stroke="#3a1620" stroke-width="1.5" opacity="0.35"/>
-  <path d="M1200,0 C1140,180 1170,450 1200,630" fill="none" stroke="#3a1620" stroke-width="2" opacity="0.5"/>
-  <path d="M1160,0 C1100,180 1130,450 1160,630" fill="none" stroke="#3a1620" stroke-width="1.5" opacity="0.35"/>
+  <!-- glitch diagonal stripes -->
+  <g opacity="0.10">
+    <rect x="-100" y="120" width="1500" height="18" fill="#ff3355" transform="rotate(-3 600 129)"/>
+    <rect x="-100" y="470" width="1500" height="10" fill="#33ffb0" transform="rotate(2 600 475)"/>
+    <rect x="-100" y="330" width="1500" height="6" fill="#ff3355" transform="rotate(-1.5 600 333)"/>
+  </g>
 
-  <!-- jester crown motif along top edge -->
-  <polyline points="0,46 40,4 80,46 120,4 160,46 200,4 240,46 280,4 320,46 360,4 400,46 440,4 480,46 520,4 560,46 600,4 640,46 680,4 720,46 760,4 800,46 840,4 880,46 920,4 960,46 1000,4 1040,46 1080,4 1120,46 1160,4 1200,46"
-    fill="none" stroke="#7a1626" stroke-width="2" opacity="0.55"/>
-  <circle cx="40" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="120" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="200" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="280" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="360" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="440" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="520" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="600" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="680" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="760" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="840" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="920" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="1000" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
-  <circle cx="1080" cy="4" r="4.5" fill="#ff3b52" opacity="0.5"/>
-  <circle cx="1160" cy="4" r="4.5" fill="#ff3b52" opacity="0.55"/>
+  <!-- top blood bar -->
+  <rect x="0" y="0" width="1200" height="7" fill="#ff3355"/>
+  <g>
+    <path d="M 70 7 L 70 46 Q 70 60 78 60 Q 86 60 86 46 L 86 7 Z" fill="url(#dripGrad)"/>
+    <path d="M 220 7 L 220 30 Q 220 40 227 40 Q 234 40 234 30 L 234 7 Z" fill="url(#dripGrad)" opacity="0.85"/>
+    <path d="M 980 7 L 980 34 Q 980 46 988 46 Q 996 46 996 34 L 996 7 Z" fill="url(#dripGrad)" opacity="0.85"/>
+    <path d="M 1120 7 L 1120 52 Q 1120 66 1128 66 Q 1136 66 1136 52 L 1136 7 Z" fill="url(#dripGrad)"/>
+    <path d="M 500 7 L 500 22 Q 500 30 506 30 Q 512 30 512 22 L 512 7 Z" fill="url(#dripGrad)" opacity="0.7"/>
+    <path d="M 830 7 L 830 26 Q 830 36 837 36 Q 844 36 844 26 L 844 7 Z" fill="url(#dripGrad)" opacity="0.7"/>
+  </g>
 
-  <!-- faint crack lines behind the title -->
-  <path d="M600,300 L170,95" stroke="#7a1626" stroke-width="1" opacity="0.28"/>
-  <path d="M600,300 L1040,70" stroke="#7a1626" stroke-width="1" opacity="0.28"/>
-  <path d="M600,300 L110,545" stroke="#7a1626" stroke-width="1" opacity="0.22"/>
-  <path d="M600,300 L1100,565" stroke="#7a1626" stroke-width="1" opacity="0.22"/>
+  <!-- frame corners -->
+  <g stroke="#7a1524" stroke-width="2" fill="none" opacity="0.8">
+    <path d="M 50 90 L 50 60 L 90 60"/>
+    <path d="M 1110 90 L 1110 60 L 1070 60"/>
+    <path d="M 50 560 L 50 590 L 90 590"/>
+    <path d="M 1110 560 L 1110 590 L 1070 590"/>
+  </g>
 
-  <!-- blood drip accents -->
-  <path d="M300,60 q6,26 0,40 q-6,-4 -6,-18 q0,-14 6,-22 z" fill="#ff3b52" opacity="0.45"/>
-  <path d="M905,58 q7,30 0,46 q-7,-5 -7,-21 q0,-16 7,-25 z" fill="#ff3b52" opacity="0.4"/>
+  <!-- fake chat log, left -->
+  <g font-family="monospace" font-size="16" fill="#33ffb0" opacity="0.35">
+    <text x="60" y="180">&gt; user_92: 見て…画面が…</text>
+    <text x="60" y="205">&gt; kanata: これ配信事故?</text>
+    <text x="60" y="230">&gt; teto_fan: にげてぇぇ</text>
+  </g>
+  <g font-family="monospace" font-size="16" fill="#33ffb0" opacity="0.30">
+    <text x="720" y="420">&gt; anon: BPM上がってる</text>
+    <text x="720" y="445">&gt; 名無し: 心拍と同期してる…</text>
+    <text x="720" y="470">&gt; guest01: 今日も生きて帰れ</text>
+  </g>
 
-  <!-- small overline label -->
-  <text x="600" y="112" text-anchor="middle" font-family="sans-serif" font-size="22"
-        fill="#b9a9a4" letter-spacing="8" opacity="0.85">本 日 の 一 曲</text>
+  <!-- eyebrow tag -->
+  <text x="600" y="205" text-anchor="middle" font-family="monospace" font-size="24"
+        letter-spacing="6" fill="#33ffb0" opacity="0.9">&gt;_ NOW STREAMING</text>
 
-  <!-- site title (chromatic aberration layers) -->
-  <text x="597" y="300" text-anchor="middle" font-family="serif" font-size="132"
-        fill="#5ac8dc" opacity="0.30" letter-spacing="6">へのへのんのの</text>
-  <text x="603" y="300" text-anchor="middle" font-family="serif" font-size="132"
-        fill="#ff3b52" opacity="0.45" letter-spacing="6">へのへのんのの</text>
-  <text x="600" y="300" text-anchor="middle" font-family="serif" font-size="132"
-        fill="#e9e2da" letter-spacing="6">へのへのんのの</text>
+  <!-- glitch title shadows -->
+  <text x="606" y="345" text-anchor="middle" font-family="sans-serif" font-weight="900"
+        font-size="130" fill="#33ffb0" opacity="0.55">へのへのんのの</text>
+  <text x="594" y="335" text-anchor="middle" font-family="sans-serif" font-weight="900"
+        font-size="130" fill="#ff3355" opacity="0.55">へのへのんのの</text>
+
+  <!-- main title -->
+  <text x="600" y="340" text-anchor="middle" font-family="sans-serif" font-weight="900"
+        font-size="130" fill="url(#titleGlow)" letter-spacing="2">へのへのんのの</text>
 
   <!-- divider -->
-  <line x1="440" y1="345" x2="760" y2="345" stroke="#ff3b52" stroke-width="3"
-        stroke-dasharray="6 8" opacity="0.75"/>
+  <rect x="500" y="392" width="200" height="4" fill="#ff3355"/>
 
-  <!-- subtitle: today's song -->
-  <text x="600" y="404" text-anchor="middle" font-family="serif" font-style="italic"
-        font-size="42" fill="#ff3b52" letter-spacing="4">SE7EN</text>
-  <text x="600" y="444" text-anchor="middle" font-family="sans-serif" font-size="23"
-        fill="#b9a9a4" letter-spacing="2">ive feat. 初音ミク</text>
+  <!-- subtitle: song -->
+  <text x="600" y="460" text-anchor="middle" font-family="sans-serif" font-weight="700"
+        font-size="42" fill="#ff3355">Hey Chat!</text>
 
-  <!-- bottom tagline -->
-  <text x="600" y="582" text-anchor="middle" font-family="sans-serif" font-size="17"
-        fill="#b9a9a4" letter-spacing="3" opacity="0.6">断罪する道化師が嗤う、血と灰の劇場</text>
+  <!-- artist -->
+  <text x="600" y="502" text-anchor="middle" font-family="sans-serif" font-size="24"
+        fill="#e9e2df" opacity="0.72">Levia, bitbreaker feat. 重音テトSV</text>
 
-  <!-- vignette on top -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="none" stroke="#3a1620" stroke-width="10" opacity="0.6"/>
+  <!-- blinking cursor accent -->
+  <rect x="815" y="308" width="16" height="70" fill="#33ffb0" opacity="0.85"/>
+
+  <!-- bottom accent line -->
+  <rect x="0" y="623" width="1200" height="7" fill="#7a1524"/>
 </svg>
