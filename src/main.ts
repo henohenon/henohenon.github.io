@@ -1,42 +1,22 @@
 import './style.css'
+import { startRouter, type Route } from './router.ts'
+import { renderIndex, renderFocus } from './views.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <section class="top">
-    <pre class="face">へ　へ
-の　の
-　ん</pre>
-    <div class="card">
-      <p>初めまして、へのへのんと申します。</p>
-      <p>ここではポートフォリオを兼ねて、自分の作品を展示しています。興味を持っていただけたり、楽しんでいただければ幸いです。</p>
-    </div>
-  </section>
-  <section class="pieces">
-    <div class="piece">
-      <div class="content"></div>
-      <div class="name-card"><p>作品名</p></div>
-    </div>
-    <div class="piece">
-      <div class="content"></div>
-      <div class="name-card"><p>作品名</p></div>
-    </div>
-    <div class="piece">
-      <div class="content"></div>
-      <div class="name-card"><p>作品名</p></div>
-    </div>
-    <div class="piece">
-      <div class="content"></div>
-      <div class="name-card"><p>作品名</p></div>
-    </div>
-    <div class="piece">
-      <div class="content"></div>
-      <div class="name-card"><p>作品名</p></div>
-    </div>
-    <div class="piece">
-      <div class="content"></div>
-      <div class="name-card"><p>作品名</p></div>
-    </div>
-  </section>
-  <footer class="footer">
-    <p>&copy; ${new Date().getFullYear()} henohenon</p>
-  </footer>
-`
+const app = document.querySelector<HTMLDivElement>('#app')!
+
+function render(route: Route): void {
+  switch (route.name) {
+    case 'focus':
+      app.innerHTML = renderFocus(route.id)
+      break
+    case 'about':
+      app.innerHTML = renderIndex(true)
+      break
+    case 'index':
+      app.innerHTML = renderIndex(false)
+      break
+  }
+  window.scrollTo(0, 0)
+}
+
+startRouter(render)

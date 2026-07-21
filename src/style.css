@@ -7,7 +7,23 @@ body {
   background: #fff;
 }
 
-.top {
+/* ヘッダー：右上 About。※通過後のみ fixed 表示は Phase 3 で対応。 */
+.site-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: 16px 24px;
+}
+
+.about-link {
+  color: #111;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* Introduction：最初の展示品。 */
+.introduction {
   position: relative;
   width: 100%;
   min-height: 100svh;
@@ -25,7 +41,7 @@ body {
   text-align: center;
 }
 
-.card {
+.text-caption {
   position: absolute;
   left: 24px;
   bottom: 24px;
@@ -36,17 +52,18 @@ body {
   box-sizing: border-box;
 }
 
-.card p {
+.text-caption p {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
 }
 
-.card p + p {
+.text-caption p + p {
   margin-top: 8px;
 }
 
-.pieces {
+/* Gallery：展示品が並ぶ場所。 */
+.gallery {
   width: 100%;
   min-height: 100svh;
   box-sizing: border-box;
@@ -56,29 +73,114 @@ body {
   gap: 24px;
 }
 
-.piece {
+/* Exhibit：Icon + title-caption 一式。Focus への遷移リンク。 */
+.exhibit {
   display: flex;
   flex-direction: column;
   width: 240px;
   box-sizing: border-box;
+  text-decoration: none;
+  color: inherit;
 }
 
-.content {
+/* Icon：作品本体（当面は空プレースホルダ）。 */
+.exhibit .icon {
   width: 100%;
   height: 160px;
 }
 
-.name-card {
+.title-caption {
   align-self: flex-start;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   padding: 6px 10px;
   background: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
 }
 
-.name-card p {
+.title-caption .no {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+
+.title-caption p {
   margin: 0;
   font-size: 0.75rem;
+}
+
+/* Focus：展示 1 点を集中して見る画面。※レイアウト/演出は Phase 2/5 で作り込み。 */
+.focus {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.details-caption {
+  position: relative;
+  width: 320px;
+  padding: 16px 20px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+.details-caption .close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  color: #111;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.details-caption .detail {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+}
+
+.details-caption .role {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.details-caption .tech {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.details-caption .tech li {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  background: #f0f0f0;
+}
+
+.focus-main {
+  flex: 1;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+
+.focus-link {
+  color: #111;
+}
+
+.focus--missing {
+  place-content: center;
+  place-items: center;
+  text-align: center;
 }
 
 .footer {
