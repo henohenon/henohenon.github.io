@@ -1,61 +1,77 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGrad" cx="50%" cy="0%" r="85%">
-      <stop offset="0%" stop-color="#150a0a"/>
-      <stop offset="70%" stop-color="#0a0505"/>
+    <radialGradient id="blob1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff2fa0" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff2fa0" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="scan" width="5" height="5" patternUnits="userSpaceOnUse">
-      <rect width="5" height="1" fill="#ff3355" opacity="0.05"/>
+    <radialGradient id="blob2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2fd8ff" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#2fd8ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blob3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff2fa0" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#ff2fa0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff2fa0"/>
+      <stop offset="55%" stop-color="#ff6fc4"/>
+      <stop offset="100%" stop-color="#2fd8ff"/>
+    </linearGradient>
+    <linearGradient id="topbarGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff2fa0"/>
+      <stop offset="50%" stop-color="#ffd6ef"/>
+      <stop offset="100%" stop-color="#2fd8ff"/>
+    </linearGradient>
+    <pattern id="scan" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+      <rect width="30" height="30" fill="transparent"/>
+      <rect width="3" height="30" fill="#2fd8ff" opacity="0.10"/>
+    </pattern>
+    <pattern id="dots" width="46" height="46" patternUnits="userSpaceOnUse">
+      <circle cx="23" cy="23" r="2.2" fill="#ff2fa0" opacity="0.14"/>
     </pattern>
   </defs>
 
   <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#0a0505"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#fff3fa"/>
   <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#dots)"/>
 
-  <!-- top accent bar + blood drips -->
-  <rect x="0" y="0" width="1200" height="6" fill="#ff3355"/>
-  <path d="M140,6 q6,20 0,34 q-6,-14 0,-34 Z" fill="#ff3355" opacity="0.85"/>
-  <path d="M300,6 q5,14 0,24 q-5,-10 0,-24 Z" fill="#7a1524" opacity="0.9"/>
-  <path d="M470,6 q7,26 0,44 q-7,-18 0,-44 Z" fill="#ff3355" opacity="0.75"/>
-  <path d="M660,6 q5,12 0,20 q-5,-8 0,-20 Z" fill="#7a1524" opacity="0.85"/>
-  <path d="M860,6 q6,18 0,30 q-6,-12 0,-30 Z" fill="#ff3355" opacity="0.8"/>
-  <path d="M1040,6 q5,10 0,18 q-5,-8 0,-18 Z" fill="#7a1524" opacity="0.9"/>
+  <circle cx="150" cy="120" r="260" fill="url(#blob1)"/>
+  <circle cx="1030" cy="90" r="250" fill="url(#blob2)"/>
+  <circle cx="860" cy="560" r="300" fill="url(#blob3)"/>
 
-  <!-- site name -->
-  <text x="60" y="98" font-family="sans-serif" font-size="34" font-weight="bold" letter-spacing="3" fill="#e9e2df">へのへのんのの<tspan fill="#33ffb0">_</tspan></text>
-  <rect x="60" y="116" width="250" height="4" fill="#ff3355"/>
+  <!-- top gradient bar -->
+  <rect x="0" y="0" width="1200" height="10" fill="url(#topbarGrad)"/>
 
-  <!-- live indicator -->
-  <circle cx="1136" cy="86" r="7" fill="#ff3355"/>
-  <text x="1000" y="94" font-family="monospace" font-size="20" fill="#33ffb0" opacity="0.85" text-anchor="end">LIVE_CHAT</text>
+  <!-- outer frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="28" fill="none" stroke="#ffd6ef" stroke-width="4"/>
 
-  <!-- decorative chat bubbles -->
-  <g fill="none" stroke="#33ffb0" stroke-width="1.5" opacity="0.28">
-    <rect x="1005" y="150" width="140" height="28" rx="14"/>
-    <rect x="1035" y="196" width="110" height="28" rx="14"/>
-    <rect x="985" y="242" width="160" height="28" rx="14"/>
-    <rect x="1020" y="288" width="120" height="28" rx="14"/>
-    <rect x="1055" y="334" width="90" height="28" rx="14"/>
-  </g>
+  <!-- smartphone glow icon (top-right) -->
+  <rect x="1040" y="46" width="80" height="150" rx="18" fill="#ffd6ef" fill-opacity="0.35" stroke="#2fd8ff" stroke-width="3"/>
+  <rect x="1064" y="58" width="32" height="6" rx="3" fill="#2a1b3d" fill-opacity="0.35"/>
+  <circle cx="1080" cy="178" r="7" fill="none" stroke="#ff2fa0" stroke-width="2.5"/>
 
-  <!-- diagonal glitch slashes -->
-  <g stroke-width="4" opacity="0.35">
-    <line x1="900" y1="630" x2="1050" y2="470" stroke="#ff3355"/>
-    <line x1="960" y1="630" x2="1110" y2="470" stroke="#33ffb0"/>
-    <line x1="1020" y1="630" x2="1170" y2="470" stroke="#7a1524"/>
-  </g>
+  <!-- site logo -->
+  <circle cx="70" cy="76" r="8" fill="#2fd8ff"/>
+  <text x="94" y="87" font-family="sans-serif" font-size="34" font-weight="700" fill="#2a1b3d">へのへのんのの</text>
+  <line x1="60" y1="106" x2="470" y2="106" stroke="#ff2fa0" stroke-width="3" stroke-dasharray="10 8" stroke-linecap="round"/>
+  <line x1="60" y1="106" x2="470" y2="106" stroke="#2fd8ff" stroke-width="3" stroke-dasharray="10 8" stroke-dashoffset="10" stroke-linecap="round"/>
 
-  <!-- title panel -->
-  <rect x="60" y="230" width="1080" height="220" fill="#150a0a" opacity="0.92" stroke="#7a1524" stroke-width="1"/>
-  <rect x="60" y="230" width="6" height="220" fill="#ff3355"/>
+  <!-- title -->
+  <text x="600" y="360" text-anchor="middle" font-family="sans-serif" font-size="76" font-weight="700" fill="none" stroke="#2a1b3d" stroke-width="11" stroke-linejoin="round" opacity="0.92">{{TITLE}}</text>
+  <text x="600" y="360" text-anchor="middle" font-family="sans-serif" font-size="76" font-weight="700" fill="url(#titleGrad)">{{TITLE}}</text>
 
-  <!-- title (glitch layers, same string) -->
-  <text x="106" y="357" font-family="sans-serif" font-size="60" font-weight="bold" fill="#33ffb0" opacity="0.5">{{TITLE}}</text>
-  <text x="114" y="363" font-family="sans-serif" font-size="60" font-weight="bold" fill="#7a1524" opacity="0.6">{{TITLE}}</text>
-  <text x="110" y="360" font-family="sans-serif" font-size="60" font-weight="bold" fill="#e9e2df">{{TITLE}}</text>
+  <line x1="230" y1="420" x2="970" y2="420" stroke="#ff2fa0" stroke-width="3" stroke-dasharray="14 10" stroke-linecap="round"/>
+  <line x1="230" y1="420" x2="970" y2="420" stroke="#2fd8ff" stroke-width="3" stroke-dasharray="14 10" stroke-dashoffset="14" stroke-linecap="round"/>
 
-  <!-- footer -->
-  <rect x="0" y="624" width="1200" height="6" fill="#7a1524" opacity="0.7"/>
+  <!-- heartbeat pulse (bottom-left) -->
+  <polyline points="60,560 130,560 155,520 180,595 205,540 230,560 300,560" fill="none" stroke="#ff2fa0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+
+  <!-- equalizer bars (bottom-right) -->
+  <rect x="900" y="565" width="14" height="30" rx="4" fill="#ff2fa0" opacity="0.55"/>
+  <rect x="924" y="540" width="14" height="55" rx="4" fill="#2fd8ff" opacity="0.55"/>
+  <rect x="948" y="555" width="14" height="40" rx="4" fill="#ff2fa0" opacity="0.5"/>
+  <rect x="972" y="525" width="14" height="70" rx="4" fill="#2fd8ff" opacity="0.6"/>
+  <rect x="996" y="548" width="14" height="47" rx="4" fill="#ff2fa0" opacity="0.5"/>
+  <rect x="1020" y="565" width="14" height="30" rx="4" fill="#2fd8ff" opacity="0.55"/>
 </svg>

@@ -1,71 +1,24 @@
-/*
- * 曲名: Hey Chat!
- * アーティスト: Levia, bitbreaker feat. 重音テトSV
- * 一言ムード: 配信画面が血で染まる、DNB/メタル×実況チャットの狂騒ホラー
- */
+/* 曲名: Restart Refine / アーティスト: d0tc0mmie feat. Synthesizer V AI Megpoid
+   一言ムード: パステル電飾のシティポップ×テクノポップ――
+   スマホ画面の明滅と鼓動がシンクロする、キュートで中毒性のあるラブコール */
 
 :root {
-  --color-fg: #e9e2df;
-  --color-bg: #0a0505;
-  --color-bg-raised: #150a0a;
-  --color-accent: #ff3355;
-  --color-accent-dim: #7a1524;
-  --color-chat: #33ffb0;
-
+  --color-fg: #2a1b3d;
+  --color-bg: #fff3fa;
+  --color-accent: #ff2fa0;
+  --color-accent-2: #2fd8ff;
+  --color-accent-soft: #ffd6ef;
   --spacing-unit: 1rem;
-
-  --font-heading: 'Impact', 'Arial Narrow Bold', 'Hiragino Sans', 'Yu Gothic',
-    'Meiryo', sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN',
-    'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Segoe UI', sans-serif;
-
+  --font-heading: 'Century Gothic', 'Verdana', 'Hiragino Sans', 'Yu Gothic', 'Rounded Mplus 1c', sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic',
+    'Segoe UI', Roboto, Meiryo, sans-serif;
   --line-height-body: 1.8;
-  --line-height-heading: 1.05;
-
-  --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
+  --line-height-heading: 1.3;
+  --ease-default: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes glitch-skew {
-  0%,
-  100% {
-    transform: skewX(0deg);
-  }
-  46% {
-    transform: skewX(0deg);
-  }
-  48% {
-    transform: skewX(4deg);
-    text-shadow: -2px 0 var(--color-chat), 2px 0 var(--color-accent);
-  }
-  50% {
-    transform: skewX(-3deg);
-    text-shadow: 2px 0 var(--color-chat), -2px 0 var(--color-accent);
-  }
-  52% {
-    transform: skewX(0deg);
-    text-shadow: none;
-  }
-}
-
-@keyframes chat-blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes drip-pulse {
-  0%,
-  100% {
-    box-shadow: 0 2px 0 var(--color-accent-dim);
-  }
-  50% {
-    box-shadow: 0 2px 0 var(--color-accent);
-  }
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -73,129 +26,202 @@ html {
 }
 
 body {
-  background: var(--color-bg);
+  margin: 0;
   color: var(--color-fg);
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 47, 160, 0.14) 0, transparent 40%),
+    radial-gradient(circle at 85% 12%, rgba(47, 216, 255, 0.16) 0, transparent 38%),
+    radial-gradient(circle at 70% 80%, rgba(255, 47, 160, 0.1) 0, transparent 45%),
+    var(--color-bg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  background-image: radial-gradient(
-    ellipse at top,
-    var(--color-bg-raised) 0%,
-    var(--color-bg) 70%
-  );
+  letter-spacing: 0.01em;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.02em;
   color: var(--color-fg);
+  letter-spacing: 0.02em;
 }
 
 a {
   color: var(--color-accent);
-  text-decoration: none;
-  border-bottom: 1px solid var(--color-accent-dim);
-  transition: color 0.2s var(--ease-default), border-color 0.2s var(--ease-default);
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--color-accent-2);
+  text-underline-offset: 0.2em;
+  transition: color 0.25s var(--ease-default), text-decoration-color 0.25s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: var(--color-chat);
-  border-color: var(--color-chat);
+  color: var(--color-accent-2);
+  text-decoration-color: var(--color-accent);
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: #fff8fc;
 }
 
 .site-header {
-  background: linear-gradient(180deg, #170a0a 0%, var(--color-bg) 100%);
-  border-bottom: 2px solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  animation: drip-pulse 2.4s var(--ease-default) infinite;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  background: linear-gradient(120deg, var(--color-accent-soft) 0%, #ffffff 55%, #e6faff 100%);
+  border-bottom: 3px solid var(--color-accent);
+  position: relative;
+  overflow: hidden;
 }
 
-.site-header a {
-  border-bottom: none;
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    100deg,
+    transparent 0,
+    transparent 24px,
+    rgba(47, 216, 255, 0.12) 24px,
+    rgba(47, 216, 255, 0.12) 26px
+  );
+  animation: retro-scan 9s linear infinite;
+  pointer-events: none;
 }
 
 .site-header h1,
-.site-header .site-title {
-  font-family: var(--font-heading);
+.site-header h1 a {
   color: var(--color-fg);
-  text-transform: uppercase;
-  animation: glitch-skew 4.5s var(--ease-default) infinite;
-}
-
-.site-header h1::after,
-.site-title::after {
-  content: '_';
-  color: var(--color-chat);
-  animation: chat-blink 1s steps(1) infinite;
+  text-decoration: none;
+  animation: heartbeat-pulse 2.4s var(--ease-default) infinite;
+  display: inline-block;
 }
 
 .site-footer {
-  background: var(--color-bg-raised);
-  color: var(--color-fg);
-  border-top: 1px solid var(--color-accent-dim);
-  padding: var(--spacing-unit);
-  font-size: 0.85em;
-  opacity: 0.85;
+  margin-top: calc(var(--spacing-unit) * 3);
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  background: var(--color-fg);
+  color: var(--color-accent-soft);
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--color-accent-2);
+  text-decoration-color: var(--color-accent);
 }
 
 .post-list {
-  display: block;
-  padding: 0;
   list-style: none;
+  padding: 0;
+  margin: calc(var(--spacing-unit) * 2) auto;
+  max-width: 42rem;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 1.25);
 }
 
 .post-list li {
-  border-bottom: 1px dashed var(--color-accent-dim);
-  padding: calc(var(--spacing-unit) * 0.75) 0;
-  transition: background-color 0.2s var(--ease-default);
+  padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.25);
+  background: #ffffffcc;
+  border: 1px solid var(--color-accent-soft);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0.75rem;
+  transition: transform 0.3s var(--ease-default), border-color 0.3s var(--ease-default), box-shadow 0.3s var(--ease-default);
 }
 
 .post-list li:hover {
-  background-color: rgba(255, 51, 85, 0.06);
-}
-
-.post-list a {
-  font-weight: bold;
+  transform: translateX(4px) scale(1.01);
+  border-left-color: var(--color-accent-2);
+  box-shadow: 0 6px 18px rgba(255, 47, 160, 0.18);
 }
 
 article.post {
-  background: var(--color-bg-raised);
-  border: 1px solid var(--color-accent-dim);
-  border-left: 4px solid var(--color-accent);
+  max-width: 42rem;
+  margin: 0 auto calc(var(--spacing-unit) * 3);
   padding: calc(var(--spacing-unit) * 1.5);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  border-radius: 2px;
+  background: #fffdff;
+  border-radius: 1rem;
+  border: 1px solid var(--color-accent-soft);
+  box-shadow: 0 4px 24px rgba(43, 27, 61, 0.06);
 }
 
 article.post h1,
 article.post h2 {
-  color: var(--color-accent);
+  position: relative;
+  padding-left: 1.1em;
+}
+
+article.post h1::before,
+article.post h2::before {
+  content: "\25CF";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent-2);
+  animation: cursor-click 1.6s step-end infinite;
 }
 
 article.post blockquote {
-  border-left: 3px solid var(--color-chat);
-  margin: var(--spacing-unit) 0;
-  padding-left: var(--spacing-unit);
-  color: var(--color-chat);
-  font-family: 'Courier New', monospace;
+  border-left: 3px dashed var(--color-accent);
+  margin-left: 0;
+  padding-left: 1em;
+  color: #55406b;
+  font-style: italic;
 }
 
 article.post code {
-  background: rgba(51, 255, 176, 0.08);
-  color: var(--color-chat);
-  padding: 0.1em 0.3em;
-  border-radius: 2px;
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
+  border-radius: 0.35em;
+  padding: 0.1em 0.4em;
+}
+
+button,
+.button,
+input[type="submit"] {
+  font-family: var(--font-heading);
+  background: var(--color-accent);
+  color: #fff8fc;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6em 1.4em;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-default), transform 0.2s var(--ease-default);
+}
+
+button:hover,
+.button:hover,
+input[type="submit"]:hover {
+  background: var(--color-accent-2);
+  transform: translateY(-2px);
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0 8px,
+    var(--color-accent-2) 8px 16px
+  );
+  margin: calc(var(--spacing-unit) * 2) 0;
+}
+
+@keyframes heartbeat-pulse {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.05); }
+  35% { transform: scale(0.98); }
+  50% { transform: scale(1.06); }
+  70% { transform: scale(1); }
+}
+
+@keyframes cursor-click {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.15; }
+}
+
+@keyframes retro-scan {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(60px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
