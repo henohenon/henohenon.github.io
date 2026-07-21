@@ -10,13 +10,31 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <p>ここではポートフォリオを兼ねて、自分の作品を展示しています。興味を持っていただけたり、楽しんでいただければ幸いです。</p>
     </div>
   </section>
-  <section class="gallery">
-    <div class="work-card"></div>
-    <div class="work-card"></div>
-    <div class="work-card"></div>
-    <div class="work-card"></div>
-    <div class="work-card"></div>
-    <div class="work-card"></div>
+  <section class="pieces">
+    <div class="piece">
+      <div class="content"></div>
+      <div class="name-card"><p>作品名</p></div>
+    </div>
+    <div class="piece">
+      <div class="content"></div>
+      <div class="name-card"><p>作品名</p></div>
+    </div>
+    <div class="piece">
+      <div class="content"></div>
+      <div class="name-card"><p>作品名</p></div>
+    </div>
+    <div class="piece">
+      <div class="content"></div>
+      <div class="name-card"><p>作品名</p></div>
+    </div>
+    <div class="piece">
+      <div class="content"></div>
+      <div class="name-card"><p>作品名</p></div>
+    </div>
+    <div class="piece">
+      <div class="content"></div>
+      <div class="name-card"><p>作品名</p></div>
+    </div>
   </section>
   <footer class="footer">
     <p>&copy; ${new Date().getFullYear()} henohenon</p>
