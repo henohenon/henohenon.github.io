@@ -19,27 +19,22 @@
 
 ## 2. 現状 (2026-07-22 時点)
 
-### 実装済み (skeleton のみ)
-- スタック: **Vite 8 + TypeScript 6 + pnpm**、フレームワーク無し（バニラ TS で `#app` に innerHTML を注入）。
-- `src/main.ts`: 3 セクションの静的マークアップのみ。
-  - `.top` … 顔タイポグラフィ `.face` ＋ 自己紹介キャプション `.card`
-  - `.pieces` … `.piece`(=`.content` + `.name-card`) を **6 枚** 並べたプレースホルダ
-  - `.footer` … コピーライト表記
-- `src/style.css`: 上記のレイアウトのみ。演出・トランジション・遷移は未実装。
-- Icon 中身・Focus 画面・About・会話・トランジションはすべて **未着手**。
+- スタック: **Vite + TypeScript + pnpm ＋ Svelte**（詳細は §7）。デプロイは GitHub Pages。
+- 実装済み: 展示 3 件のデータ（`src/exhibits/data.ts`）。docs 用語で統一したレイアウト/命名。
+- 未着手: SvelteKit への移行、Focus 演出、Icon 中身、About、会話、トランジション。
 
-### 命名の不整合（要整理）
-`docs` の用語と現行コードのクラス名が食い違っている。本仕様では **docs の用語を正**とし、コードを寄せる（Phase 1 でリネーム）。
+### 用語とクラス/コンポーネントの対応
+`docs` の用語を正とし、以降も同じ用語で統一する。
 
-| docs 用語 | 現行コード | 備考 |
+| docs 用語 | クラス/コンポーネント | 備考 |
 |---|---|---|
-| Introduction | `.top` | 最初の展示品 |
-| Icon | `.face` / `.content` | 作品本体（抽象化された概念） |
-| text-caption | `.card` | 自己紹介 |
-| Gallery | `.pieces` | 展示品が並ぶ場所 |
-| Exhibit | `.piece` | Icon + title-caption 一式 |
-| title-caption | `.name-card` | 作品名 + 番号 |
-| Focus | (未実装) | 展示 1 点を集中して見る画面 |
+| Introduction | `introduction` | 最初の展示品 |
+| Icon | `icon` | 作品本体（抽象化された概念） |
+| text-caption | `text-caption` | 自己紹介 |
+| Gallery | `gallery` | 展示品が並ぶ場所 |
+| Exhibit | `exhibit` | Icon + title-caption 一式 |
+| title-caption | `title-caption` | 作品名 + 番号 |
+| Focus | `focus` | 展示 1 点を集中して見る画面 |
 
 ---
 
@@ -134,9 +129,13 @@
 ## 6. 機能要件
 
 ### 6.1 トランジション（最重要）
-- Exhibit ↔ Focus の遷移を、作品ごとに凝った演出で行う。
+- Exhibit ↔ Focus の遷移を、作品ごとに凝った演出で行う。SPA ナビゲーション（DOM を保持したまま遷移）で連続性を担保する。
 - 制約（`frame.md`）: **わくわくする / 長すぎない / 戻る用も用意（逆再生でも可）**。
 - 作品別の方向性: GlobeXplore=ワープ / MwP=幕の開閉 / コトハコビ=ハコの開閉・飛び出し。
+- 実装の二段構え（デバイス非依存を担保）:
+  - **劇場型の派手な演出（ワープ / 幕 / ハコ）** … Svelte の `transition:`/`animate:`（FLIP）や自前オーバーレイ、必要なら GSAP。**全環境で動く**。
+  - **共有要素モーフ（Gallery Icon → Focus への連続移動）** … Svelte の `crossfade`／FLIP で実現。ブラウザ標準 View Transitions を併用してもよい（対応環境のみの enhancement）。
+- シェーダ演出（例: GlobeXplore のワープ）は、消えない常駐 `<canvas>` 島＋rAF＋GLSL で実装（Threlte or PixiJS/OGL/生 WebGL。§7）。
 
 ### 6.2 Icon 演出（Gallery 内）
 - 一覧として適切な解像度、アイコンとして適切な抽象度。
@@ -155,41 +154,44 @@
 
 ---
 
-## 7. 技術方針
-
-- スタック: **Vite + TypeScript + pnpm**（現状維持）。**【決定】デプロイは GitHub Pages**。
-- **【決定】フレームワークは導入せず、バニラ TS を継続。**
-  - 理由: 本サイトの核心「作品ごとの凝ったトランジション」は結局どの FW でも自前アニメーションになる。素の DOM を全握りするほうが演出を作りやすく、規模も小さいため FW の定型コストが割に合わない。
-  - 土台の組み合わせ:
-    - **ハッシュルーター（自前 or 極小）** … `#/`, `#/focus/globexplore` 等。
-    - **View Transitions API（ブラウザ標準）** … `document.startViewTransition()` で DOM 差し替えを包み、ルート間トランジション＋戻りの逆再生を実現。作品別演出は `::view-transition-*` の命名で分岐。
-  - 将来コンポーネントの書き味が欲しくなった場合の次点は Svelte（今回は不要と判断）。
-- **【決定】ルーティング/遷移モデルは URL 分離。まずはハッシュ方式**（`#/focus/:id`）。
-  - GitHub Pages でサーバ設定なしに動作するため。将来クリーンパス（`/focus/:id`）にしたい場合は `index.html` を `404.html` にコピーする SPA フォールバックで移行可能。
-- 命名整合: §2 の対応表に従い、コードのクラス/構造を docs 用語へリネーム。
-- ディレクトリ構成（案）:
+- スタック: **Vite + TypeScript + pnpm ＋ Svelte（Svelte 5）**。デプロイは **GitHub Pages**。
+- **器（ビュー/ルーター）**: **SvelteKit ＋ `adapter-static`**。
+  - 各ルートを実 `.html` に**静的プリレンダ**し、**クリーンパス**（`/focus/:id` 等）を Pages で `404.html` ハックなしに提供。
+  - クライアントルーターの SPA ナビゲーション（DOM 保持）で遷移し、トランジションの連続性を得る。深いリンク/リロードはプリレンダ済み HTML が応答。
+  - サイトは `henohenon.github.io`（ユーザーサイト・ルート）なので base パスは `/`。
+- **演出（エンジン）レイヤー**（器と分離して考える）:
+  - DOM 遷移 … Svelte transitions（`crossfade`/FLIP/`transition:`）、必要に応じ GSAP。
+  - シェーダ/WebGL … 消えない常駐 `<canvas>` 島＋rAF＋GLSL。宣言的にやるなら **Threlte**、軽量に生でやるなら **PixiJS/OGL/生 WebGL**。
+- **ルーティング/遷移モデル**: **URL 分離＝クリーンパス（静的プリレンダ）**。SPA ナビゲーションで DOM 保持。
+- 命名整合: §2 の対応表どおり docs 用語で統一。
+- ディレクトリ構成（SvelteKit・案）:
   ```
   src/
-    main.ts            エントリ
-    style.css          共通スタイル
-    router.ts          ハッシュルーター（#/ , #/focus/:id , #/about）
-    exhibits/          作品ごとのデータ + Icon/Focus/トランジション
-    components/        header, footer, caption 等の共通片
-    transitions/       View Transitions 用の遷移エフェクト
+    lib/
+      exhibits/data.ts       展示データ
+      components/            Header / Footer / Caption / Icon 等
+      transitions/           crossfade 定義・遷移オーケストレーション
+      shaders/               GLSL・canvas 島（ワープ等）
+    routes/
+      +layout.svelte         共通レイアウト（header/footer, ClientRouter 相当）
+      +page.svelte           / … Gallery（Introduction 含む）
+      about/+page.svelte     /about
+      focus/[id]/+page.svelte  /focus/:id … Focus
+    app.css                  共通スタイル
+  svelte.config.js           adapter-static
   ```
 
 ---
 
 ## 8. 実装フェーズ計画
 
-- **Phase 0: 本仕様の確定** ← 完了（主要方針は §9 で決定済み）。
-- **Phase 1: 命名整合とデータ化 + ルーター**
-  - クラス名/構造を docs 用語へリネーム（Introduction/Gallery/Exhibit/Icon/…）。
-  - 展示品を配列データ（id, 番号, 作品名, 詳細, 担当, 使用技術, More, リンク）として分離し、Gallery を **3 件**で動的生成（Icon/Main は仮 or 空）。
-  - ハッシュルーター（`#/`, `#/focus/:id`, `#/about`）を導入。
+- **Phase 1: Svelte 土台**
+  - SvelteKit ＋ `adapter-static` をセットアップ（Pages 向けクリーンパス）。
+  - ルートを `/`(Gallery) / `/about` / `/focus/[id]` で構成。
+  - `exhibits/data.ts` から Gallery を **3 件**生成（Icon/Main は仮 or 空）。
 - **Phase 2: Focus 画面 + 基本遷移**
-  - Focus のレイアウト（details-caption / main / title-caption）実装。
-  - Exhibit → Focus → 戻る を、View Transitions API で包んだプレーンな遷移でまず通す（作品別演出は Phase 5）。
+  - Focus のレイアウト（details-caption / main / title-caption）を component 実装。
+  - Exhibit → Focus → 戻る を、Svelte transitions で包んだプレーンな遷移でまず通す（作品別演出は Phase 5）。
 - **Phase 3: ヘッダー/フッター + Introduction 挙動**
   - About ボタン（Introduction 通過後 fixed 表示）、フッター（X リンク）。
   - Introduction → About の内容差し替え。
@@ -206,15 +208,16 @@
 
 ### 決定済み（2026-07-22）
 1. **展示枚数**: 当面 **3 件**。Icon・Main は当面「仮 or 空」で可。
-2. **フレームワーク**: 導入しない。**バニラ TS + ハッシュルーター + View Transitions API**。
-3. **遷移モデル**: **URL 分離（ハッシュ `#/focus/:id`）**。
-4. **LLM 会話**: 別スコープ。v1 は**ランダム単語応答**まで。
-5. **デプロイ**: **GitHub Pages**。
-6. **命名整合**: docs 用語へコードを寄せる（本仕様前提）。
+2. **フレームワーク**: **Svelte（Svelte 5）採用**。器は **SvelteKit ＋ `adapter-static`**。
+3. **遷移モデル**: **URL 分離＝クリーンパス（`/focus/:id`、静的プリレンダ）**。SPA ナビゲーションで DOM 保持し遷移の連続性を確保。
+4. **演出エンジン**: DOM 遷移＝Svelte transitions（`crossfade`/FLIP）＋必要に応じ GSAP。シェーダ＝常駐 canvas 島＋GLSL（Threlte or PixiJS/OGL/生 WebGL）。
+5. **LLM 会話**: 別スコープ。v1 は**ランダム単語応答**まで。
+6. **デプロイ**: **GitHub Pages**（`henohenon.github.io` ルート、base=`/`）。
+7. **命名整合**: docs 用語で統一（対応済み）。
 
 ### 残 TBD（後続で詰める）
 - 各作品の未確定演出: コトハコビ Main（3DS 的表現/音）、MwP の More 文言、Icon の具体アニメ等。→ Phase 4 以降で個別に。
-- クリーンパス（`/focus/:id`）へ将来移行するか。→ 当面ハッシュで進め、必要になれば判断。
+- WebGL レイヤーの具体選定（Threlte / PixiJS / OGL / 生 WebGL）。→ 最初のシェーダ演出（ワープ）着手時に判断。
 
 ---
 
