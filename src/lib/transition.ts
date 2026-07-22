@@ -9,21 +9,40 @@ import { nav } from './nav.svelte'
 const GALLERY_ROUTES = new Set(['/', '/about'])
 const root = () => document.documentElement
 
-// 要素（Exhibit or Focus 内カード）の .icon 中心を、ズーム原点 CSS 変数に記録。
+// ズームと同時にアイコンを画面中央へ寄せる割合（0=動かない / 1=中央まで）。やり過ぎない程度。
+// Gallery は縦中央寄せでアイコンが元々縦中央に近い（dy が小さい）ため、縦は強めにする。
+const DRIFT_X = 0.4
+const DRIFT_Y = 0.6
+
+// 要素（Exhibit or Focus 内カード）の .icon 中心を、ズーム原点＋中央への並進量として記録。
 function setOrigin(container: Element | null) {
   const icon = container?.querySelector('.icon')
   if (!icon) return
   const r = icon.getBoundingClientRect()
-  root().style.setProperty('--vt-x', `${r.left + r.width / 2}px`)
-  root().style.setProperty('--vt-y', `${r.top + r.height / 2}px`)
+  const px = r.left + r.width / 2
+  const py = r.top + r.height / 2
+  const s = root().style
+  s.setProperty('--vt-x', `${px}px`)
+  s.setProperty('--vt-y', `${py}px`)
+  // 方向は中央向き（縦横比は自然に決まる）、量は DRIFT_X / DRIFT_Y。
+  s.setProperty('--vt-dx', `${(window.innerWidth / 2 - px) * DRIFT_X}px`)
+  s.setProperty('--vt-dy', `${(window.innerHeight / 2 - py) * DRIFT_Y}px`)
 }
 
-// id の Exhibit を画面中央へ寄せ、その要素を返す。
-function centerExhibit(id: string | null | undefined): HTMLElement | null {
-  if (!id) return null
-  const el = document.getElementById(id)
-  el?.scrollIntoView({ block: 'center', behavior: 'auto' })
-  return el
+// ハッシュ #id の Exhibit をスクロールで見せる。位置合わせは CSS の scroll-margin-top 任せ
+// （scrollIntoView は block:start なので scroll-margin を尊重）。
+function scrollHashIntoView() {
+  const id = location.hash.slice(1)
+  if (id) document.getElementById(id)?.scrollIntoView()
+}
+
+// ズーム原点をリセット（CSS 既定の 50%/0 = 画面中央から）。
+function clearOrigin() {
+  const s = root().style
+  s.removeProperty('--vt-x')
+  s.removeProperty('--vt-y')
+  s.removeProperty('--vt-dx')
+  s.removeProperty('--vt-dy')
 }
 
 // Gallery のタイトルのうち name の 1 枚だけ残し、他は none（root のズームに含める）。
@@ -53,9 +72,9 @@ export function markExhibitOrigin(event: MouseEvent, about: boolean) {
   setOrigin((event.currentTarget as HTMLElement).closest('.exhibit'))
 }
 
-/** ハッシュ #id の Exhibit を画面中央へ（View Transitions 非対応時のフォールバックも兼ねる）。 */
+/** afterNavigate 用：スクロール復元より後に、ハッシュ #id を中央着地させ直す。 */
 export function centerHashExhibit() {
-  centerExhibit(location.hash.slice(1) || null)
+  requestAnimationFrame(scrollHashIntoView)
 }
 
 /** onNavigate 用：dive/rise ズームと顔モーフを演出する。 */
@@ -85,11 +104,12 @@ export function routeTransition(navigation: OnNavigate): Promise<void> | void {
     resolve()
     await navigation.complete
     if (rise) {
-      // 遷移先（Gallery）で、戻り元カードを中央へ寄せ、ズーム原点もそこに。
-      const id = navigation.from?.params?.id
-      keepOnlyTitle(`title-${id}`)
+      // 戻り先カードを中央着地（scroll-margin 尊重）させ、その状態で新フレームを捕捉。
+      // 復元に負けないよう afterNavigate 側でも再実行する。ズームは中央（既定原点）から。
+      keepOnlyTitle(`title-${navigation.from?.params?.id}`)
       setFaceName('none')
-      setOrigin(centerExhibit(id))
+      scrollHashIntoView()
+      clearOrigin()
     }
   })
   vt.finished.finally(() => {

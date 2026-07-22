@@ -30,10 +30,14 @@ body {
   font-size: 0.9rem;
 }
 
-/* 顔を「トップ〜下部キャプション間」の中央に置く領域（非リンク）。 */
+/* 顔を置く領域（非リンク）。下から一定量を空けた上側で中央寄せ。
+   bottom の値が顔の縦位置を決める（index/about 共通・ここだけで調整）。 */
 .face-area {
-  flex: 1;
-  min-height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
   display: grid;
   place-items: center;
 }
@@ -47,17 +51,17 @@ body {
 
 /* About の Introduction タイトル（00 へのへのん）は左下。Home への戻りリンク。 */
 .introduction .title-link {
-  margin: 0 0 24px 24px;
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
 }
 
 /* Introduction：最初の展示品。
-   顔は「トップ〜下部キャプションの間」でセンタリング（100svh 全体ではない）。 */
+   顔の縦位置はキャプション高さに依存させず固定（index/about で同一）。 */
 .introduction {
   position: relative;
   width: 100%;
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
   box-sizing: border-box;
 }
 
@@ -88,8 +92,9 @@ body {
 }
 
 .text-caption {
-  align-self: flex-start;
-  margin: 0 0 24px 24px;
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
   width: max-content;
   max-width: calc(100% - 48px);
   padding: 16px 20px;
@@ -128,6 +133,8 @@ body {
   flex-direction: column;
   gap: 12px;
   box-sizing: border-box;
+  /* #id で見せるときの着地位置（中央あたり）。scrollIntoView / ネイティブ両対応。 */
+  scroll-margin-top: calc(50vh - 150px);
 }
 
 /* Icon / Title それぞれを Focus への遷移リンクに（カード全体ではなく要素だけ）。 */
@@ -317,13 +324,13 @@ html.vt-rise::view-transition-old(root) {
 
 @keyframes vt-zoom-out {
   to {
-    transform: scale(1.6);
+    transform: translate(var(--vt-dx, 0px), var(--vt-dy, 0px)) scale(1.6);
     opacity: 0;
   }
 }
 @keyframes vt-zoom-in {
   from {
-    transform: scale(1.6);
+    transform: translate(var(--vt-dx, 0px), var(--vt-dy, 0px)) scale(1.6);
     opacity: 0;
   }
 }

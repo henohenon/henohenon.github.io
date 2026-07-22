@@ -11,7 +11,7 @@
 
   let { about = false }: { about?: boolean } = $props()
 
-  // ハッシュ（#id）付きで到着したら、その Exhibit を画面中央へ。
+  // #id 付きで到着したら、スクロール復元より後に中央着地させ直す。
   afterNavigate(centerHashExhibit)
 </script>
 
