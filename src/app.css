@@ -49,11 +49,13 @@ body {
   text-decoration: none;
 }
 
-/* About の Introduction タイトル（00 へのへのん）は左下。Home への戻りリンク。 */
+/* About の Introduction タイトル（00 へのへのん）は左下。Home への戻りリンク。
+   About 表示時に fade で入場（index↔about はスクロール＋この CSS 演出）。 */
 .introduction .title-link {
   position: absolute;
   left: 24px;
   bottom: 24px;
+  animation: intro-fade-in 0.5s ease both;
 }
 
 /* Introduction：最初の展示品。
@@ -69,6 +71,8 @@ body {
    × を右上角に置き、リンクはその下に並べる。 */
 .intro-links {
   view-transition-name: about-caption;
+  /* About 表示時に「にじみ出る」入場（blur→くっきり）。 */
+  animation: about-card-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .intro-links-row {
@@ -101,6 +105,8 @@ body {
   background: #faf9f6;
   box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.18);
   box-sizing: border-box;
+  /* about→index の戻りで挨拶キャプションを fade 入場（対称性）。 */
+  animation: intro-fade-in 0.5s ease both;
 }
 
 .text-caption p {
@@ -369,5 +375,18 @@ html.vt-rise::view-transition-old(root) {
   to {
     opacity: 0;
     filter: blur(14px);
+  }
+}
+
+/* About の Introduction キャプション入場（index↔about のスクロール遷移と併用）。 */
+@keyframes about-card-in {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+  }
+}
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
   }
 }

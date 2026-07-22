@@ -59,10 +59,14 @@ export function markExhibitOrigin(event: MouseEvent, about: boolean) {
 
 /** onNavigate 用：dive/rise ズームと顔モーフを演出する。 */
 export function routeTransition(navigation: OnNavigate): Promise<void> | void {
-  if (!document.startViewTransition) return
-
   const from = navigation.from?.route.id
   const to = navigation.to?.route.id
+
+  // index↔about（Introduction の切替）は VT を使わない。スクロール＋CSS 演出に任せる
+  // （VT はビューポートを凍結するのでスムーススクロールと併用できないため）。
+  const toggle = !!from && !!to && from !== to && GALLERY_ROUTES.has(from) && GALLERY_ROUTES.has(to)
+  if (toggle || !document.startViewTransition) return
+
   const el = root()
   const dive = to === '/focus/[id]' && !!from && GALLERY_ROUTES.has(from)
   const rise = from === '/focus/[id]' && !!to && GALLERY_ROUTES.has(to)
