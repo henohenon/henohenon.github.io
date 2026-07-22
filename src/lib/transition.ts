@@ -1,12 +1,14 @@
 // ルート遷移の演出ロジックを 1 か所に集約する。
-// - Gallery↔Focus: クリックした Icon を中心に index 全体をズーム（dive/rise）。
-// - Introduction↔About: 顔タイポグラフィを同要素モーフ。
+// - Gallery↔Focus: クリックした Icon を中心に index 全体をズーム（dive/rise・VT）。
+// - Introduction↔About（`/`↔`/?about`）は同一ルート内の query 変化なので、ここでは何もしない。
+//   キャプションのテキスト morph は IndexView 側の $effect が担当する。
 // - title / face の view-transition-name は「対象 1 枚だけ残す」よう出し入れする。
-// View Transitions 非対応ブラウザでは即時遷移にフォールバックする。
+// View Transitions 非対応ブラウザでは dive/rise は即時遷移にフォールバックする。
 import type { OnNavigate } from '@sveltejs/kit'
 import { nav } from './nav.svelte'
 
-const GALLERY_ROUTES = new Set(['/', '/about'])
+// Focus に入れる元＝Gallery ルート（about モードでも route id は '/'）。
+const GALLERY_ROUTES = new Set(['/'])
 const root = () => document.documentElement
 
 // ズームと同時にアイコンを画面中央へ寄せる割合（0=動かない / 1=中央まで）。やり過ぎない程度。
@@ -53,23 +55,22 @@ function setFaceName(value: 'none' | '') {
 /** Exhibit クリック時：戻り先ルートを控え、ズーム原点（Icon 中心）を記録する。
  *  icon / title どちらのリンクから来ても、原点は Exhibit の Icon に合わせる。 */
 export function markExhibitOrigin(event: MouseEvent, about: boolean) {
-  nav.from = about ? '/about' : '/'
+  // 戻り先は元のモードを保つ（query と hash は共存できる：`/?about#id`）。
+  nav.from = about ? '/?about' : '/'
   setOrigin((event.currentTarget as HTMLElement).closest('.exhibit'))
 }
 
-/** onNavigate 用：dive/rise ズームと顔モーフを演出する。 */
+/** onNavigate 用：dive/rise ズーム（VT）を演出する。index↔about は同一ルートなので対象外。 */
 export function routeTransition(navigation: OnNavigate): Promise<void> | void {
   const from = navigation.from?.route.id
   const to = navigation.to?.route.id
 
-  // index↔about（Introduction の切替）は VT を使わない。スクロール＋CSS 演出に任せる
-  // （VT はビューポートを凍結するのでスムーススクロールと併用できないため）。
-  const toggle = !!from && !!to && from !== to && GALLERY_ROUTES.has(from) && GALLERY_ROUTES.has(to)
-  if (toggle || !document.startViewTransition) return
-
-  const el = root()
   const dive = to === '/focus/[id]' && !!from && GALLERY_ROUTES.has(from)
   const rise = from === '/focus/[id]' && !!to && GALLERY_ROUTES.has(to)
+  if (!dive && !rise) return
+  if (!document.startViewTransition) return
+
+  const el = root()
 
   if (dive) {
     el.classList.add('vt-dive')

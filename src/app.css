@@ -49,15 +49,6 @@ body {
   text-decoration: none;
 }
 
-/* About の Introduction タイトル（00 へのへのん）は左下。Home への戻りリンク。
-   About 表示時に fade で入場（index↔about はスクロール＋この CSS 演出）。 */
-.introduction .title-link {
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-  animation: intro-fade-in 0.5s ease both;
-}
-
 /* Introduction：最初の展示品。
    顔の縦位置はキャプション高さに依存させず固定（index/about で同一）。 */
 .introduction {
@@ -67,14 +58,8 @@ body {
   box-sizing: border-box;
 }
 
-/* About の右上リンク（X / GitHub / More）。見た目・にじみ出る遷移とも Focus の details と共通。
-   × を右上角に置き、リンクはその下に並べる。 */
-.intro-links {
-  view-transition-name: about-caption;
-  /* About 表示時に「にじみ出る」入場（blur→くっきり）。 */
-  animation: about-card-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-}
-
+/* About の右上リンク（X / GitHub / More）。見た目は Focus の details と共通。
+   × を右上角に置き、リンクはその下に並べる。入退場は Svelte の transition:blur。 */
 .intro-links-row {
   display: flex;
   gap: 16px;
@@ -95,7 +80,10 @@ body {
   view-transition-name: face;
 }
 
-.text-caption {
+/* Introduction キャプション（左下）。index=挨拶 / about=タイトルで
+   同一の常駐要素。テキストは textMorph が直接書き換える（Svelte は再描画しない）。
+   width:max-content＋左下固定なので、文字が減れば箱も自然に縮む。about では Home リンク。 */
+.intro-caption-card {
   position: absolute;
   left: 24px;
   bottom: 24px;
@@ -105,18 +93,22 @@ body {
   background: #faf9f6;
   box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.18);
   box-sizing: border-box;
-  /* about→index の戻りで挨拶キャプションを fade 入場（対称性）。 */
-  animation: intro-fade-in 0.5s ease both;
+  color: inherit;
+  text-decoration: none;
 }
 
-.text-caption p {
+.intro-caption-card p {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.6;
+  /* 1 つのテキスト内の改行（\n）を表示。空行が段落の間になる。 */
+  white-space: pre-line;
 }
 
-.text-caption p + p {
-  margin-top: 8px;
+/* `?about` 直開き時、挨拶テキストの 1 フレーム表示を抑止（app.html のブートスクリプトが
+   ペイント前に付与）。IndexView が本文をタイトルに確定した直後にクラスを外して表示を戻す。 */
+html.boot-about .intro-caption-card {
+  visibility: hidden;
 }
 
 /* Gallery：展示品が並ぶ場所。縦横とも中央寄せの grid。
@@ -351,14 +343,11 @@ html.vt-rise::view-transition-old(root) {
   }
 }
 
-/* キャプションカード（Focus の details / About の右上リンク）は「にじみ出る」—
-   ぼかし＋透明から、少し遅れて染み出す。両者で共通。 */
-::view-transition-new(details),
-::view-transition-new(about-caption) {
+/* Focus の details キャプションは「にじみ出る」— ぼかし＋透明から、少し遅れて染み出す。 */
+::view-transition-new(details) {
   animation: card-seep-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
 }
-::view-transition-old(details),
-::view-transition-old(about-caption) {
+::view-transition-old(details) {
   animation: card-seep-out 0.35s ease both;
 }
 @keyframes card-seep-in {
@@ -378,15 +367,3 @@ html.vt-rise::view-transition-old(root) {
   }
 }
 
-/* About の Introduction キャプション入場（index↔about のスクロール遷移と併用）。 */
-@keyframes about-card-in {
-  from {
-    opacity: 0;
-    filter: blur(14px);
-  }
-}
-@keyframes intro-fade-in {
-  from {
-    opacity: 0;
-  }
-}
