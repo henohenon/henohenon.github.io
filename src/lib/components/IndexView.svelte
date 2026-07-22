@@ -4,6 +4,7 @@
   import { exhibits } from '$lib/exhibits/data'
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
+  import TitleCaption from './TitleCaption.svelte'
 
   let { about = false }: { about?: boolean } = $props()
 </script>
@@ -42,7 +43,7 @@
   {#each exhibits as e (e.id)}
     <a class="exhibit" href="/focus/{e.id}">
       <div class="icon"></div>
-      <div class="title-caption"><span class="no">{e.no}</span><p>{e.title}</p></div>
+      <TitleCaption no={e.no} title={e.title} />
     </a>
   {/each}
 </section>

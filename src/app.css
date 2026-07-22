@@ -125,21 +125,24 @@ body {
   font-size: 0.75rem;
 }
 
-/* Focus：展示 1 点を集中して見る画面。※レイアウト/演出は Phase 2/5 で作り込み。 */
+/* Focus：展示 1 点を集中して見る画面。
+   スクロール不要の固定 1 枚（details-caption 左上 / main 中央 / title-caption 右下）。
+   ※作品別演出は Phase 5。 */
 .focus {
   position: relative;
   width: 100%;
-  min-height: 100svh;
+  height: 100svh;
+  overflow: hidden;
   box-sizing: border-box;
-  padding: 48px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
 }
 
 .details-caption {
-  position: relative;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
   width: 320px;
+  max-width: calc(100% - 48px);
   padding: 16px 20px;
   background: #fff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
@@ -182,7 +185,9 @@ body {
 }
 
 .focus-main {
-  flex: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   place-content: center;
   place-items: center;
@@ -192,10 +197,12 @@ body {
   color: #111;
 }
 
-.focus--missing {
-  place-content: center;
-  place-items: center;
-  text-align: center;
+/* Focus 内の title-caption は左下に固定。 */
+.focus .title-caption {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 2;
 }
 
 .footer {
