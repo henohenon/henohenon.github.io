@@ -23,7 +23,7 @@
   {#if about}
     <!-- About の右上テキスト（introduction.md）。※自己紹介・資格/skills は今後。 -->
     <nav class="intro-links caption-card">
-      <CloseButton href="/" />
+      <CloseButton href="/" noscroll />
       <div class="intro-links-row">
         <a href="https://x.com/henohenon_8282" target="_blank" rel="noopener">X</a>
         <a href="https://github.com/henohenon" target="_blank" rel="noopener">GitHub</a>
@@ -38,14 +38,23 @@
 　ん</pre>
   {/snippet}
 
-  <!-- frame.md: タイポグラフィをクリックで遷移。index→About / About→Home。 -->
-  <a class="face-link" href={about ? '/' : '/about'} aria-label={about ? 'Home へ' : 'About へ'}>
-    {@render face()}
-  </a>
+  <!-- frame.md: index の顔クリックで About へ（スクロール保持）。
+       About 側は caption / × で戻れるので、顔はリンクにしない。 -->
+  <div class="face-area">
+    {#if about}
+      {@render face()}
+    {:else}
+      <a class="face-link" href="/about" aria-label="About へ" data-sveltekit-noscroll>
+        {@render face()}
+      </a>
+    {/if}
+  </div>
 
   {#if about}
-    <!-- Introduction は展示 00。About ではタイトルとして扱う。 -->
-    <TitleCaption no="00" title="へのへのん" />
+    <!-- Introduction は展示 00。About ではタイトル＝Home への戻りリンク。 -->
+    <a class="title-link" href="/" aria-label="Home へ戻る" data-sveltekit-noscroll>
+      <TitleCaption no="00" title="へのへのん" />
+    </a>
   {:else}
     <div class="text-caption">
       <p>初めまして、へのへのんと申します。</p>
@@ -56,10 +65,19 @@
 
 <section class="gallery">
   {#each exhibits as e (e.id)}
-    <a class="exhibit" id={e.id} href="/focus/{e.id}" onclick={(event) => markExhibitOrigin(event, about)}>
-      <div class="icon"></div>
-      <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
-    </a>
+    <div class="exhibit" id={e.id}>
+      <a
+        class="icon-link"
+        href="/focus/{e.id}"
+        aria-label={e.title}
+        onclick={(event) => markExhibitOrigin(event, about)}
+      >
+        <div class="icon"></div>
+      </a>
+      <a class="title-link" href="/focus/{e.id}" onclick={(event) => markExhibitOrigin(event, about)}>
+        <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
+      </a>
+    </div>
   {/each}
 </section>
 

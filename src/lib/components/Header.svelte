@@ -17,5 +17,5 @@
 </script>
 
 <header class="site-header" class:visible>
-  <a class="about-link" href="/about">About</a>
+  <a class="about-link" href="/about" data-sveltekit-noscroll>About</a>
 </header>

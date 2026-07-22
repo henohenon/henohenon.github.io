@@ -27,5 +27,7 @@
     {/if}
   </main>
 
-  <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
+  <a class="title-link" href="{nav.from}#{e.id}" aria-label="Gallery へ戻る">
+    <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
+  </a>
 </section>

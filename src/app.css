@@ -30,20 +30,23 @@ body {
   font-size: 0.9rem;
 }
 
-/* タイポグラフィ（顔）は About へのリンク。
-   下部キャプションより上の領域いっぱいに広げ、その中で中央寄せ。 */
-.face-link {
+/* 顔を「トップ〜下部キャプション間」の中央に置く領域（非リンク）。 */
+.face-area {
   flex: 1;
   min-height: 0;
   display: grid;
   place-items: center;
+}
+
+/* タイポグラフィ（顔）は About へのリンク。判定は顔＋少し余白まで（padding）。 */
+.face-link {
+  padding: 16px 28px;
   color: inherit;
   text-decoration: none;
 }
 
-/* About の Introduction タイトル（00 へのへのん）は左下。 */
-.introduction .title-caption {
-  align-self: flex-start;
+/* About の Introduction タイトル（00 へのへのん）は左下。Home への戻りリンク。 */
+.introduction .title-link {
   margin: 0 0 24px 24px;
 }
 
@@ -58,8 +61,12 @@ body {
   box-sizing: border-box;
 }
 
-/* About の右上リンク（X / GitHub / More）。見た目は Focus の details と共通。
+/* About の右上リンク（X / GitHub / More）。見た目・にじみ出る遷移とも Focus の details と共通。
    × を右上角に置き、リンクはその下に並べる。 */
+.intro-links {
+  view-transition-name: about-caption;
+}
+
 .intro-links-row {
   display: flex;
   gap: 16px;
@@ -115,14 +122,25 @@ body {
   gap: 64px 48px;
 }
 
-/* Exhibit：Icon + title-caption 一式。Focus への遷移リンク。 */
+/* Exhibit：Icon + title-caption 一式。Icon のみが Focus への遷移リンク。 */
 .exhibit {
   display: flex;
   flex-direction: column;
   gap: 12px;
   box-sizing: border-box;
-  text-decoration: none;
+}
+
+/* Icon / Title それぞれを Focus への遷移リンクに（カード全体ではなく要素だけ）。 */
+.icon-link {
+  display: block;
   color: inherit;
+  text-decoration: none;
+}
+
+.title-link {
+  align-self: flex-start;
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Icon：作品本体（当面は空プレースホルダ）。 */
@@ -130,6 +148,12 @@ body {
   width: 100%;
   aspect-ratio: 1 / 1;
   background: #f4f4f4;
+}
+
+/* Gallery のタイトルは Focus（等倍）基準の 0.7 倍。モーフで 0.7→1.0 に育つ。 */
+.exhibit .title-caption {
+  transform: scale(0.7);
+  transform-origin: left top;
 }
 
 .title-caption {
@@ -247,15 +271,12 @@ body {
   color: #111;
 }
 
-/* Focus 内の title-caption は左下に固定し、1.5 倍で表示。
-   角（左下）を基点に拡大するので、モーフ時に移動しながら育つ。 */
-.focus .title-caption {
+/* Focus 内の title は左下に固定（等倍を基準）。リンク側を positioned に。 */
+.focus .title-link {
   position: absolute;
   left: 24px;
   bottom: 24px;
   z-index: 2;
-  transform: scale(1.5);
-  transform-origin: left bottom;
 }
 
 .footer {
@@ -317,14 +338,17 @@ html.vt-rise::view-transition-old(root) {
   }
 }
 
-/* 詳細キャプションは「にじみ出る」— ぼかし＋透明から、少し遅れて染み出す。 */
-::view-transition-new(details) {
-  animation: details-seep-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
+/* キャプションカード（Focus の details / About の右上リンク）は「にじみ出る」—
+   ぼかし＋透明から、少し遅れて染み出す。両者で共通。 */
+::view-transition-new(details),
+::view-transition-new(about-caption) {
+  animation: card-seep-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
 }
-::view-transition-old(details) {
-  animation: details-seep-out 0.35s ease both;
+::view-transition-old(details),
+::view-transition-old(about-caption) {
+  animation: card-seep-out 0.35s ease both;
 }
-@keyframes details-seep-in {
+@keyframes card-seep-in {
   from {
     opacity: 0;
     filter: blur(14px);
@@ -334,7 +358,7 @@ html.vt-rise::view-transition-old(root) {
     filter: blur(0);
   }
 }
-@keyframes details-seep-out {
+@keyframes card-seep-out {
   to {
     opacity: 0;
     filter: blur(14px);

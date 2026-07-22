@@ -46,10 +46,11 @@ function setFaceName(value: 'none' | '') {
   if (face) face.style.viewTransitionName = value
 }
 
-/** Exhibit クリック時：戻り先ルートを控え、ズーム原点を記録する。 */
+/** Exhibit クリック時：戻り先ルートを控え、ズーム原点（Icon 中心）を記録する。
+ *  icon / title どちらのリンクから来ても、原点は Exhibit の Icon に合わせる。 */
 export function markExhibitOrigin(event: MouseEvent, about: boolean) {
   nav.from = about ? '/about' : '/'
-  setOrigin(event.currentTarget as HTMLElement)
+  setOrigin((event.currentTarget as HTMLElement).closest('.exhibit'))
 }
 
 /** ハッシュ #id の Exhibit を画面中央へ（View Transitions 非対応時のフォールバックも兼ねる）。 */
