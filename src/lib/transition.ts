@@ -29,21 +29,6 @@ function setOrigin(container: Element | null) {
   s.setProperty('--vt-dy', `${(window.innerHeight / 2 - py) * DRIFT_Y}px`)
 }
 
-// ハッシュ #id の Exhibit をスクロールで見せる。位置合わせは CSS の scroll-margin-top 任せ
-// （scrollIntoView は block:start なので scroll-margin を尊重）。
-function scrollHashIntoView() {
-  const id = location.hash.slice(1)
-  if (id) document.getElementById(id)?.scrollIntoView()
-}
-
-// ズーム原点をリセット（CSS 既定の 50%/0 = 画面中央から）。
-function clearOrigin() {
-  const s = root().style
-  s.removeProperty('--vt-x')
-  s.removeProperty('--vt-y')
-  s.removeProperty('--vt-dx')
-  s.removeProperty('--vt-dy')
-}
 
 // Gallery のタイトルのうち name の 1 枚だけ残し、他は none（root のズームに含める）。
 function keepOnlyTitle(name: string) {
@@ -70,11 +55,6 @@ function setFaceName(value: 'none' | '') {
 export function markExhibitOrigin(event: MouseEvent, about: boolean) {
   nav.from = about ? '/about' : '/'
   setOrigin((event.currentTarget as HTMLElement).closest('.exhibit'))
-}
-
-/** afterNavigate 用：スクロール復元より後に、ハッシュ #id を中央着地させ直す。 */
-export function centerHashExhibit() {
-  requestAnimationFrame(scrollHashIntoView)
 }
 
 /** onNavigate 用：dive/rise ズームと顔モーフを演出する。 */
@@ -104,12 +84,12 @@ export function routeTransition(navigation: OnNavigate): Promise<void> | void {
     resolve()
     await navigation.complete
     if (rise) {
-      // 戻り先カードを中央着地（scroll-margin 尊重）させ、その状態で新フレームを捕捉。
-      // 復元に負けないよう afterNavigate 側でも再実行する。ズームは中央（既定原点）から。
-      keepOnlyTitle(`title-${navigation.from?.params?.id}`)
+      // 中央着地は #id ＋ scroll-margin のネイティブスクロール任せ。
+      // ズーム原点＋左右ドリフトは戻り先カードの実位置から算出。
+      const id = navigation.from?.params?.id
+      keepOnlyTitle(`title-${id}`)
       setFaceName('none')
-      scrollHashIntoView()
-      clearOrigin()
+      setOrigin(id ? document.getElementById(id) : null)
     }
   })
   vt.finished.finally(() => {

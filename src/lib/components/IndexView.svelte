@@ -2,17 +2,13 @@
   // index / about 共通ビュー。about のときは Introduction の内容が変化する
   // （frame.md: 基本は index と同じで Introduction のみ差し替え）。
   import { exhibits } from '$lib/exhibits/data'
-  import { afterNavigate } from '$app/navigation'
-  import { markExhibitOrigin, centerHashExhibit } from '$lib/transition'
+  import { markExhibitOrigin } from '$lib/transition'
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
   import TitleCaption from './TitleCaption.svelte'
   import CloseButton from './CloseButton.svelte'
 
   let { about = false }: { about?: boolean } = $props()
-
-  // #id 付きで到着したら、スクロール復元より後に中央着地させ直す。
-  afterNavigate(centerHashExhibit)
 </script>
 
 {#if !about}

@@ -12,7 +12,7 @@
 
 <section class="focus">
   <aside class="details-caption caption-card">
-    <CloseButton href="{nav.from}#{e.id}" noscroll />
+    <CloseButton href="{nav.from}#{e.id}" />
     <p class="detail">{e.detail}</p>
     <p class="role">{e.role}</p>
     <ul class="tech">
@@ -27,7 +27,7 @@
     {/if}
   </main>
 
-  <a class="title-link" href="{nav.from}#{e.id}" aria-label="Gallery へ戻る" data-sveltekit-noscroll>
+  <a class="title-link" href="{nav.from}#{e.id}" aria-label="Gallery へ戻る">
     <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
   </a>
 </section>
