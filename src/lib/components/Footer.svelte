@@ -1,11 +1,10 @@
 <script lang="ts">
   // フッター：index / about のみ。※ X リンクは Phase 3 で追加。
-  // 著作権表記は制作年（2026）を基点に、現在年が進んだら範囲表記へ。
-  const created = 2026
-  const now = new Date().getFullYear()
-  const years = now > created ? `${created}–${now}` : `${created}`
+  // 著作権年は手動更新（最終更新年を表す）。自動にしないのは、サイトを
+  // 放置したときに年だけ進み続けないようにするため。更新時にここを直す。
+  const year = '2026'
 </script>
 
 <footer class="footer">
-  <p>&copy; {years} henohenon</p>
+  <p>&copy; {year} henohenon</p>
 </footer>
