@@ -7,6 +7,7 @@
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
   import TitleCaption from './TitleCaption.svelte'
+  import CloseButton from './CloseButton.svelte'
 
   let { about = false }: { about?: boolean } = $props()
 
@@ -22,7 +23,7 @@
   {#if about}
     <!-- About の右上テキスト（introduction.md）。※自己紹介・資格/skills は今後。 -->
     <nav class="intro-links caption-card">
-      <a class="close" href="/" aria-label="閉じる">×</a>
+      <CloseButton href="/" />
       <div class="intro-links-row">
         <a href="https://x.com/henohenon_8282" target="_blank" rel="noopener">X</a>
         <a href="https://github.com/henohenon" target="_blank" rel="noopener">GitHub</a>

@@ -63,7 +63,6 @@ body {
 .intro-links-row {
   display: flex;
   gap: 16px;
-  margin-top: 10px;
   font-size: 0.9rem;
 }
 
@@ -172,7 +171,8 @@ body {
   top: 24px;
   right: 24px;
   z-index: 2;
-  padding: 16px 20px;
+  /* 上は × の分だけ広めに確保して本文と重ならないように。 */
+  padding: 34px 20px 16px;
   background: #111;
   color: #fff;
   box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.3);
@@ -186,14 +186,26 @@ body {
   view-transition-name: details;
 }
 
-/* キャプションカードの × 閉じるボタン（Focus の details / About のリンク集で共通）。 */
+/* キャプションカードの × 閉じるボタン（Focus の details / About のリンク集で共通）。
+   当たり判定は正方形で広め（padding を貫通して角まで届く）。 */
 .caption-card .close {
   position: absolute;
-  top: 8px;
-  right: 12px;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   color: #fff;
-  text-decoration: none;
-  font-size: 1.1rem;
+}
+
+.caption-card .close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 .details-caption .detail {

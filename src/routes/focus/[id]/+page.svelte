@@ -4,6 +4,7 @@
   import type { PageData } from './$types'
   import { nav } from '$lib/nav.svelte'
   import TitleCaption from '$lib/components/TitleCaption.svelte'
+  import CloseButton from '$lib/components/CloseButton.svelte'
 
   let { data }: { data: PageData } = $props()
   const e = $derived(data.exhibit)
@@ -11,7 +12,7 @@
 
 <section class="focus">
   <aside class="details-caption caption-card">
-    <a class="close" href="{nav.from}#{e.id}" aria-label="閉じる">×</a>
+    <CloseButton href="{nav.from}#{e.id}" />
     <p class="detail">{e.detail}</p>
     <p class="role">{e.role}</p>
     <ul class="tech">
