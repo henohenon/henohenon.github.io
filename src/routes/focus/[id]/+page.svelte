@@ -9,7 +9,7 @@
 </script>
 
 <section class="focus">
-  <aside class="details-caption">
+  <aside class="details-caption caption-card">
     <a class="close" href="/" aria-label="閉じる">×</a>
     <p class="detail">{e.detail}</p>
     <p class="role">{e.role}</p>
