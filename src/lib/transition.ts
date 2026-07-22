@@ -1,0 +1,100 @@
+// ルート遷移の演出ロジックを 1 か所に集約する。
+// - Gallery↔Focus: クリックした Icon を中心に index 全体をズーム（dive/rise）。
+// - Introduction↔About: 顔タイポグラフィを同要素モーフ。
+// - title / face の view-transition-name は「対象 1 枚だけ残す」よう出し入れする。
+// View Transitions 非対応ブラウザでは即時遷移にフォールバックする。
+import type { OnNavigate } from '@sveltejs/kit'
+import { nav } from './nav.svelte'
+
+const GALLERY_ROUTES = new Set(['/', '/about'])
+const root = () => document.documentElement
+
+// 要素（Exhibit or Focus 内カード）の .icon 中心を、ズーム原点 CSS 変数に記録。
+function setOrigin(container: Element | null) {
+  const icon = container?.querySelector('.icon')
+  if (!icon) return
+  const r = icon.getBoundingClientRect()
+  root().style.setProperty('--vt-x', `${r.left + r.width / 2}px`)
+  root().style.setProperty('--vt-y', `${r.top + r.height / 2}px`)
+}
+
+// id の Exhibit を画面中央へ寄せ、その要素を返す。
+function centerExhibit(id: string | null | undefined): HTMLElement | null {
+  if (!id) return null
+  const el = document.getElementById(id)
+  el?.scrollIntoView({ block: 'center', behavior: 'auto' })
+  return el
+}
+
+// Gallery のタイトルのうち name の 1 枚だけ残し、他は none（root のズームに含める）。
+function keepOnlyTitle(name: string) {
+  for (const el of document.querySelectorAll<HTMLElement>('.gallery .title-caption[data-vt]')) {
+    el.style.viewTransitionName = el.dataset.vt === name ? name : 'none'
+  }
+}
+
+// 全タイトルの view-transition-name を元に戻す。
+function restoreTitles() {
+  for (const el of document.querySelectorAll<HTMLElement>('.gallery .title-caption[data-vt]')) {
+    el.style.viewTransitionName = el.dataset.vt ?? ''
+  }
+}
+
+// 顔タイポグラフィの名前を切替（'none' で外す / '' で CSS の face に戻す）。
+function setFaceName(value: 'none' | '') {
+  const face = document.querySelector<HTMLElement>('.face')
+  if (face) face.style.viewTransitionName = value
+}
+
+/** Exhibit クリック時：戻り先ルートを控え、ズーム原点を記録する。 */
+export function markExhibitOrigin(event: MouseEvent, about: boolean) {
+  nav.from = about ? '/about' : '/'
+  setOrigin(event.currentTarget as HTMLElement)
+}
+
+/** ハッシュ #id の Exhibit を画面中央へ（View Transitions 非対応時のフォールバックも兼ねる）。 */
+export function centerHashExhibit() {
+  centerExhibit(location.hash.slice(1) || null)
+}
+
+/** onNavigate 用：dive/rise ズームと顔モーフを演出する。 */
+export function routeTransition(navigation: OnNavigate): Promise<void> | void {
+  if (!document.startViewTransition) return
+
+  const from = navigation.from?.route.id
+  const to = navigation.to?.route.id
+  const el = root()
+  const dive = to === '/focus/[id]' && !!from && GALLERY_ROUTES.has(from)
+  const rise = from === '/focus/[id]' && !!to && GALLERY_ROUTES.has(to)
+
+  if (dive) {
+    el.classList.add('vt-dive')
+    // 遷移元（Gallery）で、行き先の作品タイトルだけ残す。顔はズームに含める。
+    keepOnlyTitle(`title-${navigation.to?.params?.id}`)
+    setFaceName('none')
+  } else if (rise) {
+    el.classList.add('vt-rise')
+  }
+
+  // SvelteKit の DOM 差し替えと View Transitions のキャプチャを噛み合わせる。
+  //   resolve()                 … 旧フレーム捕捉後に「DOM を差し替えてよい」と通知
+  //   await navigation.complete … 差し替え完了を待ってから新フレームを捕捉
+  const { promise, resolve } = Promise.withResolvers<void>()
+  const vt = document.startViewTransition(async () => {
+    resolve()
+    await navigation.complete
+    if (rise) {
+      // 遷移先（Gallery）で、戻り元カードを中央へ寄せ、ズーム原点もそこに。
+      const id = navigation.from?.params?.id
+      keepOnlyTitle(`title-${id}`)
+      setFaceName('none')
+      setOrigin(centerExhibit(id))
+    }
+  })
+  vt.finished.finally(() => {
+    el.classList.remove('vt-dive', 'vt-rise')
+    restoreTitles()
+    setFaceName('')
+  })
+  return promise
+}

@@ -58,14 +58,16 @@ body {
   box-sizing: border-box;
 }
 
-/* About の右上リンク（X / GitHub / More）。見た目は Focus の details と共通。 */
-.intro-links {
+/* About の右上リンク（X / GitHub / More）。見た目は Focus の details と共通。
+   × を右上角に置き、リンクはその下に並べる。 */
+.intro-links-row {
   display: flex;
   gap: 16px;
+  margin-top: 10px;
   font-size: 0.9rem;
 }
 
-.intro-links a {
+.intro-links-row a {
   color: #fff;
   text-decoration: none;
 }
@@ -75,6 +77,8 @@ body {
   font-size: 2rem;
   line-height: 1.4;
   text-align: center;
+  /* index↔about で同要素として移動（dive/rise 時は JS で一時的に外す）。 */
+  view-transition-name: face;
 }
 
 .text-caption {
@@ -178,9 +182,12 @@ body {
 .details-caption {
   width: 380px;
   max-width: calc(100% - 48px);
+  /* 遷移で「にじみ出る」ため、専用レイヤーに分離。 */
+  view-transition-name: details;
 }
 
-.details-caption .close {
+/* キャプションカードの × 閉じるボタン（Focus の details / About のリンク集で共通）。 */
+.caption-card .close {
   position: absolute;
   top: 8px;
   right: 12px;
@@ -228,12 +235,15 @@ body {
   color: #111;
 }
 
-/* Focus 内の title-caption は左下に固定。 */
+/* Focus 内の title-caption は左下に固定し、1.5 倍で表示。
+   角（左下）を基点に拡大するので、モーフ時に移動しながら育つ。 */
 .focus .title-caption {
   position: absolute;
   left: 24px;
   bottom: 24px;
   z-index: 2;
+  transform: scale(1.5);
+  transform-origin: left bottom;
 }
 
 .footer {
@@ -245,4 +255,76 @@ body {
 .copyright {
   color: #111;
   text-decoration: none;
+}
+
+/* ---- ルート遷移（View Transitions） ---- */
+
+/* 遷移全体の尺を揃える（title-caption のモーフ等も含む）。 */
+::view-transition-group(*) {
+  animation-duration: 0.42s;
+}
+
+/* Gallery→Focus：index 全体をアイコン中心に拡大しながらフェードアウト。 */
+html.vt-dive::view-transition-old(root) {
+  transform-origin: var(--vt-x, 50%) var(--vt-y, 50%);
+  animation: vt-zoom-out 0.42s ease both;
+}
+html.vt-dive::view-transition-new(root) {
+  animation: vt-fade-in 0.42s ease both;
+}
+
+/* Focus→Gallery：アイコン中心に縮小しながら現れる（逆再生）。 */
+html.vt-rise::view-transition-new(root) {
+  transform-origin: var(--vt-x, 50%) var(--vt-y, 50%);
+  animation: vt-zoom-in 0.42s ease both;
+}
+html.vt-rise::view-transition-old(root) {
+  animation: vt-fade-out 0.42s ease both;
+}
+
+@keyframes vt-zoom-out {
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes vt-zoom-in {
+  from {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* 詳細キャプションは「にじみ出る」— ぼかし＋透明から、少し遅れて染み出す。 */
+::view-transition-new(details) {
+  animation: details-seep-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
+}
+::view-transition-old(details) {
+  animation: details-seep-out 0.35s ease both;
+}
+@keyframes details-seep-in {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes details-seep-out {
+  to {
+    opacity: 0;
+    filter: blur(14px);
+  }
 }
