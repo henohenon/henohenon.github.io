@@ -23,7 +23,10 @@ click me!や、about...みたいな💭がたまに出てくる（作品のほ�
 右上のテキストは次の情報を持つ
 - 自己紹介
 - X, Githubへのリンク
+  - https://github.com/henohenon
+  - https://x.com/henohenon_8282
 - のへのリンク(More)
+  - https://henohenon-no.pages.dev/henohenon/
 - 資格・skills
   - 膨大になりすぎるよなぁ。どうしよ。資格はまぁそのままでもいけるとして、Skillsはなぁ、、二次元的な表現がベターだし...電光掲示板にして流すか(?)
 

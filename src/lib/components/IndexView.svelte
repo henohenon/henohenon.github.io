@@ -8,9 +8,20 @@
   let { about = false }: { about?: boolean } = $props()
 </script>
 
-<Header home={about} />
+{#if !about}
+  <Header />
+{/if}
 
 <section class="introduction">
+  {#if about}
+    <!-- About の右上テキスト（introduction.md）。※自己紹介・資格/skills は今後。 -->
+    <nav class="intro-links">
+      <a href="https://x.com/henohenon_8282" target="_blank" rel="noopener">X</a>
+      <a href="https://github.com/henohenon" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://henohenon-no.pages.dev/henohenon/" target="_blank" rel="noopener">More</a>
+    </nav>
+  {/if}
+
   <pre class="face">へ　へ
 の　の
 　ん</pre>

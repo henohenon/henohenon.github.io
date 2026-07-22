@@ -34,6 +34,21 @@ body {
   box-sizing: border-box;
 }
 
+/* About の右上リンク（X / GitHub / More）。 */
+.intro-links {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+}
+
+.intro-links a {
+  color: #111;
+  text-decoration: none;
+}
+
 .face {
   margin: 0;
   font-size: 2rem;
