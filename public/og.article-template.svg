@@ -1,64 +1,79 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="gradPink" cx="15%" cy="10%" r="55%">
-      <stop offset="0%" stop-color="#ff4fd8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#ff4fd8" stop-opacity="0"/>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffcf9e"/>
+      <stop offset="55%" stop-color="#f2ead9"/>
+      <stop offset="100%" stop-color="#ffcf9e"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="0%" r="75%">
+      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0.30"/>
+      <stop offset="60%" stop-color="#ff8c5a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gradTeal" cx="85%" cy="92%" r="55%">
-      <stop offset="0%" stop-color="#45f5d0" stop-opacity="0.30"/>
-      <stop offset="100%" stop-color="#45f5d0" stop-opacity="0"/>
+    <radialGradient id="sandGlow" cx="85%" cy="100%" r="70%">
+      <stop offset="0%" stop-color="#c9a876" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="#c9a876" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1.3" fill="#3a2f57" opacity="0.55"/>
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ff8c5a" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ff8c5a" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="glasspane" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M100 0 L0 0 0 100" fill="none" stroke="#f2ead9" stroke-opacity="0.05" stroke-width="1"/>
     </pattern>
-    <pattern id="scan" width="5" height="5" patternUnits="userSpaceOnUse">
-      <rect x="0" y="0" width="2" height="5" fill="#ff4fd8" opacity="0.04"/>
-    </pattern>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="11"/>
     </filter>
+    <g id="petalFlower">
+      <ellipse cx="0" cy="-14" rx="7" ry="14" fill="currentColor"/>
+      <ellipse cx="0" cy="-14" rx="7" ry="14" fill="currentColor" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-14" rx="7" ry="14" fill="currentColor" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-14" rx="7" ry="14" fill="currentColor" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-14" rx="7" ry="14" fill="currentColor" transform="rotate(288)"/>
+      <circle cx="0" cy="0" r="6" fill="currentColor"/>
+    </g>
   </defs>
 
-  <rect width="1200" height="630" fill="#14101f"/>
-  <rect width="1200" height="630" fill="url(#gradPink)"/>
-  <rect width="1200" height="630" fill="url(#gradTeal)"/>
-  <rect width="1200" height="630" fill="url(#dots)"/>
-  <rect width="1200" height="630" fill="url(#scan)"/>
+  <!-- 背景 -->
+  <rect x="0" y="0" width="1200" height="630" fill="#14201f"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#sunGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#sandGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glasspane)" opacity="0.55"/>
 
-  <g opacity="0.14">
-    <circle cx="980" cy="500" r="78" fill="none" stroke="#45f5d0" stroke-width="16"/>
-    <line x1="1038" y1="558" x2="1180" y2="610" stroke="#45f5d0" stroke-width="22" stroke-linecap="round"/>
-  </g>
+  <!-- 温室越しの陽だまり (ボケ) -->
+  <circle cx="170" cy="110" r="60" fill="#ff8c5a" opacity="0.12" filter="url(#softGlow)"/>
+  <circle cx="980" cy="130" r="80" fill="#ffcf9e" opacity="0.10" filter="url(#softGlow)"/>
+  <circle cx="1080" cy="520" r="70" fill="#c9a876" opacity="0.12" filter="url(#softGlow)"/>
 
-  <rect x="24" y="24" width="1152" height="582" rx="18" fill="none" stroke="#3a2f57" stroke-width="2" opacity="0.5"/>
+  <!-- 割れたガラスの罅 -->
+  <path d="M1200 0 L1082 96 L1132 150 L1006 232 L1058 300" stroke="#c9a876" stroke-width="1.2" fill="none" opacity="0.20"/>
+  <path d="M1200 40 L1120 40 L1160 110" stroke="#f2ead9" stroke-width="1" fill="none" opacity="0.12"/>
+  <path d="M0 630 L100 520 L60 470 L150 400" stroke="#c9a876" stroke-width="1.2" fill="none" opacity="0.18"/>
 
-  <rect x="0" y="0" width="10" height="630" fill="#45f5d0"/>
+  <!-- 咲く花のシルエット -->
+  <use href="#petalFlower" transform="translate(1122,86) scale(1.2)" color="#ffcf9e" opacity="0.32"/>
+  <use href="#petalFlower" transform="translate(78,566) scale(1.7)" color="#ff8c5a" opacity="0.22"/>
+  <use href="#petalFlower" transform="translate(1132,586) scale(1.0)" color="#c9a876" opacity="0.28"/>
+  <use href="#petalFlower" transform="translate(1010,540) scale(0.65) rotate(20)" color="#ff8c5a" opacity="0.18"/>
+  <use href="#petalFlower" transform="translate(140,90) scale(0.5) rotate(-15)" color="#ffcf9e" opacity="0.16"/>
 
-  <line x1="60" y1="150" x2="1140" y2="150" stroke="#3a2f57" stroke-width="2" stroke-dasharray="10 8" opacity="0.9"/>
+  <!-- 外枠 (ガラスの器) -->
+  <rect x="24" y="24" width="1152" height="582" rx="14" ry="14" fill="none" stroke="#ffcf9e" stroke-opacity="0.16" stroke-width="2"/>
 
-  <g>
-    <rect x="900" y="46" width="70" height="10" fill="#ff4fd8" opacity="0.55" transform="rotate(-2 935 51)"/>
-    <rect x="985" y="66" width="110" height="8" fill="#45f5d0" opacity="0.5" transform="rotate(1.5 1040 70)"/>
-    <rect x="1060" y="40" width="50" height="14" fill="#ffe14d" opacity="0.45" transform="rotate(-3 1085 47)"/>
-    <rect x="930" y="90" width="40" height="6" fill="#ff4fd8" opacity="0.4"/>
-    <circle cx="1145" cy="55" r="7" fill="#ff4fd8"/>
-  </g>
+  <!-- サイト名 -->
+  <use href="#petalFlower" transform="translate(46,72) scale(0.55)" color="#ff8c5a" opacity="0.6"/>
+  <text x="66" y="82" font-family="serif" font-size="30" fill="#f2ead9" letter-spacing="0.04em">へのへのんのの</text>
+  <line x1="60" y1="102" x2="420" y2="102" stroke="url(#lineGrad)" stroke-width="2"/>
 
-  <text x="70" y="102" font-family="sans-serif" font-size="40" font-weight="700" fill="#ff4fd8" opacity="0.55" transform="translate(-3,2)">へのへのんのの</text>
-  <text x="70" y="102" font-family="sans-serif" font-size="40" font-weight="700" fill="#45f5d0" opacity="0.55" transform="translate(3,-2)">へのへのんのの</text>
-  <text x="70" y="102" font-family="sans-serif" font-size="40" font-weight="700" fill="#ffe14d" filter="url(#glow)">へのへのんのの</text>
+  <!-- タイトルを包む温室ガラスの器 -->
+  <rect x="50" y="190" width="1100" height="290" rx="18" ry="18" fill="#f2ead9" fill-opacity="0.06" stroke="#ffcf9e" stroke-opacity="0.14" stroke-width="1"/>
 
-  <rect x="66" y="270" width="10" height="80" fill="#45f5d0" opacity="0.85"/>
+  <!-- 記事タイトル -->
+  <text x="90" y="358" font-family="serif" font-size="76" fill="none" stroke="#14201f" stroke-width="14" stroke-linejoin="round" opacity="0.55">{{TITLE}}</text>
+  <text x="90" y="358" font-family="serif" font-size="76" fill="url(#titleGrad)">{{TITLE}}</text>
 
-  <text x="94" y="340" font-family="sans-serif" font-size="72" font-weight="700" fill="#ff4fd8" opacity="0.5" transform="translate(-4,3)">{{TITLE}}</text>
-  <text x="94" y="340" font-family="sans-serif" font-size="72" font-weight="700" fill="#45f5d0" opacity="0.5" transform="translate(4,-3)">{{TITLE}}</text>
-  <text x="94" y="340" font-family="sans-serif" font-size="72" font-weight="700" fill="#f4eefc">{{TITLE}}</text>
+  <line x1="90" y1="428" x2="640" y2="428" stroke="#ff8c5a" stroke-width="2" stroke-dasharray="8 8" opacity="0.4"/>
 
-  <path d="M 94 372 q 15 -14 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0 t 30 0" stroke="#ffe14d" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.85"/>
-
-  <rect x="0" y="622" width="1200" height="8" fill="#ff4fd8"/>
+  <!-- 下部装飾線 -->
+  <line x1="24" y1="596" x2="1176" y2="596" stroke="#c9a876" stroke-opacity="0.25" stroke-width="1"/>
 </svg>

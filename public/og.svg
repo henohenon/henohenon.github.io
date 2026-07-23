@@ -1,64 +1,90 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="pinkGlow" cx="15%" cy="12%" r="55%">
-      <stop offset="0%" stop-color="#ff4fd8" stop-opacity="0.38"/>
-      <stop offset="100%" stop-color="#ff4fd8" stop-opacity="0"/>
+    <radialGradient id="topGlow" cx="50%" cy="-8%" r="65%">
+      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0.32"/>
+      <stop offset="60%" stop-color="#ff8c5a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="tealGlow" cx="85%" cy="90%" r="55%">
-      <stop offset="0%" stop-color="#45f5d0" stop-opacity="0.32"/>
-      <stop offset="100%" stop-color="#45f5d0" stop-opacity="0"/>
+    <radialGradient id="sandGlow" cx="82%" cy="102%" r="65%">
+      <stop offset="0%" stop-color="#c9a876" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="#c9a876" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="yellowGlow" cx="50%" cy="45%" r="50%">
-      <stop offset="0%" stop-color="#ffe14d" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ffe14d" stop-opacity="0"/>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0.30"/>
+      <stop offset="45%" stop-color="#ff8c5a" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ff8c5a" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="scan" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(90)">
-      <rect x="0" y="0" width="8" height="8" fill="none"/>
-      <rect x="0" y="0" width="2" height="8" fill="#ff4fd8" opacity="0.05"/>
-    </pattern>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ff8c5a" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#ff8c5a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="panelStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcf9e" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#c9a876" stop-opacity="0.12"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softblur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
   </defs>
 
-  <!-- base -->
-  <rect x="0" y="0" width="1200" height="630" fill="#14101f"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#pinkGlow)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#tealGlow)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#yellowGlow)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
+  <!-- base background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#14201f"/>
 
-  <!-- frame -->
-  <rect x="0" y="0" width="1200" height="7" fill="#ff4fd8"/>
-  <rect x="0" y="623" width="1200" height="7" fill="#45f5d0"/>
-  <rect x="26" y="26" width="1148" height="578" fill="none" stroke="#3a2f57" stroke-width="2" stroke-dasharray="9 7"/>
+  <!-- ambient glows, echoing body background of theme.css -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#topGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#sandGlow)"/>
 
-  <!-- corner glitch bits -->
-  <rect x="60" y="70" width="70" height="6" fill="#ff4fd8" opacity="0.55"/>
-  <rect x="60" y="82" width="40" height="4" fill="#45f5d0" opacity="0.5"/>
-  <rect x="1070" y="540" width="70" height="6" fill="#45f5d0" opacity="0.55"/>
-  <rect x="1100" y="552" width="40" height="4" fill="#ffe14d" opacity="0.5"/>
+  <!-- distant sun behind the glasshouse -->
+  <circle cx="600" cy="150" r="300" fill="url(#sunGlow)"/>
+  <circle cx="600" cy="150" r="46" fill="#ffcf9e" opacity="0.20" filter="url(#softblur)"/>
 
-  <!-- eyebrow -->
-  <text x="600" y="118" font-family="sans-serif" font-size="22" font-weight="700" fill="#ffe14d" text-anchor="middle" letter-spacing="6" opacity="0.9">本日のBGM再生中</text>
+  <!-- scattered petals, drifting in the greenhouse light -->
+  <g fill="#ff8c5a">
+    <text x="96" y="112" font-size="34" opacity="0.35" transform="rotate(-12 96 112)">✿</text>
+    <text x="1096" y="150" font-size="26" opacity="0.28" transform="rotate(18 1096 150)">✿</text>
+    <text x="150" y="540" font-size="22" opacity="0.22" transform="rotate(8 150 540)">✿</text>
+    <text x="1060" y="520" font-size="40" opacity="0.30" transform="rotate(-10 1060 520)">✿</text>
+    <text x="70" y="330" font-size="18" opacity="0.18" transform="rotate(20 70 330)">✿</text>
+    <text x="1130" y="360" font-size="20" opacity="0.20" transform="rotate(-16 1130 360)">✿</text>
+  </g>
 
-  <!-- glitch title layers -->
-  <text x="596" y="298" font-family="sans-serif" font-size="128" font-weight="900" fill="#ff4fd8" text-anchor="middle" opacity="0.55">へのへのんのの</text>
-  <text x="604" y="302" font-family="sans-serif" font-size="128" font-weight="900" fill="#45f5d0" text-anchor="middle" opacity="0.5">へのへのんのの</text>
-  <text x="600" y="300" font-family="sans-serif" font-size="128" font-weight="900" fill="#f4eefc" text-anchor="middle">へのへのんのの</text>
+  <!-- glasshouse pane holding the title -->
+  <rect x="130" y="176" width="940" height="300" rx="26"
+        fill="rgba(242,234,217,0.05)" stroke="url(#panelStroke)" stroke-width="1.4"/>
 
-  <!-- divider -->
-  <line x1="470" y1="336" x2="730" y2="336" stroke="#3a2f57" stroke-width="2" stroke-dasharray="4 5"/>
+  <!-- top border accent, echoing .site-header::after -->
+  <rect x="130" y="176" width="940" height="1" fill="url(#lineGrad)"/>
 
-  <!-- track label -->
-  <text x="600" y="378" font-family="sans-serif" font-size="19" fill="#cfc3e8" text-anchor="middle" letter-spacing="4">TODAY'S TRACK</text>
+  <!-- site name: the star of the card -->
+  <text x="600" y="330" text-anchor="middle" font-family="serif" font-size="124"
+        fill="#ffcf9e" filter="url(#glow)" letter-spacing="4">へのへのんのの</text>
 
-  <!-- song title -->
-  <text x="600" y="428" font-family="sans-serif" font-size="42" font-weight="700" fill="#ff4fd8" text-anchor="middle">AutoCorrection</text>
+  <!-- dashed divider, echoing article.post h1/h2/h3 border-bottom -->
+  <line x1="330" y1="368" x2="870" y2="368" stroke="#ff8c5a" stroke-opacity="0.35"
+        stroke-width="1.5" stroke-dasharray="6 8"/>
 
-  <!-- artist -->
-  <text x="600" y="468" font-family="sans-serif" font-size="25" fill="#45f5d0" text-anchor="middle">NonsenseNH feat. 重音テト</text>
+  <!-- subtitle label -->
+  <text x="600" y="404" text-anchor="middle" font-family="sans-serif" font-size="24"
+        fill="#c9a876" letter-spacing="2">本日の一曲</text>
 
-  <!-- tags -->
-  <text x="600" y="502" font-family="sans-serif" font-size="19" fill="#cfc3e8" text-anchor="middle" opacity="0.85">英語 ・ 重音テトSV2</text>
+  <!-- today's song: subordinate to the site name -->
+  <text x="600" y="446" text-anchor="middle" font-family="serif" font-size="40"
+        fill="#ff8c5a" font-style="italic">Flower Man</text>
 
-  <!-- footer mark -->
-  <text x="600" y="580" font-family="sans-serif" font-size="16" fill="#3a2f57" text-anchor="middle" letter-spacing="3">henohenononono.blog</text>
+  <!-- artist credit, smallest tier -->
+  <text x="600" y="480" text-anchor="middle" font-family="sans-serif" font-size="22"
+        fill="#c9a876" opacity="0.9">Toby Fox, かめりあ</text>
+
+  <!-- footer band, echoing .site-footer -->
+  <rect x="0" y="576" width="1200" height="54" fill="#1c2b29"/>
+  <rect x="0" y="576" width="1200" height="1" fill="#c9a876" opacity="0.28"/>
+  <text x="600" y="610" text-anchor="middle" font-family="sans-serif" font-size="18"
+        fill="#f2ead9" opacity="0.55" letter-spacing="3">曇りガラスの温室に射す夕陽</text>
 </svg>
