@@ -1,90 +1,100 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="topGlow" cx="50%" cy="-8%" r="65%">
-      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0.32"/>
-      <stop offset="60%" stop-color="#ff8c5a" stop-opacity="0"/>
+    <radialGradient id="glowTL" cx="20%" cy="-10%" r="65%">
+      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#7a1626" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="sandGlow" cx="82%" cy="102%" r="65%">
-      <stop offset="0%" stop-color="#c9a876" stop-opacity="0.22"/>
-      <stop offset="70%" stop-color="#c9a876" stop-opacity="0"/>
+    <radialGradient id="glowBR" cx="90%" cy="115%" r="70%">
+      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#7a1626" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0.30"/>
-      <stop offset="45%" stop-color="#ff8c5a" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ff8c5a" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff8c5a" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ff8c5a" stop-opacity="0.75"/>
-      <stop offset="100%" stop-color="#ff8c5a" stop-opacity="0"/>
+    <linearGradient id="leftBar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff3355" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#7a1626" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="panelStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffcf9e" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#c9a876" stop-opacity="0.12"/>
+    <linearGradient id="underline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff3355" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ff3355" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff3355" stop-opacity="0"/>
     </linearGradient>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feFlood flood-color="#ff3355" flood-opacity="0.55" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="glow"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <filter id="softblur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4"/>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feFlood flood-color="#ff3355" flood-opacity="0.5" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
   </defs>
 
-  <!-- base background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#14201f"/>
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#0a0708"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowTL)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowBR)"/>
 
-  <!-- ambient glows, echoing body background of theme.css -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#topGlow)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#sandGlow)"/>
+  <!-- faint kanji watermarks, confession-room ambience -->
+  <text x="1010" y="560" font-family="serif" font-size="460" fill="#3a1218" fill-opacity="0.45" text-anchor="middle">命</text>
+  <text x="140" y="200" font-family="serif" font-size="220" fill="#3a1218" fill-opacity="0.3" text-anchor="middle">殺</text>
 
-  <!-- distant sun behind the glasshouse -->
-  <circle cx="600" cy="150" r="300" fill="url(#sunGlow)"/>
-  <circle cx="600" cy="150" r="46" fill="#ffcf9e" opacity="0.20" filter="url(#softblur)"/>
-
-  <!-- scattered petals, drifting in the greenhouse light -->
-  <g fill="#ff8c5a">
-    <text x="96" y="112" font-size="34" opacity="0.35" transform="rotate(-12 96 112)">✿</text>
-    <text x="1096" y="150" font-size="26" opacity="0.28" transform="rotate(18 1096 150)">✿</text>
-    <text x="150" y="540" font-size="22" opacity="0.22" transform="rotate(8 150 540)">✿</text>
-    <text x="1060" y="520" font-size="40" opacity="0.30" transform="rotate(-10 1060 520)">✿</text>
-    <text x="70" y="330" font-size="18" opacity="0.18" transform="rotate(20 70 330)">✿</text>
-    <text x="1130" y="360" font-size="20" opacity="0.20" transform="rotate(-16 1130 360)">✿</text>
+  <!-- confessional grille lines, side margins only -->
+  <g stroke="#3a1218" stroke-opacity="0.35" stroke-width="1">
+    <line x1="40" y1="0" x2="40" y2="630"/>
+    <line x1="66" y1="0" x2="66" y2="630"/>
+    <line x1="92" y1="0" x2="92" y2="630"/>
+    <line x1="118" y1="0" x2="118" y2="630"/>
+    <line x1="1082" y1="0" x2="1082" y2="630"/>
+    <line x1="1108" y1="0" x2="1108" y2="630"/>
+    <line x1="1134" y1="0" x2="1134" y2="630"/>
+    <line x1="1160" y1="0" x2="1160" y2="630"/>
   </g>
 
-  <!-- glasshouse pane holding the title -->
-  <rect x="130" y="176" width="940" height="300" rx="26"
-        fill="rgba(242,234,217,0.05)" stroke="url(#panelStroke)" stroke-width="1.4"/>
+  <!-- cracked mirror lines behind title -->
+  <g stroke="#7a1626" stroke-opacity="0.5" stroke-width="1.2" fill="none">
+    <path d="M 600 260 L 520 150 M 600 260 L 690 120 M 600 260 L 420 300 M 600 260 L 780 300 M 600 260 L 560 400 M 600 260 L 650 410"/>
+    <path d="M 520 150 L 470 90 M 690 120 L 740 60 M 420 300 L 340 330"/>
+  </g>
 
-  <!-- top border accent, echoing .site-header::after -->
-  <rect x="130" y="176" width="940" height="1" fill="url(#lineGrad)"/>
+  <!-- blood drips from top -->
+  <g fill="#ff3355" fill-opacity="0.55">
+    <path d="M 250 0 q 6 40 0 60 q -6 -6 -6 -20 q 0 -25 6 -40 z"/>
+    <path d="M 960 0 q 5 55 0 78 q -6 -8 -6 -26 q 0 -32 6 -52 z"/>
+    <path d="M 150 0 q 4 26 0 38 q -4 -4 -4 -13 q 0 -16 4 -25 z"/>
+  </g>
 
-  <!-- site name: the star of the card -->
-  <text x="600" y="330" text-anchor="middle" font-family="serif" font-size="124"
-        fill="#ffcf9e" filter="url(#glow)" letter-spacing="4">へのへのんのの</text>
+  <!-- left accent bar, echoing article.post::before -->
+  <rect x="0" y="0" width="5" height="630" fill="url(#leftBar)"/>
 
-  <!-- dashed divider, echoing article.post h1/h2/h3 border-bottom -->
-  <line x1="330" y1="368" x2="870" y2="368" stroke="#ff8c5a" stroke-opacity="0.35"
-        stroke-width="1.5" stroke-dasharray="6 8"/>
+  <!-- eyebrow label -->
+  <text x="600" y="150" font-family="sans-serif" font-size="24" letter-spacing="8" fill="#a98a8f" text-anchor="middle">TODAY'S SONG BLOG</text>
 
-  <!-- subtitle label -->
-  <text x="600" y="404" text-anchor="middle" font-family="sans-serif" font-size="24"
-        fill="#c9a876" letter-spacing="2">本日の一曲</text>
+  <!-- site title, the star -->
+  <text x="600" y="300" font-family="serif" font-size="132" font-weight="700" fill="#ece3e1" text-anchor="middle" filter="url(#glow)" letter-spacing="4">へのへのんのの</text>
 
-  <!-- today's song: subordinate to the site name -->
-  <text x="600" y="446" text-anchor="middle" font-family="serif" font-size="40"
-        fill="#ff8c5a" font-style="italic">Flower Man</text>
+  <!-- underline flourish -->
+  <rect x="350" y="336" width="500" height="2" fill="url(#underline)"/>
 
-  <!-- artist credit, smallest tier -->
-  <text x="600" y="480" text-anchor="middle" font-family="sans-serif" font-size="22"
-        fill="#c9a876" opacity="0.9">Toby Fox, かめりあ</text>
+  <!-- today's song label -->
+  <text x="600" y="410" font-family="sans-serif" font-size="22" letter-spacing="6" fill="#a98a8f" text-anchor="middle">本日の一曲</text>
 
-  <!-- footer band, echoing .site-footer -->
-  <rect x="0" y="576" width="1200" height="54" fill="#1c2b29"/>
-  <rect x="0" y="576" width="1200" height="1" fill="#c9a876" opacity="0.28"/>
-  <text x="600" y="610" text-anchor="middle" font-family="sans-serif" font-size="18"
-        fill="#f2ead9" opacity="0.55" letter-spacing="3">曇りガラスの温室に射す夕陽</text>
+  <!-- song title, subtitle -->
+  <text x="600" y="462" font-family="serif" font-size="38" fill="#ff3355" text-anchor="middle" filter="url(#softGlow)">醜い命、殺してくれる？</text>
+
+  <!-- artist -->
+  <text x="600" y="504" font-family="sans-serif" font-size="22" fill="#a98a8f" text-anchor="middle">ゐろは苹果 feat. v4 flower, Lily</text>
+
+  <!-- thin frame -->
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#3a1218" stroke-width="1"/>
 </svg>
