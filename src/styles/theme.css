@@ -1,169 +1,183 @@
 /*
- * 曲名: 醜い命、殺してくれる？
- * アーティスト: ゐろは苹果 feat. v4 flower, Lily
- * 一言ムード: 血の滲む懺悔室で、鏡に映る自分を殺したいほど憎む夜
+ * 曲名: Echoes
+ * アーティスト: Aa feat. 足立レイ AI
+ * 一言ムード: 誰もいない部屋に響き続ける声 ―― 冷たい静寂の中で揺れる、褪せた青のエコー
  */
 
 :root {
-  --color-fg: #ece3e1;
-  --color-bg: #0a0708;
-  --color-accent: #ff3355;
+  /* ===== ベースカラー: 誰もいなくなった部屋の夜 ===== */
+  --color-bg: #11141b;
+  --color-bg-raised: #171b24;
+  --color-fg: #e2e6ee;
+  --color-fg-muted: #8d97ab;
+  --color-accent: #7fa8c9;
+  --color-accent-dim: #4c6478;
+  --color-border: #2a2f3a;
 
-  --color-bg-raised: #150d0f;
-  --color-border: #3a1218;
-  --color-muted: #a98a8f;
-  --color-accent-dim: #7a1626;
-
+  /* ===== 間隔 ===== */
   --spacing-unit: 1rem;
 
-  --font-heading: 'Hiragino Mincho ProN', 'Yu Mincho', '游明朝', 'Noto Serif JP', 'Georgia', serif;
-  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', '游ゴシック', 'Meiryo', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* ===== フォント ===== */
+  --font-heading: 'Hiragino Mincho ProN', 'Yu Mincho', 'Shippori Mincho', serif;
+  --font-body: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic',
+    'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --line-height-body: 1.85;
-  --line-height-heading: 1.35;
+  /* ===== 行間: 声が響いて消えていく間 ===== */
+  --line-height-body: 1.9;
+  --line-height-heading: 1.5;
 
-  --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
+  /* ===== イージング: 反響のように減衰する ===== */
+  --ease-default: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
-html {
-  background: var(--color-bg);
-}
-
 body {
-  background:
-    radial-gradient(ellipse at 20% -10%, rgba(122, 22, 38, 0.28), transparent 55%),
-    radial-gradient(ellipse at 90% 110%, rgba(122, 22, 38, 0.18), transparent 60%),
-    var(--color-bg);
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    var(--color-bg-raised) 0%,
+    var(--color-bg) 70%
+  );
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  letter-spacing: 0.01em;
+  transition: background-color 0.6s var(--ease-default);
 }
 
-h1, h2, h3, h4, h5, h6,
-.site-title {
+h1,
+h2,
+h3,
+.site-header,
+.site-footer {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  color: var(--color-fg);
-  text-shadow: 0 0 calc(var(--spacing-unit) * 0.6) rgba(255, 51, 85, 0.35);
-  animation: kodou 3.6s var(--ease-default) infinite;
-}
-
-@keyframes kodou {
-  0%, 100% { text-shadow: 0 0 calc(var(--spacing-unit) * 0.4) rgba(255, 51, 85, 0.25); }
-  45% { text-shadow: 0 0 calc(var(--spacing-unit) * 0.9) rgba(255, 51, 85, 0.55); }
-  50% { text-shadow: 0 0 calc(var(--spacing-unit) * 0.5) rgba(255, 51, 85, 0.3); }
+  letter-spacing: 0.04em;
 }
 
 a {
   color: var(--color-accent);
-  text-decoration: underline;
   text-decoration-color: var(--color-accent-dim);
-  text-underline-offset: 0.2em;
-  transition: color 0.25s var(--ease-default), text-decoration-color 0.25s var(--ease-default);
+  transition: color 0.4s var(--ease-default), text-decoration-color 0.4s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: #ff7a91;
+  color: var(--color-fg);
   text-decoration-color: var(--color-accent);
 }
 
+/* ===== ヘッダー: 静まり返った部屋の入口 ===== */
 .site-header {
-  background: linear-gradient(180deg, rgba(122, 22, 38, 0.35), transparent);
+  position: relative;
+  background-color: var(--color-bg-raised);
+  color: var(--color-fg);
   border-bottom: 1px solid var(--color-border);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
 }
 
-.site-header .site-title {
-  position: relative;
-  display: inline-block;
-}
-
-.site-header .site-title::after {
-  content: "";
+.site-header::after {
+  content: '';
   position: absolute;
-  left: 0;
-  bottom: -0.35em;
-  width: 100%;
+  left: calc(var(--spacing-unit) * 2);
+  bottom: -1px;
+  width: 3em;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
-  opacity: 0.7;
+  background: var(--color-accent);
+  animation: echo-fade 4.2s var(--ease-default) infinite;
 }
 
-.site-footer {
-  background: var(--color-bg-raised);
-  border-top: 1px solid var(--color-border);
-  color: var(--color-muted);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  font-size: 0.9em;
+/* 声が空気に溶けて消えていく点滅 */
+@keyframes echo-fade {
+  0% {
+    opacity: 0.9;
+    transform: scaleX(1);
+  }
+  60% {
+    opacity: 0.15;
+    transform: scaleX(1.6);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scaleX(1);
+  }
 }
 
+/* ===== 記事一覧: 誰もいない部屋の残響 ===== */
 .post-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.post-list li {
-  border-bottom: 1px dashed var(--color-border);
   padding: var(--spacing-unit) 0;
-  transition: padding-left 0.3s var(--ease-default);
 }
 
+.post-list article,
+.post-list li {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-unit) 0;
+  transition: background-color 0.5s var(--ease-default), padding-left 0.5s var(--ease-default);
+}
+
+.post-list article:hover,
 .post-list li:hover {
+  background-color: rgba(127, 168, 201, 0.05);
   padding-left: calc(var(--spacing-unit) * 0.5);
-  border-bottom-color: var(--color-accent-dim);
 }
 
+/* ===== 本文: 空白を満たそうとする声 ===== */
 article.post {
-  background: var(--color-bg-raised);
+  background-color: var(--color-bg-raised);
   border: 1px solid var(--color-border);
-  border-radius: 2px;
-  padding: calc(var(--spacing-unit) * 1.75);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  position: relative;
-  overflow: hidden;
-}
-
-article.post::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--color-accent), var(--color-accent-dim), transparent);
+  border-radius: 6px;
+  padding: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 0 0 1px rgba(127, 168, 201, 0.03),
+    0 12px 40px -20px rgba(0, 0, 0, 0.6);
 }
 
 article.post h1,
 article.post h2 {
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: calc(var(--spacing-unit) * 0.5);
+  color: var(--color-fg);
+  text-shadow: 0 0 18px rgba(127, 168, 201, 0.25);
 }
 
 article.post blockquote {
-  border-left: 3px solid var(--color-accent-dim);
+  border-left: 2px solid var(--color-accent-dim);
   margin-left: 0;
-  padding: calc(var(--spacing-unit) * 0.25) var(--spacing-unit);
-  color: var(--color-muted);
+  padding-left: var(--spacing-unit);
+  color: var(--color-fg-muted);
   font-style: italic;
 }
 
-::selection {
-  background: var(--color-accent-dim);
-  color: #fff5f5;
+/* 時計の針だけが規則正しく刻まれて ―― 時の流れを示す静かな明滅 */
+article.post time {
+  color: var(--color-fg-muted);
+  letter-spacing: 0.08em;
+  animation: tick-fade 6s ease-in-out infinite;
+}
+
+@keyframes tick-fade {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== フッター: まだ、響いて ===== */
+.site-footer {
+  color: var(--color-fg-muted);
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  font-size: 0.9em;
+}
+
+/* ===== 減衰する動きへの配慮 ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }

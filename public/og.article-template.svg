@@ -1,76 +1,58 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="rg1" cx="18%" cy="8%" r="60%">
-      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.55"/>
-      <stop offset="55%" stop-color="#7a1626" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
+    <radialGradient id="bgGrad" cx="50%" cy="0%" r="85%">
+      <stop offset="0%" stop-color="#171b24"/>
+      <stop offset="70%" stop-color="#11141b"/>
     </radialGradient>
-    <radialGradient id="rg2" cx="92%" cy="104%" r="65%">
-      <stop offset="0%" stop-color="#7a1626" stop-opacity="0.4"/>
-      <stop offset="55%" stop-color="#7a1626" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff3355"/>
-      <stop offset="45%" stop-color="#7a1626"/>
-      <stop offset="100%" stop-color="#0a0708" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="underlineGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ff3355" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#ff3355" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#ff3355" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="titleBarGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ff3355"/>
-      <stop offset="100%" stop-color="#7a1626" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="dripGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff3355"/>
-      <stop offset="100%" stop-color="#7a1626"/>
-    </linearGradient>
-    <filter id="glow" x="-30%" y="-60%" width="160%" height="220%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="blur"/>
-      <feColorMatrix in="blur" type="matrix"
-        values="1 0 0 0 1
-                0 0 0 0 0.2
-                0 0 0 0 0.33
-                0 0 0 0.6 0" result="tint"/>
+    <filter id="titleGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
       <feMerge>
-        <feMergeNode in="tint"/>
-        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
       </feMerge>
     </filter>
   </defs>
 
-  <rect x="0" y="0" width="1200" height="630" fill="#0a0708"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#rg1)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#rg2)"/>
+  <!-- 背景: 誰もいなくなった部屋の夜 -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGrad)"/>
 
-  <rect x="0" y="0" width="10" height="630" fill="url(#barGrad)"/>
+  <!-- 外枠: 静まり返った部屋の輪郭 -->
+  <rect x="40" y="40" width="1120" height="550" rx="6" fill="none" stroke="#2a2f3a" stroke-width="1"/>
 
-  <g stroke="#3a1218" stroke-width="1" opacity="0.55">
-    <path d="M 980 0 L 1060 140 L 1010 260" fill="none"/>
-    <path d="M 1060 140 L 1180 190" fill="none"/>
-    <path d="M 1010 260 L 1120 330" fill="none"/>
-  </g>
-  <circle cx="1030" cy="120" r="150" fill="none" stroke="#7a1626" stroke-width="1" opacity="0.35"/>
-  <circle cx="1030" cy="120" r="200" fill="none" stroke="#7a1626" stroke-width="1" opacity="0.2"/>
-
-  <g fill="url(#dripGrad)" opacity="0.75">
-    <path d="M 1120 0 L 1132 46 Q 1120 60 1108 46 Z"/>
-    <path d="M 1155 0 L 1163 30 Q 1155 40 1147 30 Z"/>
+  <!-- 反響のリング: 空気に溶けていく声 (右上) -->
+  <g fill="none" stroke="#7fa8c9">
+    <circle cx="1140" cy="90" r="60" stroke-opacity="0.30"/>
+    <circle cx="1140" cy="90" r="115" stroke-opacity="0.20"/>
+    <circle cx="1140" cy="90" r="170" stroke-opacity="0.12"/>
+    <circle cx="1140" cy="90" r="225" stroke-opacity="0.06"/>
   </g>
 
-  <text x="80" y="92" font-family="sans-serif" font-size="30" letter-spacing="0.12em" fill="#a98a8f">へのへのんのの</text>
-  <rect x="80" y="108" width="260" height="2" fill="url(#underlineGrad)"/>
-
-  <text x="80" y="360" font-family="serif" font-size="76" fill="#ece3e1" filter="url(#glow)">{{TITLE}}</text>
-
-  <rect x="80" y="410" width="360" height="4" fill="url(#titleBarGrad)"/>
-
-  <g stroke="#3a1218" stroke-width="1" stroke-dasharray="6 8" opacity="0.6">
-    <line x1="80" y1="560" x2="1120" y2="560"/>
+  <!-- 反響のリング: 小さな残響 (右下、控えめ) -->
+  <g fill="none" stroke="#4c6478">
+    <circle cx="1080" cy="560" r="40" stroke-opacity="0.35"/>
+    <circle cx="1080" cy="560" r="80" stroke-opacity="0.20"/>
   </g>
 
-  <text x="1120" y="600" font-family="sans-serif" font-size="20" fill="#a98a8f" text-anchor="end" letter-spacing="0.08em" opacity="0.8">diary</text>
+  <!-- サイト名: 誰もいない部屋の入口 -->
+  <text x="60" y="78" font-family="serif" font-size="26" fill="#8d97ab" letter-spacing="5">へのへのんのの</text>
+  <rect x="60" y="92" width="46" height="3" fill="#7fa8c9" fill-opacity="0.85"/>
+
+  <!-- ヘッダー境界線 -->
+  <line x1="60" y1="140" x2="1140" y2="140" stroke="#2a2f3a" stroke-width="1"/>
+
+  <!-- 記事タイトル: 冷たい静寂の中で揺れる声 (グロー + 本体) -->
+  <text x="64" y="356" font-family="serif" font-size="74" fill="#7fa8c9" fill-opacity="0.30" filter="url(#titleGlow)">{{TITLE}}</text>
+  <text x="60" y="352" font-family="serif" font-size="74" fill="#e2e6ee">{{TITLE}}</text>
+
+  <!-- タイトル下の反響バー -->
+  <rect x="60" y="392" width="96" height="4" fill="#7fa8c9" fill-opacity="0.75"/>
+  <rect x="164" y="392" width="28" height="4" fill="#4c6478" fill-opacity="0.5"/>
+
+  <!-- 波形: 声の残響 -->
+  <path d="M60,548 Q100,528 140,548 T220,548 T300,548 T380,548 T460,548 T540,548 T620,548"
+        fill="none" stroke="#4c6478" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- 時計の針の明滅を想起させる小さな点 -->
+  <circle cx="1140" cy="548" r="4" fill="#7fa8c9" fill-opacity="0.7"/>
+  <text x="1120" y="553" font-family="serif" font-size="20" fill="#8d97ab" text-anchor="end" letter-spacing="2">ECHO</text>
 </svg>
