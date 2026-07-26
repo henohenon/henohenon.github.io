@@ -1,12 +1,44 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGrad" cx="50%" cy="0%" r="95%">
-      <stop offset="0%" stop-color="#171b24"/>
-      <stop offset="70%" stop-color="#11141b"/>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1530"/>
+      <stop offset="55%" stop-color="#150f22"/>
+      <stop offset="100%" stop-color="#0c0913"/>
+    </linearGradient>
+    <radialGradient id="glowPink" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff6fae" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#ff6fae" stop-opacity="0"/>
     </radialGradient>
-    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="9" result="blur"/>
+    <radialGradient id="glowPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8d6fd1" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#8d6fd1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e9e2f2"/>
+      <stop offset="65%" stop-color="#f4c9e0"/>
+      <stop offset="100%" stop-color="#ff6fae"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6fae" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ff6fae" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff6fae" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dripFade" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff6fae" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff6fae" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dripFadePurple" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#8d6fd1" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#8d6fd1" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="70%">
+      <stop offset="60%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </radialGradient>
+    <filter id="titleGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
       <feMerge>
+        <feMergeNode in="blur"/>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
@@ -15,29 +47,63 @@
 
   <rect width="1200" height="630" fill="url(#bgGrad)"/>
 
-  <g fill="none" stroke="#4c6478">
-    <circle cx="600" cy="700" r="150" opacity="0.45" stroke-width="1.5"/>
-    <circle cx="600" cy="700" r="260" opacity="0.35" stroke-width="1.5"/>
-    <circle cx="600" cy="700" r="370" opacity="0.28" stroke-width="1.5"/>
-    <circle cx="600" cy="700" r="480" opacity="0.2" stroke-width="1.5"/>
-    <circle cx="600" cy="700" r="590" opacity="0.13" stroke-width="1.5"/>
-    <circle cx="600" cy="700" r="700" opacity="0.06" stroke-width="1.5"/>
+  <circle cx="150" cy="100" r="230" fill="url(#glowPurple)"/>
+  <circle cx="1060" cy="80" r="260" fill="url(#glowPink)"/>
+  <circle cx="1020" cy="580" r="230" fill="url(#glowPurple)"/>
+  <circle cx="140" cy="580" r="210" fill="url(#glowPink)"/>
+  <circle cx="600" cy="330" r="380" fill="url(#glowPink)" opacity="0.5"/>
+
+  <g opacity="0.06" stroke="#e9e2f2" stroke-width="1">
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="205" x2="1200" y2="205"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="545" x2="1200" y2="545"/>
   </g>
 
-  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#2a2f3a" stroke-width="1"/>
+  <g opacity="0.55">
+    <rect x="0" y="590" width="80" height="40" fill="#1c1530"/>
+    <rect x="90" y="565" width="60" height="65" fill="#241a3d"/>
+    <rect x="160" y="600" width="70" height="30" fill="#1c1530"/>
+    <rect x="240" y="550" width="50" height="80" fill="#241a3d"/>
+    <rect x="300" y="585" width="90" height="45" fill="#1c1530"/>
+    <rect x="400" y="570" width="65" height="60" fill="#241a3d"/>
+    <rect x="475" y="595" width="55" height="35" fill="#1c1530"/>
+    <rect x="540" y="560" width="85" height="70" fill="#241a3d"/>
+    <rect x="635" y="590" width="60" height="40" fill="#1c1530"/>
+    <rect x="705" y="575" width="70" height="55" fill="#241a3d"/>
+    <rect x="785" y="555" width="50" height="75" fill="#1c1530"/>
+    <rect x="845" y="595" width="90" height="35" fill="#241a3d"/>
+    <rect x="945" y="570" width="60" height="60" fill="#1c1530"/>
+    <rect x="1015" y="585" width="70" height="45" fill="#241a3d"/>
+    <rect x="1095" y="580" width="105" height="50" fill="#1c1530"/>
+  </g>
 
-  <circle cx="60" cy="60" r="2.5" fill="#7fa8c9" opacity="0.7"/>
-  <circle cx="1140" cy="60" r="2.5" fill="#7fa8c9" opacity="0.7"/>
-  <circle cx="60" cy="570" r="2.5" fill="#7fa8c9" opacity="0.7"/>
-  <circle cx="1140" cy="570" r="2.5" fill="#7fa8c9" opacity="0.7"/>
+  <g stroke-width="2">
+    <line x1="125" y1="565" x2="120" y2="518" stroke="url(#dripFadePurple)"/>
+    <line x1="270" y1="550" x2="278" y2="500" stroke="url(#dripFade)"/>
+    <line x1="430" y1="570" x2="424" y2="522" stroke="url(#dripFadePurple)"/>
+    <line x1="585" y1="560" x2="592" y2="512" stroke="url(#dripFade)"/>
+    <line x1="740" y1="575" x2="734" y2="530" stroke="url(#dripFadePurple)"/>
+    <line x1="810" y1="555" x2="818" y2="505" stroke="url(#dripFade)"/>
+    <line x1="975" y1="570" x2="968" y2="524" stroke="url(#dripFadePurple)"/>
+    <line x1="1130" y1="580" x2="1138" y2="535" stroke="url(#dripFade)"/>
+  </g>
 
-  <text x="600" y="300" font-family="serif" font-size="126" fill="#e2e6ee" text-anchor="middle" letter-spacing="5" filter="url(#glow)">へのへのんのの</text>
+  <rect width="1200" height="630" fill="url(#vignette)"/>
 
-  <rect x="470" y="336" width="260" height="2" fill="#7fa8c9" opacity="0.75"/>
+  <rect x="0" y="0" width="1200" height="5" fill="url(#lineGrad)"/>
+  <rect x="30" y="28" width="1140" height="574" fill="none" stroke="rgba(233,226,242,0.14)" stroke-width="1.5" rx="14"/>
 
-  <text x="600" y="404" font-family="sans-serif" font-size="34" fill="#7fa8c9" text-anchor="middle" letter-spacing="2">今日の曲 ── Echoes</text>
+  <text x="600" y="150" text-anchor="middle" font-family="sans-serif" font-size="22" letter-spacing="10" fill="#8d6fd1">TODAY&#8217;S  SOUND</text>
 
-  <text x="600" y="448" font-family="sans-serif" font-size="21" fill="#8d97ab" text-anchor="middle" letter-spacing="1">Aa feat. 足立レイ AI</text>
+  <text x="600" y="340" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="132" letter-spacing="4" fill="url(#titleGrad)" filter="url(#titleGlow)">へのへのんのの</text>
 
-  <text x="600" y="562" font-family="sans-serif" font-size="16" fill="#4c6478" text-anchor="middle" letter-spacing="4">ー 誰もいない部屋に響き続ける声 ー</text>
+  <line x1="470" y1="392" x2="730" y2="392" stroke="#ff6fae" stroke-opacity="0.5" stroke-width="1.5"/>
+  <circle cx="600" cy="392" r="3.5" fill="#ff6fae"/>
+
+  <text x="600" y="440" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="38" fill="#ff6fae" opacity="0.95">Something Like Reality</text>
+
+  <text x="600" y="478" text-anchor="middle" font-family="sans-serif" font-size="20" fill="rgba(233,226,242,0.62)">Fami-P feat. Synthesizer V AI 音街ウナ</text>
+
+  <text x="1170" y="600" text-anchor="end" font-family="sans-serif" font-size="16" letter-spacing="2" fill="rgba(233,226,242,0.4)">henohenonono</text>
 </svg>
