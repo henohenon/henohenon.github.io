@@ -1,88 +1,82 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glowPink" cx="50%" cy="0%" r="75%">
-      <stop offset="0%" stop-color="#ff3d8f" stop-opacity="0.38"/>
-      <stop offset="60%" stop-color="#ff3d8f" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#ff3d8f" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowYellow" cx="88%" cy="100%" r="65%">
-      <stop offset="0%" stop-color="#ffcc4d" stop-opacity="0.28"/>
-      <stop offset="60%" stop-color="#ffcc4d" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#ffcc4d" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="10%">
-      <stop offset="0%" stop-color="#ffcc4d"/>
-      <stop offset="55%" stop-color="#ff3d8f"/>
-      <stop offset="100%" stop-color="#ff3d8f"/>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1112"/>
+      <stop offset="100%" stop-color="#120e0f"/>
     </linearGradient>
-    <pattern id="diagStripes" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
-      <rect width="16" height="16" fill="none"/>
-      <rect width="3" height="16" fill="#ffcc4d" opacity="0.07"/>
+    <radialGradient id="vignette" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+    <pattern id="diagStripes" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
+      <rect x="0" y="0" width="20" height="20" fill="#120e0f"/>
+      <rect x="0" y="0" width="2" height="20" fill="#ff5c4d" fill-opacity="0.06"/>
     </pattern>
-    <line id="tick" x1="1070" y1="30" x2="1070" y2="50" stroke="#ffcc4d" stroke-width="3" opacity="0.32"/>
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="0" width="4" height="4" fill="#120e0f"/>
+      <rect x="0" y="0" width="4" height="1" fill="#ff5c4d" fill-opacity="0.035"/>
+    </pattern>
   </defs>
 
-  <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#150a1c"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowPink)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glowYellow)"/>
+  <!-- base -->
+  <rect x="0" y="0" width="1200" height="630" fill="#120e0f"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#scanlines)"/>
   <rect x="0" y="0" width="1200" height="630" fill="url(#diagStripes)"/>
 
-  <!-- spinning camera lens motif (回り続けるカメラ) -->
-  <g transform="translate(1070,140)">
-    <use href="#tick" transform="rotate(0 0 0)"/>
-    <use href="#tick" transform="rotate(30 0 0)"/>
-    <use href="#tick" transform="rotate(60 0 0)"/>
-    <use href="#tick" transform="rotate(90 0 0)"/>
-    <use href="#tick" transform="rotate(120 0 0)"/>
-    <use href="#tick" transform="rotate(150 0 0)"/>
-    <use href="#tick" transform="rotate(180 0 0)"/>
-    <use href="#tick" transform="rotate(210 0 0)"/>
-    <use href="#tick" transform="rotate(240 0 0)"/>
-    <use href="#tick" transform="rotate(270 0 0)"/>
-    <use href="#tick" transform="rotate(300 0 0)"/>
-    <use href="#tick" transform="rotate(330 0 0)"/>
-    <circle r="88" fill="none" stroke="#ffcc4d" stroke-width="2" opacity="0.22"/>
-    <circle r="66" fill="none" stroke="#ff3d8f" stroke-width="2" opacity="0.32"/>
-    <circle r="46" fill="none" stroke="#f4ecf3" stroke-width="1.5" opacity="0.16"/>
-    <circle r="28" fill="#ff3d8f" opacity="0.16"/>
-    <circle r="9" fill="#ffcc4d" opacity="0.55"/>
-  </g>
+  <!-- header band -->
+  <rect x="0" y="0" width="1200" height="188" fill="url(#headerGrad)"/>
+  <rect x="0" y="182" width="1200" height="7" fill="#ff5c4d"/>
+  <rect x="0" y="189" width="1200" height="2" fill="#7a1f18" opacity="0.7"/>
 
-  <!-- outer frame -->
-  <rect x="16" y="16" width="1168" height="598" rx="22" fill="none" stroke="#ff3d8f" stroke-width="5" opacity="0.85"/>
-  <rect x="27" y="27" width="1146" height="576" rx="16" fill="none" stroke="#ffcc4d" stroke-width="1.5" opacity="0.35"/>
+  <!-- vignette -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
 
-  <!-- site name -->
-  <text x="66" y="76" font-family="serif" font-size="30" letter-spacing="5" fill="#ff3d8f" opacity="0.5">へのへのんのの</text>
-  <text x="64" y="74" font-family="serif" font-size="30" letter-spacing="5" fill="#f4ecf3">へのへのんのの</text>
+  <!-- site name (glitch layered) -->
+  <text x="77" y="115" font-family="sans-serif" font-size="46" font-weight="900" letter-spacing="8" fill="#ff5c4d" fill-opacity="0.6">へのへのんのの</text>
+  <text x="63" y="123" font-family="sans-serif" font-size="46" font-weight="900" letter-spacing="8" fill="#7a1f18" fill-opacity="0.7">へのへのんのの</text>
+  <text x="70" y="119" font-family="sans-serif" font-size="46" font-weight="900" letter-spacing="8" fill="#eae4e2">へのへのんのの</text>
 
-  <!-- on air badge -->
-  <rect x="64" y="102" width="122" height="36" rx="18" fill="#ff3d8f"/>
-  <circle cx="84" cy="120" r="6" fill="#ffcc4d"/>
-  <text x="98" y="125" font-family="sans-serif" font-size="16" font-weight="bold" letter-spacing="2" fill="#2a0f1c">ON AIR</text>
+  <!-- corner label -->
+  <text x="1130" y="58" font-family="sans-serif" font-size="20" font-weight="700" letter-spacing="5" fill="#7a1f18" text-anchor="end">BLOG</text>
+
+  <!-- left accent bars -->
+  <rect x="0" y="194" width="14" height="436" fill="#ff5c4d"/>
+  <rect x="14" y="194" width="4" height="436" fill="#7a1f18"/>
 
   <!-- title (glitch layered) -->
-  <text x="60" y="322" font-family="sans-serif" font-size="72" font-weight="bold" fill="#4ddcff" opacity="0.35">{{TITLE}}</text>
-  <text x="68" y="322" font-family="sans-serif" font-size="72" font-weight="bold" fill="#ff3d8f" opacity="0.45">{{TITLE}}</text>
-  <text x="64" y="322" font-family="sans-serif" font-size="72" font-weight="bold" fill="url(#titleGrad)">{{TITLE}}</text>
+  <text x="97" y="374" font-family="sans-serif" font-size="82" font-weight="900" fill="#ff5c4d" fill-opacity="0.5">{{TITLE}}</text>
+  <text x="83" y="386" font-family="sans-serif" font-size="82" font-weight="900" fill="#7a1f18" fill-opacity="0.6">{{TITLE}}</text>
+  <text x="90" y="380" font-family="sans-serif" font-size="82" font-weight="900" fill="#eae4e2">{{TITLE}}</text>
 
-  <!-- separator -->
-  <line x1="64" y1="440" x2="1136" y2="440" stroke="#ffcc4d" stroke-width="2" stroke-dasharray="10 12" opacity="0.45"/>
+  <!-- jagged scream underline -->
+  <polyline points="90,430 220,424 340,436 470,422 600,438 730,424 860,434 900,428"
+            fill="none" stroke="#ff5c4d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+  <polyline points="90,442 220,438 340,448 470,436 600,450 730,438 860,446 900,440"
+            fill="none" stroke="#7a1f18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
 
-  <!-- marquee bulb row -->
-  <g>
-    <circle cx="70" cy="592" r="6" fill="#ffcc4d" opacity="0.7"/>
-    <circle cx="110" cy="592" r="6" fill="#ff3d8f" opacity="0.7"/>
-    <circle cx="150" cy="592" r="6" fill="#ffcc4d" opacity="0.7"/>
-    <circle cx="190" cy="592" r="6" fill="#ff3d8f" opacity="0.7"/>
-    <circle cx="230" cy="592" r="6" fill="#ffcc4d" opacity="0.7"/>
-    <circle cx="270" cy="592" r="6" fill="#ff3d8f" opacity="0.7"/>
-    <circle cx="930" cy="592" r="6" fill="#ff3d8f" opacity="0.7"/>
-    <circle cx="970" cy="592" r="6" fill="#ffcc4d" opacity="0.7"/>
-    <circle cx="1010" cy="592" r="6" fill="#ff3d8f" opacity="0.7"/>
-    <circle cx="1050" cy="592" r="6" fill="#ffcc4d" opacity="0.7"/>
-    <circle cx="1090" cy="592" r="6" fill="#ff3d8f" opacity="0.7"/>
-    <circle cx="1130" cy="592" r="6" fill="#ffcc4d" opacity="0.7"/>
+  <!-- torn glitch fragments -->
+  <rect x="1000" y="230" width="130" height="10" fill="#ff5c4d" opacity="0.25" transform="rotate(-4 1065 235)"/>
+  <rect x="960" y="255" width="90" height="6" fill="#eae4e2" opacity="0.12" transform="rotate(3 1005 258)"/>
+  <rect x="1040" y="200" width="60" height="4" fill="#7a1f18" opacity="0.5"/>
+
+  <!-- equalizer / scream waveform -->
+  <g fill="#ff5c4d">
+    <rect x="740" y="560" width="14" height="40" opacity="0.55"/>
+    <rect x="764" y="530" width="14" height="70" opacity="0.75"/>
+    <rect x="788" y="574" width="14" height="26" opacity="0.5"/>
+    <rect x="812" y="500" width="14" height="100" opacity="0.85"/>
+    <rect x="836" y="548" width="14" height="52" opacity="0.6"/>
+    <rect x="860" y="480" width="14" height="120" fill="#eae4e2" opacity="0.9"/>
+    <rect x="884" y="564" width="14" height="36" opacity="0.5"/>
+    <rect x="908" y="520" width="14" height="80" opacity="0.7"/>
+    <rect x="932" y="556" width="14" height="44" opacity="0.55"/>
+    <rect x="956" y="494" width="14" height="106" fill="#eae4e2" opacity="0.8"/>
+    <rect x="980" y="540" width="14" height="60" opacity="0.6"/>
+    <rect x="1004" y="568" width="14" height="32" opacity="0.5"/>
+    <rect x="1028" y="512" width="14" height="88" opacity="0.75"/>
+    <rect x="1052" y="552" width="14" height="48" opacity="0.55"/>
   </g>
+
+  <!-- footer rule -->
+  <rect x="0" y="624" width="1200" height="3" fill="#7a1f18" opacity="0.7"/>
 </svg>
