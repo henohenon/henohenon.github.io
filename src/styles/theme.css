@@ -1,36 +1,25 @@
+/* 曲名: YUMESHIPPER / アーティスト: Sutekina-P feat. Chis-A [tʃíːseɪ] / 一言ムード: 推しへの純愛を武器に、アンチをブロックしてでも守る、ネオンピンクな内輪ネット愛 */
+
 :root {
-  /* 曲名: I HATE VOCALOID "FANS" / アーティスト: Mantequilla-P feat. 重音テト / 一言ムード: 怒りに震える叫び、荒々しいアンチファン讃歌 */
-  --color-fg: #eae4e2;
-  --color-bg: #120e0f;
-  --color-accent: #ff5c4d;
-  --color-accent-dim: #7a1f18;
-  --color-surface: #1c1516;
-  --spacing-unit: 1.05rem;
-  --font-heading: 'Arial Black', 'Hiragino Sans', 'Yu Gothic', 'Impact', 'Helvetica Neue', sans-serif;
-  --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Segoe UI', sans-serif;
+  --color-fg: #3a1030;
+  --color-bg: #fff3f8;
+  --color-accent: #b8005a;
+  --color-accent-soft: #ff8fc7;
+  --color-accent-glow: #ff4fa8;
+  --color-double: #37c9ff;
+  --spacing-unit: 1.15rem;
+  --font-heading: 'Segoe UI Rounded', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Rounded Mplus 1c', system-ui, sans-serif;
+  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --line-height-body: 1.75;
-  --line-height-heading: 1.05;
-  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  background-color: var(--color-bg);
+  --line-height-heading: 1.3;
+  --ease-default: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 body {
-  background-color: var(--color-bg);
-  background-image:
-    repeating-linear-gradient(
-      180deg,
-      rgba(255, 92, 77, 0.025) 0px,
-      rgba(255, 92, 77, 0.025) 1px,
-      transparent 1px,
-      transparent 3px
-    );
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 143, 199, 0.35), transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(55, 201, 255, 0.18), transparent 40%),
+    var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
@@ -39,169 +28,130 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
   color: var(--color-fg);
 }
 
 a {
   color: var(--color-accent);
-  text-decoration-color: var(--color-accent-dim);
-  text-underline-offset: 0.15em;
-  transition: color 0.15s var(--ease-default), text-decoration-color 0.15s var(--ease-default);
+  text-decoration-color: var(--color-accent-soft);
+  transition: color 0.2s var(--ease-default), text-shadow 0.2s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: #ffffff;
-  text-decoration-color: var(--color-accent);
+  color: var(--color-accent-glow);
+  text-shadow: 0 0 6px rgba(255, 79, 168, 0.45);
 }
 
 ::selection {
-  background-color: var(--color-accent);
-  color: #120e0f;
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
 }
 
 .site-header {
-  background: linear-gradient(180deg, #1a1112 0%, var(--color-bg) 100%);
-  border-bottom: calc(var(--spacing-unit) * 0.28) solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 1.2);
+  background: linear-gradient(135deg, #ffe3f0 0%, #fff3f8 55%, #e9f9ff 100%);
+  border-bottom: 3px dashed var(--color-accent-soft);
+  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
   position: relative;
-  overflow: hidden;
 }
 
 .site-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    115deg,
-    transparent 0,
-    transparent 18px,
-    rgba(255, 92, 77, 0.05) 18px,
-    rgba(255, 92, 77, 0.05) 20px
-  );
-  pointer-events: none;
-}
-
-.site-header h1,
-.site-header .site-title {
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--color-fg);
-  text-shadow:
-    0.06em 0 0 var(--color-accent),
-    -0.06em 0 0 rgba(122, 31, 24, 0.8);
-  animation: fans-glitch 5s steps(1, end) infinite;
-}
-
-.site-header p,
-.site-header .site-tagline {
-  color: var(--color-accent);
-  font-size: 0.85rem;
+  content: '♡ yumeshipping since forever ♡';
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.85;
+  color: var(--color-accent);
+  opacity: 0.75;
+  margin-bottom: 0.35em;
 }
 
-@keyframes fans-glitch {
-  0%, 92%, 100% {
-    text-shadow:
-      0.06em 0 0 var(--color-accent),
-      -0.06em 0 0 rgba(122, 31, 24, 0.8);
-    transform: translate(0, 0);
-  }
-  93% {
-    text-shadow:
-      -0.12em 0.02em 0 var(--color-accent),
-      0.1em -0.02em 0 rgba(122, 31, 24, 0.9);
-    transform: translate(-1px, 0);
-  }
-  95% {
-    text-shadow:
-      0.14em 0 0 var(--color-accent),
-      -0.08em 0 0 rgba(122, 31, 24, 0.9);
-    transform: translate(1px, 0);
-  }
-  97% {
-    text-shadow:
-      -0.04em 0.03em 0 var(--color-accent),
-      0.06em -0.03em 0 rgba(122, 31, 24, 0.9);
-    transform: translate(0, -1px);
-  }
+.site-header h1 {
+  color: var(--color-accent);
+  text-shadow:
+    1px 0 0 var(--color-double),
+    -1px 0 0 var(--color-accent-glow);
+  animation: heno-double-wobble 4.5s var(--ease-default) infinite;
 }
 
 .post-list {
+  list-style: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: calc(var(--spacing-unit) * 1.1);
-  padding: calc(var(--spacing-unit) * 1.2) 0;
+  gap: var(--spacing-unit);
 }
 
-.post-list li,
-.post-list article {
-  border-left: 4px solid var(--color-accent-dim);
-  background-color: var(--color-surface);
-  padding: calc(var(--spacing-unit) * 0.9) calc(var(--spacing-unit) * 1.1);
-  transition: border-color 0.2s var(--ease-default), transform 0.15s var(--ease-default);
+.post-list li {
+  background: #ffffff;
+  border: 2px solid var(--color-accent-soft);
+  border-radius: 1.1em;
+  padding: calc(var(--spacing-unit) * 0.9) var(--spacing-unit);
+  transition: transform 0.25s var(--ease-default), border-color 0.25s var(--ease-default), box-shadow 0.25s var(--ease-default);
 }
 
-.post-list li:hover,
-.post-list article:hover {
-  border-left-color: var(--color-accent);
-  transform: translateX(3px);
+.post-list li:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 20px rgba(184, 0, 90, 0.18);
 }
 
-.post-list a {
-  font-weight: 700;
+.post-list li::marker {
+  color: var(--color-accent);
 }
 
 article.post {
-  background-color: var(--color-surface);
-  border-left: calc(var(--spacing-unit) * 0.3) solid var(--color-accent);
+  background: #ffffff;
+  border: 2px dashed var(--color-accent-soft);
+  border-radius: 1.4em;
   padding: calc(var(--spacing-unit) * 1.4);
-  margin-block: calc(var(--spacing-unit) * 1.2);
+  position: relative;
 }
 
-article.post h1,
-article.post h2 {
-  color: var(--color-accent);
-  border-bottom: 1px solid var(--color-accent-dim);
-  padding-bottom: calc(var(--spacing-unit) * 0.4);
-  margin-bottom: calc(var(--spacing-unit) * 0.8);
+article.post h1::after,
+article.post h2::after {
+  content: ' ♡';
+  color: var(--color-accent-glow);
+  animation: heno-heart-pulse 1.6s var(--ease-default) infinite;
+  display: inline-block;
 }
 
 article.post blockquote {
-  border-left: 3px solid var(--color-accent);
-  padding-left: var(--spacing-unit);
-  color: #cfc6c4;
-  font-style: italic;
-}
-
-article.post code,
-article.post pre {
-  background-color: #0c0808;
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent-dim);
+  border-left: 4px solid var(--color-double);
+  background: rgba(55, 201, 255, 0.08);
+  padding: 0.6em 1em;
+  border-radius: 0.5em;
 }
 
 .site-footer {
-  border-top: 2px solid var(--color-accent-dim);
-  background-color: #0d0a0a;
-  color: #a89e9c;
-  padding: calc(var(--spacing-unit) * 1.2);
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #e9f9ff 0%, #fff3f8 55%, #ffe3f0 100%);
+  border-top: 3px dashed var(--color-accent-soft);
+  color: var(--color-fg);
+  text-align: center;
+  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
 }
 
-.site-footer a {
+.site-footer::after {
+  content: 'I LOVE YOU — block the haters, keep the love ♡';
+  display: block;
+  margin-top: 0.5em;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
   color: var(--color-accent);
 }
 
+@keyframes heno-heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes heno-double-wobble {
+  0%, 100% { text-shadow: 1px 0 0 var(--color-double), -1px 0 0 var(--color-accent-glow); }
+  50% { text-shadow: -1px 0 0 var(--color-double), 1px 0 0 var(--color-accent-glow); }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation: none !important;
     transition: none !important;
   }

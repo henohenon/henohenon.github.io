@@ -1,82 +1,57 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="headerGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a1112"/>
-      <stop offset="100%" stop-color="#120e0f"/>
-    </linearGradient>
-    <radialGradient id="vignette" cx="50%" cy="42%" r="75%">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    <radialGradient id="gradPink" cx="12%" cy="8%" r="55%">
+      <stop offset="0%" stop-color="#ff8fc7" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#ff8fc7" stop-opacity="0"/>
     </radialGradient>
-    <pattern id="diagStripes" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
-      <rect x="0" y="0" width="20" height="20" fill="#120e0f"/>
-      <rect x="0" y="0" width="2" height="20" fill="#ff5c4d" fill-opacity="0.06"/>
-    </pattern>
-    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="0" width="4" height="4" fill="#120e0f"/>
-      <rect x="0" y="0" width="4" height="1" fill="#ff5c4d" fill-opacity="0.035"/>
-    </pattern>
+    <radialGradient id="gradCyan" cx="88%" cy="92%" r="50%">
+      <stop offset="0%" stop-color="#37c9ff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#37c9ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardEdge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe3f0"/>
+      <stop offset="55%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e9f9ff"/>
+    </linearGradient>
   </defs>
 
-  <!-- base -->
-  <rect x="0" y="0" width="1200" height="630" fill="#120e0f"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#scanlines)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#diagStripes)"/>
+  <!-- background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#fff3f8"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#gradPink)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#gradCyan)"/>
 
-  <!-- header band -->
-  <rect x="0" y="0" width="1200" height="188" fill="url(#headerGrad)"/>
-  <rect x="0" y="182" width="1200" height="7" fill="#ff5c4d"/>
-  <rect x="0" y="189" width="1200" height="2" fill="#7a1f18" opacity="0.7"/>
+  <!-- bokeh dots -->
+  <circle cx="1130" cy="55" r="34" fill="#ff4fa8" opacity="0.12"/>
+  <circle cx="70" cy="585" r="46" fill="#37c9ff" opacity="0.12"/>
+  <circle cx="1080" cy="560" r="16" fill="#b8005a" opacity="0.15"/>
+  <circle cx="120" cy="90" r="12" fill="#37c9ff" opacity="0.18"/>
 
-  <!-- vignette -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
+  <!-- faint decorative hearts -->
+  <text x="1005" y="140" font-family="sans-serif" font-size="64" fill="#37c9ff" opacity="0.16">&#9825;</text>
+  <text x="90" y="470" font-family="sans-serif" font-size="46" fill="#ff4fa8" opacity="0.18">&#9825;</text>
+  <text x="1000" y="520" font-family="sans-serif" font-size="34" fill="#b8005a" opacity="0.14">&#9825;</text>
+  <text x="150" y="150" font-family="sans-serif" font-size="30" fill="#ff8fc7" opacity="0.22">&#9825;</text>
 
-  <!-- site name (glitch layered) -->
-  <text x="77" y="115" font-family="sans-serif" font-size="46" font-weight="900" letter-spacing="8" fill="#ff5c4d" fill-opacity="0.6">へのへのんのの</text>
-  <text x="63" y="123" font-family="sans-serif" font-size="46" font-weight="900" letter-spacing="8" fill="#7a1f18" fill-opacity="0.7">へのへのんのの</text>
-  <text x="70" y="119" font-family="sans-serif" font-size="46" font-weight="900" letter-spacing="8" fill="#eae4e2">へのへのんのの</text>
+  <!-- outer dashed frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="30" fill="none" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="13 9"/>
 
-  <!-- corner label -->
-  <text x="1130" y="58" font-family="sans-serif" font-size="20" font-weight="700" letter-spacing="5" fill="#7a1f18" text-anchor="end">BLOG</text>
+  <!-- site name (double-shadow wobble style) -->
+  <text x="66" y="92" font-family="sans-serif" font-weight="700" font-size="38" fill="#37c9ff">&#12408;&#12398;&#12408;&#12398;&#12435;&#12398;&#12398;</text>
+  <text x="62" y="92" font-family="sans-serif" font-weight="700" font-size="38" fill="#ff4fa8">&#12408;&#12398;&#12408;&#12398;&#12435;&#12398;&#12398;</text>
+  <text x="64" y="92" font-family="sans-serif" font-weight="700" font-size="38" fill="#3a1030">&#12408;&#12398;&#12408;&#12398;&#12435;&#12398;&#12398;</text>
+  <text x="64" y="118" font-family="sans-serif" font-size="17" fill="#b8005a" opacity="0.75">&#9825; yumeshipping since forever &#9825;</text>
 
-  <!-- left accent bars -->
-  <rect x="0" y="194" width="14" height="436" fill="#ff5c4d"/>
-  <rect x="14" y="194" width="4" height="436" fill="#7a1f18"/>
+  <!-- header divider dashed line -->
+  <line x1="64" y1="136" x2="1136" y2="136" stroke="#ff8fc7" stroke-width="2" stroke-dasharray="9 7" opacity="0.6"/>
 
-  <!-- title (glitch layered) -->
-  <text x="97" y="374" font-family="sans-serif" font-size="82" font-weight="900" fill="#ff5c4d" fill-opacity="0.5">{{TITLE}}</text>
-  <text x="83" y="386" font-family="sans-serif" font-size="82" font-weight="900" fill="#7a1f18" fill-opacity="0.6">{{TITLE}}</text>
-  <text x="90" y="380" font-family="sans-serif" font-size="82" font-weight="900" fill="#eae4e2">{{TITLE}}</text>
+  <!-- title card -->
+  <rect x="90" y="185" width="1020" height="290" rx="34" fill="url(#cardEdge)" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="11 8"/>
 
-  <!-- jagged scream underline -->
-  <polyline points="90,430 220,424 340,436 470,422 600,438 730,424 860,434 900,428"
-            fill="none" stroke="#ff5c4d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
-  <polyline points="90,442 220,438 340,448 470,436 600,450 730,438 860,446 900,440"
-            fill="none" stroke="#7a1f18" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <!-- title (double + glow offset like h1 text-shadow) -->
+  <text x="603" y="347" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="72" fill="#37c9ff">{{TITLE}}</text>
+  <text x="597" y="347" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="72" fill="#ff4fa8">{{TITLE}}</text>
+  <text x="600" y="345" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="72" fill="#3a1030">{{TITLE}}</text>
 
-  <!-- torn glitch fragments -->
-  <rect x="1000" y="230" width="130" height="10" fill="#ff5c4d" opacity="0.25" transform="rotate(-4 1065 235)"/>
-  <rect x="960" y="255" width="90" height="6" fill="#eae4e2" opacity="0.12" transform="rotate(3 1005 258)"/>
-  <rect x="1040" y="200" width="60" height="4" fill="#7a1f18" opacity="0.5"/>
-
-  <!-- equalizer / scream waveform -->
-  <g fill="#ff5c4d">
-    <rect x="740" y="560" width="14" height="40" opacity="0.55"/>
-    <rect x="764" y="530" width="14" height="70" opacity="0.75"/>
-    <rect x="788" y="574" width="14" height="26" opacity="0.5"/>
-    <rect x="812" y="500" width="14" height="100" opacity="0.85"/>
-    <rect x="836" y="548" width="14" height="52" opacity="0.6"/>
-    <rect x="860" y="480" width="14" height="120" fill="#eae4e2" opacity="0.9"/>
-    <rect x="884" y="564" width="14" height="36" opacity="0.5"/>
-    <rect x="908" y="520" width="14" height="80" opacity="0.7"/>
-    <rect x="932" y="556" width="14" height="44" opacity="0.55"/>
-    <rect x="956" y="494" width="14" height="106" fill="#eae4e2" opacity="0.8"/>
-    <rect x="980" y="540" width="14" height="60" opacity="0.6"/>
-    <rect x="1004" y="568" width="14" height="32" opacity="0.5"/>
-    <rect x="1028" y="512" width="14" height="88" opacity="0.75"/>
-    <rect x="1052" y="552" width="14" height="48" opacity="0.55"/>
-  </g>
-
-  <!-- footer rule -->
-  <rect x="0" y="624" width="1200" height="3" fill="#7a1f18" opacity="0.7"/>
+  <!-- footer tagline -->
+  <text x="600" y="592" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#b8005a" opacity="0.85">I LOVE YOU &#8212; block the haters, keep the love &#9825;</text>
 </svg>
