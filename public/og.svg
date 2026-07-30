@@ -1,54 +1,98 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="blobPink" cx="12%" cy="8%" r="60%">
-      <stop offset="0%" stop-color="#ff8fc7" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#ff8fc7" stop-opacity="0"/>
+    <radialGradient id="glowPink" cx="50%" cy="-10%" r="55%">
+      <stop offset="0%" stop-color="#ff6fae" stop-opacity="0.28"/>
+      <stop offset="70%" stop-color="#ff6fae" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="blobBlue" cx="90%" cy="94%" r="55%">
-      <stop offset="0%" stop-color="#37c9ff" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#37c9ff" stop-opacity="0"/>
+    <radialGradient id="glowTeal" cx="85%" cy="110%" r="60%">
+      <stop offset="0%" stop-color="#7ce7d6" stop-opacity="0.22"/>
+      <stop offset="70%" stop-color="#7ce7d6" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffe3f0"/>
-      <stop offset="55%" stop-color="#fff8fb"/>
-      <stop offset="100%" stop-color="#e9f9ff"/>
+    <linearGradient id="bgV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#120e26"/>
+      <stop offset="45%" stop-color="#171232"/>
+      <stop offset="100%" stop-color="#0d0a1c"/>
     </linearGradient>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff6fae"/>
+      <stop offset="50%" stop-color="#ffd76f"/>
+      <stop offset="100%" stop-color="#7ce7d6"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <!-- base background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#fff3f8"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#blobPink)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#blobBlue)"/>
+  <!-- base -->
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgV)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowPink)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glowTeal)"/>
 
-  <!-- top / bottom dashed frame lines, echoing site-header / site-footer -->
-  <line x1="40" y1="34" x2="1160" y2="34" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="12 10"/>
-  <line x1="40" y1="596" x2="1160" y2="596" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="12 10"/>
+  <!-- faint rainbow drift stripes behind title, like the site-header::before -->
+  <g transform="rotate(-8 600 160)" opacity="0.5">
+    <rect x="-100" y="20" width="1500" height="26" fill="#ff6fae" opacity="0.10"/>
+    <rect x="-100" y="70" width="1500" height="22" fill="#ffd76f" opacity="0.09"/>
+    <rect x="-100" y="115" width="1500" height="20" fill="#7ce7d6" opacity="0.09"/>
+  </g>
 
-  <!-- scattered decorative hearts -->
-  <text x="90" y="90" font-family="sans-serif" font-size="30" fill="#ff8fc7" opacity="0.55">♡</text>
-  <text x="1090" y="80" font-family="sans-serif" font-size="22" fill="#37c9ff" opacity="0.5">♡</text>
-  <text x="70" y="560" font-family="sans-serif" font-size="24" fill="#37c9ff" opacity="0.45">♡</text>
-  <text x="1110" y="555" font-family="sans-serif" font-size="34" fill="#ff4fa8" opacity="0.5">♡</text>
-  <text x="150" y="470" font-family="sans-serif" font-size="18" fill="#ff8fc7" opacity="0.4">♡</text>
-  <text x="1030" y="150" font-family="sans-serif" font-size="18" fill="#ff8fc7" opacity="0.4">♡</text>
+  <!-- scattered stars -->
+  <circle cx="120" cy="90" r="2.2" fill="#f1eaff" opacity="0.5"/>
+  <circle cx="1080" cy="70" r="1.8" fill="#f1eaff" opacity="0.45"/>
+  <circle cx="980" cy="140" r="2.6" fill="#ffd76f" opacity="0.5"/>
+  <circle cx="180" cy="200" r="1.6" fill="#7ce7d6" opacity="0.5"/>
+  <circle cx="1050" cy="220" r="2.2" fill="#ff6fae" opacity="0.4"/>
+  <circle cx="90" cy="300" r="1.8" fill="#f1eaff" opacity="0.4"/>
+  <circle cx="1120" cy="330" r="2" fill="#f1eaff" opacity="0.35"/>
 
-  <!-- content panel -->
-  <rect x="90" y="108" width="1020" height="392" rx="50" ry="50" fill="url(#panelGrad)" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="9 7"/>
+  <!-- rainbow rising from the base, ghost's home -->
+  <g opacity="0.4" fill="none">
+    <circle cx="600" cy="900" r="330" stroke="#ff6fae" stroke-width="20"/>
+    <circle cx="600" cy="900" r="298" stroke="#ffd76f" stroke-width="20"/>
+    <circle cx="600" cy="900" r="266" stroke="#7ce7d6" stroke-width="20"/>
+    <circle cx="600" cy="900" r="234" stroke="#ff6fae" stroke-width="20" opacity="0.6"/>
+  </g>
 
-  <!-- pretitle -->
-  <text x="600" y="168" font-family="sans-serif" font-size="22" letter-spacing="3" text-anchor="middle" fill="#b8005a" opacity="0.75">♡ yumeshipping since forever ♡</text>
+  <!-- 主役: サイト名 -->
+  <text x="600" y="300" text-anchor="middle"
+        font-family="sans-serif" font-weight="700" font-size="124"
+        letter-spacing="6" fill="#ff6fae" opacity="0.35"
+        filter="url(#softGlow)">へのへのんのの</text>
+  <text x="600" y="300" text-anchor="middle"
+        font-family="sans-serif" font-weight="700" font-size="124"
+        letter-spacing="6" fill="url(#titleGrad)">へのへのんのの</text>
 
-  <!-- site name: double-vision layered text -->
-  <text x="597" y="308" font-family="sans-serif" font-weight="bold" font-size="118" text-anchor="middle" fill="#37c9ff" opacity="0.55">へのへのんのの</text>
-  <text x="603" y="308" font-family="sans-serif" font-weight="bold" font-size="118" text-anchor="middle" fill="#ff4fa8" opacity="0.55">へのへのんのの</text>
-  <text x="600" y="308" font-family="sans-serif" font-weight="bold" font-size="118" text-anchor="middle" fill="#b8005a">へのへのんのの</text>
+  <!-- underline accent -->
+  <rect x="420" y="336" width="360" height="4" rx="2" fill="url(#titleGrad)" opacity="0.8"/>
 
-  <!-- song subtitle -->
-  <text x="600" y="392" font-family="sans-serif" font-weight="bold" font-size="40" text-anchor="middle" fill="#ff4fa8">YUMESHIPPER ♡</text>
+  <!-- 副題: 今日の曲 -->
+  <text x="600" y="392" text-anchor="middle"
+        font-family="sans-serif" font-size="22" letter-spacing="4"
+        fill="#b6acd6">今日のうた</text>
+  <text x="600" y="442" text-anchor="middle"
+        font-family="sans-serif" font-weight="700" font-size="42"
+        letter-spacing="2" fill="#7ce7d6">ワンダー</text>
+  <text x="600" y="478" text-anchor="middle"
+        font-family="sans-serif" font-size="24"
+        fill="#b6acd6">r-906 feat. 初音ミク V4X (Dark)</text>
 
-  <!-- artist -->
-  <text x="600" y="434" font-family="sans-serif" font-size="23" text-anchor="middle" fill="#3a1030" opacity="0.6">Sutekina-P feat. Chis-A [tʃíːseɪ]</text>
-
-  <!-- footer tagline -->
-  <text x="600" y="565" font-family="sans-serif" font-size="19" text-anchor="middle" fill="#b8005a" opacity="0.85">I LOVE YOU — block the haters, keep the love ♡</text>
+  <!-- 空き家の幽霊、虹の根もとに -->
+  <g transform="translate(600,592)" opacity="0.6">
+    <path d="M-20,10 L0,-8 L20,10 Z" fill="#1c1638" stroke="rgba(241,234,255,0.16)"/>
+    <rect x="-15" y="10" width="30" height="24" rx="2" fill="#1c1638" stroke="rgba(241,234,255,0.16)"/>
+    <path d="M-25,-32
+             a25,25 0 0 1 50,0
+             l0,26
+             q-6,9 -12,0
+             q-6,9 -13,0
+             q-6,9 -12,0
+             q-6,9 -13,0
+             z"
+          fill="#f1eaff" opacity="0.55"/>
+    <circle cx="-9" cy="-30" r="2.4" fill="#120e26"/>
+    <circle cx="7" cy="-30" r="2.4" fill="#120e26"/>
+  </g>
 </svg>

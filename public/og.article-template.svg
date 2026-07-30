@@ -1,57 +1,87 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="gradPink" cx="12%" cy="8%" r="55%">
-      <stop offset="0%" stop-color="#ff8fc7" stop-opacity="0.38"/>
-      <stop offset="100%" stop-color="#ff8fc7" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="gradCyan" cx="88%" cy="92%" r="50%">
-      <stop offset="0%" stop-color="#37c9ff" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#37c9ff" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="cardEdge" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffe3f0"/>
-      <stop offset="55%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#e9f9ff"/>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#120e26"/>
+      <stop offset="45%" stop-color="#171232"/>
+      <stop offset="100%" stop-color="#0d0a1c"/>
     </linearGradient>
+    <radialGradient id="glowPink" cx="50%" cy="0%" r="65%">
+      <stop offset="0%" stop-color="#ff6fae" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff6fae" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowTeal" cx="88%" cy="105%" r="65%">
+      <stop offset="0%" stop-color="#7ce7d6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#7ce7d6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6fae"/>
+      <stop offset="50%" stop-color="#ffd76f"/>
+      <stop offset="100%" stop-color="#7ce7d6"/>
+    </linearGradient>
+    <linearGradient id="siteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6fae"/>
+      <stop offset="50%" stop-color="#ffd76f"/>
+      <stop offset="100%" stop-color="#7ce7d6"/>
+    </linearGradient>
+    <pattern id="stripes" width="90" height="90" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <rect x="0" y="0" width="30" height="90" fill="#ff6fae" opacity="0.16"/>
+      <rect x="30" y="0" width="30" height="90" fill="#ffd76f" opacity="0.13"/>
+      <rect x="60" y="0" width="30" height="90" fill="#7ce7d6" opacity="0.13"/>
+    </pattern>
   </defs>
 
   <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#fff3f8"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#gradPink)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#gradCyan)"/>
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#glowPink)"/>
+  <rect width="1200" height="630" fill="url(#glowTeal)"/>
+  <rect x="-100" y="-140" width="1400" height="300" fill="url(#stripes)" opacity="0.55"/>
 
-  <!-- bokeh dots -->
-  <circle cx="1130" cy="55" r="34" fill="#ff4fa8" opacity="0.12"/>
-  <circle cx="70" cy="585" r="46" fill="#37c9ff" opacity="0.12"/>
-  <circle cx="1080" cy="560" r="16" fill="#b8005a" opacity="0.15"/>
-  <circle cx="120" cy="90" r="12" fill="#37c9ff" opacity="0.18"/>
+  <!-- rainbow rising from the foot of the empty house -->
+  <g fill="none">
+    <circle cx="130" cy="690" r="130" stroke="#7ce7d6" stroke-opacity="0.35" stroke-width="14"/>
+    <circle cx="130" cy="690" r="170" stroke="#ffd76f" stroke-opacity="0.3" stroke-width="14"/>
+    <circle cx="130" cy="690" r="210" stroke="#ff6fae" stroke-opacity="0.25" stroke-width="14"/>
+    <circle cx="130" cy="690" r="250" stroke="#f1eaff" stroke-opacity="0.12" stroke-width="14"/>
+  </g>
 
-  <!-- faint decorative hearts -->
-  <text x="1005" y="140" font-family="sans-serif" font-size="64" fill="#37c9ff" opacity="0.16">&#9825;</text>
-  <text x="90" y="470" font-family="sans-serif" font-size="46" fill="#ff4fa8" opacity="0.18">&#9825;</text>
-  <text x="1000" y="520" font-family="sans-serif" font-size="34" fill="#b8005a" opacity="0.14">&#9825;</text>
-  <text x="150" y="150" font-family="sans-serif" font-size="30" fill="#ff8fc7" opacity="0.22">&#9825;</text>
+  <!-- vacant house silhouette -->
+  <g opacity="0.5" fill="none" stroke="#b6acd6" stroke-width="2">
+    <path d="M65,600 L65,560 L110,525 L155,560 L155,600"/>
+    <rect x="98" y="575" width="24" height="25"/>
+  </g>
 
-  <!-- outer dashed frame -->
-  <rect x="24" y="24" width="1152" height="582" rx="30" fill="none" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="13 9"/>
+  <!-- ground line -->
+  <line x1="60" y1="600" x2="1140" y2="600" stroke="#f1eaff" stroke-opacity="0.15" stroke-width="1.5" stroke-dasharray="6 10"/>
 
-  <!-- site name (double-shadow wobble style) -->
-  <text x="66" y="92" font-family="sans-serif" font-weight="700" font-size="38" fill="#37c9ff">&#12408;&#12398;&#12408;&#12398;&#12435;&#12398;&#12398;</text>
-  <text x="62" y="92" font-family="sans-serif" font-weight="700" font-size="38" fill="#ff4fa8">&#12408;&#12398;&#12408;&#12398;&#12435;&#12398;&#12398;</text>
-  <text x="64" y="92" font-family="sans-serif" font-weight="700" font-size="38" fill="#3a1030">&#12408;&#12398;&#12408;&#12398;&#12435;&#12398;&#12398;</text>
-  <text x="64" y="118" font-family="sans-serif" font-size="17" fill="#b8005a" opacity="0.75">&#9825; yumeshipping since forever &#9825;</text>
+  <!-- drifting sparkles -->
+  <path d="M1030,80 L1033,87 L1040,90 L1033,93 L1030,100 L1027,93 L1020,90 L1027,87 Z" fill="#ffd76f" opacity="0.6"/>
+  <path d="M1105,150 L1107,155 L1112,157 L1107,159 L1105,164 L1103,159 L1098,157 L1103,155 Z" fill="#f1eaff" opacity="0.5"/>
+  <path d="M955,55 L956.5,58.5 L960,60 L956.5,61.5 L955,65 L953.5,61.5 L950,60 L953.5,58.5 Z" fill="#7ce7d6" opacity="0.55"/>
+  <path d="M150,60 L152,65 L157,67 L152,69 L150,74 L148,69 L143,67 L148,65 Z" fill="#ff6fae" opacity="0.4"/>
 
-  <!-- header divider dashed line -->
-  <line x1="64" y1="136" x2="1136" y2="136" stroke="#ff8fc7" stroke-width="2" stroke-dasharray="9 7" opacity="0.6"/>
+  <!-- lonely ghost that no one calls out to -->
+  <g transform="translate(985,420)" opacity="0.9">
+    <path d="M0,130 C0,58.2 58.2,0 130,0 C201.8,0 260,58.2 260,130 L260,238 L227.5,206 L195,238 L162.5,206 L130,238 L97.5,206 L65,238 L32.5,206 L0,238 Z" fill="#f1eaff" fill-opacity="0.07" stroke="#f1eaff" stroke-opacity="0.14" stroke-width="2"/>
+    <ellipse cx="85" cy="110" rx="11" ry="15" fill="#120e26" fill-opacity="0.35"/>
+    <ellipse cx="175" cy="110" rx="11" ry="15" fill="#120e26" fill-opacity="0.35"/>
+  </g>
 
-  <!-- title card -->
-  <rect x="90" y="185" width="1020" height="290" rx="34" fill="url(#cardEdge)" stroke="#ff8fc7" stroke-width="3" stroke-dasharray="11 8"/>
+  <!-- title panel -->
+  <rect x="60" y="225" width="1000" height="215" rx="28" fill="#1c1638" fill-opacity="0.55" stroke="#f1eaff" stroke-opacity="0.16" stroke-width="1.5"/>
 
-  <!-- title (double + glow offset like h1 text-shadow) -->
-  <text x="603" y="347" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="72" fill="#37c9ff">{{TITLE}}</text>
-  <text x="597" y="347" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="72" fill="#ff4fa8">{{TITLE}}</text>
-  <text x="600" y="345" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="72" fill="#3a1030">{{TITLE}}</text>
+  <text x="110" y="270" font-family="sans-serif" font-size="20" font-weight="700" letter-spacing="0.3em" fill="#7ce7d6" opacity="0.85">ARTICLE</text>
 
-  <!-- footer tagline -->
-  <text x="600" y="592" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#b8005a" opacity="0.85">I LOVE YOU &#8212; block the haters, keep the love &#9825;</text>
+  <!-- title (halo + gradient) -->
+  <text x="110" y="355" font-family="sans-serif" font-size="72" font-weight="700" fill="none" stroke="#120e26" stroke-width="12" stroke-linejoin="round">{{TITLE}}</text>
+  <text x="110" y="355" font-family="sans-serif" font-size="72" font-weight="700" fill="url(#titleGrad)">{{TITLE}}</text>
+
+  <rect x="110" y="392" width="140" height="6" rx="3" fill="url(#titleGrad)"/>
+
+  <!-- site name -->
+  <text x="60" y="90" font-family="sans-serif" font-size="34" font-weight="700" letter-spacing="0.08em" fill="url(#siteGrad)">へのへのんのの</text>
+  <circle cx="64" cy="112" r="5" fill="#ff6fae" opacity="0.8"/>
+  <circle cx="84" cy="112" r="5" fill="#ffd76f" opacity="0.8"/>
+  <circle cx="104" cy="112" r="5" fill="#7ce7d6" opacity="0.8"/>
+
+  <text x="1140" y="600" text-anchor="end" font-family="sans-serif" font-size="16" fill="#b6acd6" opacity="0.6">へのへのんのの</text>
 </svg>
