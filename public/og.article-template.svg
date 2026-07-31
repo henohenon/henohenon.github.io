@@ -1,87 +1,64 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#120e26"/>
-      <stop offset="45%" stop-color="#171232"/>
-      <stop offset="100%" stop-color="#0d0a1c"/>
-    </linearGradient>
-    <radialGradient id="glowPink" cx="50%" cy="0%" r="65%">
-      <stop offset="0%" stop-color="#ff6fae" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ff6fae" stop-opacity="0"/>
+    <radialGradient id="glow" cx="50%" cy="-8%" r="75%">
+      <stop offset="0%" stop-color="#8f1f2e" stop-opacity="0.4"/>
+      <stop offset="55%" stop-color="#8f1f2e" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowTeal" cx="88%" cy="105%" r="65%">
-      <stop offset="0%" stop-color="#7ce7d6" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#7ce7d6" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff6fae"/>
-      <stop offset="50%" stop-color="#ffd76f"/>
-      <stop offset="100%" stop-color="#7ce7d6"/>
-    </linearGradient>
     <linearGradient id="siteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff6fae"/>
-      <stop offset="50%" stop-color="#ffd76f"/>
-      <stop offset="100%" stop-color="#7ce7d6"/>
+      <stop offset="0%" stop-color="#e0576a"/>
+      <stop offset="45%" stop-color="#ece5dc"/>
+      <stop offset="100%" stop-color="#8fa3c9"/>
     </linearGradient>
-    <pattern id="stripes" width="90" height="90" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
-      <rect x="0" y="0" width="30" height="90" fill="#ff6fae" opacity="0.16"/>
-      <rect x="30" y="0" width="30" height="90" fill="#ffd76f" opacity="0.13"/>
-      <rect x="60" y="0" width="30" height="90" fill="#7ce7d6" opacity="0.13"/>
-    </pattern>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0576a"/>
+      <stop offset="50%" stop-color="#ece5dc"/>
+      <stop offset="100%" stop-color="#8fa3c9"/>
+    </linearGradient>
   </defs>
 
   <!-- background -->
-  <rect width="1200" height="630" fill="url(#bgGrad)"/>
-  <rect width="1200" height="630" fill="url(#glowPink)"/>
-  <rect width="1200" height="630" fill="url(#glowTeal)"/>
-  <rect x="-100" y="-140" width="1400" height="300" fill="url(#stripes)" opacity="0.55"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#120f10"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- rainbow rising from the foot of the empty house -->
-  <g fill="none">
-    <circle cx="130" cy="690" r="130" stroke="#7ce7d6" stroke-opacity="0.35" stroke-width="14"/>
-    <circle cx="130" cy="690" r="170" stroke="#ffd76f" stroke-opacity="0.3" stroke-width="14"/>
-    <circle cx="130" cy="690" r="210" stroke="#ff6fae" stroke-opacity="0.25" stroke-width="14"/>
-    <circle cx="130" cy="690" r="250" stroke="#f1eaff" stroke-opacity="0.12" stroke-width="14"/>
+  <!-- coffin-slat fence, faint, left/right margins only -->
+  <g stroke="#2a2422" stroke-width="1" opacity="0.45">
+    <line x1="24" y1="0" x2="24" y2="630"/>
+    <line x1="40" y1="0" x2="40" y2="630"/>
+    <line x1="56" y1="0" x2="56" y2="630"/>
+    <line x1="1144" y1="0" x2="1144" y2="630"/>
+    <line x1="1160" y1="0" x2="1160" y2="630"/>
+    <line x1="1176" y1="0" x2="1176" y2="630"/>
   </g>
 
-  <!-- vacant house silhouette -->
-  <g opacity="0.5" fill="none" stroke="#b6acd6" stroke-width="2">
-    <path d="M65,600 L65,560 L110,525 L155,560 L155,600"/>
-    <rect x="98" y="575" width="24" height="25"/>
-  </g>
-
-  <!-- ground line -->
-  <line x1="60" y1="600" x2="1140" y2="600" stroke="#f1eaff" stroke-opacity="0.15" stroke-width="1.5" stroke-dasharray="6 10"/>
-
-  <!-- drifting sparkles -->
-  <path d="M1030,80 L1033,87 L1040,90 L1033,93 L1030,100 L1027,93 L1020,90 L1027,87 Z" fill="#ffd76f" opacity="0.6"/>
-  <path d="M1105,150 L1107,155 L1112,157 L1107,159 L1105,164 L1103,159 L1098,157 L1103,155 Z" fill="#f1eaff" opacity="0.5"/>
-  <path d="M955,55 L956.5,58.5 L960,60 L956.5,61.5 L955,65 L953.5,61.5 L950,60 L953.5,58.5 Z" fill="#7ce7d6" opacity="0.55"/>
-  <path d="M150,60 L152,65 L157,67 L152,69 L150,74 L148,69 L143,67 L148,65 Z" fill="#ff6fae" opacity="0.4"/>
-
-  <!-- lonely ghost that no one calls out to -->
-  <g transform="translate(985,420)" opacity="0.9">
-    <path d="M0,130 C0,58.2 58.2,0 130,0 C201.8,0 260,58.2 260,130 L260,238 L227.5,206 L195,238 L162.5,206 L130,238 L97.5,206 L65,238 L32.5,206 L0,238 Z" fill="#f1eaff" fill-opacity="0.07" stroke="#f1eaff" stroke-opacity="0.14" stroke-width="2"/>
-    <ellipse cx="85" cy="110" rx="11" ry="15" fill="#120e26" fill-opacity="0.35"/>
-    <ellipse cx="175" cy="110" rx="11" ry="15" fill="#120e26" fill-opacity="0.35"/>
-  </g>
-
-  <!-- title panel -->
-  <rect x="60" y="225" width="1000" height="215" rx="28" fill="#1c1638" fill-opacity="0.55" stroke="#f1eaff" stroke-opacity="0.16" stroke-width="1.5"/>
-
-  <text x="110" y="270" font-family="sans-serif" font-size="20" font-weight="700" letter-spacing="0.3em" fill="#7ce7d6" opacity="0.85">ARTICLE</text>
-
-  <!-- title (halo + gradient) -->
-  <text x="110" y="355" font-family="sans-serif" font-size="72" font-weight="700" fill="none" stroke="#120e26" stroke-width="12" stroke-linejoin="round">{{TITLE}}</text>
-  <text x="110" y="355" font-family="sans-serif" font-size="72" font-weight="700" fill="url(#titleGrad)">{{TITLE}}</text>
-
-  <rect x="110" y="392" width="140" height="6" rx="3" fill="url(#titleGrad)"/>
+  <!-- outer frame, like article.post border -->
+  <rect x="16" y="16" width="1168" height="598" fill="none" stroke="#2a2422" stroke-width="2"/>
 
   <!-- site name -->
-  <text x="60" y="90" font-family="sans-serif" font-size="34" font-weight="700" letter-spacing="0.08em" fill="url(#siteGrad)">へのへのんのの</text>
-  <circle cx="64" cy="112" r="5" fill="#ff6fae" opacity="0.8"/>
-  <circle cx="84" cy="112" r="5" fill="#ffd76f" opacity="0.8"/>
-  <circle cx="104" cy="112" r="5" fill="#7ce7d6" opacity="0.8"/>
+  <text x="60" y="86" font-family="sans-serif" font-weight="700" font-size="32" letter-spacing="10" fill="url(#siteGrad)">へのへのんのの</text>
+  <line x1="60" y1="104" x2="270" y2="104" stroke="#8f1f2e" stroke-width="2"/>
 
-  <text x="1140" y="600" text-anchor="end" font-family="sans-serif" font-size="16" fill="#b6acd6" opacity="0.6">へのへのんのの</text>
+  <!-- title marker bar -->
+  <rect x="60" y="220" width="6" height="220" fill="#e0576a" opacity="0.9"/>
+
+  <!-- article title, doubled for echo/flicker effect -->
+  <text x="94" y="356" font-family="sans-serif" font-weight="700" font-size="72" fill="none" stroke="#8fa3c9" stroke-width="2" opacity="0.4">{{TITLE}}</text>
+  <text x="90" y="352" font-family="sans-serif" font-weight="700" font-size="72" letter-spacing="1" fill="url(#titleGrad)">{{TITLE}}</text>
+
+  <!-- dashed separator, echoing hr styling -->
+  <line x1="60" y1="512" x2="1140" y2="512" stroke="#2a2422" stroke-width="2" stroke-dasharray="10 10"/>
+
+  <!-- procession lights -->
+  <g opacity="0.7">
+    <circle cx="90" cy="560" r="4" fill="#e0576a"/>
+    <circle cx="230" cy="560" r="4" fill="#8fa3c9"/>
+    <circle cx="370" cy="560" r="4" fill="#e0576a"/>
+    <circle cx="510" cy="560" r="4" fill="#8fa3c9"/>
+    <circle cx="650" cy="560" r="4" fill="#e0576a"/>
+    <circle cx="790" cy="560" r="4" fill="#8fa3c9"/>
+    <circle cx="930" cy="560" r="4" fill="#e0576a"/>
+    <circle cx="1070" cy="560" r="4" fill="#8fa3c9"/>
+  </g>
+
+  <!-- corner tag -->
+  <text x="1140" y="596" font-family="sans-serif" font-size="18" letter-spacing="4" fill="#8fa3c9" text-anchor="end" opacity="0.85">ARTICLE</text>
 </svg>
