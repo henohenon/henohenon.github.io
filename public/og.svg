@@ -1,78 +1,65 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="-5%" r="75%">
-      <stop offset="0%" stop-color="#8f1f2e" stop-opacity="0.35"/>
-      <stop offset="55%" stop-color="#8f1f2e" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#120f10" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="50%" r="72%">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="70%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.65"/>
-    </radialGradient>
-    <linearGradient id="edgeLine" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#8f1f2e" stop-opacity="0"/>
-      <stop offset="20%" stop-color="#8f1f2e" stop-opacity="0.9"/>
-      <stop offset="80%" stop-color="#8f1f2e" stop-opacity="0.9"/>
-      <stop offset="100%" stop-color="#8f1f2e" stop-opacity="0"/>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="none"/>
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#ff2f6d" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="topGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff2f6d" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ff2f6d" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#e0576a"/>
-      <stop offset="45%" stop-color="#ece5dc"/>
-      <stop offset="100%" stop-color="#8fa3c9"/>
+    <linearGradient id="botGlow" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#33f0ff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#33f0ff" stop-opacity="0"/>
     </linearGradient>
-    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="9"/>
-    </filter>
   </defs>
 
-  <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#120f10"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glow)"/>
+  <!-- base -->
+  <rect width="1200" height="630" fill="#0a0a0f"/>
+  <rect width="1200" height="630" fill="url(#scan)"/>
+  <rect width="1200" height="260" fill="url(#topGlow)"/>
+  <rect y="380" width="1200" height="250" fill="url(#botGlow)"/>
 
-  <!-- faint echo arcs, two voices reflecting -->
-  <circle cx="600" cy="300" r="260" fill="none" stroke="#8fa3c9" stroke-opacity="0.12" stroke-width="1"/>
-  <circle cx="600" cy="300" r="320" fill="none" stroke="#e0576a" stroke-opacity="0.10" stroke-width="1"/>
-  <circle cx="600" cy="300" r="380" fill="none" stroke="#2a2422" stroke-opacity="0.6" stroke-width="1"/>
+  <!-- glitch bars -->
+  <rect x="0" y="96" width="1200" height="5" fill="#33f0ff" opacity="0.10"/>
+  <rect x="0" y="520" width="1200" height="9" fill="#ff2f6d" opacity="0.12"/>
+  <rect x="40" y="150" width="230" height="3" fill="#ff2f6d" opacity="0.5"/>
+  <rect x="930" y="150" width="230" height="3" fill="#33f0ff" opacity="0.4"/>
+  <rect x="0" y="230" width="90" height="18" fill="#ff2f6d" opacity="0.25"/>
+  <rect x="1110" y="470" width="90" height="14" fill="#33f0ff" opacity="0.22"/>
 
-  <!-- top / bottom border lines -->
-  <rect x="60" y="52" width="1080" height="2" fill="url(#edgeLine)"/>
-  <rect x="60" y="576" width="1080" height="2" fill="url(#edgeLine)"/>
+  <!-- frame -->
+  <rect x="22" y="22" width="1156" height="586" fill="none" stroke="#ff2f6d" stroke-width="2" opacity="0.45"/>
+  <rect x="30" y="30" width="1140" height="570" fill="none" stroke="#33f0ff" stroke-width="1" opacity="0.15"/>
 
-  <!-- procession motif: quiet row of grave-marker lines -->
-  <g stroke="#8f1f2e" stroke-opacity="0.5">
-    <line x1="150" y1="600" x2="150" y2="560" stroke-width="3"/>
-    <line x1="220" y1="600" x2="220" y2="575" stroke-width="3"/>
-    <line x1="290" y1="600" x2="290" y2="555" stroke-width="3"/>
-    <line x1="910" y1="600" x2="910" y2="555" stroke-width="3"/>
-    <line x1="980" y1="600" x2="980" y2="575" stroke-width="3"/>
-    <line x1="1050" y1="600" x2="1050" y2="560" stroke-width="3"/>
-  </g>
+  <!-- top-right tag -->
+  <text x="1148" y="54" font-family="monospace" font-size="17" fill="#ff2f6d" opacity="0.6" text-anchor="end" letter-spacing="2">0x00 SEGMENTATION_FAULT</text>
 
-  <!-- small kicker -->
-  <text x="600" y="150" text-anchor="middle" font-family="sans-serif" font-size="18"
-        letter-spacing="8" fill="#8fa3c9" fill-opacity="0.75">TODAY'S SOUND SHAPES THIS PAGE</text>
+  <!-- bottom-left prompt -->
+  <text x="48" y="588" font-family="monospace" font-size="20" letter-spacing="0.5">
+    <tspan fill="#ff2f6d">root@brain:~$ </tspan><tspan fill="#d6f5df" opacity="0.75">now_playing.sh --loud</tspan>
+  </text>
 
-  <!-- title glow -->
-  <text x="600" y="322" text-anchor="middle" font-family="sans-serif" font-weight="700"
-        font-size="132" letter-spacing="6" fill="#e0576a" fill-opacity="0.45" filter="url(#softBlur)">へのへのんのの</text>
+  <!-- bottom-right small tag -->
+  <text x="1148" y="588" font-family="monospace" font-size="16" fill="#33f0ff" opacity="0.5" text-anchor="end" letter-spacing="1">VOCALOID / GLITCH-RAP</text>
 
-  <!-- site title: the star -->
-  <text x="600" y="322" text-anchor="middle" font-family="sans-serif" font-weight="700"
-        font-size="132" letter-spacing="6" fill="url(#titleGrad)">へのへのんのの</text>
+  <!-- site title: glitch shadow layers -->
+  <text x="596" y="292" font-family="monospace" font-size="132" font-weight="bold" fill="#ff2f6d" opacity="0.5" text-anchor="middle">へのへのんのの</text>
+  <text x="604" y="286" font-family="monospace" font-size="132" font-weight="bold" fill="#33f0ff" opacity="0.5" text-anchor="middle">へのへのんのの</text>
+  <text x="600" y="289" font-family="monospace" font-size="132" font-weight="bold" text-anchor="middle">
+    <tspan fill="#d6f5df">へのへのんのの</tspan><tspan fill="#ff2f6d">_<animate attributeName="opacity" values="1;1;0;0;1" dur="1.2s" repeatCount="indefinite"/></tspan>
+  </text>
 
   <!-- divider -->
-  <line x1="430" y1="368" x2="770" y2="368" stroke="#8f1f2e" stroke-width="1.5"
-        stroke-dasharray="7 8" stroke-opacity="0.7"/>
+  <line x1="430" y1="345" x2="770" y2="345" stroke="#ff2f6d" stroke-width="2" opacity="0.4"/>
+  <rect x="560" y="341" width="80" height="8" fill="#33f0ff" opacity="0.5"/>
 
-  <!-- subtitle: today's track -->
-  <text x="600" y="424" text-anchor="middle" font-family="sans-serif" font-weight="600"
-        font-size="38" letter-spacing="7" fill="#e0576a">NO EULOGIES</text>
+  <!-- eyebrow -->
+  <text x="600" y="385" font-family="monospace" font-size="20" fill="#33f0ff" opacity="0.7" text-anchor="middle" letter-spacing="4">NOW SPINNING —</text>
 
-  <!-- artist, smaller still -->
-  <text x="600" y="464" text-anchor="middle" font-family="sans-serif" font-size="21"
-        letter-spacing="2" fill="#8fa3c9" fill-opacity="0.85">Various artists</text>
+  <!-- song title (subtitle, smaller than site name) -->
+  <text x="600" y="438" font-family="monospace" font-size="42" font-weight="bold" fill="#ff2f6d" text-anchor="middle" letter-spacing="1">電脳殺意</text>
 
-  <!-- vignette on top -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
+  <!-- artist line, smallest -->
+  <text x="600" y="474" font-family="monospace" font-size="21" fill="#d6f5df" opacity="0.65" text-anchor="middle">Neru feat. 重音テトSV / 音街ウナ (SV AI) / 鏡音レン V4X</text>
 </svg>

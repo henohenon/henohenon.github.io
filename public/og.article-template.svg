@@ -1,64 +1,56 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="-8%" r="75%">
-      <stop offset="0%" stop-color="#8f1f2e" stop-opacity="0.4"/>
-      <stop offset="55%" stop-color="#8f1f2e" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="siteGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#e0576a"/>
-      <stop offset="45%" stop-color="#ece5dc"/>
-      <stop offset="100%" stop-color="#8fa3c9"/>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff2f6d" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ff2f6d" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#e0576a"/>
-      <stop offset="50%" stop-color="#ece5dc"/>
-      <stop offset="100%" stop-color="#8fa3c9"/>
+    <linearGradient id="footerGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a0f" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#ff2f6d" stop-opacity="0.09"/>
     </linearGradient>
+    <pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#0a0a0f"/>
+      <rect width="6" height="1" fill="#ff2f6d" opacity="0.06"/>
+    </pattern>
+    <clipPath id="canvas">
+      <rect x="0" y="0" width="1200" height="630"/>
+    </clipPath>
   </defs>
 
-  <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#120f10"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glow)"/>
+  <g clip-path="url(#canvas)">
+    <rect x="0" y="0" width="1200" height="630" fill="#0a0a0f"/>
 
-  <!-- coffin-slat fence, faint, left/right margins only -->
-  <g stroke="#2a2422" stroke-width="1" opacity="0.45">
-    <line x1="24" y1="0" x2="24" y2="630"/>
-    <line x1="40" y1="0" x2="40" y2="630"/>
-    <line x1="56" y1="0" x2="56" y2="630"/>
-    <line x1="1144" y1="0" x2="1144" y2="630"/>
-    <line x1="1160" y1="0" x2="1160" y2="630"/>
-    <line x1="1176" y1="0" x2="1176" y2="630"/>
+    <text x="780" y="560" font-family="monospace" font-size="210" font-weight="700" fill="#d6f5df" opacity="0.035" transform="rotate(-7 780 560)">へのへのんのの</text>
+
+    <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
+
+    <g fill="none" stroke="#33f0ff" stroke-opacity="0.18" stroke-width="1">
+      <path d="M0 40 H140 V90"/>
+      <path d="M1200 500 H1060 V590"/>
+    </g>
+    <circle cx="140" cy="90" r="3" fill="#33f0ff" fill-opacity="0.3"/>
+    <circle cx="1060" cy="500" r="3" fill="#ff2f6d" fill-opacity="0.3"/>
+
+    <rect x="-60" y="122" width="220" height="16" fill="#33f0ff" opacity="0.10" transform="skewX(-20)"/>
+    <rect x="-40" y="472" width="260" height="12" fill="#ff2f6d" opacity="0.12" transform="skewX(-20)"/>
+    <rect x="1020" y="150" width="240" height="10" fill="#ff2f6d" opacity="0.10" transform="skewX(20)"/>
+    <rect x="1000" y="440" width="260" height="14" fill="#33f0ff" opacity="0.09" transform="skewX(20)"/>
+
+    <rect x="0" y="0" width="1200" height="92" fill="url(#headerGrad)"/>
+    <rect x="0" y="90" width="1200" height="2" fill="#ff2f6d"/>
+    <text x="60" y="58" font-family="monospace" font-size="30" font-weight="700" letter-spacing="2" fill="#d6f5df">へのへのんのの<tspan fill="#ff2f6d">_</tspan></text>
+    <text x="1140" y="58" text-anchor="end" font-family="monospace" font-size="14" letter-spacing="1" fill="#33f0ff" opacity="0.6">DECODING...</text>
+
+    <rect x="56" y="230" width="1088" height="190" fill="#0a0a0f" opacity="0.4" stroke="#ff2f6d" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="1122" y="220" text-anchor="end" font-family="monospace" font-size="13" letter-spacing="1" fill="#ff2f6d" opacity="0.65">0x00 SEGMENTATION FAULT</text>
+    <text x="80" y="270" font-family="monospace" font-size="16" letter-spacing="2" fill="#33f0ff" opacity="0.7">&gt; LOG_ENTRY</text>
+
+    <text x="83" y="360" font-family="monospace" font-size="74" font-weight="700" fill="#33f0ff" opacity="0.55">{{TITLE}}</text>
+    <text x="77" y="360" font-family="monospace" font-size="74" font-weight="700" fill="#ff2f6d" opacity="0.55">{{TITLE}}</text>
+    <text x="80" y="360" font-family="monospace" font-size="74" font-weight="700" fill="#d6f5df">{{TITLE}}</text>
+
+    <rect x="0" y="600" width="1200" height="30" fill="url(#footerGrad)"/>
+    <rect x="0" y="600" width="1200" height="1" fill="#ff2f6d" opacity="0.4"/>
+    <text x="60" y="622" font-family="monospace" font-size="16" fill="#d6f5df" opacity="0.6"><tspan fill="#ff2f6d">root@brain</tspan>:~$ へのへのんのの</text>
   </g>
-
-  <!-- outer frame, like article.post border -->
-  <rect x="16" y="16" width="1168" height="598" fill="none" stroke="#2a2422" stroke-width="2"/>
-
-  <!-- site name -->
-  <text x="60" y="86" font-family="sans-serif" font-weight="700" font-size="32" letter-spacing="10" fill="url(#siteGrad)">へのへのんのの</text>
-  <line x1="60" y1="104" x2="270" y2="104" stroke="#8f1f2e" stroke-width="2"/>
-
-  <!-- title marker bar -->
-  <rect x="60" y="220" width="6" height="220" fill="#e0576a" opacity="0.9"/>
-
-  <!-- article title, doubled for echo/flicker effect -->
-  <text x="94" y="356" font-family="sans-serif" font-weight="700" font-size="72" fill="none" stroke="#8fa3c9" stroke-width="2" opacity="0.4">{{TITLE}}</text>
-  <text x="90" y="352" font-family="sans-serif" font-weight="700" font-size="72" letter-spacing="1" fill="url(#titleGrad)">{{TITLE}}</text>
-
-  <!-- dashed separator, echoing hr styling -->
-  <line x1="60" y1="512" x2="1140" y2="512" stroke="#2a2422" stroke-width="2" stroke-dasharray="10 10"/>
-
-  <!-- procession lights -->
-  <g opacity="0.7">
-    <circle cx="90" cy="560" r="4" fill="#e0576a"/>
-    <circle cx="230" cy="560" r="4" fill="#8fa3c9"/>
-    <circle cx="370" cy="560" r="4" fill="#e0576a"/>
-    <circle cx="510" cy="560" r="4" fill="#8fa3c9"/>
-    <circle cx="650" cy="560" r="4" fill="#e0576a"/>
-    <circle cx="790" cy="560" r="4" fill="#8fa3c9"/>
-    <circle cx="930" cy="560" r="4" fill="#e0576a"/>
-    <circle cx="1070" cy="560" r="4" fill="#8fa3c9"/>
-  </g>
-
-  <!-- corner tag -->
-  <text x="1140" y="596" font-family="sans-serif" font-size="18" letter-spacing="4" fill="#8fa3c9" text-anchor="end" opacity="0.85">ARTICLE</text>
 </svg>
