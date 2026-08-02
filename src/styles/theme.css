@@ -1,19 +1,25 @@
-:root {
-  /* 曲名: 電脳殺意 / アーティスト: Neru feat. 重音テトSV, 音街ウナ(SV AI), 鏡音レン V4X(Power) */
-  /* 一言ムード: 端末が壊れていく深夜、blood-red のグリッチが緑の走査線を切り裂く自暴自棄なサイバーラップ */
+/*
+ * 曲名: アクマバライ
+ * アーティスト: うちのボカロは様子がおかしい feat. 初音ミク, 雨衣, Google Text to Speech
+ * 一言ムード: 恋の呪文を唱えるヤンデレ魔女っ子ホラー――可愛いのに闇が滲む深紫の儀式空間
+ */
 
-  --color-fg: #d6f5df;
-  --color-bg: #0a0a0f;
-  --color-accent: #ff2f6d;
+:root {
+  --color-fg: #f1e6ff;
+  --color-bg: #150c1f;
+  --color-accent: #ff2fa0;
+  --color-accent-soft: #b98cff;
+  --color-accent-gold: #ffd166;
+  --color-border: rgba(185, 140, 255, 0.35);
 
   --spacing-unit: 1rem;
 
-  --font-heading: 'Courier New', 'MS Gothic', 'ＭＳ ゴシック', monospace;
-  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic',
-    'Meiryo', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-heading: 'Hiragino Mincho ProN', 'Yu Mincho', '游明朝', 'Georgia', 'Times New Roman', serif;
+  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', '游ゴシック体',
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --line-height-body: 1.85;
-  --line-height-heading: 1.2;
+  --line-height-heading: 1.3;
 
   --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
 }
@@ -22,46 +28,44 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   background-color: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 47, 109, 0.03) 0px,
-    rgba(255, 47, 109, 0.03) 1px,
-    transparent 1px,
-    transparent 3px
-  );
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 47, 160, 0.12), transparent 45%),
+    radial-gradient(circle at 85% 0%, rgba(185, 140, 255, 0.14), transparent 40%),
+    radial-gradient(circle at 50% 100%, rgba(255, 209, 102, 0.06), transparent 50%);
+  background-attachment: fixed;
 }
 
-h1, h2, h3, h4,
-.site-title,
-article.post h1,
-article.post h2 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   line-height: var(--line-height-heading);
-  letter-spacing: 0.02em;
   color: var(--color-fg);
-  text-shadow:
-    1px 0 var(--color-accent),
-    -1px 0 #33f0ff;
-  animation: flicker-glitch 6s infinite var(--ease-default);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 calc(var(--spacing-unit) * 0.6) rgba(255, 47, 160, 0.55);
+  animation: curse-flicker 4.5s var(--ease-default) infinite;
 }
 
 a {
   color: var(--color-accent);
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 47, 109, 0.5);
-  text-underline-offset: 3px;
-  transition: color 0.2s var(--ease-default), text-shadow 0.2s var(--ease-default);
+  text-decoration: underline wavy rgba(255, 47, 160, 0.4);
+  text-underline-offset: 0.2em;
+  transition: color 0.3s var(--ease-default), text-shadow 0.3s var(--ease-default);
 }
 
 a:hover,
 a:focus-visible {
-  color: #33f0ff;
-  text-shadow: 0 0 6px rgba(51, 240, 255, 0.7);
+  color: var(--color-accent-gold);
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.7);
 }
 
 ::selection {
@@ -70,112 +74,168 @@ a:focus-visible {
 }
 
 .site-header {
-  border-bottom: 2px solid var(--color-accent);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  background: linear-gradient(180deg, rgba(255, 47, 109, 0.08), transparent);
-}
-
-.site-header .site-title {
   position: relative;
-  font-size: 1.6rem;
-  text-transform: uppercase;
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(180deg, rgba(255, 47, 160, 0.08), transparent 70%);
+  overflow: hidden;
 }
 
-.site-header .site-title::after {
-  content: '_';
-  color: var(--color-accent);
-  animation: cursor-blink 1s steps(1) infinite;
+.site-header::before {
+  content: "✦ Vade retro satana ✦";
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  color: var(--color-accent-soft);
+  opacity: 0.7;
+  text-align: center;
+  margin-bottom: calc(var(--spacing-unit) * 0.75);
+  animation: incantation-drift 8s var(--ease-default) infinite;
+}
+
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto -10%;
+  height: 220%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 47, 160, 0.08) 90deg,
+    transparent 180deg,
+    rgba(185, 140, 255, 0.08) 270deg,
+    transparent 360deg
+  );
+  animation: magic-circle-spin 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .site-footer {
-  border-top: 1px solid rgba(255, 47, 109, 0.4);
-  padding: var(--spacing-unit);
-  margin-top: calc(var(--spacing-unit) * 3);
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  color: rgba(214, 245, 223, 0.6);
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 1.5);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-accent-soft);
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .site-footer::before {
-  content: 'root@brain:~$ ';
-  color: var(--color-accent);
+  content: "🕯 CANT YOU! CANT YOU! 🕯";
+  display: block;
+  margin-bottom: calc(var(--spacing-unit) * 0.5);
+  letter-spacing: 0.15em;
+  opacity: 0.6;
 }
 
 .post-list {
-  list-style: none;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 1.25);
+  padding: calc(var(--spacing-unit) * 1.5) 0;
 }
 
-.post-list li {
-  border-left: 3px solid transparent;
-  padding: calc(var(--spacing-unit) * 0.75) var(--spacing-unit);
-  margin-bottom: calc(var(--spacing-unit) * 0.5);
-  transition: border-color 0.25s var(--ease-default), background-color 0.25s var(--ease-default);
+.post-list li,
+.post-list article {
+  position: relative;
+  padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.25);
+  border-left: 3px solid var(--color-accent-soft);
+  background: rgba(185, 140, 255, 0.05);
+  transition: border-color 0.35s var(--ease-default), background 0.35s var(--ease-default), transform 0.35s var(--ease-default);
 }
 
-.post-list li:hover {
+.post-list li:hover,
+.post-list article:hover {
   border-left-color: var(--color-accent);
-  background-color: rgba(255, 47, 109, 0.06);
+  background: rgba(255, 47, 160, 0.08);
+  transform: translateX(4px);
 }
 
 article.post {
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 47, 109, 0.25);
-  border-radius: 2px;
-  padding: calc(var(--spacing-unit) * 1.5);
-  margin-bottom: calc(var(--spacing-unit) * 2);
   position: relative;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: calc(var(--spacing-unit) * 2);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: linear-gradient(160deg, rgba(21, 12, 31, 0.9), rgba(41, 18, 54, 0.85));
+  box-shadow: 0 0 calc(var(--spacing-unit) * 2) rgba(255, 47, 160, 0.12);
+  animation: seal-glow 6s var(--ease-default) infinite;
 }
 
-article.post::before {
-  content: '0x00 SEGMENTATION FAULT';
-  position: absolute;
-  top: -0.7em;
-  right: var(--spacing-unit);
-  font-family: var(--font-heading);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  color: rgba(255, 47, 109, 0.55);
-  background: var(--color-bg);
-  padding: 0 0.4em;
+article.post h1,
+article.post h2 {
+  border-bottom: 1px dashed var(--color-accent-soft);
+  padding-bottom: calc(var(--spacing-unit) * 0.5);
 }
 
-code, pre, kbd {
-  font-family: var(--font-heading);
-  color: #33f0ff;
-  background: rgba(51, 240, 255, 0.08);
-}
-
-blockquote {
-  border-left: 3px solid var(--color-accent);
+article.post blockquote {
+  border-left: 3px solid var(--color-accent-gold);
   padding-left: var(--spacing-unit);
-  color: rgba(214, 245, 223, 0.75);
-  font-style: normal;
+  color: var(--color-accent-soft);
+  font-style: italic;
 }
 
-@keyframes flicker-glitch {
-  0%, 92%, 100% {
-    text-shadow:
-      1px 0 var(--color-accent),
-      -1px 0 #33f0ff;
+article.post code,
+article.post pre {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent-gold);
+  border-radius: 3px;
+}
+
+hr {
+  border: none;
+  border-top: 1px dotted var(--color-border);
+  margin: calc(var(--spacing-unit) * 2) 0;
+}
+
+@keyframes curse-flicker {
+  0%,
+  92%,
+  100% {
     opacity: 1;
-  }
-  93% {
-    text-shadow: -2px 0 var(--color-accent), 2px 0 #33f0ff;
-    opacity: 0.85;
+    text-shadow: 0 0 calc(var(--spacing-unit) * 0.6) rgba(255, 47, 160, 0.55);
   }
   94% {
-    text-shadow: 2px 0 var(--color-accent), -2px 0 #33f0ff;
-    opacity: 1;
+    opacity: 0.75;
+    text-shadow: 0 0 calc(var(--spacing-unit) * 0.2) rgba(255, 47, 160, 0.25);
   }
   96% {
-    opacity: 0.6;
+    opacity: 1;
+    text-shadow: 0 0 calc(var(--spacing-unit) * 1) rgba(255, 209, 102, 0.6);
   }
 }
 
-@keyframes cursor-blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+@keyframes magic-circle-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes incantation-drift {
+  0%,
+  100% {
+    opacity: 0.5;
+    letter-spacing: 0.3em;
+  }
+  50% {
+    opacity: 0.9;
+    letter-spacing: 0.4em;
+  }
+}
+
+@keyframes seal-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 calc(var(--spacing-unit) * 2) rgba(255, 47, 160, 0.12);
+  }
+  50% {
+    box-shadow: 0 0 calc(var(--spacing-unit) * 2.5) rgba(185, 140, 255, 0.2);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

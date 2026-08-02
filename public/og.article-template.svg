@@ -1,56 +1,77 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="headerGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff2f6d" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#ff2f6d" stop-opacity="0"/>
+    <radialGradient id="glowPink" cx="15%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#ff2fa0" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ff2fa0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="88%" cy="8%" r="55%">
+      <stop offset="0%" stop-color="#b98cff" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#b98cff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGold" cx="45%" cy="102%" r="60%">
+      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="75%">
+      <stop offset="55%" stop-color="#150c1f" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0a0614" stop-opacity="0.55"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f1e6ff"/>
+      <stop offset="55%" stop-color="#ffd9ec"/>
+      <stop offset="100%" stop-color="#c9a6ff"/>
     </linearGradient>
-    <linearGradient id="footerGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0a0a0f" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#ff2f6d" stop-opacity="0.09"/>
-    </linearGradient>
-    <pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
-      <rect width="6" height="6" fill="#0a0a0f"/>
-      <rect width="6" height="1" fill="#ff2f6d" opacity="0.06"/>
-    </pattern>
-    <clipPath id="canvas">
-      <rect x="0" y="0" width="1200" height="630"/>
-    </clipPath>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="blur"/>
+      </feMerge>
+    </filter>
   </defs>
 
-  <g clip-path="url(#canvas)">
-    <rect x="0" y="0" width="1200" height="630" fill="#0a0a0f"/>
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="#150c1f"/>
+  <rect width="1200" height="630" fill="url(#glowPink)"/>
+  <rect width="1200" height="630" fill="url(#glowPurple)"/>
+  <rect width="1200" height="630" fill="url(#glowGold)"/>
 
-    <text x="780" y="560" font-family="monospace" font-size="210" font-weight="700" fill="#d6f5df" opacity="0.035" transform="rotate(-7 780 560)">へのへのんのの</text>
-
-    <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
-
-    <g fill="none" stroke="#33f0ff" stroke-opacity="0.18" stroke-width="1">
-      <path d="M0 40 H140 V90"/>
-      <path d="M1200 500 H1060 V590"/>
-    </g>
-    <circle cx="140" cy="90" r="3" fill="#33f0ff" fill-opacity="0.3"/>
-    <circle cx="1060" cy="500" r="3" fill="#ff2f6d" fill-opacity="0.3"/>
-
-    <rect x="-60" y="122" width="220" height="16" fill="#33f0ff" opacity="0.10" transform="skewX(-20)"/>
-    <rect x="-40" y="472" width="260" height="12" fill="#ff2f6d" opacity="0.12" transform="skewX(-20)"/>
-    <rect x="1020" y="150" width="240" height="10" fill="#ff2f6d" opacity="0.10" transform="skewX(20)"/>
-    <rect x="1000" y="440" width="260" height="14" fill="#33f0ff" opacity="0.09" transform="skewX(20)"/>
-
-    <rect x="0" y="0" width="1200" height="92" fill="url(#headerGrad)"/>
-    <rect x="0" y="90" width="1200" height="2" fill="#ff2f6d"/>
-    <text x="60" y="58" font-family="monospace" font-size="30" font-weight="700" letter-spacing="2" fill="#d6f5df">へのへのんのの<tspan fill="#ff2f6d">_</tspan></text>
-    <text x="1140" y="58" text-anchor="end" font-family="monospace" font-size="14" letter-spacing="1" fill="#33f0ff" opacity="0.6">DECODING...</text>
-
-    <rect x="56" y="230" width="1088" height="190" fill="#0a0a0f" opacity="0.4" stroke="#ff2f6d" stroke-opacity="0.3" stroke-width="1"/>
-    <text x="1122" y="220" text-anchor="end" font-family="monospace" font-size="13" letter-spacing="1" fill="#ff2f6d" opacity="0.65">0x00 SEGMENTATION FAULT</text>
-    <text x="80" y="270" font-family="monospace" font-size="16" letter-spacing="2" fill="#33f0ff" opacity="0.7">&gt; LOG_ENTRY</text>
-
-    <text x="83" y="360" font-family="monospace" font-size="74" font-weight="700" fill="#33f0ff" opacity="0.55">{{TITLE}}</text>
-    <text x="77" y="360" font-family="monospace" font-size="74" font-weight="700" fill="#ff2f6d" opacity="0.55">{{TITLE}}</text>
-    <text x="80" y="360" font-family="monospace" font-size="74" font-weight="700" fill="#d6f5df">{{TITLE}}</text>
-
-    <rect x="0" y="600" width="1200" height="30" fill="url(#footerGrad)"/>
-    <rect x="0" y="600" width="1200" height="1" fill="#ff2f6d" opacity="0.4"/>
-    <text x="60" y="622" font-family="monospace" font-size="16" fill="#d6f5df" opacity="0.6"><tspan fill="#ff2f6d">root@brain</tspan>:~$ へのへのんのの</text>
+  <!-- 魔法陣（右下、はみ出し気味に配置して主張しすぎない） -->
+  <g opacity="0.6">
+    <circle cx="1010" cy="470" r="190" fill="none" stroke="#b98cff" stroke-width="1.5" stroke-dasharray="3 7" opacity="0.5"/>
+    <circle cx="1010" cy="470" r="150" fill="none" stroke="#ff2fa0" stroke-width="1" stroke-dasharray="1 5" opacity="0.35"/>
+    <polygon points="1010,345 1118.25,532.5 901.75,532.5" fill="none" stroke="#b98cff" stroke-width="1.4" opacity="0.4"/>
+    <polygon points="1010,595 901.75,407.5 1118.25,407.5" fill="none" stroke="#b98cff" stroke-width="1.4" opacity="0.4"/>
+    <circle cx="1010" cy="470" r="40" fill="none" stroke="#ffd166" stroke-width="1.2" opacity="0.45"/>
+    <circle cx="1010" cy="470" r="4" fill="#ff2fa0" opacity="0.6"/>
   </g>
+
+  <!-- 散りばめた星屑 -->
+  <text x="130" y="170" font-family="serif" font-size="20" fill="#ffd166" opacity="0.55">✦</text>
+  <text x="980" y="140" font-family="serif" font-size="14" fill="#b98cff" opacity="0.5">✦</text>
+  <text x="70" y="470" font-family="serif" font-size="16" fill="#ff2fa0" opacity="0.4">✦</text>
+  <text x="1150" y="230" font-family="serif" font-size="12" fill="#ffd166" opacity="0.45">✦</text>
+  <text x="640" y="560" font-family="serif" font-size="14" fill="#b98cff" opacity="0.35">✦</text>
+
+  <!-- 外枠 -->
+  <rect x="20" y="20" width="1160" height="590" rx="8" fill="none" stroke="rgba(185,140,255,0.35)" stroke-width="1.5"/>
+
+  <!-- ヘッダー: サイト名 -->
+  <text x="70" y="78" font-family="serif" font-size="30" letter-spacing="0.12em" fill="#b98cff">✦ へのへのんのの ✦</text>
+  <line x1="70" y1="108" x2="1130" y2="108" stroke="rgba(185,140,255,0.35)" stroke-width="1" stroke-dasharray="2 6"/>
+
+  <!-- キッカー -->
+  <text x="72" y="200" font-family="serif" font-size="22" letter-spacing="0.4em" fill="#ffd166" opacity="0.8">封印の書</text>
+
+  <!-- タイトル（差し込み位置） -->
+  <text x="70" y="340" font-family="serif" font-size="78" fill="#ff2fa0" opacity="0.45" filter="url(#softGlow)">{{TITLE}}</text>
+  <text x="70" y="340" font-family="serif" font-size="78" fill="url(#titleGrad)">{{TITLE}}</text>
+  <text x="70" y="340" font-family="serif" font-size="78" fill="none" stroke="#b98cff" stroke-width="0.6" opacity="0.6">{{TITLE}}</text>
+
+  <!-- フッター装飾 -->
+  <line x1="70" y1="560" x2="560" y2="560" stroke="rgba(185,140,255,0.35)" stroke-width="1" stroke-dasharray="1 5"/>
+  <text x="70" y="590" font-family="serif" font-size="20" letter-spacing="0.15em" fill="#b98cff" opacity="0.75">― 深紫の儀式空間 ―</text>
+
+  <!-- ビネット -->
+  <rect width="1200" height="630" fill="url(#vignette)"/>
 </svg>
