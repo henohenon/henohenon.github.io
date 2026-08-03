@@ -1,72 +1,86 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="gradPink" cx="15%" cy="15%" r="55%">
-      <stop offset="0%" stop-color="#ff2fa0" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="#ff2fa0" stop-opacity="0"/>
+    <radialGradient id="gradPink" cx="15%" cy="0%" r="75%">
+      <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#ff2e88" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gradPurple" cx="88%" cy="5%" r="55%">
-      <stop offset="0%" stop-color="#b98cff" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#b98cff" stop-opacity="0"/>
+    <radialGradient id="gradGreen" cx="85%" cy="100%" r="75%">
+      <stop offset="0%" stop-color="#39ff14" stop-opacity="0.16"/>
+      <stop offset="55%" stop-color="#39ff14" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="gradGold" cx="50%" cy="105%" r="60%">
-      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
+    <radialGradient id="gradPurple" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#7a4dbb" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#7a4dbb" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="48%" r="75%">
-      <stop offset="55%" stop-color="#150c1f" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#08050d" stop-opacity="0.65"/>
-    </radialGradient>
-    <filter id="glowPink" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="11" result="blur"/>
+    <filter id="glowGreen" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
       <feMerge>
+        <feMergeNode in="blur"/>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <filter id="glowSoft" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
+    <filter id="glowPink" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="blur2"/>
       <feMerge>
-        <feMergeNode in="blur"/>
+        <feMergeNode in="blur2"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
   </defs>
 
-  <rect width="1200" height="630" fill="#150c1f"/>
-  <rect width="1200" height="630" fill="url(#gradPink)"/>
-  <rect width="1200" height="630" fill="url(#gradPurple)"/>
-  <rect width="1200" height="630" fill="url(#gradGold)"/>
+  <!-- base background -->
+  <rect x="0" y="0" width="1200" height="630" fill="#150f1d"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#gradPink)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#gradGreen)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#gradPurple)"/>
 
-  <g stroke="#b98cff" fill="none">
-    <circle cx="600" cy="330" r="232" stroke-opacity="0.20" stroke-width="1.5"/>
-    <circle cx="600" cy="330" r="196" stroke-opacity="0.30" stroke-width="1"/>
-    <circle cx="600" cy="330" r="164" stroke-opacity="0.16" stroke-width="1" stroke-dasharray="3 7"/>
-    <polygon points="600,118 792,436 408,436" stroke="#ff2fa0" stroke-opacity="0.16" stroke-width="1.2"/>
-    <polygon points="600,542 408,224 792,224" stroke="#b98cff" stroke-opacity="0.16" stroke-width="1.2"/>
+  <!-- top gossip ticker -->
+  <text x="0" y="42" font-family="monospace" font-size="15" letter-spacing="7" fill="#ff2e88" opacity="0.5">GOSSIP GOSSIP GOSSIP GOSSIP GOSSIP GOSSIP GOSSIP GOSSIP</text>
+  <line x1="0" y1="64" x2="1200" y2="64" stroke="#39ff14" stroke-opacity="0.28" stroke-width="1"/>
+
+  <!-- outer dashed frame -->
+  <rect x="26" y="26" width="1148" height="578" fill="none" stroke="#7a4dbb" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="4 10"/>
+
+  <!-- decorative background wisps -->
+  <line x1="90" y1="150" x2="230" y2="150" stroke="#ff2e88" stroke-width="2" stroke-dasharray="10 8" opacity="0.35"/>
+  <line x1="970" y1="470" x2="1110" y2="470" stroke="#39ff14" stroke-width="2" stroke-dasharray="10 8" opacity="0.3"/>
+
+  <!-- glitch offset (chromatic echo) behind title -->
+  <text x="604" y="326" text-anchor="middle" font-family="serif" font-weight="700" font-size="128" fill="#ff2e88" opacity="0.28">へのへのんのの</text>
+  <text x="597" y="322" text-anchor="middle" font-family="serif" font-weight="700" font-size="128" fill="#39ff14" opacity="0.22">へのへのんのの</text>
+
+  <!-- SITE NAME (main, glowing) -->
+  <text x="600" y="324" text-anchor="middle" font-family="serif" font-weight="700" font-size="128" fill="#39ff14" filter="url(#glowGreen)" letter-spacing="2">へのへのんのの</text>
+
+  <!-- dashed underline like h1::after -->
+  <line x1="380" y1="366" x2="820" y2="366" stroke="#ff2e88" stroke-width="3" stroke-dasharray="10 8"/>
+
+  <!-- whisper quote flavor -->
+  <text x="600" y="414" text-anchor="middle" font-family="sans-serif" font-style="italic" font-size="22" fill="#ff2e88" opacity="0.75">“ねえ知ってる？”</text>
+
+  <!-- today's track label -->
+  <text x="600" y="452" text-anchor="middle" font-family="sans-serif" font-size="16" letter-spacing="5" fill="#7a4dbb">TODAY'S TRACK</text>
+
+  <!-- song title (subtitle) -->
+  <text x="600" y="498" text-anchor="middle" font-family="serif" font-size="38" fill="#f4ecf7">Toxic Gossip Train</text>
+
+  <!-- artist -->
+  <text x="600" y="536" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#7a4dbb">Snappydoodle feat. 重音テトSV</text>
+
+  <!-- bottom gossip track -->
+  <line x1="70" y1="578" x2="1130" y2="578" stroke="#39ff14" stroke-width="2" stroke-dasharray="14 10" opacity="0.45"/>
+
+  <!-- little train silhouette -->
+  <g opacity="0.55">
+    <rect x="1000" y="540" width="120" height="46" rx="10" fill="#7a4dbb" fill-opacity="0.3" stroke="#ff2e88" stroke-width="1.5"/>
+    <rect x="1016" y="552" width="22" height="16" rx="2" fill="#150f1d" stroke="#39ff14" stroke-width="1"/>
+    <rect x="1050" y="552" width="22" height="16" rx="2" fill="#150f1d" stroke="#39ff14" stroke-width="1"/>
+    <rect x="1084" y="552" width="22" height="16" rx="2" fill="#150f1d" stroke="#39ff14" stroke-width="1"/>
+    <circle cx="1022" cy="592" r="9" fill="#150f1d" stroke="#ff2e88" stroke-width="2"/>
+    <circle cx="1098" cy="592" r="9" fill="#150f1d" stroke="#ff2e88" stroke-width="2"/>
   </g>
-  <g fill="#ffd166" opacity="0.55">
-    <circle cx="600" cy="98" r="3"/>
-    <circle cx="832" cy="330" r="3"/>
-    <circle cx="600" cy="562" r="3"/>
-    <circle cx="368" cy="330" r="3"/>
-  </g>
 
-  <rect width="1200" height="630" fill="url(#vignette)"/>
-
-  <rect x="30" y="30" width="1140" height="570" fill="none" stroke="rgba(185,140,255,0.35)" stroke-width="1" stroke-dasharray="2 7"/>
-  <path d="M30 60 L30 30 L60 30" fill="none" stroke="#ffd166" stroke-opacity="0.5" stroke-width="1.5"/>
-  <path d="M1170 60 L1170 30 L1140 30" fill="none" stroke="#ffd166" stroke-opacity="0.5" stroke-width="1.5"/>
-  <path d="M30 570 L30 600 L60 600" fill="none" stroke="#ffd166" stroke-opacity="0.5" stroke-width="1.5"/>
-  <path d="M1170 570 L1170 600 L1140 600" fill="none" stroke="#ffd166" stroke-opacity="0.5" stroke-width="1.5"/>
-
-  <text x="600" y="88" text-anchor="middle" font-family="serif" font-size="20" letter-spacing="8" fill="#b98cff" opacity="0.75">✦ Vade retro satana ✦</text>
-
-  <text x="600" y="360" text-anchor="middle" font-family="serif" font-size="126" letter-spacing="6" fill="#ff2fa0" opacity="0.35" filter="url(#glowPink)">へのへのんのの</text>
-  <text x="600" y="360" text-anchor="middle" font-family="serif" font-size="126" letter-spacing="6" fill="#f1e6ff">へのへのんのの</text>
-
-  <text x="600" y="440" text-anchor="middle" font-family="serif" font-size="40" letter-spacing="3" fill="#ff2fa0" filter="url(#glowSoft)">アクマバライ</text>
-
-  <text x="600" y="480" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#b98cff" opacity="0.9">うちのボカロは様子がおかしい feat. 初音ミク, 雨衣, Google Text to Speech</text>
-
-  <text x="600" y="565" text-anchor="middle" font-family="sans-serif" font-size="16" letter-spacing="4" fill="#b98cff" opacity="0.5">🕯 CANT YOU! CANT YOU! 🕯</text>
+  <!-- bottom ticker mirror -->
+  <text x="1200" y="606" text-anchor="end" font-family="monospace" font-size="13" letter-spacing="6" fill="#39ff14" opacity="0.4">— TOXIC GOSSIP TRAIN — TOXIC GOSSIP TRAIN —</text>
 </svg>

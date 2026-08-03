@@ -1,77 +1,54 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glowPink" cx="15%" cy="20%" r="55%">
-      <stop offset="0%" stop-color="#ff2fa0" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ff2fa0" stop-opacity="0"/>
+    <radialGradient id="pinkGlow" cx="12%" cy="0%" r="65%">
+      <stop offset="0%" stop-color="#ff2e88" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ff2e88" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowPurple" cx="88%" cy="8%" r="55%">
-      <stop offset="0%" stop-color="#b98cff" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#b98cff" stop-opacity="0"/>
+    <radialGradient id="greenGlow" cx="88%" cy="100%" r="65%">
+      <stop offset="0%" stop-color="#39ff14" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#39ff14" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowGold" cx="45%" cy="102%" r="60%">
-      <stop offset="0%" stop-color="#ffd166" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ffd166" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="45%" r="75%">
-      <stop offset="55%" stop-color="#150c1f" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0a0614" stop-opacity="0.55"/>
-    </radialGradient>
-    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f1e6ff"/>
-      <stop offset="55%" stop-color="#ffd9ec"/>
-      <stop offset="100%" stop-color="#c9a6ff"/>
-    </linearGradient>
-    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="9" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="blur"/>
-      </feMerge>
+    <filter id="neonBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <filter id="neonBlurSoft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3"/>
     </filter>
   </defs>
 
-  <!-- 背景 -->
-  <rect width="1200" height="630" fill="#150c1f"/>
-  <rect width="1200" height="630" fill="url(#glowPink)"/>
-  <rect width="1200" height="630" fill="url(#glowPurple)"/>
-  <rect width="1200" height="630" fill="url(#glowGold)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#150f1d"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#pinkGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#greenGlow)"/>
 
-  <!-- 魔法陣（右下、はみ出し気味に配置して主張しすぎない） -->
-  <g opacity="0.6">
-    <circle cx="1010" cy="470" r="190" fill="none" stroke="#b98cff" stroke-width="1.5" stroke-dasharray="3 7" opacity="0.5"/>
-    <circle cx="1010" cy="470" r="150" fill="none" stroke="#ff2fa0" stroke-width="1" stroke-dasharray="1 5" opacity="0.35"/>
-    <polygon points="1010,345 1118.25,532.5 901.75,532.5" fill="none" stroke="#b98cff" stroke-width="1.4" opacity="0.4"/>
-    <polygon points="1010,595 901.75,407.5 1118.25,407.5" fill="none" stroke="#b98cff" stroke-width="1.4" opacity="0.4"/>
-    <circle cx="1010" cy="470" r="40" fill="none" stroke="#ffd166" stroke-width="1.2" opacity="0.45"/>
-    <circle cx="1010" cy="470" r="4" fill="#ff2fa0" opacity="0.6"/>
+  <rect x="18" y="18" width="1164" height="594" fill="none" stroke="#7a4dbb" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="10 8"/>
+
+  <g stroke="#39ff14" stroke-opacity="0.14" stroke-width="2">
+    <line x1="880" y1="0" x2="1200" y2="150" stroke-dasharray="4 10"/>
+    <line x1="950" y1="0" x2="1200" y2="220" stroke-dasharray="4 10"/>
+    <line x1="1020" y1="0" x2="1200" y2="290" stroke-dasharray="4 10"/>
+    <line x1="1090" y1="0" x2="1200" y2="360" stroke-dasharray="4 10"/>
+  </g>
+  <g stroke="#ff2e88" stroke-opacity="0.14" stroke-width="2">
+    <line x1="0" y1="630" x2="300" y2="450" stroke-dasharray="4 10"/>
+    <line x1="0" y1="560" x2="220" y2="450" stroke-dasharray="4 10"/>
+    <line x1="0" y1="490" x2="140" y2="450" stroke-dasharray="4 10"/>
   </g>
 
-  <!-- 散りばめた星屑 -->
-  <text x="130" y="170" font-family="serif" font-size="20" fill="#ffd166" opacity="0.55">✦</text>
-  <text x="980" y="140" font-family="serif" font-size="14" fill="#b98cff" opacity="0.5">✦</text>
-  <text x="70" y="470" font-family="serif" font-size="16" fill="#ff2fa0" opacity="0.4">✦</text>
-  <text x="1150" y="230" font-family="serif" font-size="12" fill="#ffd166" opacity="0.45">✦</text>
-  <text x="640" y="560" font-family="serif" font-size="14" fill="#b98cff" opacity="0.35">✦</text>
+  <text x="60" y="592" font-family="monospace" font-size="15" letter-spacing="6" fill="#ff2e88" fill-opacity="0.4">GOSSIP GOSSIP GOSSIP GOSSIP GOSSIP GOSSIP</text>
 
-  <!-- 外枠 -->
-  <rect x="20" y="20" width="1160" height="590" rx="8" fill="none" stroke="rgba(185,140,255,0.35)" stroke-width="1.5"/>
+  <text x="60" y="90" font-family="serif" font-size="34" fill="#f4ecf7" letter-spacing="2">へのへのんのの</text>
+  <line x1="60" y1="106" x2="380" y2="106" stroke="#ff2e88" stroke-width="2" stroke-dasharray="10 8" stroke-opacity="0.75"/>
 
-  <!-- ヘッダー: サイト名 -->
-  <text x="70" y="78" font-family="serif" font-size="30" letter-spacing="0.12em" fill="#b98cff">✦ へのへのんのの ✦</text>
-  <line x1="70" y1="108" x2="1130" y2="108" stroke="rgba(185,140,255,0.35)" stroke-width="1" stroke-dasharray="2 6"/>
+  <text x="60" y="176" font-family="serif" font-size="22" font-style="italic" fill="#ff2e88" fill-opacity="0.8">"ねえ知ってる？"</text>
 
-  <!-- キッカー -->
-  <text x="72" y="200" font-family="serif" font-size="22" letter-spacing="0.4em" fill="#ffd166" opacity="0.8">封印の書</text>
+  <rect x="55" y="205" width="1090" height="310" rx="16" fill="#ffffff" fill-opacity="0.02" stroke="#7a4dbb" stroke-opacity="0.35" stroke-width="1.5"/>
 
-  <!-- タイトル（差し込み位置） -->
-  <text x="70" y="340" font-family="serif" font-size="78" fill="#ff2fa0" opacity="0.45" filter="url(#softGlow)">{{TITLE}}</text>
-  <text x="70" y="340" font-family="serif" font-size="78" fill="url(#titleGrad)">{{TITLE}}</text>
-  <text x="70" y="340" font-family="serif" font-size="78" fill="none" stroke="#b98cff" stroke-width="0.6" opacity="0.6">{{TITLE}}</text>
+  <text x="100" y="360" font-family="serif" font-size="72" fill="#39ff14" fill-opacity="0.55" filter="url(#neonBlur)">{{TITLE}}</text>
+  <text x="100" y="360" font-family="serif" font-size="72" fill="#f4ecf7">{{TITLE}}</text>
 
-  <!-- フッター装飾 -->
-  <line x1="70" y1="560" x2="560" y2="560" stroke="rgba(185,140,255,0.35)" stroke-width="1" stroke-dasharray="1 5"/>
-  <text x="70" y="590" font-family="serif" font-size="20" letter-spacing="0.15em" fill="#b98cff" opacity="0.75">― 深紫の儀式空間 ―</text>
+  <line x1="100" y1="400" x2="720" y2="400" stroke="#39ff14" stroke-width="3" stroke-dasharray="12 10" stroke-opacity="0.6"/>
 
-  <!-- ビネット -->
-  <rect width="1200" height="630" fill="url(#vignette)"/>
+  <circle cx="1120" cy="70" r="4" fill="#39ff14" fill-opacity="0.6" filter="url(#neonBlurSoft)"/>
+  <circle cx="1095" cy="95" r="3" fill="#ff2e88" fill-opacity="0.6" filter="url(#neonBlurSoft)"/>
+  <circle cx="1145" cy="105" r="2.5" fill="#7a4dbb" fill-opacity="0.7"/>
 </svg>
