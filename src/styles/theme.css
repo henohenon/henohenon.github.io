@@ -1,23 +1,40 @@
-/* 曲名: Toxic Gossip Train / アーティスト: Snappydoodle feat. 重音テトSV
-   一言ムード: 深夜の裏垢みたいな毒々しいネオン背景で、みんなで「知ってる？」と
-   耳打ちが伝染していくスキャンダル特急列車 */
+/* ============================================================
+   曲名: Blooming
+   アーティスト: Vermillion feat. 足立レイ
+   一言ムード: 土の中で蠢く虫、閉じ込められた呼吸 ―
+               それでも風を怖がりながら咲こうとする、
+               痛みと再生が同居する一輪の花。
+   ============================================================ */
 
 :root {
-  --color-fg: #f4ecf7;
-  --color-bg: #150f1d;
-  --color-accent: #39ff14;
-  --color-accent-secondary: #ff2e88;
-  --color-accent-muted: #7a4dbb;
+  /* --- 必須トークン --- */
+  --color-fg: #efe3cd;
+  --color-bg: #14100d;
+  --color-accent: #e8b64a; /* dandelion / たんぽぽ色 */
+
   --spacing-unit: 1rem;
-  --font-heading: Georgia, 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
+
+  --font-heading: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Noto Serif JP',
+    serif;
   --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
     'Yu Gothic', 'Meiryo', sans-serif;
-  --line-height-body: 1.75;
-  --line-height-heading: 1.15;
-  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --line-height-body: 1.85;
+  --line-height-heading: 1.4;
+
+  --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* --- 補助トークン (装飾用・任意) --- */
+  --color-soil: #1f1712;
+  --color-soil-deep: #0b0806;
+  --color-flower-pale: #f6e9d8;
+  --color-wound: #8a4a5c;
+  --color-ant: #3a2f24;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -26,208 +43,196 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(ellipse at 15% 0%, rgba(255, 46, 136, 0.14), transparent 55%),
-    radial-gradient(ellipse at 85% 100%, rgba(57, 255, 20, 0.1), transparent 55%),
-    var(--color-bg);
+  margin: 0;
+  padding: 0;
   color: var(--color-fg);
+  background-color: var(--color-bg);
+  background-image:
+    repeating-linear-gradient(
+      178deg,
+      transparent 0,
+      transparent 26px,
+      rgba(58, 47, 36, 0.35) 27px,
+      transparent 28px
+    ),
+    radial-gradient(ellipse at 50% 0%, rgba(232, 182, 74, 0.06), transparent 60%);
   font-family: var(--font-body);
   line-height: var(--line-height-body);
-  transition: background-color 0.4s var(--ease-default);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  color: var(--color-fg);
   letter-spacing: 0.01em;
 }
 
-h1, h2 {
-  color: var(--color-accent);
-  text-shadow: 0 0 calc(var(--spacing-unit) * 0.6) rgba(57, 255, 20, 0.35);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  line-height: var(--line-height-heading);
+  color: var(--color-flower-pale);
+  font-weight: 600;
   position: relative;
-  display: inline-block;
 }
 
-h1::after, h2::after {
-  content: '';
-  display: block;
-  height: 2px;
-  margin-top: calc(var(--spacing-unit) * 0.3);
-  background: repeating-linear-gradient(
-    90deg,
-    var(--color-accent-secondary) 0,
-    var(--color-accent-secondary) 10px,
-    transparent 10px,
-    transparent 18px
-  );
-  background-size: 200% 100%;
-  animation: gossip-train 3.5s linear infinite;
+h1::before,
+h2::before,
+h3::before {
+  content: '✿';
+  display: inline-block;
+  margin-right: 0.4em;
+  color: var(--color-accent);
+  animation: bloom 6s var(--ease-default) infinite;
+  transform-origin: center;
 }
 
 a {
-  color: var(--color-accent-secondary);
-  text-decoration-color: rgba(255, 46, 136, 0.5);
-  transition: color 0.25s var(--ease-default), text-decoration-color 0.25s var(--ease-default);
+  color: var(--color-accent);
+  text-decoration-color: rgba(232, 182, 74, 0.4);
+  text-underline-offset: 0.2em;
+  transition: color 0.3s var(--ease-default), text-decoration-color 0.3s var(--ease-default);
 }
 
-a:hover, a:focus-visible {
-  color: var(--color-accent);
+a:hover,
+a:focus-visible {
+  color: var(--color-flower-pale);
   text-decoration-color: var(--color-accent);
 }
 
 blockquote {
-  border-left: 3px solid var(--color-accent-secondary);
-  padding-left: calc(var(--spacing-unit) * 1.2);
-  margin-left: 0;
-  font-style: italic;
-  color: var(--color-accent-muted);
-  background: rgba(255, 46, 136, 0.06);
-  border-radius: 0 8px 8px 0;
+  margin: calc(var(--spacing-unit) * 1.2) 0;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.2);
+  border-left: 3px solid var(--color-wound);
+  background: rgba(138, 74, 92, 0.08);
+  color: var(--color-fg);
 }
 
-blockquote::before {
-  content: '“ねえ知ってる？”';
-  display: block;
-  font-family: var(--font-heading);
-  font-size: 0.8em;
-  color: var(--color-accent-secondary);
-  opacity: 0.7;
-  margin-bottom: calc(var(--spacing-unit) * 0.3);
+hr {
+  border: none;
+  border-top: 1px dashed var(--color-ant);
+  margin: calc(var(--spacing-unit) * 2) 0;
 }
 
-code, pre {
-  background: rgba(57, 255, 20, 0.08);
-  color: var(--color-accent);
-  border-radius: 4px;
-}
+/* --- サイト全体構造 --- */
 
 .site-header {
-  background: linear-gradient(180deg, rgba(122, 77, 187, 0.25), transparent);
-  border-bottom: 1px solid rgba(57, 255, 20, 0.25);
+  background: linear-gradient(180deg, var(--color-soil-deep) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-ant);
   padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  position: relative;
-  overflow: hidden;
 }
 
-.site-header::before {
-  content: 'GOSSIP GOSSIP GOSSIP — ';
-  position: absolute;
-  top: 0;
-  left: 0;
-  white-space: nowrap;
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  color: var(--color-accent-secondary);
-  opacity: 0.55;
-  animation: ticker-scroll 14s linear infinite;
-}
-
-.site-header h1 {
-  animation: toxic-flicker 6s ease-in-out infinite;
+.site-header h1,
+.site-header a {
+  color: var(--color-flower-pale);
+  text-shadow: 0 0 0 rgba(232, 182, 74, 0);
+  animation: flicker 9s ease-in-out infinite;
 }
 
 .site-footer {
-  background: rgba(21, 15, 29, 0.9);
-  border-top: 1px dashed rgba(255, 46, 136, 0.35);
-  color: var(--color-accent-muted);
-  padding: var(--spacing-unit);
-  font-size: 0.9rem;
+  background: var(--color-soil-deep);
+  color: rgba(239, 227, 205, 0.65);
+  border-top: 1px solid var(--color-ant);
+  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
+  font-size: 0.85em;
 }
+
+.site-footer a {
+  color: rgba(232, 182, 74, 0.8);
+}
+
+/* --- 記事一覧 --- */
 
 .post-list {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--spacing-unit) * 0.75);
+  padding: 0;
+  margin: calc(var(--spacing-unit) * 1.5) 0;
 }
 
-.post-list li,
-.post-list > * {
-  background: rgba(122, 77, 187, 0.1);
-  border: 1px solid rgba(57, 255, 20, 0.15);
-  border-radius: 14px;
-  padding: calc(var(--spacing-unit) * 0.75) var(--spacing-unit);
-  transition: transform 0.3s var(--ease-default), border-color 0.3s var(--ease-default);
+.post-list li {
+  list-style: none;
+  padding: var(--spacing-unit) 0;
+  border-bottom: 1px dashed var(--color-ant);
+  transition: transform 0.4s var(--ease-default), background-color 0.4s var(--ease-default);
 }
 
-.post-list li:hover,
-.post-list > *:hover {
-  transform: translateX(4px);
-  border-color: var(--color-accent-secondary);
+.post-list li::marker {
+  color: var(--color-accent);
 }
 
-.post-list li:nth-child(even) {
-  border-radius: 14px 14px 14px 2px;
+.post-list li:hover {
+  transform: translateX(0.3em);
+  background-color: rgba(232, 182, 74, 0.04);
 }
 
-.post-list li:nth-child(odd) {
-  border-radius: 14px 14px 2px 14px;
+.post-list a {
+  font-family: var(--font-heading);
+  font-size: 1.1em;
 }
+
+/* --- 個別記事 --- */
 
 article.post {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(122, 77, 187, 0.3);
-  border-radius: 12px;
+  background: rgba(31, 23, 18, 0.6);
+  border: 1px solid var(--color-ant);
+  border-radius: 4px;
   padding: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 1px 0 rgba(232, 182, 74, 0.05) inset;
 }
 
 article.post h1,
 article.post h2 {
-  animation: none;
+  border-bottom: 1px solid var(--color-wound);
+  padding-bottom: calc(var(--spacing-unit) * 0.5);
 }
 
-::selection {
-  background: var(--color-accent-secondary);
-  color: var(--color-bg);
+article.post p {
+  color: var(--color-fg);
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+article.post p:first-of-type::first-letter {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: 1.6em;
+  padding-right: 0.05em;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
+/* --- アニメーション --- */
+
+@keyframes bloom {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.15) rotate(6deg);
+    opacity: 1;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-accent-muted);
-  border-radius: 6px;
+@keyframes flicker {
+  0%,
+  92%,
+  100% {
+    text-shadow: 0 0 0 rgba(232, 182, 74, 0);
+  }
+  94% {
+    text-shadow: 1px 0 0 rgba(232, 182, 74, 0.25), -1px 0 0 rgba(138, 74, 92, 0.2);
+  }
+  96% {
+    text-shadow: -1px 0 0 rgba(232, 182, 74, 0.15);
+  }
 }
 
-@keyframes gossip-train {
-  from {
+@keyframes creep {
+  0% {
     background-position: 0 0;
   }
-  to {
-    background-position: -200% 0;
+  100% {
+    background-position: 0 27px;
   }
 }
 
-@keyframes ticker-scroll {
-  from {
-    transform: translateX(100vw);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes toxic-flicker {
-  0%, 92%, 100% {
-    opacity: 1;
-    text-shadow: 0 0 calc(var(--spacing-unit) * 0.6) rgba(57, 255, 20, 0.35);
-  }
-  93% {
-    opacity: 0.7;
-    text-shadow: none;
-  }
-  95% {
-    opacity: 1;
-    text-shadow: 0 0 calc(var(--spacing-unit) * 0.9) rgba(255, 46, 136, 0.5);
-  }
-}
+/* --- モーション低減設定 (必須) --- */
 
 @media (prefers-reduced-motion: reduce) {
   *,
