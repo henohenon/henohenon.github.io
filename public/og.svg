@@ -1,90 +1,77 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="glow" cx="50%" cy="14%" r="60%">
-      <stop offset="0%" stop-color="#e8b64a" stop-opacity="0.16"/>
-      <stop offset="60%" stop-color="#e8b64a" stop-opacity="0.04"/>
-      <stop offset="100%" stop-color="#e8b64a" stop-opacity="0"/>
+    <radialGradient id="bgGlow" cx="50%" cy="-10%" r="90%">
+      <stop offset="0%" stop-color="#2c1f3d"/>
+      <stop offset="60%" stop-color="#221830"/>
+      <stop offset="100%" stop-color="#221830"/>
     </radialGradient>
-    <radialGradient id="vignette" cx="50%" cy="46%" r="75%">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="72%" stop-color="#000000" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
-    </radialGradient>
-    <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0b0806" stop-opacity="0"/>
-      <stop offset="35%" stop-color="#0b0806" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#0b0806" stop-opacity="1"/>
+    <linearGradient id="titleFade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f2e9f5"/>
+      <stop offset="100%" stop-color="#e4d3ea"/>
     </linearGradient>
-    <pattern id="soilLines" width="140" height="27" patternUnits="userSpaceOnUse">
-      <line x1="0" y1="26" x2="140" y2="26" stroke="#3a2f24" stroke-width="1" stroke-opacity="0.35"/>
-    </pattern>
-    <filter id="soften" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4"/>
-    </filter>
   </defs>
 
   <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#14100d"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#soilLines)"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#221830"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlow)"/>
 
-  <!-- vine/stem growing through the card -->
-  <path d="M 600,630 C 590,520 618,470 598,400 C 580,340 615,290 600,150"
-        fill="none" stroke="#3a2f24" stroke-width="5" stroke-opacity="0.55" stroke-linecap="round"/>
-  <ellipse cx="558" cy="470" rx="30" ry="12" fill="#8a4a5c" fill-opacity="0.35"
-           transform="rotate(-30 558 470)"/>
-  <ellipse cx="642" cy="360" rx="34" ry="13" fill="#e8b64a" fill-opacity="0.25"
-           transform="rotate(24 642 360)"/>
-
-  <!-- cropped bloom ornament, partially closed in -->
-  <g filter="url(#soften)" opacity="0.9">
-    <g>
-      <ellipse cx="600" cy="60" rx="30" ry="90" fill="#e8b64a" fill-opacity="0.5"/>
-      <ellipse cx="600" cy="60" rx="30" ry="90" fill="#8a4a5c" fill-opacity="0.4" transform="rotate(60 600 150)"/>
-      <ellipse cx="600" cy="60" rx="30" ry="90" fill="#e8b64a" fill-opacity="0.5" transform="rotate(120 600 150)"/>
-      <ellipse cx="600" cy="60" rx="30" ry="90" fill="#8a4a5c" fill-opacity="0.4" transform="rotate(180 600 150)"/>
-      <ellipse cx="600" cy="60" rx="30" ry="90" fill="#e8b64a" fill-opacity="0.5" transform="rotate(240 600 150)"/>
-      <ellipse cx="600" cy="60" rx="30" ry="90" fill="#8a4a5c" fill-opacity="0.4" transform="rotate(300 600 150)"/>
-    </g>
+  <!-- crescent moon, dreamy corner -->
+  <g opacity="0.35">
+    <circle cx="110" cy="110" r="52" fill="#ffd39a"/>
+    <circle cx="132" cy="98" r="52" fill="#221830"/>
   </g>
-  <g>
-    <ellipse cx="600" cy="60" rx="24" ry="72" fill="#f6e9d8" fill-opacity="0.14"/>
-    <ellipse cx="600" cy="60" rx="24" ry="72" fill="#f6e9d8" fill-opacity="0.10" transform="rotate(90 600 150)"/>
-  </g>
-  <circle cx="600" cy="150" r="22" fill="#8a4a5c" fill-opacity="0.85"/>
-  <circle cx="600" cy="150" r="9" fill="#e8b64a"/>
 
-  <!-- site name : the star of the card -->
-  <text x="600" y="322" text-anchor="middle" font-family="serif" font-weight="600"
-        font-size="118" fill="#8a4a5c" fill-opacity="0.35" letter-spacing="2">へのへのんのの</text>
-  <text x="600" y="318" text-anchor="middle" font-family="serif" font-weight="600"
-        font-size="118" fill="#f6e9d8" letter-spacing="2">へのへのんのの</text>
+  <!-- faint large loop rings behind everything -->
+  <circle cx="600" cy="330" r="270" fill="none" stroke="#4a3760" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.5"/>
+  <circle cx="600" cy="330" r="320" fill="none" stroke="#4a3760" stroke-width="1" stroke-dasharray="2 14" opacity="0.35"/>
+
+  <!-- small stars for night mood -->
+  <g fill="#f2e9f5" opacity="0.5">
+    <circle cx="1060" cy="90" r="3"/>
+    <circle cx="1010" cy="150" r="2"/>
+    <circle cx="1120" cy="200" r="2.5"/>
+    <circle cx="90" cy="480" r="2.5"/>
+    <circle cx="150" cy="540" r="2"/>
+  </g>
+
+  <!-- spinner ring motif (broken circle like alarm-loop icon) -->
+  <circle cx="600" cy="150" r="34" fill="none" stroke="#ffd39a" stroke-width="4" stroke-linecap="round" stroke-dasharray="140 214"/>
+
+  <!-- decorative clock ticks around spinner -->
+  <g stroke="#ffd39a" stroke-width="3" stroke-linecap="round" opacity="0.7">
+    <line x1="600" y1="104" x2="600" y2="94"/>
+    <line x1="646" y1="150" x2="656" y2="150"/>
+    <line x1="600" y1="196" x2="600" y2="206"/>
+    <line x1="554" y1="150" x2="544" y2="150"/>
+  </g>
+
+  <!-- site title: the main subject -->
+  <text x="600" y="340" text-anchor="middle"
+        font-family="serif" font-size="126" font-weight="700"
+        fill="url(#titleFade)" letter-spacing="6">
+    へのへのんのの
+  </text>
 
   <!-- divider -->
-  <line x1="470" y1="368" x2="730" y2="368" stroke="#8a4a5c" stroke-width="2"
-        stroke-dasharray="3 9" stroke-opacity="0.7" stroke-linecap="round"/>
+  <line x1="420" y1="392" x2="780" y2="392" stroke="#4a3760" stroke-width="1.5" stroke-dasharray="4 8"/>
 
-  <!-- today's song : subtitle, clearly smaller than the site name -->
-  <text x="600" y="412" text-anchor="middle" font-family="sans-serif" font-size="22"
-        fill="#e8b64a" letter-spacing="6" opacity="0.9">今日の一曲</text>
-  <text x="600" y="466" text-anchor="middle" font-family="serif" font-style="italic"
-        font-size="42" fill="#e8b64a">Blooming</text>
-  <text x="600" y="505" text-anchor="middle" font-family="sans-serif" font-size="22"
-        fill="#efe3cd" opacity="0.62">Vermillion feat. 足立レイ</text>
+  <!-- today's song: subtitle -->
+  <text x="600" y="450" text-anchor="middle"
+        font-family="serif" font-size="38" font-style="italic"
+        fill="#ff8fa3" letter-spacing="1">
+    unlucky loop
+  </text>
 
-  <!-- soil ground with things wriggling in it -->
-  <rect x="0" y="560" width="1200" height="70" fill="url(#groundGrad)"/>
-  <line x1="0" y1="562" x2="1200" y2="562" stroke="#3a2f24" stroke-width="1.5"
-        stroke-dasharray="7 7" stroke-opacity="0.6"/>
-  <path d="M 90,596 q8,-10 16,0 q8,10 16,0 q8,-10 16,0" fill="none"
-        stroke="#3a2f24" stroke-width="2" stroke-opacity="0.75" stroke-linecap="round"/>
-  <path d="M 300,612 q7,-8 14,0 q7,8 14,0" fill="none"
-        stroke="#8a4a5c" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
-  <path d="M 880,600 q8,-9 16,0 q8,9 16,0 q8,-9 16,0" fill="none"
-        stroke="#3a2f24" stroke-width="2" stroke-opacity="0.7" stroke-linecap="round"/>
-  <path d="M 1060,614 q7,-8 14,0 q7,8 14,0" fill="none"
-        stroke="#8a4a5c" stroke-width="2" stroke-opacity="0.45" stroke-linecap="round"/>
+  <!-- artist: smallest info -->
+  <text x="600" y="492" text-anchor="middle"
+        font-family="sans-serif" font-size="24"
+        fill="#b8a9c9" letter-spacing="0.5">
+    Mage-P feat. 悩音Blue
+  </text>
 
-  <!-- overall vignette -->
-  <rect x="0" y="0" width="1200" height="630" fill="url(#vignette)"/>
+  <!-- bottom hairline, echoing site-footer border -->
+  <line x1="0" y1="600" x2="1200" y2="600" stroke="#4a3760" stroke-width="1" opacity="0.6"/>
+  <text x="600" y="580" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#b8a9c9" opacity="0.8">
+    目覚まし越しに繰り返される、優しく甘い悪夢のループ
+  </text>
 </svg>

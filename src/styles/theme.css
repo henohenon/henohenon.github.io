@@ -1,238 +1,165 @@
-/* ============================================================
-   曲名: Blooming
-   アーティスト: Vermillion feat. 足立レイ
-   一言ムード: 土の中で蠢く虫、閉じ込められた呼吸 ―
-               それでも風を怖がりながら咲こうとする、
-               痛みと再生が同居する一輪の花。
-   ============================================================ */
+/* unlucky loop / Mage-P feat. 悩音Blue */
+/* 一言ムード: 目覚まし越しに繰り返される、優しく甘い悪夢のループ */
 
 :root {
-  /* --- 必須トークン --- */
-  --color-fg: #efe3cd;
-  --color-bg: #14100d;
-  --color-accent: #e8b64a; /* dandelion / たんぽぽ色 */
+  --color-fg: #f2e9f5;
+  --color-bg: #221830;
+  --color-accent: #ff8fa3;
 
-  --spacing-unit: 1rem;
+  --color-bg-alt: #2c1f3d;
+  --color-border: #4a3760;
+  --color-muted: #b8a9c9;
+  --color-alarm: #ffd39a;
 
-  --font-heading: 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', 'Noto Serif JP',
-    serif;
+  --spacing-unit: 1.25rem;
+
+  --font-heading: Georgia, 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', serif;
   --font-body: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN',
-    'Yu Gothic', 'Meiryo', sans-serif;
+    'Yu Gothic', 'YuGothic', 'Segoe UI', sans-serif;
 
   --line-height-body: 1.85;
-  --line-height-heading: 1.4;
+  --line-height-heading: 1.3;
 
   --ease-default: cubic-bezier(0.65, 0, 0.35, 1);
-
-  /* --- 補助トークン (装飾用・任意) --- */
-  --color-soil: #1f1712;
-  --color-soil-deep: #0b0806;
-  --color-flower-pale: #f6e9d8;
-  --color-wound: #8a4a5c;
-  --color-ant: #3a2f24;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  background: var(--color-bg);
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  color: var(--color-fg);
-  background-color: var(--color-bg);
-  background-image:
-    repeating-linear-gradient(
-      178deg,
-      transparent 0,
-      transparent 26px,
-      rgba(58, 47, 36, 0.35) 27px,
-      transparent 28px
-    ),
-    radial-gradient(ellipse at 50% 0%, rgba(232, 182, 74, 0.06), transparent 60%);
-  font-family: var(--font-body);
-  line-height: var(--line-height-body);
-  letter-spacing: 0.01em;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  line-height: var(--line-height-heading);
-  color: var(--color-flower-pale);
-  font-weight: 600;
-  position: relative;
-}
-
-h1::before,
-h2::before,
-h3::before {
-  content: '✿';
-  display: inline-block;
-  margin-right: 0.4em;
-  color: var(--color-accent);
-  animation: bloom 6s var(--ease-default) infinite;
-  transform-origin: center;
-}
-
-a {
-  color: var(--color-accent);
-  text-decoration-color: rgba(232, 182, 74, 0.4);
-  text-underline-offset: 0.2em;
-  transition: color 0.3s var(--ease-default), text-decoration-color 0.3s var(--ease-default);
-}
-
-a:hover,
-a:focus-visible {
-  color: var(--color-flower-pale);
-  text-decoration-color: var(--color-accent);
-}
-
-blockquote {
-  margin: calc(var(--spacing-unit) * 1.2) 0;
-  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.2);
-  border-left: 3px solid var(--color-wound);
-  background: rgba(138, 74, 92, 0.08);
-  color: var(--color-fg);
-}
-
-hr {
-  border: none;
-  border-top: 1px dashed var(--color-ant);
-  margin: calc(var(--spacing-unit) * 2) 0;
-}
-
-/* --- サイト全体構造 --- */
-
-.site-header {
-  background: linear-gradient(180deg, var(--color-soil-deep) 0%, var(--color-bg) 100%);
-  border-bottom: 1px solid var(--color-ant);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-}
-
-.site-header h1,
-.site-header a {
-  color: var(--color-flower-pale);
-  text-shadow: 0 0 0 rgba(232, 182, 74, 0);
-  animation: flicker 9s ease-in-out infinite;
-}
-
-.site-footer {
-  background: var(--color-soil-deep);
-  color: rgba(239, 227, 205, 0.65);
-  border-top: 1px solid var(--color-ant);
-  padding: calc(var(--spacing-unit) * 1.5) var(--spacing-unit);
-  font-size: 0.85em;
-}
-
-.site-footer a {
-  color: rgba(232, 182, 74, 0.8);
-}
-
-/* --- 記事一覧 --- */
-
-.post-list {
-  padding: 0;
-  margin: calc(var(--spacing-unit) * 1.5) 0;
-}
-
-.post-list li {
-  list-style: none;
-  padding: var(--spacing-unit) 0;
-  border-bottom: 1px dashed var(--color-ant);
-  transition: transform 0.4s var(--ease-default), background-color 0.4s var(--ease-default);
-}
-
-.post-list li::marker {
-  color: var(--color-accent);
-}
-
-.post-list li:hover {
-  transform: translateX(0.3em);
-  background-color: rgba(232, 182, 74, 0.04);
-}
-
-.post-list a {
-  font-family: var(--font-heading);
-  font-size: 1.1em;
-}
-
-/* --- 個別記事 --- */
-
-article.post {
-  background: rgba(31, 23, 18, 0.6);
-  border: 1px solid var(--color-ant);
-  border-radius: 4px;
-  padding: calc(var(--spacing-unit) * 1.5);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  box-shadow: 0 1px 0 rgba(232, 182, 74, 0.05) inset;
-}
-
-article.post h1,
-article.post h2 {
-  border-bottom: 1px solid var(--color-wound);
-  padding-bottom: calc(var(--spacing-unit) * 0.5);
-}
-
-article.post p {
-  color: var(--color-fg);
-}
-
-article.post p:first-of-type::first-letter {
-  color: var(--color-accent);
-  font-family: var(--font-heading);
-  font-size: 1.6em;
-  padding-right: 0.05em;
-}
-
-/* --- アニメーション --- */
-
-@keyframes bloom {
+@keyframes loop-breathe {
   0%,
   100% {
-    transform: scale(1) rotate(0deg);
     opacity: 0.85;
+    transform: translateY(0);
   }
   50% {
-    transform: scale(1.15) rotate(6deg);
     opacity: 1;
+    transform: translateY(-0.15em);
   }
 }
 
-@keyframes flicker {
+@keyframes loop-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes alarm-flicker {
   0%,
   92%,
   100% {
-    text-shadow: 0 0 0 rgba(232, 182, 74, 0);
+    opacity: 1;
   }
-  94% {
-    text-shadow: 1px 0 0 rgba(232, 182, 74, 0.25), -1px 0 0 rgba(138, 74, 92, 0.2);
-  }
-  96% {
-    text-shadow: -1px 0 0 rgba(232, 182, 74, 0.15);
+  95% {
+    opacity: 0.45;
   }
 }
 
-@keyframes creep {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 27px;
-  }
+body {
+  background: radial-gradient(ellipse at 50% -10%, var(--color-bg-alt) 0%, var(--color-bg) 60%);
+  color: var(--color-fg);
 }
 
-/* --- モーション低減設定 (必須) --- */
+.site-header {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  text-align: center;
+  position: relative;
+}
+
+.site-header::before {
+  content: '';
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5em;
+  border: 2px solid var(--color-alarm);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loop-spin 6s linear infinite;
+  vertical-align: middle;
+}
+
+.site-header h1,
+.site-header .site-title {
+  color: var(--color-fg);
+  animation: loop-breathe 4s var(--ease-default) infinite;
+  letter-spacing: 0.04em;
+}
+
+.site-header p,
+.site-header .site-description {
+  color: var(--color-muted);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  margin-top: calc(var(--spacing-unit) * 3);
+  padding-top: var(--spacing-unit);
+  color: var(--color-muted);
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 1.25);
+}
+
+.post-list li,
+.post-list article {
+  border-bottom: 1px dashed var(--color-border);
+  padding-bottom: var(--spacing-unit);
+}
+
+.post-list a {
+  color: var(--color-fg);
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.4s var(--ease-default);
+}
+
+.post-list a:hover,
+.post-list a:focus-visible {
+  background-size: 100% 2px;
+  color: var(--color-accent);
+}
+
+article.post {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: calc(var(--spacing-unit) * 1.5);
+}
+
+article.post h1,
+article.post h2,
+article.post h3 {
+  color: var(--color-fg);
+  font-family: var(--font-heading);
+  line-height: var(--line-height-heading);
+}
+
+article.post a {
+  color: var(--color-accent);
+}
+
+article.post time {
+  color: var(--color-alarm);
+  animation: alarm-flicker 3s steps(1, end) infinite;
+}
+
+article.post blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--spacing-unit);
+  color: var(--color-muted);
+  font-style: italic;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,
