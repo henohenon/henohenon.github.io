@@ -26,3 +26,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 作業用（サブセット元 ttf / デバッグ出力のスクショ・AA）
+.tmp-fonts
+.tmp-shots
