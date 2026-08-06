@@ -8,15 +8,25 @@
     "build": "vite build",
     "preview": "vite preview",
     "prepare": "svelte-kit sync",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "subset:fonts": "node scripts/subset-mplus.mjs",
+    "subset:aa": "node scripts/subset-aa.mjs"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.1",
     "@sveltejs/vite-plugin-svelte": "^7.2.0",
+    "@types/matter-js": "^0.20.2",
+    "jimp": "^1.6.1",
+    "subset-font": "^2.5.0",
     "svelte": "^5.56.7",
     "svelte-check": "^4.7.3",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
+  },
+  "dependencies": {
+    "matter-js": "^0.20.0",
+    "pixi.js": "^8.19.0",
+    "tone": "^15.1.22"
   }
 }
