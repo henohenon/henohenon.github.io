@@ -1,228 +1,145 @@
-# 仕様書 / 実装予定書
+# 仕様書 / 実装予定書 — コトハコビ
 
-- 作成日: 2026-07-22
+- 作成日: 2026-07-26
 - 対象ブランチ: `Gallery`
-- 位置づけ: `docs/` の設計メモ（探索的で未確定な記述を含む）を、**確定仕様**と**実装フェーズ計画**に落とし込んだもの。
-  判断が必要で未確定の点は本文中に `TBD` として残し、末尾の「要確認事項」に集約する。
-- 元資料: `docs/frame.md`(全体), `docs/introduction.md`(導入/About), `docs/GlobeXplore.md` / `docs/MwP.md` / `docs/kotohakobi.md`(各展示品)
+- スコープ: **展示 03「コトハコビ」を実装しきる**ための仕様と手順。
+  サイト土台（SvelteKit / Focus / dive-rise トランジション）は実装済み。本書はその上に
+  **Icon・Focus Main・音・ギミック** を載せることに集中する。
+- 元資料:
+  - `docs/kotohakobi.md`（発想段階のメモ）
+  - **コトハコビ本体** `D:\0.projects\hackz-allo-cup`（GitHub: `henohenon/hackz-allo-cup`、`allo-app/`）
+    ＝ 荷物一覧・音・ビジュアルの**実装の正**。Main は原則これを移植する（§3）。
+- 位置づけ: 判断が要る未確定点は `TBD` を置き、末尾「要確認事項」に集約する。
 
 ---
 
-## 1. コンセプト
+## 0. コトハコビとは（展示データ）
 
-- キャッチ: **わくわくさせる**
-- テーマ: **展示 (Gallery)**
-- 本サイトの体験のキモは、**画面遷移時のトランジション**（`frame.md`）。作品そのものより「見せ方・動き・遊び心」に主眼を置く。
-- ポートフォリオを兼ねた、へのへのん本人の作品展示空間。
+`src/lib/exhibits/data.ts` の `id: 'kotohakobi'`（No.03）が対象。登録済み。
+
+- title: **コトハコビ**
+- about（detail）: ガラパゴス的通信アプリ
+- description: ハックツハッカソンアロカップで制作・最優秀賞を受賞しました。裏側のロジックの整備と、荷物一覧画面の作成を行いました。
+- used（tech）: Electron / (React) / Pixi.js / IndexedDB / Node.js / BLE通信
+- more: ナシ
+- link: https://topaz.dev/projects/c2bfcbeb9b1c5fd0e0ec （リンクボタン＝トップ遷移のハコ、リズムに乗る）
+
+モチーフ = **ハコ**（荷物を運ぶ＝コトハコビ）。Icon も Main もギミックも「ハコ」で統一する。
+本体のビジュアル指針（`allo-app/src/ui/theme.ts`）＝**モノクロ2色**（白地 `paper` / 黒線 `ink`）のワイヤーフレーム、
+**3DS 相当の 5:3 比率**（論理 1920×1152）レターボックス、フォント **M PLUS 1p**。これを Main に踏襲する。
 
 ---
 
-## 2. 現状 (2026-07-22 時点)
+## 1. 実装済みの土台（前提・造り直さない）
 
-- スタック: **Vite + TypeScript + pnpm ＋ Svelte**（詳細は §7）。デプロイは GitHub Pages。
-- 実装済み: 展示 3 件のデータ（`src/exhibits/data.ts`）。docs 用語で統一したレイアウト/命名。
-- 未着手: SvelteKit への移行、Focus 演出、Icon 中身、About、会話、トランジション。
+- **Focus 画面**（`src/routes/focus/[id]/+page.svelte`）: `details-caption`(右上) / `focus-main`(中央) / `title-caption`(左下) の固定 1 枚。現状 Main は**リンクのみ**のプレースホルダ。
+- **Icon**（`IndexView.svelte` の `.icon` 空 `<div>`）: 未実装。全展示共通の空枠。
+- **トランジション**（`src/lib/transition.ts`）: Gallery↔Focus を Icon 中心の **dive/rise ズーム**（View Transitions）で繋ぐ。VT 非対応は即時遷移。
+  - → kotohakobi.md「トランジション: 例の上下」は dive/rise が該当。**基本は流用**（§5）。
 
-### 用語とクラス/コンポーネントの対応
-`docs` の用語を正とし、以降も同じ用語で統一する。
+---
 
-| docs 用語 | クラス/コンポーネント | 備考 |
+## 2. Icon（Gallery のハコ）
+
+**モチーフ: ハコ。** Gallery 一覧に置く、押したくなるアイコン（`docs/kotohakobi.md` §アイコン）。
+
+- **【決定】** **本体ロゴ由来のハコ SVG**。出典＝`allo-app/src/assets/kotohakobi-icon.svg`＝「開いた段ボール箱」（鋭角の正方形＋上両角から splay したフタ＋中の「コ」、黒線・塗りなし）。実座標をそのまま流用して faithful に。実装 `src/lib/components/HakoIcon.svelte`。
+  - **現状**: 箱は閉じた四角（上辺常設）＋コ常時表示。上辺の上に 2 枚のフタ（帯・長さは上辺の半分で中央合わせ）。閉＝上辺に重なって隠れ、**ホバーで各上角を蝶番に「斜め上・外へ」跳ね上げ**（左 rotate −120° / 右 +120°・buildButton 準拠）。上ぶちは開いても残る。コの出入り・箱ビクンは今は無し。
+    - 経緯: ロゴ忠実の下 splay／上→斜め下の大回転も試したが、いったんトップボタン（buildButton）と同じ斜め上に。
+  - 予定（後で再開可）: hover でコが顔を出す／click でコ定位置＝ロゴ完成＋箱ビクン。
+- **【決定】** 吹き出し（💭）ではなく **荷物タグ**（本体 listBoxDrop の荷札と統一）で見せる。
+- **【決定】** **ホバーでフタが開いて「コ」が顔を出す。**
+- **【決定】** **クリックで「コ」が飛び出てアイコン完成。ハコ自体もちょっとビクンとなる。** そのまま Focus へ遷移（既存 dive／Icon 中心ズーム）。
+- **【決定】** **ホバー時から例の音が鳴る**（§4・音の連続ギミックの起点）。
+- TBD: 音を v1 で鳴らすか（§4 `TBD-audio-scope`）。
+
+実装メモ: SVG/CSS で自作（フタ・本体・「コ」）。`.icon` 枠は残す（`transition.ts` の `setOrigin` が中心取得に使う）。root ズームに含まれる。
+
+---
+
+## 3. Focus Main（荷物一覧＝本体 `listScene` の移植）
+
+Focus 中央に、へのへのん担当の**荷物一覧画面**を再現する。**方針 B（実物移植）**。
+
+### 3.1 実物の中身（`allo-app/src/ui/scenes/listScene.ts` ほか）
+- 白いプレーン画面に「荷物一覧」タイトル。**上中央から荷物箱が拍に合わせて 1 個ずつ落ち**、matter-js の物理で画面四辺の見えない壁・箱同士とぶつかって積もる。
+- 各箱は `content` テキストを持ち、**ホバーで荷札タグ**（紐＋ハトメ＋角丸カードに中身テキスト）がポップアップ。
+- 箱の一辺は文字数で 90〜230px に伸縮（質量も面積比で連動）。同時上限 28 個。
+- コア API は綺麗に分離済み: `buildListBoxDrop(texts: string[])` と、音の `getSequence().addListGroove()`。
+
+### 3.2 データ（実物との相違・重要）
+- **【決定】** 本体は訪問者の IndexedDB `kotohakobi.sessions`（`{session_id, content, created_at}`）を `getRecent(50)` で読むが、**公開 Web の訪問者にそのDBは無い**。→ Main の箱テキストは **`e.tech`（使用技術）** を渡す（`KotohakobiMain` の `texts` prop＝Focus から `e.tech`）。※以前はコトバのデモ文字列だったが「箱＝使用技術」に変更。
+
+### 3.3 移植方針 B（自己完結の Pixi アイランド）
+- `/focus/kotohakobi` でのみ**動的 import** する `PixiListIsland.svelte` を新設。Gallery index は従来どおり軽いまま（遅延ロード）。
+- やること:
+  - Pixi `Application` を Focus Main 内に生成。論理 1920×1152 を**レターボックススケール**（本体 `designToScreen.ts` 相当を移植 or 簡易実装）。
+  - `buildListBoxDrop(demoTexts)` の `view`＋`overlay` を載せる。タイトル「荷物一覧」は任意（Focus 側キャプションがあるため省略可）。
+  - `getSequence().addListGroove()` を購読、`onunmount` で解除＋`dispose()`。
+- **捨てるもの**: `SceneManager` / React / `@capacitor/core`（Android 加速度センサー分岐）/ BLE / 共通「戻るボタン」（Focus の `CloseButton` を使う）。
+- **持ってくるもの**: `listBoxDrop.ts` / `sequence.ts`（`addListGroove` 周辺）/ `wireframe.ts`(`label`/`wireRect`) / `theme.ts` / letterbox スケーラ。
+- 追加依存（portfolio 側 `package.json`）: `pixi.js` `matter-js` `tone`（+ `@types/matter-js`）。`pixi-filters`・`@capacitor/*`・`react` は不要。目安 **~270KB gzip（遅延ロード）**。
+- SSR/prerender 対策: アイランドは `browser` ガード＋`onMount`＋動的 import。プリレンダ HTML には canvas を出さない。
+
+### 3.4 リンクボタン
+- **【決定】** リンク（§0 の topaz URL）を**ハコ型ボタン**で配置（kotohakobi.md §リンクボタン「トップ遷移のハコ」）。
+- **【決定】** このハコは **音のリズムに乗って動く**（`addListGroove` の拍に同期）。
+
+---
+
+## 4. 音（本体 `audio/sequence.ts` の移植）
+
+- 実物 = Tone.js。**BPM110 固定、起動で一度だけ Transport を開始しシーン遷移でリセットしない**設計＝ kotohakobi.md「ここで途切れさせない！」は**本体で実現済みの思想**。移植でそのまま活かす。
+- 荷物一覧の音 = `addListGroove()`（ファンクベース＋シンコペチャイム＋2/4 スタブ＋16 分ハット＋スウィング 0.12）＝「あのリズム」。
+- **【決定】** 音量調整 UI は作らない（v1）。kotohakobi.md「音量調整は作らない（強気）」に従う。
+- 自動再生制約: Focus はクリック遷移で到達＝ユーザー操作後なので `Tone.start()` を入場時に呼べる。ホバー音（Icon）は初回操作後のみ。
+- **【決定・§6 ギミック】** **トップの Icon ホバー音と Focus 画面の音が途切れずつながる**のが本作の見せ場。Icon ホバー〜Focus 遷移〜荷物一覧グルーヴを、Transport をリセットせず 1 本の時間軸で繋ぐ。
+- TBD: v1 で音を入れるか（`addListGroove` の移植・Tone 追加を伴う）。`TBD-audio-scope`
+
+---
+
+## 5. トランジション
+
+- **【決定】** コトハコビの「例のトランジション（上下）」＝**本体 SceneManager の“上下の黒い蓋”遷移**（`allo-app/src/ui/scenes/SceneManager.ts` の `drawFlaps`）。上端から下りる蓋＋下端から昇る蓋が中央で合わさり画面を黒く覆う→覆い中に差し替え→開いて次を見せる。片道 `FLAP_MS=220ms`・easeInOutQuad、覆い中は入力遮断（`MIN_HOLD_MS`）。上下の蓋＝ロゴのハコのフタと世界観が繋がる。
+- **✅ 実装済み**（`transition.ts` の `flapTransition`）: `onNavigate` で、コトハコビの Gallery↔Focus のときだけ VT ではなく**上下 2 枚の黒オーバーレイ**（`position:fixed`・`scaleY` を各辺蝶番に）を WAAPI で **閉じ 220ms →（最低保持 560ms と mount 完了の両待ち）→ 開き 220ms**（本家の `FLAP_MS=220` / `MIN_HOLD_MS=560` / 計 1000ms に一致）。他 2 作品は従来の dive/rise ズームのまま（`focusId === 'kotohakobi'` で分岐）。覆い中に island の mount / 音 enter が走るので canvas 初期化のチラつきも隠れる。
+  - **蓋の幅は 5:3 レターボックス矩形に一致**。矩形計算は Pixi キャンバスの fit と共通化した（`src/lib/kotohakobi/screen.ts` の `letterbox()` を `layoutFlaps` と `KotohakobiMain.fit` の両方が参照）＝画面と蓋の幅が必ず一致。ビューポートが 5:3 より横長なら**横に余白が残る**＝本家の「横に白余白」を再現（余白はページの白地）。※余白を確実に白で塗る mask は必要なら後追い。
+  - 差し替え順は**本家準拠**: 閉じる → 覆い中に差し替え → 最低保持と mount の両待ち → 開く（一泊は入れない）。
+  - ただし Focus のカード（details/title）は 5:3 外の余白隅に出て蓋に覆われないため、**入場(dive)時のみ覆い中は隠し（`html.koto-covering`＋CSS opacity）、蓋が開くのと同時にフェードで現す**。戻り(rise)は隠さない。
+
+---
+
+## 6. ギミック（音の連続）
+
+- **【決定】** ギミック＝**音がつながっていること**（`docs/kotohakobi.md` §ギミック）。トップの Icon ホバーで鳴り始めた音と、Focus（荷物一覧）画面の音が**途切れずつながっている**。
+- 実現の鍵: Tone の Transport をアプリ寿命の singleton（`sequence.ts`）に置く。鳴らすのは「Icon ホバー中」または「Focus 中」だけ。
+- 再生方式は試行錯誤中。**現状＝“頭からリセット”だが、ホバー連打の激しいリセットは猶予で抑制**：
+  - 全音源をマスター `Tone.Gain` に束ねる。立ち上がり/立ち下がりは**極短デクリック（8ms）のみ**＝滑らかさは足さず、クリックノイズだけ除去。
+  - `enter` は「完全停止からの新規ホバー」だけ `stop`→`start` で頭出し。`leave` はほぼ即無音にしつつ、**stop（頭出し）を 500ms 猶予**。猶予内の再 `enter` は巻き戻さず継続＝**素早い出入りでは激しくリセットしない**。本当に離れてからの再ホバーだけ頭出し。
+  - ※既に試した「pause/resume で位置保持」「mute で楽譜進めっぱなし」「毎回即リセット」「フェードで角丸め」は微妙だったため差し替え。`TBD-audio-feel`
+- ※旧案（プレゼント/exe/ローカル IndexedDB 探索）は doc から削除されたため**廃止**。
+
+---
+
+## 7. 実装フェーズ計画
+
+- **Phase A: Icon（ハコ）** ／ ✅ 済（`HakoIcon.svelte`。ロゴ準拠・ホバーでフタ開閉。コの出入り/ビクンは保留）
+- **Phase B: Focus Main（listScene 移植）** ／ ✅ B1・B2 済
+  - B1/B2 済: pixi/matter 追加、`KotohakobiMain.svelte`（動的 import・letterbox・dispose）＋ `boxDrop.ts`/`wireframe.ts`/`theme.ts` 移植。`demoTexts` で箱降らし＋ホバー荷札。
+  - B3: ✅ 中央に本家トップと同じ段ボール箱ボタン「見に行く」（`linkButton.ts`＝buildButton 移植、ホバーで蓋開閉）を配置、押下で作品リンク（topaz）を別タブで開く。※リズム同期は未（任意）。
+- **Phase C: 音（sequence 移植）＝ギミック本体** ／ ✅ 済
+  - `sequence.ts`（Transport シングルトン＝非リセット）移植。Icon ホバーで start（Tone 遅延 import）→ Focus で `addListGroove()` ＋箱を **onBeat 同期**で落とす。離脱で groove のみ解除（Transport は生存＝連続）。音量 UI なし。
+- **Phase D: 上下の蓋トランジション** ／ ✅ 済（`flapTransition`。コトハコビ行き来を上下の黒い蓋に差し替え。§5）
+
+---
+
+## 8. 要確認事項（TBD 一覧）
+
+| ID | 内容 | 影響 |
 |---|---|---|
-| Introduction | `introduction` | 最初の展示品 |
-| Icon | `icon` | 作品本体（抽象化された概念） |
-| text-caption | `text-caption` | 自己紹介 |
-| Gallery | `gallery` | 展示品が並ぶ場所 |
-| Exhibit | `exhibit` | Icon + title-caption 一式 |
-| title-caption | `title-caption` | 作品名 + 番号 |
-| Focus | `focus` | 展示 1 点を集中して見る画面 |
+| ~~`TBD-demo-texts`~~ | 解決：箱テキスト＝`e.tech`（使用技術）。将来 IndexedDB 風の別テキストにするかは任意 | Phase B |
+| `TBD-trans-box` | コトハコビ行き来を上下の蓋トランジションに差し替えるか（§5・Phase D） | Phase D |
 
----
-
-## 3. 用語定義（`frame.md` 準拠）
-
-- **Gallery**: 展示品が並ぶ場所（index のメイン）。
-- **Focus**: 展示 1 点を集中して見る画面。Exhibit クリックで遷移。
-- **Introduction**: 導入。最初の展示品。Gallery の先頭に置かれる。
-- **Exhibit**: Icon + キャプション一式の「展示品」単位。
-- **Icon**: Gallery における作品本体。作品現物やロゴを貼るのではなく、**適切に抽象化した概念**として表現する。
-- **About**: Introduction の Icon（顔タイポ）またはヘッダーの About ボタンで遷移する、自己紹介ページ。
-
----
-
-## 4. 画面 / 情報構造
-
-### 4.1 index (Gallery)
-```
-<body>
-  <header/>                     … 右上 About（Introduction 通過後のみ表示・fixed）
-  <introduction>                … 最初の展示品
-    <icon/>                     … 顔タイポ（へ へ / の の / ん）
-    <text-caption/>             … 自己紹介
-  </introduction>
-  <gallery>
-    <exhibit><icon/><title-caption/></exhibit>  … 作品名 + 番号
-    <exhibit>…</exhibit>
-    …
-  </gallery>
-  <footer/>                     … コピーライト + X リンク（index のみ）
-</body>
-```
-
-### 4.2 Focus
-```
-<body>
-  <details-caption/>   … 閉じるボタン / コンセプト短文 / 自分の作業 / 使用技術 / More ボタン
-  <main/>              … 作品の主役（リンクボタン + 写真・動画など紹介要素）
-  <title-caption/>     … 作品名 + 番号（固定表示）
-</body>
-```
-- Exhibit → Focus 遷移が体験のキモ。**トランジション演出**を各作品ごとに用意する（§6）。
-- Focus は原則スクロールもクリックも不要。**何もしなくても完成している状態**で世界観がミニマルに伝わることを狙う（`frame.md` 演出）。
-- 固定配置（スクロール不要の 1 枚）:
-  - `details-caption` … **右上**
-  - `title-caption` … **左下**（Introduction のキャプションが左下＝キャプションは左に寄せる慣習に揃える）
-  - `main` … **中央**（作品別 Main の内部配置は各作品ドキュメント準拠。例: MwP は中央ロゴ/左上動画/右下スクショ）
-
-### 4.3 About
-- index とほぼ同構造だが、**Introduction の内容だけが変化**する（`introduction.md`）。
-- About 側 Introduction の情報:
-  - 顔タイポグラフィ（できれば数種類作って「じゃぎらせる」＝ゆらぎ表現）
-  - 右上テキスト: 自己紹介 / X・GitHub リンク / のへ(More)リンク / 資格・Skills
-  - `click me!` `about…` などの吹き出しが**たまに**出る（作品優先なので最初から全開にはしない）
-  - タイポグラフィと**会話ができる**（下 or 右下に入力欄、タイポからは返答吹き出し）
-
----
-
-## 5. 展示品カタログ
-
-**【決定】** 当面の展示は **3 件**（GlobeXplore / Make with Puppet / コトハコビ）。`main.ts` のプレースホルダ 6 枚は 3 枚に減らす。各展示の **Icon・Main は当面「仮 or 空」で可**（データ枠と遷移を先に通し、中身は後から差し込む）。
-
-### 5.1 Introduction（0 番 / 最初の展示品）
-- Icon: 顔タイポ `へ へ / の の / ん`。複数バリエーションでゆらぎ表現（`じゃぎらせたい`）。
-- Caption(左下): 「初めまして、へのへのんと申します。ここではポートフォリオを兼ねて、自分の作品を展示しています。興味を持っていただけたり、ワクワクしていただければ幸いです。」
-- クリック → About 遷移（Introduction 内容が差し替わる）。
-
-### 5.2 GlobeXplore（`docs/GlobeXplore.md`）
-- Icon: **ドローン**。ホバーで浮く / 傾いて喋る / 宙返り等の激しい回転。
-- 詳細: PLATEAU を活用したドローンシミュレーター。
-- 担当: 初期〜GlobeXplore'Pro リリースまで、Unity での開発全般と Steam 公開・運用を主導。
-- 使用技術: Unity, Cesium for Unity, Figma
-- Main: 飛行中の動画背景。
-- トランジション: 「ワープっぽいやつ」。
-
-### 5.3 Make with Puppet（`docs/MwP.md`）
-- Icon: **人形＋操る手**。ホバーで片手を上げる / クリックで手を振る / 首をかしげて喋る。
-- 詳細: XR Puppet ゲーム。BitSummit GameJam で制作・受賞。
-- 担当: 4 人チームでプログラミングを主に、一部モデリング・企画まで。コードの 9 割は人の手書き。
-- 使用技術: Unity, UniTask, VContainer, R3, Blender
-- More: 未（`まだない`）
-- Main: リンク先は itch 想定。中央にロゴボタン、左上に動画・右下にスクショ複数。
-- トランジション: 左右(+上?)から幕が閉まる／開く。
-
-### 5.4 コトハコビ（`docs/kotohakobi.md`）
-- Icon: **ハコ**。ホバーで開いて「コ」がのぞく / 顔を出して喋る / クリックで飛び出して表に出る（or 閉じる/跳ねる）。
-- 詳細: コトバでつながる、ハコべる。ガラパゴス的通信アプリ。ハックツハッカソン アロカップで最優秀賞。
-- 担当: 裏側ロジックの整備と、荷物一覧画面の作成。
-- 使用技術: Electron, (React), Pixi.js, IndexedDB, Node.js, BLE 通信
-- Main: リンク先 https://topaz.dev/projects/c2bfcbeb9b1c5fd0e0ec 。音・スクショ・3DS 的な見せ方など構想中（未確定）。
-
-> 各作品の Icon 演出・Main の見せ方・トランジションは docs で発想段階の記述が多い。実装時は本仕様の記述を出発点に、Phase 4 以降で個別詰め。
-
----
-
-## 6. 機能要件
-
-### 6.1 トランジション（最重要）
-- Exhibit ↔ Focus の遷移を、作品ごとに凝った演出で行う。SPA ナビゲーション（DOM を保持したまま遷移）で連続性を担保する。
-- 制約（`frame.md`）: **わくわくする / 長すぎない / 戻る用も用意（逆再生でも可）**。
-- 作品別の方向性: GlobeXplore=ワープ / MwP=幕の開閉 / コトハコビ=ハコの開閉・飛び出し。
-- 実装の二段構え（デバイス非依存を担保）:
-  - **劇場型の派手な演出（ワープ / 幕 / ハコ）** … Svelte の `transition:`/`animate:`（FLIP）や自前オーバーレイ、必要なら GSAP。**全環境で動く**。
-  - **共有要素モーフ（Gallery Icon → Focus への連続移動）** … Svelte の `crossfade`／FLIP で実現。ブラウザ標準 View Transitions を併用してもよい（対応環境のみの enhancement）。
-- シェーダ演出（例: GlobeXplore のワープ）は、消えない常駐 `<canvas>` 島＋rAF＋GLSL で実装（Threlte or PixiJS/OGL/生 WebGL。§7）。
-
-### 6.2 Icon 演出（Gallery 内）
-- 一覧として適切な解像度、アイコンとして適切な抽象度。
-- 「押したくなる」強調（吹き出しなど）。
-- ホバー時リアクション（スマホは対象要素が画面中央に来たとき）。
-- クリック時リアクション（トランジションと絡めても別でも可）。
-- 遊び心・自由であること。
-
-### 6.3 About / 会話
-- タイポとの会話機能。将来的に LLM を絡め、のへ本人の md や Skills と接続したい（`introduction.md`）。
-- **【決定】LLM 会話は別スコープ**。v1 では入力に対し **ランダムな単語を返す程度**の仕組み（吹き出し UI ＋ 応答語の配列からランダム選択）を作れれば十分。LLM 連携は後続フェーズ（Phase 6）。
-
-### 6.4 ヘッダー / フッター
-- ヘッダー: 右上 About。Introduction を通過（スクロール等）した後のみ表示、`fixed`。
-- フッター: index のみ。コピーライト表記 + X リンク。
-
----
-
-- スタック: **Vite + TypeScript + pnpm ＋ Svelte（Svelte 5）**。デプロイは **GitHub Pages**。
-- **器（ビュー/ルーター）**: **SvelteKit ＋ `adapter-static`**。
-  - 各ルートを実 `.html` に**静的プリレンダ**し、**クリーンパス**（`/focus/:id` 等）を Pages で `404.html` ハックなしに提供。
-  - クライアントルーターの SPA ナビゲーション（DOM 保持）で遷移し、トランジションの連続性を得る。深いリンク/リロードはプリレンダ済み HTML が応答。
-  - サイトは `henohenon.github.io`（ユーザーサイト・ルート）なので base パスは `/`。
-- **演出（エンジン）レイヤー**（器と分離して考える）:
-  - DOM 遷移 … Svelte transitions（`crossfade`/FLIP/`transition:`）、必要に応じ GSAP。
-  - シェーダ/WebGL … 消えない常駐 `<canvas>` 島＋rAF＋GLSL。宣言的にやるなら **Threlte**、軽量に生でやるなら **PixiJS/OGL/生 WebGL**。
-- **ルーティング/遷移モデル**: **URL 分離＝クリーンパス（静的プリレンダ）**。SPA ナビゲーションで DOM 保持。
-- 命名整合: §2 の対応表どおり docs 用語で統一。
-- ディレクトリ構成（SvelteKit・案）:
-  ```
-  src/
-    lib/
-      exhibits/data.ts       展示データ
-      components/            Header / Footer / Caption / Icon 等
-      transitions/           crossfade 定義・遷移オーケストレーション
-      shaders/               GLSL・canvas 島（ワープ等）
-    routes/
-      +layout.svelte         共通レイアウト（header/footer, ClientRouter 相当）
-      +page.svelte           / … Gallery（Introduction 含む）
-      about/+page.svelte     /about
-      focus/[id]/+page.svelte  /focus/:id … Focus
-    app.css                  共通スタイル
-  svelte.config.js           adapter-static
-  ```
-
----
-
-## 8. 実装フェーズ計画
-
-- **Phase 1: Svelte 土台**
-  - SvelteKit ＋ `adapter-static` をセットアップ（Pages 向けクリーンパス）。
-  - ルートを `/`(Gallery) / `/about` / `/focus/[id]` で構成。
-  - `exhibits/data.ts` から Gallery を **3 件**生成（Icon/Main は仮 or 空）。
-- **Phase 2: Focus 画面 + 基本遷移**
-  - Focus のレイアウト（details-caption / main / title-caption）を component 実装。
-  - Exhibit → Focus → 戻る を、Svelte transitions で包んだプレーンな遷移でまず通す（作品別演出は Phase 5）。
-- **Phase 3: ヘッダー/フッター + Introduction 挙動**
-  - About ボタン（Introduction 通過後 fixed 表示）、フッター（X リンク）。
-  - Introduction → About の内容差し替え。
-- **Phase 4: 演出（Icon の動き / ホバー・クリック）**
-  - 各作品 Icon のアイドル・ホバー・クリック演出。吹き出し。
-- **Phase 5: トランジション作り込み**
-  - 作品別トランジション（ワープ / 幕 / ハコ）。戻り再生。
-- **Phase 6: About の会話**（v1 はランダム単語応答。LLM 連携は将来）。
-- **Phase 7: 各 Focus の Main 作り込み**（動画背景・スクショ・埋め込み等）と仕上げ。
-
----
-
-## 9. 決定事項 / 残 TBD
-
-### 決定済み（2026-07-22）
-1. **展示枚数**: 当面 **3 件**。Icon・Main は当面「仮 or 空」で可。
-2. **フレームワーク**: **Svelte（Svelte 5）採用**。器は **SvelteKit ＋ `adapter-static`**。
-3. **遷移モデル**: **URL 分離＝クリーンパス（`/focus/:id`、静的プリレンダ）**。SPA ナビゲーションで DOM 保持し遷移の連続性を確保。
-4. **演出エンジン**: DOM 遷移＝Svelte transitions（`crossfade`/FLIP）＋必要に応じ GSAP。シェーダ＝常駐 canvas 島＋GLSL（Threlte or PixiJS/OGL/生 WebGL）。
-5. **LLM 会話**: 別スコープ。v1 は**ランダム単語応答**まで。
-6. **デプロイ**: **GitHub Pages**（`henohenon.github.io` ルート、base=`/`）。
-7. **命名整合**: docs 用語で統一（対応済み）。
-
-### 残 TBD（後続で詰める）
-- 各作品の未確定演出: コトハコビ Main（3DS 的表現/音）、MwP の More 文言、Icon の具体アニメ等。→ Phase 4 以降で個別に。
-- WebGL レイヤーの具体選定（Threlte / PixiJS / OGL / 生 WebGL）。→ 最初のシェーダ演出（ワープ）着手時に判断。
-
----
-
-> メモ: README はユーザー主筆のため本仕様では触れない。本ドキュメントは実装の合意形成用の下敷きであり、確定した内容は随時 docs 側へ反映していく想定。
+- 解決済み: クリック挙動＝コ飛び出し＋ビクン / 喋る→荷物タグ / リンクのリズム乗り / ギミック＝音の連続（exe 案は廃止）/ `TBD-audio-scope`＝音は入れる（Icon ホバー〜Focus をつなぐ、Phase C 実装済み）。
+- 残実装: Icon の「コ出入り/ビクン」演出の復帰（保留中）、リンクボタンのリズム同期（任意）。
+- フォント: ✅ M PLUS 1p を**サブセット同梱**（`scripts/subset-mplus.mjs`＝`subset-font`/harfbuzz WASM で data.ts の tech＋「見に行く」の使用文字だけ woff2、各 ~4KB）。`font.ts` が FontFace で登録し、Pixi Text 生成前に `await loadFont()`（焼き込み対策）。箱テキスト（tech）を変えたら `pnpm subset:fonts` で再生成（元 ttf は本体 allo-app から読む・非同梱）。
+- ひねり: ✅ 中央「見に行く」ボタンを**ビートに乗せて揺れ＋呼吸**（本家トップの `animateLogo` 同様・kotohakobi.md「リズムに乗る」）。※要否は要確認。
