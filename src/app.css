@@ -295,6 +295,17 @@ html.boot-about .intro-caption-card {
   text-decoration: none;
 }
 
+/* コトハコビ入場の上下の蓋トランジション中は、5:3 外の余白隅に出る Focus のカード
+   （details / title）を隠しておき、蓋が開くのと同時にフェードで現す（transition.ts が付与）。 */
+.focus .caption-card,
+.focus .title-link {
+  transition: opacity 0.22s ease;
+}
+html.koto-covering .focus .caption-card,
+html.koto-covering .focus .title-link {
+  opacity: 0;
+}
+
 /* ---- ルート遷移（View Transitions） ---- */
 
 /* 遷移全体の尺を揃える（title-caption のモーフ等も含む）。 */
