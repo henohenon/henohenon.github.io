@@ -15,6 +15,7 @@
   import Footer from './Footer.svelte'
   import TitleCaption from './TitleCaption.svelte'
   import CloseButton from './CloseButton.svelte'
+  import HakoIcon from './HakoIcon.svelte'
 
   // プリレンダ時は searchParams を読めない（＝常に挨拶状態で出力）。about 判定は
   // クライアントのみ。直リンク `/?about` は挨拶 HTML → ハイドレーション後に確定する。
@@ -96,7 +97,11 @@
         aria-label={e.title}
         onclick={(event) => markExhibitOrigin(event, about)}
       >
-        <div class="icon"></div>
+        {#if e.id === 'kotohakobi'}
+          <HakoIcon />
+        {:else}
+          <div class="icon"></div>
+        {/if}
       </a>
       <a class="title-link" href="/focus/{e.id}" onclick={(event) => markExhibitOrigin(event, about)}>
         <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
