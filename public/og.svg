@@ -1,77 +1,73 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGlow" cx="50%" cy="-10%" r="90%">
-      <stop offset="0%" stop-color="#2c1f3d"/>
-      <stop offset="60%" stop-color="#221830"/>
-      <stop offset="100%" stop-color="#221830"/>
+    <radialGradient id="cyanGlow" cx="85%" cy="8%" r="55%">
+      <stop offset="0%" stop-color="#7fe8ff" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#7fe8ff" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="titleFade" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#f2e9f5"/>
-      <stop offset="100%" stop-color="#e4d3ea"/>
-    </linearGradient>
+    <radialGradient id="pinkGlow" cx="8%" cy="96%" r="60%">
+      <stop offset="0%" stop-color="#ff7fb0" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ff7fb0" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="1" fill="#ff7fb0" opacity="0.035"/>
+    </pattern>
+    <filter id="softBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
   </defs>
 
   <!-- background -->
-  <rect x="0" y="0" width="1200" height="630" fill="#221830"/>
-  <rect x="0" y="0" width="1200" height="630" fill="url(#bgGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="#120e1a"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#cyanGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#pinkGlow)"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#scan)"/>
 
-  <!-- crescent moon, dreamy corner -->
-  <g opacity="0.35">
-    <circle cx="110" cy="110" r="52" fill="#ffd39a"/>
-    <circle cx="132" cy="98" r="52" fill="#221830"/>
-  </g>
+  <!-- night sky specks -->
+  <circle cx="1000" cy="70" r="2.4" fill="#7fe8ff" opacity="0.5"/>
+  <circle cx="1055" cy="120" r="1.6" fill="#ffd1e6" opacity="0.45"/>
+  <circle cx="960" cy="140" r="1.8" fill="#7fe8ff" opacity="0.35"/>
+  <circle cx="140" cy="80" r="1.6" fill="#ffd1e6" opacity="0.35"/>
+  <circle cx="90" cy="150" r="2.2" fill="#7fe8ff" opacity="0.3"/>
 
-  <!-- faint large loop rings behind everything -->
-  <circle cx="600" cy="330" r="270" fill="none" stroke="#4a3760" stroke-width="1.5" stroke-dasharray="6 10" opacity="0.5"/>
-  <circle cx="600" cy="330" r="320" fill="none" stroke="#4a3760" stroke-width="1" stroke-dasharray="2 14" opacity="0.35"/>
+  <!-- crescent moon -->
+  <circle cx="1118" cy="66" r="26" fill="#ffd1e6" opacity="0.85"/>
+  <circle cx="1130" cy="58" r="24" fill="#120e1a"/>
 
-  <!-- small stars for night mood -->
-  <g fill="#f2e9f5" opacity="0.5">
-    <circle cx="1060" cy="90" r="3"/>
-    <circle cx="1010" cy="150" r="2"/>
-    <circle cx="1120" cy="200" r="2.5"/>
-    <circle cx="90" cy="480" r="2.5"/>
-    <circle cx="150" cy="540" r="2"/>
-  </g>
+  <!-- outer frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="10" fill="none" stroke="#33284a" stroke-width="2"/>
 
-  <!-- spinner ring motif (broken circle like alarm-loop icon) -->
-  <circle cx="600" cy="150" r="34" fill="none" stroke="#ffd39a" stroke-width="4" stroke-linecap="round" stroke-dasharray="140 214"/>
+  <!-- panel glow -->
+  <rect x="130" y="120" width="940" height="360" rx="16" fill="#ff7fb0" opacity="0.10" filter="url(#softBlur)"/>
 
-  <!-- decorative clock ticks around spinner -->
-  <g stroke="#ffd39a" stroke-width="3" stroke-linecap="round" opacity="0.7">
-    <line x1="600" y1="104" x2="600" y2="94"/>
-    <line x1="646" y1="150" x2="656" y2="150"/>
-    <line x1="600" y1="196" x2="600" y2="206"/>
-    <line x1="554" y1="150" x2="544" y2="150"/>
-  </g>
+  <!-- editor panel -->
+  <rect x="90" y="90" width="1020" height="450" rx="16" fill="#1c1630" fill-opacity="0.72" stroke="#33284a" stroke-width="1.5"/>
 
-  <!-- site title: the main subject -->
-  <text x="600" y="340" text-anchor="middle"
-        font-family="serif" font-size="126" font-weight="700"
-        fill="url(#titleFade)" letter-spacing="6">
-    へのへのんのの
-  </text>
+  <!-- window dots -->
+  <circle cx="128" cy="122" r="6" fill="#ff7fb0" opacity="0.8"/>
+  <circle cx="150" cy="122" r="6" fill="#7fe8ff" opacity="0.8"/>
+  <circle cx="172" cy="122" r="6" fill="#ffd1e6" opacity="0.8"/>
+  <text x="1080" y="127" text-anchor="end" font-family="monospace" font-size="16" fill="#7fe8ff" opacity="0.5">~/henohenononono/secret.md</text>
 
-  <!-- divider -->
-  <line x1="420" y1="392" x2="780" y2="392" stroke="#4a3760" stroke-width="1.5" stroke-dasharray="4 8"/>
+  <line x1="90" y1="145" x2="1110" y2="145" stroke="#33284a" stroke-width="1"/>
 
-  <!-- today's song: subtitle -->
-  <text x="600" y="450" text-anchor="middle"
-        font-family="serif" font-size="38" font-style="italic"
-        fill="#ff8fa3" letter-spacing="1">
-    unlucky loop
-  </text>
+  <!-- site title (main, hero) with glitch offsets -->
+  <text x="603" y="312" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="118" letter-spacing="4" fill="#7fe8ff" opacity="0.4">へのへのんのの</text>
+  <text x="597" y="308" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="118" letter-spacing="4" fill="#ff7fb0" opacity="0.4">へのへのんのの</text>
+  <text x="600" y="310" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="118" letter-spacing="4" fill="#ece6f7">へのへのんのの</text>
+  <rect x="905" y="268" width="16" height="58" fill="#ff7fb0" opacity="0.85"/>
 
-  <!-- artist: smallest info -->
-  <text x="600" y="492" text-anchor="middle"
-        font-family="sans-serif" font-size="24"
-        fill="#b8a9c9" letter-spacing="0.5">
-    Mage-P feat. 悩音Blue
-  </text>
+  <line x1="510" y1="352" x2="690" y2="352" stroke="#ff7fb0" stroke-width="2" opacity="0.7"/>
 
-  <!-- bottom hairline, echoing site-footer border -->
-  <line x1="0" y1="600" x2="1200" y2="600" stroke="#4a3760" stroke-width="1" opacity="0.6"/>
-  <text x="600" y="580" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#b8a9c9" opacity="0.8">
-    目覚まし越しに繰り返される、優しく甘い悪夢のループ
-  </text>
+  <!-- subtitle block: today's track -->
+  <text x="600" y="392" text-anchor="middle" font-family="monospace" font-size="19" letter-spacing="6" fill="#7fe8ff" opacity="0.65">TODAY'S CONFESSION</text>
+
+  <text x="600" y="440" text-anchor="middle" font-family="monospace" font-style="italic" font-size="38" letter-spacing="1" fill="#ffd1e6">» BAD IDEA! «</text>
+
+  <text x="600" y="476" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#7fe8ff" opacity="0.75">Gem$tone feat. 足立レイ AI</text>
+
+  <text x="600" y="514" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#ece6f7" opacity="0.5">深夜、罪悪感を抱えながらAO3に投稿する秘密の物語</text>
+
+  <!-- footer watermark -->
+  <text x="1104" y="592" text-anchor="end" font-family="monospace" font-size="15" fill="#7fe8ff" opacity="0.4">// thank you for reading —</text>
+  <text x="96" y="592" text-anchor="start" font-family="monospace" font-size="15" fill="#ff7fb0" opacity="0.4">bitpop diary_</text>
 </svg>
