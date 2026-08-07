@@ -21,14 +21,15 @@ export type Exhibit = {
 
 // 並び順がそのまま Gallery の並びであり、展示番号でもある（exhibitNo が導出する）。
 export const exhibits: Exhibit[] = [
+  /*
   {
     slug: 'make-with-puppet',
     title: 'Make with Puppet',
-    summary: 'XR Puppet ゲームです。BitSummit GameJam で制作・受賞しました。',
+    summary: 'XR Puppet ゲームです。',
     detail:
-      '4 人チームで、プログラミングをメインに一部モデリングや企画まで幅広く取り組みました。9 割のコードが人の手で書かれています。',
+      'BitSummit GameJam で制作・受賞しました。4 人チームで、プログラミングをメインに一部モデリングや企画まで幅広く取り組みました。9 割のコードが人の手で書かれています。',
     tags: ['Unity', 'UniTask', 'VContainer', 'R3', 'Blender'],
-  },
+  },*/
   {
     slug: 'globexplore',
     title: 'GlobeXplore',
@@ -41,8 +42,8 @@ export const exhibits: Exhibit[] = [
   {
     slug: 'kotohakobi',
     title: 'コトハコビ',
-    summary: 'ガラパゴス的通信アプリです。ハックツハッカソンアロカップで制作・最優秀賞を受賞しました。',
-    detail: '裏側のロジックの整備と、荷物一覧画面の作成を行いました。',
+    summary: 'ガラパゴス的通信アプリです。',
+    detail: 'ハックツハッカソンアロカップで制作・最優秀賞を受賞しました。裏側のロジックの整備と、荷物一覧画面の作成を行いました。',
     tags: ['BLE通信', 'Pixi.js', 'Electron', 'IndexedDB', 'Node.js', 'React'],
   },
 ]
