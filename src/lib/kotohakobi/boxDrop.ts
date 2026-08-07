@@ -85,7 +85,12 @@ export function buildTag(text: string, flip: boolean, mono = false): Container {
     ? new Text({
         text,
         style: {
-          fontFamily: 'M PLUS 1 Code', // 等幅（罫線=半角/全角=2）で桁を揃える＝AA らしさ
+          // 罫線と CJK は Code（罫線=半角/全角=2 で桁が揃う＝AA らしさ）。
+          // Code は全角形ブロック（U+FF00-FFEF）をほぼ持たないので ＿ ￣ ／ ＼ ｸ ✝ ⟋ ⟍ が欠け、
+          // そこだけ環境の等幅フォントに落ちる＝この数字だけ字幅・字形が環境依存になる。
+          // 同梱の 1p を受け皿にすれば環境非依存にできるが、1p だと ＿＿＿ / ￣￣￣ が繋がらない。
+          // 全体を monospace にすると罫線の桁が崩れる。繋がりを取ってこの形にしている。
+          fontFamily: ['M PLUS 1 Code', 'monospace'],
           fontSize: TAG_MONO_FONT,
           lineHeight: TAG_MONO_FONT * 1.18,
           fill: COLOR.ink,
