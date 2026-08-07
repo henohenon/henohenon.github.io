@@ -27,15 +27,13 @@
 
     ;(async () => {
       const [
-        { Application, Container, Sprite },
+        { Application, Container },
         { buildListBoxDrop },
         { letterbox },
         { getSequence },
         { buildLinkButton },
         { DESIGN_W, DESIGN_H },
         { loadFont },
-        { loadSvgTexture },
-        { default: logoRaw },
       ] = await Promise.all([
         import('pixi.js'),
         import('$lib/kotohakobi/boxDrop'),
@@ -44,8 +42,6 @@
         import('$lib/kotohakobi/linkButton'),
         import('$lib/kotohakobi/theme'),
         import('$lib/kotohakobi/font'),
-        import('$lib/kotohakobi/svgTexture'),
-        import('$lib/kotohakobi/logo.svg?raw'),
       ])
       if (cancelled) return
 
@@ -86,7 +82,7 @@
       const drop = buildListBoxDrop([...BOX_EXTRA, ...tags], BOX_SHOTS)
       disposers.push(() => drop.dispose())
 
-      // レイヤー順：箱 < 見に行くボタン < ロゴ < 荷物タグ。
+      // レイヤー順：箱 < 見に行くボタン < 荷物タグ。
       root.addChild(drop.view) // 箱（最背面）
 
       // 中央に本家トップと同じ段ボール箱ボタン「見に行く」（箱より前）。
@@ -101,14 +97,6 @@
       const cy = DESIGN_H / 2
       btn.view.position.set(cx, cy)
       root.addChild(btn.view)
-
-      // 5:3 画面の左上にロゴ（本家ワードマーク）。root に載せてレターボックスと一緒に配置/拡縮。
-      const logoTex = await loadSvgTexture(logoRaw)
-      if (cancelled) return
-      const logo = new Sprite(logoTex)
-      logo.scale.set(580 / logoTex.width)
-      logo.position.set(16, 8)
-      root.addChild(logo)
 
       root.addChild(drop.overlay) // 荷物タグ（最前面）
 
