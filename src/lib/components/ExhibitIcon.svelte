@@ -1,12 +1,12 @@
 <script lang="ts">
   // Gallery の Icon 枠。展示ごとの絵を引き当てて外枠に嵌める。
   //
-  // .icon の div はここが持つ。transition.ts の setOrigin が
+  // .icon の div はここが持つ。transitions/zoom.ts の setOrigin が
   // querySelector('.icon') でズーム原点（＝アイコン中心）を取るため、
   // この要素が Exhibit 内に必ず 1 つ存在することが遷移演出の前提になっている。
   // 中身のコンポーネントはこの契約を知らなくてよく、絵を描くことだけに集中できる。
   import type { Component } from 'svelte'
-  import { markExhibitOrigin } from '$lib/transition'
+  import { markExhibitOrigin } from '$lib/transitions'
   import KotohakobiIcon from '$lib/kotohakobi/icon.svelte'
 
   // 展示ごとの Icon。作ったらここに 1 行足す。

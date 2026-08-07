@@ -149,7 +149,7 @@ html.boot-about .intro-caption-card {
 }
 
 /* Icon：作品本体。枠は ExhibitIcon が出し、中身は展示ごとのコンポーネント。
-   transition.ts の setOrigin がこの要素の中心をズーム原点に使う。 */
+   transitions/zoom.ts の setOrigin がこの要素の中心をズーム原点に使う。 */
 .exhibit .icon {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -312,14 +312,16 @@ html.boot-about .intro-caption-card {
   text-decoration: none;
 }
 
-/* コトハコビ入場の上下の蓋トランジション中は、5:3 外の余白隅に出る Focus のカード
-   （details / title）を隠しておき、蓋が開くのと同時にフェードで現す（transition.ts が付与）。 */
+/* 遷移演出が画面を覆っている間、その外側の余白隅に出る Focus のカード
+   （details / title）を隠し、覆いが解けるのと同時にフェードで現す。
+   演出側が <html> にクラスを付ける（例: コトハコビの蓋は 5:3 の外を覆えないため）。
+   差し替え前に付くので、カードは最初から隠れた状態で生まれる。 */
 .focus .caption-card,
 .focus .title-link {
   transition: opacity 0.22s ease;
 }
-html.koto-covering .focus .caption-card,
-html.koto-covering .focus .title-link {
+html.focus-covered .focus .caption-card,
+html.focus-covered .focus .title-link {
   opacity: 0;
 }
 

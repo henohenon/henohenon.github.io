@@ -8,7 +8,7 @@
   // 箱に降らせる文字は tags（使用技術）＋ BOX_EXTRA（所属/イベント）。
   import type { MainProps } from '$lib/exhibits'
   let { exhibit }: MainProps = $props()
-  const texts = $derived(exhibit.tags)
+  const tags = $derived(exhibit.tags)
 
   // 中央「見に行く」ボタンの飛び先。展示固有なのでデータ側には持たせない。
   const LINK = 'https://topaz.dev/projects/c2bfcbeb9b1c5fd0e0ec'
@@ -83,7 +83,7 @@
       // 5:3 を host にレターボックス（contain）で収める root。蓋トランジションと同じ矩形。
       const root = new Container()
       app.stage.addChild(root)
-      const drop = buildListBoxDrop([...BOX_EXTRA, ...texts], BOX_SHOTS)
+      const drop = buildListBoxDrop([...BOX_EXTRA, ...tags], BOX_SHOTS)
       disposers.push(() => drop.dispose())
 
       // レイヤー順：箱 < 見に行くボタン < ロゴ < 荷物タグ。
