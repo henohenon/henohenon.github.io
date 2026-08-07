@@ -7,7 +7,7 @@
   import { browser } from '$app/environment'
   import { blur } from 'svelte/transition'
   import { page } from '$app/state'
-  import { exhibits } from '$lib/exhibits/data'
+  import { exhibits, exhibitNo } from '$lib/exhibits'
   import { markExhibitOrigin } from '$lib/transition'
   import { INTRO_GREETING, INTRO_TITLE } from '$lib/intro'
   import { morphText } from '$lib/textMorph'
@@ -89,22 +89,22 @@
 </section>
 
 <section class="gallery">
-  {#each exhibits as e (e.id)}
-    <div class="exhibit" id={e.id}>
+  {#each exhibits as e (e.slug)}
+    <div class="exhibit" id={e.slug}>
       <a
         class="icon-link"
-        href="/focus/{e.id}"
+        href="/focus/{e.slug}"
         aria-label={e.title}
         onclick={(event) => markExhibitOrigin(event, about)}
       >
-        {#if e.id === 'kotohakobi'}
+        {#if e.slug === 'kotohakobi'}
           <HakoIcon />
         {:else}
           <div class="icon"></div>
         {/if}
       </a>
-      <a class="title-link" href="/focus/{e.id}" onclick={(event) => markExhibitOrigin(event, about)}>
-        <TitleCaption no={e.no} title={e.title} viewName={`title-${e.id}`} />
+      <a class="title-link" href="/focus/{e.slug}" onclick={(event) => markExhibitOrigin(event, about)}>
+        <TitleCaption no={exhibitNo(e.slug)} title={e.title} viewName={`title-${e.slug}`} />
       </a>
     </div>
   {/each}

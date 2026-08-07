@@ -157,15 +157,15 @@ export function routeTransition(navigation: OnNavigate): Promise<void> | void {
   const from = navigation.from?.route.id
   const to = navigation.to?.route.id
 
-  const dive = to === '/focus/[id]' && !!from && GALLERY_ROUTES.has(from)
-  const rise = from === '/focus/[id]' && !!to && GALLERY_ROUTES.has(to)
+  const dive = to === '/focus/[slug]' && !!from && GALLERY_ROUTES.has(from)
+  const rise = from === '/focus/[slug]' && !!to && GALLERY_ROUTES.has(to)
   if (!dive && !rise) return
   if (transitioning) return
 
   // コトハコビ行き来だけは「上下の黒い蓋」トランジション（VT ではなく黒オーバーレイ）。
-  // dive は行き先(to)の id、rise は戻り元(from)の id を見る。
-  const focusId = navigation.to?.params?.id ?? navigation.from?.params?.id
-  if (focusId === 'kotohakobi') {
+  // dive は行き先(to)の slug、rise は戻り元(from)の slug を見る。
+  const focusSlug = navigation.to?.params?.slug ?? navigation.from?.params?.slug
+  if (focusSlug === 'kotohakobi') {
     transitioning = true
     // Focus 入場(dive)のみカードを覆い中は隠す。戻り(rise)は従来どおり。
     return flapTransition(navigation, dive)
@@ -178,7 +178,7 @@ export function routeTransition(navigation: OnNavigate): Promise<void> | void {
   if (dive) {
     el.classList.add('vt-dive')
     // 遷移元（Gallery）で、行き先の作品タイトルだけ残す。顔はズームに含める。
-    keepOnlyTitle(`title-${navigation.to?.params?.id}`)
+    keepOnlyTitle(`title-${navigation.to?.params?.slug}`)
     setFaceName('none')
   } else if (rise) {
     el.classList.add('vt-rise')
@@ -202,12 +202,12 @@ export function routeTransition(navigation: OnNavigate): Promise<void> | void {
       resolve()
       await navigation.complete
       if (rise) {
-        // 中央着地は #id ＋ scroll-margin のネイティブスクロール任せ。
+        // 中央着地は #slug ＋ scroll-margin のネイティブスクロール任せ。
         // ズーム原点＋左右ドリフトは戻り先カードの実位置から算出。
-        const id = navigation.from?.params?.id
-        keepOnlyTitle(`title-${id}`)
+        const slug = navigation.from?.params?.slug
+        keepOnlyTitle(`title-${slug}`)
         setFaceName('none')
-        setOrigin(id ? document.getElementById(id) : null)
+        setOrigin(slug ? document.getElementById(slug) : null)
       }
     })
     // finished は中断時に reject する。両経路で cleanup し、未処理拒否を出さない。

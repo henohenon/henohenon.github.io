@@ -8,21 +8,22 @@
 //   ※ 「派生物は名前を変えて配布してほしい」という依頼（法的要求ではない）があるため、
 //      出力名を heros-gx.subset.woff2 として元と区別する。ライセンス全文は OUT に同梱。
 //
-// 使う文字 = 全展示の links ラベル（＋商標記号）。展示単位で絞らないのは、並び順や
-//   ラベルの増減で壊れないため（数文字増えるだけで実害がない）。
+// 使う文字 = GlobeXplore のリンクラベル（＝ワードマーク）＋商標記号。
+//   リンクは展示固有なのでデータ側には無く、コンポーネントと同じ globexplore/links.ts を
+//   読む（文字列の出所を 1 つに保つ）。
 //   ※ ラベルを変えたら再実行が必要:  pnpm subset:heros
 // 元 otf は .tmp-fonts に置く（gitignore 済み・同梱しない）。
 //   再取得: curl -sL -o .tmp-fonts/texgyreheros-bold.otf "https://mirrors.ctan.org/fonts/tex-gyre/opentype/texgyreheros-bold.otf"
 
 import subsetFont from 'subset-font'
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
-import { exhibits } from '../src/lib/exhibits/data.ts'
+import { LINKS } from '../src/lib/globexplore/links.ts'
 
 const FONT_SRC = '.tmp-fonts/texgyreheros-bold.otf'
 const OUT = 'src/lib/globexplore/fonts'
 const OUT_NAME = 'heros-gx.subset.woff2'
 
-const labels = exhibits.flatMap((e) => e.links?.map((l) => l.label) ?? []).join(' ')
+const labels = LINKS.map((l) => l.label).join(' ')
 // 商標記号は今はラベルに含めていないが、後で付けられるよう先に含めておく（1 グリフ）。
 const text = labels + ' ®'
 
