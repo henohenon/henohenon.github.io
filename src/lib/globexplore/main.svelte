@@ -2,7 +2,12 @@
   // GlobeXplore Focus の Main。背景に飛行映像、中央にリンクボタン。
   // リンクは展示固有なのでデータ側には持たせず、globexplore/links.ts に置く
   // （scripts/subset-heros.ts が同じものを読んでフォントのサブセット文字を決める）。
+  import type { MainProps } from '$lib/exhibits'
   import { LINKS as links } from '$lib/globexplore/links'
+
+  // Main の props は全展示で exhibit 丸ごとに揃えてある。この展示は表示に必要な情報を
+  // 持たない（リンクは links.ts、映像は static）ため今は使わないが、型を揃えるため受け取る。
+  let { exhibit }: MainProps = $props()
 
   // poster（＝動画の 1 フレーム目）を先に出し、**十分にバッファできてから**再生に入る。
   // autoplay 属性だと再生可能になった時点で走り出して途中で止まりうるので、使わずに
@@ -56,7 +61,7 @@
      使う文字だけの woff2 サブセット（2.9KB）＝ pnpm subset:heros で再生成。 */
   @font-face {
     font-family: 'Heros GX';
-    src: url('../globexplore/fonts/heros-gx.subset.woff2') format('woff2');
+    src: url('./fonts/heros-gx.subset.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

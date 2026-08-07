@@ -148,10 +148,15 @@ html.boot-about .intro-caption-card {
   text-decoration: none;
 }
 
-/* Icon：作品本体（当面は空プレースホルダ）。 */
+/* Icon：作品本体。枠は ExhibitIcon が出し、中身は展示ごとのコンポーネント。
+   transition.ts の setOrigin がこの要素の中心をズーム原点に使う。 */
 .exhibit .icon {
   width: 100%;
   aspect-ratio: 1 / 1;
+}
+
+/* Icon 未実装の展示はグレーの空枠のまま（ExhibitIcon が付与）。 */
+.exhibit .icon.placeholder {
   background: #f4f4f4;
 }
 

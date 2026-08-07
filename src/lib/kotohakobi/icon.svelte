@@ -4,7 +4,7 @@
   //   上辺の上に 2 枚のフタ（帯・長さは上辺の半分で中央合わせ）。閉じ＝上辺に重なって隠れ、
   //   ホバーで各上角を蝶番に「斜め上・外へ」跳ね上げ（左 −120°/右 +120°・buildButton 準拠）。
   //   上ぶちは開いても残る。※コの出入り・ビクン等は今は無し。
-  // ルート要素に .icon を残す（transition.ts の setOrigin が中心取得に querySelector('.icon') を使う）。
+  // 枠（.icon）と遷移まわりの配線は ExhibitIcon が持つので、ここは絵と音だけを担う。
   // ホバー中だけ例の音を鳴らす（§6 ギミック）。ホバーするたびに頭からリセットして鳴らす方式。
   // Tone は初期バンドルに載せず初回ホバーで遅延 import。外すと止まって巻き戻す。
   let seqMod: ReturnType<typeof import('$lib/kotohakobi/sequence').getSequence> | undefined
@@ -36,7 +36,7 @@
 </script>
 
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="icon hako" onpointerenter={onEnter} onpointerleave={onLeave}>
+<div class="hako" onpointerenter={onEnter} onpointerleave={onLeave}>
   <svg viewBox="0 0 256 256" aria-hidden="true">
     <!-- 箱本体：閉じた四角（上辺も残す）。フタが開いても上ぶちは常に見える。 -->
     <path class="box" d="M41.163 43.35L41.163 217.774L211.337 217.774L211.337 43.35Z" />
@@ -56,15 +56,16 @@
 </div>
 
 <style>
-  /* .exhibit .icon のグレーの下地を消す（specificity で上書き）。 */
-  .icon.hako {
-    background: none;
+  /* ExhibitIcon の .icon 枠いっぱいに広がる。 */
+  .hako {
+    width: 100%;
+    height: 100%;
     display: grid;
     place-items: center;
   }
 
   svg {
-    /* コンテナ(.icon)いっぱいより一回り小さく。中心（＝ズーム原点）は place-items で維持。 */
+    /* 枠いっぱいより一回り小さく。中心（＝ズーム原点）は place-items で維持。 */
     width: 70%;
     height: 70%;
     overflow: visible; /* 開いたフタがはみ出せるように。 */

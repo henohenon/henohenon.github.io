@@ -5,8 +5,10 @@
   import { onMount } from 'svelte'
   import { BOX_EXTRA, BOX_SHOTS } from '$lib/kotohakobi/boxTexts'
 
-  // texts: 箱に降らせる文字（＝使用技術）。箱は tags ＋ BOX_EXTRA（所属/イベント）を降らせる。
-  let { texts }: { texts: string[] } = $props()
+  // 箱に降らせる文字は tags（使用技術）＋ BOX_EXTRA（所属/イベント）。
+  import type { MainProps } from '$lib/exhibits'
+  let { exhibit }: MainProps = $props()
+  const texts = $derived(exhibit.tags)
 
   // 中央「見に行く」ボタンの飛び先。展示固有なのでデータ側には持たせない。
   const LINK = 'https://topaz.dev/projects/c2bfcbeb9b1c5fd0e0ec'

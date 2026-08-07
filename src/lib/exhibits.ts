@@ -47,6 +47,10 @@ export const exhibits: Exhibit[] = [
   },
 ]
 
+/** 展示ごとの Main コンポーネントが受け取る props。中身は展示によって使う項目が違うので、
+    個別に開かず exhibit を丸ごと渡す（型は消えるので Node からの import は壊れない）。 */
+export type MainProps = { exhibit: Exhibit }
+
 export function findExhibit(slug: string): Exhibit | undefined {
   return exhibits.find((e) => e.slug === slug)
 }

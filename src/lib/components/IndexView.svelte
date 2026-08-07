@@ -15,7 +15,7 @@
   import Footer from './Footer.svelte'
   import TitleCaption from './TitleCaption.svelte'
   import CloseButton from './CloseButton.svelte'
-  import HakoIcon from './HakoIcon.svelte'
+  import ExhibitIcon from './ExhibitIcon.svelte'
 
   // プリレンダ時は searchParams を読めない（＝常に挨拶状態で出力）。about 判定は
   // クライアントのみ。直リンク `/?about` は挨拶 HTML → ハイドレーション後に確定する。
@@ -91,18 +91,7 @@
 <section class="gallery">
   {#each exhibits as e (e.slug)}
     <div class="exhibit" id={e.slug}>
-      <a
-        class="icon-link"
-        href="/focus/{e.slug}"
-        aria-label={e.title}
-        onclick={(event) => markExhibitOrigin(event, about)}
-      >
-        {#if e.slug === 'kotohakobi'}
-          <HakoIcon />
-        {:else}
-          <div class="icon"></div>
-        {/if}
-      </a>
+      <ExhibitIcon slug={e.slug} title={e.title} {about} />
       <a class="title-link" href="/focus/{e.slug}" onclick={(event) => markExhibitOrigin(event, about)}>
         <TitleCaption no={exhibitNo(e.slug)} title={e.title} viewName={`title-${e.slug}`} />
       </a>
