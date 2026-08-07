@@ -1,8 +1,9 @@
 // 展示品データ。docs/ の各作品メモ（GlobeXplore / MwP / kotohakobi）が出典。
-// Icon・Main は当面「仮 or 空」のため、ここでは持たない（Phase 4/7 で追加）。
+// Icon・Main の中身はここでは持たず、id で分岐して差し込む（IndexView / focus/[id]/+page.svelte
+// / transition.ts の 3 箇所）。将来レジストリに集約するならここが置き場になる。
 
 export type Exhibit = {
-  /** URL に使う識別子（#/focus/:id） */
+  /** URL に使う識別子。遷移先は `/focus/:id`（クリーンパス）。戻り先だけ `{nav.from}#{id}`。 */
   id: string
   /** 展示番号 */
   no: string
@@ -14,8 +15,9 @@ export type Exhibit = {
   role: string
   /** 使用技術 */
   tech: string[]
-  /** リンク先（未確定なら省略） */
-  link?: string
+  /** Focus Main のリンクボタン。作品ごとに本数が違う（GlobeXplore は Steam / Pro の 2 本）。
+      未確定なら省略。 */
+  links?: { label: string; href: string }[]
   /** More（未確定なら省略） */
   more?: string
 }
@@ -36,6 +38,11 @@ export const exhibits: Exhibit[] = [
     detail: 'PLATEAU を活用したドローンシミュレーターです。',
     role: 'GlobeXplore の初期〜GlobeXplore\'Pro リリースまで、Unity を用いた開発全般とその Steam での公開・運用を主導しました。',
     tech: ['Unity', 'Cesium for Unity', 'Figma'],
+    links: [
+      { label: 'GlobeXplore', href: 'https://store.steampowered.com/app/2635620/GlobeXplore' },
+      { label: 'GlobeXplore Pro', href: 'https://gxpro.app/' },
+    ],
+    more: 'https://qiita.com/darknes_henohenon/items/364dec985009524d93c8',
   },
   {
     id: 'kotohakobi',
@@ -44,7 +51,7 @@ export const exhibits: Exhibit[] = [
     detail: 'ガラパゴス的通信アプリです。ハックツハッカソンアロカップで制作・最優秀賞を受賞しました。',
     role: '裏側のロジックの整備と、荷物一覧画面の作成を行いました。',
     tech: ['BLE通信', 'Pixi.js', 'Electron', 'IndexedDB', 'Node.js', 'React'],
-    link: 'https://topaz.dev/projects/c2bfcbeb9b1c5fd0e0ec',
+    links: [{ label: '見に行く', href: 'https://topaz.dev/projects/c2bfcbeb9b1c5fd0e0ec' }],
   },
 ]
 

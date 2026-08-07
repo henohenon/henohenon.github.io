@@ -183,8 +183,8 @@ html.boot-about .intro-caption-card {
 }
 
 /* Focus：展示 1 点を集中して見る画面。
-   スクロール不要の固定 1 枚（details-caption 左上 / main 中央 / title-caption 右下）。
-   ※作品別演出は Phase 5。 */
+   スクロール不要の固定 1 枚（details-caption 右上 / main 中央 / title-caption 左下）。
+   Main の中身は展示ごと（focus/[id]/+page.svelte の e.id 分岐）。 */
 .focus {
   position: relative;
   width: 100%;
@@ -261,6 +261,16 @@ html.boot-about .intro-caption-card {
   font-size: 0.7rem;
   padding: 2px 8px;
   background: rgba(255, 255, 255, 0.15);
+}
+
+/* More＝解説記事などへの導線（黒カード内なので白抜き）。link（Main のボタン）とは別物。 */
+.details-caption .more {
+  display: inline-block;
+  margin-top: 12px;
+  color: #fff;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .focus-main {
