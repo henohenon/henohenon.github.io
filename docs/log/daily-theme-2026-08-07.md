@@ -91,20 +91,20 @@ main を Gallery (ポートフォリオ + ギャラリー) に置き換えるた
 
 2026-08-07 時点の後始末:
 
-- タスク `henohenon-daily-theme` を **`Disabled` に変更** (登録自体は残置)。
-  → 明日 00:39 以降は発火しない。今日の分は生成・push 済み
+- タスク `henohenon-daily-theme` を **登録ごと削除** (`Unregister-ScheduledTask`)。
+  一度 `Disabled` にした後、同日中に破棄。二度と発火しない。今日の分は生成・push 済み
 - **リポジトリ側のスクリプトは一切消していない** — `daily-theme.ts` / `generate-theme.ts` /
   `register-theme-task.ps1` / `run-daily-theme.ps1` はそのまま
 - `deploy.yml` (main push → Pages) は生きたまま。main に何かを push すれば今も普通に公開される
 - `theme.css` / `theme-source.json` は **BAD IDEA! のまま凍結**。もう変わらない
+- 実行ログ `%LOCALAPPDATA%\henohenon-theme\theme-2026{06,07,08}.log` は消さず放置
 
-戻したくなったら `Enable-ScheduledTask -TaskName henohenon-daily-theme` の一行で再開できる。
-登録ごと消す場合は `Unregister-ScheduledTask -TaskName henohenon-daily-theme -Confirm:$false`、
-再登録は [register-theme-task.ps1](../../scripts/register-theme-task.ps1)。
+復活させたくなった場合は [register-theme-task.ps1](../../scripts/register-theme-task.ps1) を
+管理者 PowerShell で流せば同じタスクが再登録される。スクリプト側を残してあるので再現は可能。
 
-> **未同期の記述あり**: [CLAUDE.md](../../CLAUDE.md) と [local-scheduler.md](../../docs/local-scheduler.md) は
-> まだ「毎時起動される想定」で現役として書かれている。Gallery 置き換えの本体作業と
-> まとめて直すべき残件。
+> **他ドキュメントは未同期のまま**: [CLAUDE.md](../../CLAUDE.md) と
+> [local-scheduler.md](../local-scheduler.md) は「毎時起動される想定」で現役として書かれたまま。
+> Gallery の merge で main 側の記述ごと入れ替わる前提のため、**意図的に直していない**。
 
 ---
 
