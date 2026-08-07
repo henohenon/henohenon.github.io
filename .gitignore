@@ -1,23 +1,32 @@
-# Node / bun
-node_modules/
-dist/
-.astro/
-
-# Build artifacts (生成物、テンプレから build-favicon.ts で書き出される)
-public/favicon.svg
-
-# Env
-.env
-.env.*
-!.env.example
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.idea/
-.vscode/
-
 # Logs
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# SvelteKit
+.svelte-kit
+/build
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 作業用（サブセット元 ttf / デバッグ出力のスクショ・AA）
+.tmp-fonts
+.tmp-shots

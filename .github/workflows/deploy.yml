@@ -1,8 +1,17 @@
-name: deploy
+# main へ push されたら静的ビルドして GitHub Pages に配信する。
+#
+# 前提: リポジトリ設定の Pages > Build and deployment > Source を
+#       「GitHub Actions」にしておくこと（ブランチ配信のままだとこのワークフローの
+#       成果物は使われない）。
+#
+# このリポジトリは henohenon.github.io＝ユーザーサイトなのでルート配信。
+# svelte.config.js に paths.base は不要（設定しない）。
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
+  # コミットせずに再デプロイしたいとき用。
   workflow_dispatch:
 
 permissions:
@@ -10,6 +19,7 @@ permissions:
   pages: write
   id-token: write
 
+# 進行中のデプロイは中断しない（公開物が中途半端な状態で置き換わらないように）。
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -20,21 +30,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v2
+      # バージョンは package.json の packageManager から読まれる。
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
         with:
-          bun-version: latest
+          node-version: 24
+          cache: pnpm
 
-      - run: sudo apt-get install -y fonts-noto-cjk
+      - run: pnpm install --frozen-lockfile
 
-      - run: bun install --frozen-lockfile
+      # 型エラーがあれば公開前に止める。
+      - run: pnpm check
 
-      - run: bun run build
+      - run: pnpm build
+
+      # Pages は _app/ のようなアンダースコア始まりを無視することがあるため保険。
+      - run: touch build/.nojekyll
 
       - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v5
         with:
-          path: ./dist
+          path: build
 
   deploy:
     needs: build
@@ -43,5 +61,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v5
-        id: deployment
+      - id: deployment
+        uses: actions/deploy-pages@v5

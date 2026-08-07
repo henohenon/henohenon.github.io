@@ -1,0 +1,399 @@
+:root {
+  font: 18px/1.5 system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+}
+
+/* ヘッダー：右上 About。Introduction 通過後のみ出現（fixed）。 */
+.site-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: 16px 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.site-header.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.about-link {
+  color: #111;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* 顔を置く領域（非リンク）。下から一定量を空けた上側で中央寄せ。
+   bottom の値が顔の縦位置を決める（index/about 共通・ここだけで調整）。 */
+.face-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  display: grid;
+  place-items: center;
+}
+
+/* タイポグラフィ（顔）は About へのリンク。判定は顔＋少し余白まで（padding）。 */
+.face-link {
+  padding: 16px 28px;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Introduction：最初の展示品。
+   顔の縦位置はキャプション高さに依存させず固定（index/about で同一）。 */
+.introduction {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+}
+
+/* About の右上リンク（X / GitHub / More）。見た目は Focus の details と共通。
+   × を右上角に置き、リンクはその下に並べる。入退場は Svelte の transition:blur。 */
+.intro-links-row {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+}
+
+.intro-links-row a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.face {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.4;
+  text-align: center;
+  /* index↔about で同要素として移動（dive/rise 時は JS で一時的に外す）。 */
+  view-transition-name: face;
+}
+
+/* Introduction キャプション（左下）。index=挨拶 / about=タイトルで
+   同一の常駐要素。テキストは textMorph が直接書き換える（Svelte は再描画しない）。
+   width:max-content＋左下固定なので、文字が減れば箱も自然に縮む。about では Home リンク。 */
+.intro-caption-card {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  width: max-content;
+  max-width: calc(100% - 48px);
+  padding: 16px 20px;
+  background: #faf9f6;
+  box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.18);
+  box-sizing: border-box;
+  color: inherit;
+  text-decoration: none;
+}
+
+.intro-caption-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  /* 1 つのテキスト内の改行（\n）を表示。空行が段落の間になる。 */
+  white-space: pre-line;
+}
+
+/* `?about` 直開き時、挨拶テキストの 1 フレーム表示を抑止（app.html のブートスクリプトが
+   ペイント前に付与）。IndexView が本文をタイトルに確定した直後にクラスを外して表示を戻す。 */
+html.boot-about .intro-caption-card {
+  visibility: hidden;
+}
+
+/* Gallery：展示品が並ぶ場所。縦横とも中央寄せの grid。
+   auto-fit で空トラックを潰し、justify-content で中央寄せ。 */
+.gallery {
+  width: 100%;
+  min-height: 100svh;
+  box-sizing: border-box;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
+  justify-content: center;
+  align-content: center;
+  gap: 64px 48px;
+}
+
+/* Exhibit：Icon + title-caption 一式。Icon のみが Focus への遷移リンク。 */
+.exhibit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  /* #id で見せるときの着地位置（中央あたり）。scrollIntoView / ネイティブ両対応。 */
+  scroll-margin-top: calc(50vh - 150px);
+}
+
+/* Icon / Title それぞれを Focus への遷移リンクに（カード全体ではなく要素だけ）。 */
+.icon-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.title-link {
+  align-self: flex-start;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Icon：作品本体。枠は ExhibitIcon が出し、中身は展示ごとのコンポーネント。
+   transitions/zoom.ts の setOrigin がこの要素の中心をズーム原点に使う。 */
+.exhibit .icon {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+/* Icon 未実装の展示はグレーの空枠のまま（ExhibitIcon が付与）。 */
+.exhibit .icon.placeholder {
+  background: #f4f4f4;
+}
+
+/* Gallery のタイトルは Focus（等倍）基準の 0.7 倍。モーフで 0.7→1.0 に育つ。 */
+.exhibit .title-caption {
+  transform: scale(0.7);
+  transform-origin: left top;
+}
+
+.title-caption {
+  align-self: flex-start;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 16px 20px;
+  background: #faf9f6;
+  box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.18);
+  box-sizing: border-box;
+}
+
+.title-caption .no {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.title-caption p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Focus：展示 1 点を集中して見る画面。
+   スクロール不要の固定 1 枚（details-caption 右上 / main 中央 / title-caption 左下）。
+   Main の中身は展示ごと（focus/[slug]/+page.svelte の slug 分岐）。 */
+.focus {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 右上に置くキャプションカード（Focus の details / About のリンク集で共有）。
+   黒背景・白テキスト。 */
+.caption-card {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  /* 上は × の分だけ広めに確保して本文と重ならないように。 */
+  padding: 34px 20px 16px;
+  background: #111;
+  color: #fff;
+  box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.details-caption {
+  width: 380px;
+  max-width: calc(100% - 48px);
+  /* 遷移で「にじみ出る」ため、専用レイヤーに分離。 */
+  view-transition-name: details;
+}
+
+/* キャプションカードの × 閉じるボタン（Focus の details / About のリンク集で共通）。
+   当たり判定は正方形で広め（padding を貫通して角まで届く）。 */
+.caption-card .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.caption-card .close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* 主：これが何かを噛み砕いた一文。 */
+.details-caption .summary {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+}
+
+/* 従：補足（関与・受賞・背景など）。主より一段落として添える。 */
+.details-caption .detail {
+  margin: 0 0 12px;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.details-caption .tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.details-caption .tags li {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* More＝解説記事などへの導線（黒カード内なので白抜き）。link（Main のボタン）とは別物。 */
+.details-caption .more {
+  display: inline-block;
+  margin-top: 12px;
+  color: #fff;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.focus-main {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+
+.focus-link {
+  color: #111;
+}
+
+/* Focus 内の title は左下に固定（等倍を基準）。リンク側を positioned に。 */
+.focus .title-link {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 2;
+}
+
+.footer {
+  padding: 24px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.copyright {
+  color: #111;
+  text-decoration: none;
+}
+
+/* 遷移演出が画面を覆っている間、その外側の余白隅に出る Focus のカード
+   （details / title）を隠し、覆いが解けるのと同時にフェードで現す。
+   演出側が <html> にクラスを付ける（例: コトハコビの蓋は 5:3 の外を覆えないため）。
+   差し替え前に付くので、カードは最初から隠れた状態で生まれる。 */
+.focus .caption-card,
+.focus .title-link {
+  transition: opacity 0.22s ease;
+}
+html.focus-covered .focus .caption-card,
+html.focus-covered .focus .title-link {
+  opacity: 0;
+}
+
+/* ---- ルート遷移（View Transitions） ---- */
+
+/* 遷移全体の尺を揃える（title-caption のモーフ等も含む）。 */
+::view-transition-group(*) {
+  animation-duration: 0.42s;
+}
+
+/* Gallery→Focus：index 全体をアイコン中心に拡大しながらフェードアウト。 */
+html.vt-dive::view-transition-old(root) {
+  transform-origin: var(--vt-x, 50%) var(--vt-y, 50%);
+  animation: vt-zoom-out 0.42s ease both;
+}
+html.vt-dive::view-transition-new(root) {
+  animation: vt-fade-in 0.42s ease both;
+}
+
+/* Focus→Gallery：アイコン中心に縮小しながら現れる（逆再生）。 */
+html.vt-rise::view-transition-new(root) {
+  transform-origin: var(--vt-x, 50%) var(--vt-y, 50%);
+  animation: vt-zoom-in 0.42s ease both;
+}
+html.vt-rise::view-transition-old(root) {
+  animation: vt-fade-out 0.42s ease both;
+}
+
+@keyframes vt-zoom-out {
+  to {
+    transform: translate(var(--vt-dx, 0px), var(--vt-dy, 0px)) scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes vt-zoom-in {
+  from {
+    transform: translate(var(--vt-dx, 0px), var(--vt-dy, 0px)) scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Focus の details キャプションは「にじみ出る」— ぼかし＋透明から、少し遅れて染み出す。 */
+::view-transition-new(details) {
+  animation: card-seep-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
+}
+::view-transition-old(details) {
+  animation: card-seep-out 0.35s ease both;
+}
+@keyframes card-seep-in {
+  from {
+    opacity: 0;
+    filter: blur(14px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+@keyframes card-seep-out {
+  to {
+    opacity: 0;
+    filter: blur(14px);
+  }
+}
+
