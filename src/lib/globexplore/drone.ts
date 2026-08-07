@@ -61,12 +61,20 @@ export async function createDroneIcon(canvas: HTMLCanvasElement): Promise<DroneI
   const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 100)
   camera.position.z = DIST
 
-  // モデルが前提にしている 3 灯。白ページに置いたときの見えを、これで合わせてある。
+  // モデルが前提にしている 3 灯（Hemisphere ＋ キー ＋ フィル）に、環境光を足したもの。
+  //
+  // 環境光が要るのは、モデルのプレビューが Blender の「真っ白なワールド」＝全周からの
+  // 環境光の下で作られているのに対し、HemisphereLight は上下軸の光だからで、正面を向いた
+  // 面が sky と ground の中間しか受け取らない。正面ビューでは一番見える面がそこなので、
+  // 3 灯そのままだと画素の 38% がほぼ黒に沈んで、ページ上で暗く見えていた。
+  // 環境光 3.2 で沈む画素は 7% 弱まで下がる（残りはレンズガラス等、本来黒い部分）。
+  // 上げても白飛びは出ず、材質ごとの明度差が見える帯域に上がる分むしろ陰影は増える。
   scene.add(new THREE.HemisphereLight(0xffffff, 0xdcdfe8, 1.6))
-  const key = new THREE.DirectionalLight(0xffffff, 1.5)
+  scene.add(new THREE.AmbientLight(0xffffff, 3.2))
+  const key = new THREE.DirectionalLight(0xffffff, 1.8)
   key.position.set(-2.5, 3.5, 2.5)
   scene.add(key)
-  const fill = new THREE.DirectionalLight(0xffffff, 0.5)
+  const fill = new THREE.DirectionalLight(0xffffff, 0.6)
   fill.position.set(2.5, 1.5, -1.5)
   scene.add(fill)
 
