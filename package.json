@@ -9,15 +9,15 @@
     "preview": "vite preview",
     "prepare": "svelte-kit sync",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "subset:fonts": "node scripts/subset-mplus.mjs",
-    "subset:aa": "node scripts/subset-aa.mjs"
+    "subset:fonts": "node scripts/subset-mplus.ts",
+    "subset:aa": "node scripts/subset-aa.ts",
+    "subset:heros": "node scripts/subset-heros.ts"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.10",
     "@sveltejs/kit": "^2.70.1",
     "@sveltejs/vite-plugin-svelte": "^7.2.0",
     "@types/matter-js": "^0.20.2",
-    "jimp": "^1.6.1",
     "subset-font": "^2.5.0",
     "svelte": "^5.56.7",
     "svelte-check": "^4.7.3",
