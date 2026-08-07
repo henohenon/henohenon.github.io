@@ -1,7 +1,8 @@
 // ルート遷移の演出ロジックを 1 か所に集約する。
 // - Gallery↔Focus: クリックした Icon を中心に index 全体をズーム（dive/rise・VT）。
 // - Introduction↔About（`/`↔`/?about`）は同一ルート内の query 変化なので、ここでは何もしない。
-//   キャプションのテキスト morph は IndexView 側の $effect が担当する。
+//   キャプションのテキスト morph は IndexView 側の Action（use:introText）が担当する。
+//   （mount＝即確定 / update＝morph の分離が「初回は morph しない」条件そのもの）
 // - title / face の view-transition-name は「対象 1 枚だけ残す」よう出し入れする。
 // View Transitions 非対応ブラウザでは dive/rise は即時遷移にフォールバックする。
 import type { OnNavigate } from '@sveltejs/kit'

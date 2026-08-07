@@ -1,7 +1,7 @@
 // 荷物一覧の「箱降らし」。コトハコビ本体 `allo-app/src/ui/scenes/listBoxDrop.ts` の移植。
 // Web ポートフォリオ向けに以下を外した:
 //   - Capacitor / Android 加速度センサー（重力は下向き固定）
-//   - 音（sequence.ts）の拍同期 → 一定間隔のタイマー spawn（Tone 移植は Phase C）
+// 音（sequence.ts）の拍同期は本体同様に残してある（seq.onBeat で 1 拍 1 箱）。
 // 残したもの: matter-js 物理で上中央から箱が落ち画面端の見えない壁・箱同士で積もる／
 //   箱ホバーで荷札タグ（中身テキスト）がポップ。見た目は白塗り＋黒枠の角丸正方形。
 
@@ -70,7 +70,7 @@ function sizeForText(text: string): number {
   return BOX_SIZE_MIN + (BOX_SIZE_MAX - BOX_SIZE_MIN) * t
 }
 
-/** AA スクショ箱の一辺。AA の文字数（情報量）で 520〜1000 に可変させ、画面ごとに差を出す。 */
+/** AA スクショ箱の一辺。AA の文字数（情報量）で SHOT_SIZE_MIN〜MAX に可変させ、画面ごとに差を出す。 */
 function sizeForShot(text: string): number {
   const len = Array.from(text).length
   const t = clamp((len - SHOT_CHARS_MIN) / (SHOT_CHARS_MAX - SHOT_CHARS_MIN), 0, 1)
@@ -80,7 +80,7 @@ function sizeForShot(text: string): number {
 /** 荷物に付く荷札タグ。原点 (0,0) が箱との接点（＝紐の付け根）。 */
 export function buildTag(text: string, flip: boolean, mono = false): Container {
   const c = new Container()
-  // mono=AA スクショ（罫線＋日本語）は system monospace で。通常は M PLUS（label）。
+  // mono=AA スクショ（罫線＋日本語）は M PLUS 1 Code（等幅）で。通常は M PLUS 1p（label）。
   const t = mono
     ? new Text({
         text,

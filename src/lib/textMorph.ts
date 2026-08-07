@@ -4,7 +4,8 @@
 // live な要素の textContent を直接いじるので、途中経過も本物のテキストが動いて見える。
 //
 // 戻り値は「中断関数」。連打・逆方向切替で再実行されたら、進行中の morph を
-// キャンセルしてから現在の textContent を起点に新しい morph を張り直す（$effect の cleanup 用）。
+// キャンセルしてから現在の textContent を起点に新しい morph を張り直す
+// （IndexView の Action が update / destroy で呼ぶ）。
 
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2)
 
