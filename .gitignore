@@ -30,3 +30,6 @@ dist-ssr
 # 作業用（サブセット元 ttf / デバッグ出力のスクショ・AA）
 .tmp-fonts
 .tmp-shots
+
+# git worktree の置き場。中身は同じリポジトリの別チェックアウトなので追跡しない。
+.worktrees
