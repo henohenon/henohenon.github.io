@@ -325,6 +325,137 @@ html.focus-covered .focus .title-link {
   opacity: 0;
 }
 
+/* ---- GlobeXplore：ワープ ---- */
+
+/* ページ全体のスナップショットを、魚眼で歪ませながら加速ズーム＋ブラー＋露出飛ばしする。
+   filter は関数を並べて合成できるので、JS が動かす url(#…)（魚眼）と CSS の blur/brightness
+   を同じ列に置く。魚眼の強さは globexplore/transition.ts が feDisplacementMap の scale を
+   毎フレーム書き換えて制御する。尺（780ms）は同ファイルの DUR_MS と必ず揃えること。 */
+html.gx-warp::view-transition-group(root) {
+  animation-duration: var(--gx-dur, 780ms);
+}
+
+/* ワープ中は名前付きのグループを全部やめて、画面を 1 枚（root）にまとめる。
+   view-transition-name が付いた要素は root から切り離されて独立に動くため、
+   そのままだと歪みもズームも掛からず、素のまま重なって見えてしまう。
+   タイトルは TitleCaption がインライン style で名前を付けるので !important で外す。 */
+html.gx-warp .face,
+html.gx-warp .details-caption,
+html.gx-warp .title-caption {
+  view-transition-name: none !important;
+}
+
+/* 入場：手前へ突き抜けて光に飲まれる → 向こう側から現れて落ち着く。 */
+html.gx-warp.gx-dive::view-transition-old(root) {
+  transform-origin: 50% 50%;
+  animation: gx-dive-out var(--gx-dur, 780ms) cubic-bezier(0.55, 0, 0.9, 0.35) both;
+}
+html.gx-warp.gx-dive::view-transition-new(root) {
+  transform-origin: 50% 50%;
+  animation: gx-dive-in var(--gx-dur, 780ms) cubic-bezier(0.12, 0.7, 0.2, 1) both;
+}
+
+/* 戻り：入場の逆再生。奥へ吸い込まれ、Gallery が手前から寄って定位置へ。 */
+html.gx-warp.gx-rise::view-transition-old(root) {
+  transform-origin: 50% 50%;
+  animation: gx-rise-out var(--gx-dur, 780ms) cubic-bezier(0.55, 0, 0.9, 0.35) both;
+}
+html.gx-warp.gx-rise::view-transition-new(root) {
+  transform-origin: 50% 50%;
+  animation: gx-rise-in var(--gx-dur, 780ms) cubic-bezier(0.12, 0.7, 0.2, 1) both;
+}
+
+/* old と new は同時に見えるので、重なる区間を作らないこと（二重像になる）。
+   old は白く飛ばしながら 55% で消えきり、new はその後から立ち上がる。 */
+@keyframes gx-dive-out {
+  0% {
+    transform: scale(1);
+    filter: url(#gx-warp-fisheye) blur(0px) brightness(1);
+    opacity: 1;
+  }
+  42% {
+    transform: scale(3.2);
+    filter: url(#gx-warp-fisheye) blur(20px) brightness(3.2);
+    opacity: 1;
+  }
+  55% {
+    transform: scale(5.4);
+    filter: url(#gx-warp-fisheye) blur(44px) brightness(7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(11);
+    filter: url(#gx-warp-fisheye) blur(60px) brightness(7);
+    opacity: 0;
+  }
+}
+@keyframes gx-dive-in {
+  0% {
+    transform: scale(0.28);
+    filter: url(#gx-warp-fisheye) blur(44px) brightness(5);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(0.62);
+    filter: url(#gx-warp-fisheye) blur(30px) brightness(3.4);
+    opacity: 0;
+  }
+  68% {
+    transform: scale(0.82);
+    filter: url(#gx-warp-fisheye) blur(12px) brightness(1.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    filter: url(#gx-warp-fisheye) blur(0px) brightness(1);
+    opacity: 1;
+  }
+}
+@keyframes gx-rise-out {
+  0% {
+    transform: scale(1);
+    filter: url(#gx-warp-fisheye) blur(0px) brightness(1);
+    opacity: 1;
+  }
+  42% {
+    transform: scale(0.44);
+    filter: url(#gx-warp-fisheye) blur(18px) brightness(3);
+    opacity: 1;
+  }
+  55% {
+    transform: scale(0.24);
+    filter: url(#gx-warp-fisheye) blur(40px) brightness(6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.12);
+    filter: url(#gx-warp-fisheye) blur(52px) brightness(6);
+    opacity: 0;
+  }
+}
+@keyframes gx-rise-in {
+  0% {
+    transform: scale(4.5);
+    filter: url(#gx-warp-fisheye) blur(40px) brightness(4.5);
+    opacity: 0;
+  }
+  55% {
+    transform: scale(2);
+    filter: url(#gx-warp-fisheye) blur(26px) brightness(3);
+    opacity: 0;
+  }
+  68% {
+    transform: scale(1.35);
+    filter: url(#gx-warp-fisheye) blur(10px) brightness(1.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    filter: url(#gx-warp-fisheye) blur(0px) brightness(1);
+    opacity: 1;
+  }
+}
+
 /* ---- ルート遷移（View Transitions） ---- */
 
 /* 遷移全体の尺を揃える（title-caption のモーフ等も含む）。 */

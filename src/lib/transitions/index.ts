@@ -6,6 +6,7 @@
 import type { OnNavigate } from '@sveltejs/kit'
 import { nav } from '$lib/nav.svelte'
 import { flapTransition } from '$lib/kotohakobi/transition'
+import { warpTransition } from '$lib/globexplore/transition'
 import type { ExhibitTransition } from './types'
 import { zoomTransition, setOrigin } from './zoom'
 
@@ -16,6 +17,7 @@ const FOCUS_ROUTE = '/focus/[slug]'
 /** 展示ごとの演出。作ったらここに 1 行足す。無い展示は既定のズームになる。 */
 const EXHIBIT_TRANSITIONS: Record<string, ExhibitTransition> = {
   kotohakobi: flapTransition,
+  globexplore: warpTransition,
 }
 
 /** Exhibit クリック時：戻り先ルートを控え、ズーム原点（Icon 中心）を記録する。
