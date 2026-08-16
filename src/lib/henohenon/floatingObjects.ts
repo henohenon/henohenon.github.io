@@ -13,6 +13,10 @@ const OVERFLOW_TITLES = ['Make with Puppet']
 const ICON_COUNT = 8
 const RADIUS = 3.2
 
+// tmp: 平面ばかりだと寂しいので、複雑な形状の生ジオメトリも何個か混ぜておく。
+// 中身が固まったら要不要ごと見直す（TBD-object-render の一環）。
+const TMP_3D_COUNT = 2
+
 export type FloatingObject = {
   mesh: THREE.Mesh
   spinAxis: THREE.Vector3
@@ -66,9 +70,19 @@ function randomSpinAxis(): THREE.Vector3 {
   return new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize()
 }
 
+// tmp の3D枠。トーラス結び目／多面体など、平面テクスチャより手数の多い形を無作為に選ぶ。
+function tmp3dMesh(size: number): THREE.Mesh {
+  const geometry =
+    Math.random() < 0.5
+      ? new THREE.TorusKnotGeometry(size * 0.45, size * 0.14, 128, 20)
+      : new THREE.IcosahedronGeometry(size * 0.55, 1)
+  const material = new THREE.MeshStandardMaterial({ color: 0x5932ff, roughness: 0.25, metalness: 0.5 })
+  return new THREE.Mesh(geometry, material)
+}
+
 export function createFloatingObjects(loader: THREE.TextureLoader): FloatingObject[] {
   const iconUrls = [...RANDOM_ICONS].sort(() => Math.random() - 0.5).slice(0, ICON_COUNT)
-  const total = TMP_SKILL_LABELS.length + OVERFLOW_TITLES.length + iconUrls.length
+  const total = TMP_SKILL_LABELS.length + OVERFLOW_TITLES.length + iconUrls.length + TMP_3D_COUNT
   const objects: FloatingObject[] = []
 
   for (const label of [...TMP_SKILL_LABELS, ...OVERFLOW_TITLES]) {
@@ -82,6 +96,12 @@ export function createFloatingObjects(loader: THREE.TextureLoader): FloatingObje
     const texture = loader.load(url)
     texture.colorSpace = THREE.SRGBColorSpace
     const mesh = planeMesh(texture, 1, 0.8)
+    mesh.position.copy(spherePoint(objects.length, total, RADIUS))
+    objects.push({ mesh, spinAxis: randomSpinAxis(), spinSpeed: 0.1 + Math.random() * 0.15 })
+  }
+
+  for (let i = 0; i < TMP_3D_COUNT; i++) {
+    const mesh = tmp3dMesh(0.9)
     mesh.position.copy(spherePoint(objects.length, total, RADIUS))
     objects.push({ mesh, spinAxis: randomSpinAxis(), spinSpeed: 0.1 + Math.random() * 0.15 })
   }
