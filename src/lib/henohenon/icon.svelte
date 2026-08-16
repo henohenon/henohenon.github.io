@@ -11,7 +11,7 @@
      ここではサイズだけ決める。 */
   .face {
     display: block;
-    width: clamp(160px, 26vw, 300px);
+    width: clamp(160px, 26vw, 500px);
     height: auto;
   }
 </style>
