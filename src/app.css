@@ -31,8 +31,9 @@ body {
 }
 
 /* Introduction の外枠。Exhibit（Icon＋TitleCaption を flex column + gap で積む構造。
-   .exhibit 参照）に倣い、index では intro-stage（Icon）とキャプションを実際に
-   flex column で積んで gap を持たせる。下から一定量を空けた上側の領域。 */
+   .exhibit 参照）に倣い、Icon とキャプションを実際に flex column で積んで gap を持たせる。
+   下から一定量を空けた上側の領域。Emanation（下記 .emanation-area）は position:absolute
+   でこの箱を直接覆うので、Icon／キャプションの flex 計算には参加しない。 */
 .intro-group {
   position: absolute;
   top: 0;
@@ -46,25 +47,18 @@ body {
   gap: 24px;
 }
 
-/* about では Icon が Emanation（画面全体）に化け、キャプションも左下固定の overlay に
-   戻る（下記 .intro-caption-card.about）。intro-group 自体は display:contents で消え、
-   子（intro-stage / intro-caption-card）それぞれの絶対配置に譲る。
-   キャプションの DOM は index/about を通じて同一要素のまま（テキスト morph のため）。 */
-.intro-group.about {
-  display: contents;
+/* Icon／Emanation 共通。display:none ではなく opacity + pointer-events で隠す
+   （どちらも常にマウントしたまま使い回すため。理由は ai-log/spec-and-plan-henohenon.md）。 */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-.intro-stage {
-  display: grid;
-  place-items: center;
-}
-
-.intro-stage.about {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 60px;
+@media (prefers-reduced-motion: reduce) {
+  .hidden {
+    transition: none;
+  }
 }
 
 /* タイポグラフィ（顔）は About へのリンク。判定は顔＋少し余白まで（padding）。 */
@@ -74,10 +68,11 @@ body {
   text-decoration: none;
 }
 
-/* Emanation（henohenon.md）。箱に収めず intro-stage（ほぼ画面全体）いっぱいに広がる。 */
+/* Emanation（henohenon.md）。intro-group いっぱいに広がる（.emanation-area 自体は常に
+   フルサイズを維持し、表示/非表示は .hidden の opacity だけで行う）。 */
 .emanation-area {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
 }
 
 /* Introduction：最初の展示品。

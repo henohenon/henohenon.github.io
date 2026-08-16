@@ -83,21 +83,25 @@
        別ページには飛ばない。About 側は caption / × で戻れるので、顔はリンクにしない。
 
        intro-group は Exhibit（Icon＋TitleCaption を flex column + gap で並べる構造）を
-       参考にした外枠。index では実際に flex column として Icon とキャプションを積む。
-       about では Icon が画面全体の Emanation に化けるので、intro-group 自体は
-       display:contents で消え、intro-stage / intro-caption-card それぞれの絶対配置に譲る
-       （キャプションの DOM は index/about を通じて同一要素のまま。詳細は app.css）。 -->
-  <div class="intro-group" class:about>
-    <div class="intro-stage" class:about>
-      {#if about}
-        <div class="emanation-area">
-          <Emanation />
-        </div>
-      {:else}
-        <a class="face-link" href="?about" aria-label="About へ" data-sveltekit-noscroll>
-          <HenohenonIcon src={iconSrc} />
-        </a>
-      {/if}
+       参考にした外枠。Icon と Emanation は毎回作り直さず常にどちらもマウントしたまま、
+       class:hidden（opacity。display:none は避ける。理由は ai-log 参照）で出し分ける。
+       emanation-area は position:absolute で intro-group いっぱいに広がるので、
+       Icon／キャプションの flex column 配置には影響しない。
+       キャプションの DOM は index/about を通じて同一要素のまま（テキスト morph のため）。 -->
+  <div class="intro-group">
+    <a
+      class="face-link"
+      class:hidden={about}
+      aria-hidden={about}
+      href="?about"
+      aria-label="About へ"
+      data-sveltekit-noscroll
+    >
+      <HenohenonIcon src={iconSrc} />
+    </a>
+
+    <div class="emanation-area" class:hidden={!about} aria-hidden={!about}>
+      <Emanation {about} />
     </div>
 
     <!-- 常駐キャプション。index=挨拶（非リンク的）/ about=タイトル（Home へ戻る）。

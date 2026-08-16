@@ -6,6 +6,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { createFloatingObjects, disposeFloatingObject, type FloatingObject } from './floatingObjects'
 
 export type EmanationScene = {
+  pause(): void
+  resume(): void
   dispose(): void
 }
 
@@ -53,21 +55,42 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
   ro.observe(canvas)
   resize()
 
+  // 非表示中（about を離れている間）も requestAnimationFrame 自体は止まらないため、
+  // display:none ではなく opacity で隠す設計と対にして、ここで明示的に render ループを
+  // 止める（無駄な GPU/CPU 消費と、three.js が display:none で resize 時に描画を
+  // 崩すことがある問題の両方を避ける。詳細は ai-log/spec-and-plan-henohenon.md）。
+  // 破棄はせず pause/resume の使い回しにして、about の再入場でシーンを作り直さない。
   const clock = new THREE.Clock()
   let raf = 0
+  let running = false
   const tick = () => {
     const delta = clock.getDelta()
     // 自由な向きでゆっくり自転しながら漂う（Billboard 固定はしない、と決めた通り）。
     for (const f of floaters) f.mesh.rotateOnAxis(f.spinAxis, f.spinSpeed * delta)
     controls.update()
     renderer.render(scene, camera)
+    if (running) raf = requestAnimationFrame(tick)
+  }
+
+  function resume() {
+    if (running) return
+    running = true
+    clock.getDelta() // pause 中に溜まった経過時間を捨てる（再開直後の巨大delta回転を防ぐ）
     raf = requestAnimationFrame(tick)
   }
-  tick()
+
+  function pause() {
+    running = false
+    cancelAnimationFrame(raf)
+  }
+
+  resume()
 
   return {
+    pause,
+    resume,
     dispose() {
-      cancelAnimationFrame(raf)
+      pause()
       ro.disconnect()
       controls.dispose()
       renderer.dispose()
