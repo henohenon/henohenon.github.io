@@ -21,15 +21,15 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
   // 光る球。自己発光（emissive）なので外部ライト無しでも存在感が出る。
   const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(1, 32, 32),
-    new THREE.MeshStandardMaterial({ color: 0xfff2cc, emissive: 0xffcc55, emissiveIntensity: 1.6 }),
+    new THREE.MeshStandardMaterial({ color: 0x5932ff, emissive: 0x5932ff, emissiveIntensity: 1.6 }),
   )
   scene.add(sphere)
 
-  // 浮遊オブジェクトが「光に当てられている」ようにするための光源。tmp 品質なので
-  // 物理的な正確さより「見えること」を優先し、intensity は強めに振っている。
-  const light = new THREE.PointLight(0xffe8b0, 15, 30)
+  // 浮遊オブジェクトが「光に当てられている」ようにするための光源。球自身の色に揃える。
+  // tmp 品質なので物理的な正確さより「見えること」を優先し、intensity は強めに振っている。
+  const light = new THREE.PointLight(0x5932ff, 15, 30)
   scene.add(light)
-  scene.add(new THREE.AmbientLight(0xffffff, 0.4))
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6))
 
   const loader = new THREE.TextureLoader()
   const floaters: FloatingObject[] = createFloatingObjects(loader)
