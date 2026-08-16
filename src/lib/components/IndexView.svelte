@@ -95,9 +95,11 @@
 
   <!-- 常駐キャプション。index=挨拶（非リンク的）/ about=タイトル（Home へ戻る）。
        tag は常に <a> で固定＝DOM 保持のため（切替時に <p> を remount させない）。
-       index の href="?about" は顔と同じく About モードへのトグル。 -->
+       index の href="?about" は顔と同じく About モードへのトグル。
+       class:about は位置切替のみ（index=Icon直下 / about=左下固定。app.css 参照）。 -->
   <a
     class="intro-caption-card"
+    class:about
     href={about ? '/' : '?about'}
     aria-label={about ? 'Home へ戻る' : 'About へ'}
     data-sveltekit-noscroll
