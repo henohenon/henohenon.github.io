@@ -81,7 +81,7 @@
   <!-- frame.md: index の顔クリックで About モードへ（スクロール保持）。
        About に入ると Icon は Emanation（henohenon.md）に置き換わる。その場展開なので
        別ページには飛ばない。About 側は caption / × で戻れるので、顔はリンクにしない。 -->
-  <div class="face-area">
+  <div class="intro-stage">
     {#if about}
       <div class="emanation-area">
         <Emanation />

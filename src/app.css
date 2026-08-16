@@ -30,9 +30,9 @@ body {
   font-size: 0.9rem;
 }
 
-/* 顔を置く領域（非リンク）。下から一定量を空けた上側で中央寄せ。
-   bottom の値が顔の縦位置を決める（index/about 共通・ここだけで調整）。 */
-.face-area {
+/* Introduction の舞台。index では Icon、about では Emanation（ほぼ画面全体）を出し分ける。
+   下から一定量を空けた上側の領域。bottom の値がその縦位置を決める（index/about 共通）。 */
+.intro-stage {
   position: absolute;
   top: 0;
   left: 0;
@@ -49,7 +49,7 @@ body {
   text-decoration: none;
 }
 
-/* Emanation（henohenon.md）。箱に収めず face-area（ほぼ画面全体）いっぱいに広がる。 */
+/* Emanation（henohenon.md）。箱に収めず intro-stage（ほぼ画面全体）いっぱいに広がる。 */
 .emanation-area {
   width: 100%;
   height: 100%;
