@@ -4,6 +4,7 @@
   // query のみの変化ではページコンポーネントが破棄されないので DOM が保持され、
   // キャプションのテキストを textMorph で greeting↔title へ書き換えられる。
   import type { Action } from 'svelte/action'
+  import { onMount } from 'svelte'
   import { browser } from '$app/environment'
   import { blur } from 'svelte/transition'
   import { page } from '$app/state'
@@ -11,6 +12,8 @@
   import { markExhibitOrigin } from '$lib/transitions'
   import { INTRO_GREETING, INTRO_TITLE } from '$lib/henohenon/intro'
   import { morphText } from '$lib/henohenon/textMorph'
+  import { DEFAULT_ICON, pickRandomIcon } from '$lib/henohenon/icons'
+  import HenohenonIcon from '$lib/henohenon/icon.svelte'
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
   import TitleCaption from './TitleCaption.svelte'
@@ -20,6 +23,15 @@
   // プリレンダ時は searchParams を読めない（＝常に挨拶状態で出力）。about 判定は
   // クライアントのみ。直リンク `/?about` は挨拶 HTML → ハイドレーション後に確定する。
   const about = $derived(browser && page.url.searchParams.has('about'))
+
+  // Icon の抽選はページ滞在中1回だけ（about トグルで {#if} 越しに再マウントされても
+  // 引き直さない）。const で browser 分岐するだけだと、hydration は「差が無い」前提で
+  // 属性を上書きしないため DEFAULT_ICON のまま固定されてしまう（about の boot-about と
+  // 同じ理由）。$state + onMount で明示的に client 側だけ引き直す。
+  let iconSrc = $state(DEFAULT_ICON)
+  onMount(() => {
+    iconSrc = pickRandomIcon()
+  })
 
   // 常駐キャプションのテキスト制御。action の mount/update 分離で「初回は morph せず、
   // 以降の about 変化だけ morph」を表現する（initialized フラグ不要）。
@@ -45,7 +57,7 @@
 
 <section class="introduction">
   {#if about}
-    <!-- About の右上テキスト（introduction.md）。※自己紹介・資格/skills は今後。
+    <!-- About の右上テキスト（henohenon.md）。※自己紹介・資格/skills は今後。
          VT を切ったので入退場は Svelte transition で「にじみ出る/引く」（blur+fade）。 -->
     <nav class="intro-links caption-card" transition:blur={{ duration: 500, amount: 14 }}>
       <CloseButton href="/" noscroll />
@@ -58,9 +70,7 @@
   {/if}
 
   {#snippet face()}
-    <pre class="face">へ　へ
-の　の
-　ん</pre>
+    <HenohenonIcon src={iconSrc} />
   {/snippet}
 
   <!-- frame.md: index の顔クリックで About モードへ（スクロール保持）。

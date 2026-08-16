@@ -73,9 +73,6 @@ body {
 
 .face {
   margin: 0;
-  font-size: 2rem;
-  line-height: 1.4;
-  text-align: center;
   /* index↔about で同要素として移動（dive/rise 時は JS で一時的に外す）。 */
   view-transition-name: face;
 }
