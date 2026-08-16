@@ -1,8 +1,9 @@
-// Emanation の 3D シーン本体。Phase B は光る球＋ドラッグ回転のみ（浮遊オブジェクトは Phase C）。
+// Emanation の 3D シーン本体。光る球を中心に、skills/展示/へのへのアイコンズが
+// 浮遊オブジェクトとして漂う（ai-log/spec-and-plan-henohenon.md §2）。
 // ドラッグでカメラが球を中心に周回する（OrbitControls 相当。zoom/pan は無効化）。
-// ai-log/spec-and-plan-henohenon.md §2「見て回る」を狙う。
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { createFloatingObjects, disposeFloatingObject, type FloatingObject } from './floatingObjects'
 
 export type EmanationScene = {
   dispose(): void
@@ -12,7 +13,7 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
   const scene = new THREE.Scene()
 
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100)
-  camera.position.set(0, 0, 6)
+  camera.position.set(0, 0, 8)
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -24,10 +25,15 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
   )
   scene.add(sphere)
 
-  // 浮遊オブジェクト（Phase C）が「光に当てられている」ようにするための光源を今のうちに置く。
-  const light = new THREE.PointLight(0xffe8b0, 3, 20)
+  // 浮遊オブジェクトが「光に当てられている」ようにするための光源。tmp 品質なので
+  // 物理的な正確さより「見えること」を優先し、intensity は強めに振っている。
+  const light = new THREE.PointLight(0xffe8b0, 15, 30)
   scene.add(light)
-  scene.add(new THREE.AmbientLight(0xffffff, 0.15))
+  scene.add(new THREE.AmbientLight(0xffffff, 0.4))
+
+  const loader = new THREE.TextureLoader()
+  const floaters: FloatingObject[] = createFloatingObjects(loader)
+  for (const f of floaters) scene.add(f.mesh)
 
   // 見て回る＝カメラが周回。ズーム／パンは無効化し、回転だけ許可する。
   const controls = new OrbitControls(camera, canvas)
@@ -47,8 +53,12 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
   ro.observe(canvas)
   resize()
 
+  const clock = new THREE.Clock()
   let raf = 0
   const tick = () => {
+    const delta = clock.getDelta()
+    // 自由な向きでゆっくり自転しながら漂う（Billboard 固定はしない、と決めた通り）。
+    for (const f of floaters) f.mesh.rotateOnAxis(f.spinAxis, f.spinSpeed * delta)
     controls.update()
     renderer.render(scene, camera)
     raf = requestAnimationFrame(tick)
@@ -63,6 +73,7 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
       renderer.dispose()
       sphere.geometry.dispose()
       ;(sphere.material as THREE.Material).dispose()
+      for (const f of floaters) disposeFloatingObject(f)
     },
   }
 }
