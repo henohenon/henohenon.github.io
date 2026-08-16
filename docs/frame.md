@@ -48,8 +48,7 @@ Focusの構造は次の通り。
 ```
 画面遷移時のトランジションこそが本サイトの体験のキモである。
 
-introductionのみ、iconもしくはヘッダーのaboutボタンをクリックしたときに、aboutページに遷移する。
-基本的にはindexと変わらないのだが、introductionの内容が変化する。詳しくは、./introduction.md。
+introductionのみ、focusではなくemanationとなる。詳しくは、./henohenon.md。
 
 ## 情報整理
 ### Gallery
