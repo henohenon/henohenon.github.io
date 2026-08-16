@@ -49,10 +49,10 @@ body {
   text-decoration: none;
 }
 
-/* Emanation（henohenon.md）。face-area いっぱいに広がる正方形寄りの領域。 */
+/* Emanation（henohenon.md）。箱に収めず face-area（ほぼ画面全体）いっぱいに広がる。 */
 .emanation-area {
-  width: min(80vw, 80svh, 640px);
-  height: min(80vw, 80svh, 640px);
+  width: 100%;
+  height: 100%;
 }
 
 /* Introduction：最初の展示品。
