@@ -30,16 +30,41 @@ body {
   font-size: 0.9rem;
 }
 
-/* Introduction の舞台。index では Icon、about では Emanation（ほぼ画面全体）を出し分ける。
-   下から一定量を空けた上側の領域。bottom の値がその縦位置を決める（index/about 共通）。 */
-.intro-stage {
+/* Introduction の外枠。Exhibit（Icon＋TitleCaption を flex column + gap で積む構造。
+   .exhibit 参照）に倣い、index では intro-stage（Icon）とキャプションを実際に
+   flex column で積んで gap を持たせる。下から一定量を空けた上側の領域。 */
+.intro-group {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* about では Icon が Emanation（画面全体）に化け、キャプションも左下固定の overlay に
+   戻る（下記 .intro-caption-card.about）。intro-group 自体は display:contents で消え、
+   子（intro-stage / intro-caption-card）それぞれの絶対配置に譲る。
+   キャプションの DOM は index/about を通じて同一要素のまま（テキスト morph のため）。 */
+.intro-group.about {
+  display: contents;
+}
+
+.intro-stage {
   display: grid;
   place-items: center;
+}
+
+.intro-stage.about {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 60px;
 }
 
 /* タイポグラフィ（顔）は About へのリンク。判定は顔＋少し余白まで（padding）。 */
@@ -56,14 +81,14 @@ body {
 }
 
 /* Introduction：最初の展示品。
-   顔の縦位置はキャプション高さに依存させず固定（index/about で同一）。 */
+   index では Icon＋キャプションを1グループとして中央寄せする（intro-group）ため、
+   顔の縦位置はキャプションの高さぶん影響を受ける。about は総取り替えなので無関係。 */
 .introduction {
   position: relative;
   width: 100%;
   min-height: 100svh;
   box-sizing: border-box;
-  /* Icon のサイズ。Gallery の Icon（.gallery の minmax(180px, 240px)）の1.3倍。
-     intro-caption-card の位置（Icon 直下）もこれを基準に計算する。 */
+  /* Icon のサイズ。Gallery の Icon（.gallery の minmax(180px, 240px)）の1.3倍。 */
   --icon-size: clamp(calc(180px * 1.3), 21vw, calc(240px * 1.3));
 }
 
@@ -89,13 +114,8 @@ body {
 /* Introduction キャプション。index=挨拶 / about=タイトルで同一の常駐要素。
    テキストは textMorph が直接書き換える（Svelte は再描画しない）。
    width:max-content なので、文字が減れば箱も自然に縮む。about では Home リンク。
-   index では Icon の直下（中央）。Icon は intro-stage の中で縦横中央寄せなので、
-   その中心＋半径ぶん下げた位置を --icon-size から逆算する（JS 計測はしない）。 */
+   index では intro-group の flex column に乗るだけ（Icon の直下、gap は intro-group 側）。 */
 .intro-caption-card {
-  position: absolute;
-  left: 50%;
-  top: calc(50svh - 30px + var(--icon-size) / 2 + 24px);
-  transform: translateX(-50%);
   width: max-content;
   max-width: calc(100% - 48px);
   padding: 16px 20px;
@@ -109,10 +129,9 @@ body {
 /* about では Icon が Emanation（画面全体）に置き換わり「Icon 直下」の前提が崩れるため、
    他の overlay（intro-links 等）と同じ左下固定に戻す。 */
 .intro-caption-card.about {
+  position: absolute;
   left: 24px;
-  top: auto;
   bottom: 24px;
-  transform: none;
 }
 
 .intro-caption-card p {

@@ -80,32 +80,39 @@
 
   <!-- frame.md: index の顔クリックで About モードへ（スクロール保持）。
        About に入ると Icon は Emanation（henohenon.md）に置き換わる。その場展開なので
-       別ページには飛ばない。About 側は caption / × で戻れるので、顔はリンクにしない。 -->
-  <div class="intro-stage">
-    {#if about}
-      <div class="emanation-area">
-        <Emanation />
-      </div>
-    {:else}
-      <a class="face-link" href="?about" aria-label="About へ" data-sveltekit-noscroll>
-        <HenohenonIcon src={iconSrc} />
-      </a>
-    {/if}
-  </div>
+       別ページには飛ばない。About 側は caption / × で戻れるので、顔はリンクにしない。
 
-  <!-- 常駐キャプション。index=挨拶（非リンク的）/ about=タイトル（Home へ戻る）。
-       tag は常に <a> で固定＝DOM 保持のため（切替時に <p> を remount させない）。
-       index の href="?about" は顔と同じく About モードへのトグル。
-       class:about は位置切替のみ（index=Icon直下 / about=左下固定。app.css 参照）。 -->
-  <a
-    class="intro-caption-card"
-    class:about
-    href={about ? '/' : '?about'}
-    aria-label={about ? 'Home へ戻る' : 'About へ'}
-    data-sveltekit-noscroll
-  >
-    <p use:introText={about}>{INTRO_GREETING}</p>
-  </a>
+       intro-group は Exhibit（Icon＋TitleCaption を flex column + gap で並べる構造）を
+       参考にした外枠。index では実際に flex column として Icon とキャプションを積む。
+       about では Icon が画面全体の Emanation に化けるので、intro-group 自体は
+       display:contents で消え、intro-stage / intro-caption-card それぞれの絶対配置に譲る
+       （キャプションの DOM は index/about を通じて同一要素のまま。詳細は app.css）。 -->
+  <div class="intro-group" class:about>
+    <div class="intro-stage" class:about>
+      {#if about}
+        <div class="emanation-area">
+          <Emanation />
+        </div>
+      {:else}
+        <a class="face-link" href="?about" aria-label="About へ" data-sveltekit-noscroll>
+          <HenohenonIcon src={iconSrc} />
+        </a>
+      {/if}
+    </div>
+
+    <!-- 常駐キャプション。index=挨拶（非リンク的）/ about=タイトル（Home へ戻る）。
+         tag は常に <a> で固定＝DOM 保持のため（切替時に <p> を remount させない）。
+         index の href="?about" は顔と同じく About モードへのトグル。 -->
+    <a
+      class="intro-caption-card"
+      class:about
+      href={about ? '/' : '?about'}
+      aria-label={about ? 'Home へ戻る' : 'About へ'}
+      data-sveltekit-noscroll
+    >
+      <p use:introText={about}>{INTRO_GREETING}</p>
+    </a>
+  </div>
 </section>
 
 <section class="gallery">
