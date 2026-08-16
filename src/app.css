@@ -49,6 +49,12 @@ body {
   text-decoration: none;
 }
 
+/* Emanation（henohenon.md）。face-area いっぱいに広がる正方形寄りの領域。 */
+.emanation-area {
+  width: min(80vw, 80svh, 640px);
+  height: min(80vw, 80svh, 640px);
+}
+
 /* Introduction：最初の展示品。
    顔の縦位置はキャプション高さに依存させず固定（index/about で同一）。 */
 .introduction {

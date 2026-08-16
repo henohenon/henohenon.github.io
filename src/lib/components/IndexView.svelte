@@ -14,6 +14,7 @@
   import { morphText } from '$lib/henohenon/textMorph'
   import { DEFAULT_ICON, pickRandomIcon } from '$lib/henohenon/icons'
   import HenohenonIcon from '$lib/henohenon/icon.svelte'
+  import Emanation from '$lib/henohenon/emanation.svelte'
   import Header from './Header.svelte'
   import Footer from './Footer.svelte'
   import TitleCaption from './TitleCaption.svelte'
@@ -31,6 +32,14 @@
   let iconSrc = $state(DEFAULT_ICON)
   onMount(() => {
     iconSrc = pickRandomIcon()
+  })
+
+  // Emanation（three.js 一式）の先読み。Icon は常にファーストビューにあるため、
+  // クリック（about 到達）を待たずアイドル時間に裏で温めておく。間に合わなくても
+  // Emanation 側の canvas フェードインが多少の遅れを吸収する（要素の存在は待たない）。
+  onMount(() => {
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 200))
+    idle(() => void import('$lib/henohenon/emanationScene'))
   })
 
   // 常駐キャプションのテキスト制御。action の mount/update 分離で「初回は morph せず、
@@ -69,18 +78,17 @@
     </nav>
   {/if}
 
-  {#snippet face()}
-    <HenohenonIcon src={iconSrc} />
-  {/snippet}
-
   <!-- frame.md: index の顔クリックで About モードへ（スクロール保持）。
-       About 側は caption / × で戻れるので、顔はリンクにしない。 -->
+       About に入ると Icon は Emanation（henohenon.md）に置き換わる。その場展開なので
+       別ページには飛ばない。About 側は caption / × で戻れるので、顔はリンクにしない。 -->
   <div class="face-area">
     {#if about}
-      {@render face()}
+      <div class="emanation-area">
+        <Emanation />
+      </div>
     {:else}
       <a class="face-link" href="?about" aria-label="About へ" data-sveltekit-noscroll>
-        {@render face()}
+        <HenohenonIcon src={iconSrc} />
       </a>
     {/if}
   </div>
