@@ -7,7 +7,7 @@ body {
   background: #fff;
 }
 
-/* ヘッダー：右上 About。Introduction 通過後のみ出現（fixed）。 */
+/* ヘッダー：右上「上へ戻る」。Introduction 通過後のみ出現（fixed）。 */
 .site-header {
   position: fixed;
   top: 0;
@@ -24,7 +24,13 @@ body {
   pointer-events: auto;
 }
 
-.about-link {
+.top-link {
+  /* <button> のデフォルト見た目をリセットし、元の <a> と同じ見た目に揃える。 */
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
   color: #111;
   text-decoration: none;
   font-size: 0.9rem;
