@@ -115,8 +115,7 @@ body {
   max-width: calc(100% - 48px);
   padding: 16px 20px;
   background: #faf9f6;
-  box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.18);
-  box-sizing: border-box;
+  --card-shadow-alpha: 0.18;
   color: inherit;
   text-decoration: none;
 }
@@ -230,6 +229,13 @@ html.boot-about .intro-caption-card {
   box-sizing: border-box;
 }
 
+/* カードの共通見た目（影の形）。色は用途ごとに --card-shadow-alpha で変える
+   （.caption-card は黒背景で濃いめ 0.3、.intro-caption-card は白背景で薄め 0.18）。 */
+.card {
+  box-shadow: 2px 4px 1px rgba(0, 0, 0, var(--card-shadow-alpha, 0.3));
+  box-sizing: border-box;
+}
+
 /* 右上に置くキャプションカード（Focus の details / About のリンク集で共有）。
    黒背景・白テキスト。 */
 .caption-card {
@@ -241,8 +247,6 @@ html.boot-about .intro-caption-card {
   padding: 34px 20px 16px;
   background: #111;
   color: #fff;
-  box-shadow: 2px 4px 1px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
 }
 
 .details-caption {

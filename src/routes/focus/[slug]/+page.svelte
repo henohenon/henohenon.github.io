@@ -13,7 +13,7 @@
 </script>
 
 <section class="focus">
-  <aside class="details-caption caption-card">
+  <aside class="details-caption caption-card card">
     <CloseButton href="{nav.from}#{e.slug}" />
     <p class="summary">{e.summary}</p>
     <p class="detail">{e.detail}</p>

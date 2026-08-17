@@ -6,7 +6,6 @@
   import type { Action } from 'svelte/action'
   import { onMount } from 'svelte'
   import { browser } from '$app/environment'
-  import { blur } from 'svelte/transition'
   import { page } from '$app/state'
   import { exhibits, exhibitNo } from '$lib/exhibits'
   import { markExhibitOrigin } from '$lib/transitions'
@@ -65,18 +64,17 @@
 {/if}
 
 <section class="introduction">
-  {#if about}
-    <!-- About の右上テキスト（henohenon.md）。※自己紹介・資格/skills は今後。
-         VT を切ったので入退場は Svelte transition で「にじみ出る/引く」（blur+fade）。 -->
-    <nav class="intro-links caption-card" transition:blur={{ duration: 500, amount: 14 }}>
-      <CloseButton href="/" noscroll />
-      <div class="intro-links-row">
-        <a href="https://x.com/henohenon_8282" target="_blank" rel="noopener">X</a>
-        <a href="https://github.com/henohenon" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://henohenon-no.pages.dev/henohenon/" target="_blank" rel="noopener">More</a>
-      </div>
-    </nav>
-  {/if}
+  <!-- About の右上テキスト（henohenon.md）。※自己紹介・資格/skills は今後。
+       Icon/Emanation と同じ理由（ai-log 参照）で {#if} による DOM 生成/破棄はやめ、
+       常駐 + class:hidden（opacity）で出し分ける。 -->
+  <nav class="intro-links caption-card card" class:hidden={!about} aria-hidden={!about}>
+    <CloseButton href="/" noscroll />
+    <div class="intro-links-row">
+      <a href="https://x.com/henohenon_8282" target="_blank" rel="noopener">X</a>
+      <a href="https://github.com/henohenon" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://henohenon-no.pages.dev/henohenon/" target="_blank" rel="noopener">More</a>
+    </div>
+  </nav>
 
   <!-- frame.md: index の顔クリックで About モードへ（スクロール保持）。
        About に入ると Icon は Emanation（henohenon.md）に置き換わる。その場展開なので
@@ -108,7 +106,7 @@
          tag は常に <a> で固定＝DOM 保持のため（切替時に <p> を remount させない）。
          index の href="?about" は顔と同じく About モードへのトグル。 -->
     <a
-      class="intro-caption-card"
+      class="intro-caption-card card"
       class:about
       href={about ? '/' : '?about'}
       aria-label={about ? 'Home へ戻る' : 'About へ'}
