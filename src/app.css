@@ -7,7 +7,7 @@ body {
   background: #fff;
 }
 
-/* ヘッダー：右上「上へ戻る」。Introduction 通過後のみ出現（fixed）。 */
+/* ヘッダー：右上「Introへ戻る」。index は Introduction 通過後のみ、ex は常に出現（fixed）。 */
 .site-header {
   position: fixed;
   top: 0;
@@ -24,7 +24,7 @@ body {
   pointer-events: auto;
 }
 
-.top-link {
+.intro-link {
   /* <button> のデフォルト見た目をリセットし、元の <a> と同じ見た目に揃える。 */
   border: none;
   background: none;

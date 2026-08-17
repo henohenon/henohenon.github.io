@@ -59,9 +59,7 @@
   }
 </script>
 
-{#if !ex}
-  <Header />
-{/if}
+<Header {ex} />
 
 <section class="introduction">
   <!-- ex の右上テキスト（henohenon.md）。※自己紹介・資格/skills は今後。

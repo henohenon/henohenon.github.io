@@ -1,27 +1,35 @@
 <script lang="ts">
-  // ヘッダー：右上の「上へ戻る」ボタン。index でのみ表示。
-  // frame.md: Introduction を通過した後のみ fixed 表示する。
-  // ※ 以前はここから ex（Emanation）へ直接ジャンプできたが、その導線は撤去。
-  //   index の Icon クリックのみが ex への入口。
+  // ヘッダー：右上の「Intro（Introduction）へ戻る」ボタン。
+  // index は Introduction を通過した後のみ、ex は常に表示する（fixed）。
+  // ex 中は Icon が Emanation に化けているので、押すと ex を抜けて index 先頭へ。
+  // index 中はスクロールを戻すだけ（ex はそのまま、閉じない）。
   import { onMount } from 'svelte'
+  import { goto } from '$app/navigation'
 
-  let visible = $state(false)
+  let { ex }: { ex: boolean } = $props()
+
+  let scrolledPastIntro = $state(false)
+  const visible = $derived(ex || scrolledPastIntro)
 
   onMount(() => {
     const onScroll = () => {
       // Introduction は 100svh。6 割ほどスクロールしたら出現。
-      visible = window.scrollY > window.innerHeight * 0.6
+      scrolledPastIntro = window.scrollY > window.innerHeight * 0.6
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   })
 
-  function toTop() {
+  async function toIntro(event: MouseEvent) {
+    if (ex) {
+      event.preventDefault()
+      await goto('/', { noScroll: true })
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 </script>
 
 <header class="site-header" class:visible>
-  <button class="top-link" type="button" onclick={toTop}>Top</button>
+  <button class="intro-link" type="button" onclick={toIntro}>へのへのん</button>
 </header>
