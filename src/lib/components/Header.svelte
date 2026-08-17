@@ -1,8 +1,8 @@
 <script lang="ts">
   // ヘッダー：右上の「上へ戻る」ボタン。index でのみ表示。
   // frame.md: Introduction を通過した後のみ fixed 表示する。
-  // ※ 以前はここから About（Emanation）へ直接ジャンプできたが、その導線は撤去。
-  //   index の Icon クリックのみが About への入口。
+  // ※ 以前はここから ex（Emanation）へ直接ジャンプできたが、その導線は撤去。
+  //   index の Icon クリックのみが ex への入口。
   import { onMount } from 'svelte'
 
   let visible = $state(false)

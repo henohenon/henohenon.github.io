@@ -1,6 +1,6 @@
 <script lang="ts">
   // キャプションカードの閉じる（×）。当たり判定は正方形で広め（padding を貫通）。
-  // noscroll: 遷移でスクロール位置を保持する（About→Home 用）。
+  // noscroll: 遷移でスクロール位置を保持する（ex→Home 用）。
   let {
     href,
     label = '閉じる',

@@ -17,7 +17,7 @@
     kotohakobi: KotohakobiIcon,
   }
 
-  let { slug, title, about }: { slug: string; title: string; about: boolean } = $props()
+  let { slug, title, ex }: { slug: string; title: string; ex: boolean } = $props()
   const Icon = $derived(ICONS[slug])
 </script>
 
@@ -25,7 +25,7 @@
   class="icon-link"
   href="/focus/{slug}"
   aria-label={title}
-  onclick={(event) => markExhibitOrigin(event, about)}
+  onclick={(event) => markExhibitOrigin(event, ex)}
 >
   <div class="icon" class:placeholder={!Icon}>
     {#if Icon}<Icon />{/if}

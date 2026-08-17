@@ -1,6 +1,6 @@
 // ルート遷移の配線。どの展示にどの演出を当てるかの対応表もここが持つ。
 // - Gallery↔Focus: 展示ごとの演出があれば引き当て、無ければ既定のズーム（zoom.ts）。
-// - Introduction↔About（`/`↔`/?about`）は同一ルート内の query 変化なので何もしない。
+// - Introduction↔ex（`/`↔`/?ex`）は同一ルート内の query 変化なので何もしない。
 //   キャプションのテキスト morph は IndexView 側の Action（use:introText）が担当する。
 //   （mount＝即確定 / update＝morph の分離が「初回は morph しない」条件そのもの）
 import type { OnNavigate } from '@sveltejs/kit'
@@ -10,7 +10,7 @@ import { warpTransition } from '$lib/globexplore/transition'
 import type { ExhibitTransition } from './types'
 import { zoomTransition, setOrigin } from './zoom'
 
-// Focus に入れる元＝Gallery ルート（about モードでも route id は '/'）。
+// Focus に入れる元＝Gallery ルート（ex モードでも route id は '/'）。
 const GALLERY_ROUTES = new Set(['/'])
 const FOCUS_ROUTE = '/focus/[slug]'
 
@@ -22,9 +22,9 @@ const EXHIBIT_TRANSITIONS: Record<string, ExhibitTransition> = {
 
 /** Exhibit クリック時：戻り先ルートを控え、ズーム原点（Icon 中心）を記録する。
  *  icon / title どちらのリンクから来ても、原点は Exhibit の Icon に合わせる。 */
-export function markExhibitOrigin(event: MouseEvent, about: boolean) {
-  // 戻り先は元のモードを保つ（query と hash は共存できる：`/?about#slug`）。
-  nav.from = about ? '/?about' : '/'
+export function markExhibitOrigin(event: MouseEvent, ex: boolean) {
+  // 戻り先は元のモードを保つ（query と hash は共存できる：`/?ex#slug`）。
+  nav.from = ex ? '/?ex' : '/'
   setOrigin((event.currentTarget as HTMLElement).closest('.exhibit'))
 }
 

@@ -55,11 +55,11 @@ export function createEmanationScene(canvas: HTMLCanvasElement): EmanationScene 
   ro.observe(canvas)
   resize()
 
-  // 非表示中（about を離れている間）も requestAnimationFrame 自体は止まらないため、
+  // 非表示中（ex を離れている間）も requestAnimationFrame 自体は止まらないため、
   // display:none ではなく opacity で隠す設計と対にして、ここで明示的に render ループを
   // 止める（無駄な GPU/CPU 消費と、three.js が display:none で resize 時に描画を
   // 崩すことがある問題の両方を避ける。詳細は ai-log/spec-and-plan-henohenon.md）。
-  // 破棄はせず pause/resume の使い回しにして、about の再入場でシーンを作り直さない。
+  // 破棄はせず pause/resume の使い回しにして、ex の再入場でシーンを作り直さない。
   const clock = new THREE.Clock()
   let raf = 0
   let running = false

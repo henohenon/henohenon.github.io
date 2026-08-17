@@ -3,14 +3,14 @@
   // Icon と Emanation を常に両方マウントしたまま opacity で出し分ける
   // （display:none は避ける。three.js/Babylon.js 双方で、非表示中の resize が
   // WebGL context を壊しうると報告されているため。ai-log 参照）。
-  // そのためここでも「about のたびに作り直す」のではなく、初回だけ動的 import ＋
+  // そのためここでも「ex のたびに作り直す」のではなく、初回だけ動的 import ＋
   // シーン生成し、以降は pause/resume を使い回す。three.js 一式は初期バンドルに
   // 載せない（先読みは呼び出し側がアイドル時間に行うので、ここに来る頃には大抵
   // 読み込み済み）。
   import { onDestroy } from 'svelte'
   import type { EmanationScene } from './emanationScene'
 
-  let { about }: { about: boolean } = $props()
+  let { ex }: { ex: boolean } = $props()
 
   let canvas: HTMLCanvasElement
   let ready = $state(false)
@@ -28,7 +28,7 @@
   }
 
   $effect(() => {
-    if (about) {
+    if (ex) {
       if (scene) scene.resume()
       else void ensureScene()
     } else {

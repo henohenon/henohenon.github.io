@@ -6,11 +6,11 @@
     <title>へのへのん・ポートフォリオ</title>
     %sveltekit.head%
     <script>
-      // `?about` を直開き/リロード/共有した時、プリレンダHTML（挨拶）が1フレーム
+      // `?ex` を直開き/リロード/共有した時、プリレンダHTML（挨拶）が1フレーム
       // 見えてしまうのを防ぐ。ペイント前にキャプションを隠し、ハイドレーションで
       // 本文がタイトルに確定してから IndexView 側で表示を戻す。
-      if (new URLSearchParams(location.search).has('about')) {
-        document.documentElement.classList.add('boot-about')
+      if (new URLSearchParams(location.search).has('ex')) {
+        document.documentElement.classList.add('boot-ex')
       }
     </script>
   </head>
