@@ -1,0 +1,7 @@
+version: 2
+updates:
+  # SHA 固定した Actions を、コメントのバージョンごと更新する
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
