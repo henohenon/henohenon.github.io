@@ -1,39 +1,145 @@
 ---
-
+const links = [
+    { label: "X", href: "https://x.com/henohenon_8282" },
+    { label: "GitHub", href: "https://github.com/henohenon" },
+    { label: "へのへのんのの", href: "https://henohenon-no.pages.dev/" },
+];
 ---
 
 <html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>へのへのん</title>
-  </head>
-  <body>
-    <main>
-      <h1>へのへのん</h1>
-      <p>
-        「どうにもならない思いを尋常でない表現で届ける」をコンセプトとして、ゲームを中心にいろんな物を作っています。<a
-          href="/heno-world">more→heno world</a
-        >
-      </p>
-      <p>普段は福岡であくせく暮らしています。初音ミクとヌオーが好き。</p>
-    </main>
-  </body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>へのへのん</title>
+    </head>
+    <body>
+        <main>
+            <h1>へのへのん</h1>
+            <p class="intro">
+                <span>
+                    「どうにもならない思いを尋常でない表現で届ける」をコンセプトとして、ゲームを中心にいろんな物を作っています。
+                    <!--<a href="/heno-world">heno world</a>-->
+                </span>
+                <span>
+                    普段は福岡であくせく暮らしています。初音ミクとヌオーが好き。
+                </span>
+            </p>
+            <nav>
+                <ul class="links">
+                    {links.map(({ label, href }) => (
+                        <li>
+                            <a
+                                class="button"
+                                href={href}
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                {label}
+                            </a>
+                        </li>
+                    ))}
+                    <li class="contact">
+                        <a
+                            class="text-link"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSdqmaU01uB2hgwxK1vhtFfbmFasqaY5TweHUgl0y72wjsNdkQ/viewform"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            contact
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </main>
+    </body>
 </html>
 
 <style>
-  main {
-    max-width: 40rem;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
-    line-height: 1.8;
-  }
+    /* 1画面分の高さを取り、main はその一番下に寄せる */
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 100dvh;
+        margin: 0;
+    }
 
-  h1 {
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid currentColor;
-  }
+    main {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 4rem;
+        line-height: 1.8;
+    }
+
+    :global(html) {
+        overflow-x: clip;
+    }
+
+    h1 {
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    /* 線は main の幅ではなくページの端から端まで引く */
+    h1::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        border-bottom: 1px solid currentColor;
+        translate: -50%;
+    }
+
+    .intro span {
+        display: block;
+    }
+
+    .links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0;
+        list-style: none;
+    }
+
+    .button {
+        display: block;
+        padding: 0.25rem 1rem;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .button:hover {
+        color: Canvas;
+        background: CanvasText;
+    }
+
+    /* 文字色のままの下線リンク。下線は文字の左右に伸ばす（文字の位置は右端のまま） */
+    .text-link {
+        margin-right: -1rem;
+        padding-inline: 1rem;
+        border-bottom: 1px solid currentColor;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* 外部リンクの印 */
+    .text-link::after {
+        content: "↗";
+        margin-left: 0.25em;
+        font-size: 0.8em;
+    }
+
+    /* contact だけ行の右端に寄せる */
+    .contact {
+        margin-left: auto;
+    }
 </style>
